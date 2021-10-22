@@ -28,6 +28,7 @@ const customLaunchers = {
 module.exports = config => {
 	const defaultConfig = createDefaultConfig(config);
 	defaultConfig.browsers = []; // remove ChromeHeadless
+
 	config.set(
 		merge(defaultConfig, {
 			files: [
