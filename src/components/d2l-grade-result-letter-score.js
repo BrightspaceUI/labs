@@ -68,6 +68,7 @@ export class D2LGradeResultLetterScore extends LitElement {
 					<select
 						class="d2l-input-select d2l-grade-result-letter-score-select"
 						@change=${this._onOptionSelected}
+						.value=${this.selectedOption}
 					>
 						${this._renderOptions()}
 					</select>
