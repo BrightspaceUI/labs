@@ -10,7 +10,8 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		return {
 			scoreNumerator: { type: Number },
 			scoreDenominator: { type: Number },
-			readOnly: { type: Boolean }
+			readOnly: { type: Boolean },
+			validationError: { attribute: false, type: String }
 		};
 	}
 
@@ -70,15 +71,24 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 
 				${!this.readOnly ? html`
 					<div class="d2l-grade-result-numeric-score-score">
-						<d2l-input-number
-							label=${inputNumberLabel}
-							label-hidden
-							value="${this.scoreNumerator}"
-							min="0"
-							max="9999999999"
-							max-fraction-digits="2"
-							@change=${this._onGradeChange}
-						></d2l-input-number>
+						<d2l-form>
+							<d2l-input-number
+								id="grade-input"
+								label=${inputNumberLabel}
+								label-hidden
+								value="${this.scoreNumerator}"
+								min="0"
+								max="9999999999"
+								max-fraction-digits="2"
+								@change=${this._onGradeChange}
+								?validate-on-init=${this.validationError}
+							></d2l-input-number>
+							<d2l-validation-custom
+								for="grade-input"
+								failure-text=${this.validationError}
+								@d2l-validation-custom-validate=${this._checkValidationError}
+							></d2l-validation-custom>
+						</d2l-form>
 					</div>
 					<div class="d2l-grade-result-numeric-score-score-text">
 						${!isNaN(this.scoreDenominator) ? html`
@@ -94,6 +104,11 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			</div>
 		`;
 	}
+
+	_checkValidationError(event) {
+		event.detail.resolve(!this.validationError);
+	}
+
 }
 
 customElements.define('d2l-grade-result-numeric-score', D2LGradeResultNumericScore);

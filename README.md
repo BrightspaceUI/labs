@@ -60,9 +60,10 @@ If you are only interested in rendering the presentational layer of the componen
 | `isGradeAutoCompleted`            | All            | `boolean`                   | `false`     | Set to `true` if a grade has been automatically provided for the activity. This will show the 'Manually Override Grade' button. |
 | `isManualOverrideActive`          | All            | `boolean`                   | `false`     | Set to `true` is the user is currently manually overriding the grade. This will change the text of the manual override button to 'Clear Manual Override'. |
 | `hideTitle`                       | All            | `boolean`                   | `false`     | This property will hide the "Overall Grade" title above the component. |
-| `customManualOverrideText`        | All            | `string`                    | `undefined` | This properly will substitute the stock text on the "Manual Override" button. |
-| `customManualOverrideClearText`   | All            | `string`                    | `undefined` | This properly will substitute the stock text on the "Clear Manual Override" button. |
-| `subtitleText`                    | All            | `string`                    | `undefined` | This properly will show the given text under the title. |
+| `customManualOverrideText`        | All            | `string`                    | `undefined` | This property will substitute the stock text on the "Manual Override" button. |
+| `customManualOverrideClearText`   | All            | `string`                    | `undefined` | This property will substitute the stock text on the "Clear Manual Override" button. |
+| `subtitleText`                    | All            | `string`                    | `undefined` | This property will show the given text under the title. |
+| `validationError`                 | Numeric        | `string`                    | `undefined` | This property will force the grade input to display a validation error with the given text |
 
 ## Events
 
