@@ -2,10 +2,10 @@ import { Grade, GradeErrors, GradeType } from '../src/controller/Grade.js';
 import { assert } from '@open-wc/testing';
 
 const letterGradeOptions = {
-	0: {'LetterGrade': 'None', 'PercentStart': null},
-	1: {'LetterGrade': 'A', 'PercentStart': '80'},
-	2: {'LetterGrade': 'B', 'PercentStart': '65'},
-	3: {'LetterGrade': 'C', 'PercentStart': '50'},
+	0: { 'LetterGrade': 'None', 'PercentStart': null },
+	1: { 'LetterGrade': 'A', 'PercentStart': '80' },
+	2: { 'LetterGrade': 'B', 'PercentStart': '65' },
+	3: { 'LetterGrade': 'C', 'PercentStart': '50' },
 };
 
 describe('Grade tests', () => {

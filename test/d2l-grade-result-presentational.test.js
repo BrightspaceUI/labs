@@ -1,14 +1,13 @@
-/* eslint-disable prefer-arrow-callback */
 import '../d2l-grade-result.js';
 import '../src/components/d2l-grade-result-presentational.js';
 import { expect, fixture, html } from '@open-wc/testing';
 import { getGradesButton, getLetterScore, getLetterScoreSelect, getManualOverrideButton, getNumericScore, getNumericScoreInput, getReportsButton } from './utils.js';
 
 const letterGradeOptions = {
-	0: {'LetterGrade': 'None', 'PercentStart': null},
-	1: {'LetterGrade': 'A', 'PercentStart': '80'},
-	2: {'LetterGrade': 'B', 'PercentStart': '65'},
-	3: {'LetterGrade': 'C', 'PercentStart': '50'},
+	0: { 'LetterGrade': 'None', 'PercentStart': null },
+	1: { 'LetterGrade': 'A', 'PercentStart': '80' },
+	2: { 'LetterGrade': 'B', 'PercentStart': '65' },
+	3: { 'LetterGrade': 'C', 'PercentStart': '50' },
 };
 
 const componentManualOverride = html`
@@ -61,12 +60,12 @@ const componentLetterScore = html`
 const eventTimeoutMS = 10000;
 
 describe('d2l-grade-result-presentational', () => {
-	it('should pass all axe tests', async function() {
+	it('should pass all axe tests', async() => {
 		const el = await fixture(html`<d2l-labs-d2l-grade-result></d2l-labs-d2l-grade-result>`);
 		await expect(el).to.be.accessible();
 	});
 
-	it('click grade button event', async function() {
+	it('click grade button event', async() => {
 		return new Promise((resolve, reject) => {
 			fixture(componentManualOverride).then(el => {
 				const event = 'd2l-grade-result-grade-button-click';
@@ -77,7 +76,7 @@ describe('d2l-grade-result-presentational', () => {
 		});
 	});
 
-	it('click reports button event', async function() {
+	it('click reports button event', async() => {
 		return new Promise((resolve, reject) => {
 			fixture(componentManualOverride).then(el => {
 				const event = 'd2l-grade-result-reports-button-click';
@@ -88,7 +87,7 @@ describe('d2l-grade-result-presentational', () => {
 		});
 	});
 
-	it('click manual override button event', async function() {
+	it('click manual override button event', async() => {
 		return new Promise((resolve, reject) => {
 			fixture(componentManualOverride).then(el => {
 				const event = 'd2l-grade-result-manual-override-click';
@@ -99,7 +98,7 @@ describe('d2l-grade-result-presentational', () => {
 		});
 	});
 
-	it('click manual override clear button event', async function() {
+	it('click manual override clear button event', async() => {
 		return new Promise((resolve, reject) => {
 			fixture(componentManualOverrideClear).then(el => {
 				const event = 'd2l-grade-result-manual-override-clear-click';
@@ -111,7 +110,7 @@ describe('d2l-grade-result-presentational', () => {
 	});
 
 	// this test fails after adding localization to d2l-grade-result-numeric-score but the component still works
-	it.skip('number grade changed', async function() {
+	it.skip('number grade changed', async() => {
 		return new Promise((resolve, reject) => {
 			fixture(componentNumericScore).then(el => {
 				const event = 'd2l-grade-result-grade-change';
@@ -133,7 +132,7 @@ describe('d2l-grade-result-presentational', () => {
 		});
 	});
 
-	it('letter score changed', async function() {
+	it('letter score changed', async() => {
 		return new Promise((resolve, reject) => {
 			fixture(componentLetterScore).then(el => {
 				const event = 'd2l-grade-result-letter-score-selected';

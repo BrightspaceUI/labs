@@ -18,13 +18,6 @@ export class D2LGradeResultIconButton extends LitElement {
 		this._id = getUniqueId();
 	}
 
-	_onClick() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-icon-button-click', {
-			bubbles: true,
-			composed: true,
-		}));
-	}
-
 	render() {
 		return html`
 			<div>
@@ -47,5 +40,13 @@ export class D2LGradeResultIconButton extends LitElement {
 			</div>
 		`;
 	}
+
+	_onClick() {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-icon-button-click', {
+			bubbles: true,
+			composed: true,
+		}));
+	}
+
 }
 customElements.define('d2l-grade-result-icon-button', D2LGradeResultIconButton);

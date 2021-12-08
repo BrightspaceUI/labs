@@ -64,120 +64,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		this.subtitleText = undefined;
 	}
 
-	_onGradeButtonClick() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-button-click', {
-			bubbles: true,
-			composed: true,
-		}));
-	}
-
-	_onReportsButtonClick() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-reports-button-click', {
-			bubbles: true,
-			composed: true,
-		}));
-	}
-
-	_isReadOnly() {
-		if (this.isGradeAutoCompleted && !this.isManualOverrideActive) {
-			return true;
-		}
-		return Boolean(this.readOnly);
-	}
-
-	_renderNumericScoreComponent() {
-		return html`
-			<d2l-grade-result-numeric-score
-				.scoreNumerator=${this.scoreNumerator}
-				.scoreDenominator=${this.scoreDenominator}
-				.readOnly=${this._isReadOnly()}
-				.validationError=${this.validationError}
-			></d2l-grade-result-numeric-score>
-		`;
-	}
-
-	_renderLetterScoreComponent() {
-		return html`
-			<d2l-grade-result-letter-score
-				.availableOptions=${this.letterGradeOptions}
-				.selectedOption=${this.selectedLetterGrade}
-				.readOnly=${this._isReadOnly()}
-			></d2l-grade-result-letter-score>
-		`;
-	}
-
-	_renderScoreComponent() {
-		if (this.gradeType === GradeType.Number) {
-			return this._renderNumericScoreComponent();
-		} else if (this.gradeType === GradeType.Letter) {
-			return this._renderLetterScoreComponent();
-		} else {
-			throw new Error('INVALID GRADE TYPE PROVIDED');
-		}
-	}
-
-	_renderManualOverrideButtonComponent() {
-		if (this.isGradeAutoCompleted) {
-			let text, icon, onClick;
-
-			if (this.isManualOverrideActive) {
-				text = this.customManualOverrideClearText ? this.customManualOverrideClearText : this.localize('clearManualOverride');
-				icon = 'tier1:close-default';
-				onClick = this._onManualOverrideClearClick;
-			} else {
-				text = this.customManualOverrideText ? this.customManualOverrideText : this.localize('manuallyOverrideGrade');
-				icon = 'tier1:edit';
-				onClick = this._onManualOverrideClick;
-			}
-
-			return html`
-				<d2l-button-subtle
-					text=${text}
-					icon=${icon}
-					@click=${onClick}
-				></d2l-button-subtle>
-			`;
-		}
-
-		return html``;
-	}
-
-	_renderTitle() {
-		if (!this.hideTitle && this.labelText) {
-			return html`
-				<span class="d2l-input-label">
-					${this.labelText}
-				</span>
-			`;
-		}
-
-		return html``;
-	}
-
-	_renderSubtitle() {
-		if (this.subtitleText) {
-			return html`<div class="d2l-grade-result-presentational-subtitle d2l-body-small">
-					${this.subtitleText}
-				</div>
-			`;
-		}
-		return html``;
-	}
-
-	_onManualOverrideClick() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-manual-override-click', {
-			composed: true,
-			bubbles: true
-		}));
-	}
-
-	_onManualOverrideClearClick() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-manual-override-clear-click', {
-			composed: true,
-			bubbles: true
-		}));
-	}
-
 	render() {
 		return html`
 			<div>
@@ -212,6 +98,121 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			${this._renderManualOverrideButtonComponent()}
 		`;
 	}
+
+	_isReadOnly() {
+		if (this.isGradeAutoCompleted && !this.isManualOverrideActive) {
+			return true;
+		}
+		return Boolean(this.readOnly);
+	}
+
+	_onGradeButtonClick() {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-button-click', {
+			bubbles: true,
+			composed: true,
+		}));
+	}
+
+	_onManualOverrideClearClick() {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-manual-override-clear-click', {
+			composed: true,
+			bubbles: true
+		}));
+	}
+
+	_onManualOverrideClick() {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-manual-override-click', {
+			composed: true,
+			bubbles: true
+		}));
+	}
+
+	_onReportsButtonClick() {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-reports-button-click', {
+			bubbles: true,
+			composed: true,
+		}));
+	}
+
+	_renderLetterScoreComponent() {
+		return html`
+			<d2l-grade-result-letter-score
+				.availableOptions=${this.letterGradeOptions}
+				.selectedOption=${this.selectedLetterGrade}
+				.readOnly=${this._isReadOnly()}
+			></d2l-grade-result-letter-score>
+		`;
+	}
+
+	_renderManualOverrideButtonComponent() {
+		if (this.isGradeAutoCompleted) {
+			let text, icon, onClick;
+
+			if (this.isManualOverrideActive) {
+				text = this.customManualOverrideClearText ? this.customManualOverrideClearText : this.localize('clearManualOverride');
+				icon = 'tier1:close-default';
+				onClick = this._onManualOverrideClearClick;
+			} else {
+				text = this.customManualOverrideText ? this.customManualOverrideText : this.localize('manuallyOverrideGrade');
+				icon = 'tier1:edit';
+				onClick = this._onManualOverrideClick;
+			}
+
+			return html`
+				<d2l-button-subtle
+					text=${text}
+					icon=${icon}
+					@click=${onClick}
+				></d2l-button-subtle>
+			`;
+		}
+
+		return html``;
+	}
+
+	_renderNumericScoreComponent() {
+		return html`
+			<d2l-grade-result-numeric-score
+				.scoreNumerator=${this.scoreNumerator}
+				.scoreDenominator=${this.scoreDenominator}
+				.readOnly=${this._isReadOnly()}
+				.validationError=${this.validationError}
+			></d2l-grade-result-numeric-score>
+		`;
+	}
+
+	_renderScoreComponent() {
+		if (this.gradeType === GradeType.Number) {
+			return this._renderNumericScoreComponent();
+		} else if (this.gradeType === GradeType.Letter) {
+			return this._renderLetterScoreComponent();
+		} else {
+			throw new Error('INVALID GRADE TYPE PROVIDED');
+		}
+	}
+
+	_renderSubtitle() {
+		if (this.subtitleText) {
+			return html`<div class="d2l-grade-result-presentational-subtitle d2l-body-small">
+					${this.subtitleText}
+				</div>
+			`;
+		}
+		return html``;
+	}
+
+	_renderTitle() {
+		if (!this.hideTitle && this.labelText) {
+			return html`
+				<span class="d2l-input-label">
+					${this.labelText}
+				</span>
+			`;
+		}
+
+		return html``;
+	}
+
 }
 
 customElements.define('d2l-labs-d2l-grade-result-presentational', D2LGradeResultPresentational);

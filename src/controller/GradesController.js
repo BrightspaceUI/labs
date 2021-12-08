@@ -17,6 +17,7 @@ export const GradesControllerErrors = {
 };
 
 export class GradesController {
+
 	constructor(baseHref, token) {
 		if (!baseHref) {
 			throw new Error(GradesControllerErrors.INVALID_BASE_HREF);
@@ -38,21 +39,6 @@ export class GradesController {
 		this.token = token;
 	}
 
-	_parseGrade(entity) {
-		if (!entity.properties) {
-			throw new Error(GradesControllerErrors.NO_PROPERTIES_FOR_ENTITY);
-		}
-
-		return new Grade(
-			entity.properties.scoreType,
-			entity.properties.score,
-			entity.properties.outOf,
-			entity.properties.letterGrade,
-			entity.properties.letterGradeOptions,
-			entity
-		);
-	}
-
 	async requestGrade(bypassCache = false) {
 		const response = await window.D2L.Siren.EntityStore.fetch(this.baseHref, this.token, bypassCache);
 		if (!response) {
@@ -65,11 +51,6 @@ export class GradesController {
 		const gradeSubEntity = entity.getSubEntityByRel('grade');
 		const grade = this._parseGrade(gradeSubEntity);
 		return grade;
-	}
-
-	// this is in a seperate function so that it is easily mocked
-	async _performAction(saveGradeAction, fields) {
-		await performSirenAction(this.token, saveGradeAction, fields, true);
 	}
 
 	async updateGrade(grade) {
@@ -100,4 +81,25 @@ export class GradesController {
 		const newGradeEntity = await this._performAction(saveGradeAction, [field]);
 		return this._parseGrade(newGradeEntity);
 	}
+
+	_parseGrade(entity) {
+		if (!entity.properties) {
+			throw new Error(GradesControllerErrors.NO_PROPERTIES_FOR_ENTITY);
+		}
+
+		return new Grade(
+			entity.properties.scoreType,
+			entity.properties.score,
+			entity.properties.outOf,
+			entity.properties.letterGrade,
+			entity.properties.letterGradeOptions,
+			entity
+		);
+	}
+
+	// this is in a seperate function so that it is easily mocked
+	async _performAction(saveGradeAction, fields) {
+		await performSirenAction(this.token, saveGradeAction, fields, true);
+	}
+
 }

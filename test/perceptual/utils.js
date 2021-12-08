@@ -20,7 +20,7 @@ async function focusReportsButton(page, id) {
 	}, id);
 }
 
-async function testDiff(visualDiff, page, id, fullTitle, focusGrades = false, focusReports = false) {
+export async function testDiff(visualDiff, page, id, fullTitle, focusGrades = false, focusReports = false) {
 	const rect = await visualDiff.getRect(page, id);
 	if (focusGrades) {
 		await focusGradesButton(page, id);
@@ -30,5 +30,3 @@ async function testDiff(visualDiff, page, id, fullTitle, focusGrades = false, fo
 
 	await visualDiff.screenshotAndCompare(page, fullTitle, { clip: rect });
 }
-
-module.exports = testDiff;

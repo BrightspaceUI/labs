@@ -48,16 +48,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		return await getLocalizationTranslations(langs);
 	}
 
-	_onGradeChange(e) {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
-			bubbles: true,
-			composed: true,
-			detail: {
-				value: e.target.value
-			}
-		}));
-	}
-
 	render() {
 		let inputNumberLabel;
 		const roundedNumerator = Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
@@ -107,6 +97,16 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 
 	_checkValidationError(event) {
 		event.detail.resolve(!this.validationError);
+	}
+
+	_onGradeChange(e) {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
+			bubbles: true,
+			composed: true,
+			detail: {
+				value: e.target.value
+			}
+		}));
 	}
 
 }

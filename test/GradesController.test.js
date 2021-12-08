@@ -133,7 +133,7 @@ describe('GradesController', () => {
 		describe('will throw an error if properties are not present', () => {
 			before(() => {
 				sinon.stub(window.D2L.Siren.EntityStore, 'fetch').returns({
-					entity: {getSubEntityByRel: () => { return false; }}
+					entity: { getSubEntityByRel: () => { return false; } }
 				});
 			});
 

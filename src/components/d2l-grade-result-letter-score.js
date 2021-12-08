@@ -33,34 +33,6 @@ export class D2LGradeResultLetterScore extends LitElement {
 		this.selectedOption = '';
 	}
 
-	_renderOptions() {
-		const itemTemplate = [];
-		for (const [id, option] of Object.entries(this.availableOptions)) {
-			if (this.selectedOption === id) {
-				itemTemplate.push(html`<option selected value=${id}>${option.LetterGrade}</option>`);
-			} else {
-				itemTemplate.push(html`<option value=${id}>${option.LetterGrade}</option>`);
-			}
-		}
-		return itemTemplate;
-	}
-
-	_onOptionSelected(e) {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-letter-score-selected', {
-			composed: true,
-			bubbles: true,
-			detail: {
-				value: e.target.value
-			}
-		}));
-	}
-
-	_selectedOptionText() {
-		if (this.availableOptions[this.selectedOption]) {
-			return this.availableOptions[this.selectedOption].LetterGrade;
-		}
-	}
-
 	render() {
 		if (!this.readOnly) {
 			return html`
@@ -82,6 +54,35 @@ export class D2LGradeResultLetterScore extends LitElement {
 			`;
 		}
 	}
+
+	_onOptionSelected(e) {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-letter-score-selected', {
+			composed: true,
+			bubbles: true,
+			detail: {
+				value: e.target.value
+			}
+		}));
+	}
+
+	_renderOptions() {
+		const itemTemplate = [];
+		for (const [id, option] of Object.entries(this.availableOptions)) {
+			if (this.selectedOption === id) {
+				itemTemplate.push(html`<option selected value=${id}>${option.LetterGrade}</option>`);
+			} else {
+				itemTemplate.push(html`<option value=${id}>${option.LetterGrade}</option>`);
+			}
+		}
+		return itemTemplate;
+	}
+
+	_selectedOptionText() {
+		if (this.availableOptions[this.selectedOption]) {
+			return this.availableOptions[this.selectedOption].LetterGrade;
+		}
+	}
+
 }
 
 customElements.define('d2l-grade-result-letter-score', D2LGradeResultLetterScore);

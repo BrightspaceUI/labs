@@ -1,18 +1,17 @@
-/* eslint-disable prefer-arrow-callback */
-const puppeteer = require('puppeteer');
-const VisualDiff = require('@brightspace-ui/visual-diff');
-const testDiff = require('./utils.js');
+import puppeteer from 'puppeteer';
+import { testDiff } from './utils.js';
+import { VisualDiff } from '@brightspace-ui/visual-diff';
 
 describe('write enabled visual diff tests', () => {
 
-	const visualDiff = new VisualDiff('d2l-grade-result-write-enabled', __dirname);
+	const visualDiff = new VisualDiff('d2l-grade-result-write-enabled', import.meta.url);
 
 	let browser, page;
 
 	before(async() => {
 		browser = await puppeteer.launch();
 		page = await visualDiff.createPage(browser, { viewport: { width: 800, height: 1100 } });
-		await page.goto(`${visualDiff.getBaseUrl()}/test/perceptual/d2l-grade-result-write-enabled.visual-diff.html`, {waitUntil: ['networkidle0', 'load']});
+		await page.goto(`${visualDiff.getBaseUrl()}/test/perceptual/d2l-grade-result-write-enabled.visual-diff.html`, { waitUntil: ['networkidle0', 'load'] });
 		await page.bringToFront();
 		await visualDiff.disableAnimations(page);
 	});

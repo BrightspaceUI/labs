@@ -17,7 +17,7 @@ jobs:
       - name: Lint (Lit)
         run: npm run lint:lit
       - name: Unit Tests (SauceLabs)
-        run: npm run test:sauce
+        run: npx web-test-runner --config web-test-runner.sauce.config.js
         env:
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY_DESIRE2LEARN }}
           SAUCE_USERNAME: Desire2Learn

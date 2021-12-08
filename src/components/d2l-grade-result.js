@@ -89,131 +89,6 @@ export class D2LGradeResult extends LocalizeMixin(LitElement) {
 		}
 	}
 
-	async _initializeController() {
-		try {
-			this._controller = new GradesController(this._href, this._token);
-			await this._requestGrade();
-			this._emitInitializedSuccess();
-		} catch (e) {
-			this._emitInitializedError(e);
-		}
-	}
-
-	/* --- public methods --- */
-
-	hasUnsavedChanges() {
-		return this._hasUnsavedChanged;
-	}
-
-	async saveGrade() {
-		try {
-			this._grade = await this._controller.updateGrade(this._grade);
-			this._hasUnsavedChanged = false;
-			this._emitGradeSavedSuccess();
-		} catch (e) {
-			this._emitGradeSavedError(e);
-		}
-	}
-
-	/* --- emit events --- */
-
-	_emitInitializedSuccess() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-initialized-success', {
-			composed: true,
-			bubbles: true
-		}));
-	}
-
-	_emitInitializedError(e) {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-initialized-error', {
-			composed: true,
-			bubbles: true,
-			detail: {
-				error: e
-			}
-		}));
-	}
-
-	_emitGradeUpdatedSuccess() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-updated-success', {
-			composed: true,
-			bubbles: true,
-			detail: {
-				grade: this._grade
-			}
-		}));
-	}
-
-	_emitGradeUpdatedError(e) {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-updated-error', {
-			composed: true,
-			bubbles: true,
-			detail: {
-				error: e
-			}
-		}));
-	}
-
-	_emitGradeSavedSuccess() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-saved-success', {
-			composed: true,
-			bubbles: true,
-			detail: {
-				grade: this._grade
-			}
-		}));
-	}
-
-	_emitGradeSavedError(e) {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-saved-error', {
-			composed: true,
-			bubbles: true,
-			detail: {
-				error: e
-			}
-		}));
-	}
-
-	/* --- private methods --- */
-
-	async _requestGrade() {
-		this._grade = await this._controller.requestGrade(true);
-		this._hasUnsavedChanged = false;
-	}
-
-	/* --- event handlers --- */
-
-	async _handleGradeChange(e) {
-		try {
-			const score = e.detail.value;
-			this._grade.setScore(score);
-			this._emitGradeUpdatedSuccess();
-			this._hasUnsavedChanged = true;
-			if (!this.disableAutoSave) {
-				await this.saveGrade();
-			}
-		} catch (e) {
-			this._emitGradeUpdatedError(e);
-		}
-	}
-
-	_handleManualOverrideClick() {
-		this._manuallyOverriddenGrade = this._grade;
-		this.dispatchEvent('d2l-grade-result-manual-override-click', {
-			composed: true,
-			bubbles: true
-		});
-	}
-
-	_handleManualOverrideClearClick() {
-		this._grade = this._manuallyOverriddenGrade;
-		this._manuallyOverriddenGrade = undefined;
-		this.dispatchEvent('d2l-grade-result-manual-override-clear-click', {
-			composed: true,
-			bubbles: true
-		});
-	}
-
 	render() {
 		const gradeType = this._grade.getScoreType();
 		let score = this._grade.getScore();
@@ -255,6 +130,124 @@ export class D2LGradeResult extends LocalizeMixin(LitElement) {
 			></d2l-labs-d2l-grade-result-presentational>
 		`;
 	}
+
+	hasUnsavedChanges() {
+		return this._hasUnsavedChanged;
+	}
+
+	async saveGrade() {
+		try {
+			this._grade = await this._controller.updateGrade(this._grade);
+			this._hasUnsavedChanged = false;
+			this._emitGradeSavedSuccess();
+		} catch (e) {
+			this._emitGradeSavedError(e);
+		}
+	}
+
+	_emitGradeSavedError(e) {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-saved-error', {
+			composed: true,
+			bubbles: true,
+			detail: {
+				error: e
+			}
+		}));
+	}
+
+	_emitGradeSavedSuccess() {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-saved-success', {
+			composed: true,
+			bubbles: true,
+			detail: {
+				grade: this._grade
+			}
+		}));
+	}
+
+	_emitGradeUpdatedError(e) {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-updated-error', {
+			composed: true,
+			bubbles: true,
+			detail: {
+				error: e
+			}
+		}));
+	}
+
+	_emitGradeUpdatedSuccess() {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-updated-success', {
+			composed: true,
+			bubbles: true,
+			detail: {
+				grade: this._grade
+			}
+		}));
+	}
+
+	_emitInitializedError(e) {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-initialized-error', {
+			composed: true,
+			bubbles: true,
+			detail: {
+				error: e
+			}
+		}));
+	}
+
+	_emitInitializedSuccess() {
+		this.dispatchEvent(new CustomEvent('d2l-grade-result-initialized-success', {
+			composed: true,
+			bubbles: true
+		}));
+	}
+
+	async _handleGradeChange(e) {
+		try {
+			const score = e.detail.value;
+			this._grade.setScore(score);
+			this._emitGradeUpdatedSuccess();
+			this._hasUnsavedChanged = true;
+			if (!this.disableAutoSave) {
+				await this.saveGrade();
+			}
+		} catch (e) {
+			this._emitGradeUpdatedError(e);
+		}
+	}
+
+	_handleManualOverrideClearClick() {
+		this._grade = this._manuallyOverriddenGrade;
+		this._manuallyOverriddenGrade = undefined;
+		this.dispatchEvent('d2l-grade-result-manual-override-clear-click', {
+			composed: true,
+			bubbles: true
+		});
+	}
+
+	_handleManualOverrideClick() {
+		this._manuallyOverriddenGrade = this._grade;
+		this.dispatchEvent('d2l-grade-result-manual-override-click', {
+			composed: true,
+			bubbles: true
+		});
+	}
+
+	async _initializeController() {
+		try {
+			this._controller = new GradesController(this._href, this._token);
+			await this._requestGrade();
+			this._emitInitializedSuccess();
+		} catch (e) {
+			this._emitInitializedError(e);
+		}
+	}
+
+	async _requestGrade() {
+		this._grade = await this._controller.requestGrade(true);
+		this._hasUnsavedChanged = false;
+	}
+
 }
 
 customElements.define('d2l-labs-d2l-grade-result', D2LGradeResult);

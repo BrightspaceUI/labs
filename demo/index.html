@@ -2,7 +2,6 @@
 <html lang="en">
 	<head>
 		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
-		<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 		<script type="module">
 			import '@brightspace-ui/core/components/demo/demo-page.js';
 			import '@brightspace-ui/core/components/typography/styles.js';
@@ -27,31 +26,8 @@
 					this.disableAutoSave = false;
 				}
 
-				onInitializedSuccess(e) {
-					console.log('initialized success', e);
-				}
-
-				onInitializedError(e) {
-					console.log('initialized error', e);
-				}
-
-				onGradeUpdatedSuccess(e) {
-					console.log('grade updated success', e);
-				}
-
-				onGradeUpdatedError(e) {
-					console.log('grade updated error', e);
-				}
-
-				onGradeSavedSuccess(e) {
-					console.log('grade saved success', e);
-				}
-
-				onGradeSavedError(e) {
-					console.log('grade saved error', e);
-				}
-
 				render() {
+					// eslint-disable-next-line no-console
 					console.table([
 						['href', href],
 						['token', token]
@@ -70,6 +46,37 @@
 						></d2l-labs-d2l-grade-result>
 					`;
 				}
+
+				onGradeSavedError(e) {
+					// eslint-disable-next-line no-console
+					console.log('grade saved error', e);
+				}
+
+				onGradeSavedSuccess(e) {
+					// eslint-disable-next-line no-console
+					console.log('grade saved success', e);
+				}
+
+				onGradeUpdatedError(e) {
+					// eslint-disable-next-line no-console
+					console.log('grade updated error', e);
+				}
+
+				onGradeUpdatedSuccess(e) {
+					// eslint-disable-next-line no-console
+					console.log('grade updated success', e);
+				}
+
+				onInitializedError(e) {
+					// eslint-disable-next-line no-console
+					console.log('initialized error', e);
+				}
+
+				onInitializedSuccess(e) {
+					// eslint-disable-next-line no-console
+					console.log('initialized success', e);
+				}
+
 			}
 
 			customElements.define('component-demo', ComponentDemo);
@@ -77,7 +84,6 @@
 		</script>
 		<title>d2l-grade-result</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<meta charset="UTF-8">
 		<style>
 			.section {

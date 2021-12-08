@@ -15,6 +15,7 @@ export const GradeErrors = {
 };
 
 export class Grade {
+
 	constructor(scoreType, score, outOf, letterGrade, letterGradeOptions, entity) {
 		this.entity = entity;
 		this.scoreType = this._parseScoreType(scoreType);
@@ -23,6 +24,38 @@ export class Grade {
 		} else {
 			const letterGradeId = this._getLetterGradeIdFromLetterGrade(letterGrade, letterGradeOptions);
 			this._parseLetterGrade(letterGradeId, letterGradeOptions);
+		}
+	}
+
+	getEntity() {
+		return this.entity;
+	}
+
+	getScore() {
+		return this.isNumberGrade() ? this.score : this.letterGradeId;
+	}
+
+	getScoreOutOf() {
+		return this.isNumberGrade() ? this.outOf : this.letterGradeOptions;
+	}
+
+	getScoreType() {
+		return this.scoreType;
+	}
+
+	isLetterGrade() {
+		return this.scoreType === GradeType.Letter;
+	}
+
+	isNumberGrade() {
+		return this.scoreType === GradeType.Number;
+	}
+
+	setScore(score) {
+		if (this.isNumberGrade()) {
+			this._parseNumberGrade(score, this.outOf);
+		} else {
+			this._parseLetterGrade(score, this.letterGradeOptions);
 		}
 	}
 
@@ -52,20 +85,20 @@ export class Grade {
 		return letterGradeId;
 	}
 
-	_parseScoreType(scoreType) {
-		const invalidScoreError = new Error(GradeErrors.INVALID_SCORE_TYPE);
-
-		if (!scoreType || typeof scoreType !== 'string') {
-			throw invalidScoreError;
+	_parseLetterGrade(letterGradeId, letterGradeOptions) {
+		if (!letterGradeId && letterGradeId !== 0) {
+			throw new Error(GradeErrors.INVALID_LETTER_GRADE_ID);
 		}
 
-		if (scoreType.toLowerCase() === GradeType.Number.toLowerCase()) {
-			return GradeType.Number;
-		} else if (scoreType.toLowerCase() === GradeType.Letter.toLowerCase()) {
-			return GradeType.Letter;
-		} else {
-			throw invalidScoreError;
+		if (!letterGradeOptions || Object.keys(letterGradeOptions).length === 0) {
+			throw new Error(GradeErrors.INVALID_LETTER_GRADE_OPTIONS);
 		}
+
+		this.score = null;
+		this.outOf = null;
+		this.letterGradeId = letterGradeId;
+		this.letterGrade = letterGradeOptions[letterGradeId].LetterGrade;
+		this.letterGradeOptions = letterGradeOptions;
 	}
 
 	_parseNumberGrade(score, outOf) {
@@ -92,51 +125,20 @@ export class Grade {
 		this.letterGradeOptions = null;
 	}
 
-	_parseLetterGrade(letterGradeId, letterGradeOptions) {
-		if (!letterGradeId && letterGradeId !== 0) {
-			throw new Error(GradeErrors.INVALID_LETTER_GRADE_ID);
+	_parseScoreType(scoreType) {
+		const invalidScoreError = new Error(GradeErrors.INVALID_SCORE_TYPE);
+
+		if (!scoreType || typeof scoreType !== 'string') {
+			throw invalidScoreError;
 		}
 
-		if (!letterGradeOptions || Object.keys(letterGradeOptions).length === 0) {
-			throw new Error(GradeErrors.INVALID_LETTER_GRADE_OPTIONS);
-		}
-
-		this.score = null;
-		this.outOf = null;
-		this.letterGradeId = letterGradeId;
-		this.letterGrade = letterGradeOptions[letterGradeId].LetterGrade;
-		this.letterGradeOptions = letterGradeOptions;
-	}
-
-	isLetterGrade() {
-		return this.scoreType === GradeType.Letter;
-	}
-
-	isNumberGrade() {
-		return this.scoreType === GradeType.Number;
-	}
-
-	getScoreType() {
-		return this.scoreType;
-	}
-
-	getScore() {
-		return this.isNumberGrade() ? this.score : this.letterGradeId;
-	}
-
-	getScoreOutOf() {
-		return this.isNumberGrade() ? this.outOf : this.letterGradeOptions;
-	}
-
-	setScore(score) {
-		if (this.isNumberGrade()) {
-			this._parseNumberGrade(score, this.outOf);
+		if (scoreType.toLowerCase() === GradeType.Number.toLowerCase()) {
+			return GradeType.Number;
+		} else if (scoreType.toLowerCase() === GradeType.Letter.toLowerCase()) {
+			return GradeType.Letter;
 		} else {
-			this._parseLetterGrade(score, this.letterGradeOptions);
+			throw invalidScoreError;
 		}
 	}
 
-	getEntity() {
-		return this.entity;
-	}
 }
