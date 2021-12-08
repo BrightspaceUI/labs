@@ -227,43 +227,32 @@ describe('Grade tests', () => {
 		});
 	});
 
-	it('properly updates a letter grade', () => {
+	describe('properly updates a letter grade', () => {
 		const grade = new Grade(GradeType.Letter, null, null, 'A', letterGradeOptions);
 
 		it('sets the letter grade properly', () => {
 			assert.doesNotThrow(() => {
-				grade.setScore('B');
+				const letterGradeId = grade._getLetterGradeIdFromLetterGrade('B', letterGradeOptions);
+				grade.setScore(letterGradeId);
 				assert.equal(grade.getScore(), 2);
 			});
 		});
 
 		it('throws error for null score', () => {
-			assert.doesNotThrow(() => {
+			assert.throws(() => {
 				grade.setScore(null);
-			});
+			}, GradeErrors.INVALID_LETTER_GRADE_ID);
 		});
 
 		it('throws error for undefined score', () => {
 			assert.throws(() => {
 				grade.setScore();
-			}, GradeErrors.INVALID_LETTER_GRADE);
-		});
-
-		it('throws error for number score', () => {
-			assert.throws(() => {
-				grade.setScore(10);
-			}, GradeErrors.INVALID_LETTER_GRADE);
-		});
-
-		it('throws error for array of strings score', () => {
-			assert.throws(() => {
-				grade.setScore(['A']);
-			}, GradeErrors.INVALID_LETTER_GRADE);
+			}, GradeErrors.INVALID_LETTER_GRADE_ID);
 		});
 
 		it('throws error for new score not in letter grade options', () => {
 			assert.throws(() => {
-				grade.setScore('D');
+				grade._getLetterGradeIdFromLetterGrade('D', letterGradeOptions);
 			}, GradeErrors.LETTER_GRADE_NOT_IN_OPTIONS);
 		});
 
