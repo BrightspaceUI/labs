@@ -32,7 +32,6 @@
     "stylelint": "^14"
   },
   "files": [
-    "labs.js",
     "labs.serge.json",
     "/lang"
   ],
