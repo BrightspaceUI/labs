@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/@brightspace-ui/labs.svg)](https://www.npmjs.org/package/@brightspace-ui/labs)
 
-A library of experimental lit components and utilities.
+A collection of experimental web components and tools for building Brightspace applications.
 
 ## Installation
 

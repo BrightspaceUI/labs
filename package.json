@@ -1,6 +1,6 @@
 {
   "name": "@brightspace-ui/labs",
-  "description": "A library of experimental lit components and utilities.",
+  "description": "A collection of experimental web components and tools for building Brightspace applications.",
   "type": "module",
   "repository": "https://github.com/BrightspaceUI/labs.git",
   "scripts": {
