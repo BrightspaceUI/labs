@@ -33,7 +33,12 @@
   },
   "files": [
     "labs.serge.json",
-    "/src"
+    "/src",
+    "!demo",
+    "!screenshots",
+    "!test",
+    "/src/components/demo",
+    "!/src/components/demo/demo"
   ],
   "publishConfig": {
     "access": "public"
