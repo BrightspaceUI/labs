@@ -1,5 +1,5 @@
 export default {
-	files: './test/*.test.js',
+	files: './src/**/*.test.js',
 	nodeResolve: true,
 	testFramework: {
 		config: {
