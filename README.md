@@ -12,28 +12,8 @@ Install from NPM:
 npm install @brightspace-ui/labs
 ```
 
-## Usage
+## README Index
 
-```html
-<script type="module">
-    import '@brightspace-ui/labs/labs.js';
-</script>
-<d2l-labs>My element</d2l-labs>
-```
-
-**Properties:**
-
-| Property | Type | Description |
-|--|--|--|
-| | | |
-
-**Accessibility:**
-
-To make your usage of `d2l-labs` accessible, use the following properties when applicable:
-
-| Attribute | Description |
-|--|--|
-| | |
 
 ## Developing, Testing and Contributing
 
@@ -89,7 +69,7 @@ npx mocha './test/**/*.visual-diff.js' -t 10000 --golden
 
 ### Running the demos
 
-To start a [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) that hosts the demo page and tests:
+To start a [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) that hosts the demo pages and tests:
 
 ```shell
 npm start
