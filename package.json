@@ -33,7 +33,7 @@
   },
   "files": [
     "labs.serge.json",
-    "/lang"
+    "/src"
   ],
   "publishConfig": {
     "access": "public"
