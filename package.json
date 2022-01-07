@@ -36,9 +36,7 @@
     "/src",
     "!demo",
     "!screenshots",
-    "!test",
-    "/src/components/demo",
-    "!/src/components/demo/demo"
+    "!test"
   ],
   "publishConfig": {
     "access": "public"
