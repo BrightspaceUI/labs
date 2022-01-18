@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # Lit 2 upgrade
+      - dependency-name: "@open-wc/testing"
+        versions: ["3.x"]
+      # Lit 2 upgrade
+      - dependency-name: "lit-element"
+        versions: ["3.x"]
+      # Lit 2 upgrade
+      - dependency-name: "lit-html"
+        versions: ["2.x"]

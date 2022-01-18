@@ -1,0 +1,48 @@
+{
+  "name": "@brightspace-ui/labs",
+  "description": "A collection of experimental web components and tools for building Brightspace applications.",
+  "type": "module",
+  "repository": "https://github.com/BrightspaceUI/labs.git",
+  "scripts": {
+    "lint": "npm run lint:eslint && npm run lint:lit && npm run lint:style",
+    "lint:eslint": "eslint . --ext .js,.html",
+    "lint:lit": "lit-analyzer \"src/**/*.js\" --strict",
+    "lint:style": "stylelint \"**/*.{js,html}\"",
+    "start": "web-dev-server --node-resolve --open --watch",
+    "test": "npm run lint && npm run test:headless",
+    "test:headless": "web-test-runner",
+    "test:headless:watch": "web-test-runner --watch"
+  },
+  "author": "D2L Corporation",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/core": "^7",
+    "@babel/eslint-parser": "^7",
+    "@brightspace-ui/stylelint-config": "^0.3",
+    "@open-wc/testing": "^2",
+    "@web/dev-server": "^0.1",
+    "@web/test-runner": "^0.13",
+    "eslint": "^8",
+    "eslint-config-brightspace": "^0.16",
+    "eslint-plugin-html": "^6",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-lit": "^1",
+    "eslint-plugin-sort-class-members": "^1",
+    "lit-analyzer": "^1",
+    "stylelint": "^14"
+  },
+  "files": [
+    "labs.serge.json",
+    "/src",
+    "!demo",
+    "!screenshots",
+    "!test"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@brightspace-ui/core": "^1",
+    "lit-element": "^2"
+  }
+}
