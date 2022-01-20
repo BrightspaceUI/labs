@@ -3,7 +3,7 @@
   "description": "A web component used for rendering grades in Brightspace",
   "type": "module",
   "repository": "https://github.com/BrightspaceUILabs/grade-result.git",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "publishConfig": {
     "access": "public"
   },
