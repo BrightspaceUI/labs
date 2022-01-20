@@ -1,4 +1,4 @@
-import '@brightspace-ui/core/components/inputs/input-number';
+import '@brightspace-ui/core/components/inputs/input-number.js';
 import { bodyStandardStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement } from 'lit-element';
 import getLocalizationTranslations from './locale.js';

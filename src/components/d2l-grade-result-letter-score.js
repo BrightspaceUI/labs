@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit-element';
 import { bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles';
+import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 
 export class D2LGradeResultLetterScore extends LitElement {
 
