@@ -87,17 +87,6 @@ describe('d2l-grade-result-presentational', () => {
 		});
 	});
 
-	it('click manual override button event', async() => {
-		return new Promise((resolve, reject) => {
-			fixture(componentManualOverride).then(el => {
-				const event = 'd2l-grade-result-manual-override-click';
-				el.addEventListener(event, resolve);
-				getManualOverrideButton(el).click();
-				setTimeout(() => reject(`timeout waiting for ${event} event`), eventTimeoutMS);
-			});
-		});
-	});
-
 	it('click manual override clear button event', async() => {
 		return new Promise((resolve, reject) => {
 			fixture(componentManualOverrideClear).then(el => {
