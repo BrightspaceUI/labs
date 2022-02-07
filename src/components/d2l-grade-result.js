@@ -125,7 +125,6 @@ export class D2LGradeResult extends LocalizeMixin(LitElement) {
 
 				@d2l-grade-result-grade-change=${this._handleGradeChange}
 				@d2l-grade-result-letter-score-selected=${this._handleGradeChange}
-				@d2l-grade-result-manual-override-click=${this._handleManualOverrideClick}
 				@d2l-grade-result-manual-override-clear-click=${this._handleManualOverrideClearClick}
 			></d2l-labs-d2l-grade-result-presentational>
 		`;
@@ -220,14 +219,6 @@ export class D2LGradeResult extends LocalizeMixin(LitElement) {
 		this._grade = this._manuallyOverriddenGrade;
 		this._manuallyOverriddenGrade = undefined;
 		this.dispatchEvent('d2l-grade-result-manual-override-clear-click', {
-			composed: true,
-			bubbles: true
-		});
-	}
-
-	_handleManualOverrideClick() {
-		this._manuallyOverriddenGrade = this._grade;
-		this.dispatchEvent('d2l-grade-result-manual-override-click', {
 			composed: true,
 			bubbles: true
 		});
