@@ -25,7 +25,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			isGradeAutoCompleted: { type: Boolean },
 			isManualOverrideActive: { type: Boolean },
 			hideTitle: { type: Boolean },
-			customManualOverrideText: { type: String },
 			customManualOverrideClearText: { type: String },
 			subtitleText: { type: String },
 			validationError: { type: String }
@@ -59,7 +58,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		this.isGradeAutoCompleted = false;
 		this.isManualOverrideActive = false;
 		this.hideTitle = false;
-		this.customManualOverrideText = undefined;
 		this.customManualOverrideClearText = undefined;
 		this.subtitleText = undefined;
 	}
@@ -120,13 +118,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		}));
 	}
 
-	_onManualOverrideClick() {
-		this.dispatchEvent(new CustomEvent('d2l-grade-result-manual-override-click', {
-			composed: true,
-			bubbles: true
-		}));
-	}
-
 	_onReportsButtonClick() {
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-reports-button-click', {
 			bubbles: true,
@@ -145,18 +136,11 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	}
 
 	_renderManualOverrideButtonComponent() {
-		if (this.isGradeAutoCompleted) {
-			let text, icon, onClick;
+		if (this.isGradeAutoCompleted && this.isManualOverrideActive) {
 
-			if (this.isManualOverrideActive) {
-				text = this.customManualOverrideClearText ? this.customManualOverrideClearText : this.localize('clearManualOverride');
-				icon = 'tier1:close-default';
-				onClick = this._onManualOverrideClearClick;
-			} else {
-				text = this.customManualOverrideText ? this.customManualOverrideText : this.localize('manuallyOverrideGrade');
-				icon = 'tier1:edit';
-				onClick = this._onManualOverrideClick;
-			}
+			const text = this.customManualOverrideClearText ? this.customManualOverrideClearText : this.localize('clearManualOverride');
+			const icon = 'tier1:close-default';
+			const onClick = this._onManualOverrideClearClick;
 
 			return html`
 				<d2l-button-subtle

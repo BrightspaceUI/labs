@@ -22,10 +22,6 @@ describe('optional override text substitution visual diff tests', () => {
 
 	after(() => browser.close());
 
-	it('custom-manual-override-text', async function() {
-		await testDiff(visualDiff, page, '#custom-manual-override-text', this.test.fullTitle());
-	});
-
 	it('custom-manual-override-clear-text', async function() {
 		await testDiff(visualDiff, page, '#custom-manual-override-clear-text', this.test.fullTitle());
 	});

@@ -57,10 +57,9 @@ If you are only interested in rendering the presentational layer of the componen
 | `gradeButtonTooltip`              | All            | `string`                    | `''`        | The text that is inside of the tooltip when hovering over the grades button. |
 | `reportsButtonTooltip`            | All            | `string`                    | `''`        | The text that is inside of the tooltip when hovering over the reports button. |
 | `readOnly`                        | All            | `boolean`                   | `false`     | Set to `true` if the user does not have permissions to edit the grade. |
-| `isGradeAutoCompleted`            | All            | `boolean`                   | `false`     | Set to `true` if a grade has been automatically provided for the activity. This will show the 'Manually Override Grade' button. |
-| `isManualOverrideActive`          | All            | `boolean`                   | `false`     | Set to `true` is the user is currently manually overriding the grade. This will change the text of the manual override button to 'Clear Manual Override'. |
+| `isGradeAutoCompleted`            | All            | `boolean`                   | `false`     | Set to `true` if a grade has been automatically provided for the activity. |
+| `isManualOverrideActive`          | All            | `boolean`                   | `false`     | Set to `true` if the user is currently manually overriding the grade. This will display the button to 'Clear Manual Override'. |
 | `hideTitle`                       | All            | `boolean`                   | `false`     | This property will hide the "Overall Grade" title above the component. |
-| `customManualOverrideText`        | All            | `string`                    | `undefined` | This property will substitute the stock text on the "Manual Override" button. |
 | `customManualOverrideClearText`   | All            | `string`                    | `undefined` | This property will substitute the stock text on the "Clear Manual Override" button. |
 | `subtitleText`                    | All            | `string`                    | `undefined` | This property will show the given text under the title. |
 | `validationError`                 | Numeric        | `string`                    | `undefined` | This property will force the grade input to display a validation error with the given text |
@@ -79,7 +78,6 @@ If you are only interested in rendering the presentational layer of the componen
 | `@d2l-grade-result-grade-saved-error`           | This event is fired when there is an error while saving the grade to the server. |
 | `@d2l-grade-result-grade-button-click`          | This event is fired when the grades button is clicked.       |
 | `@d2l-grade-result-reports-button-click`        | This event is fired when the reports button is clicked.      |
-| `@d2l-grade-result-manual-override-click`       | This event is fired when the manual override button is clicked. |
 | `@d2l-grade-result-manual-override-clear-click` | This event is fired when the manual override clear is clicked. |
 
 #### d2l-labs-d2l-grade-result-presentational
@@ -90,7 +88,6 @@ If you are only interested in rendering the presentational layer of the componen
 | `@d2l-grade-result-reports-button-click`        | This event is fired when the reports button is clicked.      |
 | `@d2l-grade-result-grade-change`                | This event is fired on the change of the grade for a `gradeType="Numeric"` grade. |
 | `@d2l-grade-result-letter-score-selected`       | This event is fired on the change of the grade for a `gradeType="LetterGrade"` grade. |
-| `@d2l-grade-result-manual-override-click`       | This event is fired when the manual override button is clicked. |
 | `@d2l-grade-result-manual-override-clear-click` | This event is fired when the manual override clear is clicked. |
 
 ## Installation
