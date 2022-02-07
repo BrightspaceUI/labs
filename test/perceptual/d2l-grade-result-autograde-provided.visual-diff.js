@@ -22,38 +22,6 @@ describe('autograde provided visual diff tests', () => {
 
 	after(() => browser.close());
 
-	it('autograde-provided-number-grade-no-icons-manual-override-option', async function() {
-		await testDiff(visualDiff, page, '#autograde-provided-number-grade-no-icons-manual-override-option', this.test.fullTitle());
-	});
-
-	it('autograde-provided-number-grade-icons-manual-override-option', async function() {
-		await testDiff(visualDiff, page, '#autograde-provided-number-grade-icons-manual-override-option', this.test.fullTitle());
-	});
-
-	it('autograde-provided-number-grade-icons-tooltips-manual-override-option-grades', async function() {
-		await testDiff(visualDiff, page, '#autograde-provided-number-grade-icons-tooltips-manual-override-option', this.test.fullTitle(), true);
-	});
-
-	it('autograde-provided-number-grade-icons-tooltips-manual-override-option-reports', async function() {
-		await testDiff(visualDiff, page, '#autograde-provided-number-grade-icons-tooltips-manual-override-option', this.test.fullTitle(), false, true);
-	});
-
-	it('autograde-provided-letter-grade-no-icons-manual-override-option', async function() {
-		await testDiff(visualDiff, page, '#autograde-provided-letter-grade-no-icons-manual-override-option', this.test.fullTitle());
-	});
-
-	it('autograde-provided-letter-grade-icons-manual-override-option', async function() {
-		await testDiff(visualDiff, page, '#autograde-provided-letter-grade-icons-manual-override-option', this.test.fullTitle());
-	});
-
-	it('autograde-provided-letter-grade-icons-tooltips-manual-override-option-grades', async function() {
-		await testDiff(visualDiff, page, '#autograde-provided-letter-grade-icons-tooltips-manual-override-option', this.test.fullTitle(), true);
-	});
-
-	it('autograde-provided-letter-grade-icons-tooltips-manual-override-option-reports', async function() {
-		await testDiff(visualDiff, page, '#autograde-provided-letter-grade-icons-tooltips-manual-override-option', this.test.fullTitle(), false, true);
-	});
-
 	it('autograde-provided-number-grade-no-icons-clear-manual-override-option', async function() {
 		await testDiff(visualDiff, page, '#autograde-provided-number-grade-no-icons-clear-manual-override-option', this.test.fullTitle());
 	});
