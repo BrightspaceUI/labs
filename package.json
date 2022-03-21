@@ -21,7 +21,7 @@
   "devDependencies": {
     "@babel/core": "^7",
     "@babel/eslint-parser": "^7",
-    "@open-wc/testing": "^2",
+    "@open-wc/testing": "^3",
     "@web/dev-server": "^0.1",
     "@web/test-runner": "^0.13",
     "@web/test-runner-saucelabs": "^0.6",
@@ -35,9 +35,9 @@
     "sinon": "^9"
   },
   "dependencies": {
-    "@brightspace-ui/core": "^1",
+    "@brightspace-ui/core": "^2",
     "d2l-polymer-siren-behaviors": "github:Brightspace/polymer-siren-behaviors#semver:^1",
-    "lit-element": "^2",
-    "siren-sdk": "github:BrightspaceHypermediaComponents/siren-sdk#semver:^1"
+    "lit-element": "^3",
+    "siren-sdk": "github:BrightspaceHypermediaComponents/siren-sdk#semver:^2"
   }
 }
