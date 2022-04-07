@@ -16,8 +16,10 @@ export const GradeErrors = {
 
 export class Grade {
 
-	constructor(scoreType, score, outOf, letterGrade, letterGradeOptions, entity) {
+	constructor(scoreType, score, outOf, letterGrade, letterGradeOptions, entity, calculatedScore = null) {
 		this.entity = entity;
+		this.isManuallyOverridden = false;
+		this.calculatedScore = calculatedScore;
 		this.scoreType = this._parseScoreType(scoreType);
 		if (this.isNumberGrade()) {
 			this._parseNumberGrade(score, outOf);
@@ -116,6 +118,10 @@ export class Grade {
 
 		if (typeof outOf === 'string') {
 			outOf = Number(outOf);
+		}
+
+		if (this.calculatedScore !== null) {
+			this.isManuallyOverridden = score !== this.calculatedScore;
 		}
 
 		this.score = score;

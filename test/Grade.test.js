@@ -19,6 +19,26 @@ describe('Grade tests', () => {
 			assert.equal(grade.getScoreOutOf(), 50);
 		});
 
+		it('initializes properly for a numeric score (not overridden)', () => {
+			const grade = new Grade(GradeType.Number, 10, 50, null, null, null, 10);
+			assert.equal(grade.isLetterGrade(), false);
+			assert.equal(grade.isNumberGrade(), true);
+			assert.equal(grade.getScoreType(), GradeType.Number);
+			assert.equal(grade.getScore(), 10);
+			assert.equal(grade.getScoreOutOf(), 50);
+			assert.equal(grade.isManuallyOverridden, false);
+		});
+
+		it('initializes properly for a numeric score (overridden)', () => {
+			const grade = new Grade(GradeType.Number, 10, 50, null, null, null, 15);
+			assert.equal(grade.isLetterGrade(), false);
+			assert.equal(grade.isNumberGrade(), true);
+			assert.equal(grade.getScoreType(), GradeType.Number);
+			assert.equal(grade.getScore(), 10);
+			assert.equal(grade.getScoreOutOf(), 50);
+			assert.equal(grade.isManuallyOverridden, true);
+		});
+
 		it('initializes properly for a letter score', () => {
 			const grade = new Grade(GradeType.Letter, null, null, 'A', letterGradeOptions);
 			assert.equal(grade.isLetterGrade(), true);
