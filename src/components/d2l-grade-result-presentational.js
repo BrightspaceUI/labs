@@ -22,7 +22,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			gradeButtonTooltip: { type: String },
 			reportsButtonTooltip: { type: String },
 			readOnly: { type: Boolean },
-			isGradeAutoCompleted: { type: Boolean },
 			isManualOverrideActive: { type: Boolean },
 			hideTitle: { type: Boolean },
 			customManualOverrideClearText: { type: String },
@@ -55,7 +54,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		this.includeGradeButton = false;
 		this.includeReportsButton = false;
 		this.selectedLetterGrade = '';
-		this.isGradeAutoCompleted = false;
 		this.isManualOverrideActive = false;
 		this.hideTitle = false;
 		this.customManualOverrideClearText = undefined;
@@ -98,9 +96,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	}
 
 	_isReadOnly() {
-		if (this.isGradeAutoCompleted && !this.isManualOverrideActive) {
-			return true;
-		}
 		return Boolean(this.readOnly);
 	}
 
@@ -136,7 +131,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	}
 
 	_renderManualOverrideButtonComponent() {
-		if (this.isGradeAutoCompleted && this.isManualOverrideActive) {
+		if (this.isManualOverrideActive) {
 
 			const text = this.customManualOverrideClearText ? this.customManualOverrideClearText : this.localize('clearManualOverride');
 			const icon = 'tier1:close-default';
