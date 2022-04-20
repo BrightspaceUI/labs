@@ -12,7 +12,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
 			validationError: { attribute: false, type: String },
-			isValid: { attribute: false, type: Boolean }
+			isValidScore: { attribute: false, type: Boolean }
 		};
 	}
 
@@ -58,7 +58,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: roundedNumerator || 'blank', denominator: this.scoreDenominator });
 		}
 
-		this.isValid = !this.validationError || typeof this.validationError === undefined || this.validationError === '';
+		this.isValidScore = !this.validationError || typeof this.validationError === undefined;
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -75,7 +75,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 								max="9999999999"
 								max-fraction-digits="2"
 								@change=${this._onGradeChange}
-								?validate-on-init=${this.isValid}
+								?validate-on-init=${this.isValidScore}
 							></d2l-input-number>
 							<d2l-validation-custom
 								for="grade-input"
@@ -100,7 +100,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	}
 
 	_checkValidationError(event,) {
-		event.detail.resolve(this.isValid);
+		event.detail.resolve(this.isValidScore);
 	}
 
 	_onGradeChange(e) {
