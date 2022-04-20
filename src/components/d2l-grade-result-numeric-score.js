@@ -99,7 +99,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		`;
 	}
 
-	_checkValidationError(event,) {
+	_checkValidationError(event) {
 		event.detail.resolve(this.isValidScore);
 	}
 
