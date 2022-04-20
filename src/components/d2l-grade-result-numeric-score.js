@@ -57,9 +57,9 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		} else {
 			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: roundedNumerator || 'blank', denominator: this.scoreDenominator });
 		}
-		console.log('IN GRADE-RESULT-NUMERIC score = ', this.scoreNumerator, ' validationError = ', this.validationError, typeof this.validationError);
+
 		this.isValid = !this.validationError || typeof this.validationError === undefined || this.validationError === '';
-		console.log('this.isValid ? ', this.isValid);
+
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
 

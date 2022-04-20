@@ -61,7 +61,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	}
 
 	render() {
-		console.log('rendering grade result');
 		return html`
 			<div>
 				${this._renderTitle()}
@@ -151,7 +150,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	}
 
 	_renderNumericScoreComponent() {
-		console.log('IN GRADE-RESULT _renderNumericScoreComponent');
 		return html`
 			<d2l-grade-result-numeric-score
 				.scoreNumerator=${this.scoreNumerator}
