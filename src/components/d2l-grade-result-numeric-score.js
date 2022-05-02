@@ -8,11 +8,12 @@ import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
 export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	static get properties() {
 		return {
-			scoreNumerator: { type: Number },
+			scoreNumerator: { type: String },
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
-			validationError: { attribute: false, type: String },
-			isValidScore: { attribute: false, type: Boolean }
+			validationError: { type: String },
+			isValidScore: { type: Boolean },
+			isNullable: { type: Boolean }
 		};
 	}
 
@@ -49,16 +50,25 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		return await getLocalizationTranslations(langs);
 	}
 
+	async updated(changedProperties) {
+		super.updated(changedProperties);
+		console.log(changedProperties);
+		if (changedProperties.has('validationError')) {
+			console.log('GR this.validationError changed to ', this.validationError, ' for score = ', this.scoreNumerator)
+		}
+	}
+
 	render() {
 		let inputNumberLabel;
-		const roundedNumerator = Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
+		const roundedNumerator = Math.round((Number(this.scoreNumerator) + Number.EPSILON) * 100) / 100;
 		if (!this.scoreDenominator) {
 			inputNumberLabel = this.localize('gradeScoreLabel', { numerator: roundedNumerator || 'blank' });
 		} else {
 			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: roundedNumerator || 'blank', denominator: this.scoreDenominator });
 		}
 
-		this.isValidScore = !this.validationError || typeof this.validationError === undefined;
+		this.isValidScore = this._checkIsValidScore();
+		console.log('GR scoreNumerator = ', this.scoreNumerator, ' this.validationError = ', this.validationError, ' this.isValidScore = ', this.isValidScore);
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -70,7 +80,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 								id="grade-input"
 								label=${inputNumberLabel}
 								label-hidden
-								value="${this.scoreNumerator}"
+								value="${Number(this.scoreNumerator)}"
 								min="0"
 								max="9999999999"
 								max-fraction-digits="2"
@@ -99,16 +109,29 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		`;
 	}
 
+	_checkIsValidScore() {
+		//  if there's no validationError defined, the score is considered valid
+		return !this.validationError || typeof this.validationError === 'undefined';
+	}
+
 	_checkValidationError(event) {
 		event.detail.resolve(this.isValidScore);
 	}
 
 	_onGradeChange(e) {
+		const newScore = e.target.value;
+		// if the new score is undefined (box was cleared), it's invalid. need to set validationError
+		// otherwise, it's valid. so we need to set validationError to undefined
+		console.log('this.isNullable', this.isNullable)
+		if(!this.isNullable) {
+			this.validationError = typeof newScore === 'undefined' ? (this.validationError + ' ') : undefined;
+		}
+		this.isValidScore = this._checkIsValidScore();
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
 			bubbles: true,
 			composed: true,
 			detail: {
-				value: e.target.value
+				value: newScore
 			}
 		}));
 	}

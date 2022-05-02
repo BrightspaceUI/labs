@@ -14,7 +14,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			gradeType: { type: String },
 			labelText: { type: String },
 			scoreDenominator: { type: Number },
-			scoreNumerator: { type: Number },
+			scoreNumerator: { type: String },
 			letterGradeOptions: { type: Object },
 			selectedLetterGrade: { type: String },
 			includeGradeButton: { type: Boolean },
@@ -26,7 +26,8 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			hideTitle: { type: Boolean },
 			customManualOverrideClearText: { type: String },
 			subtitleText: { type: String },
-			validationError: { type: String }
+			validationError: { type: String },
+			isNullable: { type: Boolean }
 		};
 	}
 
@@ -150,6 +151,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	}
 
 	_renderNumericScoreComponent() {
+		// console.log('GR first layer this.scoreNumerator = ', this.scoreNumerator)
 		return html`
 			<d2l-grade-result-numeric-score
 				.scoreNumerator=${this.scoreNumerator}
