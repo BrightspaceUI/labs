@@ -13,7 +13,10 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			readOnly: { type: Boolean },
 			validationError: { type: String },
 			isValidScore: { type: Boolean },
-			isNullable: { type: Boolean }
+			disallowNull: {
+				attribute: 'disallow-null',
+				type: Boolean
+			}
 		};
 	}
 
@@ -111,10 +114,11 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 
 	_onGradeChange(e) {
 		const newScore = e.target.value;
-		if (!this.isNullable) {
+		if (this.disallowNull) {
 			// if the new score is undefined (box was cleared), it's invalid, so we need to force validationError to update
 			// otherwise, it's valid, so we need to set validationError to undefined
-			this.validationError = typeof newScore === 'undefined' ? this.validationError.concat(' ') : undefined;
+			const oldValidationError = typeof this.validationError === 'undefined' ? '' : this.validationError;
+			this.validationError = typeof newScore === 'undefined' ? oldValidationError.concat(' ') : undefined;
 		}
 		this.isValidScore = this._checkIsValidScore();
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
