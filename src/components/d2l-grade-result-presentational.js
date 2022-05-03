@@ -59,6 +59,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		this.hideTitle = false;
 		this.customManualOverrideClearText = undefined;
 		this.subtitleText = undefined;
+		this.isNullable = true;
 	}
 
 	render() {
@@ -94,6 +95,10 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 
 			${this._renderManualOverrideButtonComponent()}
 		`;
+	}
+
+	_isNullable() {
+		return Boolean(this.isNullable);
 	}
 
 	_isReadOnly() {
@@ -151,13 +156,13 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	}
 
 	_renderNumericScoreComponent() {
-		// console.log('GR first layer this.scoreNumerator = ', this.scoreNumerator)
 		return html`
 			<d2l-grade-result-numeric-score
 				.scoreNumerator=${this.scoreNumerator}
 				.scoreDenominator=${this.scoreDenominator}
 				.readOnly=${this._isReadOnly()}
 				.validationError=${this.validationError}
+				.isNullable=${this._isNullable()}
 			></d2l-grade-result-numeric-score>
 		`;
 	}

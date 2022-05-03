@@ -50,14 +50,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		return await getLocalizationTranslations(langs);
 	}
 
-	async updated(changedProperties) {
-		super.updated(changedProperties);
-		console.log(changedProperties);
-		if (changedProperties.has('validationError')) {
-			console.log('GR this.validationError changed to ', this.validationError, ' for score = ', this.scoreNumerator)
-		}
-	}
-
 	render() {
 		let inputNumberLabel;
 		const roundedNumerator = Math.round((Number(this.scoreNumerator) + Number.EPSILON) * 100) / 100;
@@ -68,7 +60,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		}
 
 		this.isValidScore = this._checkIsValidScore();
-		console.log('GR scoreNumerator = ', this.scoreNumerator, ' this.validationError = ', this.validationError, ' this.isValidScore = ', this.isValidScore);
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -110,7 +101,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	}
 
 	_checkIsValidScore() {
-		//  if there's no validationError defined, the score is considered valid
+		//  if no validationError is defined, the score is considered valid
 		return !this.validationError || typeof this.validationError === 'undefined';
 	}
 
@@ -120,11 +111,10 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 
 	_onGradeChange(e) {
 		const newScore = e.target.value;
-		// if the new score is undefined (box was cleared), it's invalid. need to set validationError
-		// otherwise, it's valid. so we need to set validationError to undefined
-		console.log('this.isNullable', this.isNullable)
-		if(!this.isNullable) {
-			this.validationError = typeof newScore === 'undefined' ? (this.validationError + ' ') : undefined;
+		if (!this.isNullable) {
+			// if the new score is undefined (box was cleared), it's invalid, so we need to force validationError to update
+			// otherwise, it's valid, so we need to set validationError to undefined
+			this.validationError = typeof newScore === 'undefined' ? this.validationError.concat(' ') : undefined;
 		}
 		this.isValidScore = this._checkIsValidScore();
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
