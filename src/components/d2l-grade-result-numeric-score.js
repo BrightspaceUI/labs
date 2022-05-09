@@ -8,7 +8,7 @@ import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
 export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	static get properties() {
 		return {
-			scoreNumerator: { type: String },
+			scoreNumerator: { type: Number },
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
 			validationError: { type: String },
@@ -18,11 +18,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 				type: Boolean
 			}
 		};
-	}
-
-	constructor() {
-		super();
-		this.isValidScore = true;
 	}
 
 	static get styles() {
@@ -60,7 +55,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 
 	render() {
 		let inputNumberLabel;
-		const roundedNumerator = Math.round((Number(this.scoreNumerator) + Number.EPSILON) * 100) / 100;
+		const roundedNumerator = Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
 		if (!this.scoreDenominator) {
 			inputNumberLabel = this.localize('gradeScoreLabel', { numerator: roundedNumerator || 'blank' });
 		} else {
@@ -68,10 +63,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		}
 
 		this.isValidScore = this._checkIsValidScore(this.scoreNumerator);
-		console.log('rendering d2l-validation-custom');
-		console.log('          score =', this.scoreNumerator);
-		console.log('          validationError =', this.validationError);
-		console.log('          isValidScore =', this.isValidScore);
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -83,7 +74,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 								id="grade-input"
 								label=${inputNumberLabel}
 								label-hidden
-								value="${Number(this.scoreNumerator)}"
+								value="${isNaN(roundedNumerator) ? '' : this.scoreNumerator}"
 								min="0"
 								max="9999999999"
 								max-fraction-digits="2"
@@ -113,28 +104,19 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	}
 
 	_checkIsValidScore(score) {
-		console.log('_checkIsValidScore for score =', score);
 		if (this.disallowNull && typeof score === 'undefined') {
-			console.log('          score UNDEFINED - setting isValidScore to false');
+			this.scoreNumerator = undefined;
 			return false;
 		}
-		//  if no validationError is defined, then the score is considered valid
-		console.log('          validationError =', this.validationError, '(', typeof this.validationError, ')');
-		console.log('          setting isValidScore to', (!this.validationError || typeof this.validationError === 'undefined' || this.validationError === ''));
 		return !this.validationError || typeof this.validationError === 'undefined';
 	}
 
 	_checkValidationError(event) {
-		this.isValidScore = this._checkIsValidScore(this.scoreNumerator);
-		console.log('RESOLVING PROMISE for score =', this.scoreNumerator);
-		console.log('          with isValidScore =', this.isValidScore);
 		event.detail.resolve(this.isValidScore);
 	}
 
 	_onGradeChange(e) {
 		const newScore = e.target.value;
-		console.log('GRADE-RESULT _onGradeChange');
-		console.log('          for score = ', newScore);
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
 			bubbles: true,
 			composed: true,
