@@ -74,7 +74,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 								id="grade-input"
 								label=${inputNumberLabel}
 								label-hidden
-								value="${isNaN(roundedNumerator) ? '' : this.scoreNumerator}"
+								value="${this.scoreNumerator}"
 								min="0"
 								max="9999999999"
 								max-fraction-digits="2"
