@@ -20,6 +20,11 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		};
 	}
 
+	constructor() {
+		super();
+		this.isValidScore = true;
+	}
+
 	static get styles() {
 		return [bodyStandardStyles, labelStyles, inputLabelStyles, css`
 			.d2l-grade-result-numeric-score-container {
@@ -62,7 +67,11 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: roundedNumerator || 'blank', denominator: this.scoreDenominator });
 		}
 
-		this.isValidScore = this._checkIsValidScore();
+		this.isValidScore = this._checkIsValidScore(this.scoreNumerator);
+		console.log('rendering d2l-validation-custom');
+		console.log('          score =', this.scoreNumerator);
+		console.log('          validationError =', this.validationError);
+		console.log('          isValidScore =', this.isValidScore);
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -103,24 +112,29 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		`;
 	}
 
-	_checkIsValidScore() {
-		//  if no validationError is defined, the score is considered valid
+	_checkIsValidScore(score) {
+		console.log('_checkIsValidScore for score =', score);
+		if (this.disallowNull && typeof score === 'undefined') {
+			console.log('          score UNDEFINED - setting isValidScore to false');
+			return false;
+		}
+		//  if no validationError is defined, then the score is considered valid
+		console.log('          validationError =', this.validationError, '(', typeof this.validationError, ')');
+		console.log('          setting isValidScore to', (!this.validationError || typeof this.validationError === 'undefined' || this.validationError === ''));
 		return !this.validationError || typeof this.validationError === 'undefined';
 	}
 
 	_checkValidationError(event) {
+		this.isValidScore = this._checkIsValidScore(this.scoreNumerator);
+		console.log('RESOLVING PROMISE for score =', this.scoreNumerator);
+		console.log('          with isValidScore =', this.isValidScore);
 		event.detail.resolve(this.isValidScore);
 	}
 
 	_onGradeChange(e) {
 		const newScore = e.target.value;
-		if (this.disallowNull) {
-			// if the new score is undefined (box was cleared), it's invalid, so we need to force validationError to update
-			// otherwise, it's valid, so we need to set validationError to undefined
-			const oldValidationError = typeof this.validationError === 'undefined' ? '' : this.validationError;
-			this.validationError = typeof newScore === 'undefined' ? oldValidationError.concat(' ') : undefined;
-		}
-		this.isValidScore = this._checkIsValidScore();
+		console.log('GRADE-RESULT _onGradeChange');
+		console.log('          for score = ', newScore);
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
 			bubbles: true,
 			composed: true,
@@ -128,6 +142,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 				value: newScore
 			}
 		}));
+		this.isValidScore = this._checkIsValidScore(newScore);
 	}
 
 }
