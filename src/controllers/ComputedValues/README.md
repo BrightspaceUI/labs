@@ -89,6 +89,42 @@ class DemoComponent extends LitElement {
 
 Check the demo page for additional working examples.
 
+## Compute Lifecycle
+
+There is a flow of steps that each `ComputedValue` instance follows in order to compute its value. Being aware of how this controller works is important to understand how best to make use of it.
+
+### Host `update`
+
+The compute lifecycle starts with the host executing its `update` method, which then triggers the controller's `hostUpdate`.
+
+All computation logic for this controller starts here. So, if the host's `update` method isn't called (for example by never triggering one or by explicitly using `shouldUpdate` to skip updates), then computes will never be called.
+
+This also means that `compute` functions should not look at the dom directly, since the logic for calculating the updated value happens before the render executes.
+
+### Controller `getDependencies` and `shouldCompute`
+
+The `getDependencies` and `shouldCompute` functions are important in order to decide whether to execute the `compute` function. As such, these two functions are called every host `update` for each `ComputedValue` instance.
+
+The `getDependencies` function must always be defined by the consumer, whereas the `shouldCompute` function has an internal default if the consumer does not define their own.
+
+The default `shouldCompute` function will do an indentity comparison for each of the previous and current dependencies one by one and return immediately if one of the dependencies has changed.
+
+While this controller can be very helpful for making sure to only execute heavy computations when needed, be aware of the performance costs of using this approach. So, keep in mind what processes occur each `update` call.
+
+## Order of `ComputeValue` Instances
+
+The compute lifecycle for each `ComputeValue` controller instance will be executed in its entirety before moving on to the next. This means that the order that these instances are defined in the array matters in some cases. If one of the controller instances is dependent on the result from another, then the one that is being depended on must come first in the order to make sure the most up-to-date value is passed to the dependant.
+
+### Controller `compute`
+
+Once the `shouldCompute` function returns true during the `update` step, the `compute` function will be called.
+
+If the controller is set to run synchronously, the `compute` function will execute in its entirety and the return value will be assigned to the controller's `value` instance member. This all happens during the host's `update` step.
+
+If the controller is set to run asynchronously, the `compute` function will call the `compute` function and expect a promise as the return value. It will update its async statuses as appropriate before continuing with the host's `update` step. Once the promise returned from the `compute` function resolves, the controller will assign the result to the controller's `value` instance member, it will update its async statuses as appropriate, and will then request and update from the host using `requestUpdate`.
+
+Note that if the controller is asynchronous and a controller's `compute` functions is called while a previous `compute` call is in progress, only the last `compute` function call will update the value and async statuses.
+
 ## `ComputedValues` Instance Methods
 
 ### Constructor
@@ -114,7 +150,7 @@ Check the demo page for additional working examples.
 |---|---|---|---|
 | `host` | Lit Element | The host for the controller. | Yes |
 | `options` | Object | A collection of options for the controller. | Yes |
-| `options.getDependencies` | Function() : Array | The function used to get the array of dependencies for this value. Must return an array and the array should always be the same length. | Yes |
+| `options.getDependencies` | Function() : Array | The function used to get the array of dependencies for this value. Must return an array and the array should always be the same length. The previous and current dependencies will be used to decide whether or not to update, so they should be kept in the same order as well. | Yes |
 | `options.compute` | Function(...Any) : Any | The function used to calculate the computed value. It's passed the most recent dependencies every time it is called, and the return value is assigned to the controller value member before each render. | Yes |
 | `options.initialValue` | Any | The value of the controller value member before the first update occurs. | |
 | `options.shouldCompute` | Function(Array, Array) : Bool | The function used to decide whether or not to run the compute function. It's passed an array of the previous dependencies and an array of the current dependencies. It must return a boolean representing whether to call the compute function or not. | |
