@@ -74,7 +74,7 @@ class DemoComponent extends LitElement {
 		compute: (firstName, lastName) => {
 			return `${firstName[0]}. ${lastName}`;
 		}
-    }, {
+	}, {
 		// This computed value is asynchronous
 		name: 'asyncName',
 		initialValue: '',
@@ -111,19 +111,19 @@ The default `shouldCompute` function will do an indentity comparison for each of
 
 While this controller can be very helpful for making sure to only execute heavy computations when needed, be aware of the performance costs of using this approach. So, keep in mind what processes occur each `update` call.
 
-## Order of `ComputeValue` Instances
-
-The compute lifecycle for each `ComputeValue` controller instance will be executed in its entirety before moving on to the next. This means that the order that these instances are defined in the array matters in some cases. If one of the controller instances is dependent on the result from another, then the one that is being depended on must come first in the order to make sure the most up-to-date value is passed to the dependant.
-
 ### Controller `compute`
 
 Once the `shouldCompute` function returns true during the `update` step, the `compute` function will be called.
 
 If the controller is set to run synchronously, the `compute` function will execute in its entirety and the return value will be assigned to the controller's `value` instance member. This all happens during the host's `update` step.
 
-If the controller is set to run asynchronously, the `compute` function will call the `compute` function and expect a promise as the return value. It will update its async statuses as appropriate before continuing with the host's `update` step. Once the promise returned from the `compute` function resolves, the controller will assign the result to the controller's `value` instance member, it will update its async statuses as appropriate, and will then request and update from the host using `requestUpdate`.
+If the controller is set to run asynchronously, the controller will call the `compute` function and expect a promise as the return value. It will update its async statuses as appropriate before continuing with the host's `update` step. Once the promise returned from the `compute` function resolves, the controller will assign the result to the controller's `value` instance member, it will update its async statuses as appropriate, and will then request and update from the host using `requestUpdate`.
 
 Note that if the controller is asynchronous and a controller's `compute` functions is called while a previous `compute` call is in progress, only the last `compute` function call will update the value and async statuses.
+
+## Order of `ComputeValue` Instances
+
+The compute lifecycle for each `ComputeValue` controller instance will be executed in its entirety before moving on to the next. This means that the order that these instances are defined in the array matters in some cases. If one of the controller instances is dependent on the result from another, then the one that is being depended on must come first in the order to make sure the most up-to-date value is passed to the dependant.
 
 ## `ComputedValues` Instance Methods
 
