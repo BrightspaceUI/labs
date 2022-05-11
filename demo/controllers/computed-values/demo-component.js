@@ -1,4 +1,4 @@
-import ComputedValues, { ComputedValue } from '../index.js';
+import ComputedValues, { ComputedValue } from '../../../src/controllers/computed-values/index.js';
 import { html, LitElement } from 'lit';
 
 class DemoComponent extends LitElement {
