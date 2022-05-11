@@ -3,6 +3,9 @@
   "description": "A collection of experimental web components and tools for building Brightspace applications.",
   "type": "module",
   "repository": "https://github.com/BrightspaceUI/labs.git",
+  "exports": {
+    "./controllers/computed-values.js": "./src/controllers/computed-values/index.js"
+  },
   "scripts": {
     "lint": "npm run lint:eslint && npm run lint:lit && npm run lint:style",
     "lint:eslint": "eslint . --ext .js,.html",
