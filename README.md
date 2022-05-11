@@ -1,4 +1,4 @@
-# d2l-grade-result 
+# d2l-grade-result
 
 [![NPM version](https://img.shields.io/npm/v/@brightspace-ui-labs/grade-result.svg)](https://www.npmjs.org/package/@brightspace-ui-labs/grade-result)
 
