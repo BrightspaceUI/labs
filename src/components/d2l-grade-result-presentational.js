@@ -26,7 +26,11 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			hideTitle: { type: Boolean },
 			customManualOverrideClearText: { type: String },
 			subtitleText: { type: String },
-			validationError: { type: String }
+			validationError: { type: String },
+			disallowNull: {
+				attribute: 'disallow-null',
+				type: Boolean
+			}
 		};
 	}
 
@@ -156,6 +160,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				.scoreDenominator=${this.scoreDenominator}
 				.readOnly=${this._isReadOnly()}
 				.validationError=${this.validationError}
+				?disallow-null=${this.disallowNull}
 			></d2l-grade-result-numeric-score>
 		`;
 	}

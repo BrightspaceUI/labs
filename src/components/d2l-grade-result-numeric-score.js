@@ -11,8 +11,12 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			scoreNumerator: { type: Number },
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
-			validationError: { attribute: false, type: String },
-			isValidScore: { attribute: false, type: Boolean }
+			validationError: { type: String },
+			isValidScore: { type: Boolean },
+			disallowNull: {
+				attribute: 'disallow-null',
+				type: Boolean
+			}
 		};
 	}
 
@@ -58,7 +62,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: roundedNumerator || 'blank', denominator: this.scoreDenominator });
 		}
 
-		this.isValidScore = !this.validationError || typeof this.validationError === undefined;
+		this.isValidScore = this._checkIsValidScore(this.scoreNumerator);
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -99,18 +103,28 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		`;
 	}
 
+	_checkIsValidScore(score) {
+		if (this.disallowNull && typeof score === 'undefined') {
+			this.scoreNumerator = undefined;
+			return false;
+		}
+		return !this.validationError || typeof this.validationError === 'undefined';
+	}
+
 	_checkValidationError(event) {
 		event.detail.resolve(this.isValidScore);
 	}
 
 	_onGradeChange(e) {
+		const newScore = e.target.value;
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
 			bubbles: true,
 			composed: true,
 			detail: {
-				value: e.target.value
+				value: newScore
 			}
 		}));
+		this.isValidScore = this._checkIsValidScore(newScore);
 	}
 
 }
