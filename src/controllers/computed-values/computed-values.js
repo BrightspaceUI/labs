@@ -1,4 +1,4 @@
-import ComputedValue from './ComputedValue.js';
+import ComputedValue from './computed-value.js';
 
 export default class ComputedValues {
 	constructor(host, valuesOptions = []) {

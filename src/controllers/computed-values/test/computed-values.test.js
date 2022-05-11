@@ -1,5 +1,5 @@
-import ComputedValue, { ASYNC_STATUSES } from '../ComputedValue.js';
-import ComputedValues from '../ComputedValues.js';
+import ComputedValue, { ASYNC_STATUSES } from '../computed-value.js';
+import ComputedValues from '../computed-values.js';
 import { expect } from '@open-wc/testing';
 
 class ControllerHostHelper {
