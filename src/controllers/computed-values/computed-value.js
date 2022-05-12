@@ -32,13 +32,11 @@ export default class ComputedValue {
 		} = options;
 
 		if (typeof compute !== 'function') {
-			console.error('Failed to initialize ComputedValueController: compute parameter must be a function.');
-			return;
+			throw new TypeError('Failed to initialize ComputedValueController: compute parameter must be a function.');
 		}
 
 		if (typeof getDependencies !== 'function') {
-			console.error('Failed to initialize ComputedValueController: getDependencies parameter must be a function.');
-			return;
+			throw new TypeError('Failed to initialize ComputedValueController: getDependencies parameter must be a function.');
 		}
 
 		this._compute = compute;
