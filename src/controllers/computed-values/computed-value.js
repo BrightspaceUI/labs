@@ -28,6 +28,7 @@ export default class ComputedValue {
 			shouldCompute = defaultShouldCompute,
 			getDependencies,
 			isAsync = false,
+			shouldRequestUpdate = () => true,
 			initialValue
 		} = options;
 
@@ -43,6 +44,7 @@ export default class ComputedValue {
 		this._shouldCompute = shouldCompute;
 		this._getDependencies = getDependencies;
 		this._isAsync = isAsync;
+		this._shouldRequestUpdate = shouldRequestUpdate;
 		this.value = initialValue;
 
 		(this.host = host).addController(this);
@@ -80,6 +82,7 @@ export default class ComputedValue {
 	_latestPromise;
 	_prevDependencies = null;
 	_shouldCompute;
+	_shouldRequestUpdate;
 
 	_updateAsyncValue(dependencies) {
 		this._latestPromise = null; // Prevent any ongoing compute update from completing as this is the latest now
@@ -111,6 +114,13 @@ export default class ComputedValue {
 
 			// Make sure this promise is still the latest so as not to overwrite a more recent async value
 			if (this._latestPromise === promise) {
+				const prevState = {
+					value: this.value,
+					success: this.success,
+					error: this.error,
+					pending: this.pending
+				};
+
 				if (success) {
 					this.value = newValue;
 				}
@@ -118,7 +128,18 @@ export default class ComputedValue {
 				this.success = success;
 				this.error = error;
 				this.pending = false;
-				this.host.requestUpdate();
+
+				const currState = {
+					value: this.value,
+					success: this.success,
+					error: this.error,
+					pending: this.pending
+				};
+
+				if (this._shouldRequestUpdate(prevState, currState)) {
+					this.host.requestUpdate();
+				}
+
 				this._computeCompleteResolve();
 			}
 		})();

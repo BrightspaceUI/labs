@@ -155,6 +155,7 @@ The compute lifecycle for each `ComputeValue` controller instance will be execut
 | `options.initialValue` | Any | The value of the controller value member before the first update occurs. | |
 | `options.shouldCompute` | Function(Array, Array) : Bool | The function used to decide whether or not to run the compute function. It's passed an array of the previous dependencies and an array of the current dependencies. It must return a boolean representing whether to call the compute function or not. | |
 | `options.isAsync` | Bool | This tells the controller whether the compute function is asynchronous. If this is true, the compute function must return a promise. | |
+| `options.shouldRequestUpdate` | Function(Object, Object) : Bool | This function is used to decide whether or not to call the host's `requestUpdate` method after an async `compute` function finished updating the value.<br><br>This function is passed an object that contains the value and async status before the compute finished executing, and one object with the current value and async status. It must return a boolean representing whether to call the `requestUpdate` method or not.<br><br>If not assigned, this defaults to a function that always returns true. | |
 
 ## `ComputedValue` Instance Members
 

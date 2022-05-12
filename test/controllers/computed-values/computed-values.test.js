@@ -3,6 +3,8 @@ import ComputedValues from '../../../src/controllers/computed-values/computed-va
 import { expect } from '@open-wc/testing';
 
 class ControllerHostHelper {
+	requestUpdateCallCount = 0;
+
 	constructor() {
 		this.controllersMap = new Map();
 	}
@@ -22,6 +24,8 @@ class ControllerHostHelper {
 	}
 
 	requestUpdate() {
+		this.requestUpdateCallCount++;
+
 		setTimeout(() => {
 			this.update();
 		}, 0);
@@ -353,6 +357,65 @@ describe('ComputedValue', () => {
 			expect(controller.success).to.be.true;
 			expect(controller.error).to.be.null;
 			expect(controller.asyncStatus).to.equal(ASYNC_STATUSES.SUCCESS);
+		});
+	});
+
+	describe('Async compute with custom shouldRequestUpdate', () => {
+		let host, controller, promise, resolveCall, rejectCall, computePromise;
+
+		const initialValue = 'initial value';
+		function genTestPromise() {
+			promise = new Promise((resolve, reject) => {
+				resolveCall = resolve;
+				rejectCall = reject;
+			});
+
+			return promise;
+		}
+
+		beforeEach(() => {
+			host = new ControllerHostHelper();
+
+			// Initialize controller
+			controller = new ComputedValue(host, {
+				initialValue,
+				isAsync: true,
+				getDependencies: () => [],
+				compute: () => {
+					computePromise = genTestPromise();
+					return computePromise;
+				},
+				shouldCompute: () => true,
+				shouldRequestUpdate: (prevState, currState) => {
+					return currState.success && prevState.value !== currState.value;
+				}
+			});
+		});
+
+		it('requestUpdate should be called when expected', async() => {
+			expect(host.requestUpdateCallCount).to.equal(0);
+			host.update();
+			resolveCall('Test 1');
+			await controller.computeComplete;
+			expect(host.requestUpdateCallCount).to.equal(1);
+
+			host.update();
+			resolveCall('Test 2');
+			await controller.computeComplete;
+			expect(host.requestUpdateCallCount).to.equal(2);
+		});
+
+		it('requestUpdate shouldn\'t be called when expected', async() => {
+			expect(host.requestUpdateCallCount).to.equal(0);
+			host.update();
+			resolveCall(initialValue);
+			await controller.computeComplete;
+			expect(host.requestUpdateCallCount).to.equal(0);
+
+			host.update();
+			rejectCall('Error 1');
+			await controller.computeComplete;
+			expect(host.requestUpdateCallCount).to.equal(0);
 		});
 	});
 });
