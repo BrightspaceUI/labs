@@ -107,7 +107,7 @@ The `getDependencies` and `shouldCompute` functions are important in order to de
 
 The `getDependencies` function must always be defined by the consumer, whereas the `shouldCompute` function has an internal default if the consumer does not define their own.
 
-The default `shouldCompute` function will do an indentity comparison for each of the previous and current dependencies one by one and return immediately if one of the dependencies has changed.
+The default `shouldCompute` function will do an indentity comparison for each of the previous and current dependencies one by one and return true immediately if one of the dependencies has changed.
 
 While this controller can be very helpful for making sure to only execute heavy computations when needed, be aware of the performance costs of using this approach. So, keep in mind what processes occur each `update` call.
 
@@ -153,7 +153,7 @@ The compute lifecycle for each `ComputeValue` controller instance will be execut
 | `options.getDependencies` | Function() : Array | The function used to get the array of dependencies for this value. Must return an array and the array should always be the same length. The previous and current dependencies will be used to decide whether or not to update, so they should be kept in the same order as well. | Yes |
 | `options.compute` | Function(...Any) : Any | The function used to calculate the computed value. It's passed the most recent dependencies every time it is called, and the return value is assigned to the controller value member before each render. | Yes |
 | `options.initialValue` | Any | The value of the controller value member before the first update occurs. | |
-| `options.shouldCompute` | Function(Array, Array) : Bool | The function used to decide whether or not to run the compute function. It's passed an array of the previous dependencies and an array of the current dependencies. It must return a boolean representing whether to call the compute function or not. | |
+| `options.shouldCompute` | Function(Array, Array) : Bool | The function used to decide whether or not to run the compute function.<br><br>This function is passed an array of the previous dependencies and an array of the current dependencies. It must return a boolean representing whether to call the compute function or not.<br><br>If not assigned, the default `shouldCompute` function will do an indentity comparison for each of the previous and current dependencies one by one and return true immediately if one of the dependencies has changed. | |
 | `options.isAsync` | Bool | This tells the controller whether the compute function is asynchronous. If this is true, the compute function must return a promise. | |
 | `options.shouldRequestUpdate` | Function(Object, Object) : Bool | This function is used to decide whether or not to call the host's `requestUpdate` method after an async `compute` function finished updating the value.<br><br>This function is passed an object that contains the value and async status before the compute finished executing, and one object with the current value and async status. It must return a boolean representing whether to call the `requestUpdate` method or not.<br><br>If not assigned, this defaults to a function that always returns true. | |
 
