@@ -63,6 +63,7 @@ If you are only interested in rendering the presentational layer of the componen
 | `customManualOverrideClearText`   | All            | `string`                    | `undefined` | This property will substitute the stock text on the "Clear Manual Override" button. |
 | `subtitleText`                    | All            | `string`                    | `undefined` | This property will show the given text under the title. |
 | `validationError`                 | Numeric        | `string`                    | `undefined` | This property will force the grade input to display a validation error with the given text |
+| `disallowNull`                 | Numeric        | `boolean`                    | `undefined` |  Set to `true` if an undefined/blank grade is not considered valid |
 
 ## Events
 
