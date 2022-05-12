@@ -1,5 +1,6 @@
-import ComputedValues, { ComputedValue } from '../../../src/controllers/computed-values/index.js';
 import { html, LitElement } from 'lit';
+import ComputedValue from '../../../src/controllers/computed-values/computed-value.js';
+import ComputedValues from '../../../src/controllers/computed-values/computed-values.js';
 
 class DemoComponent extends LitElement {
 	static properties = {

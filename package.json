@@ -4,7 +4,8 @@
   "type": "module",
   "repository": "https://github.com/BrightspaceUI/labs.git",
   "exports": {
-    "./controllers/computed-values.js": "./src/controllers/computed-values/index.js"
+    "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
+    "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js"
   },
   "scripts": {
     "lint": "npm run lint:eslint && npm run lint:lit && npm run lint:style",
