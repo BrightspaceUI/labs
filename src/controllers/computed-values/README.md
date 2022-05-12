@@ -20,7 +20,7 @@ While it's possible to use the `ComputedValue` controller directly, it is recomm
 Create an instance of the `ComputedValues` controller and assign it to a member variable. Pass the host and an array of objects to the constructor that each represent one value that will be computed based on dependencies.
 
 ```js
-import ComputedValues from '@brightspace-ui/labs/controllers/ComputedValues/index.js';
+import ComputedValues from '@brightspace-ui/labs/controllers/computed-values.js';
 
 class DemoComponent extends LitElement {
 	static properties = {
