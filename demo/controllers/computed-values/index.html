@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import './demo-component.js';
+		</script>
+		<title>ComputedValues Controller</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<d2l-demo-page page-title="ComputedValues Controller">
+			<h2>ComputedValues Controller</h2>
+			This demo component simply shows how the controller may be used. To
+			get a better idea of what functionality and options this controller
+			supports, take a look at the demo-component source code.
+			<br/>
+			<ul>
+				<li>The fullName computed value is dependant on the firstName and lastName</li>
+				<li>The screamingFullName computed value is dependant on the fullName computed value</li>
+				<li>The asyncShortName computed value shows how a computed value can be async and that it can have custom shouldCompute logic</li>
+				<li>The altFullName computed value shows that you can use a single computed value instead of a collection of them</li>
+			</ul>
+			<d2l-demo-snippet>
+                <demo-component></demo-component>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+	</body>
+</html>

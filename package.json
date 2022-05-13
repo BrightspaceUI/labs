@@ -3,6 +3,10 @@
   "description": "A collection of experimental web components and tools for building Brightspace applications.",
   "type": "module",
   "repository": "https://github.com/BrightspaceUI/labs.git",
+  "exports": {
+    "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
+    "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js"
+  },
   "scripts": {
     "lint": "npm run lint:eslint && npm run lint:lit && npm run lint:style",
     "lint:eslint": "eslint . --ext .js,.html",
@@ -33,16 +37,13 @@
   },
   "files": [
     "labs.serge.json",
-    "/src",
-    "!demo",
-    "!screenshots",
-    "!test"
+    "/src"
   ],
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "@brightspace-ui/core": "^2",
-    "lit-element": "^2"
+    "lit": "^2"
   }
 }
