@@ -18,7 +18,10 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 			readOnly: { type: Boolean },
 			validationError: { type: String },
 			isValidScore: { type: Boolean },
-			disallowNull: { type: Boolean }
+			disallowNull: {
+				attribute: 'disallow-null',
+				type: Boolean
+			}
 		};
 	}
 
@@ -53,14 +56,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	}
 	static async getLocalizeResources(langs) {
 		return await getLocalizationTranslations(langs);
-	}
-
-	constructor() {
-		super();
-
-		this.readOnly = false;
-		this.isValidScore = false;
-		this.disallowNull = false;
 	}
 
 	render() {
@@ -127,7 +122,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 
 	_onGradeChange(e) {
 		const newScore = e.target.value;
-
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
 			bubbles: true,
 			composed: true,

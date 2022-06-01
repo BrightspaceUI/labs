@@ -32,7 +32,10 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			customManualOverrideClearText: { type: String },
 			subtitleText: { type: String },
 			validationError: { type: String },
-			disallowNull: { type: Boolean }
+			disallowNull: {
+				attribute: 'disallow-null',
+				type: Boolean
+			}
 		};
 	}
 
@@ -64,7 +67,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		this.hideTitle = false;
 		this.customManualOverrideClearText = undefined;
 		this.subtitleText = undefined;
-		this.disallowNull = false;
 	}
 
 	render() {
@@ -163,7 +165,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				.scoreDenominator=${this.scoreDenominator}
 				.readOnly=${this._isReadOnly()}
 				.validationError=${this.validationError}
-				?disallowNull=${this.disallowNull}
+				?disallow-null=${this.disallowNull}
 			></d2l-grade-result-numeric-score>
 		`;
 	}
