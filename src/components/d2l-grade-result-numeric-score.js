@@ -5,18 +5,21 @@ import getLocalizationTranslations from './locale.js';
 import { inputLabelStyles } from '@brightspace-ui/core/components/inputs/input-label-styles.js';
 import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
 
+// US137000 - prevent Lit default converter from converting undefined to 0
+const numberConverter = {
+	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
+	toAttribute:  (prop) => { return String(prop); }
+};
+
 export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	static get properties() {
 		return {
-			scoreNumerator: { type: Number },
+			scoreNumerator: { type: Number, converter: numberConverter },
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
 			validationError: { type: String },
 			isValidScore: { type: Boolean },
-			disallowNull: {
-				attribute: 'disallow-null',
-				type: Boolean
-			}
+			disallowNull: { type: Boolean }
 		};
 	}
 
@@ -53,6 +56,14 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		return await getLocalizationTranslations(langs);
 	}
 
+	constructor() {
+		super();
+
+		this.readOnly = false;
+		this.isValidScore = false;
+		this.disallowNull = false;
+	}
+
 	render() {
 		let inputNumberLabel;
 		const roundedNumerator = Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
@@ -63,6 +74,8 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		}
 
 		this.isValidScore = this._checkIsValidScore(this.scoreNumerator);
+
+		console.log('grade-result-presentational - render - score numerator: ' + this.scoreNumerator);
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -104,6 +117,8 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	}
 
 	_checkIsValidScore(score) {
+		console.log('_checkIsValidScore - numeric score: ' + score);
+
 		if (this.disallowNull && typeof score === 'undefined') {
 			this.scoreNumerator = undefined;
 			return false;
@@ -117,6 +132,9 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 
 	_onGradeChange(e) {
 		const newScore = e.target.value;
+
+		console.log('_onGradeChange - new score: ' + newScore);
+
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-change', {
 			bubbles: true,
 			composed: true,
@@ -124,7 +142,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 				value: newScore
 			}
 		}));
-		this.isValidScore = this._checkIsValidScore(newScore);
+		//this.isValidScore = this._checkIsValidScore(newScore);
 	}
 
 }

@@ -8,13 +8,19 @@ import getLocalizationTranslations from './locale.js';
 import { GradeType } from '../controller/Grade.js';
 import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
 
+// US137000 - prevent Lit default converter from converting undefined to 0
+const numberConverter = {
+	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
+	toAttribute:  (prop) => { return String(prop); }
+};
+
 export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	static get properties() {
 		return {
 			gradeType: { type: String },
 			labelText: { type: String },
 			scoreDenominator: { type: Number },
-			scoreNumerator: { type: Number },
+			scoreNumerator: { type: Number, converter: numberConverter },
 			letterGradeOptions: { type: Object },
 			selectedLetterGrade: { type: String },
 			includeGradeButton: { type: Boolean },
@@ -27,10 +33,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			customManualOverrideClearText: { type: String },
 			subtitleText: { type: String },
 			validationError: { type: String },
-			disallowNull: {
-				attribute: 'disallow-null',
-				type: Boolean
-			}
+			disallowNull: { type: Boolean }
 		};
 	}
 
@@ -62,6 +65,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 		this.hideTitle = false;
 		this.customManualOverrideClearText = undefined;
 		this.subtitleText = undefined;
+		this.disallowNull = false;
 	}
 
 	render() {
@@ -160,7 +164,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				.scoreDenominator=${this.scoreDenominator}
 				.readOnly=${this._isReadOnly()}
 				.validationError=${this.validationError}
-				?disallow-null=${this.disallowNull}
+				?disallowNull=${this.disallowNull}
 			></d2l-grade-result-numeric-score>
 		`;
 	}
