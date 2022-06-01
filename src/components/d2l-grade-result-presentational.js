@@ -8,7 +8,6 @@ import getLocalizationTranslations from './locale.js';
 import { GradeType } from '../controller/Grade.js';
 import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
 
-// US137000 - prevent Lit default converter from converting undefined to 0
 const numberConverter = {
 	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
 	toAttribute:  (prop) => { return String(prop); }
