@@ -5,10 +5,15 @@ import getLocalizationTranslations from './locale.js';
 import { inputLabelStyles } from '@brightspace-ui/core/components/inputs/input-label-styles.js';
 import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
 
+const numberConverter = {
+	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
+	toAttribute:  (prop) => { return String(prop); }
+};
+
 export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	static get properties() {
 		return {
-			scoreNumerator: { type: Number },
+			scoreNumerator: { type: Number, converter: numberConverter },
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
 			validationError: { type: String },

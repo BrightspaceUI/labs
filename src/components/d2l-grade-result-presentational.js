@@ -8,13 +8,18 @@ import getLocalizationTranslations from './locale.js';
 import { GradeType } from '../controller/Grade.js';
 import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
 
+const numberConverter = {
+	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
+	toAttribute:  (prop) => { return String(prop); }
+};
+
 export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 	static get properties() {
 		return {
 			gradeType: { type: String },
 			labelText: { type: String },
 			scoreDenominator: { type: Number },
-			scoreNumerator: { type: Number },
+			scoreNumerator: { type: Number, converter: numberConverter },
 			letterGradeOptions: { type: Object },
 			selectedLetterGrade: { type: String },
 			includeGradeButton: { type: Boolean },
