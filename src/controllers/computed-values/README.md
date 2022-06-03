@@ -134,6 +134,7 @@ The compute lifecycle for each `ComputeValue` controller instance will be execut
 | `host` | LitElement | The host for the controller. | Yes |
 | `valuesOptions` | Array | The array of objects that each define a computed value. | Yes |
 | `valuesOptions[i].name` | String | The name of the computed value. Used to assign the internal `ComputedValue` instance to the `ComputedValues` instance. | Yes |
+| `valuesOptions[i].Controller` | Class | The controller instantiated internally for this particular value. By default this uses the `ComputedValue` controller, but it can be overriden with a custom controller. | |
 | `...valuesOptions[i]` | Object | The rest of the attributes for the object are passed to the internal `ComputedValue` instance constructor. See the `ComputedValue` constructor for details. | Yes |
 
 ## `ComputedValues` Instance Members
