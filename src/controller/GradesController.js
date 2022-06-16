@@ -1,6 +1,6 @@
 import 'd2l-polymer-siren-behaviors/store/entity-store.js';
 import { Grade } from './Grade.js';
-import { performSirenAction } from 'siren-sdk/src/es6/SirenAction.js';
+import { performSirenAction } from '@brightspace-hmc/siren-sdk/src/es6/SirenAction.js';
 
 export const GradesControllerErrors = {
 	INVALID_BASE_HREF: 'baseHref was not defined when initializing GradesController',

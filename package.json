@@ -35,9 +35,9 @@
     "sinon": "^9"
   },
   "dependencies": {
+    "@brightspace-hmc/siren-sdk": "^2",
     "@brightspace-ui/core": "^2.9",
-    "d2l-polymer-siren-behaviors": "github:Brightspace/polymer-siren-behaviors#semver:^1",
-    "lit-element": "^3",
-    "siren-sdk": "github:BrightspaceHypermediaComponents/siren-sdk#semver:^2"
+    "d2l-polymer-siren-behaviors": "^1",
+    "lit-element": "^3"
   }
 }
