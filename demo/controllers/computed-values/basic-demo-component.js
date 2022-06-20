@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import ComputedValue from '../../../src/controllers/computed-values/computed-value.js';
 import ComputedValues from '../../../src/controllers/computed-values/computed-values.js';
 
-class DemoComponent extends LitElement {
+class BasicDemoComponent extends LitElement {
 	static properties = {
 		firstName: { type: String },
 		lastName: { type: String }
@@ -88,4 +88,4 @@ class DemoComponent extends LitElement {
 		this.lastName = event.target.value;
 	}
 }
-customElements.define('demo-component', DemoComponent);
+customElements.define('basic-demo-component', BasicDemoComponent);
