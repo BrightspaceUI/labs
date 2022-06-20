@@ -4,7 +4,8 @@
 		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
 		<script type="module">
 			import '@brightspace-ui/core/components/demo/demo-page.js';
-			import './demo-component.js';
+			import './basic-demo-component.js';
+			import './classes-demo/classes-demo-component.js';
 		</script>
 		<title>ComputedValues Controller</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,10 @@
 	</head>
 	<body>
 		<d2l-demo-page page-title="ComputedValues Controller">
-			<h2>ComputedValues Controller</h2>
-			This demo component simply shows how the controller may be used. To
+			<h2>Basic Usage Demo</h2>
+			This demo component shows a very basic (and contrived) example of how the controller may be used. To
 			get a better idea of what functionality and options this controller
-			supports, take a look at the demo-component source code.
+			supports, take a look at the &lt;basic-demo-component&gt; source code.
 			<br/>
 			<ul>
 				<li>The fullName computed value is dependant on the firstName and lastName</li>
@@ -24,7 +25,18 @@
 				<li>The altFullName computed value shows that you can use a single computed value instead of a collection of them</li>
 			</ul>
 			<d2l-demo-snippet>
-                <demo-component></demo-component>
+                <basic-demo-component></basic-demo-component>
+			</d2l-demo-snippet>
+			<h2>Class List Demo</h2>
+			This demo shows how the same UI can be made with or without the use of the ComputedValues controller.
+			The resulting UI is identical, but check out the code for the &lt;without-computed-values-component&gt; and the &lt;with-computed-values-component&gt;
+			to see the differences.
+			<br/><br/>
+			In this case, the UI fetches a list of students based on the selected class. Then it runs some front-end calculations
+			to get the average grades and paginates the students.
+			<br/><br/>
+			<d2l-demo-snippet>
+                <classes-demo-component></classes-demo-component>
 			</d2l-demo-snippet>
 		</d2l-demo-page>
 	</body>
