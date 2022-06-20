@@ -21,8 +21,8 @@ class WithComputedValuesComponent extends LitElement {
 			overflow: auto;
 		}
 		.highlighted {
-			font-weight: bold;
 			color: blue;
+			font-weight: bold;
 		}
 	`;
 
