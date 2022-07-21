@@ -70,7 +70,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 		this.isValidScore = this._checkIsValidScore(this.scoreNumerator);
 
 		let numeratorToDisplay = roundedNumerator;
-		if(this.scoreNumerator == null) {
+		if (this.scoreNumerator === null) {
 			numeratorToDisplay = '';
 		}
 
