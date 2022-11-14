@@ -1,0 +1,10 @@
+{
+  "overrides": [{
+    "files": [
+      "**/*.js"
+    ],
+    "rules": {
+      "quotes": 0
+    }
+  }]
+}
