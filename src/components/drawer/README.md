@@ -21,7 +21,7 @@ Modal that is anchored to the edge of the viewport or parent container.
   import '@brightspace-ui-labs/drawer/drawer.js';
 
   document.querySelector('#open-demo').addEventListener('click', () => {
-    document.querySelector('#drawer-demo').show() = true;
+    document.querySelector('#drawer-demo').show();
   });
 </script>
 <d2l-labs-drawer id="drawer-demo" title-text="Drawer Title">
@@ -37,6 +37,7 @@ Modal that is anchored to the edge of the viewport or parent container.
 - Child drawers are non functional unless `position='right'`
 - Scroll height/component height does not respect default slot when footer slot content is present
 - `resize` mechanics require proper implementation
+  - ex: % based custom sizes do not resize on window resize
 - `lock-scroll` requires implementation
 - `trap-focus` requires implementation
 - `contained` requires implimentation
