@@ -1,4 +1,3 @@
-
 import '@brightspace-ui/core/components/focus-trap/focus-trap.js';
 import '@brightspace-ui/core/helpers/viewport-size.js';
 import { allowBodyScroll, preventBodyScroll } from '@brightspace-ui/core/components/backdrop/backdrop.js';
