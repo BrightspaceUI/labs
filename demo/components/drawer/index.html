@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href=/node_modules/@brightspace-ui/core/components/demo/styles.css type="text/css">
+        <script type="module">
+            import '@brightspace-ui/core/components/demo/demo-page.js';
+            import '@brightspace-ui/core/components/inputs/input-text.js';
+            import '@brightspace-ui/core/components/button/button.js';
+            import '../../../src/components/drawer/drawer.js';
+        </script>
+        <title>Drawer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <d2l-demo-page page-title="Drawer">
+            <h2>Drawer Positions</h2>
+            <d2l-demo-snippet>
+                <template>
+                    <d2l-button id="open-right">right</d2l-button>
+                    <d2l-button id="open-left">left</d2l-button>
+                    <d2l-button id="open-top">top</d2l-button>
+                    <d2l-button id="open-bottom">bottom</d2l-button>
+                    <d2l-labs-drawer id="position-right-demo" label="Demo Drawer" position="right">
+                        <div>
+                            <d2l-input-text id="nameId" label="Name" autofocus></d2l-input-text>
+                            <d2l-input-text id="descriptionId" label="Description"></d2l-input-text>
+                            <ul>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>consectetur adipiscing elit</li>
+                                <li>sed do eiusmod tempor incididunt</li>
+                            </ul>
+                        </div>
+                        <d2l-button slot="footer" primary data-dialog-action="done">Done</d2l-button>
+                        <d2l-button slot="footer" data-dialog-action>Cancel</d2l-button>
+                    </d2l-labs-drawer>
+					<d2l-labs-drawer id="position-left-demo" label="Demo Drawer" position="left">
+                        <div>
+                            <d2l-input-text id="nameId" label="Name" autofocus></d2l-input-text>
+                            <d2l-input-text id="descriptionId" label="Description"></d2l-input-text>
+                            <ul>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>consectetur adipiscing elit</li>
+                                <li>sed do eiusmod tempor incididunt</li>
+                            </ul>
+                        </div>
+                        <d2l-button slot="footer" primary data-dialog-action="done">Done</d2l-button>
+                        <d2l-button slot="footer" data-dialog-action>Cancel</d2l-button>
+                    </d2l-labs-drawer>
+					<d2l-labs-drawer id="position-top-demo" label="Demo Drawer" position="top">
+                        <div>
+                            <d2l-input-text id="nameId" label="Name" autofocus></d2l-input-text>
+                            <d2l-input-text id="descriptionId" label="Description"></d2l-input-text>
+                            <ul>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>consectetur adipiscing elit</li>
+                                <li>sed do eiusmod tempor incididunt</li>
+                            </ul>
+                        </div>
+                        <d2l-button slot="footer" primary data-dialog-action="done">Done</d2l-button>
+                        <d2l-button slot="footer" data-dialog-action>Cancel</d2l-button>
+                    </d2l-labs-drawer>
+					<d2l-labs-drawer id="position-bottom-demo" label="Demo Drawer" position="bottom">
+                        <div>
+                            <d2l-input-text id="nameId" label="Name" autofocus></d2l-input-text>
+                            <d2l-input-text id="descriptionId" label="Description"></d2l-input-text>
+                            <ul>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>consectetur adipiscing elit</li>
+                                <li>sed do eiusmod tempor incididunt</li>
+                            </ul>
+                        </div>
+                        <d2l-button slot="footer" primary data-dialog-action="done">Done</d2l-button>
+                        <d2l-button slot="footer" data-dialog-action>Cancel</d2l-button>
+                    </d2l-labs-drawer>
+                    <script>
+						document.querySelector('#open-right').addEventListener('click', () => {
+							document.querySelector('#position-right-demo').show();
+						});
+						document.querySelector('#open-left').addEventListener('click', () => {
+							document.querySelector('#position-left-demo').show();
+						});
+						document.querySelector('#open-top').addEventListener('click', () => {
+							document.querySelector('#position-top-demo').show();
+						});
+						document.querySelector('#open-bottom').addEventListener('click', () => {
+							document.querySelector('#position-bottom-demo').show();
+						});
+                    </script>
+                </template>
+            </d2l-demo-snippet>
+			<h2>Drawer Sizes</h2>
+            <d2l-demo-snippet>
+                <template>
+                    <d2l-button id="open-xs">xs</d2l-button>
+                    <d2l-button id="open-sm">sm</d2l-button>
+                    <d2l-button id="open-md">md</d2l-button>
+                    <d2l-button id="open-lg">lg</d2l-button>
+					<d2l-button id="open-xl">xl</d2l-button>
+					<d2l-button id="open-full">full</d2l-button>
+					<d2l-input-text id="custom-size-input" label="Custom Size Input" placeholder="% or px string"></d2l-input-text>
+					<d2l-button id="open-custom">Custom Size</d2l-button>
+                    <d2l-labs-drawer id="size-demo" label="Foobar">
+                        <div>
+                            <d2l-input-text id="nameId" label="Name" autofocus></d2l-input-text>
+                            <d2l-input-text id="descriptionId" label="Description"></d2l-input-text>
+                            <ul>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>consectetur adipiscing elit</li>
+                                <li>sed do eiusmod tempor incididunt</li>
+                            </ul>
+                        </div>
+                        <d2l-button slot="footer" primary data-dialog-action="done">Done</d2l-button>
+                        <d2l-button slot="footer" data-dialog-action>Cancel</d2l-button>
+                    </d2l-labs-drawer>
+                    <script>
+						document.querySelector('#open-xs').addEventListener('click', () => {
+							document.querySelector('#size-demo').setAttribute('size', 'xs');
+							document.querySelector('#size-demo').show();
+						});
+						document.querySelector('#open-sm').addEventListener('click', () => {
+							document.querySelector('#size-demo').setAttribute('size', 'sm');
+							document.querySelector('#size-demo').show();
+						});
+						document.querySelector('#open-md').addEventListener('click', () => {
+							document.querySelector('#size-demo').setAttribute('size', 'md');
+							document.querySelector('#size-demo').show();
+						});
+						document.querySelector('#open-lg').addEventListener('click', () => {
+							document.querySelector('#size-demo').setAttribute('size', 'lg');
+							document.querySelector('#size-demo').show();
+						});
+						document.querySelector('#open-xl').addEventListener('click', () => {
+							document.querySelector('#size-demo').setAttribute('size', 'xl');
+							document.querySelector('#size-demo').show();
+						});
+						document.querySelector('#open-full').addEventListener('click', () => {
+							document.querySelector('#size-demo').setAttribute('size', 'full');
+							document.querySelector('#size-demo').show();
+						});
+						document.querySelector('#open-custom').addEventListener('click', () => {
+							const customSize = document.querySelector('#custom-size-input').value;
+							document.querySelector('#size-demo').setAttribute('size', customSize);
+							document.querySelector('#size-demo').show();
+						});
+                    </script>
+                </template>
+            </d2l-demo-snippet>
+			<h2>Prevent Closing</h2>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-button id="openInterceptClosing">Show Drawer</d2l-button>
+					<d2l-labs-drawer id="drawerInterceptClosing" label="Prevent Closing">
+						<div>
+							<p>This drawer is prevented from closing by listening "d2l-drawer-before-close" event.</p>
+							<d2l-labs-drawer id="drawerConfirmClose" label="Comfirm close">
+								<div>
+									<p>Do you really want to close the previous drawer?</p>
+								</div>
+								<d2l-button slot="footer" primary data-dialog-action="confirm">Yes</d2l-button>
+								<d2l-button slot="footer" data-dialog-action="deny">No</d2l-button>
+							</d2l-drawer>
+						</div>
+						<d2l-button slot="footer" primary data-dialog-action="ok">Close Me!</d2l-button>
+						<d2l-button slot="footer" data-dialog-action="close">Close without confirmation</d2l-button>
+						<d2l-button slot="footer" data-dialog-action="cancel">Cancel</d2l-button>
+					</d2l-labs-drawer>
+					<script>
+						let canBeClosed = false;
+						document.querySelector('#openInterceptClosing').addEventListener('click', () => {
+							document.querySelector('#drawerInterceptClosing').show();
+						});
+						document.querySelector('#drawerInterceptClosing').addEventListener('d2l-drawer-open', () => {
+							canBeClosed = false;
+						});
+						document.querySelector('#drawerInterceptClosing').addEventListener('d2l-drawer-close', (e) => {
+							console.log('drawer action:', e.detail.action);
+						});
+						document.querySelector('#drawerConfirmClose').addEventListener('d2l-drawer-close', (e) => {
+							e.stopPropagation();
+						});
+						document.querySelector('#drawerInterceptClosing').addEventListener('d2l-drawer-before-close', async(e) => {
+
+							if (e.detail.action === 'close' || canBeClosed) return;
+
+							e.preventDefault();
+							const action = await document.querySelector('#drawerConfirmClose').show();
+
+							console.log('drawer action:', e.detail.action, ', confirm drawer action:', action);
+							if (action === 'confirm') {
+								canBeClosed = true;
+								e.detail.closeDrawer();
+							}
+						});
+					</script>
+				</template>
+			</d2l-demo-snippet>
+        </d2l-demo-page>
+    </body>
+</html>
