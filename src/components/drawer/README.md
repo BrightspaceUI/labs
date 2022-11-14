@@ -44,7 +44,7 @@ Modal that is anchored to the edge of the viewport or parent container.
   - event interception/preventDefault currently fires BOTH the pulse and the 'opening' animations
   - need to integrate `prefers-reduced-motion`
   - may want to have it be optional?
--
+- Swipe away to exit on mobile/touch
 
 **Properties:**
 
