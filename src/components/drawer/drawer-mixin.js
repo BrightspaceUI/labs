@@ -16,7 +16,7 @@ window.D2L.DrawerMixin = window.D2L.DrawerMixin || {};
 
 const abortAction = 'abort';
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const presetSizes = { 'xs': 150, 'sm': 200, 'md': 300, 'lg': 400, 'xl': 500 };
+const presetSizes = { 'xsmall': 150, 'small': 200, 'medium': 300, 'large': 400, 'xlarge': 500 };
 
 /**
  * @fires d2l-drawer-close
@@ -50,7 +50,6 @@ export const DrawerMixin = superclass => class extends RtlMixin(superclass) {
 
 	constructor() {
 		super();
-		this.label = 'Drawer';
 		this.open = false;
 		this.position = 'right';
 		this._closeAborted = false;
@@ -76,24 +75,8 @@ export const DrawerMixin = superclass => class extends RtlMixin(superclass) {
 		}
 	}
 
-	close() {
-		if (!this.open) return;
-		this.open = false;
-		return new Promise(resolve => {
-			setTimeout(async() => {
-				await this._close();
-				resolve();
-			}, 0);
-		});
-	}
-
 	resize() {
-		return new Promise(resolve => {
-			setTimeout(async() => {
-				await this._updateSize();
-				resolve();
-			}, 0);
-		});
+		return this._updateSize();
 	}
 
 	show() {
@@ -315,8 +298,6 @@ export const DrawerMixin = superclass => class extends RtlMixin(superclass) {
 	}
 
 	_handleClose() {
-		/* reset state if native dialog closes unexpectedly. ex. user highlights
-        text and then hits escape key - this is not caught by our key handler */
 		this._removeHandlers();
 		this._focusOpener();
 		this._state = null;

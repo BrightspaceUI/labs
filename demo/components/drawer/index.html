@@ -8,12 +8,12 @@
             import '@brightspace-ui/core/components/button/button.js';
             import '../../../src/components/drawer/drawer.js';
         </script>
-        <title>Drawer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
     </head>
-    <body>
+    <body unresolved>
         <d2l-demo-page page-title="Drawer">
+
             <h2>Drawer Positions</h2>
             <d2l-demo-snippet>
                 <template>
@@ -89,17 +89,18 @@
                     </script>
                 </template>
             </d2l-demo-snippet>
+
 			<h2>Drawer Sizes</h2>
             <d2l-demo-snippet>
                 <template>
-                    <d2l-button id="open-xs">xs</d2l-button>
-                    <d2l-button id="open-sm">sm</d2l-button>
-                    <d2l-button id="open-md">md</d2l-button>
-                    <d2l-button id="open-lg">lg</d2l-button>
-					<d2l-button id="open-xl">xl</d2l-button>
+                    <d2l-button id="open-xs">xsmall</d2l-button>
+                    <d2l-button id="open-sm">small</d2l-button>
+                    <d2l-button id="open-md">medium</d2l-button>
+                    <d2l-button id="open-lg">large</d2l-button>
+					<d2l-button id="open-xl">xlarge</d2l-button>
 					<d2l-button id="open-full">full</d2l-button>
-					<d2l-input-text id="custom-size-input" label="Custom Size Input" placeholder="% or px string"></d2l-input-text>
-					<d2l-button id="open-custom">Custom Size</d2l-button>
+					<d2l-button id="open-400">400px</d2l-button>
+					<d2l-button id="open-25-percent">25%</d2l-button>
                     <d2l-labs-drawer id="size-demo" label="Foobar">
                         <div>
                             <d2l-input-text id="nameId" label="Name" autofocus></d2l-input-text>
@@ -115,37 +116,41 @@
                     </d2l-labs-drawer>
                     <script>
 						document.querySelector('#open-xs').addEventListener('click', () => {
-							document.querySelector('#size-demo').setAttribute('size', 'xs');
+							document.querySelector('#size-demo').setAttribute('size', 'xsmall');
 							document.querySelector('#size-demo').show();
 						});
 						document.querySelector('#open-sm').addEventListener('click', () => {
-							document.querySelector('#size-demo').setAttribute('size', 'sm');
+							document.querySelector('#size-demo').setAttribute('size', 'small');
 							document.querySelector('#size-demo').show();
 						});
 						document.querySelector('#open-md').addEventListener('click', () => {
-							document.querySelector('#size-demo').setAttribute('size', 'md');
+							document.querySelector('#size-demo').setAttribute('size', 'medium');
 							document.querySelector('#size-demo').show();
 						});
 						document.querySelector('#open-lg').addEventListener('click', () => {
-							document.querySelector('#size-demo').setAttribute('size', 'lg');
+							document.querySelector('#size-demo').setAttribute('size', 'large');
 							document.querySelector('#size-demo').show();
 						});
 						document.querySelector('#open-xl').addEventListener('click', () => {
-							document.querySelector('#size-demo').setAttribute('size', 'xl');
+							document.querySelector('#size-demo').setAttribute('size', 'xlarge');
 							document.querySelector('#size-demo').show();
 						});
 						document.querySelector('#open-full').addEventListener('click', () => {
 							document.querySelector('#size-demo').setAttribute('size', 'full');
 							document.querySelector('#size-demo').show();
 						});
-						document.querySelector('#open-custom').addEventListener('click', () => {
-							const customSize = document.querySelector('#custom-size-input').value;
-							document.querySelector('#size-demo').setAttribute('size', customSize);
+						document.querySelector('#open-400').addEventListener('click', () => {
+							document.querySelector('#size-demo').setAttribute('size', '400px');
+							document.querySelector('#size-demo').show();
+						});
+						document.querySelector('#open-25-percent').addEventListener('click', () => {
+							document.querySelector('#size-demo').setAttribute('size', '25%');
 							document.querySelector('#size-demo').show();
 						});
                     </script>
                 </template>
             </d2l-demo-snippet>
+
 			<h2>Prevent Closing</h2>
 			<d2l-demo-snippet>
 				<template>

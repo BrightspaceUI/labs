@@ -31,14 +31,15 @@ class Drawer extends LocalizeLabsElement(DrawerMixin(LitElement)) {
              */
 			lockScroll: { type: Boolean, attribute: 'lock-scroll', reflect: true },
 			/**
-             * Control drawer size. Can use predefined values (sm, md, lg, full), or set drawer body size with any px or % values
+             * Can use predefined values (xsmall, small, medium, large, xlarge,
+			 * full) or set drawer body size with any px or % values
              * Controls width for left and right positions and height for top and bottom.
              */
 			size: { type: String },
 			/**
              * Trap user focus if true
              */
-			trapFocus: { type: Boolean, reflect: true },
+			trapFocus: { type: Boolean, reflect: true, attribute: 'trap-focus' },
 			/**
              * Hides close button if true, can still be closed via escape key or clicking out
              */
@@ -60,7 +61,7 @@ class Drawer extends LocalizeLabsElement(DrawerMixin(LitElement)) {
 		this.hideCloseButton = false;
 		this.hideHeader = false;
 		this.lockScroll = true;
-		this.size = 'md';
+		this.size = 'medium';
 		this.trapFocus = true;
 		this._hasFooterContent = false;
 		this._handleResize = this._handleResize.bind(this);
