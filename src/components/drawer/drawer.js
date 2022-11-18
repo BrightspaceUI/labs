@@ -27,7 +27,7 @@ class Drawer extends LocalizeLabsElement(DrawerMixin(LitElement)) {
              */
 			closeButtonLabel: { type: String, attribute: 'close-button-label' },
 			/**
-             * Disables scroll locking if true
+             * Enables scroll locking of parent content if true
              */
 			lockScroll: { type: Boolean, attribute: 'lock-scroll', reflect: true },
 			/**

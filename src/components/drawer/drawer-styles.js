@@ -28,7 +28,6 @@ export const drawerStyles = css`
 	}
 
 	.d2l-drawer-outer {
-		animation: var(--d2l-drawer-close-animation) 200ms ease-in;
 		background-color: var(--d2l-drawer-background-color);
 		box-sizing: border-box;
 		position: fixed;
@@ -71,15 +70,15 @@ export const drawerStyles = css`
 		padding: 0 1.2rem;
 	}
 
-	/* WIP - Playing with "closeAborted" animation - WIP
-	:host([_closeAborted][_state="showing"]) > .d2l-drawer-outer {
-		animation: var(--d2l-drawer-pulse-animation) 400ms ease-in;
-	} */
-
 	/* Animation related states */
-	:host([_state="showing"]) > .d2l-drawer-outer {
-		/* must target direct child to avoid ancestor from interfering with closing child drawers in Legacy-Edge */
-		animation: var(--d2l-drawer-open-animation) 250ms ease-out;
+	@media (prefers-reduced-motion: no-preference) {
+		.d2l-drawer-outer {
+			animation: var(--d2l-drawer-close-animation) 200ms ease-in;
+		}
+
+		:host([_state="showing"]) > .d2l-drawer-outer {
+			animation: var(--d2l-drawer-open-animation) 250ms ease-out;
+		}
 	}
 
 	/* close, open, and pulse animations */
