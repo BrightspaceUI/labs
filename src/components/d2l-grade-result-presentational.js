@@ -46,6 +46,7 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 			.d2l-grade-result-presentational-subtitle {
 				margin-top: -4px;
 				margin-bottom: 4px;
+				font-weight: bold;
 			}
 		`];
 	}
