@@ -16,6 +16,7 @@ export class D2LGradeResult extends LocalizeMixin(LitElement) {
 
 			_labelText: { type: String },
 			_readOnly: { type: Boolean },
+			_required: { type: Boolean },
 			_hideTitle: { type: Boolean },
 
 			_grade: { type: Object },
@@ -45,6 +46,7 @@ export class D2LGradeResult extends LocalizeMixin(LitElement) {
 		this.customManualOverrideClearText = undefined;
 
 		this._readOnly = false;
+		this._required = false;
 		this._labelText = '';
 		this._hideTitle = false;
 		this._grade = new Grade(GradeType.Number, 0, 0, null, null, null);
@@ -117,9 +119,9 @@ export class D2LGradeResult extends LocalizeMixin(LitElement) {
 				?includeGradeButton=${this._includeGradeButton}
 				?includeReportsButton=${this._includeReportsButton}
 
-				?isGradeAutoCompleted=${this._isGradeAutoCompleted}
 				?isManualOverrideActive=${this._manuallyOverriddenGrade !== undefined}
 
+				?required=${this._required}
 				?readOnly=${this._readOnly}
 				?hideTitle=${this._hideTitle}
 

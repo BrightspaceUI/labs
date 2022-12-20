@@ -10,18 +10,17 @@ const numberConverter = {
 	toAttribute:  (prop) => { return String(prop); }
 };
 
+const extraSpace = 2.5;
+const minWidth = 5.5;
+
 export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	static get properties() {
 		return {
+			label: { type: String },
 			scoreNumerator: { type: Number, converter: numberConverter },
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
-			validationError: { type: String },
-			isValidScore: { type: Boolean },
-			disallowNull: {
-				attribute: 'disallow-null',
-				type: Boolean
-			}
+			required: { type: Boolean }
 		};
 	}
 
@@ -32,25 +31,13 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 				flex-direction: row;
 				align-items: center;
 			}
-			.d2l-grade-result-numeric-score-score {
-				max-width: 5.25rem;
-			}
 			.d2l-grade-result-numeric-score-score-read-only {
 				max-width: 5.25rem;
 				margin-right: 0.5rem;
 			}
-			.d2l-grade-result-numeric-score-score-text {
-				margin-left: 0.5rem;
-				margin-right: 0.25rem;
-				text-align: center;
-			}
 			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-read-only {
 				margin-left: 0.5rem;
 				margin-right: 0rem;
-			}
-			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-text {
-				margin-right: 0.5rem;
-				margin-left: 0.25rem;
 			}
 		`];
 	}
@@ -59,70 +46,45 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	}
 
 	render() {
-		let inputNumberLabel;
-		const roundedNumerator = Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
-		if (!this.scoreDenominator) {
-			inputNumberLabel = this.localize('gradeScoreLabel', { numerator: roundedNumerator || 'blank' });
-		} else {
-			inputNumberLabel = this.localize('fullGradeScoreLabel', { numerator: roundedNumerator || 'blank', denominator: this.scoreDenominator });
-		}
-
-		this.isValidScore = this._checkIsValidScore(this.scoreNumerator);
-
-		let numeratorToDisplay = roundedNumerator;
+		let roundedNumerator = Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
 		if (isNaN(this.scoreNumerator)) {
-			numeratorToDisplay = '';
+			roundedNumerator = '';
 		}
+
+		const denominatorLength = isNaN(this.scoreDenominator) ? 0 : this.scoreDenominator.toString().length;
+		const numeratorLength = isNaN(roundedNumerator) ? 0 : roundedNumerator.toString().length;
+		const dynamicWidth = numeratorLength <= denominatorLength ? denominatorLength + extraSpace : (numeratorLength * 0.5) + (denominatorLength * 0.5)  + extraSpace;
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
-
 				${!this.readOnly ? html`
 					<div class="d2l-grade-result-numeric-score-score">
 						<d2l-form>
 							<d2l-input-number
+								?required=${this.required}
 								id="grade-input"
-								label=${inputNumberLabel}
+								label=${this.label ? this.label : this.localize('gradeScoreLabel')}
 								label-hidden
 								value="${this.scoreNumerator}"
+								input-width="${dynamicWidth > minWidth ? dynamicWidth : minWidth}rem"
 								min="0"
 								max="9999999999"
 								max-fraction-digits="2"
+								unit="/ ${this.scoreDenominator}"
+								unit-label=${this.localize('outOfDenominator', { denominator: this.scoreDenominator })}
+								value-align="end"
 								@change=${this._onGradeChange}
-								?validate-on-init=${this.isValidScore}
 							></d2l-input-number>
-							<d2l-validation-custom
-								for="grade-input"
-								failure-text=${this.validationError}
-								@d2l-validation-custom-validate=${this._checkValidationError}
-							></d2l-validation-custom>
 						</d2l-form>
-					</div>
-					<div class="d2l-grade-result-numeric-score-score-text">
-						${!isNaN(this.scoreDenominator) ? html`
-							<span class="d2l-body-standard">/ ${this.scoreDenominator}</span>
-						` : html``}
 					</div>
 				` : html`
 					<div class="d2l-grade-result-numeric-score-score-read-only">
-						<span class="d2l-body-standard">${numeratorToDisplay} / ${this.scoreDenominator}</span>
+						<span aria-hidden="true" class="d2l-body-standard">${roundedNumerator} / ${this.scoreDenominator}</span>
+						<d2l-offscreen>${this.localize('numeratorOutOfDenominator', { numerator: roundedNumerator, denominator: this.scoreDenominator })}</d2l-offscreen>
 					</div>
 				`}
-
 			</div>
 		`;
-	}
-
-	_checkIsValidScore(score) {
-		if (this.disallowNull && typeof score === 'undefined') {
-			this.scoreNumerator = undefined;
-			return false;
-		}
-		return !this.validationError || typeof this.validationError === 'undefined';
-	}
-
-	_checkValidationError(event) {
-		event.detail.resolve(this.isValidScore);
 	}
 
 	_onGradeChange(e) {
@@ -134,7 +96,6 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 				value: newScore
 			}
 		}));
-		this.isValidScore = this._checkIsValidScore(newScore);
 	}
 
 }
