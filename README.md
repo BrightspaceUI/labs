@@ -18,7 +18,8 @@
 
 A web component used for rendering grades in Brightspace
 
-![demo screenshot](./docs/demo_screenshot.png)
+![demo screenshot of numeric grade](./docs/numeric-grade.png)
+![demo screenshot of letter grade](./docs/letter-grade.png)
 
 ## Properties
 
@@ -46,7 +47,7 @@ If you are only interested in rendering the presentational layer of the componen
 
 | Property                          | GradeType      | Type                        | Default     | Description                                                  |
 | ----------------------------------| -------------- | --------------------------- | ----------- | ------------------------------------------------------------ |
-| `gradeType`                       | All            | `'Numeric' | 'LetterGrade'` | `'Numeric'` | Specifies the type of grade that the component is meant to render. |
+| `gradeType`                       | All            | `string ('Numeric' or 'LetterGrade')` | `'Numeric'` | Specifies the type of grade that the component is meant to render. |
 | `labelText`                       | All            | `string`                    | `''`        | The text that appears above the component.                   |
 | `scoreNumerator`                  | Numeric        | `number`                    | `0`         | The numerator of the numeric score that is given.            |
 | `scoreDenominator`                | Numeric        | `number`                    | `0`         | The denominator of the numeric score that is given.          |
@@ -57,13 +58,12 @@ If you are only interested in rendering the presentational layer of the componen
 | `gradeButtonTooltip`              | All            | `string`                    | `''`        | The text that is inside of the tooltip when hovering over the grades button. |
 | `reportsButtonTooltip`            | All            | `string`                    | `''`        | The text that is inside of the tooltip when hovering over the reports button. |
 | `readOnly`                        | All            | `boolean`                   | `false`     | Set to `true` if the user does not have permissions to edit the grade. |
-| `isGradeAutoCompleted`            | All            | `boolean`                   | `false`     | Set to `true` if a grade has been automatically provided for the activity. |
 | `isManualOverrideActive`          | All            | `boolean`                   | `false`     | Set to `true` if the user is currently manually overriding the grade. This will display the button to 'Clear Manual Override'. |
 | `hideTitle`                       | All            | `boolean`                   | `false`     | This property will hide the "Overall Grade" title above the component. |
 | `customManualOverrideClearText`   | All            | `string`                    | `undefined` | This property will substitute the stock text on the "Clear Manual Override" button. |
 | `subtitleText`                    | All            | `string`                    | `undefined` | This property will show the given text under the title. |
-| `validationError`                 | Numeric        | `string`                    | `undefined` | This property will force the grade input to display a validation error with the given text |
-| `disallowNull`                 | Numeric        | `boolean`                    | `undefined` |  Set to `true` if an undefined/blank grade is not considered valid |
+| `required`                 | Numeric        | `Boolean`                    | `false` | Set to `true` if an undefined/blank grade is not considered valid |
+| `inputLabelText`                 | Numeric        | `string`                    | `''` |  This property sets the label that will be used inside the aria-label and validation error tool-tips |
 
 ## Events
 
@@ -144,10 +144,10 @@ The golden snapshots in source control must be updated by the [visual-diff GitHu
 To run the tests locally to help troubleshoot or develop new tests, first install these dependencies:
 
 ```shell
-npm install @brightspace-ui/visual-diff@X mocha@Y puppeteer@Z  --no-save
+npm install @brightspace-ui/visual-diff@X  --no-save
 ```
 
-Replace `X`, `Y` and `Z` with [the current versions](https://github.com/BrightspaceUI/actions/tree/main/visual-diff#current-dependency-versions) the action is using.
+Replace `X` with [the current version](https://github.com/BrightspaceUI/actions/tree/main/visual-diff#current-dependency-versions) the action is using.
 
 Then run the tests:
 

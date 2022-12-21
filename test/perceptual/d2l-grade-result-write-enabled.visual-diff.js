@@ -42,6 +42,18 @@ describe('write enabled visual diff tests', () => {
 		await testDiff(visualDiff, page, '#write-enabled-number-grade-icons-tooltips', this.test.fullTitle(), false, true);
 	});
 
+	it('write-enabled-number-range-validation-error', async function() {
+		await testDiff(visualDiff, page, '#write-enabled-number-range-validation-error', this.test.fullTitle());
+	});
+
+	it('write-enabled-number-range-validation-error-tooltip', async function() {
+		await testDiff(visualDiff, page, '#write-enabled-number-range-validation-error', this.test.fullTitle(), false, false, true);
+	});
+
+	it('write-enabled-number-dynamic-width', async function() {
+		await testDiff(visualDiff, page, '#write-enabled-number-dynamic-width', this.test.fullTitle());
+	});
+
 	it('write-enabled-letter-grade-no-icons', async function() {
 		await testDiff(visualDiff, page, '#write-enabled-letter-grade-no-icons', this.test.fullTitle());
 	});

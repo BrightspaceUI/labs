@@ -8,6 +8,7 @@
     "access": "public"
   },
   "scripts": {
+    "clean": "rimraf node_modules/ package-lock.json",
     "lint": "npm run lint:eslint && npm run lint:lit",
     "lint:eslint": "eslint . --ext .js,.html",
     "lint:lit": "lit-analyzer d2l-grade-result.js demo src test",

@@ -414,6 +414,30 @@
 
 			</div>
 
+			<div class="section">
+
+				<h6>Dynamic Width</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="33333333" scoreDenominator="33333333"></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+			</div>
+
+			<div class="section">
+				<h2>validation errors</h2>
+
+				<h6>Required validation error</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational inputLabelText="Overall grade" gradeType="Numeric" labelText="Overall Grade" scoreNumerator="undefined" scoreDenominator="20" required></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Number range validation error</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="-1" scoreDenominator="20"></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+			</div>
+
 		</d2l-demo-page>
 	</body>
 </html>
