@@ -10,8 +10,8 @@ const numberConverter = {
 	toAttribute:  (prop) => { return String(prop); }
 };
 
-const extraSpace = 2.5;
-const minWidth = 5.5;
+const EXTRA_SPACE = 2.5;
+const MIN_WIDTH = 5.5;
 
 export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	static get properties() {
@@ -46,14 +46,11 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 	}
 
 	render() {
-		let roundedNumerator = Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
-		if (isNaN(this.scoreNumerator)) {
-			roundedNumerator = '';
-		}
+		const roundedNumerator = isNaN(this.scoreNumerator) ? '' : Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;
 
 		const denominatorLength = isNaN(this.scoreDenominator) ? 0 : this.scoreDenominator.toString().length;
-		const numeratorLength = isNaN(roundedNumerator) ? 0 : roundedNumerator.toString().length;
-		const dynamicWidth = numeratorLength <= denominatorLength ? denominatorLength + extraSpace : (numeratorLength * 0.5) + (denominatorLength * 0.5)  + extraSpace;
+		const numeratorLength = roundedNumerator.toString().length;
+		const dynamicWidth = numeratorLength <= denominatorLength ? denominatorLength + EXTRA_SPACE : (numeratorLength * 0.5) + (denominatorLength * 0.5)  + EXTRA_SPACE;
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
@@ -66,7 +63,7 @@ export class D2LGradeResultNumericScore extends LocalizeMixin(LitElement) {
 								label=${this.label ? this.label : this.localize('gradeScoreLabel')}
 								label-hidden
 								value="${this.scoreNumerator}"
-								input-width="${dynamicWidth > minWidth ? dynamicWidth : minWidth}rem"
+								input-width="${dynamicWidth > MIN_WIDTH ? dynamicWidth : MIN_WIDTH}rem"
 								min="0"
 								max="9999999999"
 								max-fraction-digits="2"
