@@ -33,7 +33,7 @@
     "eslint-plugin-lit": "^1",
     "eslint-plugin-sort-class-members": "^1",
     "lit-analyzer": "^1",
-    "stylelint": "^14"
+    "stylelint": "^15"
   },
   "files": [
     "labs.serge.json",
