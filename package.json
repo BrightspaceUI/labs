@@ -14,8 +14,8 @@
     "lint:lit": "lit-analyzer d2l-grade-result.js demo src test",
     "start": "web-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "test": "npm run lint && npm run test:headless",
-    "test:headless": "web-test-runner",
-    "test:headless:watch": "web-test-runner --watch"
+    "test:headless": "web-test-runner --files \"./test/**/*.test.js\" --node-resolve",
+    "test:headless:watch": "web-test-runner --files \"./test/**/*.test.js\" --node-resolve --watch"
   },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
