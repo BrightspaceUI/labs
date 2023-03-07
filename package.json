@@ -24,16 +24,11 @@
     "@babel/eslint-parser": "^7",
     "@open-wc/testing": "^3",
     "@web/dev-server": "^0.1",
-    "@web/test-runner": "^0.13",
-    "@web/test-runner-saucelabs": "^0.8",
-    "eslint": "^7",
-    "eslint-config-brightspace": "^0.16",
-    "eslint-plugin-html": "^6",
-    "eslint-plugin-import": "^2",
-    "eslint-plugin-lit": "^1",
-    "eslint-plugin-sort-class-members": "^1",
+    "@web/test-runner": "^0.15",
+    "eslint": "^8",
+    "eslint-config-brightspace": "^0.20",
     "lit-analyzer": "^1",
-    "sinon": "^9"
+    "sinon": "^15"
   },
   "dependencies": {
     "@brightspace-hmc/siren-sdk": "^2",
