@@ -2,7 +2,7 @@ import './d2l-grade-result-icon-button.js';
 import './d2l-grade-result-numeric-score.js';
 import './d2l-grade-result-letter-score.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
-import { css, html, LitElement } from 'lit-element';
+import { css, html, LitElement } from 'lit';
 import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import getLocalizationTranslations from './locale.js';
 import { GradeType } from '../controller/Grade.js';
