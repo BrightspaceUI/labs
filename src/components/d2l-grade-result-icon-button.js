@@ -1,6 +1,6 @@
 import '@brightspace-ui/core/components/button/button-icon.js';
 import '@brightspace-ui/core/components/tooltip/tooltip.js';
-import { html, LitElement } from 'lit-element';
+import { html, LitElement } from 'lit';
 import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId.js';
 
 export class D2LGradeResultIconButton extends LitElement {

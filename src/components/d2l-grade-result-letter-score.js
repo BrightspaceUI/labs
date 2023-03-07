@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit-element';
+import { css, html, LitElement } from 'lit';
 import { bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 
