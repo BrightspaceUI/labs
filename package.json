@@ -29,7 +29,7 @@
     "@web/dev-server": "^0.1",
     "@web/test-runner": "^0.15",
     "eslint": "^8",
-    "eslint-config-brightspace": "^0.20",
+    "eslint-config-brightspace": "^0.23",
     "lit-analyzer": "^1",
     "sinon": "^15"
   },
