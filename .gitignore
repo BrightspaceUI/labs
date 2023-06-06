@@ -1,4 +1,3 @@
 node_modules/
-package-lock.json
 src/**/test/screenshots/current/
 src/**/test/screenshots/golden/
