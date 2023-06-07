@@ -31,7 +31,8 @@
     "eslint": "^8",
     "eslint-config-brightspace": "^0.23",
     "lit-analyzer": "^1",
-    "sinon": "^15"
+    "sinon": "^15",
+    "typescript": "^5.1.3"
   },
   "dependencies": {
     "@brightspace-hmc/siren-sdk": "^2",
