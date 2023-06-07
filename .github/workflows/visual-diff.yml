@@ -11,7 +11,7 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
       - name: Visual Diff Tests
         uses: BrightspaceUI/actions/visual-diff@main
         with:
