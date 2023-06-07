@@ -8,9 +8,8 @@
     "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js"
   },
   "scripts": {
-    "lint": "npm run lint:eslint && npm run lint:lit && npm run lint:style",
+    "lint": "npm run lint:eslint && npm run lint:style",
     "lint:eslint": "eslint . --ext .js,.html",
-    "lint:lit": "lit-analyzer \"src/**/*.js\" --strict",
     "lint:style": "stylelint \"**/*.{js,html}\"",
     "start": "web-dev-server --node-resolve --open --watch",
     "test": "npm run lint && npm run test:headless",
@@ -26,13 +25,13 @@
     "@open-wc/testing": "^2",
     "@web/dev-server": "^0.2",
     "@web/test-runner": "^0.16",
+    "@web/test-runner-playwright": "^0.10.0",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.23",
     "eslint-plugin-html": "^7",
     "eslint-plugin-import": "^2",
     "eslint-plugin-lit": "^1",
     "eslint-plugin-sort-class-members": "^1",
-    "lit-analyzer": "^1",
     "stylelint": "^15"
   },
   "files": [
