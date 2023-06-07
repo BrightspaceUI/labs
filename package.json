@@ -26,6 +26,7 @@
     "@open-wc/testing": "^2",
     "@web/dev-server": "^0.2",
     "@web/test-runner": "^0.16",
+    "@web/test-runner-playwright": "^0.10.0",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.23",
     "eslint-plugin-html": "^7",
