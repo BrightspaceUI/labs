@@ -4,12 +4,13 @@ jobs:
   build:
     name: Visual Diff
     timeout-minutes: 10
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, AWS]
     steps:
       - uses: Brightspace/third-party-actions@actions/checkout
       - uses: Brightspace/third-party-actions@actions/setup-node
         with:
           node-version-file: .nvmrc
+          cache: npm
       - name: Install Dependencies
         run: npm ci
       - name: Visual Diff Tests

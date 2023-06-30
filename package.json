@@ -1,17 +1,16 @@
 {
-  "name": "@brightspace-ui-labs/grade-result",
+  "name": "@d2l/labs-grade-result",
   "description": "A web component used for rendering grades in Brightspace",
   "type": "module",
   "repository": "https://github.com/BrightspaceUILabs/grade-result.git",
   "version": "2.6.0",
   "publishConfig": {
-    "access": "public"
+    "registry": "https://d2l-569998014834.d.codeartifact.us-east-1.amazonaws.com/npm/private/"
   },
   "scripts": {
     "clean": "rimraf node_modules/ package-lock.json",
-    "lint": "npm run lint:eslint && npm run lint:lit",
+    "lint": "npm run lint:eslint",
     "lint:eslint": "eslint . --ext .js,.html",
-    "lint:lit": "lit-analyzer d2l-grade-result.js demo src test",
     "start": "web-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "test": "npm run lint && npm run test:headless",
     "test:headless": "web-test-runner --files \"./test/**/*.test.js\" --node-resolve",
@@ -30,9 +29,7 @@
     "@web/test-runner": "^0.16",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.23",
-    "lit-analyzer": "^1",
-    "sinon": "^15",
-    "typescript": "^5.1.3"
+    "sinon": "^15"
   },
   "dependencies": {
     "@brightspace-hmc/siren-sdk": "^2",

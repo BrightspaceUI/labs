@@ -1,6 +1,4 @@
-# d2l-grade-result
-
-[![NPM version](https://img.shields.io/npm/v/@brightspace-ui-labs/grade-result.svg)](https://www.npmjs.org/package/@brightspace-ui-labs/grade-result)
+# @d2l/labs-grade-result
 
 > Note: this is a ["labs" component](https://daylight.d2l.dev/developing/getting-started/component-tiers/). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
 >
@@ -95,14 +93,14 @@ If you are only interested in rendering the presentational layer of the componen
 To install from NPM:
 
 ```shell
-npm install @brightspace-ui-labs/d2l-grade-result
+npm install @d2l/labs-grade-result
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-    import '@brightspace-ui-labs/d2l-grade-result/d2l-grade-result.js';
+    import '@d2l/labs-grade-result/d2l-grade-result.js';
 </script>
 <d2l-labs-d2l-grade-result href="href" token="token" disableAutoSave _hideTitle>My element</d2l-labs-d2l-grade-result>
 ```
