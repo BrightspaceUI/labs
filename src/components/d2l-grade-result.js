@@ -1,11 +1,10 @@
 import './d2l-grade-result-presentational.js';
 import { Grade, GradeType } from '../controller/Grade.js';
 import { html, LitElement } from 'lit';
-import getLocalizationTranslations from './locale.js';
 import { GradesController } from '../controller/GradesController.js';
-import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
+import { Localizer } from './locale.js';
 
-export class D2LGradeResult extends LocalizeMixin(LitElement) {
+export class D2LGradeResult extends Localizer(LitElement) {
 	static get properties() {
 		return {
 			href: { type: String },
@@ -30,10 +29,6 @@ export class D2LGradeResult extends LocalizeMixin(LitElement) {
 			_reportsButtonTooltip: { type: String },
 			_isGradeAutoCompleted: { type: Boolean },
 		};
-	}
-
-	static async getLocalizeResources(langs) {
-		return await getLocalizationTranslations(langs);
 	}
 
 	constructor() {

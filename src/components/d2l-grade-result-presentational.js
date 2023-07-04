@@ -4,16 +4,15 @@ import './d2l-grade-result-letter-score.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { css, html, LitElement } from 'lit';
 import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import getLocalizationTranslations from './locale.js';
 import { GradeType } from '../controller/Grade.js';
-import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
+import { Localizer } from './locale.js';
 
 const numberConverter = {
 	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
 	toAttribute:  (prop) => { return String(prop); }
 };
 
-export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
+export class D2LGradeResultPresentational extends Localizer(LitElement) {
 	static get properties() {
 		return {
 			gradeType: { type: String },
@@ -49,10 +48,6 @@ export class D2LGradeResultPresentational extends LocalizeMixin(LitElement) {
 				font-weight: bold;
 			}
 		`];
-	}
-
-	static async getLocalizeResources(langs) {
-		return await getLocalizationTranslations(langs);
 	}
 
 	constructor() {

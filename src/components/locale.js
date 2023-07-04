@@ -1,19 +1,10 @@
-export default async function getLocalizationTranslations(langs) {
-	for await (const lang of langs) {
-		let translations;
-		switch (lang) {
-			case 'en':
-				translations = await import('../../locales/en.js');
-				break;
-		}
+import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize/localize-mixin.js';
 
-		if (translations && translations.val) {
-			return {
-				language: lang,
-				resources: translations.val
-			};
-		}
+export const Localizer = superclass => class extends LocalizeMixin(superclass) {
+
+	static get localizeConfig() {
+		return {
+			importFunc: async lang => (await import(`./../../lang/${lang}.js`)).default,
+		};
 	}
-
-	return null;
-}
+};

@@ -7,6 +7,12 @@
   "publishConfig": {
     "registry": "https://d2l-569998014834.d.codeartifact.us-east-1.amazonaws.com/npm/private/"
   },
+  "files": [
+    "/docs",
+    "/lang",
+    "/src",
+    "d2l-grade-result.js"
+  ],
   "scripts": {
     "clean": "rimraf node_modules/ package-lock.json",
     "lint": "npm run lint:eslint",
