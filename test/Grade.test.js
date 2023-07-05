@@ -199,6 +199,21 @@ describe('Grade tests', () => {
 		});
 	});
 
+	describe('getLetterGrade works properly', () => {
+		it('getLetterGrade throws an error if the grade is numeric', () => {
+			const grade = new Grade(GradeType.Number, 5, 10, null, null);
+			assert.throws(() => {
+				grade.getLetterGrade();
+			}, GradeErrors.GET_LETTER_GRADE_FROM_NUMERIC_SCORE);
+		});
+
+		it('getLetterGrade returns the letter grade properly', () => {
+			const letterGrade = 'A';
+			const grade = new Grade(GradeType.Letter, null, null, letterGrade, letterGradeOptions);
+			assert.equal(grade.getLetterGrade(), letterGrade);
+		});
+	});
+
 	it('ensures that the letterGrade is one of the LetterGradeOptions', () => {
 		assert.throws(() => {
 			new Grade(GradeType.Letter, null, null, 'D', letterGradeOptions);

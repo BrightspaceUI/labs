@@ -5,6 +5,7 @@ export const GradeType = {
 };
 
 export const GradeErrors = {
+	GET_LETTER_GRADE_FROM_NUMERIC_SCORE: 'Grade must be of type LetterGrade to get the letter grade',
 	INVALID_SCORE_TYPE: 'Invalid scoreType provided',
 	INVALID_SCORE: 'Invalid score provided',
 	INVALID_OUT_OF: 'Invalid outOf provided',
@@ -31,6 +32,13 @@ export class Grade {
 
 	getEntity() {
 		return this.entity;
+	}
+
+	getLetterGrade() {
+		if (this.isNumberGrade()) {
+			throw new Error(GradeErrors.GET_LETTER_GRADE_FROM_NUMERIC_SCORE);
+		}
+		return this.letterGrade;
 	}
 
 	getScore() {
