@@ -13,7 +13,7 @@
 > - [x] Demo page
 > - [x] README documentation
 
-A web component used for rendering grades in Brightspace
+A web component used for rendering grades in Brightspace 
 
 ![demo screenshot of numeric grade](./docs/numeric-grade.png)
 ![demo screenshot of letter grade](./docs/letter-grade.png)
