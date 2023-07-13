@@ -11,6 +11,8 @@ const numberConverter = {
 
 const EXTRA_SPACE = 2.5;
 const MIN_WIDTH = 5.5;
+const MIN_NEGATIVE_GRADE = -999999;
+const MIN_POSITIVE_GRADE = 0;
 
 export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 	static get properties() {
@@ -19,7 +21,8 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 			scoreNumerator: { type: Number, converter: numberConverter },
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
-			required: { type: Boolean }
+			required: { type: Boolean },
+			enableNegativeGrading: { type: Boolean },
 		};
 	}
 
@@ -56,11 +59,11 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 							<d2l-input-number
 								?required=${this.required}
 								id="grade-input"
-								label=${this.label ? this.label : this.localize('gradeScoreLabel')}
+								label="james"
 								label-hidden
 								value="${this.scoreNumerator}"
 								input-width="${dynamicWidth > MIN_WIDTH ? dynamicWidth : MIN_WIDTH}rem"
-								min="0"
+								min="${this.enableNegativeGrading ? MIN_NEGATIVE_GRADE : MIN_POSITIVE_GRADE}"
 								max="9999999999"
 								max-fraction-digits="2"
 								unit="/ ${this.scoreDenominator}"

@@ -31,7 +31,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 			customManualOverrideClearText: { type: String },
 			subtitleText: { type: String },
 			required: { type: Boolean },
-			inputLabelText: { type: String }
+			inputLabelText: { type: String },
+			enableNegativeGrading: { type: Boolean },
 		};
 	}
 
@@ -60,6 +61,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 		this.hideTitle = false;
 		this.customManualOverrideClearText = undefined;
 		this.subtitleText = undefined;
+		this.enableNegativeGrading = false;
 	}
 
 	render() {
@@ -159,6 +161,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 				.scoreDenominator=${this.scoreDenominator}
 				.readOnly=${this._isReadOnly()}
 				?required=${this.required}
+				enableNegativeGrading = ${this.enableNegativeGrading}
 			></d2l-grade-result-numeric-score>
 		`;
 	}
