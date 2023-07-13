@@ -11,7 +11,7 @@ const numberConverter = {
 
 const EXTRA_SPACE = 2.5;
 const MIN_WIDTH = 5.5;
-const MIN_NEGATIVE_GRADE = -999999;
+const MIN_NEGATIVE_GRADE = -9999999999;
 const MIN_POSITIVE_GRADE = 0;
 
 export class D2LGradeResultNumericScore extends Localizer(LitElement) {

@@ -161,7 +161,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 				.scoreDenominator=${this.scoreDenominator}
 				.readOnly=${this._isReadOnly()}
 				?required=${this.required}
-				enableNegativeGrading = ${this.enableNegativeGrading}
+				?enableNegativeGrading=${this.enableNegativeGrading}
 			></d2l-grade-result-numeric-score>
 		`;
 	}
