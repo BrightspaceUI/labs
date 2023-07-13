@@ -59,7 +59,7 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 							<d2l-input-number
 								?required=${this.required}
 								id="grade-input"
-								label="${this.label ? this.label : this.localize('gradeScoreLabel')}"
+								label=${this.label ? this.label : this.localize('gradeScoreLabel')}
 								label-hidden
 								value="${this.scoreNumerator}"
 								input-width="${dynamicWidth > MIN_WIDTH ? dynamicWidth : MIN_WIDTH}rem"
