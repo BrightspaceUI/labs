@@ -17,10 +17,11 @@ export const GradeErrors = {
 
 export class Grade {
 
-	constructor(scoreType, score, outOf, letterGrade, letterGradeOptions, entity, calculatedScore = null) {
+	constructor(scoreType, score, outOf, letterGrade, letterGradeOptions, entity, calculatedScore = null, aggregatedScore = null) {
 		this.entity = entity;
 		this.isManuallyOverridden = false;
 		this.calculatedScore = calculatedScore;
+		this.aggregatedScore = aggregatedScore;
 		this.scoreType = this._parseScoreType(scoreType);
 		if (this.isNumberGrade()) {
 			this._parseNumberGrade(score, outOf);
