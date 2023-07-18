@@ -44,8 +44,30 @@
 				<d2l-labs-d2l-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="-2" scoreDenominator="20"></d2l-labs-d2l-grade-result-presentational>
 			</div>
 
-			<div id="write-enabled-number-range-validation-error-negative-marking-enabled">
-				<d2l-labs-d2l-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="-2" scoreDenominator="20" enableNegativeGrading="true"></d2l-labs-d2l-grade-result-presentational>
+			<div id="write-enabled-number-negative-marking-enabled">
+				<d2l-labs-d2l-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="-2" scoreDenominator="20" allowNegativeScore></d2l-labs-d2l-grade-result-presentational>
+			</div>
+
+			<div id="write-enabled-negative-grade-warning">
+				<d2l-labs-d2l-grade-result-presentational
+					gradeType="Numeric"
+					labelText="Attempt Grade"
+					scoreNumerator="0"
+					scoreDenominator="20"
+					showFlooredScoreWarning
+				></d2l-labs-d2l-grade-result-presentational>
+			</div>
+
+			<div id="write-enabled-negative-grade-warning-icons">
+				<d2l-labs-d2l-grade-result-presentational
+					gradeType="Numeric"
+					labelText="Attempt Grade"
+					scoreNumerator="0"
+					scoreDenominator="20"
+					includeGradeButton
+					includeReportsButton
+					showFlooredScoreWarning
+				></d2l-labs-d2l-grade-result-presentational>
 			</div>
 
 			<div id="write-enabled-number-dynamic-width">

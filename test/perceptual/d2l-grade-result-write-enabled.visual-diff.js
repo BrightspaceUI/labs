@@ -50,8 +50,16 @@ describe('write enabled visual diff tests', () => {
 		await testDiff(visualDiff, page, '#write-enabled-number-range-validation-error', this.test.fullTitle(), false, false, true);
 	});
 
-	it('write-enabled-number-range-validation-error-tooltip-negative-marking-enabled', async function() {
-		await testDiff(visualDiff, page, '#write-enabled-number-range-validation-error-negative-marking-enabled', this.test.fullTitle(), false, false, true);
+	it('write-enabled-number-negative-marking-enabled', async function() {
+		await testDiff(visualDiff, page, '#write-enabled-number-negative-marking-enabled', this.test.fullTitle());
+	});
+
+	it('write-enabled-negative-grade-warning', async function() {
+		await testDiff(visualDiff, page, '#write-enabled-negative-grade-warning', this.test.fullTitle(), false, false, true);
+	});
+
+	it('write-enabled-negative-grade-warning-icons', async function() {
+		await testDiff(visualDiff, page, '#write-enabled-negative-grade-warning-icons', this.test.fullTitle(), false, false, true);
 	});
 
 	it('write-enabled-number-dynamic-width', async function() {

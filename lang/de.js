@@ -1,4 +1,5 @@
 export default {
+	"cannotBeNegative": "(cannot be less than 0)",
 	"clearManualOverride" : "Manuelles Überschreiben löschen",
 	"gradeScoreLabel" : "Punktzahl",
 	"manuallyOverrideGrade" : "Note manuell überschreiben",

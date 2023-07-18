@@ -32,7 +32,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 			subtitleText: { type: String },
 			required: { type: Boolean },
 			inputLabelText: { type: String },
-			enableNegativeGrading: { type: Boolean },
+			allowNegativeScore: { type: Boolean },
+			showFlooredScoreWarning: { type: Boolean },
 		};
 	}
 
@@ -58,10 +59,11 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 		this.includeReportsButton = false;
 		this.selectedLetterGrade = '';
 		this.isManualOverrideActive = false;
+		this.showFlooredScoreWarning = false;
 		this.hideTitle = false;
 		this.customManualOverrideClearText = undefined;
 		this.subtitleText = undefined;
-		this.enableNegativeGrading = false;
+		this.allowNegativeScore = false;
 	}
 
 	render() {
@@ -161,7 +163,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 				.scoreDenominator=${this.scoreDenominator}
 				.readOnly=${this._isReadOnly()}
 				?required=${this.required}
-				?enableNegativeGrading=${this.enableNegativeGrading}
+				?showFlooredScoreWarning=${this.showFlooredScoreWarning}
+				?allowNegativeScore=${this.allowNegativeScore}
 			></d2l-grade-result-numeric-score>
 		`;
 	}

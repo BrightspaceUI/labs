@@ -1,4 +1,5 @@
 export default {
+	"cannotBeNegative": "(cannot be less than 0)",
 	"clearManualOverride" : "مسح التجاوز اليدوي",
 	"gradeScoreLabel" : "درجة العلامة",
 	"manuallyOverrideGrade" : "تجاوز العلامة يدويًا",

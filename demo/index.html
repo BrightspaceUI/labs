@@ -424,6 +424,75 @@
 			</div>
 
 			<div class="section">
+				<h2>Negative Marking</h6>
+
+				<h6>Negative marking enabled (for question scores)</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Score"
+						scoreNumerator="-1"
+						scoreDenominator="3"
+						allowNegativeScore
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Floored negative score hint (for attempt scores)</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Attempt Grade"
+						scoreNumerator="0"
+						scoreDenominator="20"
+						showFlooredScoreWarning
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Floored negative score hint, icons (for attempt scores on quizzes with grade items)</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Attempt Grade"
+						scoreNumerator="0"
+						scoreDenominator="20"
+						showFlooredScoreWarning
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Example Quiz Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Floored negative score hint, read-only</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Attempt Grade"
+						scoreNumerator="0"
+						scoreDenominator="20"
+						showFlooredScoreWarning
+						readOnly
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Floored negative score hint, read-only, icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Attempt Grade"
+						scoreNumerator="0"
+						scoreDenominator="20"
+						showFlooredScoreWarning
+						readOnly
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Example Quiz Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+			</div>
+
+			<div class="section">
 				<h2>validation errors</h2>
 
 				<h6>Required validation error</h6>

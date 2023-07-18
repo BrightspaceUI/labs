@@ -1,4 +1,5 @@
 export default {
+	"cannotBeNegative": "(cannot be less than 0)",
 	"clearManualOverride" : "Effacer le remplacement manuel",
 	"gradeScoreLabel" : "Pointage d'appréciation",
 	"manuallyOverrideGrade" : "Remplacer manuellement la note d’appréciation",

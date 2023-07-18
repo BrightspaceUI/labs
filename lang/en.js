@@ -1,8 +1,9 @@
 export default {
-	"overallGrade": "Overall Grade",
-	"manuallyOverrideGrade": "Manually Override Grade",
+	"cannotBeNegative": "(cannot be less than 0)",
 	"clearManualOverride": "Clear Manual Override",
 	"gradeScoreLabel" : "Grade score",
+	"manuallyOverrideGrade": "Manually Override Grade",
+	"numeratorOutOfDenominator": "{numerator} out of {denominator}",
 	"outOfDenominator": "out of {denominator}",
-	"numeratorOutOfDenominator": "{numerator} out of {denominator}"
+	"overallGrade": "Overall Grade",
 };

@@ -13,7 +13,7 @@
 > - [x] Demo page
 > - [x] README documentation
 
-A web component used for rendering grades in Brightspace 
+A web component used for rendering grades in Brightspace
 
 ![demo screenshot of numeric grade](./docs/numeric-grade.png)
 ![demo screenshot of letter grade](./docs/letter-grade.png)
@@ -61,6 +61,8 @@ If you are only interested in rendering the presentational layer of the componen
 | `subtitleText`                    | All            | `string`                    | `undefined` | This property will show the given text under the title. |
 | `required`                 | Numeric        | `Boolean`                    | `false` | Set to `true` if an undefined/blank grade is not considered valid |
 | `inputLabelText`                 | Numeric        | `string`                    | `''` |  This property sets the label that will be used inside the aria-label and validation error tool-tips |
+| `allowNegativeScore`             | Numeric        | `boolean`                    | `'false'`   | Set to `true` if negative scores can be entered                         |
+| `showFlooredScoreWarning`        | Numeric        | `boolean`                    | `'false'`   | Set to `true` if displaying a negative grade that has been floored at 0 |
 
 ## Events
 

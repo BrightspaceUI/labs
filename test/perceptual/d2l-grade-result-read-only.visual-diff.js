@@ -30,6 +30,10 @@ describe('read only visual diff tests', () => {
 		await testDiff(visualDiff, page, '#read-only-number-decimal-grade-no-icons', this.test.fullTitle());
 	});
 
+	it('read-only-negative-grade-no-icons', async function() {
+		await testDiff(visualDiff, page, '#read-only-negative-grade-no-icons', this.test.fullTitle());
+	});
+
 	it('read-only-number-grade-icons', async function() {
 		await testDiff(visualDiff, page, '#read-only-number-grade-icons', this.test.fullTitle());
 	});
@@ -40,6 +44,10 @@ describe('read only visual diff tests', () => {
 
 	it('read-only-number-grade-icons-tooltips-reports', async function() {
 		await testDiff(visualDiff, page, '#read-only-number-grade-icons-tooltips', this.test.fullTitle(), false, true);
+	});
+
+	it('read-only-negative-grade-icons', async function() {
+		await testDiff(visualDiff, page, '#read-only-negative-grade-icons', this.test.fullTitle());
 	});
 
 	it('read-only-number-grade-empty-numerator', async function() {

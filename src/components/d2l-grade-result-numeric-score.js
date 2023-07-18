@@ -1,6 +1,6 @@
 import '@brightspace-ui/core/components/inputs/input-number.js';
-import { bodyStandardStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { css, html, LitElement } from 'lit';
+import { bodyCompactStyles, bodyStandardStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
+import { css, html, LitElement, nothing } from 'lit';
 import { inputLabelStyles } from '@brightspace-ui/core/components/inputs/input-label-styles.js';
 import { Localizer } from './locale.js';
 
@@ -22,12 +22,13 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 			scoreDenominator: { type: Number },
 			readOnly: { type: Boolean },
 			required: { type: Boolean },
-			enableNegativeGrading: { type: Boolean },
+			allowNegativeScore: { type: Boolean },
+			showFlooredScoreWarning: { type: Boolean },
 		};
 	}
 
 	static get styles() {
-		return [bodyStandardStyles, labelStyles, inputLabelStyles, css`
+		return [bodyCompactStyles, bodyStandardStyles, labelStyles, inputLabelStyles, css`
 			.d2l-grade-result-numeric-score-container {
 				display: flex;
 				flex-direction: row;
@@ -40,6 +41,10 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-read-only {
 				margin-left: 0.5rem;
 				margin-right: 0rem;
+			}
+			.d2l-grade-result-numeric-score-hint {
+				margin-left: 0.5rem;
+				margin-right: 0.5rem;
 			}
 		`];
 	}
@@ -63,7 +68,7 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 								label-hidden
 								value="${this.scoreNumerator}"
 								input-width="${dynamicWidth > MIN_WIDTH ? dynamicWidth : MIN_WIDTH}rem"
-								min="${this.enableNegativeGrading ? MIN_NEGATIVE_GRADE : MIN_POSITIVE_GRADE}"
+								min="${this.allowNegativeScore ? MIN_NEGATIVE_GRADE : MIN_POSITIVE_GRADE}"
 								max="9999999999"
 								max-fraction-digits="2"
 								unit="/ ${this.scoreDenominator}"
@@ -79,6 +84,11 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 						<d2l-offscreen>${this.localize('numeratorOutOfDenominator', { numerator: roundedNumerator, denominator: this.scoreDenominator })}</d2l-offscreen>
 					</div>
 				`}
+				${this.showFlooredScoreWarning ? html`
+					<div class="d2l-grade-result-numeric-score-hint d2l-body-compact">
+						${this.localize('cannotBeNegative')}
+					</div>
+				` : nothing}
 			</div>
 		`;
 	}
