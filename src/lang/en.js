@@ -1,4 +1,3 @@
-/* eslint quotes: 0 */
-
 export default {
+	"components.drawer.close": "Close this drawer",
 };
