@@ -1,9 +1,9 @@
 export default {
 	"cannotBeNegative": "(cannot be less than 0)",
-	"clearManualOverride" : "手動の上書きのクリア",
+	"clearManualOverride": "手動の上書きのクリア",
 	"gradeScoreLabel" : "成績スコア",
-	"manuallyOverrideGrade" : "成績の手動の上書き",
-	"numeratorOutOfDenominator" : "{numerator}/{denominator}",
-	"outOfDenominator" : "{denominator} 点満点中",
-	"overallGrade" : "全体の成績"
+	"manuallyOverrideGrade": "成績の手動の上書き",
+	"numeratorOutOfDenominator": "{numerator}/{denominator}",
+	"outOfDenominator": "{denominator} 点満点中",
+	"overallGrade": "全体の成績",
 };

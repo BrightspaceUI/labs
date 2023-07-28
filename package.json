@@ -15,8 +15,10 @@
   ],
   "scripts": {
     "clean": "rimraf node_modules/ package-lock.json",
-    "lint": "npm run lint:eslint",
+    "format-lang": "mfv remove-extraneous && mfv add-missing && mfv sort",
+    "lint": "npm run lint:eslint && npm run lint:lang",
     "lint:eslint": "eslint . --ext .js,.html",
+    "lint:lang": "mfv -e",
     "start": "web-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "test": "npm run lint && npm run test:headless",
     "test:headless": "web-test-runner --files \"./test/**/*.test.js\" --node-resolve",
@@ -35,6 +37,7 @@
     "@web/test-runner": "^0.16",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.23",
+    "messageformat-validator": "^2.4.2",
     "sinon": "^15"
   },
   "dependencies": {
