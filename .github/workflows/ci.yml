@@ -11,12 +11,12 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Install dependencies
-        run: |
-          npm ci
-          npx playwright install-deps
+        run: npm ci
       - name: Lint (JavaScript)
         run: npm run lint:eslint
       - name: Lint (CSS)
         run: npm run lint:style
+      - name: Validate Translations
+        run: npm run test:translations
       - name: Unit Tests (cross-browser)
-        run: npx web-test-runner --config web-test-runner.config.js --group default --playwright --browsers chromium firefox webkit
+        run: npm run test:unit
