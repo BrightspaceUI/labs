@@ -1,6 +1,6 @@
 import ComputedValue, { ASYNC_STATUSES } from '../../../src/controllers/computed-values/computed-value.js';
 import ComputedValues from '../../../src/controllers/computed-values/computed-values.js';
-import { expect } from '@open-wc/testing';
+import { expect } from '@brightspace-ui/testing';
 
 class ControllerHostHelper {
 	requestUpdateCallCount = 0;
