@@ -33,6 +33,9 @@ npm run lint:eslint
 # stylelint
 npm run lint:style
 
+# translations
+npm run test:translations
+
 # unit tests
 npm run test:unit
 ```
