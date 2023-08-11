@@ -115,9 +115,9 @@ class OptOutDialog extends composeMixins(
 				<br><br>
 				<div ?hidden="${this.hideReason}">
 					<label id="reason-label">${this.localize('components:optInFlyout:feedbackReasonLabel')}</label>
-					<opt-out-reason-selector id="reason-selector" aria-labelledby="reason-label" @selected="${this._handleSelected}">
+					<d2l-labs-opt-out-reason-selector id="reason-selector" aria-labelledby="reason-label" @selected="${this._handleSelected}">
 						<slot></slot>
-					</opt-out-reason-selector>
+					</d2l-labs-opt-out-reason-selector>
 				</div>
 				<div ?hidden="${this.hideFeedback}">
 					<label id="feedback-label">${this.localize('components:optInFlyout:feedbackLabel')}</label>
@@ -201,4 +201,4 @@ class OptOutDialog extends composeMixins(
 
 }
 
-customElements.define('d2l-opt-out-dialog', OptOutDialog);
+customElements.define('d2l-labs-opt-out-dialog', OptOutDialog);

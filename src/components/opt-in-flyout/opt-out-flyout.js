@@ -21,7 +21,7 @@ class OptOutFlyout extends LitElement {
 
 	static get styles() {
 		return css`
-			flyout-impl {
+			d2l-labs-opt-in-flyout-impl {
 				font-size: 20px;
 			}
 		`;
@@ -34,7 +34,7 @@ class OptOutFlyout extends LitElement {
 
 	render() {
 		return html`
-			<flyout-impl
+			<d2l-labs-opt-in-flyout-impl
 				id="flyout-impl"
 				class="d2l-typography"
 				opt-out
@@ -51,7 +51,7 @@ class OptOutFlyout extends LitElement {
 				@flyout-opened="${this._handleOpened}"
 				@flyout-closed="${this._handleClosed}">
 				<slot></slot>
-			</flyout-impl>
+			</d2l-labs-opt-in-flyout-impl>
 		`;
 	}
 
@@ -60,7 +60,7 @@ class OptOutFlyout extends LitElement {
 			return;
 		}
 
-		const element = this.shadowRoot.querySelector('flyout-impl');
+		const element = this.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl');
 
 		if (!element) {
 			return;
@@ -79,4 +79,4 @@ class OptOutFlyout extends LitElement {
 
 }
 
-customElements.define('d2l-opt-out-flyout', OptOutFlyout);
+customElements.define('d2l-labs-opt-out-flyout', OptOutFlyout);

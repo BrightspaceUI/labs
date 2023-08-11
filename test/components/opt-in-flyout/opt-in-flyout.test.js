@@ -2,15 +2,15 @@ import '../../../src/components/opt-in-flyout/opt-in-flyout.js';
 import { clickElem, expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
 import TestUtil from './utilities.js';
 
-describe('d2l-opt-in-flyout', () => {
+describe('d2l-labs-opt-in-flyout', () => {
 
 	describe('defaults', () => {
 
 		let flyout, innerFlyout;
 
 		beforeEach(async() => {
-			flyout = await fixture(html`<d2l-opt-in-flyout open></d2l-opt-in-flyout>`);
-			innerFlyout = flyout.shadowRoot.querySelector('flyout-impl');
+			flyout = await fixture(html`<d2l-labs-opt-in-flyout open></d2l-labs-opt-in-flyout>`);
+			innerFlyout = flyout.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl');
 		});
 
 		it('should not contain short description', () => {
@@ -36,16 +36,16 @@ describe('d2l-opt-in-flyout', () => {
 
 		beforeEach(async() => {
 			flyout = await fixture(html`
-				<d2l-opt-in-flyout
+				<d2l-labs-opt-in-flyout
 					open
 					title="Flyout Demo"
 					short-description="This is a short description"
 					long-description="This is a long description"
 					tab-position="right"
 					tutorial-link="https://www.testlink1.com"
-					help-docs-link="https://www.testlink2.com"></d2l-opt-in-flyout>
+					help-docs-link="https://www.testlink2.com"></d2l-labs-opt-in-flyout>
 			`);
-			innerFlyout = flyout.shadowRoot.querySelector('flyout-impl');
+			innerFlyout = flyout.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl');
 		});
 
 		it('should contain short description', () => {
@@ -168,8 +168,8 @@ describe('d2l-opt-in-flyout', () => {
 		let flyout, innerFlyout;
 
 		beforeEach(async() => {
-			flyout = await fixture(html`<d2l-opt-in-flyout></d2l-opt-in-flyout>`);
-			innerFlyout = flyout.shadowRoot.querySelector('flyout-impl');
+			flyout = await fixture(html`<d2l-labs-opt-in-flyout></d2l-labs-opt-in-flyout>`);
+			innerFlyout = flyout.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl');
 		});
 
 		it('should fire flyout-opened event when tab clicked', async() => {

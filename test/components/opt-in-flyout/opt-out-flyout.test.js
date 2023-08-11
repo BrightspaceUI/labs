@@ -2,15 +2,15 @@ import '../../../src/components/opt-in-flyout/opt-out-flyout.js';
 import { clickElem, expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
 import TestUtil from './utilities.js';
 
-describe('d2l-opt-out-flyout', () => {
+describe('d2l-labs-opt-out-flyout', () => {
 
 	describe('defaults', () => {
 
 		let flyout, innerFlyout;
 
 		beforeEach(async() => {
-			flyout = await fixture(html`<d2l-opt-out-flyout open></d2l-opt-out-flyout>`);
-			innerFlyout = flyout.shadowRoot.querySelector('flyout-impl');
+			flyout = await fixture(html`<d2l-labs-opt-out-flyout open></d2l-labs-opt-out-flyout>`);
+			innerFlyout = flyout.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl');
 		});
 
 		it('should not contain short description', () => {
@@ -29,7 +29,7 @@ describe('d2l-opt-out-flyout', () => {
 		});
 
 		it('should not display reason dialog', () => {
-			const dialog = innerFlyout.shadowRoot.querySelector('d2l-opt-out-dialog');
+			const dialog = innerFlyout.shadowRoot.querySelector('d2l-labs-opt-out-dialog');
 			expect(dialog).to.equal(null);
 		});
 
@@ -41,16 +41,16 @@ describe('d2l-opt-out-flyout', () => {
 
 		beforeEach(async() => {
 			flyout = await fixture(html`
-				<d2l-opt-out-flyout
+				<d2l-labs-opt-out-flyout
 					open
 					title="Flyout Demo"
 					short-description="This is a short description"
 					long-description="This is a long description"
 					tab-position="right"
 					tutorial-link="https://www.testlink1.com"
-					help-docs-link="https://www.testlink2.com"></d2l-opt-out-flyout>
+					help-docs-link="https://www.testlink2.com"></d2l-labs-opt-out-flyout>
 			`);
-			innerFlyout = flyout.shadowRoot.querySelector('flyout-impl');
+			innerFlyout = flyout.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl');
 		});
 
 		it('should contain short description', () => {
@@ -144,14 +144,14 @@ describe('d2l-opt-out-flyout', () => {
 			const button = innerFlyout.shadowRoot.querySelector('d2l-button[primary]');
 			clickElem(button);
 			await oneEvent(flyout, 'flyout-closed');
-			const dialog = innerFlyout.shadowRoot.querySelector('d2l-opt-out-dialog');
+			const dialog = innerFlyout.shadowRoot.querySelector('d2l-labs-opt-out-dialog');
 			expect(dialog).to.not.exist;
 		});
 
 		it('should open reason dialog when "turn it off" button clicked', async() => {
 			const button = innerFlyout.shadowRoot.querySelector('d2l-button:not([primary])');
 			await clickElem(button);
-			const dialog = innerFlyout.shadowRoot.querySelector('d2l-opt-out-dialog');
+			const dialog = innerFlyout.shadowRoot.querySelector('d2l-labs-opt-out-dialog');
 			expect(dialog).to.exist;
 		});
 
@@ -166,8 +166,8 @@ describe('d2l-opt-out-flyout', () => {
 	describe('flyout closed', () => {
 
 		it('should fire flyout-opened event when tab clicked', async() => {
-			const flyout = await fixture(html`<d2l-opt-out-flyout></d2l-opt-out-flyout>`);
-			const innerFlyout = flyout.shadowRoot.querySelector('flyout-impl');
+			const flyout = await fixture(html`<d2l-labs-opt-out-flyout></d2l-labs-opt-out-flyout>`);
+			const innerFlyout = flyout.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl');
 			const tab = innerFlyout.shadowRoot.querySelector('.flyout-tab');
 			clickElem(tab);
 			await oneEvent(flyout, 'flyout-opened');

@@ -19,4 +19,4 @@ class OptOutReason extends LitElement {
 
 }
 
-customElements.define('d2l-opt-out-reason', OptOutReason);
+customElements.define('d2l-labs-opt-out-reason', OptOutReason);

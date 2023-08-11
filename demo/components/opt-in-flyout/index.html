@@ -24,20 +24,20 @@
 
 			<d2l-demo-snippet no-padding>
 				<div class="flyout-wrapper">
-					<d2l-opt-in-flyout
+					<d2l-labs-opt-in-flyout
 						open
 						title="Flyout Demo Opt-in"
 						short-description="This is a <b>short</b> description" long-description="This is a <b>long</b> description"
 						tab-position="right"
 						tutorial-link="https://www.example.com#tutorial"
 						help-docs-link="https://www.example.com#documentation">
-					</d2l-opt-in-flyout>
+					</d2l-labs-opt-in-flyout>
 				</div>
 			</d2l-demo-snippet>
 
 			<d2l-demo-snippet no-padding>
 				<div class="flyout-wrapper">
-					<d2l-opt-out-flyout
+					<d2l-labs-opt-out-flyout
 						open
 						title="Flyout Demo Opt-out"
 						short-description="This is a <b>short</b> description"
@@ -45,13 +45,13 @@
 						tab-position="right"
 						tutorial-link="https://www.example.com#tutorial"
 						help-docs-link="https://www.example.com#documentation">
-					</d2l-opt-out-flyout>
+					</d2l-labs-opt-out-flyout>
 				</div>
 			</d2l-demo-snippet>
 
 			<d2l-demo-snippet no-padding>
 				<div class="flyout-wrapper">
-					<d2l-opt-out-flyout
+					<d2l-labs-opt-out-flyout
 						open
 						title="Flyout Demo Opt-out"
 						short-description="This is a <b>short</b> description"
@@ -59,15 +59,15 @@
 						tab-position="right"
 						tutorial-link="https://www.example.com#tutorial"
 						help-docs-link="https://www.example.com#documentation">
-						<d2l-opt-out-reason key="test-1" text="Test Option 1"></d2l-opt-out-reason>
-						<d2l-opt-out-reason key="test-2" text="Test Option 2"></d2l-opt-out-reason>
-					</d2l-opt-out-flyout>
+						<d2l-labs-opt-out-reason key="test-1" text="Test Option 1"></d2l-labs-opt-out-reason>
+						<d2l-labs-opt-out-reason key="test-2" text="Test Option 2"></d2l-labs-opt-out-reason>
+					</d2l-labs-opt-out-flyout>
 				</div>
 			</d2l-demo-snippet>
 
 			<d2l-demo-snippet no-padding>
 				<div class="flyout-wrapper">
-					<d2l-opt-out-flyout
+					<d2l-labs-opt-out-flyout
 						hide-reason
 						hide-feedback
 						open
@@ -77,12 +77,12 @@
 						tab-position="right"
 						tutorial-link="https://www.example.com#tutorial"
 						help-docs-link="https://www.example.com#documentation">
-					</d2l-opt-out-flyout>
+					</d2l-labs-opt-out-flyout>
 				</div>
 			</d2l-demo-snippet>
 
 			<script type="module">
-				[...document.querySelectorAll('d2l-opt-in-flyout, d2l-opt-out-flyout')].forEach(elem => {
+				[...document.querySelectorAll('d2l-labs-opt-in-flyout, d2l-labs-opt-out-flyout')].forEach(elem => {
 					['flyout-opened', 'flyout-closed', 'opt-in', 'opt-out'].forEach(eventName => {
 						// eslint-disable-next-line no-console
 						elem.addEventListener(eventName, (event) => console.log(eventName, JSON.stringify(event.detail)));

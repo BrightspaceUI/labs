@@ -25,8 +25,8 @@ describe('opt-out-dialog', () => {
 		let flyout, reasonSelector;
 
 		beforeEach(async() => {
-			flyout = await fixture(html`<d2l-opt-out-dialog></d2l-opt-out-dialog>`);
-			reasonSelector = flyout.shadowRoot.querySelector('opt-out-reason-selector');
+			flyout = await fixture(html`<d2l-labs-opt-out-dialog></d2l-labs-opt-out-dialog>`);
+			reasonSelector = flyout.shadowRoot.querySelector('d2l-labs-opt-out-reason-selector');
 		});
 
 		it('should contain a title', () => {
@@ -34,8 +34,8 @@ describe('opt-out-dialog', () => {
 			expect(message.textContent).to.contain('Let us know how to improve!');
 		});
 
-		it('should contain opt-out-reason-selector', () => {
-			const selector = flyout.shadowRoot.querySelector('opt-out-reason-selector');
+		it('should contain d2l-labs-opt-out-reason-selector', () => {
+			const selector = flyout.shadowRoot.querySelector('d2l-labs-opt-out-reason-selector');
 			expect(selector).to.exist;
 		});
 
@@ -75,12 +75,12 @@ describe('opt-out-dialog', () => {
 
 		beforeEach(async() => {
 			flyout = await fixture(html`
-				<d2l-opt-out-dialog>
-					<d2l-opt-out-reason key="test-1" text="Test Option 1"></d2l-opt-out-reason>
-					<d2l-opt-out-reason key="test-2" text="Test Option 2"></d2l-opt-out-reason>
-				</d2l-opt-out-dialog>
+				<d2l-labs-opt-out-dialog>
+					<d2l-labs-opt-out-reason key="test-1" text="Test Option 1"></d2l-labs-opt-out-reason>
+					<d2l-labs-opt-out-reason key="test-2" text="Test Option 2"></d2l-labs-opt-out-reason>
+				</d2l-labs-opt-out-dialog>
 			`);
-			reasonSelector = flyout.shadowRoot.querySelector('opt-out-reason-selector');
+			reasonSelector = flyout.shadowRoot.querySelector('d2l-labs-opt-out-reason-selector');
 		});
 
 		it('should contain the first option', async() => {
@@ -103,10 +103,10 @@ describe('opt-out-dialog', () => {
 
 		it('fires confirm with no reason', async() => {
 			const flyout = await fixture(html`
-				<d2l-opt-out-dialog hide-reason>
-					<d2l-opt-out-reason key="test-1" text="Test Option 1"></d2l-opt-out-reason>
-					<d2l-opt-out-reason key="test-2" text="Test Option 2"></d2l-opt-out-reason>
-				</d2l-opt-out-dialog>
+				<d2l-labs-opt-out-dialog hide-reason>
+					<d2l-labs-opt-out-reason key="test-1" text="Test Option 1"></d2l-labs-opt-out-reason>
+					<d2l-labs-opt-out-reason key="test-2" text="Test Option 2"></d2l-labs-opt-out-reason>
+				</d2l-labs-opt-out-dialog>
 			`);
 			const hiddenReason = flyout.shadowRoot.querySelector('div[hidden] > #reason-selector');
 			expect(hiddenReason).to.exist;
@@ -120,7 +120,7 @@ describe('opt-out-dialog', () => {
 	describe('feedback hidden', () => {
 
 		it('fires confirm with no feedback', async() => {
-			const flyout = await fixture(html`<d2l-opt-out-dialog hide-feedback></d2l-opt-out-dialog>`);
+			const flyout = await fixture(html`<d2l-labs-opt-out-dialog hide-feedback></d2l-labs-opt-out-dialog>`);
 			const hiddenFeedback = flyout.shadowRoot.querySelector('div[hidden] > #feedback');
 			expect(hiddenFeedback).to.exist;
 			clickDone(flyout);

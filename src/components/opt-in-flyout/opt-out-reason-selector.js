@@ -85,7 +85,7 @@ class OptOutReasonSelector extends composeMixins(
 
 	_onSlotChanged() {
 		/* Passing <option> elements directly into a <select> tag with a slot doesn't work.
-		 * Instead, pass in <d2l-opt-out-reason> elements, and this component will construct
+		 * Instead, pass in <d2l-labs-opt-out-reason> elements, and this component will construct
 		 * the options from the passed in options.
 		 */
 		const selector = this.shadowRoot.querySelector('#selector');
@@ -97,7 +97,7 @@ class OptOutReasonSelector extends composeMixins(
 
 		children = children.filter(child =>
 			child &&
-			child.tagName === 'D2L-OPT-OUT-REASON' &&
+			child.tagName === 'd2l-labs-opt-out-reason' &&
 			child.key &&
 			child.text
 		).map(child => ({
@@ -146,4 +146,4 @@ class OptOutReasonSelector extends composeMixins(
 
 }
 
-customElements.define('opt-out-reason-selector', OptOutReasonSelector);
+customElements.define('d2l-labs-opt-out-reason-selector', OptOutReasonSelector);

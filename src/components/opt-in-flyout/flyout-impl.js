@@ -459,13 +459,13 @@ class FlyoutImplementation extends composeMixins(
 			return nothing;
 		}
 		return html`
-			<d2l-opt-out-dialog
+			<d2l-labs-opt-out-dialog
 				@cancel="${this._cancelOptOut}"
 				@confirm="${this._confirmOptOut}"
 				?hide-reason="${this.hideReason}"
 				?hide-feedback="${this.hideFeedback}">
 				<slot></slot>
-			</d2l-opt-out-dialog>
+			</d2l-labs-opt-out-dialog>
 		`;
 	}
 
@@ -498,4 +498,4 @@ class FlyoutImplementation extends composeMixins(
 
 }
 
-customElements.define('flyout-impl', FlyoutImplementation);
+customElements.define('d2l-labs-opt-in-flyout-impl', FlyoutImplementation);
