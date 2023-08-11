@@ -97,7 +97,7 @@ class OptOutReasonSelector extends composeMixins(
 
 		children = children.filter(child =>
 			child &&
-			child.tagName === 'd2l-labs-opt-out-reason' &&
+			child.tagName === 'D2L-LABS-OPT-OUT-REASON' &&
 			child.key &&
 			child.text
 		).map(child => ({
