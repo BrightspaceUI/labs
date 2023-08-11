@@ -22,62 +22,70 @@
 		<d2l-demo-page page-title="Opt-in Flyout">
 
 			<d2l-demo-snippet no-padding>
-				<div class="flyout-wrapper">
-					<d2l-labs-opt-in-flyout
-						open
-						title="Flyout Demo Opt-in"
-						short-description="This is a <b>short</b> description" long-description="This is a <b>long</b> description"
-						tab-position="right"
-						tutorial-link="https://www.example.com#tutorial"
-						help-docs-link="https://www.example.com#documentation">
-					</d2l-labs-opt-in-flyout>
-				</div>
+				<template>
+					<div class="flyout-wrapper">
+						<d2l-labs-opt-in-flyout
+							open
+							title="Flyout Demo Opt-in"
+							short-description="This is a <b>short</b> description" long-description="This is a <b>long</b> description"
+							tab-position="right"
+							tutorial-link="https://www.example.com#tutorial"
+							help-docs-link="https://www.example.com#documentation">
+						</d2l-labs-opt-in-flyout>
+					</div>
+				</template>
 			</d2l-demo-snippet>
 
 			<d2l-demo-snippet no-padding>
-				<div class="flyout-wrapper">
-					<d2l-labs-opt-out-flyout
-						open
-						title="Flyout Demo Opt-out"
-						short-description="This is a <b>short</b> description"
-						long-description="This is a <b>long</b> description"
-						tab-position="right"
-						tutorial-link="https://www.example.com#tutorial"
-						help-docs-link="https://www.example.com#documentation">
-					</d2l-labs-opt-out-flyout>
-				</div>
+				<template>
+					<div class="flyout-wrapper">
+						<d2l-labs-opt-out-flyout
+							open
+							title="Flyout Demo Opt-out"
+							short-description="This is a <b>short</b> description"
+							long-description="This is a <b>long</b> description"
+							tab-position="right"
+							tutorial-link="https://www.example.com#tutorial"
+							help-docs-link="https://www.example.com#documentation">
+						</d2l-labs-opt-out-flyout>
+					</div>
+				</template>
 			</d2l-demo-snippet>
 
 			<d2l-demo-snippet no-padding>
-				<div class="flyout-wrapper">
-					<d2l-labs-opt-out-flyout
-						open
-						title="Flyout Demo Opt-out"
-						short-description="This is a <b>short</b> description"
-						long-description="This is a <b>long</b> description"
-						tab-position="right"
-						tutorial-link="https://www.example.com#tutorial"
-						help-docs-link="https://www.example.com#documentation">
-						<d2l-labs-opt-out-reason key="test-1" text="Test Option 1"></d2l-labs-opt-out-reason>
-						<d2l-labs-opt-out-reason key="test-2" text="Test Option 2"></d2l-labs-opt-out-reason>
-					</d2l-labs-opt-out-flyout>
-				</div>
+				<template>
+					<div class="flyout-wrapper">
+						<d2l-labs-opt-out-flyout
+							open
+							title="Flyout Demo Opt-out"
+							short-description="This is a <b>short</b> description"
+							long-description="This is a <b>long</b> description"
+							tab-position="right"
+							tutorial-link="https://www.example.com#tutorial"
+							help-docs-link="https://www.example.com#documentation">
+							<d2l-labs-opt-out-reason key="test-1" text="Test Option 1"></d2l-labs-opt-out-reason>
+							<d2l-labs-opt-out-reason key="test-2" text="Test Option 2"></d2l-labs-opt-out-reason>
+						</d2l-labs-opt-out-flyout>
+					</div>
+				</template>
 			</d2l-demo-snippet>
 
 			<d2l-demo-snippet no-padding>
-				<div class="flyout-wrapper">
-					<d2l-labs-opt-out-flyout
-						hide-reason
-						hide-feedback
-						open
-						title="Flyout Demo Opt-out - dialog disabled"
-						short-description="This is a <b>short</b> description"
-						long-description="This is a <b>long</b> description"
-						tab-position="right"
-						tutorial-link="https://www.example.com#tutorial"
-						help-docs-link="https://www.example.com#documentation">
-					</d2l-labs-opt-out-flyout>
-				</div>
+				<template>
+					<div class="flyout-wrapper">
+						<d2l-labs-opt-out-flyout
+							hide-reason
+							hide-feedback
+							open
+							title="Flyout Demo Opt-out - dialog disabled"
+							short-description="This is a <b>short</b> description"
+							long-description="This is a <b>long</b> description"
+							tab-position="right"
+							tutorial-link="https://www.example.com#tutorial"
+							help-docs-link="https://www.example.com#documentation">
+						</d2l-labs-opt-out-flyout>
+					</div>
+				</template>
 			</d2l-demo-snippet>
 
 			<script type="module">
