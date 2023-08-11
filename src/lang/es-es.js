@@ -1,4 +1,23 @@
-/* eslint quotes: 0 */
-
 export default {
+	"components:optInFlyout:cancel": "Cancelar",
+	"components:optInFlyout:close": "Cerrar este cuadro de diálogo",
+	"components:optInFlyout:done": "Listo",
+	"components:optInFlyout:feedbackChooseReason": "-- Seleccione un motivo --",
+	"components:optInFlyout:feedbackLabel": "¿Qué podríamos hacer para que esto sea algo que le encantaría utilizar?",
+	"components:optInFlyout:feedbackReasonJustCheckingSomething": "Quiero volver atrás a verificar algo",
+	"components:optInFlyout:feedbackReasonLabel": "¿Le importaría decirnos por qué desea volver atrás?",
+	"components:optInFlyout:feedbackReasonMissingFeature": "Falta una función que utilizo",
+	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "No es un buen momento para probar esta versión",
+	"components:optInFlyout:feedbackReasonOther": "Otro",
+	"components:optInFlyout:feedbackReasonPreferOldExperience": "Creo que la versión anterior proporciona una experiencia mejor",
+	"components:optInFlyout:feedbackTitle": "Háganos saber cómo podemos mejorar.",
+	"components:optInFlyout:helpMessage": "¡Lea nuestra *documentación de ayuda* para comenzar!",
+	"components:optInFlyout:leaveOff": "Mantener desactivado",
+	"components:optInFlyout:leaveOn": "Mantener activado",
+	"components:optInFlyout:openOptIn": "Abrir el cuadro de diálogo de suscripción",
+	"components:optInFlyout:openOptOut": "Abrir el cuadro de diálogo de anulación de suscripción",
+	"components:optInFlyout:turnOff": "Desactivar",
+	"components:optInFlyout:turnOn": "Activar",
+	"components:optInFlyout:tutorialAndHelpMessage": "Consulte nuestros *tutoriales* o lea nuestra ~documentación de ayuda~ para comenzar.",
+	"components:optInFlyout:tutorialMessage": "Consulte nuestros *tutoriales* como ayuda adicional para empezar."
 };

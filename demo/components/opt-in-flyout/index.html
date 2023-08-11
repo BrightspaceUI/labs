@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../../../src/components/opt-in-flyout/opt-in-flyout.js';
+			import '../../../src/components/opt-in-flyout/opt-out-flyout.js';
+			import '../../../src/components/opt-in-flyout/opt-out-reason.js';
+		</script>
+		<title>opt-in-flyout demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<style>
+			.flyout-wrapper {
+				height: 450px;
+				position: relative;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<d2l-demo-page page-title="Opt-in Flyout">
+
+			<d2l-demo-snippet no-padding>
+				<div class="flyout-wrapper">
+					<d2l-opt-in-flyout
+						open
+						title="Flyout Demo Opt-in"
+						short-description="This is a <b>short</b> description" long-description="This is a <b>long</b> description"
+						tab-position="right"
+						tutorial-link="https://www.example.com#tutorial"
+						help-docs-link="https://www.example.com#documentation">
+					</d2l-opt-in-flyout>
+				</div>
+			</d2l-demo-snippet>
+
+			<d2l-demo-snippet no-padding>
+				<div class="flyout-wrapper">
+					<d2l-opt-out-flyout
+						open
+						title="Flyout Demo Opt-out"
+						short-description="This is a <b>short</b> description"
+						long-description="This is a <b>long</b> description"
+						tab-position="right"
+						tutorial-link="https://www.example.com#tutorial"
+						help-docs-link="https://www.example.com#documentation">
+					</d2l-opt-out-flyout>
+				</div>
+			</d2l-demo-snippet>
+
+			<d2l-demo-snippet no-padding>
+				<div class="flyout-wrapper">
+					<d2l-opt-out-flyout
+						open
+						title="Flyout Demo Opt-out"
+						short-description="This is a <b>short</b> description"
+						long-description="This is a <b>long</b> description"
+						tab-position="right"
+						tutorial-link="https://www.example.com#tutorial"
+						help-docs-link="https://www.example.com#documentation">
+						<d2l-opt-out-reason key="test-1" text="Test Option 1"></d2l-opt-out-reason>
+						<d2l-opt-out-reason key="test-2" text="Test Option 2"></d2l-opt-out-reason>
+					</d2l-opt-out-flyout>
+				</div>
+			</d2l-demo-snippet>
+
+			<d2l-demo-snippet no-padding>
+				<div class="flyout-wrapper">
+					<d2l-opt-out-flyout
+						hide-reason
+						hide-feedback
+						open
+						title="Flyout Demo Opt-out - dialog disabled"
+						short-description="This is a <b>short</b> description"
+						long-description="This is a <b>long</b> description"
+						tab-position="right"
+						tutorial-link="https://www.example.com#tutorial"
+						help-docs-link="https://www.example.com#documentation">
+					</d2l-opt-out-flyout>
+				</div>
+			</d2l-demo-snippet>
+
+			<script type="module">
+				[...document.querySelectorAll('d2l-opt-in-flyout, d2l-opt-out-flyout')].forEach(elem => {
+					['flyout-opened', 'flyout-closed', 'opt-in', 'opt-out'].forEach(eventName => {
+						// eslint-disable-next-line no-console
+						elem.addEventListener(eventName, (event) => console.log(eventName, JSON.stringify(event.detail)));
+					});
+				});
+			</script>
+		</d2l-demo-page>
+	</body>
+</html>

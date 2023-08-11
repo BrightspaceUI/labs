@@ -4,6 +4,9 @@
   "type": "module",
   "repository": "https://github.com/BrightspaceUI/labs.git",
   "exports": {
+    "./components/opt-in-flyout.js": "./src/components/opt-in-flyout/opt-in-flyout.js",
+    "./components/opt-out-flyout.js": "./src/components/opt-in-flyout/opt-out-flyout.js",
+    "./components/opt-out-reason.js": "./src/components/opt-in-flyout/opt-out-reason.js",
     "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
     "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js"
   },
