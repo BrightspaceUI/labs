@@ -26,8 +26,8 @@ class FlyoutImplementation extends composeMixins(
 	static get properties() {
 		return {
 			optOut: { type: Boolean, attribute: 'opt-out' },
-			open: { type: Boolean, reflect: true },
-			title: { type: String },
+			opened: { type: Boolean, reflect: true },
+			flyoutTitle: { attribute: 'flyout-title', type: String },
 			shortDescription: { type: String, attribute: 'short-description' },
 			longDescription: { type: String, attribute: 'long-description' },
 			tabPosition: { type: String, attribute: 'tab-position' },
@@ -193,7 +193,7 @@ class FlyoutImplementation extends composeMixins(
 
 	connectedCallback() {
 		super.connectedCallback();
-		this._visibleState = this.open ? VISIBLE_STATES.opened : VISIBLE_STATES.closed;
+		this._visibleState = this.opened ? VISIBLE_STATES.opened : VISIBLE_STATES.closed;
 	}
 
 	render() {
@@ -214,8 +214,8 @@ class FlyoutImplementation extends composeMixins(
 
 	updated(changedProperties) {
 		super.updated(changedProperties);
-		if (changedProperties.has('open')) {
-			this._openChanged();
+		if (changedProperties.has('opened')) {
+			this._openedChanged();
 		}
 	}
 
@@ -243,7 +243,7 @@ class FlyoutImplementation extends composeMixins(
 
 	_clickOptIn() {
 		this._fireEvent('opt-in');
-		this.open = false;
+		this.opened = false;
 	}
 
 	_clickOptOut() {
@@ -251,20 +251,20 @@ class FlyoutImplementation extends composeMixins(
 			this._optOutDialogOpen = true;
 		} else {
 			this._fireEvent('opt-out');
-			this.open = false;
+			this.opened = false;
 		}
 	}
 
 	_clickTab() {
 		if (this._visibleState === VISIBLE_STATES.opened || this._visibleState === VISIBLE_STATES.closed) {
-			this.open = !this.open;
+			this.opened = !this.opened;
 		}
 	}
 
 	_confirmOptOut(event) {
 		this._optOutDialogOpen = false;
 		this._fireEvent('opt-out', event.detail);
-		this.open = false;
+		this.opened = false;
 		event.stopPropagation();
 	}
 
@@ -281,7 +281,7 @@ class FlyoutImplementation extends composeMixins(
 	}
 
 	_getAriaLabelForTab() {
-		if (this.open) {
+		if (this.opened) {
 			return this.localize('components:optInFlyout:close');
 		}
 		return this.localize(this.optOut ? 'components:optInFlyout:openOptOut' : 'components:optInFlyout:openOptIn');
@@ -317,7 +317,7 @@ class FlyoutImplementation extends composeMixins(
 	}
 
 	_getTabIndex() {
-		return this.open ? 0 : -1;
+		return this.opened ? 0 : -1;
 	}
 
 	_getTabStyle() {
@@ -386,13 +386,13 @@ class FlyoutImplementation extends composeMixins(
 		}
 	}
 
-	_openChanged() {
-		if (this.open && this._visibleState === VISIBLE_STATES.closed || this._visibleState === VISIBLE_STATES.closing) {
+	_openedChanged() {
+		if (this.opened && this._visibleState === VISIBLE_STATES.closed || this._visibleState === VISIBLE_STATES.closing) {
 			this._visibleState = VISIBLE_STATES.opening;
-		} else if (!this.open && this._visibleState === VISIBLE_STATES.opened || this._visibleState === VISIBLE_STATES.opening) {
+		} else if (!this.opened && this._visibleState === VISIBLE_STATES.opened || this._visibleState === VISIBLE_STATES.opening) {
 			this._visibleState = VISIBLE_STATES.closing;
 		}
-		this._fireEvent(this.open ? 'flyout-opened' : 'flyout-closed');
+		this._fireEvent(this.opened ? 'flyout-opened' : 'flyout-closed');
 	}
 
 	_renderFlyoutContent() {
@@ -402,7 +402,7 @@ class FlyoutImplementation extends composeMixins(
 		return html`
 			<div id="flyout-content" role="dialog" aria-labelledby="title" aria-describedby="${this._getDescription()}" class="flyout-content">
 				<div class="flyout-text">
-					<h1 class="d2l-heading-1" id="title">${this.title}</h1>
+					<h1 class="d2l-heading-1" id="title">${this.flyoutTitle}</h1>
 					${this._renderShortDescription()}
 					${this._renderLongDescription()}
 					${this._renderLinksText()}
@@ -491,7 +491,7 @@ class FlyoutImplementation extends composeMixins(
 	}
 
 	_shiftToLast() {
-		if (this.open) {
+		if (this.opened) {
 			this.shadowRoot.querySelector('#flyout-tab').focus();
 		}
 	}

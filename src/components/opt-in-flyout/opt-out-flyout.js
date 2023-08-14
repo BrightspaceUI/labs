@@ -6,8 +6,8 @@ class OptOutFlyout extends LitElement {
 
 	static get properties() {
 		return {
-			open: { type: Boolean, reflect: true },
-			title: { type: String },
+			opened: { type: Boolean, reflect: true },
+			flyoutTitle: { attribute: 'flyout-title', type: String },
 			shortDescription: { type: String, attribute: 'short-description' },
 			longDescription: { type: String, attribute: 'long-description' },
 			tabPosition: { type: String, attribute: 'tab-position' },
@@ -29,7 +29,7 @@ class OptOutFlyout extends LitElement {
 
 	constructor() {
 		super();
-		this.open = false;
+		this.opened = false;
 	}
 
 	render() {
@@ -38,7 +38,7 @@ class OptOutFlyout extends LitElement {
 				id="flyout-impl"
 				class="d2l-typography"
 				opt-out
-				title="${this.title}"
+				flyout-title="${this.flyoutTitle}"
 				short-description="${this.shortDescription}"
 				long-description="${this.longDescription}"
 				tab-position="${this.tabPosition}"
@@ -47,7 +47,7 @@ class OptOutFlyout extends LitElement {
 				?hide-reason="${this.hideReason}"
 				?hide-feedback="${this.hideFeedback}"
 				?no-transform="${this.noTransform}"
-				?open="${this.open}"
+				?opened="${this.opened}"
 				@flyout-opened="${this._handleOpened}"
 				@flyout-closed="${this._handleClosed}">
 				<slot></slot>
@@ -70,11 +70,11 @@ class OptOutFlyout extends LitElement {
 	}
 
 	_handleClosed() {
-		this.open = false;
+		this.opened = false;
 	}
 
 	_handleOpened() {
-		this.open = true;
+		this.opened = true;
 	}
 
 }
