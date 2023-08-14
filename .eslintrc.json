@@ -1,3 +1,21 @@
 {
-  "extends": "brightspace/lit-config"
+  "extends": "brightspace/lit-config",
+  "overrides": [
+    {
+      "files": [
+        "src/lang/*.js"
+      ],
+      "rules": {
+        "quotes": 0
+      }
+    },
+    {
+      "files": [
+        "demo/**/**.html"
+      ],
+      "rules": {
+        "no-console": 0
+      }
+    }
+  ]
 }
