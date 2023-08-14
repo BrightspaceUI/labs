@@ -7,9 +7,9 @@ The `<d2l-labs-opt-in-flyout>` and `<d2l-labs-opt-out-flyout>` can be used in ap
 
 | Property | Type | Description |
 |---|---|---|
-| `open` | Boolean, default: `false` | Indicates the opened or closed state of the flyout |
-| `title` | String, required | Title to display at the top of the flyout |
-| `short-description` | String |Descriptive text shown beneath the `title` |
+| `opened` | Boolean, default: `false` | Indicates the opened or closed state of the flyout |
+| `flyout-title` | String, required | Title to display at the top of the flyout |
+| `short-description` | String |Descriptive text shown beneath the `flyout-title` |
 | `long-description` | String | Additional text shown beneath `short-description` |
 | `tab-position` | String, default: `'right'` | Position to display the expand/collapse tab. Can either be an integer percentage (including the `%` character) or the string `left`, `right`, or `center`/`centre`. |
 | `tutorial-link` | String | A URL for a tutorial of the new experience or feature |

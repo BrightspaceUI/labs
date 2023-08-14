@@ -9,7 +9,7 @@ describe('d2l-labs-opt-in-flyout', () => {
 		let flyout, innerFlyout;
 
 		beforeEach(async() => {
-			flyout = await fixture(html`<d2l-labs-opt-in-flyout open></d2l-labs-opt-in-flyout>`);
+			flyout = await fixture(html`<d2l-labs-opt-in-flyout opened></d2l-labs-opt-in-flyout>`);
 			innerFlyout = flyout.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl');
 		});
 
@@ -37,8 +37,8 @@ describe('d2l-labs-opt-in-flyout', () => {
 		beforeEach(async() => {
 			flyout = await fixture(html`
 				<d2l-labs-opt-in-flyout
-					open
-					title="Flyout Demo"
+					opened
+					flyout-title="Flyout Demo"
 					short-description="This is a short description"
 					long-description="This is a long description"
 					tab-position="right"
@@ -60,10 +60,10 @@ describe('d2l-labs-opt-in-flyout', () => {
 
 		it('should reflect title attribute to property', async() => {
 			const newTitle = 'new title';
-			flyout.setAttribute('title', newTitle);
+			flyout.setAttribute('flyout-title', newTitle);
 			await flyout.updateComplete;
 			await innerFlyout.updateComplete;
-			expect(flyout.title).to.equal(newTitle);
+			expect(flyout.flyoutTitle).to.equal(newTitle);
 			const title = innerFlyout.shadowRoot.querySelector('#title');
 			expect(title.textContent).to.equal(newTitle);
 		});
