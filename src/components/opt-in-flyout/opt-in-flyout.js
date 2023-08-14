@@ -10,7 +10,6 @@ class OptInFlyout extends LitElement {
 			flyoutTitle: { attribute: 'flyout-title', type: String },
 			shortDescription: { type: String, attribute: 'short-description' },
 			longDescription: { type: String, attribute: 'long-description' },
-			tabPosition: { type: String, attribute: 'tab-position' },
 			tutorialLink: { type: String, attribute: 'tutorial-link' },
 			helpDocsLink: { type: String, attribute: 'help-docs-link' }
 		};
@@ -36,7 +35,6 @@ class OptInFlyout extends LitElement {
 				flyout-title="${this.flyoutTitle}"
 				short-description="${this.shortDescription}"
 				long-description="${this.longDescription}"
-				tab-position="${this.tabPosition}"
 				tutorial-link="${this.tutorialLink}"
 				help-docs-link="${this.helpDocsLink}"
 				?opened="${this.opened}"
