@@ -8,6 +8,14 @@
       "rules": {
         "quotes": 0
       }
+    },
+    {
+      "files": [
+        "demo/**/**.html"
+      ],
+      "rules": {
+        "no-console": 0
+      }
     }
   ]
 }

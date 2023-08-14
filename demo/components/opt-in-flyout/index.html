@@ -91,7 +91,6 @@
 			<script type="module">
 				[...document.querySelectorAll('d2l-labs-opt-in-flyout, d2l-labs-opt-out-flyout')].forEach(elem => {
 					['flyout-opened', 'flyout-closed', 'opt-in', 'opt-out'].forEach(eventName => {
-						// eslint-disable-next-line no-console
 						elem.addEventListener(eventName, (event) => console.log(eventName, JSON.stringify(event.detail)));
 					});
 				});
