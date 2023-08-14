@@ -8,7 +8,6 @@ import { css, html, LitElement, nothing } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { composeMixins } from '@brightspace-ui/core/helpers/composeMixins.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
-import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
 const VISIBLE_STATES = Object.freeze({
 	opened: 'OPENED',
@@ -19,8 +18,7 @@ const VISIBLE_STATES = Object.freeze({
 
 class FlyoutImplementation extends composeMixins(
 	LitElement,
-	LocalizeLabsElement,
-	RtlMixin
+	LocalizeLabsElement
 ) {
 
 	static get properties() {
@@ -30,8 +28,6 @@ class FlyoutImplementation extends composeMixins(
 			flyoutTitle: { attribute: 'flyout-title', type: String },
 			shortDescription: { type: String, attribute: 'short-description' },
 			longDescription: { type: String, attribute: 'long-description' },
-			tabPosition: { type: String, attribute: 'tab-position' },
-			noTransform: { type: Boolean, attribute: 'no-transform' },
 			tutorialLink: { type: String, attribute: 'tutorial-link' },
 			helpDocsLink: { type: String, attribute: 'help-docs-link' },
 			hideReason: { type: Boolean, attribute: 'hide-reason' },
@@ -153,12 +149,13 @@ class FlyoutImplementation extends composeMixins(
 					box-sizing: border-box;
 					cursor: pointer;
 					height: 1rem;
+					inset-block-start: 0;
+					inset-inline-end: 15px;
 					min-height: 0;
 					padding: 1px;
 					pointer-events: auto;
 					position: absolute;
 					text-align: center;
-					top: 0;
 					width: 5rem;
 				}
 
@@ -187,7 +184,6 @@ class FlyoutImplementation extends composeMixins(
 
 	constructor() {
 		super();
-		this.tabPosition = 'right';
 		this._visibleState = VISIBLE_STATES.closed;
 	}
 
@@ -203,7 +199,7 @@ class FlyoutImplementation extends composeMixins(
 				<span tabindex="${this._getTabIndex()}" @focus="${this._shiftToLast}"></span>
 				${this._renderFlyoutContent()}
 				<div class="flyout-tab-container">
-					<button id="flyout-tab" class="flyout-tab" style="${this._getTabStyle()}" tabindex="0" aria-label="${this._getAriaLabelForTab()}" @click="${this._clickTab}">
+					<button id="flyout-tab" class="flyout-tab" tabindex="0" aria-label="${this._getAriaLabelForTab()}" @click="${this._clickTab}">
 						<d2l-icon icon="${this._getTabIcon()}"></d2l-icon>
 					</button>
 				</div>
@@ -318,35 +314,6 @@ class FlyoutImplementation extends composeMixins(
 
 	_getTabIndex() {
 		return this.opened ? 0 : -1;
-	}
-
-	_getTabStyle() {
-		let rtl = this.dir === 'rtl';
-		let position = '';
-		if (this.tabPosition === 'left') {
-			position = 'calc(2.5rem + 15px)';
-		} else if (this.tabPosition === 'right' || this.tabPosition === 'default' || !this.tabPosition) {
-			position = 'calc(2.5rem + 15px)';
-			rtl = !rtl;
-		} else if (this.tabPosition === 'center' || this.tabPosition === 'centre') {
-			position = '50%';
-		} else if (!/^\d+(?:\.\d+)?%$/.test(this.tabPosition)) {
-			/* eslint-disable no-console */
-			console.warn('Invalid position supplied to opt-in flyout');
-			position = 'calc(2.5rem + 15px)';
-			rtl = !rtl;
-		}
-
-		const side = rtl ? 'right' : 'left';
-		const shift = rtl ? '50%' : '-50%';
-
-		const tabStyle = `${side}: ${position};`;
-
-		if (this.noTransform) {
-			return tabStyle;
-		}
-
-		return `${tabStyle} transform: translateX(${shift});`;
 	}
 
 	_getTutorialLink(i) {

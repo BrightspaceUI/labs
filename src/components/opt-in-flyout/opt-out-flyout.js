@@ -10,8 +10,6 @@ class OptOutFlyout extends LitElement {
 			flyoutTitle: { attribute: 'flyout-title', type: String },
 			shortDescription: { type: String, attribute: 'short-description' },
 			longDescription: { type: String, attribute: 'long-description' },
-			tabPosition: { type: String, attribute: 'tab-position' },
-			noTransform: { type: Boolean, attribute: 'no-transform' },
 			tutorialLink: { type: String, attribute: 'tutorial-link' },
 			helpDocsLink: { type: String, attribute: 'help-docs-link' },
 			hideReason: { type: Boolean, attribute: 'hide-reason' },
@@ -41,12 +39,10 @@ class OptOutFlyout extends LitElement {
 				flyout-title="${this.flyoutTitle}"
 				short-description="${this.shortDescription}"
 				long-description="${this.longDescription}"
-				tab-position="${this.tabPosition}"
 				tutorial-link="${this.tutorialLink}"
 				help-docs-link="${this.helpDocsLink}"
 				?hide-reason="${this.hideReason}"
 				?hide-feedback="${this.hideFeedback}"
-				?no-transform="${this.noTransform}"
 				?opened="${this.opened}"
 				@flyout-opened="${this._handleOpened}"
 				@flyout-closed="${this._handleClosed}">
