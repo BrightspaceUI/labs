@@ -199,7 +199,7 @@ class FlyoutImplementation extends composeMixins(
 				<span tabindex="${this._getTabIndex()}" @focus="${this._shiftToLast}"></span>
 				${this._renderFlyoutContent()}
 				<div class="flyout-tab-container">
-					<button id="flyout-tab" class="flyout-tab" tabindex="0" aria-label="${this._getAriaLabelForTab()}" @click="${this._clickTab}">
+					<button id="flyout-tab" class="flyout-tab" aria-label="${this._getAriaLabelForTab()}" @click="${this._clickTab}">
 						<d2l-icon icon="${this._getTabIcon()}"></d2l-icon>
 					</button>
 				</div>
