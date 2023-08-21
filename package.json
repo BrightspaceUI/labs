@@ -17,13 +17,14 @@
     "start": "web-dev-server --node-resolve --open --watch",
     "test": "npm run lint && npm run test:translations && npm run test:unit",
     "test:translations": "mfv -e -s en -p ./lang/ -i untranslated",
-    "test:unit": "d2l-test-runner"
+    "test:unit": "d2l-test-runner",
+    "test:vdiff": "d2l-test-runner vdiff"
   },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
     "@brightspace-ui/stylelint-config": "^0.8",
-    "@brightspace-ui/testing": "^0.28",
+    "@brightspace-ui/testing": "^0.29",
     "@web/dev-server": "^0.3",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.25",

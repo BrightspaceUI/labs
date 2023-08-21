@@ -1,3 +1,2 @@
 node_modules/
-src/**/test/screenshots/current/
-src/**/test/screenshots/golden/
+.vdiff
