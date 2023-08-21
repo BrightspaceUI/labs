@@ -20,6 +20,11 @@ class OptOutReasonSelector extends composeMixins(
 		return [
 			inputStyles,
 			css`
+				label {
+					display: block;
+					margin-bottom: 0.5rem;
+				}
+
 				select {
 					-moz-appearance: none;
 					-webkit-appearance: none;
@@ -68,6 +73,7 @@ class OptOutReasonSelector extends composeMixins(
 
 	render() {
 		return html`
+			<label for="selector">${this.localize('components:optInFlyout:feedbackReasonLabel')}</label>
 			<select class="d2l-input" id="selector" @change="${this._reasonSelected}" onload="${this.focus()}">
 				<option disabled="" value="">${this.localize('components:optInFlyout:feedbackChooseReason')}</option>
 				${this._reasons.map((item) => html`<option value="${item.key}">${item.text}</option>`)}
