@@ -375,7 +375,7 @@ class FlyoutImplementation extends composeMixins(
 					${this._renderLinksText()}
 				</div>
 				<div class="flyout-buttons">
-					<d2l-button id="primary-button" primary="" @click="${this._clickOptIn}">${this._getPrimaryButtonText()}</d2l-button>
+					<d2l-button id="primary-button" primary @click="${this._clickOptIn}">${this._getPrimaryButtonText()}</d2l-button>
 					<d2l-button id="opt-out-button" @click="${this._clickOptOut}">${this._getSecondaryButtonText()}</d2l-button>
 				</div>
 			</div>
