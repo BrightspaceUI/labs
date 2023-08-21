@@ -21,13 +21,20 @@ const clickDone = (elem) => {
 
 describe('opt-out-dialog', () => {
 
-	describe('events', () => {
+	let elem;
+	beforeEach(async() => {
+		elem = await fixture(html`<d2l-labs-opt-out-dialog></d2l-labs-opt-out-dialog>`);
+	});
 
-		let elem;
+	describe('accessibility', () => {
 
-		beforeEach(async() => {
-			elem = await fixture(html`<d2l-labs-opt-out-dialog></d2l-labs-opt-out-dialog>`);
+		it('should be accessible', async() => {
+			await expect(elem).to.be.accessible();
 		});
+
+	});
+
+	describe('events', () => {
 
 		it('should dispatch "confirm" event when reason selected and done clicked (no feedback)', async() => {
 			setSelection(elem, 1);
