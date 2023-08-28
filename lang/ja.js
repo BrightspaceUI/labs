@@ -1,5 +1,5 @@
 export default {
-	"cannotBeNegative": "(cannot be less than 0)",
+	"cannotBeNegative": "（0より小さくはできません）",
 	"clearManualOverride": "手動の上書きのクリア",
 	"gradeScoreLabel" : "成績スコア",
 	"manuallyOverrideGrade": "成績の手動の上書き",

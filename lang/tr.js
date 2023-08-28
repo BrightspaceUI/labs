@@ -1,5 +1,5 @@
 export default {
-	"cannotBeNegative": "(cannot be less than 0)",
+	"cannotBeNegative": "(0'dan az olamaz)",
 	"clearManualOverride": "Manuel Olarak Geçersiz Kılmayı Temizle",
 	"gradeScoreLabel" : "Not puanı",
 	"manuallyOverrideGrade": "Notu Manuel Olarak Geçersiz Kıl",

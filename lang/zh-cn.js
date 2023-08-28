@@ -1,5 +1,5 @@
 export default {
-	"cannotBeNegative": "(cannot be less than 0)",
+	"cannotBeNegative": "（不能小于 0）",
 	"clearManualOverride": "清除手动改写",
 	"gradeScoreLabel" : "成绩分数",
 	"manuallyOverrideGrade": "手动改写成绩",

@@ -1,5 +1,5 @@
 export default {
-	"cannotBeNegative": "(cannot be less than 0)",
+	"cannotBeNegative": "(no puede ser menor que 0)",
 	"clearManualOverride": "Borrar anulación manual",
 	"gradeScoreLabel" : "Puntuación de calificación",
 	"manuallyOverrideGrade": "Anular calificación manualmente",

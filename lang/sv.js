@@ -1,5 +1,5 @@
 export default {
-	"cannotBeNegative": "(cannot be less than 0)",
+	"cannotBeNegative": "(får inte vara mindre än 0)",
 	"clearManualOverride": "Rensa manuell åsidosättning",
 	"gradeScoreLabel" : "Betygsresultat",
 	"manuallyOverrideGrade": "Åsidosätt betyg manuellt",

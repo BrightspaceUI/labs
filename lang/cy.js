@@ -1,5 +1,5 @@
 export default {
-	"cannotBeNegative": "(cannot be less than 0)",
+	"cannotBeNegative": "(ni all fod yn llai na 0)",
 	"clearManualOverride": "Clirio Trosgrifio â Llaw",
 	"gradeScoreLabel" : "Sgôr gradd",
 	"manuallyOverrideGrade": "Trosgrifo’r Gradd â Llaw",
