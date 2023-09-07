@@ -1,4 +1,4 @@
-import '../../../src/components/community-link/community-link.js';
+import '../../../src/components/link-community/link-community.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 import { getDocumentLocaleSettings } from '@brightspace-ui/intl/lib/common.js';
 

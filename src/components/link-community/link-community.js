@@ -1,5 +1,5 @@
 import '@brightspace-ui/core/components/link/link.js';
-import '@brightspace-ui/core/components/button/button-icon.js';
+import '@brightspace-ui/core/components/button/button-subtle.js';
 import { html, LitElement } from 'lit';
 import { getDocumentLocaleSettings } from '@brightspace-ui/intl/lib/common.js';
 
@@ -15,15 +15,9 @@ class CommunityLink extends LitElement {
 
 	constructor() {
 		super();
+		this.type = 'link';
 		this._localeSettings = getDocumentLocaleSettings();
 		this._handleUpdate = () => this.requestUpdate();
-	}
-
-	get link() {
-		const { language } = getDocumentLocaleSettings();
-		const { articleCode, langCode } = this._getArticleCode(language);
-
-		return `https://community.d2l.com/brightspace${langCode === 'en' ? '' : `-${langCode}`}/kb/articles/${articleCode}`;
 	}
 
 	connectedCallback() {
@@ -37,12 +31,18 @@ class CommunityLink extends LitElement {
 	}
 
 	render() {
+
+		const { language } = getDocumentLocaleSettings();
+		const { articleCode, langCode } = this._getArticleCode(language);
+
+		this.link = `https://community.d2l.com/brightspace${langCode === 'en' ? '' : `-${langCode}`}/kb/articles/${articleCode}`;
+
 		return this.type === 'button'
 			? html`<d2l-button-subtle
 				icon="d2l-tier1:help"
 				text=${this.text}
 				@click="${this._handleButtonClick}"
-			>`
+			></d2l-button-subtle>`
 			: html`<d2l-link href="${this.link}" target="_blank">${this.text}</d2l-link>`;
 	}
 
@@ -71,10 +71,6 @@ class CommunityLink extends LitElement {
 
 	_handleButtonClick() {
 		window.open(this.link, '_blank');
-	}
-
-	_onLangChange() {
-		this.requestUpdate();
 	}
 }
 
