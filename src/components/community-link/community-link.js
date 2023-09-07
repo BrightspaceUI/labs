@@ -1,5 +1,4 @@
 import '@brightspace-ui/core/components/link/link.js';
-
 import { getDocumentLocaleSettings } from '@brightspace-ui/intl/lib/common.js';
 
 const Link = customElements.get('d2l-link');
@@ -13,11 +12,27 @@ class CommunityLink extends Link {
 		};
 	}
 
+	constructor() {
+		super();
+		this._localeSettings = getDocumentLocaleSettings();
+		this._handleUpdate = () => this.requestUpdate();
+	}
+
 	get link() {
 		const { language } = getDocumentLocaleSettings();
 		const { articleCode, langCode } = this._getArticleCode(language);
 
 		return `https://community.d2l.com/brightspace${langCode === 'en' ? '' : `-${langCode}`}/kb/articles/${articleCode}`;
+	}
+
+	connectedCallback() {
+		super.connectedCallback();
+		this._localeSettings.addChangeListener(this._handleUpdate);
+	}
+
+	disconnectedCallback() {
+		super.disconnectedCallback();
+		this._localeSettings.removeChangeListener(this._handleUpdate);
 	}
 
 	render() {
@@ -47,6 +62,10 @@ class CommunityLink extends Link {
 		}
 		return { articleCode, langCode: usedLangCode };
 	}
+
+	_onLangChange() {
+		this.requestUpdate();
+	}
 }
 
-customElements.define('d2l-community-link', CommunityLink);
+customElements.define('d2l-labs-link-community', CommunityLink);

@@ -8,30 +8,15 @@
 		</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
-		<style>
-			.flyout-wrapper {
-				height: 450px;
-				position: relative;
-				width: 100%;
-			}
-		</style>
 	</head>
 	<body unresolved>
 		<d2l-demo-page page-title="Community Link">
 
 			<d2l-demo-snippet>
 				<template>
-					<d2l-community-link article-map='{"en": 4545, "ar-SA": 10489, "es-MX": 9214, "pt-BR": 9978, "nl-NL": 7833, "fr-CA": 6739}'>Localized link to community article. Use language selector to change link location</d2l-community-link>
+					<d2l-labs-link-community article-map='{"en": 4545, "ar-SA": 10489, "es-MX": 9214, "pt-BR": 9978, "nl-NL": 7833, "fr-CA": 6739}'>Localized link to community article. Use language selector to change link location</d2l-community-link>
 				</template>
 			</d2l-demo-snippet>
-
-			<script type="module">
-				document.querySelector('body > d2l-demo-page').shadowRoot.querySelector('header > label > select').addEventListener('change', () => {
-					setTimeout(() => {
-						document.querySelector("body > d2l-demo-page > d2l-demo-snippet > div > d2l-community-link").requestUpdate();
-					}, 300);
-				});
-			</script>
 		</d2l-demo-page>
 	</body>
 </html>
