@@ -37,13 +37,13 @@ class CommunityLink extends LitElement {
 	}
 
 	render() {
-		return this.type === 'link'
-			? html`<d2l-link href="${this.link}" target="_blank">${this.text}</d2l-link>`
-			: html`<d2l-button-subtle
+		return this.type === 'button'
+			? html`<d2l-button-subtle
 				icon="d2l-tier1:help"
 				text=${this.text}
 				@click="${this._handleButtonClick}"
-			>`;
+			>`
+			: html`<d2l-link href="${this.link}" target="_blank">${this.text}</d2l-link>`;
 	}
 
 	_getArticleCode(langIdent) {
