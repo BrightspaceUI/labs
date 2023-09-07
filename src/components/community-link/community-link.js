@@ -1,13 +1,14 @@
 import '@brightspace-ui/core/components/link/link.js';
+import '@brightspace-ui/core/components/button/button-icon.js';
+import { html, LitElement } from 'lit';
 import { getDocumentLocaleSettings } from '@brightspace-ui/intl/lib/common.js';
 
-const Link = customElements.get('d2l-link');
-
-class CommunityLink extends Link {
+class CommunityLink extends LitElement {
 
 	static get properties() {
 		return {
-			...Link.properties,
+			text: { type: String },
+			type: { type: String },
 			articleMap: { attribute: 'article-map', type: Object }
 		};
 	}
@@ -36,8 +37,13 @@ class CommunityLink extends Link {
 	}
 
 	render() {
-		this.href = this.link;
-		return super.render();
+		return this.type === 'link'
+			? html`<d2l-link href="${this.link}" target="_blank">${this.text}</d2l-link>`
+			: html`<d2l-button-subtle
+				icon="d2l-tier1:help"
+				text=${this.text}
+				@click="${this._handleButtonClick}"
+			>`;
 	}
 
 	_getArticleCode(langIdent) {
@@ -61,6 +67,10 @@ class CommunityLink extends Link {
 			}
 		}
 		return { articleCode, langCode: usedLangCode };
+	}
+
+	_handleButtonClick() {
+		window.open(this.link, '_blank');
 	}
 
 	_onLangChange() {
