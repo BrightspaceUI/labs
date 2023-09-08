@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/colors/colors.js';
+			import '@brightspace-ui/core/components/typography/typography.js';
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import './lang-demo-component.js';
+		</script>
+		<title>ComputedValues Controller</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<d2l-demo-page page-title="ComputedValues Controller">
+			<h2>Basic Usage Demo</h2>
+			This controller allows for components to listen to the document language in cases where the language can change without a page refresh.
+			<br/>
+			Try changing the language to see different messages.
+			<br/>
+			<d2l-demo-snippet>
+                <demo-lang-listener></demo-lang-listener>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+	</body>
+</html>

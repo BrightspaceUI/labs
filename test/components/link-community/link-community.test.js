@@ -1,4 +1,5 @@
-import '../../../src/components/link-community/link-community.js';
+import '../../../src/components/community/button-community.js';
+import '../../../src/components/community/link-community.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 import { getDocumentLocaleSettings } from '@brightspace-ui/intl/lib/common.js';
 
@@ -25,7 +26,7 @@ describe('community link', () => {
 		it(`Should have the right link for each lang code ${langCode}`, async() => {
 			getDocumentLocaleSettings().language = langCode;
 			const communityLink = await fixture(html`<d2l-labs-link-community type="link" text="Help" article-map=${JSON.stringify(langArticleMap)}></d2l-labs-link-community>`);
-			expect(communityLink.link).to.equal(langUrlMap[langCode]);
+			expect(communityLink.shadowRoot.querySelector('d2l-link').href).to.equal(langUrlMap[langCode]);
 		});
 	});
 
@@ -34,25 +35,19 @@ describe('community link', () => {
 			const regionlessLang = langCode.split('-')[0];
 			getDocumentLocaleSettings().language = regionlessLang;
 			const communityLink = await fixture(html`<d2l-labs-link-community type="link" text="Help" article-map=${JSON.stringify(langArticleMap)}></d2l-labs-link-community>`);
-			expect(communityLink.link).to.equal(langUrlMap[langCode]);
+			expect(communityLink.shadowRoot.querySelector('d2l-link').href).to.equal(langUrlMap[langCode]);
 		});
 	});
 
 	it("Should default to english if the lang code doesn't match", async() => {
 		getDocumentLocaleSettings().language = 'zh-tw';
 		const communityLink = await fixture(html`<d2l-labs-link-community type="link" text="Help" article-map=${JSON.stringify(langArticleMap)}></d2l-labs-link-community>`);
-		expect(communityLink.link).to.equal(langUrlMap['en']);
+		expect(communityLink.shadowRoot.querySelector('d2l-link').href).to.equal(langUrlMap['en']);
 	});
 
 	it('Should have a button variant', async() => {
 		getDocumentLocaleSettings().language = 'en';
-		const communityLink = await fixture(html`<d2l-labs-link-community type="button" text="Help" article-map=${JSON.stringify(langArticleMap)}></d2l-labs-link-community>`);
+		const communityLink = await fixture(html`<d2l-labs-button-community type="button" text="Help" article-map=${JSON.stringify(langArticleMap)}></d2l-labs-link-community>`);
 		expect(communityLink.shadowRoot.querySelector('d2l-button-subtle')).to.exist;
-	});
-
-	it('Should default to link variant', async() => {
-		getDocumentLocaleSettings().language = 'en';
-		const communityLink = await fixture(html`<d2l-labs-link-community text="Help" article-map=${JSON.stringify(langArticleMap)}></d2l-labs-link-community>`);
-		expect(communityLink.shadowRoot.querySelector('d2l-link')).to.exist;
 	});
 });
