@@ -1,5 +1,6 @@
 
-import '../../../src/components/link-community/link-community.js';
+import '../../../src/components/community/link-community.js';
+import '../../../src/components/community/button-community.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 const opts = { viewport: { height: 450 } };
@@ -18,7 +19,6 @@ describe('link-community', () => {
 		await fixture(
 			html`<d2l-labs-link-community
 				article-map="${JSON.stringify(langArticleMap)}"
-				type="link"
 				text="Link To Community"
 			></d2l-labs-link-community>`
 			, opts);
@@ -27,11 +27,10 @@ describe('link-community', () => {
 
 	it('Should render a button in button mode', async() => {
 		await fixture(
-			html`<d2l-labs-link-community
+			html`<d2l-labs-button-community
 				article-map="${JSON.stringify(langArticleMap)}"
-				type="button"
 				text="Link To Community"
-			></d2l-labs-link-community>`
+			></d2l-labs-button-community>`
 			, opts);
 		await expect(document).to.be.golden();
 	});
