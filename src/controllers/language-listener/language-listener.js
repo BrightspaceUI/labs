@@ -5,7 +5,10 @@ export class LanguageListenerController {
 	constructor(host) {
 		(this.host = host).addController(this);
 		this._localeSettings = getDocumentLocaleSettings();
-		this._handleLangUpdate = () => this.host.requestUpdate();
+		this._handleLangUpdate = () => {
+			this.language = this._localeSettings.language;
+			this.host.requestUpdate();
+		};
 		this.language = this._localeSettings.language;
 	}
 
@@ -15,9 +18,5 @@ export class LanguageListenerController {
 
 	hostDisconnected() {
 		this._localeSettings.removeChangeListener(this._handleLangUpdate);
-	}
-
-	hostUpdate() {
-		this.language = this._localeSettings.language;
 	}
 }
