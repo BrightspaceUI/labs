@@ -1,6 +1,6 @@
 
 import '../../../src/components/link-community/link-community.js';
-import { expect, fixture, html, oneEvent, sendKeysElem } from '@brightspace-ui/testing';
+import { expect, fixture, html } from '@brightspace-ui/testing';
 
 const opts = { viewport: { height: 450 } };
 
