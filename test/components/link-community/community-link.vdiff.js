@@ -2,7 +2,7 @@
 import '../../../src/components/community/community-link.js';
 import '../../../src/components/community/community-button.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
-import { langArticleMap } from './community-url-factory.js';
+import { langArticleMap } from './community-url-factory.test.js';
 
 const opts = { viewport: { height: 450 } };
 
