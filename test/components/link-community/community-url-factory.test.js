@@ -29,7 +29,7 @@ describe('community url factory', () => {
 	});
 	Object.keys(langArticleMap).map((lang) => {
 		it(`Should have the right link for each lang code ${lang}`, async() => {
-			expect(directive[lang]).to.equal(langUrlMap[lang]);
+			expect(directive(lang)).to.equal(langUrlMap[lang]);
 		});
 	});
 
@@ -46,6 +46,6 @@ describe('community url factory', () => {
 
 	it("Should default to english if the lang code doesn't match", async() => {
 		const lang = 'zh-tw';
-		expect(directive[lang]).to.equal(langUrlMap['en']);
+		expect(directive(lang)).to.equal(langUrlMap['en']);
 	});
 });
