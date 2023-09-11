@@ -16,4 +16,4 @@ class CommunityLink extends CommunityBase {
 	}
 }
 
-customElements.define('d2l-labs-link-community', CommunityLink);
+customElements.define('d2l-labs-community-link', CommunityLink);
