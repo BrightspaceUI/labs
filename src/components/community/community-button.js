@@ -1,12 +1,11 @@
 import '@brightspace-ui/core/components/button/button-subtle.js';
+import { html, LitElement } from 'lit';
 import { CommunityBase } from './community-base.js';
-import { html } from 'lit';
 
-class CommunityLink extends CommunityBase {
+class CommunityLink extends CommunityBase(LitElement) {
 
 	static get properties() {
 		return {
-			...CommunityBase.properties,
 			text: { type: String },
 		};
 	}

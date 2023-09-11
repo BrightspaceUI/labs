@@ -1,22 +1,23 @@
 import { getDocumentLocaleSettings } from '@brightspace-ui/intl/lib/common.js';
 
+const localeSettings = getDocumentLocaleSettings();
+
 export class LanguageListenerController {
 
 	constructor(host) {
 		(this.host = host).addController(this);
-		this._localeSettings = getDocumentLocaleSettings();
 		this._handleLangUpdate = () => {
-			this.language = this._localeSettings.language;
+			this.language = localeSettings.language;
 			this.host.requestUpdate();
 		};
-		this.language = this._localeSettings.language;
+		this.language = localeSettings.language;
 	}
 
 	hostConnected() {
-		this._localeSettings.addChangeListener(this._handleLangUpdate);
+		localeSettings.addChangeListener(this._handleLangUpdate);
 	}
 
 	hostDisconnected() {
-		this._localeSettings.removeChangeListener(this._handleLangUpdate);
+		localeSettings.removeChangeListener(this._handleLangUpdate);
 	}
 }

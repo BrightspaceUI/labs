@@ -1,8 +1,7 @@
 import { communityUrlFactory } from './community-url-factory.js';
 import { LanguageListenerController } from '../../controllers/language-listener/language-listener.js';
-import { LitElement } from 'lit';
 
-export class CommunityBase extends LitElement {
+export const CommunityBase = (superClass) => class CommunityBaseMixin extends superClass {
 
 	static get properties() {
 		return {
@@ -19,4 +18,9 @@ export class CommunityBase extends LitElement {
 		super.connectedCallback();
 		this.communityArticleDirective = communityUrlFactory(this.articleMap);
 	}
-}
+
+	update() {
+		super.update();
+		this.communityArticleDirective = communityUrlFactory(this.articleMap);
+	}
+};
