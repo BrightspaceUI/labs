@@ -12,7 +12,7 @@ class CommunityLink extends CommunityBase(LitElement) {
 	}
 
 	render() {
-		return html`<d2l-link href="${this.communityArticleDirective(this.langController.language)}" target="_blank" ?small=${this.small} >${this.text}</d2l-link>`;
+		return html`<d2l-link new-window href="${this.communityArticleDirective(this.langController.language)}" ?small=${this.small} >${this.text}</d2l-link>`;
 	}
 }
 
