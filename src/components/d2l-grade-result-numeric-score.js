@@ -54,7 +54,7 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 
 		const denominatorLength = isNaN(this.scoreDenominator) ? 0 : this.scoreDenominator.toString().length;
 		const numeratorLength = roundedNumerator.toString().length;
-		const dynamicWidth = numeratorLength <= denominatorLength ? denominatorLength + EXTRA_SPACE : (numeratorLength * 0.5) + (denominatorLength * 0.5)  + EXTRA_SPACE;
+		const dynamicWidth = numeratorLength <= denominatorLength ? denominatorLength + EXTRA_SPACE : (numeratorLength * 0.5) + (denominatorLength * 0.5) + EXTRA_SPACE;
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">

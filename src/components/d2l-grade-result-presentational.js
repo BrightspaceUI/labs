@@ -77,7 +77,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 			<div class="d2l-grade-result-presentational-container">
 				${this._renderScoreComponent()}
 
-				${this.includeGradeButton ?  html`
+				${this.includeGradeButton ? html`
 					<d2l-grade-result-icon-button
 						.tooltipText=${this.gradeButtonTooltip}
 						ariaLabel="Grades"
