@@ -19,8 +19,9 @@ export const CommunityBase = (superClass) => class CommunityBaseMixin extends su
 		this.communityArticleDirective = communityUrlFactory(this.articleMap);
 	}
 
-	update() {
-		super.update();
-		this.communityArticleDirective = communityUrlFactory(this.articleMap);
+	updated(changedProperties) {
+		if (changedProperties.has('articleMap')) {
+			this.communityArticleDirective = communityUrlFactory(this.articleMap);
+		}
 	}
 };
