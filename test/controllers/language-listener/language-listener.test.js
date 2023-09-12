@@ -16,8 +16,7 @@ describe('LanguageListenerController', () => {
 
 	it('Should change based on the document language', async() => {
 		// using en example element here for host updating features
-		const elm = await fixture(html`<d2l-labs-community-link article-map="${JSON.stringify(langArticleMap)}"></d2l-labs-community-link>`);
-		localeSettings.language = 'fr';
+		const elm = await fixture(html`<d2l-labs-community-link article-map="${JSON.stringify(langArticleMap)}"></d2l-labs-community-link>`, { lang: 'fr' });
 		expect(elm.langController.language).to.equal('fr');
 	});
 });
