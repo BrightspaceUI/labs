@@ -4,11 +4,15 @@
   "type": "module",
   "repository": "https://github.com/BrightspaceUI/labs.git",
   "exports": {
+    "./components/community-button.js": "./src/components/community/community-button.js",
+    "./components/community-link.js": "./src/components/community/community-link.js",
+    "./components/community-url-factory.js": "./src/components/community/community-url-factory.js",
     "./components/opt-in-flyout.js": "./src/components/opt-in-flyout/opt-in-flyout.js",
     "./components/opt-out-flyout.js": "./src/components/opt-in-flyout/opt-out-flyout.js",
     "./components/opt-out-reason.js": "./src/components/opt-in-flyout/opt-out-reason.js",
     "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
-    "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js"
+    "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js",
+    "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js"
   },
   "scripts": {
     "lint": "npm run lint:eslint && npm run lint:style",
