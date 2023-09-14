@@ -1,14 +1,14 @@
-// Remove and replace with d2l-link once core#4001 is merged.
+// Delete this file once core#4001 is merged.
 // https://github.com/BrightspaceUI/core/pull/4001
-import '../colors/colors.js';
-import '../icons/icon.js';
+import '@brightspace-ui/core/components/colors/colors';
+import '@brightspace-ui/core/components/icons/icon.js';
 import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { FocusMixin } from '../../mixins/focus/focus-mixin.js';
-import { getFocusPseudoClass } from '../../helpers/focus.js';
+import { FocusMixin } from '@brightspace-ui/core/mixins/focus/focus-mixin.js';
+import { getFocusPseudoClass } from '@brightspace-ui/core/helpers/focus.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { LocalizeCoreElement } from '../../helpers/localize-core-element.js';
-import { offscreenStyles } from '../offscreen/offscreen.js';
+import { LocalizeCoreElement } from '@brightspace-ui/core/helpers/localize-core-element.js';
+import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 export const linkStyles = css`
