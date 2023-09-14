@@ -146,7 +146,7 @@ describe('opt-out-flyout', () => {
 		`, opts);
 		const optOutButton = elem.shadowRoot.querySelector('d2l-labs-opt-in-flyout-impl')
 			.shadowRoot.querySelector('#opt-out-button');
-		sendKeysElem(optOutButton, 'press', 'Enter');
+		await sendKeysElem(optOutButton, 'press', 'Enter');
 		await expect(document).to.be.golden();
 	});
 
