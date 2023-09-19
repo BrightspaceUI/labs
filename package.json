@@ -28,7 +28,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@brightspace-ui/stylelint-config": "^0.8",
-    "@brightspace-ui/testing": "^0.34",
+    "@brightspace-ui/testing": "^1.0",
     "@web/dev-server": "^0.3",
     "eslint": "^8",
     "eslint-config-brightspace": "^0.25",
