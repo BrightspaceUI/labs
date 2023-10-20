@@ -91,6 +91,18 @@ class WithoutComputedValuesComponent extends LitElement {
 		`;
 	}
 
+	willUpdate(changedProperties) {
+		if (changedProperties.has('selectedClassId')) {
+			if (typeof this.selectedClassId !== 'number') {
+				this.students = null;
+			} else {
+				ClassesApi.getStudents(this.selectedClassId).then((students) => {
+					this.students = students;
+				});
+			}
+		}
+	}
+
 	renderTable(students) {
 		if (!this.selectedClassId) { return ''; }
 		if (!Array.isArray(students)) { return 'Loading...'; }
@@ -148,18 +160,6 @@ class WithoutComputedValuesComponent extends LitElement {
 				>&rarr;</button>
 			</div>
 		`;
-	}
-
-	willUpdate(changedProperties) {
-		if (changedProperties.has('selectedClassId')) {
-			if (typeof this.selectedClassId !== 'number') {
-				this.students = null;
-			} else {
-				ClassesApi.getStudents(this.selectedClassId).then((students) => {
-					this.students = students;
-				});
-			}
-		}
 	}
 
 	_calcGradeAverages(students) {
