@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@brightspace-hmc/siren-sdk": "^2",
-    "@brightspace-ui/core": "^2.161",
+    "@brightspace-ui/core": "^2.167",
     "d2l-polymer-siren-behaviors": "^1",
     "lit": "^2"
   }
