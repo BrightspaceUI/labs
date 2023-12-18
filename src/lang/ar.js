@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "تم طي خانة الاختيار", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "تم توسيع خانة الاختيار", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "إلغاء",
 	"components:optInFlyout:close": "إغلاق مربع الحوار هذا",
 	"components:optInFlyout:done": "تم",

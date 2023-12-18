@@ -4,6 +4,7 @@
   "type": "module",
   "repository": "https://github.com/BrightspaceUI/labs.git",
   "exports": {
+    "./components/checkbox-drawer.js": "./src/components/checkbox-drawer/checkbox-drawer.js",
     "./components/community-button.js": "./src/components/community/community-button.js",
     "./components/community-link.js": "./src/components/community/community-link.js",
     "./components/community-url-factory.js": "./src/components/community/community-url-factory.js",

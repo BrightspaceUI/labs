@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "折りたたまれたチェックボックス", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "展開されたチェックボックス", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "キャンセル",
 	"components:optInFlyout:close": "このダイアログを閉じる",
 	"components:optInFlyout:done": "終了",

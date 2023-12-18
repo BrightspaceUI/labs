@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "Selectievakje samengevouwen", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "Selectievakje uitgevouwen", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Annuleren",
 	"components:optInFlyout:close": "Dit dialoogvenster sluiten",
 	"components:optInFlyout:done": "Gereed",

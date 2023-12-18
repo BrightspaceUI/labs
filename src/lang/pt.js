@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "Caixa de seleção recolhida", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "Caixa de seleção expandida", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Cancelar",
 	"components:optInFlyout:close": "Fechar esta caixa de diálogo",
 	"components:optInFlyout:done": "Concluído",

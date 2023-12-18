@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../../../src/components/checkbox-drawer/checkbox-drawer.js';
+		</script>
+		<title>CheckboxDrawer</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<d2l-demo-page page-title="CheckboxDrawer">
+			<h2>Checkbox drawer with label and description</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-checkbox-drawer label="Per pharetra vehicula pulvinar elementum pede senectus." description="Vitae egestas praesent conubia.">
+					Volutpat risus accumsan taciti nonummy sociosqu arcu neque quisque ullamcorper gravida enim aptent sodales elit et sociis molestie nisi lobortis, sollicitudin nibh placerat.
+				</d2l-labs-checkbox-drawer>
+			</d2l-demo-snippet>
+
+			<h2>Checkbox drawer with label and description - Checked</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-checkbox-drawer checked label="Per pharetra vehicula pulvinar elementum pede senectus." description="Vitae egestas praesent conubia.">
+					Volutpat risus accumsan taciti nonummy sociosqu arcu neque quisque ullamcorper gravida enim aptent sodales elit et sociis molestie nisi lobortis, sollicitudin nibh placerat.
+				</d2l-labs-checkbox-drawer>
+			</d2l-demo-snippet>
+
+
+			<h2>Checkbox drawer read-only - Checked</h2>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-checkbox-drawer checked read-only label="Per pharetra vehicula pulvinar elementum pede senectus." description="Vitae egestas praesent conubia.">
+						Volutpat risus accumsan taciti nonummy sociosqu arcu neque quisque ullamcorper gravida enim aptent sodales elit et sociis molestie nisi lobortis, sollicitudin nibh placerat.
+					</d2l-labs-checkbox-drawer>
+				</template>
+			</d2l-demo-snippet>
+
+			<h2>Checkbox drawer read-only - Unchecked</h2>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-checkbox-drawer read-only label="Per pharetra vehicula pulvinar elementum pede senectus." description="Vitae egestas praesent conubia.">
+						Volutpat risus accumsan taciti nonummy sociosqu arcu neque quisque ullamcorper gravida enim aptent sodales elit et sociis molestie nisi lobortis, sollicitudin nibh placerat.
+					</d2l-labs-checkbox-drawer>
+				</template>
+			</d2l-demo-snippet>
+
+			<h2>Checkbox drawer with label only</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-checkbox-drawer label="Per pharetra vehicula pulvinar elementum pede senectus.">
+					Volutpat risus accumsan taciti nonummy sociosqu arcu neque quisque ullamcorper gravida enim aptent sodales elit et sociis molestie nisi lobortis, sollicitudin nibh placerat.
+				</d2l-labs-checkbox-drawer>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+	</body>
+</html>

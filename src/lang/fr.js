@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "Case à cocher réduite", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "Case à cocher agrandie", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Annuler",
 	"components:optInFlyout:close": "Fermer cette boîte de dialogue",
 	"components:optInFlyout:done": "Terminé",
