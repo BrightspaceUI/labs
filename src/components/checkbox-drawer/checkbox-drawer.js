@@ -70,7 +70,7 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 				<div class="d2l-input-checkbox-description d2l-skeletize">${this.description}</div>
 			</d2l-input-checkbox-spacer>
 			<d2l-input-checkbox-spacer class="d2l-input-checkbox-spacer">
-				<d2l-expand-collapse-content ?expanded="${this.checked}" ?aria-busy=${this._expandCollapseBusy} @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}">
+				<d2l-expand-collapse-content ?expanded="${this.checked}" aria-busy=${this._expandCollapseBusy ? 'true' : 'false'} @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}">
 					<div class="d2l-checkbox-content-margin"></div>
 					<slot></slot>
 				</d2l-expand-collapse-content>
@@ -103,8 +103,6 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 		);
 
 		this._expandCollapseBusy = true;
-		await this.updateComplete;
-
 		await e.detail[action];
 		this._expandCollapseBusy = false;
 	}
