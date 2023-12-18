@@ -1,5 +1,5 @@
 import '../../../src/components/checkbox-drawer/checkbox-drawer.js';
-import { expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
+import { clickElem, expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 
 function getInputCheckbox(component) {
@@ -27,24 +27,26 @@ describe('checkbox-drawer', () => {
 		[ false, true ].forEach(checked => {
 			const action = checked ? 'collapse' : 'expand';
 
-			it(`should fire "d2l-checkbox-drawer-checked-change" event when ${!checked ? 'un' : ''}checked input element is clicked`, async() => {
+			it(`should fire "d2l-labs-checkbox-drawer-checked-change" event when ${!checked ? 'un' : ''}checked input element is clicked`, async() => {
 				const component = await fixture(html`<d2l-labs-checkbox-drawer label="Label" ?checked=${checked}></d2l-labs-checkbox-drawer>`);
-				const listener = oneEvent(component, 'd2l-checkbox-drawer-checked-change');
+				const listener = oneEvent(component, 'd2l-labs-checkbox-drawer-checked-change');
 
-				getInputCheckbox(component).simulateClick();
+				const innerCheckbox = getInputCheckbox(component);
+				expect(innerCheckbox.description).to.equal(!checked ? 'Checkbox collapsed' : 'Checkbox expanded'); // it isn't checked/unchecked yet, so it should be the opposite of what it will become
+
+				clickElem(innerCheckbox);
 				const { detail } = await listener;
 				expect(detail.checked).to.equal(!checked);
 				expect(component.checked).to.equal(!checked);
 
-				const innerCheckbox = component.shadowRoot.querySelector('d2l-input-checkbox');
 				expect(innerCheckbox.description).to.equal(checked ? 'Checkbox collapsed' : 'Checkbox expanded');
 			});
 
-			it(`should fire "d2l-checkbox-drawer-${action}" event when ${!checked ? 'un' : ''}checked input element is clicked`, async() => {
+			it(`should fire "d2l-labs-checkbox-drawer-${action}" event when ${!checked ? 'un' : ''}checked input element is clicked`, async() => {
 				const component = await fixture(html`<d2l-labs-checkbox-drawer label="Label" ?checked=${checked}></d2l-labs-checkbox-drawer>`);
-				const listener = oneEvent(component, `d2l-checkbox-drawer-${action}`);
+				const listener = oneEvent(component, `d2l-labs-checkbox-drawer-${action}`);
 
-				getInputCheckbox(component).simulateClick();
+				clickElem(getInputCheckbox(component));
 				const { detail } = await listener;
 				expect(detail[`${action}Complete`]).to.exist;
 			});

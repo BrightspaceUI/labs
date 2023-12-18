@@ -5,7 +5,6 @@ import '@brightspace-ui/core/components/inputs/input-checkbox-spacer.js';
 import '@brightspace-ui/core/components/icons/icon.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { SkeletonMixin } from '@brightspace-ui/core/components/skeleton/skeleton-mixin.js';
 
@@ -13,11 +12,11 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 
 	static get properties() {
 		return {
-			ariaLabel: { type: String, attribute: 'aria-label' },
 			checked: { type: Boolean },
 			description: { type: String },
 			label: { type: String },
-			readOnly: { type: Boolean, attribute: 'read-only' }
+			readOnly: { type: Boolean, attribute: 'read-only' },
+			_expandCollapseBusy: { state: true }
 		};
 	}
 
@@ -51,6 +50,7 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 	constructor() {
 		super();
 		this.checked = false;
+		this._expandCollapseBusy = false;
 	}
 
 	render() {
@@ -61,7 +61,6 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 			` : html`
 				<d2l-input-checkbox
 					?checked="${this.checked}"
-					aria-label="${ifDefined(this.ariaLabel)}"
 					class="d2l-input-checkbox"
 					?skeleton="${this.skeleton}"
 					description=${this.localize(`components:checkboxDrawer:checkbox${this.checked ? 'Expanded' : 'Collapsed'}`)}
@@ -71,7 +70,7 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 				<div class="d2l-input-checkbox-description d2l-skeletize">${this.description}</div>
 			</d2l-input-checkbox-spacer>
 			<d2l-input-checkbox-spacer class="d2l-input-checkbox-spacer">
-				<d2l-expand-collapse-content @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}" ?expanded="${this.checked}">
+				<d2l-expand-collapse-content ?expanded="${this.checked}" ?aria-busy=${this._expandCollapseBusy} @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}">
 					<div class="d2l-checkbox-content-margin"></div>
 					<slot></slot>
 				</d2l-expand-collapse-content>
@@ -83,7 +82,7 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 		this.checked = e.target.checked;
 
 		this.dispatchEvent(
-			new CustomEvent('d2l-checkbox-drawer-checked-change', {
+			new CustomEvent('d2l-labs-checkbox-drawer-checked-change', {
 				bubbles: true,
 				composed: false,
 				detail: { checked: this.checked }
@@ -92,20 +91,22 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 	}
 
 	async _onExpandCollapseContentToggled(e) {
-		const action = e.target.expanded ? 'expand' : 'collapse';
+		const action = e.target.expanded ? 'expandComplete' : 'collapseComplete';
+		const eventName = e.target.expanded ? 'd2l-labs-checkbox-drawer-expand' : 'd2l-labs-checkbox-drawer-collapse';
 
 		this.dispatchEvent(
-			new CustomEvent(`d2l-checkbox-drawer-${action}`, {
+			new CustomEvent(eventName, {
 				bubbles: true,
 				composed: false,
 				detail: e.detail
 			})
 		);
 
-		const content = this.shadowRoot?.querySelector('d2l-expand-collapse-content');
-		content.ariaBusy = 'true';
-		await e.detail[`${action}Complete`];
-		content.ariaBusy = 'false';
+		this._expandCollapseBusy = true;
+		await this.updateComplete;
+
+		await e.detail[action];
+		this._expandCollapseBusy = false;
 	}
 }
 
