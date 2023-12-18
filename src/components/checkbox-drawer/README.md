@@ -6,7 +6,7 @@ The `d2l-labs-checkbox-drawer` element can be used to get a checkbox with a desc
 
 ```html
 <script type="module">
-    import '@brightspace-ui-labs/checkbox-drawer/checkbox-drawer.js';
+    import '@brightspace-ui/labs/components/checkbox-drawer.js';
 </script>
 <d2l-labs-checkbox-drawer>
   <p>My drawer content.</p>
