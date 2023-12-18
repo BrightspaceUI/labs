@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "확인란이 축소됨", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "확인란이 확장됨", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "취소",
 	"components:optInFlyout:close": "이 대화 상자 닫기",
 	"components:optInFlyout:done": "완료",

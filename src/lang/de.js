@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "Kontrollkästchen ausgeblendet", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "Kontrollkästchen eingeblendet", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Abbrechen",
 	"components:optInFlyout:close": "Dieses Dialogfeld schließen",
 	"components:optInFlyout:done": "Fertig",

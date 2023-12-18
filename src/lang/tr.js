@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "Onay kutusu daraltıldı", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "Onay kutusu genişletildi", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "İptal Et",
 	"components:optInFlyout:close": "Bu iletişim kutusunu kapat",
 	"components:optInFlyout:done": "Bitti",

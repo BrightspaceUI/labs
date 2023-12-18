@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "चेकबॉक्स छोटा हो गया", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "चेकबॉक्स बड़ा हो गया", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "रद्द करें",
 	"components:optInFlyout:close": "यह संवाद बंद करें",
 	"components:optInFlyout:done": "पूर्ण हो गया",

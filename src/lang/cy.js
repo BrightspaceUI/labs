@@ -1,4 +1,6 @@
 export default {
+	"components:checkboxDrawer:checkboxCollapsed": "Wedi crebachu blwch ticio", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
+	"components:checkboxDrawer:checkboxExpanded": "Wedi ehangu blwch ticio", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Canslo",
 	"components:optInFlyout:close": "Cau’r deialog hwn",
 	"components:optInFlyout:done": "Wedi Gorffen",
