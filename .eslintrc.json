@@ -3,14 +3,6 @@
   "overrides": [
     {
       "files": [
-        "src/lang/*.js"
-      ],
-      "rules": {
-        "quotes": 0
-      }
-    },
-    {
-      "files": [
         "demo/**/**.html"
       ],
       "rules": {
