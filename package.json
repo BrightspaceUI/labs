@@ -33,7 +33,7 @@
     "@web/dev-server": "^0.4.1",
     "@web/test-runner": "^0.18.0",
     "eslint": "^8",
-    "eslint-config-brightspace": "^0.25",
+    "eslint-config-brightspace": "^1.0",
     "messageformat-validator": "^2.4.2",
     "sinon": "^17"
   },

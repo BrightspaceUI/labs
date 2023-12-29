@@ -2,7 +2,7 @@ import './d2l-grade-result-icon-button.js';
 import './d2l-grade-result-numeric-score.js';
 import './d2l-grade-result-letter-score.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { GradeType } from '../controller/Grade.js';
 import { Localizer } from './locale.js';
@@ -84,7 +84,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 						icon="tier1:grade"
 						@d2l-grade-result-icon-button-click=${this._onGradeButtonClick}
 					></d2l-grade-result-icon-button>
-				` : html``}
+				` : nothing}
 
 				${this.includeReportsButton ? html`
 					<d2l-grade-result-icon-button
@@ -93,7 +93,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 						icon="tier1:reports"
 						@d2l-grade-result-icon-button-click=${this._onReportsButtonClick}
 					></d2l-grade-result-icon-button>
-				` : html``}
+				` : nothing}
 
 			</div>
 
@@ -152,7 +152,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 			`;
 		}
 
-		return html``;
+		return nothing;
 	}
 
 	_renderNumericScoreComponent() {
@@ -186,7 +186,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 				</div>
 			`;
 		}
-		return html``;
+		return nothing;
 	}
 
 	_renderTitle() {
@@ -198,7 +198,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 			`;
 		}
 
-		return html``;
+		return nothing;
 	}
 
 }
