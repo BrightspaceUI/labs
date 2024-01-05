@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../../../src/components/pagination/pagination.js';
+		</script>
+		<title>Pagination</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<d2l-demo-page page-title="Pagination">
+			<h2>Default</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-pagination></d2l-labs-pagination>
+			</d2l-demo-snippet>
+
+			<h2>With Custom Max Page Number</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-pagination page-number="2" max-page-number="5"></d2l-labs-pagination>
+			</d2l-demo-snippet>
+
+			<h2>Item Count Enabled</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-pagination max-page-number="5" show-item-count-select item-count-options="[1,10,20,100,250]" selected-count-option="10"></d2l-labs-pagination>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+
+		<script>
+			const elements = document.querySelectorAll('d2l-labs-pagination');
+			elements.forEach(elem => {
+				elem.addEventListener('d2l-labs-pagination-page-change', (e) => {
+					window.alert(`Navigating to page ${e.detail.page}.`);
+					e.target.pageNumber = e.detail.page;
+				});
+				elem.addEventListener('d2l-labs-pagination-item-counter-change', (e) => {
+					window.alert(`Displaying ${e.detail.itemCount} items per page.`);
+				});
+			});
+		</script>
+	</body>
+</html>
