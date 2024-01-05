@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "关闭",
 	"components:optInFlyout:turnOn": "开启",
 	"components:optInFlyout:tutorialAndHelpMessage": "观看我们的*教程*或阅读我们的~帮助文档~，以便快速入门！",
-	"components:optInFlyout:tutorialMessage": "观看我们的*教程*帮助您快速入门！"
+	"components:optInFlyout:tutorialMessage": "观看我们的*教程*帮助您快速入门！",
+	"components:pagination:amountPerPage" : "每页 {count} 个结果",
+	"components:pagination:currentPage": "页码 ｛ pageNumber ｝ ，共 ｛ maxPageNumber ｝ 页",
+	"components:pagination:nextPage" : "下一页",
+	"components:pagination:previousPage" : "上一页",
+	"components:pagination:resultsPerPage" : "每页结果数"
 };

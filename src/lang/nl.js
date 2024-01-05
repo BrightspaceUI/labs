@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "Uitschakelen",
 	"components:optInFlyout:turnOn": "Inschakelen",
 	"components:optInFlyout:tutorialAndHelpMessage": "Lees onze *zelfstudies* of onze ~helpdocumentatie~ om aan de slag te gaan.",
-	"components:optInFlyout:tutorialMessage": "Bekijk onze *zelfstudies* om aan de slag te gaan."
+	"components:optInFlyout:tutorialMessage": "Bekijk onze *zelfstudies* om aan de slag te gaan.",
+	"components:pagination:amountPerPage" : "{count} per pagina",
+	"components:pagination:currentPage": "Paginanummer {pageNumber} van {maxPageNumber}",
+	"components:pagination:nextPage" : "Volgende pagina",
+	"components:pagination:previousPage" : "Vorige pagina",
+	"components:pagination:resultsPerPage" : "Resultaten per pagina"
 };

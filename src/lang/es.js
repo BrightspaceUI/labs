@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "Desactivar",
 	"components:optInFlyout:turnOn": "Activar",
 	"components:optInFlyout:tutorialAndHelpMessage": "Vea nuestros *tutoriales* o lea nuestra ~documentación de ayuda~ para comenzar.",
-	"components:optInFlyout:tutorialMessage": "Vea nuestros *tutoriales* para saber cómo comenzar."
+	"components:optInFlyout:tutorialMessage": "Vea nuestros *tutoriales* para saber cómo comenzar.",
+	"components:pagination:amountPerPage" : "{count} por página",
+	"components:pagination:currentPage": "Página número {pageNumber} de {maxPageNumber}",
+	"components:pagination:nextPage" : "Página siguiente",
+	"components:pagination:previousPage" : "Página anterior",
+	"components:pagination:resultsPerPage" : "Resultados por página"
 };

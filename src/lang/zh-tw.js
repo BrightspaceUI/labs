@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "關閉",
 	"components:optInFlyout:turnOn": "開啟",
 	"components:optInFlyout:tutorialAndHelpMessage": "觀看我們的 *教學課程* 或閱讀 ~說明文件~ 以開始使用！",
-	"components:optInFlyout:tutorialMessage": "觀看我們的 *教學課程*，協助您開始使用！"
+	"components:optInFlyout:tutorialMessage": "觀看我們的 *教學課程*，協助您開始使用！",
+	"components:pagination:amountPerPage" : "每頁 {count} 個",
+	"components:pagination:currentPage": "頁碼 {pageNumber} / {maxPageNumber}",
+	"components:pagination:nextPage" : "下一頁",
+	"components:pagination:previousPage" : "上一頁",
+	"components:pagination:resultsPerPage" : "每頁結果"
 };

@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "オフにする",
 	"components:optInFlyout:turnOn": "オンにする",
 	"components:optInFlyout:tutorialAndHelpMessage": "はじめに*チュートリアル*をご覧になるか、～ヘルプドキュメント～をお読みください。",
-	"components:optInFlyout:tutorialMessage": "ぜひ*チュートリアル*をご覧になり、ご利用を開始してください。"
+	"components:optInFlyout:tutorialMessage": "ぜひ*チュートリアル*をご覧になり、ご利用を開始してください。",
+	"components:pagination:amountPerPage" : "ページごとの {count}",
+	"components:pagination:currentPage": "{maxPageNumber} のページ番号 {pageNumber}",
+	"components:pagination:nextPage" : "次のページ",
+	"components:pagination:previousPage" : "前のページ",
+	"components:pagination:resultsPerPage" : "ページごとの結果"
 };

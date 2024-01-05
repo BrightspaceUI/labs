@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "Diffoddwch e",
 	"components:optInFlyout:turnOn": "Trowch e ymlaen",
 	"components:optInFlyout:tutorialAndHelpMessage": "Gwyliwch ein *tiwtorialau* neu darllenwch ein ~dogfennaeth cymorth~ i gychwyn arni!",
-	"components:optInFlyout:tutorialMessage": "Gwyliwch ein *tiwtorialau* i’ch helpu i gychwyn arni!"
+	"components:optInFlyout:tutorialMessage": "Gwyliwch ein *tiwtorialau* i’ch helpu i gychwyn arni!",
+	"components:pagination:amountPerPage" : "{count} fesul tudalen",
+	"components:pagination:currentPage": "Rhif tudalen {pageNumber} o {maxPageNumber}",
+	"components:pagination:nextPage" : "Tudalen nesaf",
+	"components:pagination:previousPage" : "Y dudalen flaenorol",
+	"components:pagination:resultsPerPage" : "Canlyniadau fesul tudalen"
 };
