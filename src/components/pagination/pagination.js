@@ -31,10 +31,15 @@ class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
 				margin: 0.75rem;
 			}
 
+			.d2l-page-number-container {
+				display: inline-block;
+				direction: ltr;
+			}
+
 			.d2l-page-number {
 				margin-left: 0.25rem;
 				margin-right: 0.25rem;
-				width: 4rem;
+				width: 3.8rem;
 			}
 
 			.d2l-page-max-text {
@@ -61,18 +66,20 @@ class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
 			<div class="d2l-page-selector-container">
 				<d2l-button-icon id="d2l-labs-pagination-previous-button" icon="tier1:chevron-left" @click="${this._onPreviousClicked}" text="${this.localize('components:pagination:previousPage')}" ?disabled=${this._isFirstPage()}></d2l-button-icon>
 
-				<d2l-input-number
-					class="d2l-page-number"
-					autocomplete="off"
-					label="${this.localize('components:pagination:currentPage', { pageNumber: this.pageNumber, maxPageNumber: this.maxPageNumber })}"
-					label-hidden
-					max-fraction-digits="0"
-					value="${this.pageNumber}"
-					@change=${this._onPageNumberChanged}>
-				</d2l-input-number>
-				<!-- Note: this uses a division slash rather than a regular slash -->
-				<!-- a11y note: setting aria-hidden to true because info here is covered by input element -->
-				<span class="d2l-page-max-text" aria-hidden="true">∕ ${this.maxPageNumber}</span>
+				<div class="d2l-page-number-container">
+					<d2l-input-number
+						class="d2l-page-number"
+						autocomplete="off"
+						label="${this.localize('components:pagination:currentPage', { pageNumber: this.pageNumber, maxPageNumber: this.maxPageNumber })}"
+						label-hidden
+						max-fraction-digits="0"
+						value="${this.pageNumber}"
+						@change=${this._onPageNumberChanged}>
+					</d2l-input-number>
+					<!-- Note: this uses a division slash rather than a regular slash -->
+					<!-- a11y note: setting aria-hidden to true because info here is covered by input element -->
+					<span class="d2l-page-max-text" aria-hidden="true">∕ ${this.maxPageNumber}</span>
+				</div>
 				<d2l-button-icon id="d2l-labs-pagination-next-button" icon="tier1:chevron-right" @click="${this._onNextClicked}" text="${this.localize('components:pagination:nextPage')}" ?disabled=${this._isLastPage()}></d2l-button-icon>
 			</div>
 
