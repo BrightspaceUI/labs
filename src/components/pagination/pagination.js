@@ -32,8 +32,8 @@ class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
 			}
 
 			.d2l-page-number-container {
-				display: inline-block;
 				direction: ltr;
+				display: inline-block;
 			}
 
 			.d2l-page-number {
