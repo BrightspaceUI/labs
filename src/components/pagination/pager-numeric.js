@@ -12,10 +12,10 @@ class PagerNumeric extends RtlMixin(LocalizeLabsElement(LitElement)) {
 	static get properties() {
 		return {
 			pageNumber: { type: Number, attribute: 'page-number', reflect: true },
-			maxPageNumber: { type: Number, attribute: 'max-page-number', reflect: true },
-			showPageSizeSelector : { type: Boolean, attribute: 'show-page-size-selector', reflect: true },
-			pageSizes : { type: Array, attribute: 'page-sizes' },
 			pageSize : { type: Number, attribute: 'page-size', reflect: true },
+			pageSizes : { type: Array, attribute: 'page-sizes' },
+			maxPageNumber: { type: Number, attribute: 'max-page-number', reflect: true },
+			showPageSizeSelector : { type: Boolean, attribute: 'show-page-size-selector', reflect: true }
 		};
 	}
 
