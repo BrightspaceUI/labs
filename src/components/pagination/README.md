@@ -25,5 +25,5 @@ A component to indicate the existence of and provide navigation for multiple pag
 
 * `d2l-labs-pager-numeric-page-change`: dispatched when either the navigation buttons are pressed, or the page number is modified. Event `detail` includes:
   * `page`: the new page number value
-* `d2l-labs-pager-numeric-item-counter-change`: dispatched when the item count selector's value is changed. Event `detail` includes:
+* `d2l-labs-pager-numeric-page-size-change`: dispatched when the item count selector's value is changed. Event `detail` includes:
   * `itemCount`: the value the item count selector was just set to

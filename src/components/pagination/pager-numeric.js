@@ -143,7 +143,7 @@ class PagerNumeric extends RtlMixin(LocalizeLabsElement(LitElement)) {
 
 	_onPageSizeChanged(e) {
 		this.dispatchEvent(
-			new CustomEvent('d2l-labs-pager-numeric-item-counter-change', {
+			new CustomEvent('d2l-labs-pager-numeric-page-size-change', {
 				detail: { itemCount: Number(e.target.value) },
 				bubbles: true,
 				composed: true

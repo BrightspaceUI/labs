@@ -63,10 +63,10 @@ describe('pagination', () => {
 			});
 		});
 
-		it('should fire "d2l-labs-pager-numeric-item-counter-change" event when the page size selector value changes', async() => {
+		it('should fire "d2l-labs-pager-numeric-page-size-change" event when the page size selector value changes', async() => {
 			const component = await createComponent({ showPageSizeSelector: true, pageSizes: custompageSizes, pageSize: 37 });
 
-			const listener = oneEvent(component, 'd2l-labs-pager-numeric-item-counter-change');
+			const listener = oneEvent(component, 'd2l-labs-pager-numeric-page-size-change');
 			const pageSizeSelector = component.shadowRoot.querySelector('select.d2l-input-select');
 			pageSizeSelector.value = '5';
 			pageSizeSelector.dispatchEvent(new Event('change'));

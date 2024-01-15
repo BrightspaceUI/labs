@@ -34,7 +34,7 @@
 					window.alert(`Navigating to page ${e.detail.page}.`);
 					e.target.pageNumber = e.detail.page;
 				});
-				elem.addEventListener('d2l-labs-pager-numeric-item-counter-change', (e) => {
+				elem.addEventListener('d2l-labs-pager-numeric-page-size-change', (e) => {
 					window.alert(`Displaying ${e.detail.itemCount} items per page.`);
 				});
 			});
