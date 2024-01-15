@@ -1,15 +1,15 @@
-import '../../../src/components/pagination/pagination.js';
+import '../../../src/components/pagination/pager-numeric.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-async function createComponent({ pageNumber, maxPageNumber, showItemCountSelect = false, itemCountOptions, selectedCountOption, rtl = false } = {}) {
-	return await fixture(html`<d2l-labs-pagination
+async function createComponent({ pageNumber, maxPageNumber, showPageSizeSelector = false, pageSizes, pageSize, rtl = false } = {}) {
+	return await fixture(html`<d2l-labs-pager-numeric
 		page-number="${ifDefined(pageNumber)}"
 		max-page-number="${ifDefined(maxPageNumber)}"
-		?show-item-count-select="${showItemCountSelect}"
-		.itemCountOptions="${ifDefined(itemCountOptions)}"
-		selected-count-option="${ifDefined(selectedCountOption)}">
-	</d2l-labs-pagination>`, {
+		?show-page-size-selector="${showPageSizeSelector}"
+		.pageSizes="${ifDefined(pageSizes)}"
+		page-size="${ifDefined(pageSize)}">
+	</d2l-labs-pager-numeric>`, {
 		rtl
 	});
 }
@@ -26,12 +26,12 @@ describe('pagination', () => {
 	});
 
 	it('with default page size selector', async() => {
-		const component = await createComponent({ showItemCountSelect: true });
+		const component = await createComponent({ showPageSizeSelector: true });
 		await expect(component).to.be.golden();
 	});
 
 	it('with custom page size selector', async() => {
-		const component = await createComponent({ showItemCountSelect: true, itemCountOptions: [1, 2, 3, 5, 8], selectedCountOption: 3 });
+		const component = await createComponent({ showPageSizeSelector: true, pageSizes: [1, 2, 3, 5, 8], pageSize: 3 });
 		await expect(component).to.be.golden();
 	});
 

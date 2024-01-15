@@ -6,15 +6,15 @@ import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 
-class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
+class PagerNumeric extends RtlMixin(LocalizeLabsElement(LitElement)) {
 
 	static get properties() {
 		return {
 			pageNumber: { type: Number, attribute: 'page-number', reflect: true },
 			maxPageNumber: { type: Number, attribute: 'max-page-number', reflect: true },
-			showItemCountSelect : { type: Boolean, attribute: 'show-item-count-select', reflect: true },
-			itemCountOptions : { type: Array, attribute: 'item-count-options' },
-			selectedCountOption : { type: Number, attribute: 'selected-count-option', reflect: true },
+			showPageSizeSelector : { type: Boolean, attribute: 'show-page-size-selector', reflect: true },
+			pageSizes : { type: Array, attribute: 'page-sizes' },
+			pageSize : { type: Number, attribute: 'page-size', reflect: true },
 		};
 	}
 
@@ -58,13 +58,13 @@ class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
 		super();
 		this.pageNumber = 1;
 		this.maxPageNumber = 1;
-		this.itemCountOptions = [10, 20, 30, 40];
+		this.pageSizes = [10, 20, 30, 40];
 	}
 
 	render() {
 		return html`
 			<div class="d2l-page-selector-container">
-				<d2l-button-icon id="d2l-labs-pagination-previous-button" icon="tier1:chevron-left" @click="${this._onPreviousClicked}" text="${this.localize('components:pagination:previousPage')}" ?disabled=${this._isFirstPage()}></d2l-button-icon>
+				<d2l-button-icon id="d2l-labs-pager-numeric-previous-button" icon="tier1:chevron-left" @click="${this._onPreviousClicked}" text="${this.localize('components:pagination:previousPage')}" ?disabled=${this._isFirstPage()}></d2l-button-icon>
 
 				<div class="d2l-page-number-container">
 					<d2l-input-number
@@ -80,17 +80,17 @@ class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
 					<!-- a11y note: setting aria-hidden to true because info here is covered by input element -->
 					<span class="d2l-page-max-text" aria-hidden="true">∕ ${this.maxPageNumber}</span>
 				</div>
-				<d2l-button-icon id="d2l-labs-pagination-next-button" icon="tier1:chevron-right" @click="${this._onNextClicked}" text="${this.localize('components:pagination:nextPage')}" ?disabled=${this._isLastPage()}></d2l-button-icon>
+				<d2l-button-icon id="d2l-labs-pager-numeric-next-button" icon="tier1:chevron-right" @click="${this._onNextClicked}" text="${this.localize('components:pagination:nextPage')}" ?disabled=${this._isLastPage()}></d2l-button-icon>
 			</div>
 
-			${this.showItemCountSelect ? html`
+			${this.showPageSizeSelector ? html`
 				<select
 					class="d2l-input-select"
 					aria-label="${this.localize('components:pagination:resultsPerPage')}"
 					title="${this.localize('components:pagination:resultsPerPage')}"
 					@change="${this._onPageCounterChanged}">
-					${this.itemCountOptions.map(item => html`
-						<option ?selected="${this.selectedCountOption === item}" value="${item}">${this.localize('components:pagination:amountPerPage', 'count', item)}</option>
+					${this.pageSizes.map(item => html`
+						<option ?selected="${this.pageSize === item}" value="${item}">${this.localize('components:pagination:amountPerPage', 'count', item)}</option>
 					`)}
 				</select>
 			` : null }
@@ -99,7 +99,7 @@ class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
 
 	_dispatchPageChangeEvent(newPageNumber) {
 		this.dispatchEvent(
-			new CustomEvent('d2l-labs-pagination-page-change', {
+			new CustomEvent('d2l-labs-pager-numeric-page-change', {
 				detail: { page: newPageNumber },
 				bubbles: true,
 				composed: true
@@ -125,7 +125,7 @@ class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
 
 	_onPageCounterChanged(e) {
 		this.dispatchEvent(
-			new CustomEvent('d2l-labs-pagination-item-counter-change', {
+			new CustomEvent('d2l-labs-pager-numeric-item-counter-change', {
 				detail: { itemCount: Number(e.target.value) },
 				bubbles: true,
 				composed: true
@@ -147,4 +147,4 @@ class Pagination extends RtlMixin(LocalizeLabsElement(LitElement)) {
 	}
 }
 
-customElements.define('d2l-labs-pagination', Pagination);
+customElements.define('d2l-labs-pager-numeric', PagerNumeric);
