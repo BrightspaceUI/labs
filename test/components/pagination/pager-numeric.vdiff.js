@@ -14,7 +14,7 @@ async function createComponent({ pageNumber, maxPageNumber, showPageSizeSelector
 	});
 }
 
-describe('pagination', () => {
+describe('pager-numeric', () => {
 	it('default state', async() => {
 		const component = await createComponent();
 		await expect(component).to.be.golden();
