@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "비활성화",
 	"components:optInFlyout:turnOn": "활성화",
 	"components:optInFlyout:tutorialAndHelpMessage": "시작하려면 *개별지도*를 시청하거나 ~도움말 설명서~를 읽어보십시오!",
-	"components:optInFlyout:tutorialMessage": "시작하는 데 도움이 되는 *개별지도*를 시청하십시오."
+	"components:optInFlyout:tutorialMessage": "시작하는 데 도움이 되는 *개별지도*를 시청하십시오.",
+	"components:pagination:amountPerPage" : "페이지당 {count}개",
+	"components:pagination:currentPage": "{maxPageNumber}의 페이지 번호 {pageNumber}",
+	"components:pagination:nextPage" : "다음 페이지",
+	"components:pagination:previousPage" : "이전 페이지",
+	"components:pagination:resultsPerPage" : "페이지당 결과 수"
 };

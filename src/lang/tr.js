@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "Kapat",
 	"components:optInFlyout:turnOn": "Aç",
 	"components:optInFlyout:tutorialAndHelpMessage": "*Eğitimlerimizi\" izleyerek ya da ~yardım belgemizi~ okuyarak başlayın!",
-	"components:optInFlyout:tutorialMessage": "Başlamanıza yardımcı olacak *eğitimlerimizi* izleyin!"
+	"components:optInFlyout:tutorialMessage": "Başlamanıza yardımcı olacak *eğitimlerimizi* izleyin!",
+	"components:pagination:amountPerPage" : "Sayfa başına {count}",
+	"components:pagination:currentPage": "Sayfa numarası {pageNumber} / {maxPageNumber}",
+	"components:pagination:nextPage" : "Sonraki sayfa",
+	"components:pagination:previousPage" : "Önceki sayfa",
+	"components:pagination:resultsPerPage" : "Sayfa başına sonuç"
 };

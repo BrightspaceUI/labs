@@ -20,5 +20,10 @@ export default {
 	"components:optInFlyout:tutorialAndHelpMessage": "شاهد *الدروس التعليمية* الخاصة بنا أو اقرأ ~مستندات التعليمات الخاصة بنا~ للبدء!",
 	"components:optInFlyout:tutorialMessage": "شاهد *الدروس التعليمية* الخاصة بنا لمساعدتك على البدء!",
 	"components:optInFlyout:turnOff": "إيقاف التشغيل",
-	"components:optInFlyout:turnOn": "التشغيل"
+	"components:optInFlyout:turnOn": "التشغيل",
+	"components:pagination:amountPerPage" : "{count} لكل صفحة",
+	"components:pagination:currentPage": "رقم الصفحة {pageNumber} من {maxPageNumber}",
+	"components:pagination:nextPage" : "الصفحة التالية",
+	"components:pagination:previousPage" : "الصفحة السابقة",
+	"components:pagination:resultsPerPage" : "النتائج لكل صفحة"
 };

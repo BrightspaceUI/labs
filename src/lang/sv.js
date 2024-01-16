@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "Stäng av",
 	"components:optInFlyout:turnOn": "Sätt på",
 	"components:optInFlyout:tutorialAndHelpMessage": "Se våra *handledningar* eller läs vår ~hjälpdokumentation~ för att komma igång!",
-	"components:optInFlyout:tutorialMessage": "Se våra *handledningar* som hjälper dig att komma igång!"
+	"components:optInFlyout:tutorialMessage": "Se våra *handledningar* som hjälper dig att komma igång!",
+	"components:pagination:amountPerPage" : "{count} per sida",
+	"components:pagination:currentPage": "Sidnummer {pageNumber} av {maxPageNumber}",
+	"components:pagination:nextPage" : "Nästa sida",
+	"components:pagination:previousPage" : "Föregående sida",
+	"components:pagination:resultsPerPage" : "Resultat per sida"
 };

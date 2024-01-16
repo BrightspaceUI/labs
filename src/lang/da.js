@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "Slå den fra",
 	"components:optInFlyout:turnOn": "Slå den til",
 	"components:optInFlyout:tutorialAndHelpMessage": "Se vores *selvstudier*, eller læs vores ~hjælp-dokumentation~ for at komme i gang!",
-	"components:optInFlyout:tutorialMessage": "Se vores *selvstudier* for at komme i gang!"
+	"components:optInFlyout:tutorialMessage": "Se vores *selvstudier* for at komme i gang!",
+	"components:pagination:amountPerPage" : "{count} pr. side",
+	"components:pagination:currentPage": "Sidenummer {pageNumber} af {maxPageNumber}",
+	"components:pagination:nextPage" : "Næste side",
+	"components:pagination:previousPage" : "Forrige side",
+	"components:pagination:resultsPerPage" : "Resultater pr. side"
 };

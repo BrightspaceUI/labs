@@ -21,5 +21,10 @@ export default {
 	"components:optInFlyout:turnOff": "इसे बंद करें",
 	"components:optInFlyout:turnOn": "इसे चालू करें",
 	"components:optInFlyout:tutorialAndHelpMessage": "शुरू करने के लिए हमारे *ट्यूटोरियल* देखें या हमारे ~मदद दस्तावेज़~ पढ़ें!",
-	"components:optInFlyout:tutorialMessage": "शुरू करने में आपकी मदद के लिए हमारे *ट्यूटोरियल* देखें!"
+	"components:optInFlyout:tutorialMessage": "शुरू करने में आपकी मदद के लिए हमारे *ट्यूटोरियल* देखें!",
+	"components:pagination:amountPerPage" : "प्रति पेज {count}",
+	"components:pagination:currentPage": "{maxPageNumber} में से पेज नंबर {pageNumber}",
+	"components:pagination:nextPage" : "अगला पेज",
+	"components:pagination:previousPage" : "पिछला पेज",
+	"components:pagination:resultsPerPage" : "प्रति पेज के परिणाम"
 };
