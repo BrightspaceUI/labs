@@ -7,7 +7,7 @@ async function createComponent({ pageNumber, maxPageNumber, showPageSizeSelector
 		page-number="${ifDefined(pageNumber)}"
 		max-page-number="${ifDefined(maxPageNumber)}"
 		?show-page-size-selector="${showPageSizeSelector}"
-		.pageSizes="${ifDefined(pageSizes)}"
+		.pageSizes="${pageSizes}"
 		page-size="${ifDefined(pageSize)}">
 	</d2l-labs-pager-numeric>`, {
 		rtl
