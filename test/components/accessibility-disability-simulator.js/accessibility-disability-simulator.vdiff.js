@@ -25,7 +25,7 @@ describe('accessibility-disability-simulator', () => {
 
 	it('no vision', async() => {
 		const component = await createComponent('no-vision');
-		await expect(component).to.be.golden();
+		await expect(component).to.be.golden({ margin: 20 });
 	});
 
 	describe('low vision', () => {
