@@ -2,23 +2,23 @@ import '@brightspace-ui/core/components/alert/alert.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
-export const DISABILITY_TYPES = Object.freeze({
-	no_vision: 'no-vision',
-	low_vision: 'low-vision',
-	motor_impairment: 'motor-impairment',
-	colourblind_achromatopsia: 'colourblind-achromatopsia',
-	colourblind_deuteranopia: 'colourblind-deuteranopia',
-	colourblind_protanopia: 'colourblind-protanopia',
-	colourblind_tritanopia: 'colourblind-tritanopia'
+const DISABILITY_TYPES = Object.freeze({
+	none: 'none',
+	noVision: 'no-vision',
+	lowVision: 'low-vision',
+	motorImpairment: 'motor-impairment',
+	colourblindAchromatopsia: 'colourblind-achromatopsia',
+	colourblindDeuteranopia: 'colourblind-deuteranopia',
+	colourblindProtanopia: 'colourblind-protanopia',
+	colourblindTritanopia: 'colourblind-tritanopia'
 });
 
-// Would it be worth it to localize the terms?
-
-class AccessibilityDisabilitySimulator extends LitElement {
+class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {
@@ -27,29 +27,23 @@ class AccessibilityDisabilitySimulator extends LitElement {
 			 * @type {'no-vision'|'low-vision'|'motor-impairment'|'colourblind-achromatopsia'|'colourblind-deuteranopia'|'colourblind-protanopia'|'colourblind-tritanopia'}
 			 */
 			disabilityType: { type: String, attribute: 'disability-type', reflect: true },
-
 			/**
 			 * Whether or not the alert should be shown or not
 			 * @type {Boolean}
 			 */
 			hideAlert: { type: Boolean, attribute: 'hide-alert' },
-
 			/**
 			 * Whether you want to show the controls or not
 			 * @type {Boolean}
 			 */
 			hideControls: { type: Boolean, attribute: 'hide-controls' },
-			_sliderValue: { state: true }
+			_blurriness: { state: true }
 		};
 	}
 
 	static get styles() {
 		return [ bodyCompactStyles, offscreenStyles, selectStyles, css`
-			// :host([disability-type="low-vision"]) .wrapper-slot {
-			// 	filter: blur(${this._sliderValue / 20}px);
-			// }
-
-			.handler {
+			.simulator-controls {
 				align-items: center;
 				display: flex;
 				gap: 0.5rem;
@@ -62,7 +56,7 @@ class AccessibilityDisabilitySimulator extends LitElement {
 				gap: 0.5rem;
 			}
 
-			.message {
+			.alert-message {
 				display: inline-block;
 				margin-bottom: 1rem;
 				padding: 0.5rem;
@@ -100,18 +94,17 @@ class AccessibilityDisabilitySimulator extends LitElement {
 
 	constructor() {
 		super();
-		this._disabilityTypes = ['none', ...Object.values(DISABILITY_TYPES)];
-		this._sliderValue = 50;
+		this._blurriness = 50;
 	}
 
 	render() {
 		const wrapperClasses = {
 			'wrapper-slot': true,
-			'd2l-offscreen': this.disabilityType === DISABILITY_TYPES.no_vision
+			'd2l-offscreen': this.disabilityType === DISABILITY_TYPES.noVision
 		};
 		const wrapperStyles = {
-			...(this.disabilityType === DISABILITY_TYPES.low_vision && { filter: `blur(${this._sliderValue / 20}px)` })
-		}
+			...(this.disabilityType === DISABILITY_TYPES.lowVision && { filter: `blur(${this._blurriness / 20}px)` })
+		};
 		return html`
 			${this._renderColourblindFilters()}
 
@@ -125,29 +118,33 @@ class AccessibilityDisabilitySimulator extends LitElement {
 		`;
 	}
 
+	_localize(key) {
+		return this.localize(`components:accessibilityDisabilitySimulator:${key}`);
+	}
+
 	_onDisabilityTypeChanged(e) {
 		this.disabilityType = e.target.value;
 	}
 
 	_onSliderChanged(e) {
-		this._sliderValue = e.target.value;
+		this._blurriness = e.target.value;
 	}
 
-	_renderAlert() {
+	_renderAlert() { // rather than have an alert, maybe have it in the dropdown (i.e. "Motor Impairment (mouse & keyboard only)")
 		if (this.hideAlert) return; // should the alert be hidden by default or shown by default?
 
 		let alertMessage;
 
-		if (this.disabilityType === DISABILITY_TYPES.no_vision) {
-			alertMessage = 'Enable your screenreader and tab into the content';
-		} else if (this.disabilityType === DISABILITY_TYPES.motor_impairment) {
-			alertMessage = 'Keyboard interactions only';
+		if (this.disabilityType === DISABILITY_TYPES.noVision) {
+			alertMessage = this._localize('screenreaderAndTabAlert');
+		} else if (this.disabilityType === DISABILITY_TYPES.motorImpairment) {
+			alertMessage = this._localize('keyboardOnlyAlert');
 		} else {
 			return;
 		}
 
 		return html`
-			<d2l-alert class="message" no-padding><span class="d2l-body-compact">${alertMessage}</span></d2l-alert>
+			<d2l-alert class="alert-message" no-padding><span class="d2l-body-compact">${alertMessage}</span></d2l-alert>
 		`;
 	}
 
@@ -200,18 +197,18 @@ class AccessibilityDisabilitySimulator extends LitElement {
 		if (this.hideControls) return;
 
 		return html`
-			<div class="handler">
-				Filter type:
+			<div class="simulator-controls">
+				${this._localize('filterType')}
 				<select class="d2l-input-select" @change=${this._onDisabilityTypeChanged}>
-					${this._disabilityTypes.map(value => html`
-						<option>${value}</option>
+					${Object.entries(DISABILITY_TYPES).map(type => html`
+						<option value="${type[1]}">${this._localize(type[0])}</option>
 					`)}
 				</select>
 
-				${this.disabilityType === DISABILITY_TYPES['low_vision'] ? html`
+				${this.disabilityType === DISABILITY_TYPES.lowVision ? html`
 					<div class="low-vision-slider">
-						<label for="blur" class="d2l-body-compact">Blur Level</label>
-						<input type="range" min="1" max="100" value="${this._sliderValue}" @input="${this._onSliderChanged}" name="blur">
+						<label for="blur" class="d2l-body-compact">${this._localize('blurriness')}</label>
+						<input type="range" min="1" max="100" .value="${this._blurriness}" @input="${this._onSliderChanged}" name="blur">
 					</div>
 				` : null}
 			</div>

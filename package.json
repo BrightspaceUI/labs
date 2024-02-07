@@ -18,6 +18,7 @@
     "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js"
   },
   "scripts": {
+    "langs:sync": "mfv add-missing && mfv remove-extraneous",
     "lint": "npm run lint:eslint && npm run lint:style",
     "lint:eslint": "eslint . --ext .js,.html",
     "lint:style": "stylelint \"**/*.{js,html}\"",
