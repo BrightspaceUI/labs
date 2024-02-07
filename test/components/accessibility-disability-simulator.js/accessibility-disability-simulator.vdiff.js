@@ -3,7 +3,7 @@ import { expect, fixture, html } from '@brightspace-ui/testing';
 
 async function createComponent(disabilityType, hideControls) {
 	return await fixture(html`<d2l-labs-accessibility-disability-simulator disability-type="${disabilityType}" ?hide-controls=${hideControls}>
-		<img src="../../../demo/components/accessibility-disability-simulator/colour-wheel.png">
+		<img src="../../../demo/components/accessibility-disability-simulator/color-wheel.png">
 	</d2l-labs-accessibility-disability-simulator>`);
 }
 
@@ -54,24 +54,24 @@ describe('accessibility-disability-simulator', () => {
 		await expect(component).to.be.golden();
 	});
 
-	describe('colourblindness', () => {
+	describe('colorblindness', () => {
 		it('achromatopsia filter', async() => {
-			const component = await createComponent('colourblind-achromatopsia');
+			const component = await createComponent('colorblind-achromatopsia');
 			await expect(component).to.be.golden();
 		});
 
 		it('deuteranopia filter', async() => {
-			const component = await createComponent('colourblind-deuteranopia');
+			const component = await createComponent('colorblind-deuteranopia');
 			await expect(component).to.be.golden();
 		});
 
 		it('protanopia filter', async() => {
-			const component = await createComponent('colourblind-protanopia');
+			const component = await createComponent('colorblind-protanopia');
 			await expect(component).to.be.golden();
 		});
 
 		it('tritanopia filter', async() => {
-			const component = await createComponent('colourblind-tritanopia');
+			const component = await createComponent('colorblind-tritanopia');
 			await expect(component).to.be.golden();
 		});
 	});

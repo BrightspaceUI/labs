@@ -26,7 +26,7 @@ A wrapper component that can be used to simulate how users with different forms 
 - `no-vision`, Simulates not being able to see anything by hiding the wrapped content off of the screen
 - `low-vision`, Simulates having a limited amount of vision by blurring out the wrapped content
 - `motor-impairment`, Simulates the inability to use a mouse, forcing the wrapped content to only be navigable using keyboard inputs
-- `colourblind-achromatopsia`, Simulates achromatopsia (grayscale) colourblindness
-- `colourblind-deuteranopia`, Simulates deuteranopia (green-light deficient) colourblindness
-- `colourblind-protanopia`, Simulates protanopia (red-light deficient) colourblindness
-- `colourblind-tritanopia`, Simulates tritanopia (blue-light deficient) colourblindness
+- `colorblind-achromatopsia`, Simulates achromatopsia (grayscale) colorblindness
+- `colorblind-deuteranopia`, Simulates deuteranopia (green-light deficient) colorblindness
+- `colorblind-protanopia`, Simulates protanopia (red-light deficient) colorblindness
+- `colorblind-tritanopia`, Simulates tritanopia (blue-light deficient) colorblindness

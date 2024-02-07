@@ -1,9 +1,9 @@
 export default {
 	"components:accessibilityDisabilitySimulator:blurriness": "Blurriness", // Label for input slider that users can use to change the level of blurriness
-	"components:accessibilityDisabilitySimulator:colourblindAchromatopsia": "Colourblindness (Achromatopsia)", // Disability simulation option for users with Achromatiopsia colourblindness
-	"components:accessibilityDisabilitySimulator:colourblindDeuteranopia": "Colourblindness (Deuteranopia)", // Disability simulation option for users with Deuteranopia colourblindness
-	"components:accessibilityDisabilitySimulator:colourblindProtanopia": "Colourblindness (Protanopia)", // Disability simulation option for users with Protanopia colourblindness
-	"components:accessibilityDisabilitySimulator:colourblindTritanopia": "Colourblindness (Tritanopia)", // Disability simulation option for users with Tritanopia colourblindness
+	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Colorblindness (Achromatopsia)", // Disability simulation option for users with Achromatiopsia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Colorblindness (Deuteranopia)", // Disability simulation option for users with Deuteranopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Colorblindness (Protanopia)", // Disability simulation option for users with Protanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Colorblindness (Tritanopia)", // Disability simulation option for users with Tritanopia colorblindness
 	"components:accessibilityDisabilitySimulator:filterType": "Filter type:", // Label for the disability simulation options
 	"components:accessibilityDisabilitySimulator:keyboardOnlyAlert": "Keyboard interactions only", // Alert that prompts the user to use their keyboard to navigate and operate content
 	"components:accessibilityDisabilitySimulator:lowVision": "Low Vision", // Disability simulation option for users with a limited ability to see
@@ -38,5 +38,5 @@ export default {
 	"components:pagination:currentPage": "Número da página {pageNumber} de {maxPageNumber}",
 	"components:pagination:nextPage" : "Próxima página",
 	"components:pagination:previousPage" : "Página anterior",
-	"components:pagination:resultsPerPage" : "Resultados por página",
+	"components:pagination:resultsPerPage" : "Resultados por página"
 };

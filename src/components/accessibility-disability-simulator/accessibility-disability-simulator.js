@@ -12,10 +12,10 @@ const DISABILITY_TYPES = Object.freeze({
 	noVision: 'no-vision',
 	lowVision: 'low-vision',
 	motorImpairment: 'motor-impairment',
-	colourblindAchromatopsia: 'colourblind-achromatopsia',
-	colourblindDeuteranopia: 'colourblind-deuteranopia',
-	colourblindProtanopia: 'colourblind-protanopia',
-	colourblindTritanopia: 'colourblind-tritanopia'
+	colorblindAchromatopsia: 'colorblind-achromatopsia',
+	colorblindDeuteranopia: 'colorblind-deuteranopia',
+	colorblindProtanopia: 'colorblind-protanopia',
+	colorblindTritanopia: 'colorblind-tritanopia'
 });
 
 class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
@@ -24,7 +24,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 		return {
 			/**
 			 * The type of disability you want to simulate
-			 * @type {'no-vision'|'low-vision'|'motor-impairment'|'colourblind-achromatopsia'|'colourblind-deuteranopia'|'colourblind-protanopia'|'colourblind-tritanopia'}
+			 * @type {'no-vision'|'low-vision'|'motor-impairment'|'colorblind-achromatopsia'|'colorblind-deuteranopia'|'colorblind-protanopia'|'colorblind-tritanopia'}
 			 */
 			disabilityType: { type: String, attribute: 'disability-type', reflect: true },
 			/**
@@ -74,19 +74,19 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 				filter: grayscale(1);
 			}
 
-			:host([disability-type="colourblind-achromatopsia"]) .wrapper-slot {
+			:host([disability-type="colorblind-achromatopsia"]) .wrapper-slot {
 				filter: grayscale(1);
 			}
 
-			:host([disability-type="colourblind-deuteranopia"]) .wrapper-slot {
+			:host([disability-type="colorblind-deuteranopia"]) .wrapper-slot {
 				filter: url("#deuteranopia");
 			}
 
-			:host([disability-type="colourblind-protanopia"]) .wrapper-slot {
+			:host([disability-type="colorblind-protanopia"]) .wrapper-slot {
 				filter: url("#protanopia");
 			}
 
-			:host([disability-type="colourblind-tritanopia"]) .wrapper-slot {
+			:host([disability-type="colorblind-tritanopia"]) .wrapper-slot {
 				filter: url("#tritanopia");
 			}
 		` ];
@@ -106,10 +106,8 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 			...(this.disabilityType === DISABILITY_TYPES.lowVision && { filter: `blur(${this._blurriness / 20}px)` })
 		};
 		return html`
-			${this._renderColourblindFilters()}
-
+			${this._renderColorblindFilters()}
 			${this._renderControls()}
-
 			${this._renderAlert()}
 
 			<div class="${classMap(wrapperClasses)}" style="${styleMap(wrapperStyles)}">
@@ -148,7 +146,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 		`;
 	}
 
-	_renderColourblindFilters() {
+	_renderColorblindFilters() {
 		return html`
 			<svg xmlns="http://www.w3.org/2000/svg" class="svg-filter">
 				<filter id="tritanopia" color-interpolation-filters="linearRGB">
