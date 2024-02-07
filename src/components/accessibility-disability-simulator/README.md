@@ -1,6 +1,6 @@
 # d2l-labs-accessibility-disability-simulator
 
-A wrapper component that can be used to simulated different forms of disabilities to the content it's wrapped around.
+A wrapper component that can be used to simulate how users with different forms of disabilities would experience the content it's wrapped around.
 
 ## Usage
 
@@ -17,9 +17,9 @@ A wrapper component that can be used to simulated different forms of disabilitie
 
 | Property | Type | Description |
 |--|--|--|
-| `disability-type` | String | The type of disability you want to simulate, see [here](#disability-type-values) for the options
-| `hide-alert` | Boolean, default: `false` | Whether or not the alert should be shown or not
-| `hide-controls` | Boolean, default: `false` | Whether you want to show the controls or not.
+| `disability-type` | String | The type of disability to simulate, see [here](#disability-type-values) for the options
+| `hide-alert` | Boolean, default: `false` | Whether or not the alert should be shown
+| `hide-controls` | Boolean, default: `false` | Whether or not to show the disability type selection and blur level controls
 
 
 ### Disability Type Values
