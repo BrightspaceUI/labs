@@ -201,7 +201,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 				${this._localize('filterType')}
 				<select class="d2l-input-select" @change=${this._onDisabilityTypeChanged}>
 					${Object.entries(DISABILITY_TYPES).map(type => html`
-						<option value="${type[1]}">${this._localize(type[0])}</option>
+						<option value="${type[1]}" ?selected=${this.disabilityType === type[1]}>${this._localize(type[0])}</option>
 					`)}
 				</select>
 
