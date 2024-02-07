@@ -1,13 +1,13 @@
 import '@brightspace-ui/core/components/alert/alert.js';
+import { bodyCompactStyles, bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement } from 'lit';
-import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
-const DISABILITY_TYPES = Object.freeze({
+export const DISABILITY_TYPES = Object.freeze({
 	none: 'none',
 	noVision: 'no-vision',
 	lowVision: 'low-vision',
@@ -23,17 +23,17 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {
 			/**
-			 * The type of disability you want to simulate
+			 * The type of disability to simulate
 			 * @type {'no-vision'|'low-vision'|'motor-impairment'|'colorblind-achromatopsia'|'colorblind-deuteranopia'|'colorblind-protanopia'|'colorblind-tritanopia'}
 			 */
 			disabilityType: { type: String, attribute: 'disability-type', reflect: true },
 			/**
-			 * Whether or not the alert should be shown or not
+			 * Whether or not the alert should be shown
 			 * @type {Boolean}
 			 */
 			hideAlert: { type: Boolean, attribute: 'hide-alert' },
 			/**
-			 * Whether you want to show the controls or not
+			 * Whether or not to show the disability type selection and blur level controls
 			 * @type {Boolean}
 			 */
 			hideControls: { type: Boolean, attribute: 'hide-controls' },
@@ -42,7 +42,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 	}
 
 	static get styles() {
-		return [ bodyCompactStyles, offscreenStyles, selectStyles, css`
+		return [ bodyCompactStyles, bodyStandardStyles, offscreenStyles, selectStyles, css`
 			.simulator-controls {
 				align-items: center;
 				display: flex;
@@ -196,8 +196,8 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 
 		return html`
 			<div class="simulator-controls">
-				${this._localize('filterType')}
-				<select class="d2l-input-select" @change=${this._onDisabilityTypeChanged}>
+				<label for="disability-select" class="d2l-body-standard">${this._localize('filterType')}</label>
+				<select id="disability-select" class="d2l-input-select" @change=${this._onDisabilityTypeChanged}>
 					${Object.entries(DISABILITY_TYPES).map(type => html`
 						<option value="${type[1]}" ?selected=${this.disabilityType === type[1]}>${this._localize(type[0])}</option>
 					`)}
@@ -205,8 +205,8 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 
 				${this.disabilityType === DISABILITY_TYPES.lowVision ? html`
 					<div class="low-vision-slider">
-						<label for="blur" class="d2l-body-compact">${this._localize('blurriness')}</label>
-						<input type="range" min="1" max="100" .value="${this._blurriness}" @input="${this._onSliderChanged}" name="blur">
+						<label for="blur-slider" class="d2l-body-compact">${this._localize('blurriness')}</label>
+						<input id="blur-slider" type="range" min="1" max="100" .value="${this._blurriness}" @input="${this._onSliderChanged}">
 					</div>
 				` : null}
 			</div>
