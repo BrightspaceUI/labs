@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '@brightspace-ui/core/components/calendar/calendar.js';
+			import '../../../src/components/accessibility-disability-simulator/accessibility-disability-simulator.js';
+		</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+
+	<body>
+		<d2l-demo-page page-title="accessibility-disability-simulator">
+			<h2>With Colour Wheel</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-accessibility-disability-simulator>
+					<img src="./colour-wheel.png">
+				</d2l-labs-accessibility-disability-simulator>
+			</d2l-demo-snippet>
+
+			<h2>With Calendar</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-accessibility-disability-simulator>
+					<d2l-calendar selected-value="2020-05-09" summary="Click on a day to select it."></d2l-calendar>
+				</d2l-labs-accessibility-disability-simulator>
+			</d2l-demo-snippet>
+
+			<h2>With Colour Wheel (controls hidden)</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-accessibility-disability-simulator hide-controls disability-type="colourblind-tritanopia">
+					<img src="./colour-wheel.png">
+				</d2l-labs-accessibility-disability-simulator>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+	</body>
+</html>

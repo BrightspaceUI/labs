@@ -12,7 +12,7 @@
     "./components/opt-out-flyout.js": "./src/components/opt-in-flyout/opt-out-flyout.js",
     "./components/opt-out-reason.js": "./src/components/opt-in-flyout/opt-out-reason.js",
     "./components/pager-numeric.js": "./src/components/pagination/pager-numeric.js",
-    "./components/colourblind-filter-wrapper.js": "./src/components/colourblind-filter/colourblind-filter-wrapper.js",
+    "./components/accessibility-disability-simulator.js": "./src/components/accessibility-disability-simulator/accessibility-disability-simulator.js",
     "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
     "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js",
     "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js"
