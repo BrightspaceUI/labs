@@ -49,6 +49,11 @@ describe('accessibility-disability-simulator', () => {
 		});
 	})
 
+	it('motor impairment', async() => {
+		const component = await createComponent('motor-impairment');
+		await expect(component).to.be.golden();
+	});
+
 	describe('colourblindness', () => {
 		it('achromatopsia filter', async() => {
 			const component = await createComponent('colourblind-achromatopsia');
