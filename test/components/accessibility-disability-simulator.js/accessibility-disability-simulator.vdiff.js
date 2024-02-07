@@ -47,7 +47,7 @@ describe('accessibility-disability-simulator', () => {
 			await component.updateComplete;
 			await expect(component).to.be.golden();
 		});
-	})
+	});
 
 	it('motor impairment', async() => {
 		const component = await createComponent('motor-impairment');
@@ -74,5 +74,5 @@ describe('accessibility-disability-simulator', () => {
 			const component = await createComponent('colourblind-tritanopia');
 			await expect(component).to.be.golden();
 		});
-	})
+	});
 });
