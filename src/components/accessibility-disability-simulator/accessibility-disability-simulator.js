@@ -23,7 +23,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {
 			/**
-			 * Type of scenario to simulate
+			 * The type of disability you want to simulate
 			 * @type {'no-vision'|'low-vision'|'motor-impairment'|'colourblind-achromatopsia'|'colourblind-deuteranopia'|'colourblind-protanopia'|'colourblind-tritanopia'}
 			 */
 			disabilityType: { type: String, attribute: 'disability-type', reflect: true },
