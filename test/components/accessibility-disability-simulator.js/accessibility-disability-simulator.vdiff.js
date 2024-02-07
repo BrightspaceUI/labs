@@ -49,8 +49,8 @@ describe('accessibility-disability-simulator', () => {
 		});
 	});
 
-	it('motor impairment', async() => {
-		const component = await createComponent('motor-impairment');
+	it('keyboard only', async() => {
+		const component = await createComponent('keyboard-only');
 		await expect(component).to.be.golden();
 	});
 

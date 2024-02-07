@@ -11,7 +11,7 @@ export const DISABILITY_TYPES = Object.freeze({
 	none: 'none',
 	noVision: 'no-vision',
 	lowVision: 'low-vision',
-	motorImpairment: 'motor-impairment',
+	keyboardOnly: 'keyboard-only',
 	colorblindAchromatopsia: 'colorblind-achromatopsia',
 	colorblindDeuteranopia: 'colorblind-deuteranopia',
 	colorblindProtanopia: 'colorblind-protanopia',
@@ -24,7 +24,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 		return {
 			/**
 			 * The type of disability to simulate
-			 * @type {'no-vision'|'low-vision'|'motor-impairment'|'colorblind-achromatopsia'|'colorblind-deuteranopia'|'colorblind-protanopia'|'colorblind-tritanopia'}
+			 * @type {'no-vision'|'low-vision'|'keyboard-only'|'colorblind-achromatopsia'|'colorblind-deuteranopia'|'colorblind-protanopia'|'colorblind-tritanopia'}
 			 */
 			disabilityType: { type: String, attribute: 'disability-type', reflect: true },
 			/**
@@ -66,7 +66,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 				display: none;
 			}
 
-			:host([disability-type="motor-impairment"]) .wrapper-slot {
+			:host([disability-type="keyboard-only"]) .wrapper-slot {
 				pointer-events: none;
 			}
 
@@ -128,21 +128,13 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 		this._blurriness = e.target.value;
 	}
 
-	_renderAlert() { // rather than have an alert, maybe have it in the dropdown (i.e. "Motor Impairment (mouse & keyboard only)")
-		if (this.hideAlert) return; // should the alert be hidden by default or shown by default?
-
-		let alertMessage;
-
-		if (this.disabilityType === DISABILITY_TYPES.noVision) {
-			alertMessage = this._localize('screenreaderAndTabAlert');
-		} else if (this.disabilityType === DISABILITY_TYPES.motorImpairment) {
-			alertMessage = this._localize('keyboardOnlyAlert');
-		} else {
-			return;
-		}
+	_renderAlert() {
+		if (this.hideAlert || this.disabilityType !== DISABILITY_TYPES.noVision) return;
 
 		return html`
-			<d2l-alert class="alert-message" no-padding><span class="d2l-body-compact">${alertMessage}</span></d2l-alert>
+			<d2l-alert class="alert-message" no-padding>
+				<span class="d2l-body-compact">${this._localize('screenreaderAndTabAlert')}</span>
+			</d2l-alert>
 		`;
 	}
 
@@ -194,18 +186,26 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 	_renderControls() {
 		if (this.hideControls) return;
 
+		const colorblindTypes = Object.entries(DISABILITY_TYPES).filter(value => value[0].includes('colorblind'));
+		const otherTypes = Object.entries(DISABILITY_TYPES).filter(value => !value[0].includes('colorblind'));
+
 		return html`
 			<div class="simulator-controls">
-				<label for="disability-select" class="d2l-body-standard">${this._localize('filterType')}</label>
+				<label for="disability-select" class="d2l-body-standard">${this._localize('simulationType')}</label>
 				<select id="disability-select" class="d2l-input-select" @change=${this._onDisabilityTypeChanged}>
-					${Object.entries(DISABILITY_TYPES).map(type => html`
+					${otherTypes.map(type => html`
 						<option value="${type[1]}" ?selected=${this.disabilityType === type[1]}>${this._localize(type[0])}</option>
 					`)}
+					<optgroup label="${this._localize('colorblindness')}">
+						${colorblindTypes.map(type => html`
+							<option value="${type[1]}" ?selected=${this.disabilityType === type[1]}>${this._localize(type[0])}</option>
+						`)}
+					</optgroup>
 				</select>
 
 				${this.disabilityType === DISABILITY_TYPES.lowVision ? html`
 					<div class="low-vision-slider">
-						<label for="blur-slider" class="d2l-body-compact">${this._localize('blurriness')}</label>
+						<label for="blur-slider" class="d2l-body-compact">${this._localize('blurLevel')}</label>
 						<input id="blur-slider" type="range" min="1" max="100" .value="${this._blurriness}" @input="${this._onSliderChanged}">
 					</div>
 				` : null}
