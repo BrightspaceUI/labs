@@ -1,8 +1,8 @@
 import '../../../src/components/accessibility-disability-simulator/accessibility-disability-simulator.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
-async function createComponent(disabilityType, hideControls) {
-	return await fixture(html`<d2l-labs-accessibility-disability-simulator disability-type="${disabilityType}" ?hide-controls=${hideControls}>
+async function createComponent(disabilityType, { hideControls, blurLevel } = {}) {
+	return await fixture(html`<d2l-labs-accessibility-disability-simulator disability-type="${disabilityType}" ?hide-controls=${hideControls} blur-level=${blurLevel}>
 		<img src="../../../demo/components/accessibility-disability-simulator/color-wheel.png">
 	</d2l-labs-accessibility-disability-simulator>`);
 }
@@ -35,16 +35,12 @@ describe('accessibility-disability-simulator', () => {
 		});
 
 		it('minimum blurriness', async() => {
-			const component = await createComponent('low-vision');
-			component._blurriness = 1;
-			await component.updateComplete;
+			const component = await createComponent('low-vision', { blurLevel: 1 });
 			await expect(component).to.be.golden();
 		});
 
 		it('maximum blurriness', async() => {
-			const component = await createComponent('low-vision');
-			component._blurriness = 100;
-			await component.updateComplete;
+			const component = await createComponent('low-vision', { blurLevel: 100 });
 			await expect(component).to.be.golden();
 		});
 	});

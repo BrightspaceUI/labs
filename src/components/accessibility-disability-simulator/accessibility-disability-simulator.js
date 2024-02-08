@@ -23,6 +23,11 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {
 			/**
+			 * The level of blurriness when the low-vision filter is being used, should range between 1 and 100
+			 * @type {Number}
+			 */
+			blurLevel: { type: Number, attribute: 'blur-level', reflect: true},
+			/**
 			 * The type of disability to simulate
 			 * @type {'no-vision'|'low-vision'|'keyboard-only'|'colorblind-achromatopsia'|'colorblind-deuteranopia'|'colorblind-protanopia'|'colorblind-tritanopia'}
 			 */
@@ -36,8 +41,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 			 * Whether or not to show the disability type selection and blur level controls
 			 * @type {Boolean}
 			 */
-			hideControls: { type: Boolean, attribute: 'hide-controls' },
-			_blurriness: { state: true }
+			hideControls: { type: Boolean, attribute: 'hide-controls' }
 		};
 	}
 
@@ -94,7 +98,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 
 	constructor() {
 		super();
-		this._blurriness = 50;
+		this.blurLevel = 50;
 	}
 
 	render() {
@@ -103,7 +107,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 			'd2l-offscreen': this.disabilityType === DISABILITY_TYPES.noVision
 		};
 		const wrapperStyles = {
-			...(this.disabilityType === DISABILITY_TYPES.lowVision && { filter: `blur(${this._blurriness / 20}px)` })
+			...(this.disabilityType === DISABILITY_TYPES.lowVision && { filter: `blur(${this.blurLevel / 20}px)` })
 		};
 		return html`
 			${this._renderColorblindFilters()}
@@ -116,6 +120,14 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 		`;
 	}
 
+	updated(changedProperties) {
+		super.updated(changedProperties);
+
+		if (changedProperties.has('blurLevel')) {
+			this.blurLevel = Math.max(Math.min(this.blurLevel, 100), 1);
+		}
+	}
+
 	_localize(key) {
 		return this.localize(`components:accessibilityDisabilitySimulator:${key}`);
 	}
@@ -125,7 +137,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 	}
 
 	_onSliderChanged(e) {
-		this._blurriness = e.target.value;
+		this.blurLevel = e.target.value;
 	}
 
 	_renderAlert() {
@@ -206,7 +218,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 				${this.disabilityType === DISABILITY_TYPES.lowVision ? html`
 					<div class="low-vision-slider">
 						<label for="blur-slider" class="d2l-body-compact">${this._localize('blurLevel')}</label>
-						<input id="blur-slider" type="range" min="1" max="100" .value="${this._blurriness}" @input="${this._onSliderChanged}">
+						<input id="blur-slider" type="range" min="1" max="100" .value="${this.blurLevel}" @input="${this._onSliderChanged}">
 					</div>
 				` : null}
 			</div>

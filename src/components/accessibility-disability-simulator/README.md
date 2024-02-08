@@ -17,6 +17,7 @@ A wrapper component that can be used to simulate how users with different forms 
 
 | Property | Type | Description |
 |--|--|--|
+| `blur-level` | Number, default: 50 | The level of blurriness when the `low-vision` filter is being used, should range between 1 and 100
 | `disability-type` | String | The type of disability to simulate, see [here](#disability-type-values) for the options
 | `hide-alert` | Boolean, default: `false` | Whether or not the alert should be shown
 | `hide-controls` | Boolean, default: `false` | Whether or not to show the disability type selection and blur level controls
