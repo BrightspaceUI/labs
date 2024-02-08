@@ -26,7 +26,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 			 * The level of blurriness when the low-vision filter is being used, should range between 1 and 100
 			 * @type {Number}
 			 */
-			blurLevel: { type: Number, attribute: 'blur-level', reflect: true},
+			blurLevel: { type: Number, attribute: 'blur-level', reflect: true },
 			/**
 			 * The type of disability to simulate
 			 * @type {'no-vision'|'low-vision'|'keyboard-only'|'colorblind-achromatopsia'|'colorblind-deuteranopia'|'colorblind-protanopia'|'colorblind-tritanopia'}
