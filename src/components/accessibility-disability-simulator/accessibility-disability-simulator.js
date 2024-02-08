@@ -1,6 +1,6 @@
 import '@brightspace-ui/core/components/alert/alert.js';
 import { bodyCompactStyles, bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen.js';
@@ -17,6 +17,9 @@ export const DISABILITY_TYPES = Object.freeze({
 	colorblindProtanopia: 'colorblind-protanopia',
 	colorblindTritanopia: 'colorblind-tritanopia'
 });
+
+const colorblindTypes = Object.entries(DISABILITY_TYPES).filter(value => value[0].includes('colorblind'));
+const otherTypes = Object.entries(DISABILITY_TYPES).filter(value => !value[0].includes('colorblind'));
 
 class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 
@@ -198,9 +201,6 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 	_renderControls() {
 		if (this.hideControls) return;
 
-		const colorblindTypes = Object.entries(DISABILITY_TYPES).filter(value => value[0].includes('colorblind'));
-		const otherTypes = Object.entries(DISABILITY_TYPES).filter(value => !value[0].includes('colorblind'));
-
 		return html`
 			<div class="simulator-controls">
 				<label for="disability-select" class="d2l-body-standard">${this._localize('simulationType')}</label>
@@ -220,7 +220,7 @@ class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 						<label for="blur-slider" class="d2l-body-compact">${this._localize('blurLevel')}</label>
 						<input id="blur-slider" type="range" min="1" max="100" .value="${this.blurLevel}" @input="${this._onSliderChanged}">
 					</div>
-				` : null}
+				` : nothing}
 			</div>
 		`;
 	}
