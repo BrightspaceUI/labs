@@ -4,6 +4,7 @@
   "type": "module",
   "repository": "https://github.com/BrightspaceUI/labs.git",
   "exports": {
+    "./components/accessibility-disability-simulator.js": "./src/components/accessibility-disability-simulator/accessibility-disability-simulator.js",
     "./components/checkbox-drawer.js": "./src/components/checkbox-drawer/checkbox-drawer.js",
     "./components/community-button.js": "./src/components/community/community-button.js",
     "./components/community-link.js": "./src/components/community/community-link.js",
@@ -17,6 +18,8 @@
     "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js"
   },
   "scripts": {
+    "langs:sync": "mfv add-missing && mfv remove-extraneous",
+    "langs:sort": "mfv sort",
     "lint": "npm run lint:eslint && npm run lint:style",
     "lint:eslint": "eslint . --ext .js,.html",
     "lint:style": "stylelint \"**/*.{js,html}\"",
