@@ -16,6 +16,7 @@ describe('accessibility-disability-simulator', () => {
 
 	it('default state with content', async() => {
 		const component = await createComponent('');
+		await component.updateComplete;
 		await expect(component).to.be.golden();
 	});
 
