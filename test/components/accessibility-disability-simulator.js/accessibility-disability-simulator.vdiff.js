@@ -2,7 +2,7 @@ import '../../../src/components/accessibility-disability-simulator/accessibility
 import { expect, fixture, html, setViewport } from '@brightspace-ui/testing';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-async function createComponent(disabilityType, { hideControls, blurLevel,  } = {}) {
+async function createComponent(disabilityType, { hideControls, blurLevel } = {}) {
 	return await fixture(html`<d2l-labs-accessibility-disability-simulator disability-type="${ifDefined(disabilityType)}" ?hide-controls=${hideControls} blur-level=${ifDefined(blurLevel)}>
 		<img src="../../../demo/components/accessibility-disability-simulator/color-wheel.png">
 	</d2l-labs-accessibility-disability-simulator>`);
@@ -16,7 +16,7 @@ describe('accessibility-disability-simulator', () => {
 
 	it('default state with content', async() => {
 		const component = await createComponent();
-		await setViewport({ height: 1142 })
+		await setViewport({ height: 1142 });
 		await component.updateComplete;
 		await expect(component).to.be.golden();
 	});
