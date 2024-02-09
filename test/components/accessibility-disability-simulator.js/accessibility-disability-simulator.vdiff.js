@@ -14,14 +14,512 @@ describe('accessibility-disability-simulator', () => {
 		await expect(component).to.be.golden();
 	});
 
+	it('content with hidden controls', async() => {
+		const component = await createComponent('', { hideControls: true });
+		await expect(component).to.be.golden();
+	});
+
 	it('default state with content', async() => {
 		const component = await createComponent();
 		await component.updateComplete;
 		await expect(component).to.be.golden();
 	});
 
-	it('content with hidden controls', async() => {
-		const component = await createComponent('', { hideControls: true });
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
+		await expect(component).to.be.golden();
+	});
+
+	it('default state with content', async() => {
+		const component = await createComponent();
+		await component.updateComplete;
 		await expect(component).to.be.golden();
 	});
 
