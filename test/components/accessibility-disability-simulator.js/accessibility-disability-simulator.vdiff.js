@@ -1,5 +1,5 @@
 import '../../../src/components/accessibility-disability-simulator/accessibility-disability-simulator.js';
-import { expect, fixture, html } from '@brightspace-ui/testing';
+import { expect, fixture, html, setViewport } from '@brightspace-ui/testing';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 async function createComponent(disabilityType, { hideControls, blurLevel } = {}) {
@@ -16,6 +16,7 @@ describe('accessibility-disability-simulator', () => {
 
 	it('default state with content', async() => {
 		const component = await createComponent('');
+		await setViewport({ height: 1142 });
 		await component.updateComplete;
 		await expect(component).to.be.golden();
 	});
