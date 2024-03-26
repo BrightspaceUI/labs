@@ -1,6 +1,5 @@
 import '../../../src/components/checkbox-drawer/checkbox-drawer.js';
-import { clickElem, expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
-import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
+import { clickElem, expect, fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
 
 function getInputCheckbox(component) {
 	return component.shadowRoot.querySelector('d2l-input-checkbox');
