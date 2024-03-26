@@ -1,7 +1,6 @@
 import '../../../src/components/pagination/pager-numeric.js';
-import { expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
+import { expect, fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 
 const custompageSizes = [2, 5, 37, 159];
 
