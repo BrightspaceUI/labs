@@ -1,16 +1,16 @@
 export default {
-	"components:accessibilityDisabilitySimulator:blurLevel": "Blur Level", // Label for input slider that users can use to change the level of blurriness
-	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Achromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // Disability simulation option for users with Deuteranopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopia", // Disability simulation option for users with Protanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // Disability simulation option for users with Tritanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindness": "Colorblindness", // Disability simulation option for users with Colorblindness
-	"components:accessibilityDisabilitySimulator:keyboardOnly": "Keyboard Only", // Disability simulation option for users who can only use the keyboard for navigation
-	"components:accessibilityDisabilitySimulator:lowVision": "Low Vision", // Disability simulation option for users with a limited ability to see
-	"components:accessibilityDisabilitySimulator:noVision": "No Vision", // Disability simulation option for users without the ability to see
-	"components:accessibilityDisabilitySimulator:none": "None", // Disability simulation option that represents having no disability
-	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Enable your screenreader and tab into the content", // Alert that prompts the user to use a screenreader and tabbing to view content
-	"components:accessibilityDisabilitySimulator:simulationType": "Simulation type:", // Label for the disability simulation options
+	"components:accessibilityDisabilitySimulator:blurLevel": "Vervagingsniveau", // Label for input slider that users can use to change the level of blurriness
+	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Achromatopsie", // Disability simulation option for users with Achromatiopsia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranomalie", // Disability simulation option for users with Deuteranopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanomalie", // Disability simulation option for users with Protanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanomalie", // Disability simulation option for users with Tritanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindness": "Kleurenblindheid", // Disability simulation option for users with Colorblindness
+	"components:accessibilityDisabilitySimulator:keyboardOnly": "Alleen toetsenbord", // Disability simulation option for users who can only use the keyboard for navigation
+	"components:accessibilityDisabilitySimulator:lowVision": "Slechtziend", // Disability simulation option for users with a limited ability to see
+	"components:accessibilityDisabilitySimulator:noVision": "Blind", // Disability simulation option for users without the ability to see
+	"components:accessibilityDisabilitySimulator:none": "Geen", // Disability simulation option that represents having no disability
+	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Schakel uw schermlezer in en druk op tab om naar de inhoud te gaan", // Alert that prompts the user to use a screenreader and tabbing to view content
+	"components:accessibilityDisabilitySimulator:simulationType": "Simulatietype:", // Label for the disability simulation options
 	"components:checkboxDrawer:checkboxCollapsed": "Selectievakje samengevouwen", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Selectievakje uitgevouwen", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Annuleren",
@@ -34,9 +34,9 @@ export default {
 	"components:optInFlyout:turnOn": "Inschakelen",
 	"components:optInFlyout:tutorialAndHelpMessage": "Lees onze *zelfstudies* of onze ~helpdocumentatie~ om aan de slag te gaan.",
 	"components:optInFlyout:tutorialMessage": "Bekijk onze *zelfstudies* om aan de slag te gaan.",
-	"components:pagination:amountPerPage" : "{count} per pagina",
+	"components:pagination:amountPerPage": "{count} per pagina",
 	"components:pagination:currentPage": "Paginanummer {pageNumber} van {maxPageNumber}",
-	"components:pagination:nextPage" : "Volgende pagina",
-	"components:pagination:previousPage" : "Vorige pagina",
-	"components:pagination:resultsPerPage" : "Resultaten per pagina"
+	"components:pagination:nextPage": "Volgende pagina",
+	"components:pagination:previousPage": "Vorige pagina",
+	"components:pagination:resultsPerPage": "Resultaten per pagina"
 };

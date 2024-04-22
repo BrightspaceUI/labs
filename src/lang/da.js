@@ -1,16 +1,16 @@
 export default {
-	"components:accessibilityDisabilitySimulator:blurLevel": "Blur Level", // Label for input slider that users can use to change the level of blurriness
-	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Achromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // Disability simulation option for users with Deuteranopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopia", // Disability simulation option for users with Protanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // Disability simulation option for users with Tritanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindness": "Colorblindness", // Disability simulation option for users with Colorblindness
-	"components:accessibilityDisabilitySimulator:keyboardOnly": "Keyboard Only", // Disability simulation option for users who can only use the keyboard for navigation
-	"components:accessibilityDisabilitySimulator:lowVision": "Low Vision", // Disability simulation option for users with a limited ability to see
-	"components:accessibilityDisabilitySimulator:noVision": "No Vision", // Disability simulation option for users without the ability to see
-	"components:accessibilityDisabilitySimulator:none": "None", // Disability simulation option that represents having no disability
-	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Enable your screenreader and tab into the content", // Alert that prompts the user to use a screenreader and tabbing to view content
-	"components:accessibilityDisabilitySimulator:simulationType": "Simulation type:", // Label for the disability simulation options
+	"components:accessibilityDisabilitySimulator:blurLevel": "Sløringsniveau", // Label for input slider that users can use to change the level of blurriness
+	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Farveblindhed", // Disability simulation option for users with Achromatiopsia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Grønblindhed", // Disability simulation option for users with Deuteranopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Rødblindhed", // Disability simulation option for users with Protanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Violetblindhed", // Disability simulation option for users with Tritanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindness": "Farveblindhed", // Disability simulation option for users with Colorblindness
+	"components:accessibilityDisabilitySimulator:keyboardOnly": "Kun tastatur", // Disability simulation option for users who can only use the keyboard for navigation
+	"components:accessibilityDisabilitySimulator:lowVision": "Svagsyn", // Disability simulation option for users with a limited ability to see
+	"components:accessibilityDisabilitySimulator:noVision": "Intet syn", // Disability simulation option for users without the ability to see
+	"components:accessibilityDisabilitySimulator:none": "Ingen", // Disability simulation option that represents having no disability
+	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Aktivér din skærmlæser og fane i indholdet", // Alert that prompts the user to use a screenreader and tabbing to view content
+	"components:accessibilityDisabilitySimulator:simulationType": "Simulationstype:", // Label for the disability simulation options
 	"components:checkboxDrawer:checkboxCollapsed": "Afkrydsningsfelt skjult", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Afkrydsningsfelt udvidet", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Annuller",
@@ -34,9 +34,9 @@ export default {
 	"components:optInFlyout:turnOn": "Slå den til",
 	"components:optInFlyout:tutorialAndHelpMessage": "Se vores *selvstudier*, eller læs vores ~hjælp-dokumentation~ for at komme i gang!",
 	"components:optInFlyout:tutorialMessage": "Se vores *selvstudier* for at komme i gang!",
-	"components:pagination:amountPerPage" : "{count} pr. side",
+	"components:pagination:amountPerPage": "{count} pr. side",
 	"components:pagination:currentPage": "Sidenummer {pageNumber} af {maxPageNumber}",
-	"components:pagination:nextPage" : "Næste side",
-	"components:pagination:previousPage" : "Forrige side",
-	"components:pagination:resultsPerPage" : "Resultater pr. side"
+	"components:pagination:nextPage": "Næste side",
+	"components:pagination:previousPage": "Forrige side",
+	"components:pagination:resultsPerPage": "Resultater pr. side"
 };

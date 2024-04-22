@@ -1,21 +1,21 @@
 export default {
-	"components:accessibilityDisabilitySimulator:blurLevel": "Blur Level", // Label for input slider that users can use to change the level of blurriness
-	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Achromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // Disability simulation option for users with Deuteranopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopia", // Disability simulation option for users with Protanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // Disability simulation option for users with Tritanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindness": "Colorblindness", // Disability simulation option for users with Colorblindness
-	"components:accessibilityDisabilitySimulator:keyboardOnly": "Keyboard Only", // Disability simulation option for users who can only use the keyboard for navigation
-	"components:accessibilityDisabilitySimulator:lowVision": "Low Vision", // Disability simulation option for users with a limited ability to see
-	"components:accessibilityDisabilitySimulator:noVision": "No Vision", // Disability simulation option for users without the ability to see
-	"components:accessibilityDisabilitySimulator:none": "None", // Disability simulation option that represents having no disability
-	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Enable your screenreader and tab into the content", // Alert that prompts the user to use a screenreader and tabbing to view content
-	"components:accessibilityDisabilitySimulator:simulationType": "Simulation type:", // Label for the disability simulation options
+	"components:accessibilityDisabilitySimulator:blurLevel": "Nivel de desenfoque", // Label for input slider that users can use to change the level of blurriness
+	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Acromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopía", // Disability simulation option for users with Deuteranopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopía", // Disability simulation option for users with Protanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopía", // Disability simulation option for users with Tritanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindness": "Daltonismo", // Disability simulation option for users with Colorblindness
+	"components:accessibilityDisabilitySimulator:keyboardOnly": "Solo teclado", // Disability simulation option for users who can only use the keyboard for navigation
+	"components:accessibilityDisabilitySimulator:lowVision": "Visión reducida", // Disability simulation option for users with a limited ability to see
+	"components:accessibilityDisabilitySimulator:noVision": "Sin visión", // Disability simulation option for users without the ability to see
+	"components:accessibilityDisabilitySimulator:none": "Ninguno", // Disability simulation option that represents having no disability
+	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Habilite el lector de pantalla y desplácese con el tabulador por el contenido.", // Alert that prompts the user to use a screenreader and tabbing to view content
+	"components:accessibilityDisabilitySimulator:simulationType": "Tipo de simulación:", // Label for the disability simulation options
 	"components:checkboxDrawer:checkboxCollapsed": "Casilla de verificación contraída", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Casilla de verificación expandida", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Cancelar",
 	"components:optInFlyout:close": "Cerrar este cuadro de diálogo",
-	"components:optInFlyout:done": "Listo",
+	"components:optInFlyout:done": "Hecho",
 	"components:optInFlyout:feedbackChooseReason": "-- Seleccione un motivo --",
 	"components:optInFlyout:feedbackLabel": "¿Qué podríamos hacer para que esto sea algo que le encantaría utilizar?",
 	"components:optInFlyout:feedbackReasonJustCheckingSomething": "Quiero volver atrás a verificar algo",
@@ -34,9 +34,9 @@ export default {
 	"components:optInFlyout:turnOn": "Activar",
 	"components:optInFlyout:tutorialAndHelpMessage": "Consulte nuestros *tutoriales* o lea nuestra ~documentación de ayuda~ para comenzar.",
 	"components:optInFlyout:tutorialMessage": "Consulte nuestros *tutoriales* como ayuda adicional para empezar.",
-	"components:pagination:amountPerPage" : "{count} por página",
-	"components:pagination:currentPage": "Página número {pageNumber} de {maxPageNumber}",
-	"components:pagination:nextPage" : "Página siguiente",
-	"components:pagination:previousPage" : "Página anterior",
-	"components:pagination:resultsPerPage" : "Resultados por página"
+	"components:pagination:amountPerPage": "{count} por página",
+	"components:pagination:currentPage": "Página número {PageNumber} de {maxPageNumber}",
+	"components:pagination:nextPage": "Página siguiente",
+	"components:pagination:previousPage": "Página anterior",
+	"components:pagination:resultsPerPage": "Resultados por página"
 };
