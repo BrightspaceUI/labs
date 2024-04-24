@@ -1,6 +1,6 @@
 import '../d2l-grade-result.js';
 import '../src/components/d2l-grade-result-presentational.js';
-import { expect, fixture, html } from '@open-wc/testing';
+import { clickElem, expect, fixture, html } from '@brightspace-ui/testing';
 import { getGradesButton, getLetterScore, getLetterScoreSelect, getManualOverrideButton, getNumericScore, getNumericScoreInput, getReportsButton } from './utils.js';
 
 const letterGradeOptions = {
@@ -70,7 +70,7 @@ describe('d2l-grade-result-presentational', () => {
 			fixture(componentManualOverride).then(el => {
 				const event = 'd2l-grade-result-grade-button-click';
 				el.addEventListener(event, resolve);
-				getGradesButton(el).click();
+				clickElem(getGradesButton(el));
 				setTimeout(() => reject(`timeout waiting for ${event} event`), eventTimeoutMS);
 			});
 		});
@@ -81,7 +81,7 @@ describe('d2l-grade-result-presentational', () => {
 			fixture(componentManualOverride).then(el => {
 				const event = 'd2l-grade-result-reports-button-click';
 				el.addEventListener(event, resolve);
-				getReportsButton(el).click();
+				clickElem(getReportsButton(el));
 				setTimeout(() => reject(`timeout waiting for ${event} event`), eventTimeoutMS);
 			});
 		});
@@ -92,7 +92,7 @@ describe('d2l-grade-result-presentational', () => {
 			fixture(componentManualOverrideClear).then(el => {
 				const event = 'd2l-grade-result-manual-override-clear-click';
 				el.addEventListener(event, resolve);
-				getManualOverrideButton(el).click();
+				clickElem(getManualOverrideButton(el));
 				setTimeout(() => reject(`timeout waiting for ${event} event`), eventTimeoutMS);
 			});
 		});

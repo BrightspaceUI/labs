@@ -1,47 +1,44 @@
-async function focusGradesButton(page, id) {
-	await page.evaluate((id) => {
-		document
-			.querySelector(id)
-			.querySelector('d2l-labs-d2l-grade-result-presentational')
-			.shadowRoot.querySelector('d2l-grade-result-icon-button')
-			.shadowRoot.querySelector('d2l-button-icon')
-			.focus();
-	}, id);
+import { aTimeout, expect, focusElem } from '@brightspace-ui/testing';
+
+async function focusGradesButton(fixtureElement) {
+	const gradeButtonElement = fixtureElement
+		.querySelector('d2l-labs-d2l-grade-result-presentational')
+		.shadowRoot.querySelector('d2l-grade-result-icon-button')
+		.shadowRoot.querySelector('d2l-button-icon');
+
+	await focusElem(gradeButtonElement);
 }
 
-async function focusReportsButton(page, id) {
-	await page.evaluate((id) => {
-		document
-			.querySelector(id)
-			.querySelector('d2l-labs-d2l-grade-result-presentational')
-			.shadowRoot.querySelectorAll('d2l-grade-result-icon-button')[1]
-			.shadowRoot.querySelector('d2l-button-icon')
-			.focus();
-	}, id);
+async function focusReportsButton(fixtureElement) {
+	const reportsButtonElement = fixtureElement
+		.querySelector('d2l-labs-d2l-grade-result-presentational')
+		.shadowRoot.querySelectorAll('d2l-grade-result-icon-button')[1]
+		.shadowRoot.querySelector('d2l-button-icon');
+
+	await focusElem(reportsButtonElement);
 }
 
-async function focusInputBox(page, id) {
-	await page.evaluate((id) => {
-		document
-			.querySelector(id)
-			.querySelector('d2l-labs-d2l-grade-result-presentational')
-			.shadowRoot.querySelector('d2l-grade-result-numeric-score')
-			.shadowRoot.querySelector('d2l-input-number')
-			.shadowRoot.querySelector('d2l-input-text')
-			.shadowRoot.querySelector('input')
-			.focus();
-	}, id);
+async function focusInputBox(fixtureElement) {
+	const inputBoxElement = fixtureElement
+		.querySelector('d2l-labs-d2l-grade-result-presentational')
+		.shadowRoot.querySelector('d2l-grade-result-numeric-score')
+		.shadowRoot.querySelector('d2l-input-number')
+		.shadowRoot.querySelector('d2l-input-text')
+		.shadowRoot.querySelector('input');
+
+	await focusElem(inputBoxElement);
 }
 
-export async function testDiff(visualDiff, page, id, fullTitle, focusGrades = false, focusReports = false, focusInput = false) {
-	const rect = await visualDiff.getRect(page, id);
+export async function testDiff(fixtureElement, focusGrades, focusReports, focusInput) {
 	if (focusGrades) {
-		await focusGradesButton(page, id);
+		focusGradesButton(fixtureElement);
 	} else if (focusReports) {
-		await focusReportsButton(page, id);
+		focusReportsButton(fixtureElement);
 	} else if (focusInput) {
-		await focusInputBox(page, id);
+		focusInputBox(fixtureElement);
 	}
 
-	await visualDiff.screenshotAndCompare(page, fullTitle, { clip: rect });
+	await aTimeout(200); // The webkit tests are unstable without this :(
+
+	await expect(fixtureElement).to.be.golden();
 }

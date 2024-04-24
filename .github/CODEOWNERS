@@ -1,3 +1,4 @@
 *       @BrightspaceUILabs/nimbus
 golden/
+.vdiff.json
 package-lock.json

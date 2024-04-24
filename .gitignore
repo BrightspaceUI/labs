@@ -1,3 +1,2 @@
 node_modules/
-test/perceptual/screenshots/current/
-test/perceptual/screenshots/golden/
+.vdiff/
