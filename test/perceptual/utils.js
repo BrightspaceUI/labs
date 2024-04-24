@@ -1,4 +1,4 @@
-import { aTimeout, expect, focusElem } from '@brightspace-ui/testing';
+import { expect, focusElem } from '@brightspace-ui/testing';
 
 async function focusGradesButton(fixtureElement) {
 	const gradeButtonElement = fixtureElement
@@ -31,14 +31,12 @@ async function focusInputBox(fixtureElement) {
 
 export async function testDiff(fixtureElement, focusGrades, focusReports, focusInput) {
 	if (focusGrades) {
-		focusGradesButton(fixtureElement);
+		await focusGradesButton(fixtureElement);
 	} else if (focusReports) {
-		focusReportsButton(fixtureElement);
+		await focusReportsButton(fixtureElement);
 	} else if (focusInput) {
-		focusInputBox(fixtureElement);
+		await focusInputBox(fixtureElement);
 	}
-
-	await aTimeout(200); // The webkit tests are unstable without this :(
 
 	await expect(fixtureElement).to.be.golden();
 }
