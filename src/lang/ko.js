@@ -1,16 +1,16 @@
 export default {
-	"components:accessibilityDisabilitySimulator:blurLevel": "Blur Level", // Label for input slider that users can use to change the level of blurriness
-	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Achromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // Disability simulation option for users with Deuteranopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopia", // Disability simulation option for users with Protanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // Disability simulation option for users with Tritanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindness": "Colorblindness", // Disability simulation option for users with Colorblindness
-	"components:accessibilityDisabilitySimulator:keyboardOnly": "Keyboard Only", // Disability simulation option for users who can only use the keyboard for navigation
-	"components:accessibilityDisabilitySimulator:lowVision": "Low Vision", // Disability simulation option for users with a limited ability to see
-	"components:accessibilityDisabilitySimulator:noVision": "No Vision", // Disability simulation option for users without the ability to see
-	"components:accessibilityDisabilitySimulator:none": "None", // Disability simulation option that represents having no disability
-	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Enable your screenreader and tab into the content", // Alert that prompts the user to use a screenreader and tabbing to view content
-	"components:accessibilityDisabilitySimulator:simulationType": "Simulation type:", // Label for the disability simulation options
+	"components:accessibilityDisabilitySimulator:blurLevel": "흐림 수준", // Label for input slider that users can use to change the level of blurriness
+	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "색맹", // Disability simulation option for users with Achromatiopsia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "제2색맹", // Disability simulation option for users with Deuteranopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "제1색맹", // Disability simulation option for users with Protanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "제3색맹", // Disability simulation option for users with Tritanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindness": "색각이상", // Disability simulation option for users with Colorblindness
+	"components:accessibilityDisabilitySimulator:keyboardOnly": "키보드만 해당", // Disability simulation option for users who can only use the keyboard for navigation
+	"components:accessibilityDisabilitySimulator:lowVision": "저시력", // Disability simulation option for users with a limited ability to see
+	"components:accessibilityDisabilitySimulator:noVision": "시력 없음", // Disability simulation option for users without the ability to see
+	"components:accessibilityDisabilitySimulator:none": "없음", // Disability simulation option that represents having no disability
+	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "스크린 리더를 활성화하고 콘텐츠를 탭합니다", // Alert that prompts the user to use a screenreader and tabbing to view content
+	"components:accessibilityDisabilitySimulator:simulationType": "시뮬레이션 유형:", // Label for the disability simulation options
 	"components:checkboxDrawer:checkboxCollapsed": "확인란이 축소됨", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "확인란이 확장됨", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "취소",
@@ -18,12 +18,12 @@ export default {
 	"components:optInFlyout:done": "완료",
 	"components:optInFlyout:feedbackChooseReason": "-- 이유 선택 --",
 	"components:optInFlyout:feedbackLabel": "어떻게 하면 이 기능을 개선할 수 있겠습니까?",
-	"components:optInFlyout:feedbackReasonJustCheckingSomething": "확인할 사항이 있어 다시 전환합니다.",
+	"components:optInFlyout:feedbackReasonJustCheckingSomething": "확인할 사항이 있어 다시 전환합니다",
 	"components:optInFlyout:feedbackReasonLabel": "다시 전환하는 이유를 알려주시겠습니까?",
-	"components:optInFlyout:feedbackReasonMissingFeature": "내가 사용하는 기능이 없습니다.",
-	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "이 버전을 사용해 보기에 적당한 시기가 아닙니다.",
+	"components:optInFlyout:feedbackReasonMissingFeature": "내가 사용하는 기능이 없습니다",
+	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "이 버전을 사용해 보기에 적당한 시기가 아닙니다",
 	"components:optInFlyout:feedbackReasonOther": "기타",
-	"components:optInFlyout:feedbackReasonPreferOldExperience": "이전 버전이 더 나은 경험을 제공한다고 생각합니다.",
+	"components:optInFlyout:feedbackReasonPreferOldExperience": "이전 버전이 더 나은 경험을 제공한다고 생각합니다",
 	"components:optInFlyout:feedbackTitle": "개선할 사항을 알려주십시오!",
 	"components:optInFlyout:helpMessage": "시작하려면 *도움말 설명서*를 읽어보십시오!",
 	"components:optInFlyout:leaveOff": "비활성화 유지",
@@ -33,10 +33,10 @@ export default {
 	"components:optInFlyout:turnOff": "비활성화",
 	"components:optInFlyout:turnOn": "활성화",
 	"components:optInFlyout:tutorialAndHelpMessage": "시작하려면 *개별지도*를 시청하거나 ~도움말 설명서~를 읽어보십시오!",
-	"components:optInFlyout:tutorialMessage": "시작하는 데 도움이 되는 *개별지도*를 시청하십시오.",
-	"components:pagination:amountPerPage" : "페이지당 {count}개",
-	"components:pagination:currentPage": "{maxPageNumber}의 페이지 번호 {pageNumber}",
-	"components:pagination:nextPage" : "다음 페이지",
-	"components:pagination:previousPage" : "이전 페이지",
-	"components:pagination:resultsPerPage" : "페이지당 결과 수"
+	"components:optInFlyout:tutorialMessage": "시작하는 데 도움이 되는 *개별지도*를 시청하십시오!",
+	"components:pagination:amountPerPage": "페이지당 {count}개",
+	"components:pagination:currentPage": "페이지 번호 {pageNumber} / {maxPageNumber}",
+	"components:pagination:nextPage": "다음 페이지",
+	"components:pagination:previousPage": "이전 페이지",
+	"components:pagination:resultsPerPage": "페이지당 결과 수"
 };
