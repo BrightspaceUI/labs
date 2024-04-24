@@ -1,9 +1,9 @@
 export default {
 	"components:accessibilityDisabilitySimulator:blurLevel": "Nível de desfoque", // Label for input slider that users can use to change the level of blurriness
 	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Acromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // Disability simulation option for users with Deuteranopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopia", // Disability simulation option for users with Protanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // Disability simulation option for users with Tritanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // mfv-translated Disability simulation option for users with Deuteranopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopia", // mfv-translated Disability simulation option for users with Protanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // mfv-translated Disability simulation option for users with Tritanopia colorblindness
 	"components:accessibilityDisabilitySimulator:colorblindness": "Daltonismo", // Disability simulation option for users with Colorblindness
 	"components:accessibilityDisabilitySimulator:keyboardOnly": "Somente teclado", // Disability simulation option for users who can only use the keyboard for navigation
 	"components:accessibilityDisabilitySimulator:lowVision": "Baixa visão", // Disability simulation option for users with a limited ability to see

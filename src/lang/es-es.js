@@ -35,7 +35,7 @@ export default {
 	"components:optInFlyout:tutorialAndHelpMessage": "Consulte nuestros *tutoriales* o lea nuestra ~documentación de ayuda~ para comenzar.",
 	"components:optInFlyout:tutorialMessage": "Consulte nuestros *tutoriales* como ayuda adicional para empezar.",
 	"components:pagination:amountPerPage": "{count} por página",
-	"components:pagination:currentPage": "Página número {PageNumber} de {maxPageNumber}",
+	"components:pagination:currentPage": "Página número {pageNumber} de {maxPageNumber}",
 	"components:pagination:nextPage": "Página siguiente",
 	"components:pagination:previousPage": "Página anterior",
 	"components:pagination:resultsPerPage": "Resultados por página"
