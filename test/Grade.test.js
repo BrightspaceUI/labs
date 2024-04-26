@@ -1,5 +1,5 @@
 import { Grade, GradeErrors, GradeType } from '../src/controller/Grade.js';
-import { assert } from '@open-wc/testing';
+import { assert } from '@brightspace-ui/testing';
 
 const letterGradeOptions = {
 	0: { 'LetterGrade': 'None', 'PercentStart': null },

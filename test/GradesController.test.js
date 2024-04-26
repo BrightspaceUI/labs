@@ -1,6 +1,6 @@
 import 'd2l-polymer-siren-behaviors/store/entity-store.js';
 import { GradesController, GradesControllerErrors } from '../src/controller/GradesController.js';
-import { assert } from '@open-wc/testing';
+import { assert } from '@brightspace-ui/testing';
 import { Grade } from '../src/controller/Grade.js';
 import sinon from 'sinon';
 

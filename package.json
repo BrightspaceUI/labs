@@ -21,15 +21,18 @@
     "lint:lang": "mfv -e",
     "start": "web-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "test": "npm run lint && npm run test:headless",
-    "test:headless": "web-test-runner --files \"./test/**/*.test.js\" --node-resolve",
-    "test:headless:watch": "web-test-runner --files \"./test/**/*.test.js\" --node-resolve --watch"
+    "test:headless": "d2l-test-runner",
+    "test:headless:watch": "d2l-test-runner --watch",
+    "vdiff": "npx d2l-test-runner vdiff --chrome --firefox --safari",
+    "vdiff:goldens": "d2l-test-runner vdiff golden --chrome --firefox --safari",
+    "vdiff:report": "d2l-test-runner vdiff report"
   },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/core": "^7",
     "@babel/eslint-parser": "^7",
-    "@open-wc/testing": "^4",
+    "@brightspace-ui/testing": "^1.16.0",
     "@web/dev-server": "^0.4.1",
     "@web/test-runner": "^0.18.0",
     "eslint": "^8",
