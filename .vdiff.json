@@ -2,11 +2,11 @@
 	"browsers": [
 		{
 			"name": "Chromium",
-			"version": 124
+			"version": 125
 		},
 		{
 			"name": "Firefox",
-			"version": 124
+			"version": 125
 		},
 		{
 			"name": "Webkit",
