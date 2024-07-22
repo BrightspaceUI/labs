@@ -1,0 +1,14 @@
+{
+  "tool": "Daylight Components",
+  "experience": "Software Services",
+  "overrides": [
+    {
+      "pattern": "**/test/*.test.js",
+      "type": "UI Unit"
+    },
+    {
+      "pattern": "**/test/*.vdiff.js",
+      "type": "UI Visual Diff"
+    }
+  ]
+}
