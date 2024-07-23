@@ -7,6 +7,10 @@
       "type": "UI Unit"
     },
     {
+      "pattern": "test/**/*.axe.js",
+      "type": "UI Accessibility"
+    },
+    {
       "pattern": "test/**/*.vdiff.js",
       "type": "UI Visual Diff"
     }
