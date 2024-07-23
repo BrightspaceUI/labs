@@ -36,6 +36,9 @@ npm run lint:style
 # translations
 npm run test:translations
 
+# accessibility tests
+npm run test:axe
+
 # unit tests
 npm run test:unit
 ```

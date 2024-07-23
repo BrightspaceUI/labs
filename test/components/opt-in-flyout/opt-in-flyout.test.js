@@ -1,5 +1,5 @@
 import '../../../src/components/opt-in-flyout/flyout-impl.js';
-import { clickElem, expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
+import { clickElem, fixture, html, oneEvent } from '@brightspace-ui/testing';
 
 const closedFixture = html`
 	<d2l-labs-opt-in-flyout-impl flyout-title="Opt-In Flyout">
@@ -27,20 +27,6 @@ async function clickOptOutButton(elem) {
 }
 
 describe('opt-in-flyout', () => {
-
-	describe('accessibility', () => {
-
-		it('closed', async() => {
-			const elem = await fixture(closedFixture);
-			await expect(elem).to.be.accessible();
-		});
-
-		it('opened', async() => {
-			const elem = await fixture(openedFixture);
-			await expect(elem).to.be.accessible();
-		});
-
-	});
 
 	describe('events', () => {
 

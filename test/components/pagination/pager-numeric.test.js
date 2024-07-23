@@ -21,18 +21,6 @@ describe('pager-numeric', () => {
 		});
 	});
 
-	describe('accessibility', () => {
-		it('should pass all axe tests (basic)', async() => {
-			const component = await createComponent();
-			await expect(component).to.be.accessible();
-		});
-
-		it('should pass all axe tests (full)', async() => {
-			const component = await createComponent({ pageNumber: 1, maxPageNumber: 6, showPageSizeSelector: true, pageSizes: custompageSizes, pageSize: 20 });
-			await expect(component).to.be.accessible();
-		});
-	});
-
 	describe('render', () => {
 		// This couldn't get turned into a vdiff test due to complications with the 'select' component
 		it('should render page size selector with correct options and initial selection', async() => {
