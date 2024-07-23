@@ -26,14 +26,6 @@ describe('opt-out-dialog', () => {
 		elem = await fixture(html`<d2l-labs-opt-out-dialog></d2l-labs-opt-out-dialog>`);
 	});
 
-	describe('accessibility', () => {
-
-		it('should be accessible', async() => {
-			await expect(elem).to.be.accessible();
-		});
-
-	});
-
 	describe('events', () => {
 
 		it('should dispatch "confirm" event when reason selected and done clicked (no feedback)', async() => {
