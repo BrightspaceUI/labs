@@ -2,15 +2,15 @@
 	"browsers": [
 		{
 			"name": "Chromium",
-			"version": 125
+			"version": 128
 		},
 		{
 			"name": "Firefox",
-			"version": 125
+			"version": 128
 		},
 		{
 			"name": "Webkit",
-			"version": 17
+			"version": 18
 		}
 	]
 }
