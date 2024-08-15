@@ -79,8 +79,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 
 				${this.includeGradeButton ? html`
 					<d2l-grade-result-icon-button
-						.tooltipText=${this.gradeButtonTooltip}
-						ariaLabel="Grades"
+						text=${this.gradeButtonTooltip}
 						icon="tier1:grade"
 						@d2l-grade-result-icon-button-click=${this._onGradeButtonClick}
 					></d2l-grade-result-icon-button>
@@ -88,8 +87,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 
 				${this.includeReportsButton ? html`
 					<d2l-grade-result-icon-button
-						.tooltipText=${this.reportsButtonTooltip}
-						ariaLabel="Reports"
+						text=${this.reportsButtonTooltip}
 						icon="tier1:reports"
 						@d2l-grade-result-icon-button-click=${this._onReportsButtonClick}
 					></d2l-grade-result-icon-button>

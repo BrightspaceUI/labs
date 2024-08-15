@@ -1,16 +1,13 @@
 import '@brightspace-ui/core/components/button/button-icon.js';
-import '@brightspace-ui/core/components/tooltip/tooltip.js';
-import { html, LitElement, nothing } from 'lit';
+import { html, LitElement } from 'lit';
 import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
 
 export class D2LGradeResultIconButton extends LitElement {
 	static get properties() {
 		return {
-			tooltipText: { type: String },
+			text: { type: String },
 			icon: { type: String },
 			_id: { type: String },
-			ariaLabel: { type: String }
 		};
 	}
 
@@ -24,20 +21,10 @@ export class D2LGradeResultIconButton extends LitElement {
 			<div>
 				<d2l-button-icon
 					id="d2l-grade-result-icon-button-${this._id}"
-					icon=${this.icon}
-					@click=${this._onClick}
-					text=${ifDefined(this.ariaLabel)}
+					icon="${this.icon}"
+					@click="${this._onClick}"
+					text="${this.text}"
 				></d2l-button-icon>
-
-				${this.tooltipText ? html`
-					<d2l-tooltip
-						for="d2l-grade-result-icon-button-${this._id}"
-						position="bottom"
-						align="start"
-					>
-						${this.tooltipText}
-					</d2l-tooltip>
-				` : nothing }
 			</div>
 		`;
 	}
