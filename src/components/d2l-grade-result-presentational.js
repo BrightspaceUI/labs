@@ -130,6 +130,7 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 		return html`
 			<d2l-grade-result-letter-score
 				.availableOptions=${this.letterGradeOptions}
+				.label=${this.inputLabelText}
 				.selectedOption=${this.selectedLetterGrade}
 				.readOnly=${this._isReadOnly()}
 			></d2l-grade-result-letter-score>

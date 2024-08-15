@@ -1,12 +1,14 @@
 import { css, html, LitElement } from 'lit';
 import { bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
+import { Localizer } from './locale.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 
-export class D2LGradeResultLetterScore extends LitElement {
+export class D2LGradeResultLetterScore extends Localizer(LitElement) {
 
 	static get properties() {
 		return {
 			availableOptions: { type: Object },
+			label: { type: String },
 			selectedOption: { type: String },
 			readOnly: { type: Boolean }
 		};
@@ -38,6 +40,7 @@ export class D2LGradeResultLetterScore extends LitElement {
 			return html`
 				<div class="d2l-grade-result-letter-score-container">
 					<select
+						aria-label=${this.label ? this.label : this.localize('gradeScoreLabel')}
 						class="d2l-input-select d2l-grade-result-letter-score-select"
 						@change=${this._onOptionSelected}
 						.value=${this.selectedOption}>

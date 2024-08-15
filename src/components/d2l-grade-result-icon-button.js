@@ -26,7 +26,7 @@ export class D2LGradeResultIconButton extends LitElement {
 					id="d2l-grade-result-icon-button-${this._id}"
 					icon=${this.icon}
 					@click=${this._onClick}
-					aria-label=${ifDefined(this.ariaLabel)}
+					text=${ifDefined(this.ariaLabel)}
 				></d2l-button-icon>
 
 				${this.tooltipText ? html`
