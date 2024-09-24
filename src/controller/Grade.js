@@ -82,7 +82,7 @@ export class Grade {
 
 		// this is the "None" case which has the id 0
 		if (letterGrade === '' || letterGrade === null) {
-			letterGradeId = 0;
+			letterGradeId = '0';
 		} else {
 			letterGradeId = Object.keys(letterGradeOptions).find(key =>
 				letterGradeOptions[key].LetterGrade === letterGrade

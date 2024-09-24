@@ -44,7 +44,16 @@ describe('Grade tests', () => {
 			assert.equal(grade.isLetterGrade(), true);
 			assert.equal(grade.isNumberGrade(), false);
 			assert.equal(grade.getScoreType(), GradeType.Letter);
-			assert.equal(grade.getScore(), 1);
+			assert.equal(grade.getScore(), '1');
+			assert.deepEqual(grade.getScoreOutOf(), letterGradeOptions);
+		});
+
+		it('initializes properly for a letter score with null grade', () => {
+			const grade = new Grade(GradeType.Letter, null, null, null, letterGradeOptions);
+			assert.equal(grade.isLetterGrade(), true);
+			assert.equal(grade.isNumberGrade(), false);
+			assert.equal(grade.getScoreType(), GradeType.Letter);
+			assert.equal(grade.getScore(), '0');
 			assert.deepEqual(grade.getScoreOutOf(), letterGradeOptions);
 		});
 	});
