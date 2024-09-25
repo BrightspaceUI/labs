@@ -2,10 +2,10 @@ import { Grade, GradeErrors, GradeType } from '../src/controller/Grade.js';
 import { assert } from '@brightspace-ui/testing';
 
 const letterGradeOptions = {
-	0: { 'LetterGrade': 'None', 'PercentStart': null },
-	1: { 'LetterGrade': 'A', 'PercentStart': '80' },
-	2: { 'LetterGrade': 'B', 'PercentStart': '65' },
-	3: { 'LetterGrade': 'C', 'PercentStart': '50' },
+	0: { 'LetterGrade': 'None', 'PercentStart': null, 'AssignedValue': null },
+	1: { 'LetterGrade': 'A', 'PercentStart': 80, 'AssignedValue': 80 },
+	2: { 'LetterGrade': 'B', 'PercentStart': 65, 'AssignedValue': 65 },
+	3: { 'LetterGrade': 'C', 'PercentStart': 50, 'AssignedValue': 50 },
 };
 
 describe('Grade tests', () => {
@@ -232,6 +232,49 @@ describe('Grade tests', () => {
 	it('allows score and outOf to be 0', () => {
 		assert.doesNotThrow(() => {
 			new Grade(GradeType.Number, 0, 0, null, null);
+		});
+	});
+
+	describe('getLetterGradeAssignedValue works properly', () => {
+		it('getLetterGradeAssignedValue throws an error if the grade is numeric', () => {
+			const grade = new Grade(GradeType.Number, 5, 10, null, null);
+			assert.throws(() => {
+				grade.getLetterGradeAssignedValue();
+			}, GradeErrors.GET_LETTER_GRADE_FROM_NUMERIC_SCORE);
+		});
+
+		it('getLetterGradeAssignedValue throws an error if the letterGradeId has no corresponding assigned value', () => {
+			const letterGrade = 'A';
+			const badLetterGradeOptions = {
+				0: { 'LetterGrade': 'None', 'PercentStart': null, 'AssignedValue': null },
+				1: { 'LetterGrade': 'A', 'PercentStart': '80' },
+				2: { 'LetterGrade': 'B', 'PercentStart': '65', 'AssignedValue': '65' },
+				3: { 'LetterGrade': 'C', 'PercentStart': '50', 'AssignedValue': '50' },
+			};
+			const grade = new Grade(GradeType.Letter, null, null, letterGrade, badLetterGradeOptions);
+			assert.throws(() => {
+				grade.getLetterGradeAssignedValue();
+			}, GradeErrors.LETTER_GRADE_ID_NO_ASSIGNED_VALUE);
+		});
+
+		it('getLetterGradeAssignedValue throws an error if the letterGradeId has an assigned value that is not a number', () => {
+			const letterGrade = 'A';
+			const badLetterGradeOptions = {
+				0: { 'LetterGrade': 'None', 'PercentStart': null, 'AssignedValue': null },
+				1: { 'LetterGrade': 'A', 'PercentStart': '80', 'AssignedValue': 'A' },
+				2: { 'LetterGrade': 'B', 'PercentStart': '65', 'AssignedValue': '65' },
+				3: { 'LetterGrade': 'C', 'PercentStart': '50', 'AssignedValue': '50' },
+			};
+			const grade = new Grade(GradeType.Letter, null, null, letterGrade, badLetterGradeOptions);
+			assert.throws(() => {
+				grade.getLetterGradeAssignedValue();
+			}, GradeErrors.LETTER_GRADE_ID_NO_ASSIGNED_VALUE);
+		});
+
+		it('getLetterGradeAssignedValue returns assigned value', () => {
+			const letterGrade = 'A';
+			const grade = new Grade(GradeType.Letter, null, null, letterGrade, letterGradeOptions);
+			assert.equal(grade.getLetterGradeAssignedValue(), 80);
 		});
 	});
 

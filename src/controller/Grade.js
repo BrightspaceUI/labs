@@ -6,13 +6,15 @@ export const GradeType = {
 
 export const GradeErrors = {
 	GET_LETTER_GRADE_FROM_NUMERIC_SCORE: 'Grade must be of type LetterGrade to get the letter grade',
+	GET_ASSIGNED_VALUE_FROM_NUMERIC_SCORE: 'Grade must be of type LetterGrade to get the assigned value',
 	INVALID_SCORE_TYPE: 'Invalid scoreType provided',
 	INVALID_SCORE: 'Invalid score provided',
 	INVALID_OUT_OF: 'Invalid outOf provided',
 	INVALID_LETTER_GRADE: 'Invalid letterGrade provided',
 	INVALID_LETTER_GRADE_ID: 'Invalid letterGradeId provided',
 	INVALID_LETTER_GRADE_OPTIONS: 'Invalid letterGradeOptions provided',
-	LETTER_GRADE_NOT_IN_OPTIONS: 'letterGrade must be one of the letterGradeOptions provided'
+	LETTER_GRADE_NOT_IN_OPTIONS: 'letterGrade must be one of the letterGradeOptions provided',
+	LETTER_GRADE_ID_NO_ASSIGNED_VALUE: 'LetterGradeId does not have a corresponding AssignedValue',
 };
 
 export class Grade {
@@ -40,6 +42,20 @@ export class Grade {
 			throw new Error(GradeErrors.GET_LETTER_GRADE_FROM_NUMERIC_SCORE);
 		}
 		return this.letterGrade;
+	}
+
+	getLetterGradeAssignedValue() {
+		if (this.isNumberGrade()) {
+			throw new Error(GradeErrors.GET_LETTER_GRADE_FROM_NUMERIC_SCORE);
+		}
+
+		const letterGradeOption = this.letterGradeOptions[this.letterGradeId];
+
+		if (!letterGradeOption || (typeof letterGradeOption.AssignedValue !== 'number' && letterGradeOption.AssignedValue !== null)) {
+			throw new Error(GradeErrors.LETTER_GRADE_ID_NO_ASSIGNED_VALUE);
+		}
+
+		return letterGradeOption.AssignedValue;
 	}
 
 	getScore() {
