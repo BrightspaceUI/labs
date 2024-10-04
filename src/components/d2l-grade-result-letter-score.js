@@ -23,7 +23,6 @@ export class D2LGradeResultLetterScore extends Localizer(LitElement) {
 				width: 100%;
 			}
 			.d2l-grade-result-letter-score-score-read-only {
-				margin-right: 0.5rem;
 				height: calc(2rem + 2px);
 				line-height: calc(2rem + 2px);
 			}

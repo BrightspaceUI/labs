@@ -234,6 +234,10 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 	}
 
 	_renderStudentGradePreview() {
+		if (!this.studentGradePreview) {
+			return nothing;
+		}
+
 		return html`
 			<d2l-grade-result-student-grade-preview
 				.studentGradePreview=${this.studentGradePreview}

@@ -131,7 +131,7 @@ describe('presentational-with-grade-preview', () => {
 			name: 'readonly-letter-long-letter',
 			gradeType: 'LetterGrade',
 			labelText: 'Overall Grade',
-			letterGradeOptions: '{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "This is a really really really long letter grade", "PercentStart": "50"}}',
+			letterGradeOptions: '{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "This is a really really really really really long letter grade", "PercentStart": "50"}}',
 			selectedLetterGrade: '2',
 			scoreDenominator: '5',
 			includeGradeButton: true,

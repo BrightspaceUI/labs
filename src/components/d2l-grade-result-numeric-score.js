@@ -36,13 +36,8 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 			}
 			.d2l-grade-result-numeric-score-score-read-only {
 				max-width: 5.25rem;
-				margin-right: 0.5rem;
 				height: calc(2rem + 2px);
 				line-height: calc(2rem + 2px);
-			}
-			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-read-only {
-				margin-left: 0.5rem;
-				margin-right: 0rem;
 			}
 			.d2l-grade-result-numeric-score-hint {
 				margin: 0 0.3rem;
