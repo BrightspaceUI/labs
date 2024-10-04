@@ -6,4 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{numerator} van {denominator}",
 	"outOfDenominator": "van {denominator}",
 	"overallGrade": "Algehele score",
+	"studentGradePreviewLabel": "Learner View of Grade",
+	"studentGradePreviewNotShown": "Grade not shown to learners",
 };

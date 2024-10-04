@@ -6,4 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{numerator} من أصل {denominator}",
 	"outOfDenominator": "من أصل {denominator}",
 	"overallGrade": "العلامة الإجمالية",
+	"studentGradePreviewLabel": "Learner View of Grade",
+	"studentGradePreviewNotShown": "Grade not shown to learners",
 };

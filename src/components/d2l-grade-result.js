@@ -2,6 +2,7 @@ import './d2l-grade-result-presentational.js';
 import { Grade, GradeType } from '../controller/Grade.js';
 import { html, LitElement } from 'lit';
 import { GradesController } from '../controller/GradesController.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { Localizer } from './locale.js';
 
 export class D2LGradeResult extends Localizer(LitElement) {
@@ -12,6 +13,7 @@ export class D2LGradeResult extends Localizer(LitElement) {
 			disableAutoSave: { type: Boolean },
 			customManualOverrideText: { type: String },
 			customManualOverrideClearText: { type: String },
+			labelHeadingLevel: { type: Number },
 
 			_labelText: { type: String },
 			_readOnly: { type: Boolean },
@@ -39,6 +41,7 @@ export class D2LGradeResult extends Localizer(LitElement) {
 		this.disableAutoSave = false;
 		this.customManualOverrideText = undefined;
 		this.customManualOverrideClearText = undefined;
+		this.labelHeadingLevel = undefined;
 
 		this._readOnly = false;
 		this._required = false;
@@ -101,6 +104,7 @@ export class D2LGradeResult extends Localizer(LitElement) {
 		return html`
 			<d2l-labs-d2l-grade-result-presentational
 				labelText=${this.localize('overallGrade')}
+				labelHeadingLevel=${ifDefined(this.labelHeadingLevel)}
 				.gradeType=${gradeType}
 				scoreNumerator=${score}
 				scoreDenominator=${scoreOutOf}

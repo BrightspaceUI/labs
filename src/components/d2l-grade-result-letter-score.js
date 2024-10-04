@@ -18,13 +18,14 @@ export class D2LGradeResultLetterScore extends Localizer(LitElement) {
 		return [selectStyles, bodyStandardStyles, css`
 			.d2l-grade-result-letter-score-container {
 				width: 8rem;
-				margin-right: 0.5rem;
 			}
 			.d2l-grade-result-letter-score-select {
 				width: 100%;
 			}
 			.d2l-grade-result-letter-score-score-read-only {
 				margin-right: 0.5rem;
+				height: calc(2rem + 2px);
+				line-height: calc(2rem + 2px);
 			}
 		`];
 	}
@@ -40,6 +41,7 @@ export class D2LGradeResultLetterScore extends Localizer(LitElement) {
 			return html`
 				<div class="d2l-grade-result-letter-score-container">
 					<select
+						id="d2l-grade"
 						aria-label=${this.label ? this.label : this.localize('gradeScoreLabel')}
 						class="d2l-input-select d2l-grade-result-letter-score-select"
 						@change=${this._onOptionSelected}
@@ -51,7 +53,7 @@ export class D2LGradeResultLetterScore extends Localizer(LitElement) {
 		} else {
 			return html`
 				<div class="d2l-grade-result-letter-score-score-read-only">
-					<span class="d2l-body-standard">${this._selectedOptionText()}</span>
+					<span id="d2l-grade" class="d2l-body-standard">${this._selectedOptionText()}</span>
 				</div>
 			`;
 		}

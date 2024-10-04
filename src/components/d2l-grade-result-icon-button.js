@@ -18,14 +18,12 @@ export class D2LGradeResultIconButton extends LitElement {
 
 	render() {
 		return html`
-			<div>
-				<d2l-button-icon
-					id="d2l-grade-result-icon-button-${this._id}"
-					icon="${this.icon}"
-					@click="${this._onClick}"
-					text="${this.text}"
-				></d2l-button-icon>
-			</div>
+			<d2l-button-icon
+				id="d2l-grade-result-icon-button-${this._id}"
+				icon="${this.icon}"
+				@click="${this._onClick}"
+				text="${this.text}"
+			></d2l-button-icon>
 		`;
 	}
 

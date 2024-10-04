@@ -6,4 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{numerator}/{denominator}",
 	"outOfDenominator": "/{denominator}",
 	"overallGrade": "전체 평점",
+	"studentGradePreviewLabel": "Learner View of Grade",
+	"studentGradePreviewNotShown": "Grade not shown to learners",
 };

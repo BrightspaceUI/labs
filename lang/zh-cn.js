@@ -6,4 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{numerator} 分，共 {denominator}",
 	"outOfDenominator": "共 {denominator}",
 	"overallGrade": "总成绩",
+	"studentGradePreviewLabel": "Learner View of Grade",
+	"studentGradePreviewNotShown": "Grade not shown to learners",
 };

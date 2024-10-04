@@ -6,4 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{denominator} में से {numerator}",
 	"outOfDenominator": "{denominator} में से",
 	"overallGrade": "संपूर्ण ग्रेड",
+	"studentGradePreviewLabel": "Learner View of Grade",
+	"studentGradePreviewNotShown": "Grade not shown to learners",
 };

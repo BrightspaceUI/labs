@@ -1,7 +1,7 @@
 import '@brightspace-ui/core/components/inputs/input-number.js';
-import { bodyCompactStyles, bodyStandardStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
+import '@brightspace-ui/core/components/offscreen/offscreen.js';
+import { bodyCompactStyles, bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement, nothing } from 'lit';
-import { inputLabelStyles } from '@brightspace-ui/core/components/inputs/input-label-styles.js';
 import { Localizer } from './locale.js';
 
 const numberConverter = {
@@ -28,7 +28,7 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 	}
 
 	static get styles() {
-		return [bodyCompactStyles, bodyStandardStyles, labelStyles, inputLabelStyles, css`
+		return [bodyCompactStyles, bodyStandardStyles, css`
 			.d2l-grade-result-numeric-score-container {
 				display: flex;
 				flex-direction: row;
@@ -37,14 +37,15 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 			.d2l-grade-result-numeric-score-score-read-only {
 				max-width: 5.25rem;
 				margin-right: 0.5rem;
+				height: calc(2rem + 2px);
+				line-height: calc(2rem + 2px);
 			}
 			:host([dir="rtl"]) .d2l-grade-result-numeric-score-score-read-only {
 				margin-left: 0.5rem;
 				margin-right: 0rem;
 			}
 			.d2l-grade-result-numeric-score-hint {
-				margin-left: 0.5rem;
-				margin-right: 0.5rem;
+				margin: 0 0.3rem;
 			}
 		`];
 	}
@@ -63,7 +64,7 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 						<d2l-form>
 							<d2l-input-number
 								?required=${this.required}
-								id="grade-input"
+								id="d2l-grade"
 								label=${this.label ? this.label : this.localize('gradeScoreLabel')}
 								label-hidden
 								value="${this.scoreNumerator}"
@@ -79,10 +80,13 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 						</d2l-form>
 					</div>
 				` : html`
-					<div class="d2l-grade-result-numeric-score-score-read-only">
-						<span aria-hidden="true" class="d2l-body-standard">${roundedNumerator} / ${this.scoreDenominator}</span>
-						<d2l-offscreen>${this.localize('numeratorOutOfDenominator', { numerator: roundedNumerator, denominator: this.scoreDenominator })}</d2l-offscreen>
+					<div
+						aria-hidden="true"
+						class="d2l-body-standard d2l-grade-result-numeric-score-score-read-only"
+						id="d2l-grade">
+						${roundedNumerator} / ${this.scoreDenominator}
 					</div>
+					<d2l-offscreen>${this.localize('numeratorOutOfDenominator', { numerator: roundedNumerator, denominator: this.scoreDenominator })}</d2l-offscreen>
 				`}
 				${this.showFlooredScoreWarning ? html`
 					<div class="d2l-grade-result-numeric-score-hint d2l-body-compact">
