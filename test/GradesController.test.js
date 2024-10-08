@@ -76,7 +76,7 @@ describe('GradesController', () => {
 					const grade = await controller.requestGrade(false);
 					assert.equal(grade.getScoreType(), 'Numeric');
 					assert.equal(grade.getScore(), 60);
-					assert.equal(grade.getScoreOutOf(), 100);
+					assert.equal(grade.getOutOf(), 100);
 					assert.deepEqual(grade.getEntity(), {
 						properties: {
 							outOf: 100,

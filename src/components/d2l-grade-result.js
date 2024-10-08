@@ -92,7 +92,6 @@ export class D2LGradeResult extends Localizer(LitElement) {
 	render() {
 		const gradeType = this._grade.getScoreType();
 		let score = this._grade.getScore();
-		const scoreOutOf = this._grade.getScoreOutOf();
 
 		// handle when grade is not yet initialized on the server
 		if (gradeType === GradeType.Number && score === null) {
@@ -107,8 +106,8 @@ export class D2LGradeResult extends Localizer(LitElement) {
 				labelHeadingLevel=${ifDefined(this.labelHeadingLevel)}
 				.gradeType=${gradeType}
 				scoreNumerator=${score}
-				scoreDenominator=${scoreOutOf}
-				.letterGradeOptions=${scoreOutOf}
+				scoreDenominator=${this._grade.getOutOf()}
+				.letterGradeOptions=${this._grade.getLetterGradeOptions()}
 				selectedLetterGrade=${score}
 				.customManualOverrideText=${this.customManualOverrideText}
 				.customManualOverrideClearText=${this.customManualOverrideClearText}

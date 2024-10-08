@@ -16,7 +16,7 @@ describe('Grade tests', () => {
 			assert.equal(grade.isNumberGrade(), true);
 			assert.equal(grade.getScoreType(), GradeType.Number);
 			assert.equal(grade.getScore(), 10);
-			assert.equal(grade.getScoreOutOf(), 50);
+			assert.equal(grade.getOutOf(), 50);
 		});
 
 		it('initializes properly for a numeric score (not overridden)', () => {
@@ -25,7 +25,8 @@ describe('Grade tests', () => {
 			assert.equal(grade.isNumberGrade(), true);
 			assert.equal(grade.getScoreType(), GradeType.Number);
 			assert.equal(grade.getScore(), 10);
-			assert.equal(grade.getScoreOutOf(), 50);
+			assert.equal(grade.getOutOf(), 50);
+			assert.equal(grade.getLetterGradeOptions(), undefined);
 			assert.equal(grade.isManuallyOverridden, false);
 		});
 
@@ -35,7 +36,8 @@ describe('Grade tests', () => {
 			assert.equal(grade.isNumberGrade(), true);
 			assert.equal(grade.getScoreType(), GradeType.Number);
 			assert.equal(grade.getScore(), 10);
-			assert.equal(grade.getScoreOutOf(), 50);
+			assert.equal(grade.getOutOf(), 50);
+			assert.equal(grade.getLetterGradeOptions(), undefined);
 			assert.equal(grade.isManuallyOverridden, true);
 		});
 
@@ -45,7 +47,8 @@ describe('Grade tests', () => {
 			assert.equal(grade.isNumberGrade(), false);
 			assert.equal(grade.getScoreType(), GradeType.Letter);
 			assert.equal(grade.getScore(), '1');
-			assert.deepEqual(grade.getScoreOutOf(), letterGradeOptions);
+			assert.equal(grade.getOutOf(), null);
+			assert.deepEqual(grade.getLetterGradeOptions(), letterGradeOptions);
 		});
 
 		it('initializes properly for a letter score with null grade', () => {
@@ -54,7 +57,18 @@ describe('Grade tests', () => {
 			assert.equal(grade.isNumberGrade(), false);
 			assert.equal(grade.getScoreType(), GradeType.Letter);
 			assert.equal(grade.getScore(), '0');
-			assert.deepEqual(grade.getScoreOutOf(), letterGradeOptions);
+			assert.equal(grade.getOutOf(), null);
+			assert.deepEqual(grade.getLetterGradeOptions(), letterGradeOptions);
+		});
+
+		it('initializes properly for a letter score with an out of', () => {
+			const grade = new Grade(GradeType.Letter, null, 50, 'A', letterGradeOptions);
+			assert.equal(grade.isLetterGrade(), true);
+			assert.equal(grade.isNumberGrade(), false);
+			assert.equal(grade.getScoreType(), GradeType.Letter);
+			assert.equal(grade.getScore(), '1');
+			assert.equal(grade.getOutOf(), 50);
+			assert.deepEqual(grade.getLetterGradeOptions(), letterGradeOptions);
 		});
 	});
 
@@ -102,7 +116,7 @@ describe('Grade tests', () => {
 		});
 	});
 
-	describe('throws an error if improper score/outOf are provided for numeric scores', () => {
+	describe('throws an error if improper score are provided for numeric scores', () => {
 		it('score as null', () => {
 			assert.doesNotThrow(() => {
 				new Grade(GradeType.Number, null, 10, null, null);
@@ -120,25 +134,6 @@ describe('Grade tests', () => {
 				new Grade(GradeType.Number, ['A'], 10, null, null);
 			}, GradeErrors.INVALID_SCORE);
 		});
-
-		it('outOf as null', () => {
-			assert.throws(() => {
-				new Grade(GradeType.Number, 5, null, null, null);
-			}, GradeErrors.INVALID_OUT_OF);
-		});
-
-		it('outOf as string', () => {
-			assert.throws(() => {
-				new Grade(GradeType.Number, 5, 'B', null, null);
-			}, GradeErrors.INVALID_OUT_OF);
-		});
-
-		it('outOf as array of strings', () => {
-			assert.throws(() => {
-				new Grade(GradeType.Number, 5, ['B'], null, null);
-			}, GradeErrors.INVALID_OUT_OF);
-		});
-
 	});
 
 	describe('throws an error if improper score/outOf are provided for letter scores', () => {
@@ -186,7 +181,7 @@ describe('Grade tests', () => {
 
 	});
 
-	describe('getScore and getScoreOutOf work properly', () => {
+	describe('getScore, getOutOf, and getLetterGradeOptions work properly', () => {
 		it('getScore works properly for numeric scores', () => {
 			const grade = new Grade(GradeType.Number, 5, 10, null, null);
 			assert.equal(grade.getScore(), 5);
@@ -197,14 +192,14 @@ describe('Grade tests', () => {
 			assert.equal(grade.getScore(), 1);
 		});
 
-		it('getScoreOutOf works properly for numeric scores', () => {
+		it('getOutOf works properly for numeric scores', () => {
 			const grade = new Grade(GradeType.Number, 5, 10, null, null);
-			assert.equal(grade.getScoreOutOf(), 10);
+			assert.equal(grade.getOutOf(), 10);
 		});
 
-		it('getScoreOutOf works properly for letter scores', () => {
+		it('getLetterGradeOptions works properly for letter scores', () => {
 			const grade = new Grade(GradeType.Letter, null, null, 'A', letterGradeOptions);
-			assert.deepEqual(grade.getScoreOutOf(), letterGradeOptions);
+			assert.deepEqual(grade.getLetterGradeOptions(), letterGradeOptions);
 		});
 	});
 
@@ -363,5 +358,11 @@ describe('Grade tests', () => {
 				new Grade(GradeType.Letter, null, null, null, letterGradeOptions);
 			});
 		});
+	});
+
+	it('getDisplay works properly', () => {
+		const display = { some: 'display property' };
+		const grade = new Grade(GradeType.Number, 10, 11, null, null, null, null, null, display);
+		assert.equal(grade.getDisplay(), display);
 	});
 });

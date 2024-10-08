@@ -98,7 +98,7 @@ export class D2LGradeResultStudentGradePreview extends Localizer(LitElement) {
 			return nothing;
 		}
 
-		const score = this._shouldDisplay(previewOptions.score) ? `${this.studentGradePreview?.score} / ${this.outOf || 0}` : '';
+		const score = this._shouldDisplay(previewOptions.score) ? `${this.studentGradePreview?.score ?? ''} / ${this.outOf || 0}` : '';
 		const accessibleScore = this._shouldDisplay(previewOptions.score) ? this.localize('numeratorOutOfDenominator', { numerator: this.studentGradePreview?.score, denominator: this.outOf }) : '';
 
 		const symbol = this._shouldDisplay(previewOptions.symbol) ? this.studentGradePreview?.symbol : '';

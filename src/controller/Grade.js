@@ -19,18 +19,24 @@ export const GradeErrors = {
 
 export class Grade {
 
-	constructor(scoreType, score, outOf, letterGrade, letterGradeOptions, entity, calculatedScore = null, aggregatedScore = null) {
+	constructor(scoreType, score, outOf, letterGrade, letterGradeOptions, entity, calculatedScore = null, aggregatedScore = null, display = null) {
 		this.entity = entity;
 		this.isManuallyOverridden = false;
 		this.calculatedScore = calculatedScore;
 		this.aggregatedScore = aggregatedScore;
+		this.display = display;
+		this.outOf = outOf;
 		this.scoreType = this._parseScoreType(scoreType);
 		if (this.isNumberGrade()) {
-			this._parseNumberGrade(score, outOf);
+			this._parseNumberGrade(score);
 		} else {
 			const letterGradeId = this._getLetterGradeIdFromLetterGrade(letterGrade, letterGradeOptions);
 			this._parseLetterGrade(letterGradeId, letterGradeOptions);
 		}
+	}
+
+	getDisplay() {
+		return this.display;
 	}
 
 	getEntity() {
@@ -58,12 +64,16 @@ export class Grade {
 		return letterGradeOption.AssignedValue;
 	}
 
-	getScore() {
-		return this.isNumberGrade() ? this.score : this.letterGradeId;
+	getLetterGradeOptions() {
+		return this.letterGradeOptions;
 	}
 
-	getScoreOutOf() {
-		return this.isNumberGrade() ? this.outOf : this.letterGradeOptions;
+	getOutOf() {
+		return this.outOf;
+	}
+
+	getScore() {
+		return this.isNumberGrade() ? this.score : this.letterGradeId;
 	}
 
 	getScoreType() {
@@ -122,17 +132,12 @@ export class Grade {
 		}
 
 		this.score = null;
-		this.outOf = null;
 		this.letterGradeId = letterGradeId;
 		this.letterGrade = letterGradeOptions[letterGradeId].LetterGrade;
 		this.letterGradeOptions = letterGradeOptions;
 	}
 
-	_parseNumberGrade(score, outOf) {
-		if ((!outOf || isNaN(outOf)) && outOf !== 0) {
-			throw new Error(GradeErrors.INVALID_OUT_OF);
-		}
-
+	_parseNumberGrade(score) {
 		if (score === undefined) {
 			score = '';
 		} else if (isNaN(score)) {
@@ -141,16 +146,11 @@ export class Grade {
 			score = Number(score);
 		}
 
-		if (typeof outOf === 'string') {
-			outOf = Number(outOf);
-		}
-
 		if (this.calculatedScore !== null) {
 			this.isManuallyOverridden = score !== this.calculatedScore;
 		}
 
 		this.score = score;
-		this.outOf = outOf;
 		this.letterGradeId = null;
 		this.letterGrade = null;
 		this.letterGradeOptions = null;
