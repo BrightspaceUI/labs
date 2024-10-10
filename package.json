@@ -13,6 +13,7 @@
     "./components/opt-out-flyout.js": "./src/components/opt-in-flyout/opt-out-flyout.js",
     "./components/opt-out-reason.js": "./src/components/opt-in-flyout/opt-out-reason.js",
     "./components/pager-numeric.js": "./src/components/pagination/pager-numeric.js",
+    "./components/status-icon.js": "./src/components/status-icon/status-icon.js",
     "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
     "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js",
     "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js"
