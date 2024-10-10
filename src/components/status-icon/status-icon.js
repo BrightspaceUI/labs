@@ -45,11 +45,7 @@ class StatusIcon extends RtlMixin(LitElement) {
 				color: var(--d2l-color-olivine);
 			}
 			span {
-				margin-left: 0.4em;
-			}
-			:host([dir="rtl"]) span {
-				margin-left: 0;
-				margin-right: 0.4em;
+				margin-inline-start: 0.4em;
 			}
 		`;
 	}
