@@ -13,6 +13,10 @@ export class D2LGradeResultStudentGradePreview extends Localizer(LitElement) {
 
 	static get properties() {
 		return {
+			hideLabel: {
+				type: Boolean,
+				attribute: 'hide-label'
+			},
 			outOf: {
 				type: Number,
 				attribute: 'out-of'
@@ -51,16 +55,24 @@ export class D2LGradeResultStudentGradePreview extends Localizer(LitElement) {
 		`];
 	}
 
+	constructor() {
+		super();
+		this.hideLabel = false;
+	}
+
 	render() {
 		if (!this.studentGradePreview) {
 			return nothing;
 		}
 
-		const label = html`
-			<label class="d2l-label-text d2l-skeletize" for="d2l-grade-result-student-grade-preview">
-				${this.localize('studentGradePreviewLabel')}
-			</label>
-		`;
+		let label = nothing;
+		if (!this.hideLabel) {
+			label = html`
+				<label class="d2l-label-text d2l-skeletize" for="d2l-grade-result-student-grade-preview">
+					${this.localize('studentGradePreviewLabel')}
+				</label>
+			`;
+		}
 
 		const shouldDisplayAny = Object.values(previewOptions).some(option => this._shouldDisplay(option));
 		if (!shouldDisplayAny) {

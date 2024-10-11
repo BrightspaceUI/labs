@@ -59,6 +59,12 @@ describe('student-grade-preview', () => {
 			outOf: 10,
 			studentGradePreview: '{"score":"-", "symbol":"-%", "colour":""}'
 		},
+		{
+			name: 'hide-label',
+			hideLabel: true,
+			outOf: 10,
+			studentGradePreview: '{"score":9, "symbol":"90 %", "colour":"#AAAAFF"}'
+		},
 	];
 
 	tests.forEach((test) => {
@@ -66,6 +72,7 @@ describe('student-grade-preview', () => {
 			const el = await fixture(
 				html`
 					<d2l-grade-result-student-grade-preview
+						?hide-label=${test.hideLabel}
 						out-of=${test.outOf}
 						student-grade-preview=${test.studentGradePreview}
 					></d2l-grade-result-student-grade-preview>
