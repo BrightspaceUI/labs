@@ -2,11 +2,11 @@
 	"browsers": [
 		{
 			"name": "Chromium",
-			"version": 129
+			"version": 130
 		},
 		{
 			"name": "Firefox",
-			"version": 130
+			"version": 131
 		},
 		{
 			"name": "Webkit",
