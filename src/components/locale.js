@@ -4,7 +4,7 @@ export const Localizer = superclass => class extends LocalizeMixin(superclass) {
 
 	static get localizeConfig() {
 		return {
-			importFunc: async lang => (await import(`./../../lang/${lang}.js`)).default,
+			importFunc: async lang => (await import(`../../lang/${lang}.js`)).default,
 		};
 	}
 };
