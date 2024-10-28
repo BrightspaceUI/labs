@@ -38,7 +38,7 @@
     "eslint": "^8",
     "eslint-config-brightspace": "^1.0",
     "messageformat-validator": "^2.4.2",
-    "sinon": "^17"
+    "sinon": "^19"
   },
   "dependencies": {
     "@brightspace-hmc/siren-sdk": "^3",
