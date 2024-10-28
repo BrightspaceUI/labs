@@ -6,6 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{numerator}/{denominator}",
 	"outOfDenominator": "{denominator} 点満点中",
 	"overallGrade": "全体の成績",
-	"studentGradePreviewLabel": "Learner View of Grade",
-	"studentGradePreviewNotShown": "Grade not shown to learners",
+	"studentGradePreviewLabel": "受講者の成績ビュー",
+	"studentGradePreviewNotShown": "成績は受講者には表示されません",
 };

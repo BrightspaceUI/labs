@@ -6,6 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{numerator} av {denominator}",
 	"outOfDenominator": "av {denominator}",
 	"overallGrade": "Totalbetyg",
-	"studentGradePreviewLabel": "Learner View of Grade",
-	"studentGradePreviewNotShown": "Grade not shown to learners",
+	"studentGradePreviewLabel": "Elevvy över betyg",
+	"studentGradePreviewNotShown": "Betyg visas inte för eleverna",
 };

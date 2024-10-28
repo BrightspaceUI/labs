@@ -6,6 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{numerator} sobre {denominator}",
 	"outOfDenominator": "sobre {denominator}",
 	"overallGrade": "Calificación general",
-	"studentGradePreviewLabel": "Learner View of Grade",
-	"studentGradePreviewNotShown": "Grade not shown to learners",
+	"studentGradePreviewLabel": "Vista de calificaciones del estudiante",
+	"studentGradePreviewNotShown": "La calificación no se muestra a los estudiantes",
 };

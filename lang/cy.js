@@ -6,6 +6,6 @@ export default {
 	"numeratorOutOfDenominator": "{numerator} o {denominator}",
 	"outOfDenominator": "o {denominator}",
 	"overallGrade": "Gradd Gyffredinol",
-	"studentGradePreviewLabel": "Learner View of Grade",
-	"studentGradePreviewNotShown": "Grade not shown to learners",
+	"studentGradePreviewLabel": "Gwedd Dysgwr o Radd",
+	"studentGradePreviewNotShown": "Ni ddangosir y radd i ddysgwyr",
 };
