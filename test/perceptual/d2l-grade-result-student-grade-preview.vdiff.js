@@ -12,57 +12,75 @@ describe('student-grade-preview', () => {
 		{
 			name: 'no-display-options',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{}'
 		},
 		{
 			name: 'select-box-symbol',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
 		},
 		{
 			name: 'percentage-symbol',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":9, "symbol":"90 %", "colour":"#AAAAFF"}'
 		},
 		{
 			name: 'score-and-symbol-only',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":2, "symbol":"Bad"}'
 		},
 		{
 			name: 'score-and-colour-only',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":10, "colour":"#11FF11"}'
 		},
 		{
 			name: 'symbol-and-colour-only',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"symbol":"11 %", "colour":"#666666"}'
 		},
 		{
 			name: 'score-only',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":7}'
 		},
 		{
 			name: 'symbol-only',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"symbol":"A+"}'
 		},
 		{
 			name: 'colour-only',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"colour":"#FFAAAA"}'
 		},
 		{
 			name: 'null-values',
 			outOf: 10,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":"-", "symbol":"-%", "colour":""}'
 		},
 		{
 			name: 'hide-label',
 			hideLabel: true,
 			outOf: 10,
+			displayStudentGradePreview: true,
+			studentGradePreview: '{"score":9, "symbol":"90 %", "colour":"#AAAAFF"}'
+		},
+		{
+			name: 'hide-student-grade-preview',
+			hideLabel: false,
+			outOf: 10,
+			displayStudentGradePreview: false,
 			studentGradePreview: '{"score":9, "symbol":"90 %", "colour":"#AAAAFF"}'
 		},
 	];
@@ -72,6 +90,7 @@ describe('student-grade-preview', () => {
 			const el = await fixture(
 				html`
 					<d2l-grade-result-student-grade-preview
+						?hidden=${!test.displayStudentGradePreview}
 						?hide-label=${test.hideLabel}
 						out-of=${test.outOf}
 						student-grade-preview=${test.studentGradePreview}
@@ -97,6 +116,7 @@ describe('presentational-with-grade-preview', () => {
 			includeGradeButton: true,
 			includeReportsButton: true,
 			readOnly: false,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
 		{
@@ -109,6 +129,7 @@ describe('presentational-with-grade-preview', () => {
 			includeGradeButton: true,
 			includeReportsButton: true,
 			readOnly: false,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"B", "colour":"#00FF00"}'
 		},
 		{
@@ -120,6 +141,7 @@ describe('presentational-with-grade-preview', () => {
 			includeGradeButton: true,
 			includeReportsButton: true,
 			readOnly: true,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
 		{
@@ -132,6 +154,7 @@ describe('presentational-with-grade-preview', () => {
 			includeGradeButton: true,
 			includeReportsButton: true,
 			readOnly: true,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"B", "colour":"#00FF00"}'
 		},
 		{
@@ -144,6 +167,7 @@ describe('presentational-with-grade-preview', () => {
 			includeGradeButton: true,
 			includeReportsButton: true,
 			readOnly: true,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"B", "colour":"#00FF00"}'
 		},
 		{
@@ -157,6 +181,7 @@ describe('presentational-with-grade-preview', () => {
 			includeGradeButton: true,
 			includeReportsButton: true,
 			readOnly: false,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
 		{
@@ -171,6 +196,7 @@ describe('presentational-with-grade-preview', () => {
 			includeReportsButton: true,
 			readOnly: true,
 			subtitleText: 'Average post score',
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
 		{
@@ -185,6 +211,7 @@ describe('presentational-with-grade-preview', () => {
 			includeGradeButton: true,
 			includeReportsButton: true,
 			readOnly: false,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
 		{
@@ -196,6 +223,7 @@ describe('presentational-with-grade-preview', () => {
 			includeGradeButton: true,
 			includeReportsButton: true,
 			readOnly: false,
+			displayStudentGradePreview: true,
 			studentGradePreview: '{}'
 		},
 	];
@@ -212,20 +240,21 @@ describe('presentational-with-grade-preview', () => {
 					const el = await fixture(
 						html`
 							<d2l-labs-d2l-grade-result-presentational
+								?display-student-grade-preview=${test.displayStudentGradePreview}
 								gradeType=${test.gradeType}
-								labelText=${test.labelText}
-								letterGradeOptions=${test.letterGradeOptions}
-								selectedLetterGrade=${test.selectedLetterGrade}
-								scoreNumerator=${test.scoreNumerator}
-								scoreDenominator=${test.scoreDenominator}
-								?showFlooredScoreWarning=${test.showFlooredScoreWarning}
-								?isManualOverrideActive=${test.isManualOverrideActive}
-								?isGradeAutoCompleted=${test.isGradeAutoCompleted}
 								?includeGradeButton=${test.includeGradeButton}
 								?includeReportsButton=${test.includeReportsButton}
+								?isManualOverrideActive=${test.isManualOverrideActive}
+								?isGradeAutoCompleted=${test.isGradeAutoCompleted}
+								labelText=${test.labelText}
+								letterGradeOptions=${test.letterGradeOptions}
 								?readOnly=${test.readOnly}
-								subtitleText=${test.subtitleText}
+								scoreDenominator=${test.scoreDenominator}
+								scoreNumerator=${test.scoreNumerator}
+								selectedLetterGrade=${test.selectedLetterGrade}
+								?showFlooredScoreWarning=${test.showFlooredScoreWarning}
 								student-grade-preview=${test.studentGradePreview}
+								subtitleText=${test.subtitleText}
 							></d2l-labs-d2l-grade-result-presentational>
 						`, { viewport: screenSizeCategory.viewport }
 					);

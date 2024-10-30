@@ -17,26 +17,27 @@ const numberConverter = {
 export class D2LGradeResultPresentational extends Localizer(LitElement) {
 	static get properties() {
 		return {
+			allowNegativeScore: { type: Boolean },
+			customManualOverrideClearText: { type: String },
+			displayStudentGradePreview: { type: Boolean, attribute: 'display-student-grade-preview' },
+			gradeButtonTooltip: { type: String },
 			gradeType: { type: String },
-			labelText: { type: String },
-			scoreDenominator: { type: Number },
-			scoreNumerator: { type: Number, converter: numberConverter },
-			letterGradeOptions: { type: Object },
-			selectedLetterGrade: { type: String },
+			hideTitle: { type: Boolean },
 			includeGradeButton: { type: Boolean },
 			includeReportsButton: { type: Boolean },
-			gradeButtonTooltip: { type: String },
-			reportsButtonTooltip: { type: String },
-			readOnly: { type: Boolean },
-			isManualOverrideActive: { type: Boolean },
-			hideTitle: { type: Boolean },
-			customManualOverrideClearText: { type: String },
-			subtitleText: { type: String },
-			required: { type: Boolean },
 			inputLabelText: { type: String },
+			isManualOverrideActive: { type: Boolean },
 			labelHeadingLevel: { type: Number },
-			allowNegativeScore: { type: Boolean },
+			labelText: { type: String },
+			letterGradeOptions: { type: Object },
+			readOnly: { type: Boolean },
+			reportsButtonTooltip: { type: String },
+			required: { type: Boolean },
+			scoreDenominator: { type: Number },
+			scoreNumerator: { type: Number, converter: numberConverter },
+			selectedLetterGrade: { type: String },
 			showFlooredScoreWarning: { type: Boolean },
+			subtitleText: { type: String },
 			studentGradePreview: { type: Object, attribute: 'student-grade-preview' },
 		};
 	}
@@ -69,17 +70,17 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 
 	constructor() {
 		super();
-		this.readOnly = false;
+		this.allowNegativeScore = false;
+		this.customManualOverrideClearText = undefined;
+		this.hideTitle = false;
 		this.includeGradeButton = false;
 		this.includeReportsButton = false;
-		this.selectedLetterGrade = '';
 		this.isManualOverrideActive = false;
-		this.showFlooredScoreWarning = false;
-		this.hideTitle = false;
-		this.customManualOverrideClearText = undefined;
-		this.subtitleText = undefined;
-		this.allowNegativeScore = false;
 		this.labelHeadingLevel = undefined;
+		this.readOnly = false;
+		this.selectedLetterGrade = '';
+		this.showFlooredScoreWarning = false;
+		this.subtitleText = undefined;
 	}
 
 	render() {
@@ -113,8 +114,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 
 	_onManualOverrideClearClick() {
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-manual-override-clear-click', {
-			composed: true,
-			bubbles: true
+			bubbles: true,
+			composed: true
 		}));
 	}
 
@@ -132,8 +133,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 
 		return html`
 			<d2l-grade-result-icon-button
-				text=${this.gradeButtonTooltip}
 				icon="tier1:grade"
+				text=${this.gradeButtonTooltip}
 				@d2l-grade-result-icon-button-click=${this._onGradeButtonClick}
 			></d2l-grade-result-icon-button>
 		`;
@@ -146,8 +147,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 
 		return html`
 			<d2l-grade-result-icon-button
-				text=${this.reportsButtonTooltip}
 				icon="tier1:reports"
+				text=${this.reportsButtonTooltip}
 				@d2l-grade-result-icon-button-click=${this._onReportsButtonClick}
 			></d2l-grade-result-icon-button>
 		`;
@@ -158,8 +159,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 			<d2l-grade-result-letter-score
 				.availableOptions=${this.letterGradeOptions}
 				.label=${this.inputLabelText}
-				.selectedOption=${this.selectedLetterGrade}
 				.readOnly=${this._isReadOnly()}
+				.selectedOption=${this.selectedLetterGrade}
 			></d2l-grade-result-letter-score>
 		`;
 	}
@@ -174,8 +175,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 		return html`
 			<d2l-button-subtle
 				class="d2l-grade-result-manual-override-clear"
-				text=${text}
 				icon="tier1:close-default"
+				text=${text}
 				@click=${this._onManualOverrideClearClick}
 			></d2l-button-subtle>
 		`;
@@ -184,13 +185,13 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 	_renderNumericScoreComponent() {
 		return html`
 			<d2l-grade-result-numeric-score
+				?allowNegativeScore=${this.allowNegativeScore}
 				.label=${this.inputLabelText}
-				.scoreNumerator=${this.scoreNumerator}
-				.scoreDenominator=${this.scoreDenominator}
 				.readOnly=${this._isReadOnly()}
 				?required=${this.required}
+				.scoreDenominator=${this.scoreDenominator}
+				.scoreNumerator=${this.scoreNumerator}
 				?showFlooredScoreWarning=${this.showFlooredScoreWarning}
-				?allowNegativeScore=${this.allowNegativeScore}
 			></d2l-grade-result-numeric-score>
 		`;
 	}
@@ -212,10 +213,10 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 
 		return html`
 			<label
-				class="d2l-label-text"
-				role=${this.labelHeadingLevel ? 'heading' : ''}
 				aria-level=${ifDefined(this.labelHeadingLevel)}
-				for="d2l-grade">
+				class="d2l-label-text"
+				for="d2l-grade"
+				role=${this.labelHeadingLevel ? 'heading' : ''}>
 				${this.labelText}
 			</label>
 		`;
@@ -240,9 +241,10 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 
 		return html`
 			<d2l-grade-result-student-grade-preview
+				?hidden=${!this.displayStudentGradePreview}
+				out-of=${this.scoreDenominator}
 				.studentGradePreview=${this.studentGradePreview}
-				out-of=${this.scoreDenominator}>
-			</d2l-grade-result-student-grade-preview>
+			></d2l-grade-result-student-grade-preview>
 		`;
 	}
 
