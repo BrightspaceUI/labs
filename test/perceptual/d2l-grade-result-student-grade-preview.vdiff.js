@@ -67,7 +67,7 @@ describe('student-grade-preview', () => {
 			name: 'null-values',
 			outOf: 10,
 			displayStudentGradePreview: true,
-			studentGradePreview: '{"score":"-", "symbol":"-%", "colour":""}'
+			studentGradePreview: '{"score":null, "symbol":"-%", "colour":""}'
 		},
 		{
 			name: 'hide-label',

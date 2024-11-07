@@ -12,5 +12,10 @@
 			"name": "Webkit",
 			"version": 18
 		}
-	]
+	],
+	"system": {
+		"platform": "linux",
+		"release": "6.8.0-1016-aws",
+		"arch": "x64"
+	}
 }

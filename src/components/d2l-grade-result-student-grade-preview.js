@@ -1,6 +1,7 @@
 import '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { bodyCompactStyles, bodySmallStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement, nothing } from 'lit';
+import { formatNumber } from '@brightspace-ui/intl/lib/number.js';
 import { Localizer } from './locale.js';
 
 const previewOptions = {
@@ -110,7 +111,9 @@ export class D2LGradeResultStudentGradePreview extends Localizer(LitElement) {
 			return nothing;
 		}
 
-		const score = this._shouldDisplay(previewOptions.score) ? `${this.studentGradePreview?.score ?? ''} / ${this.outOf || 0}` : '';
+		const score = this._shouldDisplay(previewOptions.score)
+			? `${this.studentGradePreview?.score && typeof this.studentGradePreview?.score === 'number' ? formatNumber(this.studentGradePreview?.score) : ''} / ${this.outOf && typeof this.outOf === 'number' ? formatNumber(this.outOf) : 0}`
+			: '';
 		const accessibleScore = this._shouldDisplay(previewOptions.score) ? this.localize('numeratorOutOfDenominator', { numerator: this.studentGradePreview?.score, denominator: this.outOf }) : '';
 
 		const symbol = this._shouldDisplay(previewOptions.symbol) ? this.studentGradePreview?.symbol : '';
