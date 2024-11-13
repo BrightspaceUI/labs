@@ -66,6 +66,17 @@ export default class ComputedValue {
 		return ASYNC_STATUSES.ERROR;
 	}
 
+	asyncRender(renderStates = {}) {
+		switch (this.asyncStatus) {
+			case ASYNC_STATUSES.SUCCESS:
+				return renderStates[ASYNC_STATUSES.SUCCESS]?.(this.value);
+			case ASYNC_STATUSES.ERROR:
+				return renderStates[ASYNC_STATUSES.ERROR]?.(this.error);
+			case ASYNC_STATUSES.PENDING:
+				return renderStates[ASYNC_STATUSES.PENDING]?.();
+		}
+	}
+
 	hostUpdate() {
 		const currDependencies = this._getDependencies();
 		const shouldCompute = this._shouldCompute(this._prevDependencies, currDependencies);

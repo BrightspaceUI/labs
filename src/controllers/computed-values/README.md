@@ -145,7 +145,7 @@ The compute lifecycle for each `ComputeValue` controller instance will be execut
 
 ## `ComputedValue` Instance Methods
 
-### Constructor
+### `constructor(host, options)`
 
 | Parameter Name | Type | Description | Required |
 |---|---|---|---|
@@ -157,6 +157,17 @@ The compute lifecycle for each `ComputeValue` controller instance will be execut
 | `options.shouldCompute` | Function(Array, Array) : Bool | The function used to decide whether or not to run the compute function.<br><br>This function is passed an array of the previous dependencies and an array of the current dependencies. It must return a boolean representing whether to call the compute function or not.<br><br>If not assigned, the default `shouldCompute` function will do an indentity comparison for each of the previous and current dependencies one by one and return true immediately if one of the dependencies has changed. | |
 | `options.isAsync` | Bool | This tells the controller whether the compute function is asynchronous. If this is true, the compute function must return a promise. | |
 | `options.shouldRequestUpdate` | Function(Object, Object) : Bool | This function is used to decide whether or not to call the host's `requestUpdate` method after an async `compute` function finished updating the value.<br><br>This function is passed an object that contains the value and async status before the compute finished executing, and one object with the current value and async status. It must return a boolean representing whether to call the `requestUpdate` method or not.<br><br>If not assigned, this defaults to a function that always returns true. | |
+
+### `asyncRender(renderMap)`
+
+This method is used to render different things depending on the async state of the computed value. If the computed value is not async, this method will always return `undefined`.
+
+| Parameter Name | Type | Description | Required |
+|---|---|---|---|
+| `renderMap` | Object | This object must contain different functions to call depending on the async state of the computed value. | Yes |
+| `renderMap.pending` | Function() : Any | If the current async state of the computed value is "pending", this function is called when calling `asyncRender`. The function is passed no arguments, and the return value from it is returned from `asyncRender`. | No |
+| `renderMap.success` | Function(Any) : Any | If the current async state of the computed value is "success", this function is called when calling `asyncRender`. The function is passed the result of the computed value as its first arguement, and the return value from it is returned from `asyncRender`. | No |
+| `renderMap.success` | Function(Any) : Any | If the current async state of the computed value is "error", this function is called when calling `asyncRender`. The function is passed the result of the error value as its first arguement, and the return value from it is returned from `asyncRender`. | No |
 
 ## `ComputedValue` Instance Members
 
