@@ -11,6 +11,9 @@ export default {
 	"components:accessibilityDisabilitySimulator:none": "Ingen", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Aktivér din skærmlæser og fane i indholdet", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Simulationstype:", // Label for the disability simulation options
+	"components:attributePicker:addValue": "Klik for at tilføje værdi {value}", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:minimumRequirement": "Der skal angives mindst én værdi", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
+	"components:attributePicker:removeValue": "Klik for at fjerne værdi {value}", // Label for screen readers to inform user that they can click to remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Afkrydsningsfelt skjult", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Afkrydsningsfelt udvidet", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Annuller",

@@ -11,6 +11,9 @@ export default {
 	"components:accessibilityDisabilitySimulator:none": "Keine", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Aktivieren Sie Ihre Bildschirmsprachausgabe und tippen Sie den Inhalt an", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Simulationstyp:", // Label for the disability simulation options
+	"components:attributePicker:addValue": "Klicken Sie, um den Wert {value} hinzuzufügen", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:minimumRequirement": "Mindestens ein Wert muss festgelegt werden", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
+	"components:attributePicker:removeValue": "Klicken Sie, um den Wert {value} zu entfernen", // Label for screen readers to inform user that they can click to remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Kontrollkästchen ausgeblendet", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Kontrollkästchen eingeblendet", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Abbrechen",

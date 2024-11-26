@@ -11,6 +11,9 @@ export default {
 	"components:accessibilityDisabilitySimulator:none": "なし", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "スクリーンリーダーを有効にして、コンテンツを利用します", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "シミュレーションタイプ: ", // Label for the disability simulation options
+	"components:attributePicker:addValue": "クリックして値 {value} を追加", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:minimumRequirement": "少なくとも 1 つの値を設定する必要があります", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
+	"components:attributePicker:removeValue": "クリックして値 {value} を削除", // Label for screen readers to inform user that they can click to remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "折りたたまれたチェックボックス", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "展開されたチェックボックス", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "キャンセル",

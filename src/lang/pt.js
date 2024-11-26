@@ -11,6 +11,9 @@ export default {
 	"components:accessibilityDisabilitySimulator:none": "Nenhuma", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Ative seu leitor de tela e insira o conteúdo", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Tipo de simulação:", // Label for the disability simulation options
+	"components:attributePicker:addValue": "Clique para adicionar valor {value}", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:minimumRequirement": "Pelo menos um valor deve ser definido", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
+	"components:attributePicker:removeValue": "Clique para remover valor {value}", // Label for screen readers to inform user that they can click to remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Caixa de seleção recolhida", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Caixa de seleção expandida", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Cancelar",
