@@ -21,7 +21,7 @@
     "langs:sync": "mfv add-missing && mfv remove-extraneous",
     "langs:sort": "mfv sort",
     "lint": "npm run lint:eslint && npm run lint:style",
-    "lint:eslint": "eslint . --ext .js,.html",
+    "lint:eslint": "eslint .",
     "lint:style": "stylelint \"**/*.{js,html}\"",
     "start": "web-dev-server --node-resolve --open --watch",
     "test": "npm run lint && npm run test:translations && npm run test:unit && npm run test:axe",
@@ -36,7 +36,7 @@
     "@brightspace-ui/stylelint-config": "^1",
     "@brightspace-ui/testing": "^1",
     "@web/dev-server": "^0.3",
-    "eslint": "^8",
+    "eslint": "^9",
     "eslint-config-brightspace": "^2",
     "messageformat-validator": "^2",
     "stylelint": "^16"
