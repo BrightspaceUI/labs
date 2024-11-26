@@ -37,7 +37,7 @@
     "@brightspace-ui/testing": "^1",
     "@web/dev-server": "^0.3",
     "eslint": "^8",
-    "eslint-config-brightspace": "^1",
+    "eslint-config-brightspace": "^2",
     "messageformat-validator": "^2",
     "stylelint": "^16"
   },
