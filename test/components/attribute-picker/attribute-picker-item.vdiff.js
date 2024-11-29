@@ -1,44 +1,48 @@
 import '../../../src/components/attribute-picker/attribute-picker-item.js';
 import { expect, fixture, focusElem, hoverElem, html, oneEvent } from '@brightspace-ui/testing';
 
+async function createComponent(deletable = false) {
+	return await fixture(html`<d2l-labs-attribute-picker-item text="attribute" ?deletable=${deletable}></d2l-labs-attribute-picker-item>`);
+}
+
 describe('attribute-picker-item', () => {
 	it('default', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker-item text="attribute"></d2l-labs-attribute-picker-item>`);
+		const component = await createComponent();
 		await expect(component).to.be.golden();
 	});
 
 	it('deletable', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker-item text="attribute" deletable></d2l-labs-attribute-picker-item>`);
+		const component = await createComponent(true);
 		await expect(component).to.be.golden();
 	});
 
 	it('focused', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker-item text="attribute"></d2l-labs-attribute-picker-item>`);
+		const component = await createComponent();
 		await focusElem(component);
 		await expect(component).to.be.golden();
 	});
 
 	it('focused and deletable', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker-item text="attribute" deletable></d2l-labs-attribute-picker-item>`);
+		const component = await createComponent(true);
 		await focusElem(component);
 		await expect(component).to.be.golden();
 	});
 
 	it('hover', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker-item text="attribute"></d2l-labs-attribute-picker-item>`);
+		const component = await createComponent();
 		await hoverElem(component);
 		await expect(component).to.be.golden();
 	});
 
 	it('unfocused item with hovered icon', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker-item text="attribute" deletable></d2l-labs-attribute-picker-item>`);
+		const component = await createComponent(true);
 		const icon = component.shadowRoot.querySelector('d2l-icon');
 		await hoverElem(icon);
 		await expect(component).to.be.golden();
 	});
 
 	it('focused item with hovered icon', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker-item text="attribute" deletable></d2l-labs-attribute-picker-item>`);
+		const component = await createComponent(true);
 		await focusElem(component);
 		const icon = component.shadowRoot.querySelector('d2l-icon');
 		await hoverElem(icon);
