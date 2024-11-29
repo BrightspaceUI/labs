@@ -1,5 +1,5 @@
 import '../../../src/components/attribute-picker/attribute-picker.js';
-import { expect, fixture, html, oneEvent, runConstructor, sendKeysElem } from '@brightspace-ui/testing';
+import { expect, fixture, focusElem, html, oneEvent, runConstructor, sendKeysElem } from '@brightspace-ui/testing';
 
 function createAttributeList(nameList) {
 	return nameList.map(name => ({
@@ -42,9 +42,9 @@ describe('attribute-picker', () => {
 		it('should prevent unlisted if allow-freeform is disabled.', async() => {
 			const component = await createComponent(attributeList, { allowFreeform: false });
 			const input = component.shadowRoot.querySelector('input');
-			input.focus();
+			await focusElem(input);
 
-			component._text = 'unlisted attribute';
+			await sendKeysElem(input, 'type', 'unlisted attribute');
 			await sendKeysElem(input, 'press', 'Enter');
 			expect(component.attributeList[component.attributeList.length - 1]).to.not.equal('unlisted attribute');
 		});
@@ -58,7 +58,7 @@ describe('attribute-picker', () => {
 		it('should scroll through the dropdown using the up and down arrow keys (updated)', async() => {
 			const component = await createComponent(attributeList);
 			const input = component.shadowRoot.querySelector('input');
-			input.focus();
+			await focusElem(input);
 
 			// In freeform mode, pressing down should focus the first list item.
 			await changeDirection(component, input, 'ArrowDown', 3);
@@ -71,11 +71,11 @@ describe('attribute-picker', () => {
 
 		it('should scroll through tags using left and right arrow keys', async() => {
 			const component = await createComponent(shortAttributeList);
-			const pageNumberInput = component.shadowRoot.querySelector('input');
-			pageNumberInput.focus();
+			const input = component.shadowRoot.querySelector('input');
+			await focusElem(input);
 
 			// Select last attribute
-			await sendKeysElem(pageNumberInput, 'press', 'ArrowLeft');
+			await sendKeysElem(input, 'press', 'ArrowLeft');
 			const attributeElements = component.shadowRoot.querySelectorAll('.d2l-attribute-picker-attribute');
 			let focusElement = component.shadowRoot.querySelector(':focus');
 			expect(attributeElements[1].innerText).to.equal(focusElement.innerText);
@@ -99,7 +99,7 @@ describe('attribute-picker', () => {
 			// Navigate right to return to the input field
 			await sendKeysElem(focusElement, 'press', 'ArrowRight');
 			focusElement = component.shadowRoot.querySelector(':focus');
-			expect(focusElement).to.equal(pageNumberInput);
+			expect(focusElement).to.equal(input);
 		});
 
 		it('should convert different capitalization into capitalization matching an available attribute if any exist', async() => {
@@ -107,14 +107,14 @@ describe('attribute-picker', () => {
 			const input = component.shadowRoot.querySelector('input');
 			expect(component.attributeList.length).to.equal(shortAttributeList.length);
 
-			input.focus();
-			component._text = 'ThReE';
+			await focusElem(input);
+			await sendKeysElem(input, 'type', 'ThReE');
 			await sendKeysElem(input, 'press', 'Enter');
 
 			expect(component.attributeList.length).to.equal(attributeList.length);
 			expect(component.attributeList).to.deep.equal(attributeList);
 
-			component._text = 'THREE';
+			await sendKeysElem(input, 'type', 'THREE');
 			await sendKeysElem(input, 'press', 'Enter');
 
 			expect(component.attributeList).to.deep.equal(attributeList);
@@ -129,16 +129,16 @@ describe('attribute-picker', () => {
 			const input = component.shadowRoot.querySelector('input');
 			expect(component.attributeList.length).to.equal(3);
 
-			input.focus();
-			component._text = 'four';
+			await focusElem(input);
+			await sendKeysElem(input, 'type', 'four');
 			await sendKeysElem(input, 'press', 'Enter');
 
 			expect(component.attributeList.length).to.equal(4);
-			component._text = 'five';
+			await sendKeysElem(input, 'type', 'five');
 			await sendKeysElem(input, 'press', 'Enter');
 
 			expect(component.attributeList.length).to.equal(5);
-			component._text = 'six';
+			await sendKeysElem(input, 'type', 'six');
 			await sendKeysElem(input, 'press', 'Enter');
 
 			const { detail } = await listener;

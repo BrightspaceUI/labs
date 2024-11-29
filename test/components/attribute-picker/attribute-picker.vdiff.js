@@ -1,5 +1,5 @@
 import '../../../src/components/attribute-picker/attribute-picker.js';
-import { clickElem, expect, fixture, html, oneEvent, sendKeysElem, waitUntil } from '@brightspace-ui/testing';
+import { clickElem, expect, fixture, focusElem, html, oneEvent, sendKeysElem, waitUntil } from '@brightspace-ui/testing';
 
 function createAttributeList(nameList) {
 	return nameList.map(name => ({
@@ -31,20 +31,21 @@ describe('attribute-picker', () => {
 
 		it('dropdown opened freeform off', async() => {
 			const component = await createComponent();
-			component.shadowRoot.querySelector('input').focus();
+			await focusElem(component.shadowRoot.querySelector('input'));
 			await expect(document).to.be.golden();
 		});
 
 		it('dropdown opened freeform on', async() => {
 			const component = await createComponent([], { allowFreeform: true });
-			component.shadowRoot.querySelector('input').focus();
+			await focusElem(component.shadowRoot.querySelector('input'));
 			await expect(document).to.be.golden();
 		});
 
 		it('dropdown filtered', async() => {
 			const component = await createComponent();
-			component._text = 'f';
-			component.shadowRoot.querySelector('input').focus();
+			const input = component.shadowRoot.querySelector('input');
+			await focusElem(input);
+			await sendKeysElem(input, 'type', 'f');
 			await expect(document).to.be.golden();
 		});
 	});
@@ -57,7 +58,7 @@ describe('attribute-picker', () => {
 
 		it('dropdown opened', async() => {
 			const component = await createComponent(selectedAttributeList);
-			component.shadowRoot.querySelector('input').focus();
+			await focusElem(component.shadowRoot.querySelector('input'));
 			await expect(document).to.be.golden();
 		});
 	});
@@ -67,7 +68,7 @@ describe('attribute-picker', () => {
 			it('via dropdown (click)', async() => {
 				const component = await createComponent(selectedAttributeList);
 				const listener = oneEvent(component, 'd2l-labs-attribute-picker-attributes-changed');
-				component.shadowRoot.querySelector('input').focus();
+				await focusElem(component.shadowRoot.querySelector('input'));
 				await waitUntil(() => component._dropdownIndex === 0);
 				const selectedItem = component.shadowRoot.querySelector('.d2l-attribute-picker-li[aria-selected="true"]');
 
@@ -79,7 +80,7 @@ describe('attribute-picker', () => {
 			it('via dropdown (enter)', async() => {
 				const component = await createComponent(selectedAttributeList);
 				const listener = oneEvent(component, 'd2l-labs-attribute-picker-attributes-changed');
-				component.shadowRoot.querySelector('input').focus();
+				await focusElem(component.shadowRoot.querySelector('input'));
 				await waitUntil(() => component._dropdownIndex === 0);
 				const selectedItem = component.shadowRoot.querySelector('.d2l-attribute-picker-li[aria-selected="true"]');
 
@@ -90,10 +91,10 @@ describe('attribute-picker', () => {
 
 			it('via typing (partial match)', async() => {
 				const component = await createComponent(selectedAttributeList);
-				component._text = 'fo'; // partially matches 'four'
 				const listener = oneEvent(component, 'd2l-labs-attribute-picker-attributes-changed');
 				const input = component.shadowRoot.querySelector('input');
-				input.focus();
+				await focusElem(input);
+				await sendKeysElem(input, 'type', 'fo'); // partially matches 'four'
 				await sendKeysElem(input, 'press', 'Enter');
 				await listener;
 				await expect(document).to.be.golden();
@@ -101,10 +102,10 @@ describe('attribute-picker', () => {
 
 			it('via typing (freeform)', async() => {
 				const component = await createComponent(selectedAttributeList, { allowFreeform: true });
-				component._text = 'new attribute';
 				const listener = oneEvent(component, 'd2l-labs-attribute-picker-attributes-changed');
 				const input = component.shadowRoot.querySelector('input');
-				input.focus();
+				await focusElem(input);
+				await sendKeysElem(input, 'type', 'new attribute');
 				await sendKeysElem(input, 'press', 'Enter');
 				await listener;
 				await expect(document).to.be.golden();
@@ -126,7 +127,7 @@ describe('attribute-picker', () => {
 				const component = await createComponent(selectedAttributeList);
 				const listener = oneEvent(component, 'd2l-labs-attribute-picker-attributes-changed');
 				const secondItem = component.shadowRoot.querySelector('d2l-labs-attribute-picker-item:nth-of-type(2)');
-				secondItem.focus();
+				await focusElem(secondItem);
 				await sendKeysElem(secondItem, 'press', 'Delete');
 				await listener;
 				await expect(document).to.be.golden();
@@ -136,7 +137,7 @@ describe('attribute-picker', () => {
 				const component = await createComponent(selectedAttributeList);
 				const listener = oneEvent(component, 'd2l-labs-attribute-picker-attributes-changed');
 				const secondItem = component.shadowRoot.querySelector('d2l-labs-attribute-picker-item:nth-of-type(2)');
-				secondItem.focus();
+				await focusElem(secondItem);
 				await sendKeysElem(secondItem, 'press', 'Backspace');
 				await listener;
 				await expect(document).to.be.golden();
@@ -147,7 +148,7 @@ describe('attribute-picker', () => {
 	describe('error handling', () => {
 		it('marked invalid if empty and required', async() => {
 			const component = await createComponent([], { required: true });
-			component.shadowRoot.querySelector('input').focus();
+			await focusElem(component.shadowRoot.querySelector('input'));
 			component.shadowRoot.querySelector('input').blur();
 			await expect(document).to.be.golden();
 		});

@@ -73,7 +73,7 @@ class AttributePickerItem extends LocalizeLabsElement(LitElement) {
 				word-break: break-all;
 			}
 			d2l-tooltip {
-				word-break: break-all;
+				word-break: break-word;
 			}
 		`];
 	}
