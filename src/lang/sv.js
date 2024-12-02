@@ -12,6 +12,7 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Aktivera skärmläsaren och använd Tabb till att förflytta dig i innehållet", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Simuleringstyp:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Klicka för att lägga till värde {value}", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:limitReached": "Du har nått gränsen på {value} valda värden", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Minst ett värde måste anges", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "Klicka för att ta bort värde {value}", // Label for screen readers to inform user that they can click to remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Komprimerad kryssruta", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden

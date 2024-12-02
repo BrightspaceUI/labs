@@ -12,6 +12,7 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "启用屏幕阅读器并按 Tab 键进入内容", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "模拟类型：", // Label for the disability simulation options
 	"components:attributePicker:addValue": "单击以添加值 {value}", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:limitReached": "您已达到所选值 {value} 的限制", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "必须设置至少一个值", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "单击以删除值 {value}", // Label for screen readers to inform user that they can click to remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "复选框已折叠", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden

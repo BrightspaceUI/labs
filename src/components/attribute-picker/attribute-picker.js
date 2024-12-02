@@ -62,6 +62,9 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 			/* When true, the user currently has focus within the input */
 			_inputFocused: { type: Boolean, reflect: false },
 
+			/* When true, the user has reached the limit of attributes that can be added */
+			_limitReached: { type: Boolean, reflect: false },
+
 			/* The inner text of the input */
 			_text: { type: String, attribute: 'text', reflect: true }
 		};
@@ -239,6 +242,10 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 			${!isValid ? html`
 				<d2l-tooltip for="d2l-attribute-picker-container" state="error" announced position="top" ?force-show=${this._inputFocused}>${this.invalidTooltipText || this.localize('components:attributePicker:minimumRequirement')}</d2l-tooltip>
 			` : null}
+
+			${this.limit && this._limitReached ? html`
+				<d2l-tooltip for="d2l-attribute-picker-container" position="top" ?force-show=${this._inputFocused}>${this.localize('components:attributePicker:limitReached', { value: this.limit })}</d2l-tooltip>
+			` : null}
 		`;
 	}
 
@@ -260,7 +267,8 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 	async addAttribute(newAttribute) {
 		if (!newAttribute || this.attributeList.findIndex(attribute => attribute.name === newAttribute.name) >= 0) return false;
 
-		if (this.limit && this.attributeList.length >= this.limit) {
+		this._limitReached = this.limit && this.attributeList.length >= this.limit;
+		if (this._limitReached) {
 			this.dispatchEvent(new CustomEvent('d2l-labs-attribute-picker-limit-reached', {
 				bubbles: true, composed: true, detail: { limit: this.limit }
 			}));
@@ -432,6 +440,7 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 	async _removeAttribute(index) {
 		this.attributeList = this.attributeList.slice(0, index).concat(this.attributeList.slice(index + 1, this.attributeList.length));
 		this._dispatchAttributeChangedEvent();
+		this._limitReached = this.limit && this.attributeList.length >= this.limit;
 		await this.updateComplete;
 	}
 

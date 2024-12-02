@@ -1,5 +1,7 @@
 import '../../../src/components/attribute-picker/attribute-picker.js';
 import { clickElem, expect, fixture, focusElem, html, oneEvent, sendKeysElem, waitUntil } from '@brightspace-ui/testing';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { styleMap } from 'lit/directives/style-map.js';
 
 function createAttributeList(nameList) {
 	return nameList.map(name => ({
@@ -11,13 +13,19 @@ function createAttributeList(nameList) {
 const assignableAttributeList = createAttributeList(['one', 'two', 'three', 'four', 'five', 'six']);
 const selectedAttributeList = createAttributeList(['one', 'two', 'three']);
 
-async function createComponent(attributeList = [], { allowFreeform = false, required = false } = {}) {
+async function createComponent(attributeList = [], { allowFreeform = false, required = false, limit, hasTooltip = false } = {}) {
+	const styles = {
+		marginTop: hasTooltip ? '25px' : ''
+	};
+
 	return await fixture(html`
 		<d2l-labs-attribute-picker
+			style="${styleMap(styles)}"
 			.attributeList="${attributeList}"
 			.assignableAttributes="${assignableAttributeList}"
 			?allow-freeform=${allowFreeform}
-			?required=${required}>
+			?required=${required}
+			limit=${ifDefined(limit)}>
 		</d2l-labs-attribute-picker>
 	`);
 }
@@ -150,6 +158,17 @@ describe('attribute-picker', () => {
 			const component = await createComponent([], { required: true });
 			await focusElem(component.shadowRoot.querySelector('input'));
 			component.shadowRoot.querySelector('input').blur();
+			await expect(document).to.be.golden();
+		});
+
+		it('tooltip when limit reached', async() => {
+			const component = await createComponent(selectedAttributeList, { limit: 3, hasTooltip: true });
+			await focusElem(component.shadowRoot.querySelector('input'));
+			await waitUntil(() => component._dropdownIndex === 0);
+			const selectedItem = component.shadowRoot.querySelector('.d2l-attribute-picker-li[aria-selected="true"]');
+
+			clickElem(selectedItem);
+			await oneEvent(component, 'd2l-labs-attribute-picker-limit-reached');
 			await expect(document).to.be.golden();
 		});
 	});
