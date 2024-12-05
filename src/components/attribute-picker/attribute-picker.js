@@ -7,8 +7,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { inputStyles } from '@brightspace-ui/core/components/inputs/input-styles.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { repeat } from 'lit/directives/repeat.js';
-import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
-
 const keyCodes = {
 	ENTER: 13,
 	ESCAPE: 27,
@@ -20,7 +18,7 @@ const keyCodes = {
 	DELETE: 46
 };
 
-class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitElement))) {
+class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
 	static get properties() {
 		return {
 			/* When true, the user can manually enter any attribute they wish. If false, they must match a value from the dropdown. */
@@ -48,25 +46,25 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 			required: { type: Boolean, attribute: 'required', reflect: true },
 
 			/* Represents the index of the currently focused attribute. If no attribute is focused, equals -1 */
-			_activeAttributeIndex: { type: Number, reflect: false },
+			_activeAttributeIndex: { state: true },
 
 			/* Represents the index of the currently focused dropdown list item. If no item is focused, equals -1 */
-			_dropdownIndex: { type: Number, reflect: false },
+			_dropdownIndex: { state: true },
 
 			/* When true, the user currently has focus within the component */
 			_hasFocus: { state: true },
 
 			/* When true, the user has yet to lose focus for the first time, meaning the validation won't be shown until they've lost focus for the first time */
-			_initialFocus: { type: Boolean, reflect: false },
+			_initialFocus: { state: true },
 
 			/* When true, the user currently has focus within the input */
-			_inputFocused: { type: Boolean, reflect: false },
+			_inputFocused: { state: true },
 
 			/* When true, the user has reached the limit of attributes that can be added */
-			_limitReached: { type: Boolean, reflect: false },
+			_limitReached: { state: true },
 
 			/* The inner text of the input */
-			_text: { type: String, attribute: 'text', reflect: true }
+			_text: { state: true }
 		};
 	}
 
@@ -146,16 +144,11 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 				background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0wIDBoMjJ2MjJIMHoiLz4KICAgIDxwYXRoIGQ9Ik0xOC44NjQgMTYuNDdMMTIuNjIzIDMuOTg5YTEuNzgzIDEuNzgzIDAgMDAtMy4xOTIgMEwzLjE4OSAxNi40N2ExLjc2MSAxLjc2MSAwIDAwLjA4IDEuNzNjLjMyNS41MjUuODk4Ljc5OCAxLjUxNi43OTloMTIuNDgzYy42MTggMCAxLjE5Mi0uMjczIDEuNTE2LS44LjIzNy0uMzM1LjI2NS0xLjM3LjA4LTEuNzN6IiBmaWxsPSIjQ0QyMDI2IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz4KICAgIDxwYXRoIGQ9Ik0xMS4wMjcgMTcuMjY0YTEuMzM3IDEuMzM3IDAgMTEwLTIuNjc1IDEuMzM3IDEuMzM3IDAgMDEwIDIuNjc1ek0xMS45IDEyLjk4YS44OTIuODkyIDAgMDEtMS43NDcgMEw5LjI3IDguNTJhLjg5Mi44OTIgMCAwMS44NzQtMS4wNjRoMS43NjhhLjg5Mi44OTIgMCAwMS44NzQgMS4wNjVsLS44ODYgNC40NTh6IiBmaWxsPSIjRkZGIi8+CiAgPC9nPgo8L3N2Zz4K");
 				display: flex;
 				height: 22px;
-				left: unset;
+				inset-inline-end: 8px;
 				position: absolute;
-				right: 8px;
 				top: 50%;
 				transform: translateY(-50%);
 				width: 22px;
-			}
-			:host([dir="rtl"]) .d2l-input-text-invalid-icon {
-				left: 8px;
-				right: unset;
 			}
 		`];
 	}
@@ -173,10 +166,16 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 		this._inputFocused = false;
 	}
 
-	firstUpdated(changedProperties) {
-		super.firstUpdated(changedProperties);
+	connectedCallback() {
+		super.connectedCallback();
 		this.addEventListener('focusin', this._onFocusIn);
 		this.addEventListener('focusout', this._onFocusOut);
+	}
+
+	disconnectedCallback() {
+		super.disconnectedCallback();
+		this.removeEventListener('focusin', this._onFocusIn);
+		this.removeEventListener('focusout', this._onFocusOut);
 	}
 
 	render() {

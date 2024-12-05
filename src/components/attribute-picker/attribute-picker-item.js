@@ -4,22 +4,13 @@ import '@brightspace-ui/core/components/tooltip/tooltip.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
-import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
-class AttributePickerItem extends RtlMixin(LocalizeLabsElement(LitElement)) {
+class AttributePickerItem extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {
-			deletable: {
-				type: Boolean,
-				reflect: true
-			},
-			tabIndex: {
-				type: Number,
-				reflect: true
-			},
-			text: {
-				type: String
-			}
+			deletable: { type: Boolean, reflect: true },
+			tabIndex: { type: Number, reflect: true },
+			text: { type: String }
 		};
 	}
 
@@ -40,14 +31,14 @@ class AttributePickerItem extends RtlMixin(LocalizeLabsElement(LitElement)) {
 				border-radius: 0.3rem;
 				display: flex;
 				gap: 0.2rem;
-				padding: 0.25rem 0.75rem 0.2rem;
+				padding: 0.25rem;
+				padding-inline: 0.5rem;
 				user-select: none;
 			}
 			:host([deletable]) .d2l-labs-attribute-picker-item-wrapper {
-				padding: 0.1rem 0.1rem 0.1rem 0.55rem;
-			}
-			:host([dir="rtl"][deletable]) .d2l-labs-attribute-picker-item-wrapper {
-				padding: 0.1rem 0.55rem 0.1rem 0.1rem;
+				padding-bottom: 0.15rem;
+				padding-inline: 0.5rem 0.1rem;
+				padding-top: 0.1rem;
 			}
 			:host(:hover) .d2l-labs-attribute-picker-item-wrapper {
 				background-color: var(--d2l-color-gypsum);
@@ -97,7 +88,7 @@ class AttributePickerItem extends RtlMixin(LocalizeLabsElement(LitElement)) {
 		return html`
 			<div class="d2l-labs-attribute-picker-item-wrapper">
 				<div id="d2l-labs-attribute-picker-item-text" class="d2l-body-compact d2l-labs-attribute-picker-item-text">${this.text}</div>
-				<d2l-button-icon role="button" tabindex="-1" text="${this.localize('components:attributePicker:removeValue', 'value', this.text)}" icon="tier1:close-small" ?hidden="${!this.deletable}" @click="${this._onDeleteItem}"></d2l-button-icon>
+				<d2l-button-icon tabindex="-1" text="${this.localize('components:attributePicker:removeValue', 'value', this.text)}" icon="tier1:close-small" ?hidden="${!this.deletable}" @click="${this._onDeleteItem}"></d2l-button-icon>
 			</div>
 			<d2l-tooltip for="d2l-labs-attribute-picker-item-text" position="top" show-truncated-only offset="16">${this.text}</d2l-tooltip>
 		`;
