@@ -9,7 +9,6 @@ class AttributePickerItem extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {
 			deletable: { type: Boolean, reflect: true },
-			tabIndex: { type: Number, reflect: true },
 			text: { type: String }
 		};
 	}
@@ -81,7 +80,11 @@ class AttributePickerItem extends LocalizeLabsElement(LitElement) {
 	constructor() {
 		super();
 		this.deletable = false;
-		this.tabIndex = 0; // without it we can't focus the item
+	}
+
+	firstUpdated(changedProperties) {
+		super.firstUpdated(changedProperties);
+		this.tabIndex = 0;
 	}
 
 	render() {
