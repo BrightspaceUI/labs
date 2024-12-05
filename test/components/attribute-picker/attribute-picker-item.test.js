@@ -11,7 +11,7 @@ describe('attribute-picker-item', () => {
 	describe('eventing', () => {
 		it('should fire d2l-labs-attribute-picker-item-delete when delete button is clicked', async() => {
 			const component = await fixture(html`<d2l-labs-attribute-picker-item text="attribute" deletable></d2l-labs-attribute-picker-item>`);
-			clickElem(component.shadowRoot.querySelector('d2l-icon'));
+			clickElem(component.shadowRoot.querySelector('d2l-button-icon'));
 			await oneEvent(component, 'd2l-labs-attribute-picker-item-deleted');
 		});
 	});

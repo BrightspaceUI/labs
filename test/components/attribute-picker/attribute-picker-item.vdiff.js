@@ -36,7 +36,7 @@ describe('attribute-picker-item', () => {
 
 	it('unfocused item with hovered icon', async() => {
 		const component = await createComponent(true);
-		const icon = component.shadowRoot.querySelector('d2l-icon');
+		const icon = component.shadowRoot.querySelector('d2l-button-icon');
 		await hoverElem(icon);
 		await expect(component).to.be.golden();
 	});
@@ -44,7 +44,7 @@ describe('attribute-picker-item', () => {
 	it('focused item with hovered icon', async() => {
 		const component = await createComponent(true);
 		await focusElem(component);
-		const icon = component.shadowRoot.querySelector('d2l-icon');
+		const icon = component.shadowRoot.querySelector('d2l-button-icon');
 		await hoverElem(icon);
 		await expect(component).to.be.golden();
 	});

@@ -14,7 +14,7 @@ export default {
 	"components:attributePicker:addValue": "按一下以新增值 {value}", // Label for screen readers to inform user that they can click to add the given value
 	"components:attributePicker:limitReached": "您已達到 {value} 個選取值的限制", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "至少必須設定一個值", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
-	"components:attributePicker:removeValue": "按一下以移除值 {value}", // Label for screen readers to inform user that they can click to remove the given value
+	"components:attributePicker:removeValue": "按一下、按下退格鍵或按下刪除鍵以移除項目 {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "核取方塊已摺疊", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "核取方塊已展開", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "取消",

@@ -14,7 +14,7 @@ export default {
 	"components:attributePicker:addValue": "Klik om waarde {value} toe te voegen", // Label for screen readers to inform user that they can click to add the given value
 	"components:attributePicker:limitReached": "U hebt de limiet van {value} geselecteerde waarden bereikt", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Er moet ten minste één waarde worden ingesteld", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
-	"components:attributePicker:removeValue": "Klik om waarde {value} te verwijderen", // Label for screen readers to inform user that they can click to remove the given value
+	"components:attributePicker:removeValue": "Klik, druk op Backspace of druk op de Delete-toets om item {value} te verwijderen", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Selectievakje samengevouwen", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Selectievakje uitgevouwen", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Annuleren",

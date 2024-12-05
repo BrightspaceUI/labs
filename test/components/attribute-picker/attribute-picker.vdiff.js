@@ -125,8 +125,9 @@ describe('attribute-picker', () => {
 				const component = await createComponent(selectedAttributeList);
 				const listener = oneEvent(component, 'd2l-labs-attribute-picker-attributes-changed');
 				const secondItem = component.shadowRoot.querySelector('d2l-labs-attribute-picker-item:nth-of-type(2)');
-				const deleteButton = secondItem.shadowRoot.querySelector('d2l-icon');
-				deleteButton.click();
+				await focusElem(secondItem);
+				await secondItem.updateComplete;
+				await clickElem(secondItem.shadowRoot.querySelector('d2l-button-icon'));
 				await listener;
 				await expect(document).to.be.golden();
 			});

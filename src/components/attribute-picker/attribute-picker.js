@@ -1,6 +1,6 @@
+import './attribute-picker-item.js';
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-ui/core/components/tooltip/tooltip.js';
-import './attribute-picker-item.js';
 import { css, html, LitElement } from 'lit';
 import { ArrowKeysMixin } from '@brightspace-ui/core/mixins/arrow-keys/arrow-keys-mixin.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -26,9 +26,6 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 			/* When true, the user can manually enter any attribute they wish. If false, they must match a value from the dropdown. */
 			allowFreeform: { type: Boolean, attribute: 'allow-freeform', reflect: true },
 
-			/* Required. The label associated with the attribute picker for screen reader users */
-			ariaLabel: { type: String, attribute: 'aria-label', reflect: true },
-
 			/* An array of strings available in the dropdown list */
 			assignableAttributes: { type: Array, attribute: 'assignable-attributes', reflect: true },
 
@@ -40,6 +37,9 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 				The default value is: 'At least one attribute must be set'
 			*/
 			invalidTooltipText: { type: String, attribute: 'invalid-tooltip-text', reflect: true },
+
+			/* Required. The label associated with the attribute picker for screen reader users */
+			label: { type: String, reflect: true },
 
 			/* The maximum number of attributes permitted. */
 			limit: { type: Number, attribute: 'limit', reflect: true },
@@ -103,6 +103,9 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 			}
 			.d2l-attribute-picker-attribute {
 				height: 1.55rem;
+			}
+			.d2l-attribute-picker-attribute:focus-visible {
+				outline: none;
 			}
 			.d2l-attribute-picker-input {
 				background: transparent;
@@ -170,6 +173,12 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 		this._inputFocused = false;
 	}
 
+	firstUpdated(changedProperties) {
+		super.firstUpdated(changedProperties);
+		this.addEventListener('focusin', this._onFocusIn);
+		this.addEventListener('focusout', this._onFocusOut);
+	}
+
 	render() {
 		const comparableText = this._text.trim().toLowerCase();
 		const availableAttributes = this.assignableAttributes.filter(x => this.attributeList.every(a => a.name !== x.name) && (comparableText === '' || x.name?.toLowerCase().includes(comparableText)));
@@ -179,7 +188,7 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 		const ariaRequired = this.required ? true : undefined;
 
 		return html`
-			<div role="application" id="d2l-attribute-picker-container" class="d2l-attribute-picker-container d2l-input" aria-invalid="${ifDefined(ariaInvalid)}" @focusin=${this._onFocusIn} @focusout=${this._onFocusOut}>
+			<div role="application" id="d2l-attribute-picker-container" aria-label="${this.label}" class="d2l-attribute-picker-container d2l-input" aria-invalid="${ifDefined(ariaInvalid)}">
 				${this.arrowKeysContainer(html`
 					<div class="d2l-attribute-picker-content" role="${this.attributeList.length > 0 ? 'list' : ''}">
 						${repeat(this.attributeList, (item) => item.value, (item, index) => html`
@@ -201,7 +210,6 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 							aria-expanded="${this._inputFocused}"
 							aria-haspopup="true"
 							aria-invalid="${ifDefined(ariaInvalid)}"
-							aria-label="${this.ariaLabel}"
 							aria-owns="attribute-dropdown-list"
 							aria-required=${ifDefined(ariaRequired)}
 							enterkeyhint="enter"
