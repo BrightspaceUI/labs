@@ -3,19 +3,19 @@ import { expect, fixture, html } from '@brightspace-ui/testing';
 
 describe('attribute-picker', () => {
 	it('should pass all axe tests', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker aria-label="attributes"></d2l-labs-attribute-picker>`);
+		const component = await fixture(html`<d2l-labs-attribute-picker label="attributes"></d2l-labs-attribute-picker>`);
 		await expect(component).to.be.accessible();
 	});
 
 	it('should pass all axe tests (with required attribute)', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker required aria-label="attributes"></d2l-labs-attribute-picker>`);
+		const component = await fixture(html`<d2l-labs-attribute-picker required label="attributes"></d2l-labs-attribute-picker>`);
 		await expect(component).to.be.accessible();
 	});
 
 	it('should pass all axe tests when populated', async() => {
 		const component = await fixture(
 			html`<d2l-labs-attribute-picker
-					aria-label="attributes"
+					label="attributes"
 					.attributeList="${['one', 'two', 'three']}"
 					.assignableAttributes="${['one', 'two', 'three', 'four', 'five', 'six']}">
 				</d2l-labs-attribute-picker>`

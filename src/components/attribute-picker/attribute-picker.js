@@ -210,6 +210,7 @@ class AttributePicker extends ArrowKeysMixin(RtlMixin(LocalizeLabsElement(LitEle
 							aria-expanded="${this._inputFocused}"
 							aria-haspopup="true"
 							aria-invalid="${ifDefined(ariaInvalid)}"
+							aria-label="${this.label}"
 							aria-owns="attribute-dropdown-list"
 							aria-required=${ifDefined(ariaRequired)}
 							enterkeyhint="enter"
