@@ -166,16 +166,10 @@ class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
 		this._inputFocused = false;
 	}
 
-	connectedCallback() {
-		super.connectedCallback();
+	firstUpdated(changedProperties) {
+		super.firstUpdated(changedProperties);
 		this.addEventListener('focusin', this._onFocusIn);
 		this.addEventListener('focusout', this._onFocusOut);
-	}
-
-	disconnectedCallback() {
-		super.disconnectedCallback();
-		this.removeEventListener('focusin', this._onFocusIn);
-		this.removeEventListener('focusout', this._onFocusOut);
 	}
 
 	render() {
