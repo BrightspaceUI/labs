@@ -53,5 +53,5 @@
     "@brightspace-ui/core": "^3",
     "lit": "^3"
   },
-  "version": "2.1.1"
+  "version": "2.2.0"
 }
