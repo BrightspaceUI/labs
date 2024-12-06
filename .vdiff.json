@@ -2,11 +2,11 @@
 	"browsers": [
 		{
 			"name": "Chromium",
-			"version": 130
+			"version": 131
 		},
 		{
 			"name": "Firefox",
-			"version": 131
+			"version": 132
 		},
 		{
 			"name": "Webkit",
@@ -15,7 +15,7 @@
 	],
 	"system": {
 		"platform": "linux",
-		"release": "6.8.0-1016-aws",
+		"release": "6.8.0-1018-aws",
 		"arch": "x64"
 	}
 }
