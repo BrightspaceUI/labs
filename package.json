@@ -5,6 +5,7 @@
   "repository": "https://github.com/BrightspaceUI/labs.git",
   "exports": {
     "./components/accessibility-disability-simulator.js": "./src/components/accessibility-disability-simulator/accessibility-disability-simulator.js",
+    "./components/attribute-picker.js": "./src/components/attribute-picker/attribute-picker.js",
     "./components/checkbox-drawer.js": "./src/components/checkbox-drawer/checkbox-drawer.js",
     "./components/community-button.js": "./src/components/community/community-button.js",
     "./components/community-link.js": "./src/components/community/community-link.js",
