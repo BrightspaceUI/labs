@@ -11,6 +11,10 @@ export default {
 	"components:accessibilityDisabilitySimulator:none": "Inga", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Aktivera skärmläsaren och använd Tabb till att förflytta dig i innehållet", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Simuleringstyp:", // Label for the disability simulation options
+	"components:attributePicker:addValue": "Klicka för att lägga till värde {value}", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:limitReached": "Du har nått gränsen på {value} valda värden", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:minimumRequirement": "Minst ett värde måste anges", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
+	"components:attributePicker:removeValue": "Klicka, tryck på backstegstangenten eller Delete-tangenten för att ta bort objektet {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Komprimerad kryssruta", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Expanderad kryssruta", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "Avbryt",
