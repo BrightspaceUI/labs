@@ -21,7 +21,7 @@ class ViewToggle extends LitElement {
 	static get styles() {
 		return [
 			css`
-			button.d2l-labs-view-toggle-left{
+			button.d2l-labs-view-toggle-left {
 				border-end-start-radius: 0.3rem;
 				border-inline-end-color: transparent;
 				border-inline-start-color: var(--d2l-color-mica);
@@ -91,20 +91,20 @@ class ViewToggle extends LitElement {
 		];
 	}
 
+	render() {
+		return html`
+		<div class="view-toggle-container">
+			<span>${this.text}</span>
+			${this.toggleOptions?.map((option, i) => this.#renderButton(option, i))}
+		</div>
+		`;
+	}
+
 	willUpdate(changedProperties) {
 		super.willUpdate(changedProperties);
 		if (!this.selectedOption && changedProperties.has('toggleOptions')) {
 			this.selectedOption = this.toggleOptions[0].val;
 		}
-	}
-
-	render() {
-		return html`
-		<div class="view-toggle-container">
-			<span>${this.text}</span>
-			${this.toggleOptions?.map((option, i) => this.#renderButton(option,i))}
-		</div>
-		`;
 	}
 	#isSelected(option) {
 		return option.val === this.selectedOption;
