@@ -9,7 +9,7 @@ A Lit element component for toggling between views.
     import '@brightspace-ui-labs/view-toggle/view-toggle.js';
 </script>
 <d2l-labs-view-toggle
-        toggleOptions='[{"text":"Bananas","val":"overall"},{"text":"Minions","val":"minios"},{"text":"Pyjamas","val":"subject"}]'
+        toggle-options='[{"text":"Bananas","val":"overall"},{"text":"Minions","val":"minios"},{"text":"Pyjamas","val":"subject"}]'
         text="Toggle: "
 ></d2l-labs-view-toggle>
 ```

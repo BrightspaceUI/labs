@@ -2,7 +2,7 @@ import '../../../src/components/view-toggle/view-toggle.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 const basicFixture = html`<d2l-labs-view-toggle
-	toggleOptions='[{"text":"Bananas","val":"overall"},{"text":"Minions","val":"minios"},{"text":"Pyjamas","val":"subject"}]'
+	toggle-options='[{"text":"Bananas","val":"overall"},{"text":"Minions","val":"minios"},{"text":"Pyjamas","val":"subject"}]'
 	text="Toggle: ">
 </d2l-labs-view-toggle>`;
 

@@ -1,42 +1,37 @@
 import '@brightspace-ui/core/components/icons/icon.js';
 import '@brightspace-ui/core/components/colors/colors.js';
 import { css, html, LitElement } from 'lit';
-import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
-class ViewToggle extends RtlMixin(LitElement) {
+class ViewToggle extends LitElement {
 	static get properties() {
 		return {
 			text: {
 				type: String
 			},
 			toggleOptions: {
-				type: Array
+				type: Array,
+				attribute: 'toggle-options'
 			},
 			selectedOption: {
-				type: String
+				type: String,
+				attribute: 'selected-options'
 			}
 		};
 	}
 	static get styles() {
 		return [
 			css`
-			button.d2l-labs-view-toggle-left,
-			:host([dir="rtl"]) button.d2l-labs-view-toggle-right {
-				border-bottom-left-radius: 0.3rem;
-				border-bottom-right-radius: 0;
-				border-left-color: var(--d2l-color-mica);
-				border-right-color: transparent;
-				border-top-left-radius: 0.3rem;
-				border-top-right-radius: 0;
+			button.d2l-labs-view-toggle-left{
+				border-end-start-radius: 0.3rem;
+				border-inline-end-color: transparent;
+				border-inline-start-color: var(--d2l-color-mica);
+				border-start-start-radius: 0.3rem;
 			}
-			button.d2l-labs-view-toggle-right,
-			:host([dir="rtl"]) button.d2l-labs-view-toggle-left {
-				border-bottom-left-radius: 0;
-				border-bottom-right-radius: 0.3rem;
-				border-left-color: transparent;
-				border-right-color: var(--d2l-color-mica);
-				border-top-left-radius: 0;
-				border-top-right-radius: 0.3rem;
+			button.d2l-labs-view-toggle-right {
+				border-end-end-radius: 0.3rem;
+				border-inline-end-color: var(--d2l-color-mica);
+				border-inline-start-color: transparent;
+				border-start-end-radius: 0.3rem;
 			}
 			button {
 				background-color: var(--d2l-color-sylvite);
@@ -95,25 +90,26 @@ class ViewToggle extends RtlMixin(LitElement) {
 			}`
 		];
 	}
-	constructor() {
-		super();
 
-		if (!this.selectedOption && this.toggleOptions && this.toggleOptions.any()) {
+	willUpdate(changedProperties) {
+		super.willUpdate(changedProperties);
+		if (!this.selectedOption && changedProperties.has('toggleOptions')) {
 			this.selectedOption = this.toggleOptions[0].val;
 		}
 	}
+
 	render() {
 		return html`
 		<div class="view-toggle-container">
 			<span>${this.text}</span>
-			${this.toggleOptions && this.toggleOptions.map(this._renderButton.bind(this))}
+			${this.toggleOptions?.map((option, i) => this.#renderButton(option,i))}
 		</div>
 		`;
 	}
-	_isSelected(option) {
+	#isSelected(option) {
 		return option.val === this.selectedOption;
 	}
-	_renderButton(option, index) {
+	#renderButton(option, index) {
 		let placement = 'centre';
 		if (index === 0) {
 			placement = 'left';
@@ -123,12 +119,12 @@ class ViewToggle extends RtlMixin(LitElement) {
 		}
 		return html`<button
 			data-option-val="${option.val}"
-			aria-pressed="${this._isSelected(option)}"
+			aria-pressed="${this.#isSelected(option)}"
 			class="d2l-labs-view-toggle-${placement}"
-			@click="${this._selectIndex}"
+			@click="${this.#selectIndex}"
 		>${option.text}</button>`;
 	}
-	_selectIndex(e) {
+	#selectIndex(e) {
 		this.selectedOption = e.target.dataset.optionVal;
 		this.dispatchEvent(
 			new CustomEvent(

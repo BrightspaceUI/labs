@@ -3,7 +3,7 @@ import { clickElem, expect, fixture, html, oneEvent } from '@brightspace-ui/test
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 
 const basicFixture = html`<d2l-labs-view-toggle
-toggleOptions='[{"text":"Bananas","val":"overall"},{"text":"Minions","val":"minios"},{"text":"Pyjamas","val":"subject"}]'
+toggle-options='[{"text":"Bananas","val":"overall"},{"text":"Minions","val":"minios"},{"text":"Pyjamas","val":"subject"}]'
 text="Toggle: "></d2l-labs-view-toggle>`;
 
 describe('d2l-labs-view-toggle', () => {
