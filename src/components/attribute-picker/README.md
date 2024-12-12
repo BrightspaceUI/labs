@@ -19,6 +19,7 @@ The `d2l-labs-attribute-picker` component is an autocompleting dropdown to choos
 | `attribute-list` | Array |  An array of string/value pairs representing the attributes currently selected in the picker (eg `[{"name":"shown to user","value":"sent in event"}]`). Only the values are sent in events and the string names are otherwise ignored. |
 | `assignable-attributes` | Array | An array of string/value pairs, just like `attribute-list`, available in the dropdown list |
 | `invalid-tooltip-text` | String (default: At least one attribute must be set) | The text that will appear in the tooltip that informs a user that the state is invalid |
+| `label` | String, Required | The label associated with the attribute picker for screen reader users |
 | `limit` | Number | The maximum length of attribute-list permitted |
 | `required` | Boolean | When true, an error state will appear if no attributes are set. Error state only appear once the user interacts with the component. |
 
