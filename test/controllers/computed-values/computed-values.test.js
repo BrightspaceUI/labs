@@ -96,6 +96,20 @@ describe('ComputedValue', () => {
 			host.update();
 			expect(computeCount).to.equal(1);
 		});
+
+		it('tryUpdate() updates the controller value', () => {
+			host.update();
+			expect(computeCount).to.equal(1);
+			expect(controller.value).to.equal(`${properties.firstName} ${properties.lastName}`);
+
+			properties = {
+				firstName: 'Jill',
+				lastName: 'Valentine'
+			};
+			expect(controller.tryUpdate()).to.be.true;
+			expect(controller.value).to.equal(`${properties.firstName} ${properties.lastName}`);
+			expect(computeCount).to.equal(2);
+		});
 	});
 
 	describe('Empty Dependencies Array', () => {
@@ -357,6 +371,30 @@ describe('ComputedValue', () => {
 			expect(controller.success).to.be.true;
 			expect(controller.error).to.be.null;
 			expect(controller.asyncStatus).to.equal(ASYNC_STATUSES.SUCCESS);
+		});
+
+		it('asyncRender() returns different values depending on async status', async() => {
+			const renderStates = {
+				success: (value) => `Success: ${value}`,
+				error: (error) => `Error: ${error}`,
+				pending: () => 'Pending'
+			};
+
+			// Pending
+			host.update();
+			expect(controller.asyncRender(renderStates)).to.equal('Pending');
+
+			// Success
+			resolveCall();
+			await controller.computeComplete;
+			expect(controller.asyncRender(renderStates)).to.equal(`Success: ${users[1]}`);
+
+			// Error
+			properties.userId = 2;
+			host.update();
+			rejectCall('error message');
+			await controller.computeComplete;
+			expect(controller.asyncRender(renderStates)).to.equal('Error: error message');
 		});
 	});
 
