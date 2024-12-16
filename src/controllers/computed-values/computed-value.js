@@ -78,13 +78,18 @@ export default class ComputedValue {
 	}
 
 	hostUpdate() {
+		this.tryUpdate();
+	}
+
+	tryUpdate() {
 		const currDependencies = this._getDependencies();
 		const shouldCompute = this._shouldCompute(this._prevDependencies, currDependencies);
 		this._prevDependencies = currDependencies;
 
-		if (shouldCompute) {
-			this._updateValue(currDependencies);
-		}
+		if (!shouldCompute) return false;
+
+		this._updateValue(currDependencies);
+		return true;
 	}
 
 	_compute;

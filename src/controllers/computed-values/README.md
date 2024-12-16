@@ -137,6 +137,10 @@ The compute lifecycle for each `ComputeValue` controller instance will be execut
 | `valuesOptions[i].Controller` | Class | The controller instantiated internally for this particular value. By default this uses the `ComputedValue` controller, but it can be overriden with a custom controller. | |
 | `...valuesOptions[i]` | Object | The rest of the attributes for the object are passed to the internal `ComputedValue` instance constructor. See the `ComputedValue` constructor for details. | Yes |
 
+### `tryUpdate()`
+
+This method calls the `tryUpdate()` method for each of its computed values in order. See the `ComputedValue` Instance Methods section below for more details.
+
 ## `ComputedValues` Instance Members
 
 | Member Name | Type | Description |
@@ -168,6 +172,14 @@ This method is used to render different things depending on the async state of t
 | `renderMap.pending` | Function() : Any | If the current async state of the computed value is "pending", this function is called when calling `asyncRender`. The function is passed no arguments, and the return value from it is returned from `asyncRender`. | No |
 | `renderMap.success` | Function(Any) : Any | If the current async state of the computed value is "success", this function is called when calling `asyncRender`. The function is passed the result of the computed value as its first arguement, and the return value from it is returned from `asyncRender`. | No |
 | `renderMap.success` | Function(Any) : Any | If the current async state of the computed value is "error", this function is called when calling `asyncRender`. The function is passed the result of the error value as its first arguement, and the return value from it is returned from `asyncRender`. | No |
+
+### `tryUpdate()`
+
+This method checks if the dependencies have changed since it was last called and runs the compute process if they have. It is called automatically by the controller in between the `willUpdate` and `render` steps of the host's render cycle.
+
+There is normally no need to explicitly call this method since it's automatically called as part of the host's render cycle. However, calling this yourself might be useful if you wish to have the compute process run earlier than it normally would (e.g. during `willUpdate`) in order to make use the resulting value before getting to the render step.
+
+This method takes no arguments and returns `true` if it detected that the dependencies changed and ran the compute process.
 
 ## `ComputedValue` Instance Members
 
