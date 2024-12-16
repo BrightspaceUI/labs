@@ -11,6 +11,10 @@ export default {
 	"components:accessibilityDisabilitySimulator:none": "कोई नहीं", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "सामग्री में अपना स्क्रीनरीडर और टैब चालू करें", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "सिम्युलेशन प्रकार:", // Label for the disability simulation options
+	"components:attributePicker:addValue": "मान {value} जोड़ने के लिए क्लिक करें", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:limitReached": "आप {value} चयनित मानों की सीमा तक पहुँच गए हैं", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:minimumRequirement": "कम से कम एक मान सेट होना चाहिए", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
+	"components:attributePicker:removeValue": "{value} को हटाने के लिए क्लिक करें, बैकस्पेस दबाएँ, या हटाएँ कुंजी को दबाएँ", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "चेकबॉक्स छोटा हो गया", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "चेकबॉक्स बड़ा हो गया", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "कैंसल करें",
