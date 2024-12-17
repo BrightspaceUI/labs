@@ -14,7 +14,7 @@ class ViewToggle extends LitElement {
 			},
 			selectedOption: {
 				type: String,
-				attribute: 'selected-options'
+				attribute: 'selected-option'
 			}
 		};
 	}
