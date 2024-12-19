@@ -47,7 +47,7 @@ class FlyoutImplementation extends composeMixins(
 			heading1Styles,
 			css`
 				:host {
-					height: 100%;
+					height: var(--d2l-flyout-custom-element-height, 100%);
 					overflow: hidden;
 					pointer-events: none;
 					position: absolute;
@@ -58,6 +58,7 @@ class FlyoutImplementation extends composeMixins(
 					background-color: white;
 					border-bottom: 1px solid var(--d2l-color-mica);
 					box-sizing: border-box;
+					margin-bottom: 1.2rem;
 					overflow: visible;
 					padding-bottom: 2rem;
 					pointer-events: auto;
