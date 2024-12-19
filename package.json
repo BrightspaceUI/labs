@@ -17,7 +17,8 @@
     "./components/view-toggle.js": "./src/components/view-toggle/view-toggle.js",
     "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
     "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js",
-    "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js"
+    "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js",
+    "./utilities/pub-sub.js": "./src/utilities/pub-sub/pub-sub.js"
   },
   "scripts": {
     "langs:sync": "mfv add-missing && mfv remove-extraneous",
