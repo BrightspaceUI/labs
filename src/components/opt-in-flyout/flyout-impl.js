@@ -58,9 +58,9 @@ class FlyoutImplementation extends composeMixins(
 					background-color: white;
 					border-bottom: 1px solid var(--d2l-color-mica);
 					box-sizing: border-box;
+					margin-bottom: 1.2rem;
 					overflow: visible;
 					padding-bottom: 2rem;
-					margin-bottom: 1.2rem;
 					pointer-events: auto;
 					position: var(--d2l-flyout-custom-element-position, absolute);
 					top: var(--d2l-flyout-custom-element-top, 0);
