@@ -12,7 +12,7 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Habilite su lector de pantalla y tableta en el contenido", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Tipo de simulación:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Haga clic para agregar el valor {value}", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "Alcanzó el límite de {value} valores seleccionados", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:limitReached": "Alcanzó el límite de {value} valores seleccionados", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Se debe definir al menos un valor", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "Haga clic, presione Retroceso o presione la tecla Suprimir para eliminar el elemento {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Casilla de selección contraída", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
