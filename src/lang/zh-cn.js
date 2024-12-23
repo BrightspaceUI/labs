@@ -42,5 +42,10 @@ export default {
 	"components:pagination:currentPage": "第 {pageNumber} 页，共 {maxPageNumber} 页",
 	"components:pagination:nextPage": "下一页",
 	"components:pagination:previousPage": "上一页",
-	"components:pagination:resultsPerPage": "每页结果数"
+	"components:pagination:resultsPerPage": "每页结果数",
+	"components:wizard:aria.steplabel": "Step {currentStep} of {totalSteps}",
+	"components:wizard:stepper.defaults.next": "Next",
+	"components:wizard:stepper.defaults.restart": "Restart",
+	"components:wizard:restart.button.tooltip": "Back to first step",
+	"components:wizard:next.button.tooltip": "Proceed to next step"
 };

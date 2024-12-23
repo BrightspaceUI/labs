@@ -42,5 +42,10 @@ export default {
 	"components:pagination:currentPage": "Rhif tudalen {pageNumber} o {maxPageNumber}",
 	"components:pagination:nextPage": "Tudalen nesaf",
 	"components:pagination:previousPage": "Y dudalen flaenorol",
-	"components:pagination:resultsPerPage": "Canlyniadau fesul tudalen"
+	"components:pagination:resultsPerPage": "Canlyniadau fesul tudalen",
+	"components:wizard:aria.steplabel": "Cam {currentStep} o {totalSteps}",
+	"components:wizard:stepper.defaults.next": "Nesaf",
+	"components:wizard:stepper.defaults.restart": "Ailddechrau",
+	"components:wizard:restart.button.tooltip": "Back to first step",
+	"components:wizard:next.button.tooltip": "Proceed to next step"
 };

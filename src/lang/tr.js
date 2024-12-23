@@ -42,5 +42,10 @@ export default {
 	"components:pagination:currentPage": "Sayfa numarası {pageNumber} / {maxPageNumber}",
 	"components:pagination:nextPage": "Sonraki sayfa",
 	"components:pagination:previousPage": "Önceki sayfa",
-	"components:pagination:resultsPerPage": "Sayfa başına sonuç"
+	"components:pagination:resultsPerPage": "Sayfa başına sonuç",
+	"components:wizard:aria.steplabel": "Adım {currentStep} / {totalSteps}",
+	"components:wizard:stepper.defaults.next": "İleri",
+	"components:wizard:stepper.defaults.restart": "Yeniden Başlat",
+	"components:wizard:restart.button.tooltip": "İlk adıma geri dön",
+	"components:wizard:next.button.tooltip": "Sonraki adıma ilerle"
 };

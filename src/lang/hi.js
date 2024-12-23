@@ -42,5 +42,10 @@ export default {
 	"components:pagination:currentPage": "{maxPageNumber} में से पेज नंबर {pageNumber}",
 	"components:pagination:nextPage": "अगला पेज",
 	"components:pagination:previousPage": "पिछला पेज",
-	"components:pagination:resultsPerPage": "प्रति पेज के परिणाम"
+	"components:pagination:resultsPerPage": "प्रति पेज के परिणाम",
+	"components:wizard:aria.steplabel": "{totalSteps} में से {currentStep} चरण",
+	"components:wizard:stepper.defaults.next": "अगला",
+	"components:wizard:stepper.defaults.restart": "रीस्टार्ट करें",
+	"components:wizard:restart.button.tooltip": "पहले चरण पर वापस जाएँ",
+	"components:wizard:next.button.tooltip": "अगले चरण पर आगे बढ़ें"
 };
