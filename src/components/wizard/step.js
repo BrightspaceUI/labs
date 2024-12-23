@@ -46,9 +46,9 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 				type: String,
 				attribute: 'aria-title'
 			},
-			title: {
+			stepTitle: {
 				type: String,
-				attribute: 'title'
+				attribute: 'step-title'
 			},
 			stepCount: {
 				type: Number,
@@ -83,7 +83,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		this.nextButtonAriaLabel = '';
 		this.restartButtonAriaLabel = '';
 		this.ariaTitle = '';
-		this.title = '';
+		this.stepTitle = '';
 		this.stepCount = 1;
 		this.thisStep = 1;
 	}
@@ -125,8 +125,8 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 	_getAriaTitle() {
 		if (this.ariaTitle) {
 			return this.ariaTitle;
-		} else if (this.title) {
-			return `${this.title}. ${this._getStepLabel()}`;
+		} else if (this.stepTitle) {
+			return `${this.stepTitle}. ${this._getStepLabel()}`;
 		}
 		return this._getStepLabel();
 	}

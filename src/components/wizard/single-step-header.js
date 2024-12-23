@@ -6,9 +6,9 @@ class D2LSingleStepHeader extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {
-			title: {
+			stepTitle: {
 				type: String,
-				attribute: 'title'
+				attribute: 'step-title'
 			},
 			totalSteps: {
 				type: Number,
@@ -119,7 +119,7 @@ class D2LSingleStepHeader extends LocalizeLabsElement(LitElement) {
 	constructor() {
 		super();
 
-		this.title = '';
+		this.stepTitle = '';
 		this.totalSteps = 0;
 		this.currentStep = 0;
 		this.selectedStep = 0;
@@ -140,7 +140,7 @@ class D2LSingleStepHeader extends LocalizeLabsElement(LitElement) {
 
 						<hr>
 					</div>
-					<div class="${this._getProgressStatus()} d2l-labs-single-step-header-step-title d2l-body-small">${this.title}</div>
+					<div class="${this._getProgressStatus()} d2l-labs-single-step-header-step-title d2l-body-small">${this.stepTitle}</div>
 				</div>
 			</div>
 		`;

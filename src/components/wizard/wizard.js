@@ -51,7 +51,7 @@ class D2LWizard extends LitElement {
 			<div class="d2l-labs-wizard-header">
 				${this.stepTitles.map((title, index) =>
 		html`
-						<d2l-labs-single-step-header total-steps="${this.stepCount}" current-step="${index}" selected-step="${this.selectedStep}" title="${title}" ?fill-header-width="${this.fillHeaderWidth}"></d2l-labs-single-step-header>
+						<d2l-labs-single-step-header total-steps="${this.stepCount}" current-step="${index}" selected-step="${this.selectedStep}" step-title="${title}" ?fill-header-width="${this.fillHeaderWidth}"></d2l-labs-single-step-header>
 					`)}
 
 			</div>
@@ -107,8 +107,8 @@ class D2LWizard extends LitElement {
 		this.stepTitles = [];
 
 		steps.forEach((element, index) => {
-			const title = element.attributes.title;
-			this.stepTitles.push(!title ? '' : title.value);
+
+			this.stepTitles.push(element.stepTitle);
 			element.setAttribute('step-count', this.stepCount);
 			element.setAttribute('this-step', index + 1);
 			element.style.display = index !== this.selectedStep ? 'none' : '';
