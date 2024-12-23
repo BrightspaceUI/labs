@@ -7,7 +7,7 @@ The `<d2l-labs-wizard>` can be used to be display a spped workflow.
 ```html
 <script type="module">
     import '@brightspace-ui/labs/components/wizard.js';
-	import '@brightspace-ui/labs/components/step.js';
+	import '@brightspace-ui/labs/components/wizard-step.js';
 </script>
 <d2l-labs-wizard id="wizard">
 	<d2l-labs-step step-title="Step 1">
