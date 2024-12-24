@@ -55,7 +55,7 @@ class D2LWizard extends LitElement {
 					`)}
 
 			</div>
-			<slot @slotchange="${this._handleSlotChange}"></slot>
+			<slot @slotchange="${this.#handleSlotChange}"></slot>
 		`;
 	}
 
@@ -66,24 +66,24 @@ class D2LWizard extends LitElement {
 	next() {
 		this.selectedStep = (this.selectedStep + 1) === this.stepCount ? this.selectedStep : (this.selectedStep + 1);
 
-		this._updateStep();
+		this.#updateStep();
 
 		if (window.parentIFrame) {
 			window.parentIFrame.scrollTo(0, 0);
 		}
 
-		this._focusAriaTitleOfStep();
+		this.#focusAriaTitleOfStep();
 	}
 
 	restart() {
 		this.selectedStep = 0;
 
-		this._updateStep();
+		this.#updateStep();
 
-		this._focusAriaTitleOfStep();
+		this.#focusAriaTitleOfStep();
 	}
 
-	_focusAriaTitleOfStep() {
+	#focusAriaTitleOfStep() {
 		const slotChildren = this.shadowRoot.querySelector('slot').assignedNodes({ flatten: true }).filter(node => node.nodeType === Node.ELEMENT_NODE);
 		slotChildren.forEach(child => {
 			if (child.style.display !== 'none') {
@@ -96,11 +96,11 @@ class D2LWizard extends LitElement {
 		});
 	}
 
-	_handleSlotChange() {
-		this._updateStep();
+	#handleSlotChange() {
+		this.#updateStep();
 	}
 
-	_updateStep() {
+	#updateStep() {
 		const steps = this.shadowRoot.querySelector('slot').assignedNodes({ flatten: true }).filter((node) => node.nodeType === Node.ELEMENT_NODE);
 		this.stepCount = steps.length;
 

@@ -16,17 +16,17 @@
 		<h2>Basic Wizard</h2>
 		<d2l-demo-snippet>
 			<d2l-labs-wizard id="wizard" selected-step="1">
-				<d2l-labs-step next-button-aria-label="Go to step 2" step-title="Lets get started" hide-restart-button="true">
+				<d2l-labs-wizard-step next-button-aria-label="Go to step 2" step-title="Lets get started" hide-restart-button="true">
 					<p> first step </p>
-				</d2l-labs-step>
+				</d2l-labs-wizard-step>
 
-				<d2l-labs-step aria-title="This is the second step" restart-button-tooltip="Restart this wizard">
+				<d2l-labs-wizard-step aria-title="This is the second step" restart-button-tooltip="Restart this wizard">
 					<p> second step </p>
-				</d2l-labs-step>
+				</d2l-labs-wizard-step>
 
-				<d2l-labs-step step-title="Almost done" next-button-title="Done" next-button-tooltip="Save this wizard">
+				<d2l-labs-wizard-step step-title="Almost done" next-button-title="Done" next-button-tooltip="Save this wizard">
 					<p> Last step </p>
-				</d2l-labs-step>
+				</d2l-labs-wizard-step>
 			</d2l-labs-wizard>
 			<script>
 				const wizard = document.getElementById('wizard');
@@ -40,12 +40,12 @@
 		</d2l-demo-snippet>
 		<d2l-demo-snippet>
 			<d2l-labs-wizard id="wizard2" selected-step="0">
-				<d2l-labs-step step-title="Lets get started" hide-restart-button="true" hide-next-button="true">
+				<d2l-labs-wizard-step step-title="Lets get started" hide-restart-button="true" hide-next-button="true">
 					<p> first step </p>
-				</d2l-labs-step>
-				<d2l-labs-step step-title="Last done" hide-restart-button="true" hide-next-button="true">
+				</d2l-labs-wizard-step>
+				<d2l-labs-wizard-step step-title="Last done" hide-restart-button="true" hide-next-button="true">
 					<p> Last step </p>
-				</d2l-labs-step>
+				</d2l-labs-wizard-step>
 			</d2l-labs-wizard>
 		</d2l-demo-snippet>
 	</d2l-demo-page>

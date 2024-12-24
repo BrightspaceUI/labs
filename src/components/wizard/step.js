@@ -63,13 +63,13 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 
 	static get styles() {
 		return [offscreenStyles, css`
-			.d2l-labs-step-footer {
+			.d2l-labs-wizard-step-footer {
 				display: flex;
 				justify-content: space-between;
 				width: 100%;
 			}
 
-			.d2l-labs-step-button-next {
+			.d2l-labs-wizard-step-button-next {
 				float: right;
 			}
 		`];
@@ -92,7 +92,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		return html`
 			<div id="aria-title" tabindex="0" class="d2l-offscreen">${this._getAriaTitle()}</div>
 			<slot></slot>
-			<div class="d2l-labs-step-footer">
+			<div class="d2l-labs-wizard-step-footer">
 	${this.hideRestartButton
 		? html`<div></div>`
 		: html`
@@ -108,7 +108,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		? html`<div></div>`
 		: html`
 			<d2l-button
-				class="d2l-labs-step-button-next"
+				class="d2l-labs-wizard-step-button-next"
 				title="${!this.nextButtonTooltip ? this.localize('components:wizard:next.button.tooltip') : this.nextButtonTooltip}"
 				aria-label="${this.nextButtonAriaLabel}"
 				@click="${this._nextClick}"
@@ -144,4 +144,4 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 	}
 }
 
-customElements.define('d2l-labs-step', D2LStep);
+customElements.define('d2l-labs-wizard-step', D2LStep);

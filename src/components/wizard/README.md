@@ -1,6 +1,6 @@
 # Wizard
 
-The `<d2l-labs-wizard>` can be used to be display a spped workflow.
+The `<d2l-labs-wizard>` can be used to be display a stepped workflow.
 
 ## Usage
 
@@ -10,13 +10,13 @@ The `<d2l-labs-wizard>` can be used to be display a spped workflow.
 	import '@brightspace-ui/labs/components/wizard-step.js';
 </script>
 <d2l-labs-wizard id="wizard">
-	<d2l-labs-step step-title="Step 1">
+	<d2l-labs-wizard-step step-title="Step 1">
 		<p> First step </p>
-	</d2l-labs-step>
+	</d2l-labs-wizard-step>
 
-	<d2l-labs-step step-title="Step 2">
+	<d2l-labs-wizard-step step-title="Step 2">
 		<p> Second step </p>
-	</d2l-labs-step>
+	</d2l-labs-wizard-step>
 </d2l-labs-wizard>
 <script>
 	var wizard = document.getElementById('wizard');

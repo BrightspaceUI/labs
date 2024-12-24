@@ -3,10 +3,10 @@ import { expect, fixture, html } from '@brightspace-ui/testing';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 
 const defaultFixture = html`
-<d2l-labs-step></d2l-labs-step>
+<d2l-labs-wizard-step></d2l-labs-wizard-step>
 `;
 
-describe('d2l-labs-step', () => {
+describe('d2l-labs-wizard-step', () => {
 
 	describe('accessibility', () => {
 		it('should pass all axe tests', async() => {
@@ -17,14 +17,14 @@ describe('d2l-labs-step', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-labs-step');
+			runConstructor('d2l-labs-wizard-step');
 		});
 	});
 
 	describe('basic', () => {
 		it('should instantiate the element', async() => {
 			const elem = await fixture(defaultFixture);
-			expect(elem.localName).to.equal('d2l-labs-step');
+			expect(elem.localName).to.equal('d2l-labs-wizard-step');
 		});
 	});
 
