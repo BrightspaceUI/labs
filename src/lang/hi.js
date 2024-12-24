@@ -14,9 +14,9 @@ export default {
 	"components:attributePicker:addValue": "मान {value} जोड़ने के लिए क्लिक करें", // Label for screen readers to inform user that they can click to add the given value
 	"components:attributePicker:limitReached": "आप {value} चयनित मानों की सीमा तक पहुँच गए हैं", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "कम से कम एक मान सेट होना चाहिए", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
-	"components:attributePicker:removeValue": "{value} को हटाने के लिए क्लिक करें, बैकस्पेस दबाएँ, या हटाएँ कुंजी को दबाएँ", // Label to inform user how they can remove the given value
+	"components:attributePicker:removeValue": "{value} को हटाने के लिए क्लिक करें, बैकस्पेस दबाएँ, या डिलीट बटन को दबाएँ", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "चेकबॉक्स छोटा हो गया", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
-	"components:checkboxDrawer:checkboxExpanded": "चेकबॉक्स बड़ा हो गया", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:checkboxDrawer:checkboxExpanded": "चेकबॉक्स बड़ा हो गया", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:optInFlyout:cancel": "कैंसल करें",
 	"components:optInFlyout:close": "यह संवाद बंद करें",
 	"components:optInFlyout:done": "पूरा हो गया",
