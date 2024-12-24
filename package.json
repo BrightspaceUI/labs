@@ -15,6 +15,8 @@
     "./components/opt-out-reason.js": "./src/components/opt-in-flyout/opt-out-reason.js",
     "./components/pager-numeric.js": "./src/components/pagination/pager-numeric.js",
     "./components/view-toggle.js": "./src/components/view-toggle/view-toggle.js",
+    "./components/wizard.js": "./src/components/wizard/wizard.js",
+    "./components/wizard-step.js": "./src/components/wizard/step.js",
     "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
     "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js",
     "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js"
