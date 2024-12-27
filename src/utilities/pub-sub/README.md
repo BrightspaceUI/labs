@@ -54,7 +54,7 @@ The `subscribe` method is used to subscribe a callback function for future publi
 
 If the callback being subscribed is already subscribed, nothing will change and it will still only be called once when messages are published.
 
-By default, a subscribed callback function won't be called until a message is published, but if the `initialize` argument is set to `true` and the `PubSub` instance has published at least once, then callback function will be immediately called after subscription with the last published arguments.
+By default, a subscribed callback function won't be called until a message is published, but if the `initialize` argument is set to `true` and the `PubSub` instance has published at least once, then the callback function will be immediately called after subscription with the last published arguments.
 
 | Parameter Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
