@@ -38,7 +38,7 @@ export default {
 	"components:optInFlyout:turnOn": "E hoʻā",
 	"components:optInFlyout:tutorialAndHelpMessage": "E nānā i kā mākou * kumu aʻo * a heluhelu i kā mākou ~ palapala kōkua ~ e hoʻomaka!",
 	"components:optInFlyout:tutorialMessage": "E nānā i kā mākou * kumu aʻo * e kōkua iā ʻoe e hoʻomaka!",
-	"components:pagination:amountPerPage": "{helu} no kēlā me kēia ʻaoʻao",
+	"components:pagination:amountPerPage": "{count} no kēlā me kēia ʻaoʻao",
 	"components:pagination:currentPage": "Helu ʻaoʻao {pageNumber} o {maxPageNumber}",
 	"components:pagination:nextPage": "ʻAoʻao aʻe",
 	"components:pagination:previousPage": "ʻaoʻao mua",
