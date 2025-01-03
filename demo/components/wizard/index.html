@@ -1,0 +1,54 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+	<script type="module">
+		import '@brightspace-ui/core/components/demo/demo-page.js';
+		import '../../../src/components/wizard/wizard.js';
+		import '../../../src/components/wizard/step.js';
+	</script>
+</head>
+
+<body unresolved>
+	<d2l-demo-page page-title="d2l-labs-wizard">
+		<h2>Basic Wizard</h2>
+		<d2l-demo-snippet>
+			<d2l-labs-wizard id="wizard" selected-step="1">
+				<d2l-labs-wizard-step next-button-aria-label="Go to step 2" step-title="Lets get started" hide-restart-button="true">
+					<p> first step </p>
+				</d2l-labs-wizard-step>
+
+				<d2l-labs-wizard-step aria-title="This is the second step" restart-button-tooltip="Restart this wizard">
+					<p> second step </p>
+				</d2l-labs-wizard-step>
+
+				<d2l-labs-wizard-step step-title="Almost done" next-button-title="Done" next-button-tooltip="Save this wizard">
+					<p> Last step </p>
+				</d2l-labs-wizard-step>
+			</d2l-labs-wizard>
+			<script>
+				const wizard = document.getElementById('wizard');
+				wizard.addEventListener('stepper-next', () => {
+					wizard.next();
+				});
+				wizard.addEventListener('stepper-restart', () => {
+					wizard.restart();
+				});
+			</script>
+		</d2l-demo-snippet>
+		<d2l-demo-snippet>
+			<d2l-labs-wizard id="wizard2" selected-step="0">
+				<d2l-labs-wizard-step step-title="Lets get started" hide-restart-button="true" hide-next-button="true">
+					<p> first step </p>
+				</d2l-labs-wizard-step>
+				<d2l-labs-wizard-step step-title="Last done" hide-restart-button="true" hide-next-button="true">
+					<p> Last step </p>
+				</d2l-labs-wizard-step>
+			</d2l-labs-wizard>
+		</d2l-demo-snippet>
+	</d2l-demo-page>
+</body>
+
+</html>

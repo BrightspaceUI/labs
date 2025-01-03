@@ -42,5 +42,10 @@ export default {
 	"components:pagination:currentPage": "페이지 번호 {pageNumber} / {maxPageNumber}",
 	"components:pagination:nextPage": "다음 페이지",
 	"components:pagination:previousPage": "이전 페이지",
-	"components:pagination:resultsPerPage": "페이지당 결과 수"
+	"components:pagination:resultsPerPage": "페이지당 결과 수",
+	"components:wizard:aria.steplabel": "{currentStep}/{totalSteps} 단계",
+	"components:wizard:stepper.defaults.next": "다음",
+	"components:wizard:stepper.defaults.restart": "다시 시작",
+	"components:wizard:restart.button.tooltip": "첫 번째 단계로 돌아갑니다",
+	"components:wizard:next.button.tooltip": "다음 단계로 진행합니다"
 };

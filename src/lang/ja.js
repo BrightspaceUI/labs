@@ -42,5 +42,10 @@ export default {
 	"components:pagination:currentPage": "{maxPageNumber} のページ番号 {pageNumber}",
 	"components:pagination:nextPage": "次のページ",
 	"components:pagination:previousPage": "前のページ",
-	"components:pagination:resultsPerPage": "ページごとの結果"
+	"components:pagination:resultsPerPage": "ページごとの結果",
+	"components:wizard:aria.steplabel": "ステップ {currentStep}/{totalSteps}",
+	"components:wizard:stepper.defaults.next": "次へ",
+	"components:wizard:stepper.defaults.restart": "再開",
+	"components:wizard:restart.button.tooltip": "最初の手順に戻る",
+	"components:wizard:next.button.tooltip": "次の手順に進む"
 };

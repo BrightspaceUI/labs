@@ -42,5 +42,10 @@ export default {
 	"components:pagination:currentPage": "Seitennummer {pageNumber} von {maxPageNumber}",
 	"components:pagination:nextPage": "Nächste Seite",
 	"components:pagination:previousPage": "Vorherige Seite",
-	"components:pagination:resultsPerPage": "Ergebnisse pro Seite"
+	"components:pagination:resultsPerPage": "Ergebnisse pro Seite",
+	"components:wizard:aria.steplabel": "Schritt {currentStep} von {totalSteps}",
+	"components:wizard:stepper.defaults.next": "Weiter",
+	"components:wizard:stepper.defaults.restart": "Neu starten",
+	"components:wizard:restart.button.tooltip": "Zurück zum ersten Schritt",
+	"components:wizard:next.button.tooltip": "Fahren Sie mit dem nächsten Schritt fort"
 };
