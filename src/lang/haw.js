@@ -42,5 +42,10 @@ export default {
 	"components:pagination:currentPage": "Helu ʻaoʻao {pageNumber} o {maxPageNumber}",
 	"components:pagination:nextPage": "ʻAoʻao aʻe",
 	"components:pagination:previousPage": "ʻaoʻao mua",
-	"components:pagination:resultsPerPage": "Nā hualoaʻa no kēlā me kēia ʻaoʻao"
+	"components:pagination:resultsPerPage": "Nā hualoaʻa no kēlā me kēia ʻaoʻao",
+	"components:wizard:aria.steplabel": "Step {currentStep} of {totalSteps}",
+	"components:wizard:stepper.defaults.next": "Next",
+	"components:wizard:stepper.defaults.restart": "Restart",
+	"components:wizard:restart.button.tooltip": "Back to first step",
+	"components:wizard:next.button.tooltip": "Proceed to next step"
 };
