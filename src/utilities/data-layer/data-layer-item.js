@@ -1,3 +1,5 @@
+import { AbortableGroup } from './util/abortable.js';
+
 let __activeComputedValue = null;
 
 export class DataLayerItem {
@@ -11,6 +13,7 @@ export class DataLayerItem {
 			this._defaultValue = defaultValue;
 			this._dependenciesEvaluating = new Set();
 			this._getter = value.bind(callingContext);
+			this._inProgressCompute = new AbortableGroup();
 			this._needsFirstCompute = true;
 			this._value = defaultValue;
 		} else {
@@ -31,8 +34,9 @@ export class DataLayerItem {
 
 	addDependency(dependency) {
 		if (dependency === this) return;
-		if (dependency.evaluating) this._dependenciesEvaluating.add(dependency);
+
 		dependency.subscribe(this._onDependencyChange.bind(this));
+		if (dependency.evaluating) this._onDependencyChange(dependency);
 	}
 
 	flush() {
@@ -44,12 +48,12 @@ export class DataLayerItem {
 		if (immediate) callback(this);
 	}
 
-	async _compute() {
-		if (!this.evaluating) this._setValue(this._defaultValue, true);
-		// TODO cancel if already evaluating, but leave in evaluating state
+	_compute() {
+		this._inProgressCompute.abort();
+		this._setValue(this._defaultValue, true);
 		if (this._dependenciesEvaluating.size) return;
 
-		this._setValue(await this._getter(), false);
+		this._inProgressCompute.add().run(this._getter, value => this._setValue(value, false), err => this._onError(err));
 	}
 
 	_firstCompute() {
@@ -69,9 +73,17 @@ export class DataLayerItem {
 		this._compute();
 	}
 
-	_setValue(value, evaluating) {
+	_onError(err) {
+		console.error(err);
+		this._setValue(this._defaultValue, false);
+	}
+
+	_setValue(value, evaluating = false) {
+		evaluating = evaluating || this._dependenciesEvaluating?.size > 0;
+		if (this._value === value && this.evaluating === evaluating) return;
+
 		this._value = value;
-		this.evaluating = evaluating || this._dependenciesEvaluating?.size > 0;
+		this.evaluating = evaluating;
 		this._notify();
 	}
 }
