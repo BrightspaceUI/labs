@@ -11,7 +11,7 @@ export class DataLayerItem {
 			this._defaultValue = defaultValue;
 			this._dependenciesEvaluating = new Set();
 			this._getter = value.bind(callingContext);
-			this._isNew = true;
+			this._needsFirstCompute = true;
 			this._value = defaultValue;
 		} else {
 			this._value = value;
@@ -20,9 +20,7 @@ export class DataLayerItem {
 
 	get value() {
 		__activeComputedValue?.addDependency(this);
-		if (!this._isComputed) return this._value;
-
-		if (this._isNew) this._computeFirstTime();
+		if (this._needsFirstCompute) this._firstCompute();
 		return this._value;
 	}
 
@@ -50,12 +48,11 @@ export class DataLayerItem {
 		this._setValue(await this._getter(), false);
 	}
 
-	async _computeFirstTime() {
-		this._isNew = false;
+	_firstCompute() {
+		this._needsFirstCompute = false;
 		__activeComputedValue = this;
-		const promise = this._compute();
+		this._compute();
 		__activeComputedValue = null;
-		await promise;
 	}
 
 	_notify() {
