@@ -36,6 +36,11 @@ console.log(q.value);
 console.log('updating foo');
 dataLayer.foo = 'foo2'; // foo2bar, foo2barbaz
 
+await new Promise(resolve => setTimeout(resolve, 2000));
+
+console.log('flushing bar');
+dataLayer.flushBar(); // foo2bar, foo2barbaz
+
 try { dataLayer.bar = 'bar'; } catch (e) { console.log('caught', e.message); }
 try {
 	new class extends DataLayerGroup {

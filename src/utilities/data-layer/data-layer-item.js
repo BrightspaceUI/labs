@@ -35,6 +35,10 @@ export class DataLayerItem {
 		dependency.subscribe(this._onDependencyChange.bind(this));
 	}
 
+	flush() {
+		this._compute();
+	}
+
 	subscribe(callback, immediate = false) {
 		this._subscribers.add(callback);
 		if (immediate) callback(this);
