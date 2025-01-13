@@ -4,7 +4,7 @@ export class DataLayerGroup {
 	constructor() {
 		this._items = new Map();
 
-		this._initProperties(this.__proto__, 'data', (key, value) => {
+		this._initProperties(Object.getPrototypeOf(this), 'data', (key, value) => {
 			this._items.set(key, new DataLayerItem(value, { callingContext: this }));
 			Object.defineProperty(this, key, {
 				configurable: true,
@@ -13,7 +13,7 @@ export class DataLayerGroup {
 			});
 		});
 
-		this._initProperties(this.__proto__, 'actions', (key, value) => {
+		this._initProperties(Object.getPrototypeOf(this), 'actions', (key, value) => {
 			this[key] = value.bind(this);
 		});
 	}
@@ -30,7 +30,7 @@ export class DataLayerGroup {
 		const properties = base.constructor[field];
 		if (!properties) return;
 
-		this._initProperties(base.__proto__);
+		this._initProperties(Object.getPrototypeOf(base));
 
 		Object.keys(properties).forEach(key => {
 			if (key in this) throw new Error(`Cannot define duplicate property ${key} in ${base.constructor.name || 'anonymous class'}`);
