@@ -18,10 +18,6 @@ export class DataLayerGroup {
 		});
 	}
 
-	declareDependencies() {
-		// No-op, simply passing values to this method will cause the dependencies to be declared.
-	}
-
 	getItem(key) {
 		return this._items.get(key);
 	}

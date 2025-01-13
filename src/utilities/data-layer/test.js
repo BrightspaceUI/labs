@@ -1,4 +1,4 @@
-import { DataLayerGroup, DataLayerItem } from './index.js';
+import { DataLayerGroup, DataLayerItem, declareDependencies } from './index.js';
 
 class FooData extends DataLayerGroup {
 	static actions = {
@@ -8,7 +8,7 @@ class FooData extends DataLayerGroup {
 	static data = {
 		foo: 'foo',
 		async bar() {
-			this.declareDependencies(this.foo);
+			declareDependencies(this.foo);
 			await new Promise(resolve => setTimeout(resolve, 1000));
 			return `${this.foo}bar`;
 		},
