@@ -40,6 +40,7 @@ export class DataLayerItem {
 	}
 
 	flush() {
+		if (!this._isComputed) return;
 		this._compute();
 	}
 
@@ -70,7 +71,7 @@ export class DataLayerItem {
 	_onDependencyChange(dependency) {
 		if (dependency.evaluating) this._dependenciesEvaluating.add(dependency);
 		else this._dependenciesEvaluating.delete(dependency);
-		this._compute();
+		this.flush();
 	}
 
 	_onError(err) {
