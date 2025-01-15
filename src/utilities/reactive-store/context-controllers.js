@@ -1,9 +1,9 @@
 import {
 	createContext,
-	ContextProvider as LitContextProvider,
-	ContextConsumer as LitContextConsumer
-} from "@lit/context";
-import StoreConsumer from "./store-consumer";
+	ContextConsumer as LitContextConsumer,
+	ContextProvider as LitContextProvider
+} from '@lit/context';
+import StoreConsumer from './store-consumer.js';
 
 export class ContextProvider {
 	constructor(host, StoreClass, store = new StoreClass()) {

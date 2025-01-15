@@ -1,6 +1,6 @@
+import { createContextControllers } from './context-controllers.js';
 import PubSub from '../pub-sub/pub-sub.js';
 import StoreConsumer from './store-consumer.js';
-import { createContextControllers } from './context-controllers.js';
 
 const defaultHasChanged = (oldValue, newValue) => oldValue !== newValue;
 
@@ -21,7 +21,7 @@ export default class ReactiveStore {
 			constructor(host) {
 				super(host, store);
 			}
-		}
+		};
 	}
 
 	forceUpdate() {

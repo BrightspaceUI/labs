@@ -1,5 +1,5 @@
 import { expect } from '@brightspace-ui/testing';
-import PubSub from '../../../src/utilities/pub-sub/pub-sub';
+import PubSub from '../../../src/utilities/pub-sub/pub-sub.js';
 
 class CallbackStub {
 	calls = [];
