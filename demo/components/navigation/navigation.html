@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../d2l-navigation.js';
+			import '../d2l-navigation-main-header.js';
+			import '../d2l-navigation-main-footer.js';
+			import '../d2l-navigation-separator.js';
+		</script>
+		<title>d2l-navigation demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<style>
+			html {
+				--d2l-navigation-band-slot-height: 26px;
+			}
+			d2l-navigation-main-header {
+				background-color: mediumpurple;
+			}
+			d2l-navigation-main-footer {
+				background-color: green;
+			}
+			.d2l-navigation-header-left {
+				background-color: pink;
+			}
+			.d2l-navigation-header-right {
+				background-color: lightblue;
+			}
+			div[slot="navigation-band"] {
+				white-space: nowrap;
+			}
+			button {
+				height: 26px;
+				width: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<d2l-demo-page page-title="d2l-navigation">
+			<h2>Header and Footer</h2>
+			<d2l-demo-snippet full-width>
+				<d2l-navigation has-skip-nav>
+					<d2l-navigation-main-header>
+						<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+						<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+					</d2l-navigation-main-header>
+					<d2l-navigation-main-footer>
+						<div slot="main" class="d2l-navigation-s-main-wrapper">Stuff goes in here (small border above and below)</div>
+					</d2l-navigation-main-footer>
+				</d2l-navigation>
+			</d2l-demo-snippet>
+
+			<h2>Just Header</h2>
+			<d2l-demo-snippet full-width>
+				<d2l-navigation>
+					<d2l-navigation-main-header>
+						<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+						<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+					</d2l-navigation-main-header>
+				</d2l-navigation>
+			</d2l-demo-snippet>
+
+			<h2>Separator</h2>
+			<d2l-demo-snippet>
+				<d2l-navigation-separator></d2l-navigation-separator>
+			</d2l-demo-snippet>
+
+			<h2>Band Default</h2>
+			<d2l-demo-snippet full-width>
+				<d2l-navigation-band></d2l-navigation-band>
+			</d2l-demo-snippet>
+
+			<h2>Band Content Slotted</h2>
+			<d2l-demo-snippet full-width>
+				<d2l-navigation>
+					<div slot="navigation-band">
+						<button>consortium 1</button>
+						<button>consortium 2</button>
+						<button>consortium 3</button>
+						<button>consortium 4</button>
+					</div>
+					<d2l-navigation-main-header>
+						<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+						<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+					</d2l-navigation-main-header>
+				</d2l-navigation>
+			</d2l-demo-snippet>
+
+			<h2>Band Content Slotted Scrollbar</h2>
+			<d2l-demo-snippet full-width overflow-hidden>
+				<d2l-navigation>
+					<div slot="navigation-band">
+						<button class="scrollable">consortium 1</button>
+						<button class="scrollable">consortium 2</button>
+						<button class="scrollable">consortium 3</button>
+						<button class="scrollable">consortium 4</button>
+						<button class="scrollable">consortium 5</button>
+						<button class="scrollable">consortium 6</button>
+						<button class="scrollable">consortium 7</button>
+						<button class="scrollable">consortium 8</button>
+						<button class="scrollable">consortium 9</button>
+						<button class="scrollable">consortium 10</button>
+					</div>
+					<d2l-navigation-main-header>
+						<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+						<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+					</d2l-navigation-main-header>
+				</d2l-navigation>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+		<script>
+			requestAnimationFrame(() => {
+				const scrollTestButtons = document.querySelectorAll('.scrollable');
+				scrollTestButtons.forEach((button) => {
+					button.addEventListener('click', () => {
+						button.dispatchEvent(
+							new CustomEvent(
+								'd2l-navigation-band-slot-scroll-request',
+								{
+									detail: {
+										pointToCenter: button.offsetLeft + (button.offsetWidth / 2)
+									},
+									bubbles: true,
+									composed: true
+								}
+							)
+						);
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

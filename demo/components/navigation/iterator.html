@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../d2l-navigation-separator.js';
+			import '../components/d2l-navigation-iterator/d2l-navigation-iterator.js';
+		</script>
+		<title>d2l-navigation-iterator demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<d2l-demo-page page-title="d2l-navigation-iterator">
+			<h2>Empty</h2>
+			<d2l-demo-snippet>
+				<d2l-navigation-iterator></d2l-navigation-iterator>
+			</d2l-demo-snippet>
+
+			<h2>Count (hide text)</h2>
+			<d2l-demo-snippet>
+				<d2l-navigation-iterator hide-text>
+					User 1 of 17
+				</d2l-navigation-iterator>
+			</d2l-demo-snippet>
+
+			<h2>Custom Labels</h2>
+			<d2l-demo-snippet>
+				<d2l-navigation-iterator previous-text="Back" next-text="Forward"></d2l-navigation-iterator>
+			</d2l-demo-snippet>
+
+			<h2>Disabled</h2>
+			<d2l-demo-snippet>
+				<d2l-navigation-iterator previous-disabled next-disabled></d2l-navigation-iterator>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+	</body>
+</html>
