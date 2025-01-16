@@ -20,6 +20,10 @@ export class ContextProvider {
 		return this._storeConsumer.changedProperties;
 	}
 
+	forceUpdate() {
+		this._storeConsumer.forceUpdate();
+	}
+
 	_defineProperties(properties) {
 		Object.keys(properties).forEach((property) => {
 			Object.defineProperty(this, property, {
@@ -47,6 +51,10 @@ export class ContextConsumer {
 
 	get changedProperties() {
 		return this._storeConsumer?.changedProperties;
+	}
+
+	forceUpdate() {
+		this._storeConsumer.forceUpdate();
 	}
 
 	_defineProperties(properties) {
