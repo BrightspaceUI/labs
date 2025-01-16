@@ -1,28 +1,3 @@
-# navigation
-
-> Note: this is a ["labs" component](https://daylight.d2l.dev/developing/getting-started/component-tiers/). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
->
-> - [ ] [Design organization buy-in](https://daylight.d2l.dev/developing/creating-component/before-building/#working-with-design)
-> - [ ] [Architectural sign-off](https://daylight.d2l.dev/developing/creating-component/before-building/#web-component-architecture)
-> - [x] [Continuous integration](https://daylight.d2l.dev/developing/testing/tools/#continuous-integration)
-> - [x] [Cross-browser testing](https://daylight.d2l.dev/developing/testing/cross-browser/)
-> - [x] [Unit tests](https://daylight.d2l.dev/developing/testing/tools/) (if applicable)
-> - [x] [Accessibility tests](https://daylight.d2l.dev/developing/testing/accessibility/)
-> - [x] [Visual diff tests](https://daylight.d2l.dev/developing/testing/visual-difference/)
-> - [ ] Localization with Serge (if applicable)
-> - [x] Demo page
-> - [x] README documentation
-
-A series of web components for top level navigation use in D2L applications.
-
-## Installation
-
-```shell
-npm install @brightspace-ui-labs/navigation
-```
-
-![screenshot of sample usage](/screenshots/navigation.png?raw=true)
-
 ## Usage: Primary Components
 
 > These are the components that should be used in the **VAST MAJORITY** of use cases
@@ -33,9 +8,9 @@ Add the `d2l-navigation` component, and provide sub elements `d2l-navigation-mai
 
 ```html
 <script type="module">
-  import '@brightspace-ui-labs/navigation/d2l-navigation.js';
-  import '@brightspace-ui-labs/navigation/d2l-navigation-main-header.js';
-  import '@brightspace-ui-labs/navigation/d2l-navigation-main-footer.js';
+  import '@brightspace-ui/labs/navigation/d2l-navigation.js';
+  import '@brightspace-ui/labs/navigation/d2l-navigation-main-header.js';
+  import '@brightspace-ui/labs/navigation/d2l-navigation-main-footer.js';
 </script>
 
 <d2l-navigation>
@@ -60,7 +35,7 @@ Please note that overridding the `left` slot will prevent the Back link from dis
 
 ```html
 <script type="module">
-  import '@brightspace-ui-labs/navigation/d2l-navigation-immersive.js';
+  import '@brightspace-ui/labs/navigation/d2l-navigation-immersive.js';
 </script>
 
 <d2l-navigation-immersive back-link-href="https://www.d2l.com" back-link-text="Back to D2L">
@@ -90,7 +65,7 @@ Optionally:
 
 ```html
 <script type="module">
-  import '@brightspace-ui-labs/navigation/d2l-navigation-band.js';
+  import '@brightspace-ui/labs/navigation/d2l-navigation-band.js';
 </script>
 
 <d2l-navigation-band></d2l-navigation-band>
@@ -112,7 +87,7 @@ Add the `d2l-navigation-main-header` component, and provide elements for the `le
 
 ```html
 <script type="module">
-  import '@brightspace-ui-labs/navigation/d2l-navigation-main-header.js';
+  import '@brightspace-ui/labs/navigation/d2l-navigation-main-header.js';
 </script>
 
 <d2l-navigation-main-header>
@@ -136,7 +111,7 @@ Add the `d2l-navigation-main-footer` component, and provide elements for the `ma
 
 ```html
 <script type="module">
-  import '@brightspace-ui-labs/navigation/d2l-navigation-main-footer.js';
+  import '@brightspace-ui/labs/navigation/d2l-navigation-main-footer.js';
 </script>
 
 <d2l-navigation-main-footer>
@@ -199,7 +174,7 @@ Similar to `<d2l-navigation-button-icon>`, a link that comes with an icon and op
 
 ```html
 <script type="module">
-  import '@brightspace-ui-labs/navigation/d2l-navigation-iterator.js';
+  import '@brightspace-ui/labs/navigation/d2l-navigation-iterator.js';
 </script>
 
 <d2l-navigation-iterator></d2l-navigation-iterator>
