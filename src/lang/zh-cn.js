@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "单击、按退格键或按 Delete 键以移除项目 {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "复选框已折叠", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "复选框已展开", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "返回",
+	"components:navigation:next": "下一个",
+	"components:navigation:previous": "上一步",
+	"components:navigation:skipNav": "跳到主目录",
 	"components:optInFlyout:cancel": "取消",
 	"components:optInFlyout:close": "关闭此对话框",
 	"components:optInFlyout:done": "完成",

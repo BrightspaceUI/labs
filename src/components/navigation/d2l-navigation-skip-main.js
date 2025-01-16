@@ -1,17 +1,17 @@
 import './d2l-navigation-skip.js';
 import { html, LitElement } from 'lit';
 import { FocusMixin } from '@brightspace-ui/core/mixins/focus/focus-mixin.js';
-import { LocalizeNavigationElement } from './components/localize-navigation-element.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { querySelectorComposed } from '@brightspace-ui/core/helpers/dom.js';
 
-class NavigationSkipMain extends FocusMixin(LocalizeNavigationElement(LitElement)) {
+class NavigationSkipMain extends FocusMixin(LocalizeLabsElement(LitElement)) {
 
 	static get focusElementSelector() {
 		return 'd2l-navigation-skip';
 	}
 
 	render() {
-		return html`<d2l-navigation-skip text="${this.localize('skipNav')}" @click="${this._handleSkipNav}" class="vdiff-target"></d2l-navigation-skip>`;
+		return html`<d2l-navigation-skip text="${this.localize('components:navigation:skipNav')}" @click="${this._handleSkipNav}" class="vdiff-target"></d2l-navigation-skip>`;
 	}
 
 	_handleSkipNav() {

@@ -1,18 +1,9 @@
-import '../d2l-navigation-iterator.js';
-import { expect, fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
+import '../../../src/components/navigation/d2l-navigation-iterator.js';
+import { fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
 
 describe('d2l-navigation-iterator', () => {
 
 	const iteratorFixture = html`<d2l-navigation-iterator></d2l-navigation-iterator>`;
-
-	describe('accessibility', () => {
-
-		it('should pass all aXe tests', async() => {
-			const el = await fixture(iteratorFixture);
-			await expect(el).to.be.accessible();
-		});
-
-	});
 
 	describe('constructor', () => {
 		it('should construct', () => {

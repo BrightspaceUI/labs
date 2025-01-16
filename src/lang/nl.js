@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Klik, druk op Backspace of druk op de Delete-toets om item {value} te verwijderen", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Selectievakje samengevouwen", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Selectievakje uitgevouwen", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Terug",
+	"components:navigation:next": "Volgende",
+	"components:navigation:previous": "Vorige",
+	"components:navigation:skipNav": "meteen naar hoofdinhoud gaan",
 	"components:optInFlyout:cancel": "Annuleren",
 	"components:optInFlyout:close": "Dit dialoogvenster sluiten",
 	"components:optInFlyout:done": "Gereed",

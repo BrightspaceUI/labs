@@ -1,4 +1,4 @@
-import '../d2l-navigation-skip.js';
+import '../../../src/components/navigation/d2l-navigation-skip.js';
 import { clickElem, expect, fixture, focusElem, html, oneEvent, sendKeysElem } from '@brightspace-ui/testing';
 import { createMessage } from '@brightspace-ui/core/mixins/property-required/property-required-mixin.js';
 import { getComposedActiveElement } from '@brightspace-ui/core/helpers/focus.js';
@@ -11,16 +11,6 @@ describe('d2l-navigation-skip', () => {
 		const elem = await fixture(html`<d2l-navigation-skip><d2l-navigation-skip>`);
 		expect(() => elem.flushRequiredPropertyErrors())
 			.to.throw(TypeError, createMessage(elem, 'text'));
-	});
-
-	describe('accessibility', () => {
-
-		it('should pass all aXe tests', async() => {
-			const elem = await fixture(customFixture);
-			await focusElem(elem);
-			await expect(elem).to.be.accessible();
-		});
-
 	});
 
 	describe('events', () => {

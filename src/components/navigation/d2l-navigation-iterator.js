@@ -1,9 +1,9 @@
 import './d2l-navigation-button-icon.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { LocalizeNavigationElement } from '../localize-navigation-element.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 
-class NavigationIterator extends LocalizeNavigationElement(LitElement) {
+class NavigationIterator extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {
@@ -41,8 +41,8 @@ class NavigationIterator extends LocalizeNavigationElement(LitElement) {
 	}
 
 	render() {
-		const previousText = this.previousText ? this.previousText : this.localize('previous');
-		const nextText = this.nextText ? this.nextText : this.localize('next');
+		const previousText = this.previousText ? this.previousText : this.localize('components:navigation:previous');
+		const nextText = this.nextText ? this.nextText : this.localize('components:navigation:next');
 		return html`
 			<d2l-navigation-button-icon
 				class="d2l-body-compact"

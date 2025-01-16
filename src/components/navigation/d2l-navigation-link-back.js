@@ -1,9 +1,9 @@
 import './d2l-navigation-link-icon.js';
 import { css, html, LitElement } from 'lit';
 import { FocusMixin } from '@brightspace-ui/core/mixins/focus-mixin.js';
-import { LocalizeNavigationElement } from './components/localize-navigation-element.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 
-class NavigationLinkBack extends LocalizeNavigationElement(FocusMixin(LitElement)) {
+class NavigationLinkBack extends LocalizeLabsElement(FocusMixin(LitElement)) {
 
 	static get properties() {
 		return {
@@ -30,7 +30,7 @@ class NavigationLinkBack extends LocalizeNavigationElement(FocusMixin(LitElement
 
 	render() {
 		const href = this.href ? this.href : 'javascript:void(0);'; // backwards-compatible for uses before missing "href" threw exception
-		const text = this.text ? this.text : this.localize('back');
+		const text = this.text ? this.text : this.localize('components:navigation:back');
 		return html`<d2l-navigation-link-icon href="${href}" icon="tier1:chevron-left" text="${text}"></d2l-navigation-link-icon>`;
 	}
 
