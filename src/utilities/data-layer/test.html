@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import './demo-component.js';
+		</script>
+	</head>
+	<body unresolved>
+		<d2l-demo-page page-title="data-layer">
+
+			<h2>Default</h2>
+
+			<d2l-demo-snippet>
+				<template>
+					<d2l-data-layer-demo prop="foo"></d2l-data-layer-demo>
+					<d2l-data-layer-demo prop="bar"></d2l-data-layer-demo>
+					<d2l-data-layer-demo prop="baz"></d2l-data-layer-demo>
+					<d2l-data-layer-demo prop="baz2"></d2l-data-layer-demo>
+				</template>
+			</d2l-demo-snippet>
+
+		</d2l-demo-page>
+	</body>
+</html>
