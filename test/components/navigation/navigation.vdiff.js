@@ -1,8 +1,8 @@
-import '../../d2l-navigation.js';
-import '../../d2l-navigation-band.js';
-import '../../d2l-navigation-separator.js';
-import '../../d2l-navigation-main-header.js';
-import '../../d2l-navigation-main-footer.js';
+import '../../../src/components/navigation/d2l-navigation.js';
+import '../../../src/components/navigation/d2l-navigation-band.js';
+import '../../../src/components/navigation/d2l-navigation-separator.js';
+import '../../../src/components/navigation/d2l-navigation-main-header.js';
+import '../../../src/components/navigation/d2l-navigation-main-footer.js';
 import { expect, fixture, focusElem, html } from '@brightspace-ui/testing';
 
 const navigationDefaultFixture = html`<d2l-navigation has-skip-nav>Stuff in here</d2l-navigation>`;

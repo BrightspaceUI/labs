@@ -1,4 +1,4 @@
-import '../../d2l-navigation-skip-main.js';
+import '../../../src/components/navigation/d2l-navigation-skip-main.js';
 import { expect, fixture, focusElem, html } from '@brightspace-ui/testing';
 
 const mainFixture = html`

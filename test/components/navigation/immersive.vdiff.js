@@ -1,4 +1,4 @@
-import '../../d2l-navigation-immersive.js';
+import '../../../src/components/navigation/d2l-navigation-immersive.js';
 import { expect, fixture, focusElem, html } from '@brightspace-ui/testing';
 
 const pageContent = html`<div style="background-color: pink;">Main Page Content</div>`;
