@@ -199,7 +199,7 @@ Similar to `<d2l-navigation-button-icon>`, a link that comes with an icon and op
 
 ```html
 <script type="module">
-  import '@brightspace-ui-labs/navigation/components/d2l-navigation-iterator/d2l-navigation-iterator.js';
+  import '@brightspace-ui-labs/navigation/d2l-navigation-iterator.js';
 </script>
 
 <d2l-navigation-iterator></d2l-navigation-iterator>
