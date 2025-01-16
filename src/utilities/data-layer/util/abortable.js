@@ -1,6 +1,6 @@
 export class Abortable {
 	constructor(cleanup = () => {}) {
-		this._abortPromise = new Promise((_, reject) => { this.abort = () => reject('Abortable_aborted') });
+		this._abortPromise = new Promise((_, reject) => { this.abort = () => reject('Abortable_aborted'); });
 		this._cleanup = cleanup;
 	}
 
