@@ -28,8 +28,8 @@ export default class ReactiveStore {
 		this._pubSub.publish({ forceUpdate: true });
 	}
 
-	subscribe(callback, initialize = false) {
-		this._pubSub.subscribe(callback, initialize);
+	subscribe(callback) {
+		this._pubSub.subscribe(callback);
 	}
 
 	unsubscribe(callback) {
@@ -49,7 +49,7 @@ export default class ReactiveStore {
 					const prevValue = this._state;
 					this._state[property] = value;
 
-					this._pubSub.publish({ property, value, prevValue });
+					this._pubSub.publish({ property, value, prevValue, forceUpdate: false });
 				}
 			});
 		});

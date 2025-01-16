@@ -7,8 +7,10 @@ export default class StoreConsumer {
 		this.changedProperties = new Map();
 
 		this._onPropertyChange = this._onPropertyChange.bind(this);
-		this._store.subscribe(this._onPropertyChange, true);
+		this._store.subscribe(this._onPropertyChange);
+
 		this._defineProperties(properties);
+		this._initializeChangedProperties(properties);
 	}
 
 	forceUpdate() {
@@ -29,6 +31,23 @@ export default class StoreConsumer {
 					this._store[property] = value;
 				}
 			});
+		});
+	}
+
+	_initializeChangedProperties(properties) {
+		let shouldUpdate = false;
+		Object.keys(properties).forEach((property) => {
+			if (this._store[property] === undefined) return;
+
+			this.changedProperties.set(property, undefined);
+			shouldUpdate = true;
+		});
+
+		if (!shouldUpdate) return;
+
+		this._host.requestUpdate();
+		this._host.updateComplete.then(() => {
+			this.changedProperties.clear();
 		});
 	}
 
