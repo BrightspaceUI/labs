@@ -1,7 +1,7 @@
 import '../../../src/components/navigation/navigation-iterator.js';
-import { expect, fixture, html } from '@brightspace-ui/testing';const iteratorFixture = html`<d2l-navigation-iterator></d2l-navigation-iterator>`;
+import { expect, fixture, html } from '@brightspace-ui/testing';const iteratorFixture = html`<d2l-labs-navigation-iterator></d2l-labs-navigation-iterator>`;
 
-describe('d2l-navigation-iterator', () => {
+describe('d2l-labs-navigation-iterator', () => {
 
 	describe('accessibility', () => {
 

@@ -39,7 +39,7 @@ class D2LNavigationLink extends FocusMixin(LitElement) {
 				color: var(--d2l-color-celestine);
 				outline: none;
 			}
-			:host(:not([href])) .d2l-navigation-highlight-border {
+			:host(:not([href])) .d2l-labs-navigation-highlight-border {
 				display: none;
 			}
 		`];
@@ -52,11 +52,11 @@ class D2LNavigationLink extends FocusMixin(LitElement) {
 	render() {
 		return html`
 			<a href="${this.href}" title="${this.text}">
-				<span class="d2l-navigation-highlight-border"></span>
+				<span class="d2l-labs-navigation-highlight-border"></span>
 				<slot></slot>
 			</a>
 		`;
 	}
 }
 
-customElements.define('d2l-navigation-link', D2LNavigationLink);
+customElements.define('d2l-labs-navigation-link', D2LNavigationLink);

@@ -1,7 +1,7 @@
 import '../../../src/components/navigation/navigation-skip.js';
-import { expect, fixture, focusElem, html } from '@brightspace-ui/testing';const customFixture = html`<d2l-navigation-skip text="Skip to custom place"></d2l-navigation-skip>`;
+import { expect, fixture, focusElem, html } from '@brightspace-ui/testing';const customFixture = html`<d2l-labs-navigation-skip text="Skip to custom place"></d2l-labs-navigation-skip>`;
 
-describe('d2l-navigation-skip', () => {
+describe('d2l-labs-navigation-skip', () => {
 
 	describe('accessibility', () => {
 

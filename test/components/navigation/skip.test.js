@@ -3,12 +3,12 @@ import { clickElem, expect, fixture, focusElem, html, oneEvent, sendKeysElem } f
 import { createMessage } from '@brightspace-ui/core/mixins/property-required/property-required-mixin.js';
 import { getComposedActiveElement } from '@brightspace-ui/core/helpers/focus.js';
 
-const customFixture = html`<d2l-navigation-skip text="Skip to custom place"></d2l-navigation-skip>`;
+const customFixture = html`<d2l-labs-navigation-skip text="Skip to custom place"></d2l-labs-navigation-skip>`;
 
-describe('d2l-navigation-skip', () => {
+describe('d2l-labs-navigation-skip', () => {
 
 	it('should throw if text is not provided', async() => {
-		const elem = await fixture(html`<d2l-navigation-skip><d2l-navigation-skip>`);
+		const elem = await fixture(html`<d2l-labs-navigation-skip><d2l-labs-navigation-skip>`);
 		expect(() => elem.flushRequiredPropertyErrors())
 			.to.throw(TypeError, createMessage(elem, 'text'));
 	});

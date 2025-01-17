@@ -22,10 +22,10 @@ class Navigation extends LitElement {
 				display: block;
 				position: relative;
 			}
-			.d2l-navigation-shadow-drop-border {
+			.d2l-labs-navigation-shadow-drop-border {
 				background-color: rgba(0, 0, 0, 0.02);
 				bottom: -4px;
-				display: var(--d2l-navigation-shadow-drop-border-display, block);
+				display: var(--d2l-labs-navigation-shadow-drop-border-display, block);
 				height: 4px;
 				pointer-events: none;
 				position: absolute;
@@ -40,16 +40,16 @@ class Navigation extends LitElement {
 	}
 
 	render() {
-		const skipNav = this.hasSkipNav ? html`<d2l-navigation-skip-main @d2l-navigation-skip-fail="${this._handleSkipNavFail}"></d2l-navigation-skip-main>` : nothing;
+		const skipNav = this.hasSkipNav ? html`<d2l-labs-navigation-skip-main @d2l-labs-navigation-skip-fail="${this._handleSkipNavFail}"></d2l-labs-navigation-skip-main>` : nothing;
 		return html`
-			${skipNav}<d2l-navigation-band><slot name="navigation-band"></slot></d2l-navigation-band>
+			${skipNav}<d2l-labs-navigation-band><slot name="navigation-band"></slot></d2l-labs-navigation-band>
 			<slot></slot>
-			<div class="d2l-navigation-shadow-drop-border"></div>
+			<div class="d2l-labs-navigation-shadow-drop-border"></div>
 		`;
 	}
 
 	_handleSkipNavFail() {
-		const nextFocusable = getNextFocusable(this.shadowRoot.querySelector('.d2l-navigation-shadow-drop-border'));
+		const nextFocusable = getNextFocusable(this.shadowRoot.querySelector('.d2l-labs-navigation-shadow-drop-border'));
 		if (nextFocusable) {
 			nextFocusable.focus();
 		}
@@ -57,4 +57,4 @@ class Navigation extends LitElement {
 
 }
 
-customElements.define('d2l-navigation', Navigation);
+customElements.define('d2l-labs-navigation', Navigation);

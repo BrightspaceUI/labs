@@ -27,4 +27,4 @@ class NavigationSeparator extends LitElement {
 
 }
 
-customElements.define('d2l-navigation-separator', NavigationSeparator);
+customElements.define('d2l-labs-navigation-separator', NavigationSeparator);

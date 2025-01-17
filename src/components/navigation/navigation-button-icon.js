@@ -85,7 +85,7 @@ class NavigationButtonIcon extends FocusMixin(LitElement) {
 
 	render() {
 		const { ariaLabel, id, text, tooltip } = this._getRenderSettings();
-		const highlightBorder = (!this.disabled && !this.noHighlightBorder) ? html`<span class="d2l-navigation-highlight-border"></span>` : nothing;
+		const highlightBorder = (!this.disabled && !this.noHighlightBorder) ? html`<span class="d2l-labs-navigation-highlight-border"></span>` : nothing;
 		const icon = html`<d2l-icon icon="${this.icon}"></d2l-icon>`;
 		return html`
 			<button id="${ifDefined(id)}" ?disabled="${this.disabled}" aria-label="${ifDefined(ariaLabel)}" type="button">
@@ -117,4 +117,4 @@ class NavigationButtonIcon extends FocusMixin(LitElement) {
 
 }
 
-customElements.define('d2l-navigation-button-icon', NavigationButtonIcon);
+customElements.define('d2l-labs-navigation-button-icon', NavigationButtonIcon);

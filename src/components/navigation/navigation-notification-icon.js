@@ -27,14 +27,14 @@ class NavigationNotificationIcon extends RtlMixin(LitElement) {
 				left: calc(-50% - 4px);
 				right: auto;
 			}
-			.d2l-navigation-notification-icon-indicator {
+			.d2l-labs-navigation-notification-icon-indicator {
 				background: var(--d2l-color-primary-accent-indicator);
 				border: 2px solid white;
 				border-radius: 50%;
 				height: 10px;
 				width: 10px;
 			}
-			:host([thin-border]) .d2l-navigation-notification-icon-indicator {
+			:host([thin-border]) .d2l-labs-navigation-notification-icon-indicator {
 				border-width: 1px;
 			}
 		`;
@@ -46,9 +46,9 @@ class NavigationNotificationIcon extends RtlMixin(LitElement) {
 	}
 
 	render() {
-		return html`<div class="d2l-navigation-notification-icon-indicator"></div>`;
+		return html`<div class="d2l-labs-navigation-notification-icon-indicator"></div>`;
 	}
 
 }
 
-window.customElements.define('d2l-navigation-notification-icon', NavigationNotificationIcon);
+window.customElements.define('d2l-labs-navigation-notification-icon', NavigationNotificationIcon);

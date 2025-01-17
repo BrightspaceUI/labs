@@ -5,21 +5,21 @@ import '../../../src/components/navigation/navigation-main-footer.js';
 import '../../../src/components/navigation/navigation-separator.js';
 import { expect, fixture, html, runConstructor } from '@brightspace-ui/testing';
 
-describe('d2l-navigation', () => {
+describe('d2l-labs-navigation', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation');
+			runConstructor('d2l-labs-navigation');
 		});
 	});
 
 });
 
-describe('d2l-navigation-band', () => {
+describe('d2l-labs-navigation-band', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation-band');
+			runConstructor('d2l-labs-navigation-band');
 		});
 	});
 
@@ -43,7 +43,7 @@ describe('d2l-navigation-band', () => {
 		].forEach((input) => {
 			it(`should set data-custom-scroll to "${input.result}" for user-agent "${input.userAgent}"`, async() => {
 				Object.defineProperty(window.navigator, 'userAgent', { value: input.userAgent, configurable: true });
-				const el = await fixture(html`<d2l-navigation-band></d2l-navigation-band>`);
+				const el = await fixture(html`<d2l-labs-navigation-band></d2l-labs-navigation-band>`);
 				expect(el._customScroll).to.equal(input.result);
 			});
 		});
@@ -52,31 +52,31 @@ describe('d2l-navigation-band', () => {
 
 });
 
-describe('d2l-navigation-main-header', () => {
+describe('d2l-labs-navigation-main-header', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation-main-header');
+			runConstructor('d2l-labs-navigation-main-header');
 		});
 	});
 
 });
 
-describe('d2l-navigation-main-footer', () => {
+describe('d2l-labs-navigation-main-footer', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation-main-footer');
+			runConstructor('d2l-labs-navigation-main-footer');
 		});
 	});
 
 });
 
-describe('d2l-navigation-separator', () => {
+describe('d2l-labs-navigation-separator', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation-separator');
+			runConstructor('d2l-labs-navigation-separator');
 		});
 	});
 

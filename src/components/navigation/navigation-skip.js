@@ -56,4 +56,4 @@ class NavigationSkip extends FocusMixin(PropertyRequiredMixin(LitElement)) {
 
 }
 
-customElements.define('d2l-navigation-skip', NavigationSkip);
+customElements.define('d2l-labs-navigation-skip', NavigationSkip);

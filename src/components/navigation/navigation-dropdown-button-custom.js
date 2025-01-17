@@ -20,7 +20,7 @@ class NavigationDropdownButtonCustom extends DropdownOpenerMixin(LitElement) {
 	render() {
 		return html`
 			<button type="button">
-				<span class="d2l-navigation-highlight-border"></span>
+				<span class="d2l-labs-navigation-highlight-border"></span>
 				<slot name="opener"></slot>
 			</button>
 			<slot></slot>
@@ -32,4 +32,4 @@ class NavigationDropdownButtonCustom extends DropdownOpenerMixin(LitElement) {
 	}
 }
 
-customElements.define('d2l-navigation-dropdown-button-custom', NavigationDropdownButtonCustom);
+customElements.define('d2l-labs-navigation-dropdown-button-custom', NavigationDropdownButtonCustom);

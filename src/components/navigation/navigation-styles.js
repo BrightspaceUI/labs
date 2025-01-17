@@ -2,26 +2,26 @@ import '@brightspace-ui/core/components/colors/colors.js';
 import { css } from 'lit';
 
 export const centererStyles = css`
-	.d2l-navigation-centerer {
+	.d2l-labs-navigation-centerer {
 		margin: 0 auto;
 		max-width: 1230px;
 	}
 `;
 
 export const guttersStyles = css`
-	.d2l-navigation-gutters {
+	.d2l-labs-navigation-gutters {
 		padding-left: 2.439%;
 		padding-right: 2.439%;
 		position: relative;
 	}
 	@media (max-width: 615px) {
-		.d2l-navigation-gutters {
+		.d2l-labs-navigation-gutters {
 			padding-left: 15px;
 			padding-right: 15px;
 		}
 	}
 	@media (min-width: 1230px) {
-		.d2l-navigation-gutters {
+		.d2l-labs-navigation-gutters {
 			padding-left: 30px;
 			padding-right: 30px;
 		}
@@ -29,7 +29,7 @@ export const guttersStyles = css`
 `;
 
 export const highlightBorderStyles = css`
-	.d2l-navigation-highlight-border {
+	.d2l-labs-navigation-highlight-border {
 		background: transparent;
 		border-bottom-left-radius: 4px;
 		border-bottom-right-radius: 4px;
@@ -40,9 +40,9 @@ export const highlightBorderStyles = css`
 		top: 0;
 		width: calc(100% + 14px);
 	}
-	*:focus > .d2l-navigation-highlight-border,
-	*:hover > .d2l-navigation-highlight-border,
-	*[active] > .d2l-navigation-highlight-border {
+	*:focus > .d2l-labs-navigation-highlight-border,
+	*:hover > .d2l-labs-navigation-highlight-border,
+	*[active] > .d2l-labs-navigation-highlight-border {
 		background: var(--d2l-color-celestine);
 	}
 `;

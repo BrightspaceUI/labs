@@ -16,13 +16,13 @@ const create = (opts = {}) => {
 		...opts
 	};
 	return html`
-		<d2l-navigation-button-icon
+		<d2l-labs-navigation-button-icon
 			?disabled="${disabled}"
 			icon="${icon}"
 			icon-position="${ifDefined(iconPosition)}"
 			?no-highlight-border="${noHighlightBorder}"
 			text="${text}"
-			?text-hidden="${textHidden}"></d2l-navigation-button-icon>
+			?text-hidden="${textHidden}"></d2l-labs-navigation-button-icon>
 	`;
 };
 
@@ -36,17 +36,17 @@ const createDropdown = (opts = {}) => {
 	};
 	const dropdown = hasDropdown ? html`<d2l-dropdown-content>content</d2l-dropdown-content>` : nothing;
 	return html`
-		<d2l-navigation-dropdown-button-icon
+		<d2l-labs-navigation-dropdown-button-icon
 			?disabled="${disabled}"
 			?has-notification="${hasNotification}"
 			icon="${icon}"
 			?notification-text="${ifDefined(notificationText)}"
 			style="margin: 0 60px"
-			text="${text}">${dropdown}</d2l-navigation-dropdown-button-icon>
+			text="${text}">${dropdown}</d2l-labs-navigation-dropdown-button-icon>
 	`;
 };
 
-describe('d2l-navigation-button', () => {
+describe('d2l-labs-navigation-button', () => {
 
 	[
 		{ name: 'icon-text', template: create() },
@@ -58,7 +58,7 @@ describe('d2l-navigation-button', () => {
 		{ name: 'dropdown-icon-off', template: createDropdown(), tooltip: true },
 		{ name: 'dropdown-icon-on', template: createDropdown({ hasNotification: true, notificationText: 'You have new notifications', text: 'Notification on' }), tooltip: true },
 		{ name: 'dropdown-icon-disabled', template: createDropdown({ disabled: true, text: 'Disabled' }) },
-		{ name: 'dropdown-custom', template: html`<d2l-navigation-dropdown-button-custom><span slot="opener">custom</span><d2l-dropdown-content>content</d2l-dropdown-content></d2l-navigation-dropdown-button-custom>` }
+		{ name: 'dropdown-custom', template: html`<d2l-labs-navigation-dropdown-button-custom><span slot="opener">custom</span><d2l-dropdown-content>content</d2l-dropdown-content></d2l-labs-navigation-dropdown-button-custom>` }
 	].forEach(({ name, template, tooltip }) => {
 		describe(name, () => {
 

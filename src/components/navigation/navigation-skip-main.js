@@ -7,11 +7,11 @@ import { querySelectorComposed } from '@brightspace-ui/core/helpers/dom.js';
 class NavigationSkipMain extends FocusMixin(LocalizeLabsElement(LitElement)) {
 
 	static get focusElementSelector() {
-		return 'd2l-navigation-skip';
+		return 'd2l-labs-navigation-skip';
 	}
 
 	render() {
-		return html`<d2l-navigation-skip text="${this.localize('components:navigation:skipNav')}" @click="${this._handleSkipNav}" class="vdiff-target"></d2l-navigation-skip>`;
+		return html`<d2l-labs-navigation-skip text="${this.localize('components:navigation:skipNav')}" @click="${this._handleSkipNav}" class="vdiff-target"></d2l-labs-navigation-skip>`;
 	}
 
 	_handleSkipNav() {
@@ -22,10 +22,10 @@ class NavigationSkipMain extends FocusMixin(LocalizeLabsElement(LitElement)) {
 			elem.tabIndex = -1;
 			elem.focus();
 		} else {
-			this.dispatchEvent(new CustomEvent('d2l-navigation-skip-fail', { bubbles: false, composed: false }));
+			this.dispatchEvent(new CustomEvent('d2l-labs-navigation-skip-fail', { bubbles: false, composed: false }));
 		}
 	}
 
 }
 
-customElements.define('d2l-navigation-skip-main', NavigationSkipMain);
+customElements.define('d2l-labs-navigation-skip-main', NavigationSkipMain);

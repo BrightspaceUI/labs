@@ -15,8 +15,8 @@ class NavigationMainFooter extends LitElement {
 
 	render() {
 		return html`
-			<div class="d2l-navigation-centerer">
-				<div class="d2l-navigation-gutters">
+			<div class="d2l-labs-navigation-centerer">
+				<div class="d2l-labs-navigation-gutters">
 					<slot name="main"></slot>
 				</div>
 			</div>
@@ -24,4 +24,4 @@ class NavigationMainFooter extends LitElement {
 	}
 
 }
-customElements.define('d2l-navigation-main-footer', NavigationMainFooter);
+customElements.define('d2l-labs-navigation-main-footer', NavigationMainFooter);

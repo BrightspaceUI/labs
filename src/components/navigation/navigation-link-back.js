@@ -25,15 +25,15 @@ class NavigationLinkBack extends LocalizeLabsElement(FocusMixin(LitElement)) {
 	}
 
 	static get focusElementSelector() {
-		return 'd2l-navigation-link-icon';
+		return 'd2l-labs-navigation-link-icon';
 	}
 
 	render() {
 		const href = this.href ? this.href : 'javascript:void(0);'; // backwards-compatible for uses before missing "href" threw exception
 		const text = this.text ? this.text : this.localize('components:navigation:back');
-		return html`<d2l-navigation-link-icon href="${href}" icon="tier1:chevron-left" text="${text}"></d2l-navigation-link-icon>`;
+		return html`<d2l-labs-navigation-link-icon href="${href}" icon="tier1:chevron-left" text="${text}"></d2l-labs-navigation-link-icon>`;
 	}
 
 }
 
-customElements.define('d2l-navigation-link-back', NavigationLinkBack);
+customElements.define('d2l-labs-navigation-link-back', NavigationLinkBack);

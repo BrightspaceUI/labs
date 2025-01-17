@@ -2,9 +2,9 @@
 
 > These are the components that should be used in the **VAST MAJORITY** of use cases
 
-### d2l-navigation
+### d2l-labs-navigation
 
-Add the `d2l-navigation` component, and provide sub elements `d2l-navigation-main-header` & `d2l-navigation-main-footer` (along with their respective slot contents).
+Add the `d2l-labs-navigation` component, and provide sub elements `d2l-labs-navigation-main-header` & `d2l-labs-navigation-main-footer` (along with their respective slot contents).
 
 ```html
 <script type="module">
@@ -13,24 +13,24 @@ Add the `d2l-navigation` component, and provide sub elements `d2l-navigation-mai
   import '@brightspace-ui/labs/navigation/navigation-main-footer.js';
 </script>
 
-<d2l-navigation>
-	<d2l-navigation-main-header>
-		<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+<d2l-labs-navigation>
+	<d2l-labs-navigation-main-header>
+		<div slot="left" class="d2l-labs-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
 
-		<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
-	</d2l-navigation-main-header>
-	<d2l-navigation-main-footer>
-		<div slot="main" class="d2l-navigation-s-main-wrapper">Stuff goes in here (small border above and below)</div>
-	</d2l-navigation-main-footer>
-</d2l-navigation>
+		<div slot="right" class="d2l-labs-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+	</d2l-labs-navigation-main-header>
+	<d2l-labs-navigation-main-footer>
+		<div slot="main" class="d2l-labs-navigation-s-main-wrapper">Stuff goes in here (small border above and below)</div>
+	</d2l-labs-navigation-main-footer>
+</d2l-labs-navigation>
 ```
 
 ***Relevant CSS class name:***
-* `--d2l-navigation-shadow-drop-border-display`: The default value is `block`, but this property can be used to hide the shadow by setting it to `none`.
+* `--d2l-labs-navigation-shadow-drop-border-display`: The default value is `block`, but this property can be used to hide the shadow by setting it to `none`.
 
-### d2l-navigation-immersive
+### d2l-labs-navigation-immersive
 
-Add the `d2l-navigation-immersive` component, providing values for the `backLinkHref` & `backLinkText`. Additionally, you may override any of the 3 slots (`left`, `middle`, `right`).
+Add the `d2l-labs-navigation-immersive` component, providing values for the `backLinkHref` & `backLinkText`. Additionally, you may override any of the 3 slots (`left`, `middle`, `right`).
 Please note that overridding the `left` slot will prevent the Back link from displaying. This should only be done in very specialized cases.
 
 ```html
@@ -38,14 +38,14 @@ Please note that overridding the `left` slot will prevent the Back link from dis
   import '@brightspace-ui/labs/navigation/navigation-immersive.js';
 </script>
 
-<d2l-navigation-immersive back-link-href="https://www.d2l.com" back-link-text="Back to D2L">
+<d2l-labs-navigation-immersive back-link-href="https://www.d2l.com" back-link-text="Back to D2L">
 	<div class="d2l-typography d2l-body-standard" slot="middle">
 		<p>Economics 101</p>
 	</div>
 	<div slot="right">
 		...
 	</div>
-</d2l-navigation-immersive>
+</d2l-labs-navigation-immersive>
 ```
 
 Optionally:
@@ -59,37 +59,37 @@ Optionally:
 > These are the components that make up the Primary Components. There might be an edge case or two where it makes sense to use one of these in isolation,
 > but **PLEASE STRONGLY CONSIDER** using a Primary Component instead.
 
-### d2l-navigation-band
+### d2l-labs-navigation-band
 
 ```html
 <script type="module">
   import '@brightspace-ui/labs/navigation/navigation-band.js';
 </script>
 
-<d2l-navigation-band></d2l-navigation-band>
+<d2l-labs-navigation-band></d2l-labs-navigation-band>
 ```
 
-The `d2l-navigation-band` also includes a `slot` with a custom scrollbar and fading effects, but this has only been designed for the `d2l-organization-consortium-tabs` and should not be used for anything else right now.
+The `d2l-labs-navigation-band` also includes a `slot` with a custom scrollbar and fading effects, but this has only been designed for the `d2l-organization-consortium-tabs` and should not be used for anything else right now.
 
 ***Relevant CSS class name:***
 * `--d2l-branding-primary-color`: Used to customize the colour of the top navigation band.
-* `--d2l-navigation-band-slot-height`: When using the slot, this is needed to setup the proper scrollbar and fading effects.
+* `--d2l-labs-navigation-band-slot-height`: When using the slot, this is needed to setup the proper scrollbar and fading effects.
 
 ---
 
-### d2l-navigation-main-header
+### d2l-labs-navigation-main-header
 
-Add the `d2l-navigation-main-header` component, and provide elements for the `left` and `right` slots.
+Add the `d2l-labs-navigation-main-header` component, and provide elements for the `left` and `right` slots.
 
 ```html
 <script type="module">
   import '@brightspace-ui/labs/navigation/navigation-main-header.js';
 </script>
 
-<d2l-navigation-main-header>
+<d2l-labs-navigation-main-header>
 	<div slot="left"></div>
 	<div slot="right"></div>
-</d2l-navigation-main-header>
+</d2l-labs-navigation-main-header>
 ```
 
 ***Slots:***
@@ -99,18 +99,18 @@ Add the `d2l-navigation-main-header` component, and provide elements for the `le
 
 ---
 
-### d2l-navigation-main-footer
+### d2l-labs-navigation-main-footer
 
-Add the `d2l-navigation-main-footer` component, and provide elements for the `main` slot.
+Add the `d2l-labs-navigation-main-footer` component, and provide elements for the `main` slot.
 
 ```html
 <script type="module">
   import '@brightspace-ui/labs/navigation/navigation-main-footer.js';
 </script>
 
-<d2l-navigation-main-footer>
+<d2l-labs-navigation-main-footer>
 	<div slot="main"></div>
-</d2l-navigation-main-footer>
+</d2l-labs-navigation-main-footer>
 ```
 
 ***Slots:***
@@ -119,18 +119,18 @@ Add the `d2l-navigation-main-footer` component, and provide elements for the `ma
 
 ---
 
-### d2l-navigation-link
+### d2l-labs-navigation-link
 
 (Placeholder for now)
 
 ***Relevant CSS class name:***
-* `--d2l-navigation-primary-color`: Used to customize the hover colour of the highlight links and buttons
+* `--d2l-labs-navigation-primary-color`: Used to customize the hover colour of the highlight links and buttons
 
 ---
 
-### d2l-navigation-button-icon
+### d2l-labs-navigation-button-icon
 
-`<d2l-navigation-button-icon>` provides a button with an icon and optional text.
+`<d2l-labs-navigation-button-icon>` provides a button with an icon and optional text.
 
 ### Properties
 
@@ -145,9 +145,9 @@ Add the `d2l-navigation-main-footer` component, and provide elements for the `ma
 
 ---
 
-### d2l-navigation-link-icon
+### d2l-labs-navigation-link-icon
 
-Similar to `<d2l-navigation-button-icon>`, a link that comes with an icon and optional text.
+Similar to `<d2l-labs-navigation-button-icon>`, a link that comes with an icon and optional text.
 
 ### Properties
 
@@ -160,33 +160,33 @@ Similar to `<d2l-navigation-button-icon>`, a link that comes with an icon and op
 
 ---
 
-### d2l-navigation-iterator
+### d2l-labs-navigation-iterator
 
 ```html
 <script type="module">
   import '@brightspace-ui/labs/navigation/navigation-iterator.js';
 </script>
 
-<d2l-navigation-iterator></d2l-navigation-iterator>
+<d2l-labs-navigation-iterator></d2l-labs-navigation-iterator>
 ```
 
 There is only one slot, and the default button text can be hidden with `hide-text`.
 
 ```html
-<d2l-navigation-iterator hide-text>
+<d2l-labs-navigation-iterator hide-text>
 	<span>User 1 of 17</span>
-</d2l-navigation-iterator>
+</d2l-labs-navigation-iterator>
 ```
 
 The iterator button labels can be customized with `previous-text` and `next-text`.
 
 ```html
-<d2l-navigation-iterator previous-text="Back" next-text="Forward"></d2l-navigation-iterator>
+<d2l-labs-navigation-iterator previous-text="Back" next-text="Forward"></d2l-labs-navigation-iterator>
 ```
 
 The iterator buttons can be hidden completely with `no-next` or `no-previous`.
 
 ```html
-<d2l-navigation-iterator no-next></d2l-navigation-iterator>
-<d2l-navigation-iterator no-previous></d2l-navigation-iterator>
+<d2l-labs-navigation-iterator no-next></d2l-labs-navigation-iterator>
+<d2l-labs-navigation-iterator no-previous></d2l-labs-navigation-iterator>
 ```

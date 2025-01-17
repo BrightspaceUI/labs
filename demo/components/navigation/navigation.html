@@ -9,23 +9,23 @@
 			import '../../../src/components/navigation/navigation-main-footer.js';
 			import '../../../src/components/navigation/navigation-separator.js';
 		</script>
-		<title>d2l-navigation demo</title>
+		<title>d2l-labs-navigation demo</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
 		<style>
 			html {
-				--d2l-navigation-band-slot-height: 26px;
+				--d2l-labs-navigation-band-slot-height: 26px;
 			}
-			d2l-navigation-main-header {
+			d2l-labs-navigation-main-header {
 				background-color: mediumpurple;
 			}
-			d2l-navigation-main-footer {
+			d2l-labs-navigation-main-footer {
 				background-color: green;
 			}
-			.d2l-navigation-header-left {
+			.d2l-labs-navigation-header-left {
 				background-color: pink;
 			}
-			.d2l-navigation-header-right {
+			.d2l-labs-navigation-header-right {
 				background-color: lightblue;
 			}
 			div[slot="navigation-band"] {
@@ -38,59 +38,59 @@
 		</style>
 	</head>
 	<body>
-		<d2l-demo-page page-title="d2l-navigation">
+		<d2l-demo-page page-title="d2l-labs-navigation">
 			<h2>Header and Footer</h2>
 			<d2l-demo-snippet full-width>
-				<d2l-navigation has-skip-nav>
-					<d2l-navigation-main-header>
-						<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
-						<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
-					</d2l-navigation-main-header>
-					<d2l-navigation-main-footer>
-						<div slot="main" class="d2l-navigation-s-main-wrapper">Stuff goes in here (small border above and below)</div>
-					</d2l-navigation-main-footer>
-				</d2l-navigation>
+				<d2l-labs-navigation has-skip-nav>
+					<d2l-labs-navigation-main-header>
+						<div slot="left" class="d2l-labs-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+						<div slot="right" class="d2l-labs-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+					</d2l-labs-navigation-main-header>
+					<d2l-labs-navigation-main-footer>
+						<div slot="main" class="d2l-labs-navigation-s-main-wrapper">Stuff goes in here (small border above and below)</div>
+					</d2l-labs-navigation-main-footer>
+				</d2l-labs-navigation>
 			</d2l-demo-snippet>
 
 			<h2>Just Header</h2>
 			<d2l-demo-snippet full-width>
-				<d2l-navigation>
-					<d2l-navigation-main-header>
-						<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
-						<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
-					</d2l-navigation-main-header>
-				</d2l-navigation>
+				<d2l-labs-navigation>
+					<d2l-labs-navigation-main-header>
+						<div slot="left" class="d2l-labs-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+						<div slot="right" class="d2l-labs-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+					</d2l-labs-navigation-main-header>
+				</d2l-labs-navigation>
 			</d2l-demo-snippet>
 
 			<h2>Separator</h2>
 			<d2l-demo-snippet>
-				<d2l-navigation-separator></d2l-navigation-separator>
+				<d2l-labs-navigation-separator></d2l-labs-navigation-separator>
 			</d2l-demo-snippet>
 
 			<h2>Band Default</h2>
 			<d2l-demo-snippet full-width>
-				<d2l-navigation-band></d2l-navigation-band>
+				<d2l-labs-navigation-band></d2l-labs-navigation-band>
 			</d2l-demo-snippet>
 
 			<h2>Band Content Slotted</h2>
 			<d2l-demo-snippet full-width>
-				<d2l-navigation>
+				<d2l-labs-navigation>
 					<div slot="navigation-band">
 						<button>consortium 1</button>
 						<button>consortium 2</button>
 						<button>consortium 3</button>
 						<button>consortium 4</button>
 					</div>
-					<d2l-navigation-main-header>
-						<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
-						<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
-					</d2l-navigation-main-header>
-				</d2l-navigation>
+					<d2l-labs-navigation-main-header>
+						<div slot="left" class="d2l-labs-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+						<div slot="right" class="d2l-labs-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+					</d2l-labs-navigation-main-header>
+				</d2l-labs-navigation>
 			</d2l-demo-snippet>
 
 			<h2>Band Content Slotted Scrollbar</h2>
 			<d2l-demo-snippet full-width overflow-hidden>
-				<d2l-navigation>
+				<d2l-labs-navigation>
 					<div slot="navigation-band">
 						<button class="scrollable">consortium 1</button>
 						<button class="scrollable">consortium 2</button>
@@ -103,11 +103,11 @@
 						<button class="scrollable">consortium 9</button>
 						<button class="scrollable">consortium 10</button>
 					</div>
-					<d2l-navigation-main-header>
-						<div slot="left" class="d2l-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
-						<div slot="right" class="d2l-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
-					</d2l-navigation-main-header>
-				</d2l-navigation>
+					<d2l-labs-navigation-main-header>
+						<div slot="left" class="d2l-labs-navigation-header-left">This should be on the left.  As the width changes it shrinks as needed.</div>
+						<div slot="right" class="d2l-labs-navigation-header-right">This should be on the right.  It doesn't shrink.</div>
+					</d2l-labs-navigation-main-header>
+				</d2l-labs-navigation>
 			</d2l-demo-snippet>
 		</d2l-demo-page>
 		<script>
@@ -117,7 +117,7 @@
 					button.addEventListener('click', () => {
 						button.dispatchEvent(
 							new CustomEvent(
-								'd2l-navigation-band-slot-scroll-request',
+								'd2l-labs-navigation-band-slot-scroll-request',
 								{
 									detail: {
 										pointToCenter: button.offsetLeft + (button.offsetWidth / 2)

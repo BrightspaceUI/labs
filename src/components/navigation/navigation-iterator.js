@@ -44,23 +44,23 @@ class NavigationIterator extends LocalizeLabsElement(LitElement) {
 		const previousText = this.previousText ? this.previousText : this.localize('components:navigation:previous');
 		const nextText = this.nextText ? this.nextText : this.localize('components:navigation:next');
 		return html`
-			<d2l-navigation-button-icon
+			<d2l-labs-navigation-button-icon
 				class="d2l-body-compact"
 				icon="tier3:chevron-left-circle"
 				icon-position="start"
 				text="${previousText}"
 				?text-hidden="${this.hideText}"
 				?disabled="${this.previousDisabled}"
-				@click="${this._dispatchPreviousClicked}"></d2l-navigation-button-icon>
+				@click="${this._dispatchPreviousClicked}"></d2l-labs-navigation-button-icon>
 			<slot class="d2l-body-compact"></slot>
-			<d2l-navigation-button-icon
+			<d2l-labs-navigation-button-icon
 				class="d2l-body-compact"
 				icon="tier3:chevron-right-circle"
 				icon-position="end"
 				text="${nextText}"
 				?text-hidden="${this.hideText}"
 				?disabled="${this.nextDisabled}"
-				@click="${this._dispatchNextClicked}"></d2l-navigation-button-icon>
+				@click="${this._dispatchNextClicked}"></d2l-labs-navigation-button-icon>
 		`;
 	}
 
@@ -94,4 +94,4 @@ class NavigationIterator extends LocalizeLabsElement(LitElement) {
 
 }
 
-window.customElements.define('d2l-navigation-iterator', NavigationIterator);
+window.customElements.define('d2l-labs-navigation-iterator', NavigationIterator);

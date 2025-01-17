@@ -2,13 +2,13 @@ import '../../../src/components/navigation/navigation-skip-main.js';
 import { clickElem, expect, fixture, focusElem, html, oneEvent, sendKeysElem } from '@brightspace-ui/testing';
 import { getComposedActiveElement } from '@brightspace-ui/core/helpers/focus.js';
 
-const mainFixture = html`<d2l-navigation-skip-main></d2l-navigation-skip-main>`;
+const mainFixture = html`<d2l-labs-navigation-skip-main></d2l-labs-navigation-skip-main>`;
 
 function getAnchor(elem) {
-	return elem.shadowRoot.querySelector('d2l-navigation-skip').shadowRoot.querySelector('a');
+	return elem.shadowRoot.querySelector('d2l-labs-navigation-skip').shadowRoot.querySelector('a');
 }
 
-describe('d2l-navigation-skip-main', () => {
+describe('d2l-labs-navigation-skip-main', () => {
 
 	describe('events', () => {
 
@@ -49,7 +49,7 @@ describe('d2l-navigation-skip-main', () => {
 					<h1>heading</h1>
 				</div>
 			`);
-			const anchor = getAnchor(elem.querySelector('d2l-navigation-skip-main'));
+			const anchor = getAnchor(elem.querySelector('d2l-labs-navigation-skip-main'));
 			await sendKeysElem(anchor, 'press', 'Enter');
 			expect(getComposedActiveElement()).to.equal(elem.querySelector('main'));
 		});
@@ -62,7 +62,7 @@ describe('d2l-navigation-skip-main', () => {
 					<h1>heading</h1>
 				</div>
 			`);
-			const anchor = getAnchor(elem.querySelector('d2l-navigation-skip-main'));
+			const anchor = getAnchor(elem.querySelector('d2l-labs-navigation-skip-main'));
 			await sendKeysElem(anchor, 'press', 'Enter');
 			expect(getComposedActiveElement()).to.equal(elem.querySelector('[role="main"]'));
 		});
@@ -74,16 +74,16 @@ describe('d2l-navigation-skip-main', () => {
 					<h1>heading</h1>
 				</div>
 			`);
-			const anchor = getAnchor(elem.querySelector('d2l-navigation-skip-main'));
+			const anchor = getAnchor(elem.querySelector('d2l-labs-navigation-skip-main'));
 			await sendKeysElem(anchor, 'press', 'Enter');
 			expect(getComposedActiveElement()).to.equal(elem.querySelector('h1'));
 		});
 
-		it('should dispatch "d2l-navigation-skip-fail" event if no focus targets are found', async() => {
+		it('should dispatch "d2l-labs-navigation-skip-fail" event if no focus targets are found', async() => {
 			const elem = await fixture(mainFixture);
 			const anchor = getAnchor(elem);
 			sendKeysElem(anchor, 'press', 'Enter');
-			await oneEvent(elem, 'd2l-navigation-skip-fail');
+			await oneEvent(elem, 'd2l-labs-navigation-skip-fail');
 		});
 
 	});

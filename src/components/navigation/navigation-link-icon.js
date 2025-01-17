@@ -75,7 +75,7 @@ class NavigationLinkIcon extends FocusMixin(LitElement) {
 		const { ariaLabel, id, text, tooltip } = this._getRenderSettings();
 		return html`
 			<a id="${ifDefined(id)}" href="${ifDefined(this.href)}" aria-label="${ifDefined(ariaLabel)}">
-				<span class="d2l-navigation-highlight-border"></span>
+				<span class="d2l-labs-navigation-highlight-border"></span>
 				<d2l-icon icon="${this.icon}"></d2l-icon>
 				${text}
 			</a>
@@ -117,11 +117,11 @@ class NavigationLinkIcon extends FocusMixin(LitElement) {
 			if (!hasHref && !this._missingHrefErrorHasBeenThrown) {
 				this._missingHrefErrorHasBeenThrown = true;
 				// we don't want to prevent rendering
-				setTimeout(() => { throw new Error('<d2l-navigation-link-icon>: missing required "href" attribute. If this component performs an action and not a navigation, consider using <d2l-navigation-button-icon> instead.'); });
+				setTimeout(() => { throw new Error('<d2l-labs-navigation-link-icon>: missing required "href" attribute. If this component performs an action and not a navigation, consider using <d2l-labs-navigation-button-icon> instead.'); });
 			}
 		}, 3000);
 	}
 
 }
 
-customElements.define('d2l-navigation-link-icon', NavigationLinkIcon);
+customElements.define('d2l-labs-navigation-link-icon', NavigationLinkIcon);

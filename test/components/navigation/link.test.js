@@ -4,41 +4,41 @@ import '../../../src/components/navigation/navigation-link-icon.js';
 import '../../../src/components/navigation/navigation-link-image.js';
 import { runConstructor } from '@brightspace-ui/testing';
 
-describe('d2l-navigation-link', () => {
+describe('d2l-labs-navigation-link', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation-link');
+			runConstructor('d2l-labs-navigation-link');
 		});
 	});
 
 });
 
-describe('d2l-navigation-link-back', () => {
+describe('d2l-labs-navigation-link-back', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation-link-back');
+			runConstructor('d2l-labs-navigation-link-back');
 		});
 	});
 
 });
 
-describe('d2l-navigation-link-icon', () => {
+describe('d2l-labs-navigation-link-icon', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation-link-icon');
+			runConstructor('d2l-labs-navigation-link-icon');
 		});
 	});
 
 });
 
-describe('d2l-navigation-link-image', () => {
+describe('d2l-labs-navigation-link-image', () => {
 
 	describe('constructor', () => {
 		it('should construct', () => {
-			runConstructor('d2l-navigation-link-image');
+			runConstructor('d2l-labs-navigation-link-image');
 		});
 	});
 

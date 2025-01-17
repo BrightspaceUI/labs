@@ -46,7 +46,7 @@ class NavigationDropdownButtonIcon extends DropdownOpenerMixin(LitElement) {
 
 	render() {
 		const { ariaDescribedBy, ariaDescription, contents } = this._getRenderSettings();
-		const highlightBorder = !this.disabled ? html`<span class="d2l-navigation-highlight-border"></span>` : nothing;
+		const highlightBorder = !this.disabled ? html`<span class="d2l-labs-navigation-highlight-border"></span>` : nothing;
 		const tooltip = !this.dropdownOpened ? html`<d2l-tooltip close-on-click for="${this._buttonId}" for-type="label" position="bottom" offset="${ifDefined(this.tooltipOffset)}" class="vdiff-target">${this.text}</d2l-tooltip>` : nothing;
 		return html`
 			<button
@@ -71,7 +71,7 @@ class NavigationDropdownButtonIcon extends DropdownOpenerMixin(LitElement) {
 			return {
 				ariaDescribedBy: this._describedById,
 				ariaDescription: html`<span class="d2l-offscreen" id="${this._describedById}">${this.notificationText}</span>`,
-				contents: html`<span class="icon-container">${icon}<d2l-navigation-notification-icon></d2l-navigation-notification-icon></span>`
+				contents: html`<span class="icon-container">${icon}<d2l-labs-navigation-notification-icon></d2l-labs-navigation-notification-icon></span>`
 			};
 		}
 		return {
@@ -83,4 +83,4 @@ class NavigationDropdownButtonIcon extends DropdownOpenerMixin(LitElement) {
 
 }
 
-customElements.define('d2l-navigation-dropdown-button-icon', NavigationDropdownButtonIcon);
+customElements.define('d2l-labs-navigation-dropdown-button-icon', NavigationDropdownButtonIcon);
