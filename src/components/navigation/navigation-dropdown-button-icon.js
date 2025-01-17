@@ -1,8 +1,8 @@
 import '@brightspace-ui/core/components/icons/icon.js';
 import '@brightspace-ui/core/components/tooltip/tooltip.js';
-import './d2l-navigation-notification-icon.js';
+import './navigation-notification-icon.js';
 import { css, html, LitElement, nothing } from 'lit';
-import { highlightBorderStyles, highlightButtonStyles } from './d2l-navigation-styles.js';
+import { highlightBorderStyles, highlightButtonStyles } from './navigation-styles.js';
 import { DropdownOpenerMixin } from '@brightspace-ui/core/components/dropdown/dropdown-opener-mixin.js';
 import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId.js';
 import { ifDefined } from 'lit/directives/if-defined.js';

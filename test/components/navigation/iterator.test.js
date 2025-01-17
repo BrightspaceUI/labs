@@ -1,4 +1,4 @@
-import '../../../src/components/navigation/d2l-navigation-iterator.js';
+import '../../../src/components/navigation/navigation-iterator.js';
 import { fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
 
 describe('d2l-navigation-iterator', () => {

@@ -1,4 +1,4 @@
-import '../../../src/components/navigation/d2l-navigation-skip-main.js';
+import '../../../src/components/navigation/navigation-skip-main.js';
 import { clickElem, expect, fixture, focusElem, html, oneEvent, sendKeysElem } from '@brightspace-ui/testing';
 import { getComposedActiveElement } from '@brightspace-ui/core/helpers/focus.js';
 

@@ -1,4 +1,4 @@
-import '../../../src/components/navigation/d2l-navigation-skip.js';
+import '../../../src/components/navigation/navigation-skip.js';
 import { clickElem, expect, fixture, focusElem, html, oneEvent, sendKeysElem } from '@brightspace-ui/testing';
 import { createMessage } from '@brightspace-ui/core/mixins/property-required/property-required-mixin.js';
 import { getComposedActiveElement } from '@brightspace-ui/core/helpers/focus.js';

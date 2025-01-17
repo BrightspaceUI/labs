@@ -1,5 +1,5 @@
-import './d2l-navigation-band.js';
-import './d2l-navigation-skip-main.js';
+import './navigation-band.js';
+import './navigation-skip-main.js';
 import { css, html, LitElement, nothing } from 'lit';
 import { getNextFocusable } from '@brightspace-ui/core/helpers/focus.js';
 

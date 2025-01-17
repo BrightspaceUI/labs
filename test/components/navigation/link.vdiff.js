@@ -1,7 +1,7 @@
-import '../../../src/components/navigation/d2l-navigation-link.js';
-import '../../../src/components/navigation/d2l-navigation-link-back.js';
-import '../../../src/components/navigation/d2l-navigation-link-icon.js';
-import '../../../src/components/navigation/d2l-navigation-link-image.js';
+import '../../../src/components/navigation/navigation-link.js';
+import '../../../src/components/navigation/navigation-link-back.js';
+import '../../../src/components/navigation/navigation-link-icon.js';
+import '../../../src/components/navigation/navigation-link-image.js';
 import { expect, fixture, focusElem, hoverElem, html, oneEvent } from '@brightspace-ui/testing';
 import { ifDefined } from 'lit/directives/if-defined.js';
 

@@ -8,9 +8,9 @@ Add the `d2l-navigation` component, and provide sub elements `d2l-navigation-mai
 
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/d2l-navigation.js';
-  import '@brightspace-ui/labs/navigation/d2l-navigation-main-header.js';
-  import '@brightspace-ui/labs/navigation/d2l-navigation-main-footer.js';
+  import '@brightspace-ui/labs/navigation/navigation.js';
+  import '@brightspace-ui/labs/navigation/navigation-main-header.js';
+  import '@brightspace-ui/labs/navigation/navigation-main-footer.js';
 </script>
 
 <d2l-navigation>
@@ -35,7 +35,7 @@ Please note that overridding the `left` slot will prevent the Back link from dis
 
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/d2l-navigation-immersive.js';
+  import '@brightspace-ui/labs/navigation/navigation-immersive.js';
 </script>
 
 <d2l-navigation-immersive back-link-href="https://www.d2l.com" back-link-text="Back to D2L">
@@ -61,11 +61,9 @@ Optionally:
 
 ### d2l-navigation-band
 
-![screenshot of navigation band](/screenshots/navigation-band.png?raw=true)
-
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/d2l-navigation-band.js';
+  import '@brightspace-ui/labs/navigation/navigation-band.js';
 </script>
 
 <d2l-navigation-band></d2l-navigation-band>
@@ -83,11 +81,9 @@ The `d2l-navigation-band` also includes a `slot` with a custom scrollbar and fad
 
 Add the `d2l-navigation-main-header` component, and provide elements for the `left` and `right` slots.
 
-![screenshot of navigation main header](/screenshots/navigation-main-header.png?raw=true)
-
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/d2l-navigation-main-header.js';
+  import '@brightspace-ui/labs/navigation/navigation-main-header.js';
 </script>
 
 <d2l-navigation-main-header>
@@ -107,11 +103,9 @@ Add the `d2l-navigation-main-header` component, and provide elements for the `le
 
 Add the `d2l-navigation-main-footer` component, and provide elements for the `main` slot.
 
-![screenshot of navigation main footer](/screenshots/navigation-main-footer.png?raw=true)
-
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/d2l-navigation-main-footer.js';
+  import '@brightspace-ui/labs/navigation/navigation-main-footer.js';
 </script>
 
 <d2l-navigation-main-footer>
@@ -155,8 +149,6 @@ Add the `d2l-navigation-main-footer` component, and provide elements for the `ma
 
 Similar to `<d2l-navigation-button-icon>`, a link that comes with an icon and optional text.
 
-![screenshot of navigation link icon](/screenshots/navigation-link-button-icon.png?raw=true)
-
 ### Properties
 
 | Property | Type | Description |
@@ -170,19 +162,15 @@ Similar to `<d2l-navigation-button-icon>`, a link that comes with an icon and op
 
 ### d2l-navigation-iterator
 
-![screenshot of default navigation iterator](/screenshots/d2l-navigation-iterator.png?raw=true)
-
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/d2l-navigation-iterator.js';
+  import '@brightspace-ui/labs/navigation/navigation-iterator.js';
 </script>
 
 <d2l-navigation-iterator></d2l-navigation-iterator>
 ```
 
 There is only one slot, and the default button text can be hidden with `hide-text`.
-
-![screenshot of navigation iterator with hidden iterator button text and custom content](/screenshots/d2l-navigation-iterator-hide-text-custom.png?raw=true)
 
 ```html
 <d2l-navigation-iterator hide-text>
@@ -192,54 +180,13 @@ There is only one slot, and the default button text can be hidden with `hide-tex
 
 The iterator button labels can be customized with `previous-text` and `next-text`.
 
-![screenshot of navigation iterator with hidden iterator button text and custom content](/screenshots/d2l-navigation-iterator-custom-buttons.png?raw=true)
-
 ```html
 <d2l-navigation-iterator previous-text="Back" next-text="Forward"></d2l-navigation-iterator>
 ```
 
 The iterator buttons can be hidden completely with `no-next` or `no-previous`.
 
-![screenshot of navigation iterator with no next button](/screenshots/d2l-navigation-iterator-no-next.png?raw=true)
-![screenshot of navigation iterator with no previous button](/screenshots/d2l-navigation-iterator-no-prev.png?raw=true)
-
 ```html
 <d2l-navigation-iterator no-next></d2l-navigation-iterator>
 <d2l-navigation-iterator no-previous></d2l-navigation-iterator>
 ```
-
-## Developing and Contributing
-
-After cloning the repo, run `npm install` to install dependencies.
-
-### Testing
-
-To run the full suite of tests:
-
-```shell
-npm test
-```
-
-Alternatively, tests can be selectively run:
-
-```shell
-# unit tests
-npm run test:unit
-
-# vdiff tests
-npm run test:vdiff
-```
-
-### Running the demos
-
-To start a [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) that hosts the demo page and tests:
-
-```shell
-npm start
-```
-
-### Versioning and Releasing
-
-This repo is configured to use `semantic-release`. Commits prefixed with `fix:` and `feat:` will trigger patch and minor releases when merged to `main`.
-
-To learn how to create major releases and release from maintenance branches, refer to the [semantic-release GitHub Action](https://github.com/BrightspaceUI/actions/tree/main/semantic-release) documentation.

@@ -1,4 +1,4 @@
-import './d2l-navigation-button-icon.js';
+import './navigation-button-icon.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';

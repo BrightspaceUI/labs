@@ -1,6 +1,6 @@
 import '@brightspace-ui/core/components/tooltip/tooltip.js';
 import { css, html, LitElement, nothing } from 'lit';
-import { highlightBorderStyles, highlightLinkStyles } from './d2l-navigation-styles.js';
+import { highlightBorderStyles, highlightLinkStyles } from './navigation-styles.js';
 import { FocusMixin } from '@brightspace-ui/core/mixins/focus-mixin.js';
 import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId.js';
 import { ifDefined } from 'lit/directives/if-defined.js';

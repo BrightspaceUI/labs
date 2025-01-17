@@ -1,4 +1,4 @@
-import '../../../src/components/navigation/d2l-navigation-immersive.js';
+import '../../../src/components/navigation/navigation-immersive.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 describe('d2l-navigation-immersive', () => {

@@ -1,8 +1,8 @@
-import '../../../src/components/navigation/d2l-navigation.js';
-import '../../../src/components/navigation/d2l-navigation-band.js';
-import '../../../src/components/navigation/d2l-navigation-main-header.js';
-import '../../../src/components/navigation/d2l-navigation-main-footer.js';
-import '../../../src/components/navigation/d2l-navigation-separator.js';
+import '../../../src/components/navigation/navigation.js';
+import '../../../src/components/navigation/navigation-band.js';
+import '../../../src/components/navigation/navigation-main-header.js';
+import '../../../src/components/navigation/navigation-main-footer.js';
+import '../../../src/components/navigation/navigation-separator.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 describe('d2l-navigation', () => {

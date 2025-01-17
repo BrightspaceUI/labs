@@ -1,7 +1,7 @@
 import '@brightspace-ui/core/components/colors/colors.js';
 import { css, html, LitElement } from 'lit';
 import { FocusMixin } from '@brightspace-ui/core/mixins/focus-mixin.js';
-import { highlightBorderStyles } from './d2l-navigation-styles.js';
+import { highlightBorderStyles } from './navigation-styles.js';
 
 class D2LNavigationLink extends FocusMixin(LitElement) {
 

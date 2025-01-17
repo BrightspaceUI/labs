@@ -1,4 +1,4 @@
-import '../../../src/components/navigation/d2l-navigation-skip-main.js';
+import '../../../src/components/navigation/navigation-skip-main.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 describe('d2l-navigation-skip-main', () => {

@@ -1,10 +1,10 @@
 import '@brightspace-ui/core/components/colors/colors.js';
-import './d2l-navigation.js';
-import './d2l-navigation-link-back.js';
+import './navigation.js';
+import './navigation-link-back.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { navigationSharedStyle } from './d2l-navigation-shared-styles.js';
+import { navigationSharedStyle } from './navigation-shared-styles.js';
 import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver.es.js';
 
 const mediaQueryList = window.matchMedia('(max-width: 615px)');

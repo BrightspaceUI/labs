@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit';
-import { navigationSharedStyle } from './d2l-navigation-shared-styles.js';
+import { navigationSharedStyle } from './navigation-shared-styles.js';
 
 class NavigationMainFooter extends LitElement {
 

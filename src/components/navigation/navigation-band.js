@@ -1,5 +1,5 @@
 import '@brightspace-ui/core/components/colors/colors.js';
-import { centererStyles, guttersStyles } from './d2l-navigation-styles.js';
+import { centererStyles, guttersStyles } from './navigation-styles.js';
 import { css, html, LitElement } from 'lit';
 
 function useCustomScroll() {

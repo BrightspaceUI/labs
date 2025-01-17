@@ -1,7 +1,7 @@
 import '@brightspace-ui/core/components/dropdown/dropdown-content.js';
-import '../../../src/components/navigation/d2l-navigation-button-icon.js';
-import '../../../src/components/navigation/d2l-navigation-dropdown-button-custom.js';
-import '../../../src/components/navigation/d2l-navigation-dropdown-button-icon.js';
+import '../../../src/components/navigation/navigation-button-icon.js';
+import '../../../src/components/navigation/navigation-dropdown-button-custom.js';
+import '../../../src/components/navigation/navigation-dropdown-button-icon.js';
 import { expect, fixture, focusElem, hoverElem, html, oneEvent } from '@brightspace-ui/testing';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { nothing } from 'lit';

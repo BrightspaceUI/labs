@@ -1,7 +1,7 @@
-import '../../../src/components/navigation/d2l-navigation-dropdown-button-icon.js';
-import '../../../src/components/navigation/d2l-navigation-dropdown-button-custom.js';
-import '../../../src/components/navigation/d2l-navigation-button-icon.js';
-import '../../../src/components/navigation/d2l-navigation-notification-icon.js';
+import '../../../src/components/navigation/navigation-dropdown-button-icon.js';
+import '../../../src/components/navigation/navigation-dropdown-button-custom.js';
+import '../../../src/components/navigation/navigation-button-icon.js';
+import '../../../src/components/navigation/navigation-notification-icon.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 import { getComposedActiveElement } from '@brightspace-ui/core/helpers/focus.js';
 

@@ -1,4 +1,4 @@
-import './d2l-navigation-skip.js';
+import './navigation-skip.js';
 import { html, LitElement } from 'lit';
 import { FocusMixin } from '@brightspace-ui/core/mixins/focus/focus-mixin.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';

@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit';
-import { highlightBorderStyles, highlightButtonStyles } from './d2l-navigation-styles.js';
+import { highlightBorderStyles, highlightButtonStyles } from './navigation-styles.js';
 import { DropdownOpenerMixin } from '@brightspace-ui/core/components/dropdown/dropdown-opener-mixin.js';
 
 class NavigationDropdownButtonCustom extends DropdownOpenerMixin(LitElement) {
