@@ -59,9 +59,6 @@ class AttributePickerItem extends LocalizeLabsElement(LitElement) {
 				text-overflow: ellipsis;
 				word-break: break-all;
 			}
-			d2l-tooltip {
-				word-break: break-word;
-			}
 			d2l-button-icon {
 				--d2l-button-icon-background-color-hover: var(--d2l-color-mica);
 				--d2l-button-icon-fill-color: var(--d2l-color-chromite);
