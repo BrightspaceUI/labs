@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '@brightspace-ui/core/components/dropdown/dropdown-content.js';
+			import '@brightspace-ui/core/components/icons/icon.js';
+			import '../../../src/components/navigation/navigation-dropdown-button-custom.js';
+			import '../../../src/components/navigation/navigation-dropdown-button-icon.js';
+			import '../../../src/components/navigation/navigation-button-icon.js';
+			import '../../../src/components/navigation/navigation-link.js';
+			import '../../../src/components/navigation/navigation-link-back.js';
+			import '../../../src/components/navigation/navigation-link-icon.js';
+			import '../../../src/components/navigation/navigation-link-image.js';
+		</script>
+		<title>button & link demos</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<style>
+			.personal-menu {
+				align-items: center;
+				display: flex;
+				font-size: 0.7rem;
+				gap: 10px;
+			}
+			.personal-menu-square {
+				background-color: #ab578a;
+				border-radius: 6px;
+				display: inline-block;
+				height: 42px;
+				width: 42px;
+			}
+			.wrapper {
+				border: 1px solid #999999;
+				border-top: 4px solid slateblue;
+				display: flex;
+				gap: 18px;
+				height: 90px;
+				padding: 0 18px;
+			}
+		</style>
+	</head>
+	<body>
+		<d2l-demo-page page-title="button & link demos">
+
+			<h2>d2l-labs-navigation-link</h2>
+			<d2l-demo-snippet>
+				<div class="wrapper">
+					<d2l-labs-navigation-link href="https://www.example.org">
+						<d2l-icon icon="tier2:gear" style="margin-right: 10px;"></d2l-icon>
+						Settings
+					</d2l-labs-navigation-link>
+				</div>
+			</d2l-demo-snippet>
+
+			<h2>d2l-labs-navigation-button-icon / d2l-labs-navigation-link-icon</h2>
+			<d2l-demo-snippet>
+				<div class="wrapper">
+					<d2l-labs-navigation-button-icon icon="tier3:gear" text="Settings"></d2l-labs-navigation-button-icon>
+					<d2l-labs-navigation-button-icon icon="tier3:gear" text="Settings (hidden)" text-hidden></d2l-labs-navigation-button-icon>
+					<d2l-labs-navigation-link-icon href="https://www.example.org" icon="tier3:gear" text="Settings"></d2l-labs-navigation-link-icon>
+					<d2l-labs-navigation-link-icon href="https://www.example.org" icon="tier3:gear" text="Settings (hidden)" text-hidden></d2l-labs-navigation-link-icon>
+				</div>
+			</d2l-demo-snippet>
+
+			<h2>d2l-labs-navigation-dropdown-button-custom / d2l-labs-navigation-dropdown-button-icon</h2>
+			<d2l-demo-snippet>
+				<div class="wrapper">
+					<d2l-labs-navigation-dropdown-button-icon icon="tier3:classes" text="Select a course...">
+						<d2l-dropdown-content vertical-offset="0">Course selector in here.</d2l-dropdown-content>
+					</d2l-labs-navigation-dropdown-button-icon>
+					<d2l-labs-navigation-dropdown-button-icon icon="tier3:email" text="Message alerts" disabled>
+						<d2l-dropdown-content vertical-offset="0">Message alerts in here.</d2l-dropdown-content>
+					</d2l-labs-navigation-dropdown-button-icon>
+					<d2l-labs-navigation-dropdown-button-icon icon="tier3:discussions" text="Subscription alerts" has-notification notification-text="You have new subscription alerts">
+						<d2l-dropdown-content vertical-offset="0">Subscription alerts in here.</d2l-dropdown-content>
+					</d2l-labs-navigation-dropdown-button-icon>
+					<d2l-labs-navigation-dropdown-button-custom>
+						<span class="personal-menu" slot="opener">
+							<span class="personal-menu-square"></span>
+							User Name
+						</span>
+						<d2l-dropdown-content vertical-offset="0">User Settings menu in here.</d2l-dropdown-content>
+					</d2l-labs-navigation-dropdown-button-custom>
+				</div>
+			</d2l-demo-snippet>
+
+			<h2>d2l-labs-navigation-link-image</h2>
+			<d2l-demo-snippet>
+				<div class="wrapper">
+					<d2l-labs-navigation-link-image
+						href="https://www.example.org"
+						src="./logo-image.png"
+						text="Link Image Text"></d2l-labs-navigation-link-image>
+					<d2l-labs-navigation-link-image
+						src="./logo-image.png"
+						text="Link Image Text"></d2l-labs-navigation-link-image>
+				</div>
+			</d2l-demo-snippet>
+
+			<h2>d2l-labs-navigation-link-back</h2>
+			<d2l-demo-snippet>
+				<div class="wrapper">
+					<d2l-labs-navigation-link-back href="https://www.example.org"></d2l-labs-navigation-link-back>
+					<d2l-labs-navigation-link-back href="https://www.example.org" text="Custom Text"></d2l-labs-navigation-link-back>
+				</div>
+			</d2l-demo-snippet>
+
+			<h2>Combined</h2>
+			<d2l-demo-snippet>
+				<div class="wrapper">
+					<d2l-labs-navigation-link-back href="https://www.example.org"></d2l-labs-navigation-link-back>
+					<d2l-labs-navigation-link-image
+						href="https://www.example.org"
+						src="./logo-image.png"
+						text="Link Image Text"></d2l-labs-navigation-link-image>
+					<d2l-labs-navigation-button-icon icon="tier3:gear" text="Settings"></d2l-labs-navigation-button-icon>
+					<d2l-labs-navigation-link-icon href="https://www.example.org" icon="tier3:gear" text="Settings"></d2l-labs-navigation-link-icon>
+					<d2l-labs-navigation-link href="https://www.example.org">
+						<d2l-icon icon="tier3:gear" style="margin-right: 10px;"></d2l-icon>
+						Settings
+					</d2l-labs-navigation-link>
+				</div>
+			</d2l-demo-snippet>
+
+		</d2l-demo-page>
+	</body>
+</html>
