@@ -55,8 +55,8 @@ class FlyoutImplementation extends composeMixins(
 				}
 
 				:host([opened]) {
-					height: 100%;
 					background-color: rgba(255, 255, 255, 0.7);
+					height: 100%;
 					pointer-events: auto;
 				}
 
