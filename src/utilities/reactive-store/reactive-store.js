@@ -46,7 +46,7 @@ export default class ReactiveStore {
 					const { hasChanged = defaultHasChanged } = properties[property];
 					if (!hasChanged(this._state[property], value)) return;
 
-					const prevValue = this._state;
+					const prevValue = this._state[property];
 					this._state[property] = value;
 
 					this._pubSub.publish({ property, value, prevValue, forceUpdate: false });
