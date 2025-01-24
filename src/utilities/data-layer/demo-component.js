@@ -1,6 +1,7 @@
 import '@brightspace-ui/core/components/loading-spinner/loading-spinner.js';
 import { css, html, LitElement } from 'lit';
 import { DataLayerGroup, declareDependencies } from './index.js';
+import { DataLayerController } from './lit/index.js';
 
 class FooData extends DataLayerGroup {
 	static actions = {
@@ -23,11 +24,11 @@ class FooData extends DataLayerGroup {
 	};
 }
 
-const dataLayer = new FooData();
+const fooData = new FooData();
 
-export class DataLayerDemo extends LitElement {
+class DataLayerDemo extends LitElement {
 	static properties = {
-		prop: { type: String },
+		linkLoading: { type: Boolean, attribute: 'link-loading' },
 		_data: { state: true },
 		_loading: { state: true },
 	};
@@ -41,35 +42,44 @@ export class DataLayerDemo extends LitElement {
 	constructor() {
 		super();
 
-		this.prop = '';
-		this._data = null;
-		this._loading = true;
-	}
-
-	firstUpdated() {
-		if (this.prop) {
-			dataLayer.getItem(this.prop).subscribe(v => {
-				this._data = v.value;
-				this._loading = v.evaluating;
-			}, true);
-		}
+		this._data = new DataLayerController(this, fooData, [
+			'foo',
+			'bar',
+			'baz',
+			'baz2',
+		]);
 	}
 
 	render() {
+		if (this.linkLoading && this._data.loading) {
+			return html`<d2l-loading-spinner></d2l-loading-spinner>`;
+		}
+
 		return html`
-			${this.prop}:
-			<button @click=${this._flush}>Flush</button>
-			<button @click=${this._append}>Append</button>
-			${this._loading ? html`<d2l-loading-spinner></d2l-loading-spinner>` : this._data}
+			${this._renderItem('foo')}
+			${this._renderItem('bar')}
+			${this._renderItem('baz')}
+			${this._renderItem('baz2')}
 		`;
 	}
 
-	_append() {
-		dataLayer.getItem(this.prop).value += '!';
+	_append(e) {
+		fooData.getItem(e.target?.dataset.prop).value += '!';
 	}
 
-	_flush() {
-		dataLayer.getItem(this.prop).flush();
+	_flush(e) {
+		fooData.getItem(e.target?.dataset.prop).flush();
+	}
+
+	_renderItem(prop) {
+		return html`
+			<div>
+				${prop}:
+				<button @click=${this._flush} data-prop=${prop}>Flush</button>
+				<button @click=${this._append} data-prop=${prop}>Append</button>
+				${this._data.getLoading(prop) ? html`<d2l-loading-spinner></d2l-loading-spinner>` : this._data[prop]}
+			</div>
+		`;
 	}
 }
 
