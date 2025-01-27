@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/collapsible-panel/collapsible-panel.js';
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '@brightspace-ui/core/components/demo/code-view.js';
+			import './basic-demo.js';
+			import './context-demo.js';
+			import './multiple-consumers-demo.js';
+		</script>
+		<style>
+			d2l-collapsible-panel {
+				margin: 16px 0;
+			}
+		</style>
+		<title>ReactiveStore</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<d2l-demo-page page-title="ReactiveStore">
+			The following demos all use the same ReactiveStore definition, which is shown below:
+			<d2l-collapsible-panel panel-title="my-store.js" type="subtle">
+				<d2l-code-view language="js">import ReactiveStore from '../../../src/utilities/reactive-store/reactive-store.js';
+
+export default class MyStore extends ReactiveStore {
+	static get properties() {
+		return {
+			foo: { type: Number },
+			bar: { type: Number },
+		};
+	}
+
+	constructor() {
+		super();
+
+		this.foo = 0;
+		this.bar = 0;
+	}
+}</d2l-code-view>
+			</d2l-collapsible-panel>
+
+			<h2 class="d2l-heading-3">Basic Demo</h2>
+			This demo defines a single component that connects to a ReactiveStore instance using the store consumer controller. See the definition for this component here:
+			<d2l-collapsible-panel panel-title="basic-demo.js" type="subtle">
+				<d2l-code-view language="js">import { html, LitElement } from 'lit';
+import MyStore from './my-store.js';
+
+// Create a new instance of MyStore
+// Note that this would normally be defined in a separate file so that it can be imported by other components
+const myStore = new MyStore();
+const MyStoreConsumer = myStore.createConsumer();
+
+class BasicDemo extends LitElement {
+	constructor() {
+		super();
+
+		this.consumer = new MyStoreConsumer(this);
+	}
+
+	render() {
+		return html`
+			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
+			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
+			&lt;button @click=${this._updateFoo}&gt;Update foo&lt;/button&gt;
+			&lt;button @click=${this._updateBar}&gt;Update bar&lt;/button&gt;
+		`;
+	}
+
+	_updateBar() {
+		this.consumer.bar += 1;
+	}
+
+	_updateFoo() {
+		this.consumer.foo += 1;
+	}
+}
+
+customElements.define('basic-demo', BasicDemo);</d2l-code-view>
+			</d2l-collapsible-panel>
+			<d2l-demo-snippet>
+				<basic-demo></basic-demo>
+			</d2l-demo-snippet>
+
+			<h2 class="d2l-heading-3">Multiple Consumers Demo</h2>
+			This demo defines two components (one parent and one child) that both connect to the same ReactiveStore instance using the store consumer controller. See the definition for both of these components here:
+			<d2l-collapsible-panel panel-title="multiple-consumers-demo.js" type="subtle">
+				<d2l-code-view language="js">import { html, LitElement } from 'lit';
+import MyStore from './my-store.js';
+
+// Create a new instance of MyStore
+// Note that this would normally be defined in a separate file so that it can be imported by other components
+const myStore = new MyStore();
+const MyStoreConsumer = myStore.createConsumer();
+
+class MultipleConsumersDemo extends LitElement {
+	constructor() {
+		super();
+
+		this.consumer = new MyStoreConsumer(this);
+	}
+
+	render() {
+		return html`
+			&lt;h2&gt;Parent&lt;/h2&gt;
+			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
+			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
+			&lt;button @click=${this._click}&gt;Update foo&lt;/button&gt;
+
+			&lt;multiple-consumers-demo-child&gt;&lt;/multiple-consumers-demo-child&gt;
+		`;
+	}
+
+	_click() {
+		this.consumer.foo += 1;
+	}
+}
+
+class MultipleConsumersDemoChild extends LitElement {
+	constructor() {
+		super();
+
+		this.consumer = new MyStoreConsumer(this);
+	}
+	render() {
+		return html`
+			&lt;h2&gt;Child&lt;/h2&gt;
+			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
+			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
+			&lt;button @click=${this._click}&gt;Update bar&lt;/button&gt;
+		`;
+	}
+	_click() {
+		this.consumer.bar += 1;
+	}
+}
+
+customElements.define('multiple-consumers-demo-child', MultipleConsumersDemoChild);
+customElements.define('multiple-consumers-demo', MultipleConsumersDemo);</d2l-code-view>
+			</d2l-collapsible-panel>
+			<d2l-demo-snippet>
+                <multiple-consumers-demo></multiple-consumers-demo>
+			</d2l-demo-snippet>
+
+			<h2 class="d2l-heading-3">Context Demo</h2>
+			This demo defines two components: a parent and a child. The parent instantiates and provides an instance of MyStore by using the store context Provider controller. The child then consumes the store using the store context Consumer controller. See the definition for both of these components here:
+			<d2l-collapsible-panel panel-title="context-demo-component.js" type="subtle">
+				<d2l-code-view language="js">import { html, LitElement } from 'lit';
+import MyStore from './my-store.js';
+
+// Define the context controllers
+// Note that this would normally be defined in a separate file so that it can be imported by other components
+const {
+	Provider: MyStoreContextProvider,
+	Consumer: MyStoreContextConsumer
+} = MyStore.createContextControllers();
+
+class ContextDemo extends LitElement {
+	constructor() {
+		super();
+
+		this.store = new MyStoreContextProvider(this);
+	}
+	render() {
+		return html`
+			&lt;h2&gt;Parent&lt;/h2&gt;
+			&lt;div&gt;Foo: ${this.store.foo}&lt;/div&gt;
+			&lt;div&gt;Bar: ${this.store.bar}&lt;/div&gt;
+			&lt;button @click=${this._click}&gt;Update foo&lt;/button&gt;
+
+			&lt;context-demo-child&gt;&lt;/context-demo-child&gt;
+		`;
+	}
+
+	_click() {
+		this.store.foo += 1;
+	}
+}
+
+class ContextDemoChild extends LitElement {
+	constructor() {
+		super();
+
+		this.consumer = new MyStoreContextConsumer(this);
+	}
+	render() {
+		return html`
+			&lt;h2&gt;Child&lt;/h2&gt;
+			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
+			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
+			&lt;button @click=${this._click}&gt;Update bar&lt;/button&gt;
+		`;
+	}
+	_click() {
+		this.consumer.bar += 1;
+	}
+}
+
+customElements.define('context-demo-child', ContextDemoChild);
+customElements.define('context-demo', ContextDemo);</d2l-code-view>
+			</d2l-collapsible-panel>
+			<d2l-demo-snippet>
+                <context-demo></context-demo>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+	</body>
+</html>
