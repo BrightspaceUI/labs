@@ -1,36 +1,7 @@
 import ComputedValue, { ASYNC_STATUSES } from '../../../src/controllers/computed-values/computed-value.js';
 import ComputedValues from '../../../src/controllers/computed-values/computed-values.js';
+import ControllerHostStub from '../../test-utilities/controller-host-stub.js';
 import { expect } from '@brightspace-ui/testing';
-
-class ControllerHostHelper {
-	requestUpdateCallCount = 0;
-
-	constructor() {
-		this.controllersMap = new Map();
-	}
-
-	update() {
-		for (const controller of this.controllersMap.keys()) {
-			controller.hostUpdate();
-		}
-	}
-
-	addController(controller) {
-		this.controllersMap.set(controller, true);
-	}
-
-	removeController(controller) {
-		this.controllersMap.delete(controller);
-	}
-
-	requestUpdate() {
-		this.requestUpdateCallCount++;
-
-		setTimeout(() => {
-			this.update();
-		}, 0);
-	}
-}
 
 describe('ComputedValue', () => {
 
@@ -40,7 +11,8 @@ describe('ComputedValue', () => {
 		const initialValue = 'initial value';
 
 		beforeEach(() => {
-			host = new ControllerHostHelper();
+			host = new ControllerHostStub();
+			host.onRequestUpdate = () => setTimeout(() => host.update(), 0);
 			properties = {
 				firstName: 'John',
 				lastName: 'Smith'
@@ -118,7 +90,7 @@ describe('ComputedValue', () => {
 		const initialValue = 'initial value';
 
 		beforeEach(() => {
-			host = new ControllerHostHelper();
+			host = new ControllerHostStub();
 			properties = {
 				firstName: 'John',
 				lastName: 'Smith'
@@ -167,7 +139,7 @@ describe('ComputedValue', () => {
 		const initialValue = 'initial value';
 
 		beforeEach(() => {
-			host = new ControllerHostHelper();
+			host = new ControllerHostStub();
 			properties = {
 				firstName: 'John',
 				lastName: 'Smith'
@@ -264,7 +236,7 @@ describe('ComputedValue', () => {
 		}
 
 		beforeEach(() => {
-			host = new ControllerHostHelper();
+			host = new ControllerHostStub();
 			properties = {
 				userId: 1
 			};
@@ -412,7 +384,7 @@ describe('ComputedValue', () => {
 		}
 
 		beforeEach(() => {
-			host = new ControllerHostHelper();
+			host = new ControllerHostStub();
 
 			// Initialize controller
 			controller = new ComputedValue(host, {
@@ -472,7 +444,7 @@ describe('ComputedValues', () => {
 		const initialValue3 = 'initial value 3';
 
 		beforeEach(() => {
-			host = new ControllerHostHelper();
+			host = new ControllerHostStub();
 			properties = {
 				userId: 1,
 				firstName: 'John',
