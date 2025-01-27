@@ -47,9 +47,9 @@ export default {
 	"components:pagination:nextPage": "下一页",
 	"components:pagination:previousPage": "上一页",
 	"components:pagination:resultsPerPage": "每页结果数",
-	"components:wizard:aria.steplabel": "Step {currentStep} of {totalSteps}",
+	"components:wizard:aria.steplabel": "全部 {currentStep} 步中的 {totalSteps} 步",
 	"components:wizard:stepper.defaults.next": "Next",
-	"components:wizard:stepper.defaults.restart": "Restart",
-	"components:wizard:restart.button.tooltip": "Back to first step",
-	"components:wizard:next.button.tooltip": "Proceed to next step"
+	"components:wizard:stepper.defaults.restart": "重新开始",
+	"components:wizard:restart.button.tooltip": "返回第一步",
+	"components:wizard:next.button.tooltip": "继续下一步"
 };
