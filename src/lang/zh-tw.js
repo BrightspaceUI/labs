@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "按一下、按下退格鍵或按下刪除鍵以移除項目 {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "核取方塊已摺疊", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "核取方塊已展開", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "返回",
+	"components:navigation:next": "下一個",
+	"components:navigation:previous": "上一個",
+	"components:navigation:skipNav": "跳至主要內容",
 	"components:optInFlyout:cancel": "取消",
 	"components:optInFlyout:close": "關閉此對話方塊",
 	"components:optInFlyout:done": "完成",
@@ -42,5 +46,10 @@ export default {
 	"components:pagination:currentPage": "頁碼 {pageNumber} / {maxPageNumber}",
 	"components:pagination:nextPage": "下一頁",
 	"components:pagination:previousPage": "上一頁",
-	"components:pagination:resultsPerPage": "每頁結果"
+	"components:pagination:resultsPerPage": "每頁結果",
+	"components:wizard:aria.steplabel": "第 {currentStep} 步，共 {totalSteps} 步",
+	"components:wizard:stepper.defaults.next": "下一個",
+	"components:wizard:stepper.defaults.restart": "重新開始",
+	"components:wizard:restart.button.tooltip": "返回第一個步驟",
+	"components:wizard:next.button.tooltip": "繼續前往下一個步驟"
 };

@@ -12,11 +12,15 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Habilite su lector de pantalla y tableta en el contenido", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Tipo de simulación:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Haga clic para agregar el valor {value}", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "Alcanzó el límite de {value} valores seleccionados", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:limitReached": "Alcanzó el límite de {value} valores seleccionados", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Se debe definir al menos un valor", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "Haga clic, presione Retroceso o presione la tecla Suprimir para eliminar el elemento {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Casilla de selección contraída", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Casilla de selección expandida", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Volver",
+	"components:navigation:next": "Siguiente",
+	"components:navigation:previous": "Anterior",
+	"components:navigation:skipNav": "pasar al contenido principal",
 	"components:optInFlyout:cancel": "Cancelar",
 	"components:optInFlyout:close": "Cerrar este cuadro de diálogo",
 	"components:optInFlyout:done": "Listo",
@@ -42,5 +46,10 @@ export default {
 	"components:pagination:currentPage": "Página número {pageNumber} de {maxPageNumber}",
 	"components:pagination:nextPage": "Página siguiente",
 	"components:pagination:previousPage": "Página anterior",
-	"components:pagination:resultsPerPage": "Resultados por página"
+	"components:pagination:resultsPerPage": "Resultados por página",
+	"components:wizard:aria.steplabel": "Paso {currentStep} de {totalSteps}",
+	"components:wizard:stepper.defaults.next": "Siguiente",
+	"components:wizard:stepper.defaults.restart": "Reiniciar",
+	"components:wizard:restart.button.tooltip": "Volver al primer paso",
+	"components:wizard:next.button.tooltip": "Avanzar al siguiente paso"
 };

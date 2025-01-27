@@ -1,9 +1,9 @@
 export default {
 	"components:accessibilityDisabilitySimulator:blurLevel": "Lefel aneglurdeb", // Label for input slider that users can use to change the level of blurriness
-	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Achromatopsia", // mfv-translated Disability simulation option for users with Achromatiopsia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Achromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
 	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Dewteranopia", // Disability simulation option for users with Deuteranopia colorblindness
 	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Cochddallineb", // Disability simulation option for users with Protanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // mfv-translated Disability simulation option for users with Tritanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // Disability simulation option for users with Tritanopia colorblindness
 	"components:accessibilityDisabilitySimulator:colorblindness": "Dallineb lliw", // Disability simulation option for users with Colorblindness
 	"components:accessibilityDisabilitySimulator:keyboardOnly": "Bysellfwrdd yn Unig", // Disability simulation option for users who can only use the keyboard for navigation
 	"components:accessibilityDisabilitySimulator:lowVision": "Golwg Gwan", // Disability simulation option for users with a limited ability to see
@@ -12,11 +12,15 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Galluogwch eich darllenydd sgrîn a thab i'r cynnwys", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Math o efelychiad:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Cliciwch i ychwanegu'r gwerth {value}", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "Rydych chi wedi cyrraedd terfyn y gwerthoedd a ddewiswyd {value}", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:limitReached": "Rydych chi wedi cyrraedd terfyn y gwerthoedd a ddewiswyd o {value}", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Rhaid gosod o leiaf un gwerth", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
-	"components:attributePicker:removeValue": "Cliciwch, pwyswch yn ôl, neu pwyswch y bysell dileu i dynnu’r eitem {value}", // Label to inform user how they can remove the given value
+	"components:attributePicker:removeValue": "Cliciwch, pwyswch yn ôl, neu pwyswch y fysell dileu i dynnu’r eitem {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Wedi crebachu blwch ticio", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Wedi ehangu blwch ticio", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Yn ôl",
+	"components:navigation:next": "Nesaf",
+	"components:navigation:previous": "Blaenorol",
+	"components:navigation:skipNav": "neidio i’r prif gynnwys",
 	"components:optInFlyout:cancel": "Canslo",
 	"components:optInFlyout:close": "Cau’r dialog hwn",
 	"components:optInFlyout:done": "Wedi Gorffen",
@@ -42,5 +46,10 @@ export default {
 	"components:pagination:currentPage": "Rhif tudalen {pageNumber} o {maxPageNumber}",
 	"components:pagination:nextPage": "Tudalen nesaf",
 	"components:pagination:previousPage": "Y dudalen flaenorol",
-	"components:pagination:resultsPerPage": "Canlyniadau fesul tudalen"
+	"components:pagination:resultsPerPage": "Canlyniadau fesul tudalen",
+	"components:wizard:aria.steplabel": "Cam {currentStep} o {totalSteps}",
+	"components:wizard:stepper.defaults.next": "Nesaf",
+	"components:wizard:stepper.defaults.restart": "Ailddechrau",
+	"components:wizard:restart.button.tooltip": "Back to first step",
+	"components:wizard:next.button.tooltip": "Proceed to next step"
 };

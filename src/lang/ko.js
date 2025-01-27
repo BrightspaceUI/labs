@@ -11,12 +11,16 @@ export default {
 	"components:accessibilityDisabilitySimulator:none": "없음", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "스크린 리더를 활성화하고 콘텐츠를 탭합니다", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "시뮬레이션 유형:", // Label for the disability simulation options
-	"components:attributePicker:addValue": "클릭하여 값 {value}을(를) 추가합니다.", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "{value} 선택한 값의 제한에 도달했습니다.", //  Tooltip that appears when the user has reach the maximum amount of attributes
-	"components:attributePicker:minimumRequirement": "하나 이상의 값을 설정해야 합니다.", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
-	"components:attributePicker:removeValue": "항목 {value}을(를) 제거하려면 클릭하거나, 백스페이스 또는 삭제 키를 누릅니다.", // Label to inform user how they can remove the given value
+	"components:attributePicker:addValue": "클릭하여 {value} 값을 추가합니다", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:limitReached": "{value} 선택한 값의 제한에 도달했습니다", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:minimumRequirement": "하나 이상의 값을 설정해야 합니다", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
+	"components:attributePicker:removeValue": "{value} 항목을 제거하려면 클릭하거나, 백스페이스 또는 삭제 키를 누릅니다", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "확인란이 축소됨", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "확인란이 확장됨", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "뒤로",
+	"components:navigation:next": "다음",
+	"components:navigation:previous": "이전",
+	"components:navigation:skipNav": "기본 콘텐츠로 건너뛰기",
 	"components:optInFlyout:cancel": "취소",
 	"components:optInFlyout:close": "이 대화 상자 닫기",
 	"components:optInFlyout:done": "완료",
@@ -42,5 +46,10 @@ export default {
 	"components:pagination:currentPage": "페이지 번호 {pageNumber} / {maxPageNumber}",
 	"components:pagination:nextPage": "다음 페이지",
 	"components:pagination:previousPage": "이전 페이지",
-	"components:pagination:resultsPerPage": "페이지당 결과 수"
+	"components:pagination:resultsPerPage": "페이지당 결과 수",
+	"components:wizard:aria.steplabel": "{currentStep}/{totalSteps} 단계",
+	"components:wizard:stepper.defaults.next": "다음",
+	"components:wizard:stepper.defaults.restart": "다시 시작",
+	"components:wizard:restart.button.tooltip": "첫 번째 단계로 돌아갑니다",
+	"components:wizard:next.button.tooltip": "다음 단계로 진행합니다"
 };

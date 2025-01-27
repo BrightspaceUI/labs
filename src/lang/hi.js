@@ -14,9 +14,13 @@ export default {
 	"components:attributePicker:addValue": "मान {value} जोड़ने के लिए क्लिक करें", // Label for screen readers to inform user that they can click to add the given value
 	"components:attributePicker:limitReached": "आप {value} चयनित मानों की सीमा तक पहुँच गए हैं", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "कम से कम एक मान सेट होना चाहिए", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
-	"components:attributePicker:removeValue": "{value} को हटाने के लिए क्लिक करें, बैकस्पेस दबाएँ, या हटाएँ कुंजी को दबाएँ", // Label to inform user how they can remove the given value
+	"components:attributePicker:removeValue": "{value} को हटाने के लिए क्लिक करें, बैकस्पेस दबाएँ, या डिलीट बटन को दबाएँ", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "चेकबॉक्स छोटा हो गया", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
-	"components:checkboxDrawer:checkboxExpanded": "चेकबॉक्स बड़ा हो गया", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:checkboxDrawer:checkboxExpanded": "चेकबॉक्स बड़ा हो गया", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "वापस जाएँ",
+	"components:navigation:next": "अगला",
+	"components:navigation:previous": "पिछला",
+	"components:navigation:skipNav": "मुख्य सामग्री में जाएँ",
 	"components:optInFlyout:cancel": "कैंसल करें",
 	"components:optInFlyout:close": "यह संवाद बंद करें",
 	"components:optInFlyout:done": "पूरा हो गया",
@@ -42,5 +46,10 @@ export default {
 	"components:pagination:currentPage": "{maxPageNumber} में से पेज नंबर {pageNumber}",
 	"components:pagination:nextPage": "अगला पेज",
 	"components:pagination:previousPage": "पिछला पेज",
-	"components:pagination:resultsPerPage": "प्रति पेज के परिणाम"
+	"components:pagination:resultsPerPage": "प्रति पेज के परिणाम",
+	"components:wizard:aria.steplabel": "{totalSteps} में से {currentStep} चरण",
+	"components:wizard:stepper.defaults.next": "अगला",
+	"components:wizard:stepper.defaults.restart": "रीस्टार्ट करें",
+	"components:wizard:restart.button.tooltip": "पहले चरण पर वापस जाएँ",
+	"components:wizard:next.button.tooltip": "अगले चरण पर आगे बढ़ें"
 };

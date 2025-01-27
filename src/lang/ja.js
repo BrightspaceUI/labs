@@ -12,11 +12,15 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "スクリーンリーダーを有効にして、コンテンツを利用します", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "シミュレーションタイプ: ", // Label for the disability simulation options
 	"components:attributePicker:addValue": "クリックして値 {value} を追加", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "{value} 個の選択した値の上限に達しました", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:limitReached": "選択した値の上限値 {value} に達しました", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "少なくとも 1 つの値を設定する必要があります", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "クリックする、Backspace キーを押す、または Delete キーを押すと項目 {value} が削除されます", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "折りたたまれたチェックボックス", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "展開されたチェックボックス", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "戻る",
+	"components:navigation:next": "次へ",
+	"components:navigation:previous": "前へ",
+	"components:navigation:skipNav": "メインコンテンツへスキップ",
 	"components:optInFlyout:cancel": "キャンセル",
 	"components:optInFlyout:close": "このダイアログを閉じる",
 	"components:optInFlyout:done": "終了",
@@ -42,5 +46,10 @@ export default {
 	"components:pagination:currentPage": "{maxPageNumber} のページ番号 {pageNumber}",
 	"components:pagination:nextPage": "次のページ",
 	"components:pagination:previousPage": "前のページ",
-	"components:pagination:resultsPerPage": "ページごとの結果"
+	"components:pagination:resultsPerPage": "ページごとの結果",
+	"components:wizard:aria.steplabel": "ステップ {currentStep}/{totalSteps}",
+	"components:wizard:stepper.defaults.next": "次へ",
+	"components:wizard:stepper.defaults.restart": "再開",
+	"components:wizard:restart.button.tooltip": "最初の手順に戻る",
+	"components:wizard:next.button.tooltip": "次の手順に進む"
 };

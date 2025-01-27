@@ -1,9 +1,9 @@
 export default {
 	"components:accessibilityDisabilitySimulator:blurLevel": "Nível de desfoque", // Label for input slider that users can use to change the level of blurriness
 	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Acromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // mfv-translated Disability simulation option for users with Deuteranopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopia", // mfv-translated Disability simulation option for users with Protanopia colorblindness
-	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // mfv-translated Disability simulation option for users with Tritanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // Disability simulation option for users with Deuteranopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindProtanopia": "Protanopia", // Disability simulation option for users with Protanopia colorblindness
+	"components:accessibilityDisabilitySimulator:colorblindTritanopia": "Tritanopia", // Disability simulation option for users with Tritanopia colorblindness
 	"components:accessibilityDisabilitySimulator:colorblindness": "Daltonismo", // Disability simulation option for users with Colorblindness
 	"components:accessibilityDisabilitySimulator:keyboardOnly": "Somente teclado", // Disability simulation option for users who can only use the keyboard for navigation
 	"components:accessibilityDisabilitySimulator:lowVision": "Baixa visão", // Disability simulation option for users with a limited ability to see
@@ -11,12 +11,16 @@ export default {
 	"components:accessibilityDisabilitySimulator:none": "Nenhuma", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Ative seu leitor de tela e insira o conteúdo", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Tipo de simulação:", // Label for the disability simulation options
-	"components:attributePicker:addValue": "Clique para adicionar valor {value}", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:addValue": "Clique para adicionar o valor {value}", // Label for screen readers to inform user that they can click to add the given value
 	"components:attributePicker:limitReached": "Você atingiu o limite de {value} valores selecionados", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Pelo menos um valor deve ser definido", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
-	"components:attributePicker:removeValue": "Clique em, pressione Backspace ou pressione a tecla Delete para remover o item {value}", // Label to inform user how they can remove the given value
+	"components:attributePicker:removeValue": "Clique, pressione a tecla Backspace ou a tecla Delete para remover o item {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Caixa de seleção recolhida", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Caixa de seleção expandida", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Voltar",
+	"components:navigation:next": "Próximo",
+	"components:navigation:previous": "Anterior",
+	"components:navigation:skipNav": "passar para conteúdo principal",
 	"components:optInFlyout:cancel": "Cancelar",
 	"components:optInFlyout:close": "Fechar esta caixa de diálogo",
 	"components:optInFlyout:done": "Concluído",
@@ -42,5 +46,10 @@ export default {
 	"components:pagination:currentPage": "Número da página {pageNumber} de {maxPageNumber}",
 	"components:pagination:nextPage": "Próxima página",
 	"components:pagination:previousPage": "Página anterior",
-	"components:pagination:resultsPerPage": "Resultados por página"
+	"components:pagination:resultsPerPage": "Resultados por página",
+	"components:wizard:aria.steplabel": "Etapa {currentStep} de {totalSteps}",
+	"components:wizard:stepper.defaults.next": "Avançar",
+	"components:wizard:stepper.defaults.restart": "Reiniciar",
+	"components:wizard:restart.button.tooltip": "Voltar para a primeira etapa",
+	"components:wizard:next.button.tooltip": "Ir para a próxima etapa"
 };

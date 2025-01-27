@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../../../src/components/navigation/navigation-iterator.js';
+			import '../../../src/components/navigation/navigation-immersive.js';
+		</script>
+		<title>d2l-labs-navigation-immersive demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<style>
+			body {
+				background-color: pink;
+				overflow-x: hidden;
+				padding: 20px;
+			}
+			div[slot="middle"]#middle {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			div[slot="right"] {
+				width: 15rem;
+			}
+		</style>
+	</head>
+	<body>
+		<d2l-labs-navigation-immersive back-link-href="https://www.d2l.com" back-link-text="Back to D2L">
+			<div id="middle" class="d2l-typography d2l-body-standard" slot="middle">
+				Economics 101
+			</div>
+			<div slot="right">
+				<d2l-labs-navigation-iterator></d2l-labs-navigation-iterator>
+			</div>
+		</d2l-labs-navigation-immersive>
+		<p>First Item in Page Content</p>
+		<p>Page Contents</p>
+		<p>Page Contents</p>
+		<p>Page Contents</p>
+		<p>Page Contents</p>
+	</body>
+</html>
