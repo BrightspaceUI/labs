@@ -1,17 +1,6 @@
+import CallbackStub from '../../test-utilities/callback-stub.js';
 import { expect } from '@brightspace-ui/testing';
 import PubSub from '../../../src/utilities/pub-sub/pub-sub.js';
-
-class CallbackStub {
-	calls = [];
-
-	constructor() {
-		this.callback = this.callback.bind(this);
-	}
-
-	callback(...args) {
-		this.calls.push(args);
-	}
-}
 
 describe('PubSub', () => {
 	let pubSub;
