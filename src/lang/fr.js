@@ -18,7 +18,7 @@ export default {
 	"components:checkboxDrawer:checkboxCollapsed": "Case à cocher réduite", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Case à cocher agrandie", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:navigation:back": "Retour",
-	"components:navigation:next": "Page suivante",
+	"components:navigation:next": "Suivant",
 	"components:navigation:previous": "Précédent",
 	"components:navigation:skipNav": "passer au contenu principal",
 	"components:optInFlyout:cancel": "Annuler",
@@ -47,7 +47,7 @@ export default {
 	"components:pagination:nextPage": "Page suivante",
 	"components:pagination:previousPage": "Page précédente",
 	"components:pagination:resultsPerPage": "Résultats par page",
-	"components:wizard:aria.steplabel": "Étape {currentStep} de {totalSteps}",
+	"components:wizard:aria.steplabel": "Étape {currentStep} de {totalSteps}",
 	"components:wizard:stepper.defaults.next": "Suivant",
 	"components:wizard:stepper.defaults.restart": "Redémarrer",
 	"components:wizard:restart.button.tooltip": "Retour à la première étape",
