@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "{value} 항목을 제거하려면 클릭하거나, 백스페이스 또는 삭제 키를 누릅니다", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "확인란이 축소됨", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "확인란이 확장됨", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "뒤로",
+	"components:navigation:next": "다음",
+	"components:navigation:previous": "이전",
+	"components:navigation:skipNav": "기본 콘텐츠로 건너뛰기",
 	"components:optInFlyout:cancel": "취소",
 	"components:optInFlyout:close": "이 대화 상자 닫기",
 	"components:optInFlyout:done": "완료",
@@ -43,9 +47,9 @@ export default {
 	"components:pagination:nextPage": "다음 페이지",
 	"components:pagination:previousPage": "이전 페이지",
 	"components:pagination:resultsPerPage": "페이지당 결과 수",
-	"components:wizard:aria.steplabel": "{currentStep}/{totalSteps} 단계",
+	"components:wizard:aria.steplabel": "{currentStep}/{totalSteps}단계",
 	"components:wizard:stepper.defaults.next": "다음",
 	"components:wizard:stepper.defaults.restart": "다시 시작",
-	"components:wizard:restart.button.tooltip": "첫 번째 단계로 돌아갑니다",
-	"components:wizard:next.button.tooltip": "다음 단계로 진행합니다"
+	"components:wizard:restart.button.tooltip": "첫 번째 단계로 돌아가기",
+	"components:wizard:next.button.tooltip": "다음 단계로 진행"
 };

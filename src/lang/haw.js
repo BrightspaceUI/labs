@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Kaomi, kaomi i hope, a i ʻole ke kī holoi e wehe i ka mea {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Checkbox collapsed", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Checkbox expanded", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Ke kua",
+	"components:navigation:next": "Aʻe",
+	"components:navigation:previous": "Mamua",
+	"components:navigation:skipNav": "lele i ka ʻike nui",
 	"components:optInFlyout:cancel": "Hoʻopau",
 	"components:optInFlyout:close": "Pani i kēia kamaʻilio",
 	"components:optInFlyout:done": "Pau",

@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "{value} को हटाने के लिए क्लिक करें, बैकस्पेस दबाएँ, या डिलीट बटन को दबाएँ", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "चेकबॉक्स छोटा हो गया", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "चेकबॉक्स बड़ा हो गया", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "वापस जाएँ",
+	"components:navigation:next": "अगला",
+	"components:navigation:previous": "पिछला",
+	"components:navigation:skipNav": "मुख्य सामग्री में जाएँ",
 	"components:optInFlyout:cancel": "कैंसल करें",
 	"components:optInFlyout:close": "यह संवाद बंद करें",
 	"components:optInFlyout:done": "पूरा हो गया",
@@ -45,7 +49,7 @@ export default {
 	"components:pagination:resultsPerPage": "प्रति पेज के परिणाम",
 	"components:wizard:aria.steplabel": "{totalSteps} में से {currentStep} चरण",
 	"components:wizard:stepper.defaults.next": "अगला",
-	"components:wizard:stepper.defaults.restart": "रीस्टार्ट करें",
+	"components:wizard:stepper.defaults.restart": "पुनरारंभ करें",
 	"components:wizard:restart.button.tooltip": "पहले चरण पर वापस जाएँ",
 	"components:wizard:next.button.tooltip": "अगले चरण पर आगे बढ़ें"
 };

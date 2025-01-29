@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Klik, tryk på tilbagetasten, eller tryk på slettasten for at fjerne element {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Afkrydsningsfelt skjult", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Afkrydsningsfelt udvidet", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Tilbage",
+	"components:navigation:next": "Næste",
+	"components:navigation:previous": "Forrige",
+	"components:navigation:skipNav": "spring videre til hovedindhold",
 	"components:optInFlyout:cancel": "Annuller",
 	"components:optInFlyout:close": "Luk denne dialogboks",
 	"components:optInFlyout:done": "Udført",
@@ -43,9 +47,9 @@ export default {
 	"components:pagination:nextPage": "Næste side",
 	"components:pagination:previousPage": "Forrige side",
 	"components:pagination:resultsPerPage": "Resultater pr. side",
-	"components:wizard:aria.steplabel": "Step {currentStep} of {totalSteps}",
+	"components:wizard:aria.steplabel": "Trin {currentStep} af {totalSteps}",
 	"components:wizard:stepper.defaults.next": "Next",
-	"components:wizard:stepper.defaults.restart": "Restart",
-	"components:wizard:restart.button.tooltip": "Back to first step",
-	"components:wizard:next.button.tooltip": "Proceed to next step"
+	"components:wizard:stepper.defaults.restart": "Genstart",
+	"components:wizard:restart.button.tooltip": "Tilbage til første trin",
+	"components:wizard:next.button.tooltip": "Fortsæt til næste trin"
 };

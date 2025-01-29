@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Haga clic, pulse Retroceso o pulse la tecla Supr para eliminar el elemento {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Casilla de verificación contraída", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Casilla de verificación expandida", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Volver",
+	"components:navigation:next": "Siguiente",
+	"components:navigation:previous": "Anterior",
+	"components:navigation:skipNav": "pasar al contenido principal",
 	"components:optInFlyout:cancel": "Cancelar",
 	"components:optInFlyout:close": "Cerrar este cuadro de diálogo",
 	"components:optInFlyout:done": "Hecho",

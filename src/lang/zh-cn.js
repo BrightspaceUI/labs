@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "单击、按退格键或按 Delete 键以移除项目 {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "复选框已折叠", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "复选框已展开", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "返回",
+	"components:navigation:next": "下一个",
+	"components:navigation:previous": "上一步",
+	"components:navigation:skipNav": "跳到主目录",
 	"components:optInFlyout:cancel": "取消",
 	"components:optInFlyout:close": "关闭此对话框",
 	"components:optInFlyout:done": "完成",
@@ -43,9 +47,9 @@ export default {
 	"components:pagination:nextPage": "下一页",
 	"components:pagination:previousPage": "上一页",
 	"components:pagination:resultsPerPage": "每页结果数",
-	"components:wizard:aria.steplabel": "Step {currentStep} of {totalSteps}",
+	"components:wizard:aria.steplabel": "全部 {currentStep} 步中的 {totalSteps} 步",
 	"components:wizard:stepper.defaults.next": "Next",
-	"components:wizard:stepper.defaults.restart": "Restart",
-	"components:wizard:restart.button.tooltip": "Back to first step",
-	"components:wizard:next.button.tooltip": "Proceed to next step"
+	"components:wizard:stepper.defaults.restart": "重新开始",
+	"components:wizard:restart.button.tooltip": "返回第一步",
+	"components:wizard:next.button.tooltip": "继续下一步"
 };

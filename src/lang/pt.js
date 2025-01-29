@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Clique, pressione a tecla Backspace ou a tecla Delete para remover o item {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Caixa de seleção recolhida", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Caixa de seleção expandida", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Voltar",
+	"components:navigation:next": "Avançar",
+	"components:navigation:previous": "Anterior",
+	"components:navigation:skipNav": "passar para conteúdo principal",
 	"components:optInFlyout:cancel": "Cancelar",
 	"components:optInFlyout:close": "Fechar esta caixa de diálogo",
 	"components:optInFlyout:done": "Concluído",

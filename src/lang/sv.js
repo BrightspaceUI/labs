@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Klicka, tryck på backstegstangenten eller Delete-tangenten för att ta bort objektet {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Komprimerad kryssruta", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Expanderad kryssruta", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Tillbaka",
+	"components:navigation:next": "Nästa",
+	"components:navigation:previous": "Föregående",
+	"components:navigation:skipNav": "fortsätt till huvudinnehåll",
 	"components:optInFlyout:cancel": "Avbryt",
 	"components:optInFlyout:close": "Stäng dialogrutan",
 	"components:optInFlyout:done": "Klar",

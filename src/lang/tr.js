@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Öğe {value} değerini kaldırmak için tıklatın, geri al tuşuna veya sil tuşuna basın", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Onay kutusu daraltıldı", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Onay kutusu genişletildi", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Geri",
+	"components:navigation:next": "İleri",
+	"components:navigation:previous": "Önceki",
+	"components:navigation:skipNav": "ana içeriğe atla",
 	"components:optInFlyout:cancel": "İptal et",
 	"components:optInFlyout:close": "Bu iletişim kutusunu kapat",
 	"components:optInFlyout:done": "Bitti",

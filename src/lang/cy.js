@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Cliciwch, pwyswch yn ôl, neu pwyswch y fysell dileu i dynnu’r eitem {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Wedi crebachu blwch ticio", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Wedi ehangu blwch ticio", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Yn ôl",
+	"components:navigation:next": "Nesaf",
+	"components:navigation:previous": "Blaenorol",
+	"components:navigation:skipNav": "neidio i’r prif gynnwys",
 	"components:optInFlyout:cancel": "Canslo",
 	"components:optInFlyout:close": "Cau’r dialog hwn",
 	"components:optInFlyout:done": "Wedi Gorffen",
@@ -46,6 +50,6 @@ export default {
 	"components:wizard:aria.steplabel": "Cam {currentStep} o {totalSteps}",
 	"components:wizard:stepper.defaults.next": "Nesaf",
 	"components:wizard:stepper.defaults.restart": "Ailddechrau",
-	"components:wizard:restart.button.tooltip": "Back to first step",
-	"components:wizard:next.button.tooltip": "Proceed to next step"
+	"components:wizard:restart.button.tooltip": "Yn ôl i'r cam cyntaf",
+	"components:wizard:next.button.tooltip": "Parhau i'r cam nesaf"
 };

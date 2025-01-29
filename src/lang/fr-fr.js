@@ -17,6 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Cliquez sur l’élément, appuyez sur la touche Retour arrière ou sur la touche Suppr pour supprimer l’élément {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Case à cocher réduite", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Case à cocher développée", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
+	"components:navigation:back": "Retour",
+	"components:navigation:next": "Suivant",
+	"components:navigation:previous": "Précédent",
+	"components:navigation:skipNav": "passer au contenu principal",
 	"components:optInFlyout:cancel": "Annuler",
 	"components:optInFlyout:close": "Fermer cette boîte de dialogue",
 	"components:optInFlyout:done": "Terminé",
