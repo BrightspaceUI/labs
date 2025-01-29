@@ -43,9 +43,9 @@ export default {
 	"components:pagination:nextPage": "Næste side",
 	"components:pagination:previousPage": "Forrige side",
 	"components:pagination:resultsPerPage": "Resultater pr. side",
-	"components:wizard:aria.steplabel": "Step {currentStep} of {totalSteps}",
+	"components:wizard:aria.steplabel": "Trin {currentStep} af {totalSteps}",
 	"components:wizard:stepper.defaults.next": "Next",
-	"components:wizard:stepper.defaults.restart": "Restart",
-	"components:wizard:restart.button.tooltip": "Back to first step",
-	"components:wizard:next.button.tooltip": "Proceed to next step"
+	"components:wizard:stepper.defaults.restart": "Genstart",
+	"components:wizard:restart.button.tooltip": "Tilbage til første trin",
+	"components:wizard:next.button.tooltip": "Fortsæt til næste trin"
 };

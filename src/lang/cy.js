@@ -46,6 +46,6 @@ export default {
 	"components:wizard:aria.steplabel": "Cam {currentStep} o {totalSteps}",
 	"components:wizard:stepper.defaults.next": "Nesaf",
 	"components:wizard:stepper.defaults.restart": "Ailddechrau",
-	"components:wizard:restart.button.tooltip": "Back to first step",
-	"components:wizard:next.button.tooltip": "Proceed to next step"
+	"components:wizard:restart.button.tooltip": "Yn ôl i'r cam cyntaf",
+	"components:wizard:next.button.tooltip": "Parhau i'r cam nesaf"
 };

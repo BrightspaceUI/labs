@@ -45,7 +45,7 @@ export default {
 	"components:pagination:resultsPerPage": "प्रति पेज के परिणाम",
 	"components:wizard:aria.steplabel": "{totalSteps} में से {currentStep} चरण",
 	"components:wizard:stepper.defaults.next": "अगला",
-	"components:wizard:stepper.defaults.restart": "रीस्टार्ट करें",
+	"components:wizard:stepper.defaults.restart": "पुनरारंभ करें",
 	"components:wizard:restart.button.tooltip": "पहले चरण पर वापस जाएँ",
 	"components:wizard:next.button.tooltip": "अगले चरण पर आगे बढ़ें"
 };
