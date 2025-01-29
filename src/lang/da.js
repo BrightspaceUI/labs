@@ -17,10 +17,6 @@ export default {
 	"components:attributePicker:removeValue": "Klik, tryk på tilbagetasten, eller tryk på slettasten for at fjerne element {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Afkrydsningsfelt skjult", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Afkrydsningsfelt udvidet", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:navigation:back": "Tilbage",
-	"components:navigation:next": "Næste",
-	"components:navigation:previous": "Forrige",
-	"components:navigation:skipNav": "spring videre til hovedindhold",
 	"components:optInFlyout:cancel": "Annuller",
 	"components:optInFlyout:close": "Luk denne dialogboks",
 	"components:optInFlyout:done": "Udført",

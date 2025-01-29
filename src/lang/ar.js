@@ -17,10 +17,6 @@ export default {
 	"components:attributePicker:removeValue": "انقر، أو اضغط على مسافة للخلف، أو اضغط على مفتاح الحذف لإزالة العنصر {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "تم طي خانة الاختيار", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "تم توسيع خانة الاختيار", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:navigation:back": "العودة",
-	"components:navigation:next": "التالي",
-	"components:navigation:previous": "السابق",
-	"components:navigation:skipNav": "تجاوز إلى المحتوى الرئيسي",
 	"components:optInFlyout:cancel": "إلغاء",
 	"components:optInFlyout:close": "إغلاق مربع الحوار هذا",
 	"components:optInFlyout:done": "تم",

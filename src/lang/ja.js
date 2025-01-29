@@ -17,10 +17,6 @@ export default {
 	"components:attributePicker:removeValue": "クリックする、Backspace キーを押す、または Delete キーを押すと項目 {value} が削除されます", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "折りたたまれたチェックボックス", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "展開されたチェックボックス", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:navigation:back": "戻る",
-	"components:navigation:next": "次へ",
-	"components:navigation:previous": "前へ",
-	"components:navigation:skipNav": "メインコンテンツへスキップ",
 	"components:optInFlyout:cancel": "キャンセル",
 	"components:optInFlyout:close": "このダイアログを閉じる",
 	"components:optInFlyout:done": "終了",

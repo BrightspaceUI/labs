@@ -17,10 +17,6 @@ export default {
 	"components:attributePicker:removeValue": "Klicken Sie, drücken Sie die Rücktaste, oder drücken Sie die Entfernen-Taste, um das Element {value} zu entfernen", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Kontrollkästchen ausgeblendet", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Kontrollkästchen eingeblendet", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:navigation:back": "Zurück",
-	"components:navigation:next": "Weiter",
-	"components:navigation:previous": "Zurück",
-	"components:navigation:skipNav": "zum Hauptinhalt springen",
 	"components:optInFlyout:cancel": "Abbrechen",
 	"components:optInFlyout:close": "Dieses Dialogfeld schließen",
 	"components:optInFlyout:done": "Fertig",
