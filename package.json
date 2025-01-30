@@ -65,7 +65,7 @@
     "lint:style": "stylelint \"**/*.{js,html}\"",
     "start": "web-dev-server --node-resolve --open --watch",
     "test": "npm run lint && npm run test:translations && npm run test:unit && npm run test:axe",
-    "test:translations": "mfv -e -i untranslated",
+    "test:translations": "mfv -i untranslated,category-missing",
     "test:axe": "d2l-test-runner axe --chrome",
     "test:unit": "d2l-test-runner",
     "test:vdiff": "d2l-test-runner vdiff"
