@@ -14,19 +14,29 @@ class ContextDemo extends LitElement {
 
 		this.store = new MyStoreContextProvider(this);
 	}
+
 	render() {
 		return html`
 			<h2>Parent</h2>
-			<div>Foo: ${this.store.foo}</div>
-			<div>Bar: ${this.store.bar}</div>
-			<button @click=${this._click}>Update foo</button>
+			<div>Count: ${this.store.count}</div>
+			<button @click=${this._increment}>Increment</button>
+			<button @click=${this._decrement}>Decrement</button>
+			<button @click=${this._reset}>Reset</button>
 
 			<context-demo-child></context-demo-child>
 		`;
 	}
 
-	_click() {
-		this.store.foo += 1;
+	_decrement() {
+		this.store.decrement();
+	}
+
+	_increment() {
+		this.store.increment();
+	}
+
+	_reset() {
+		this.store.count = 0;
 	}
 }
 
@@ -36,16 +46,27 @@ class ContextDemoChild extends LitElement {
 
 		this.consumer = new MyStoreContextConsumer(this);
 	}
+
 	render() {
 		return html`
 			<h2>Child</h2>
-			<div>Foo: ${this.consumer.foo}</div>
-			<div>Bar: ${this.consumer.bar}</div>
-			<button @click=${this._click}>Update bar</button>
+			<div>Count: ${this.consumer.count}</div>
+			<button @click=${this._increment}>Increment</button>
+			<button @click=${this._decrement}>Decrement</button>
+			<button @click=${this._reset}>Reset</button>
 		`;
 	}
-	_click() {
-		this.consumer.bar += 1;
+
+	_decrement() {
+		this.consumer.decrement();
+	}
+
+	_increment() {
+		this.consumer.increment();
+	}
+
+	_reset() {
+		this.consumer.count = 0;
 	}
 }
 
