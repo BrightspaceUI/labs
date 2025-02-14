@@ -1,66 +1,21 @@
+import StoreReactor from './store-reactor.js';
+
 export default class StoreConsumer {
 	constructor(host, store, properties = store.constructor.properties) {
-		this._host = host;
-		this._host.addController(this);
-		this._store = store;
+		const storeReactor = new StoreReactor(host, store, properties);
 
-		this.changedProperties = new Map();
-
-		this._onPropertyChange = this._onPropertyChange.bind(this);
-		this._store.subscribe(this._onPropertyChange);
-
-		this._defineProperties(properties);
-		this._initializeChangedProperties(properties);
-	}
-
-	forceUpdate() {
-		this._store.forceUpdate();
-	}
-
-	hostDisconnected() {
-		this._store.unsubscribe(this._onPropertyChange);
-	}
-
-	_defineProperties(properties) {
-		Object.keys(properties).forEach((property) => {
-			Object.defineProperty(this, property, {
-				get() {
-					return this._store[property];
-				},
-				set(value) {
-					this._store[property] = value;
+		return new Proxy(store, {
+			get(target, prop) {
+				if (prop in storeReactor) return storeReactor[prop];
+				return Reflect.get(target, prop);
+			},
+			set(target, prop, value) {
+				if (prop in storeReactor) {
+					storeReactor[prop] = value;
+					return true;
 				}
-			});
-		});
-	}
-
-	_initializeChangedProperties(properties) {
-		let shouldUpdate = false;
-		Object.keys(properties).forEach((property) => {
-			if (this._store[property] === undefined) return;
-
-			this.changedProperties.set(property, undefined);
-			shouldUpdate = true;
-		});
-
-		if (!shouldUpdate) return;
-
-		this._host.requestUpdate();
-		this._host.updateComplete.then(() => {
-			this.changedProperties.clear();
-		});
-	}
-
-	_onPropertyChange({
-		property,
-		prevValue,
-		forceUpdate = false,
-	}) {
-		if (!forceUpdate && !this.changedProperties.has(property)) this.changedProperties.set(property, prevValue);
-
-		this._host.requestUpdate();
-		this._host.updateComplete.then(() => {
-			this.changedProperties.clear();
+				return Reflect.set(target, prop, value);
+			}
 		});
 	}
 }

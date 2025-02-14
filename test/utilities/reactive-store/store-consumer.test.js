@@ -13,6 +13,12 @@ class TestStore extends ReactiveStore {
 		super();
 		this.prop1 = 'default';
 		this.prop2 = 'default';
+
+		this.nonReactiveProp = 'default';
+	}
+
+	testMethod() {
+		return 'test';
 	}
 }
 
@@ -206,6 +212,36 @@ describe('ReactiveStore StoreConsumer', () => {
 			storeConsumer.forceUpdate();
 
 			expect(forceUpdateCallCount).to.equal(1);
+		});
+	});
+
+	describe('non-reactive properties and methods', () => {
+		it('should reflect the store non-reactive properties and methods', () => {
+			const storeConsumer = new StoreConsumer(host, store);
+
+			expect(storeConsumer.nonReactiveProp).to.equal('default');
+			expect(storeConsumer.testMethod()).to.equal('test');
+
+			store.nonReactiveProp = 'value';
+			expect(storeConsumer.nonReactiveProp).to.equal('value');
+		});
+
+		it('non-reactive properties should not call requestUpdate', () => {
+			const storeConsumer = new StoreConsumer(host, store);
+
+			const requestUpdateCallCount = host.requestUpdateCallCount;
+
+			storeConsumer.nonReactiveProp = 'value';
+
+			expect(host.requestUpdateCallCount).to.equal(requestUpdateCallCount);
+		});
+
+		it('non-reactive properties should not be in changedProperties', async() => {
+			const storeConsumer = new StoreConsumer(host, store);
+
+			storeConsumer.nonReactiveProp = 'value';
+
+			expect(storeConsumer.changedProperties.has('nonReactiveProp')).to.be.false;
 		});
 	});
 });

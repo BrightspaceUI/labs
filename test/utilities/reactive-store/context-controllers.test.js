@@ -18,6 +18,12 @@ class TestStore1 extends ReactiveStore {
 		this.objectProp = {
 			nestedProp: 'default'
 		};
+
+		this.nonReactiveProp = 'default';
+	}
+
+	testMethod() {
+		return 'test';
 	}
 }
 const { Provider: Provider1, Consumer: Consumer1 } = TestStore1.createContextControllers();
@@ -58,6 +64,7 @@ class HostingComponent extends LitElement {
 			<div id="prop1">${this.storeProvider1.prop1}</div>
 			<div id="prop2">${this.storeProvider1.prop2}</div>
 			<div id="nestedProp">${this.storeProvider1.objectProp.nestedProp}</div>
+			<div id="nonReactiveProp">${this.storeProvider1.nonReactiveProp}</div>
 			<div id="foo">${this.storeProvider2.foo}</div>
 			<div id="bar">${this.storeProvider2.bar}</div>
 
@@ -101,6 +108,7 @@ class ConsumingComponent extends LitElement {
 			<div id="prop1">${this.storeConsumer1.prop1}</div>
 			<div id="prop2">${this.storeConsumer1.prop2}</div>
 			<div id="nestedProp">${this.storeConsumer1.objectProp.nestedProp}</div>
+			<div id="nonReactiveProp">${this.storeConsumer1.nonReactiveProp}</div>
 			<div id="foo">${this.storeConsumer2.foo}</div>
 			<div id="bar">${this.storeConsumer2.bar}</div>
 		`;
@@ -329,6 +337,44 @@ describe('ReactiveStore Context Controllers', () => {
 				});
 			});
 		});
+
+		describe('non-reactive properties and methods', () => {
+			it('should reflect the store non-reactive properties and methods', async() => {
+				const hostingComponent = await fixture(basicFixture);
+
+				expect(hostingComponent.storeProvider1.nonReactiveProp).to.equal('default');
+				expect(hostingComponent.storeProvider1.testMethod()).to.equal('test');
+
+				hostingComponent.storeProvider1.nonReactiveProp = 'value1';
+				expect(hostingComponent.storeProvider1.nonReactiveProp).to.equal('value1');
+			});
+
+			it('non-reactive properties should not trigger an update', async() => {
+				const hostingComponent = await fixture(basicFixture);
+
+				verifyRenderedValues(hostingComponent, {
+					nonReactiveProp: 'default',
+				});
+
+				hostingComponent.storeProvider1.nonReactiveProp = 'value1';
+
+				await hostingComponent.updateComplete;
+
+				verifyRenderedValues(hostingComponent, {
+					nonReactiveProp: 'default',
+				});
+			});
+
+			it('non-reactive properties should not be in changedProperties', async() => {
+				const hostingComponent = await fixture(basicFixture);
+
+				hostingComponent.storeProvider1.nonReactiveProp = 'value1';
+
+				await hostingComponent.updateComplete;
+
+				expect(hostingComponent.storeProvider1.changedProperties.has('nonReactiveProp')).to.be.false;
+			});
+		});
 	});
 
 	describe('Consumer', () => {
@@ -469,6 +515,47 @@ describe('ReactiveStore Context Controllers', () => {
 				verifyRenderedValues(consumingComponent2, {
 					nestedProp: 'default',
 				});
+			});
+		});
+
+		describe('non-reactive properties and methods', () => {
+			it('should reflect the store non-reactive properties and methods', async() => {
+				const hostingComponent = await fixture(basicFixture);
+				const consumingComponent = hostingComponent.consumingComponent;
+
+				expect(consumingComponent.storeConsumer1.nonReactiveProp).to.equal('default');
+				expect(consumingComponent.storeConsumer1.testMethod()).to.equal('test');
+
+				consumingComponent.storeConsumer1.nonReactiveProp = 'value1';
+				expect(consumingComponent.storeConsumer1.nonReactiveProp).to.equal('value1');
+			});
+
+			it('non-reactive properties should not trigger an update', async() => {
+				const hostingComponent = await fixture(basicFixture);
+				const consumingComponent = hostingComponent.consumingComponent;
+
+				verifyRenderedValues(consumingComponent, {
+					nonReactiveProp: 'default',
+				});
+
+				consumingComponent.storeConsumer1.nonReactiveProp = 'value1';
+
+				await consumingComponent.updateComplete;
+
+				verifyRenderedValues(consumingComponent, {
+					nonReactiveProp: 'default',
+				});
+			});
+
+			it('non-reactive properties should not be in changedProperties', async() => {
+				const hostingComponent = await fixture(basicFixture);
+				const consumingComponent = hostingComponent.consumingComponent;
+
+				consumingComponent.storeConsumer1.nonReactiveProp = 'value1';
+
+				await consumingComponent.updateComplete;
+
+				expect(consumingComponent.storeConsumer1.changedProperties.has('nonReactiveProp')).to.be.false;
 			});
 		});
 	});

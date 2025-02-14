@@ -16,16 +16,25 @@ class MultipleConsumersDemo extends LitElement {
 	render() {
 		return html`
 			<h2>Parent</h2>
-			<div>Foo: ${this.consumer.foo}</div>
-			<div>Bar: ${this.consumer.bar}</div>
-			<button @click=${this._click}>Update foo</button>
+			<div>Count: ${this.consumer.count}</div>
+			<button @click=${this._increment}>Increment</button>
+			<button @click=${this._decrement}>Decrement</button>
+			<button @click=${this._reset}>Reset</button>
 
 			<multiple-consumers-demo-child></multiple-consumers-demo-child>
 		`;
 	}
 
-	_click() {
-		this.consumer.foo += 1;
+	_decrement() {
+		this.consumer.decrement();
+	}
+
+	_increment() {
+		this.consumer.increment();
+	}
+
+	_reset() {
+		this.consumer.count = 0;
 	}
 }
 
@@ -35,16 +44,27 @@ class MultipleConsumersDemoChild extends LitElement {
 
 		this.consumer = new MyStoreConsumer(this);
 	}
+
 	render() {
 		return html`
 			<h2>Child</h2>
-			<div>Foo: ${this.consumer.foo}</div>
-			<div>Bar: ${this.consumer.bar}</div>
-			<button @click=${this._click}>Update bar</button>
+			<div>Count: ${this.consumer.count}</div>
+			<button @click=${this._increment}>Increment</button>
+			<button @click=${this._decrement}>Decrement</button>
+			<button @click=${this._reset}>Reset</button>
 		`;
 	}
-	_click() {
-		this.consumer.bar += 1;
+
+	_decrement() {
+		this.consumer.decrement();
+	}
+
+	_increment() {
+		this.consumer.increment();
+	}
+
+	_reset() {
+		this.consumer.count = 0;
 	}
 }
 

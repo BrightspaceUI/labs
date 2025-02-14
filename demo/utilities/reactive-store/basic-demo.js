@@ -15,19 +15,23 @@ class BasicDemo extends LitElement {
 
 	render() {
 		return html`
-			<div>Foo: ${this.consumer.foo}</div>
-			<div>Bar: ${this.consumer.bar}</div>
-			<button @click=${this._updateFoo}>Update foo</button>
-			<button @click=${this._updateBar}>Update bar</button>
+			<div>Count: ${this.consumer.count}</div>
+			<button @click=${this._increment}>Increment</button>
+			<button @click=${this._decrement}>Decrement</button>
+			<button @click=${this._reset}>Reset</button>
 		`;
 	}
 
-	_updateBar() {
-		this.consumer.bar += 1;
+	_decrement() {
+		this.consumer.decrement();
 	}
 
-	_updateFoo() {
-		this.consumer.foo += 1;
+	_increment() {
+		this.consumer.increment();
+	}
+
+	_reset() {
+		this.consumer.count = 0;
 	}
 }
 
