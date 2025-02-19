@@ -3,15 +3,21 @@ import ReactiveStore from '../../../src/utilities/reactive-store/reactive-store.
 export default class MyStore extends ReactiveStore {
 	static get properties() {
 		return {
-			foo: { type: Number },
-			bar: { type: Number },
+			count: { type: Number },
 		};
 	}
 
 	constructor() {
 		super();
 
-		this.foo = 0;
-		this.bar = 0;
+		this.count = 0;
+	}
+
+	decrement() {
+		this.count--;
+	}
+
+	increment() {
+		this.count++;
 	}
 }

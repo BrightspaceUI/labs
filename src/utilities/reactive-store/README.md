@@ -19,14 +19,22 @@ import ReactiveStore from '@brightspace-ui/labs/utilites/reactive-store.js';
 class MyStore extends ReactiveStore {
 	static get properties() {
 		return {
-			foo: { type: Number },
+			count: { type: Number },
 		};
 	}
 
 	constructor() {
 		super();
 
-		this.foo = 0;
+		this.count = 0;
+	}
+
+	increment() {
+		this.count++;
+	}
+
+	decrement() {
+		this.count--;
 	}
 }
 
@@ -56,15 +64,27 @@ class MyComponent extends LitElement {
 	render() {
 		// The consumer will have all the same properties defined in your store.
 		return html`
-			<div>Foo: ${this.myStoreConsumer.foo}</div>
-			<button @click=${this._click}>Update foo</button>
+			<div>Count: ${this.myStoreConsumer.count}</div>
+			<button @click=${this._increment}>Increment</button>
+			<button @click=${this._decrement}>Decrement</button>
+			<button @click=${this._reset}>Reset</button>
 		`;
 	}
 
-	_click() {
+	_reset() {
 		// Updating the values from the consumer will update the store, which will then
 		// notify all consumers of the changes and trigger component updates.
-		this.myStoreConsumer.foo += 1;
+		this.myStoreConsumer.count = 0;
+	}
+
+	_increment() {
+		// You can access any method or property defined in the store, not just reactive properties.
+		this.myStoreConsumer.increment();
+	}
+
+	_decrement() {
+		// You can access any method or property defined in the store, not just reactive properties.
+		this.myStoreConsumer.decrement();
 	}
 }
 
@@ -86,14 +106,22 @@ import ReactiveStore from '@brightspace-ui/labs/utilites/reactive-store.js';
 class MyStore extends ReactiveStore {
 	static get properties() {
 		return {
-			foo: { type: Number },
+			count: { type: Number },
 		};
 	}
 
 	constructor() {
 		super();
 
-		this.foo = 0;
+		this.count = 0;
+	}
+
+	increment() {
+		this.count++;
+	}
+
+	decrement() {
+		this.count--;
 	}
 }
 
@@ -127,16 +155,28 @@ class MyComponent extends LitElement {
 		// The provider will have all the same properties defined in your store, so you can
 		// access your store data from the provider if you wish.
 		return html`
-			<div>Foo: ${this.myStoreProvider.foo}</div>
-			<button @click=${this._click}>Update foo</button>
+			<div>Count: ${this.myStoreProvider.count}</div>
+			<button @click=${this._increment}>Increment</button>
+			<button @click=${this._decrement}>Decrement</button>
+			<button @click=${this._reset}>Reset</button>
 			<my-descendant-component></my-descendant-component>
 		`;
 	}
 
-	_click() {
+	_reset() {
 		// Updating the values from the provider will update the store, which will then
 		// notify all consumers of the changes and trigger component updates.
-		this.myStoreProvider.foo += 1;
+		this.myStoreProvider.count = 0;
+	}
+
+	_increment() {
+		// You can access any method or property defined in the store, not just reactive properties.
+		this.myStoreProvider.increment();
+	}
+
+	_decrement() {
+		// You can access any method or property defined in the store, not just reactive properties.
+		this.myStoreProvider.decrement();
 	}
 }
 
@@ -162,16 +202,28 @@ class MyDescendantComponent extends LitElement {
 	render() {
 		// The consumer will have all the same properties defined in your store.
 		return html`
-			<div>Foo: ${this.myStoreConsumer.foo}</div>
-			<button @click=${this._click}>Update foo</button>
+			<div>Count: ${this.myStoreConsumer.count}</div>
+			<button @click=${this._increment}>Increment</button>
+			<button @click=${this._decrement}>Decrement</button>
+			<button @click=${this._reset}>Reset</button>
 		`;
 	}
 
-	_click() {
+	_reset() {
 		// Updating the values from the consumer will update the store, which will then
 		// notify all consumers of the changes and trigger component updates for all consumers and
 		// the provider as well.
-		this.myStoreConsumer.foo += 1;
+		this.myStoreConsumer.count = 0;
+	}
+
+	_increment() {
+		// You can access any method or property defined in the store, not just reactive properties.
+		this.myStoreConsumer.increment();
+	}
+
+	_decrement() {
+		// You can access any method or property defined in the store, not just reactive properties.
+		this.myStoreConsumer.decrement();
 	}
 }
 
@@ -193,14 +245,14 @@ import ReactiveStore from '@brightspace-ui/labs/utilites/reactive-store.js';
 class MyStore extends ReactiveStore {
 	static get properties() {
 		return {
-			foo: { type: Number },
+			count: { type: Number },
 		};
 	}
 
 	constructor() {
 		super();
 
-		this.foo = 0;
+		this.count = 0;
 	}
 }
 
@@ -220,7 +272,7 @@ function handlePropertyChange({ property, value, prevValue }) {
 myStore.subscribe(handlePropertyChange);
 
 // When a store property is changed, any subscribed callback functions will be invoked synchronously
-myStore.foo += 1; // console: The "foo" property changed from 0 to 1
+myStore.count += 1; // console: The "count" property changed from 0 to 1
 
 // Unsubscribe your callback function when you no longer want to receive store updates
 myStore.unsubscribe(handlePropertyChange);
@@ -324,17 +376,19 @@ If the callback function passed in does not match a currently subscribed functio
 
 This is the class that is returned by the `createConsumer()` instance method on an instance of the store.
 
-This class is a [Lit Reactive Controller](https://lit.dev/docs/composition/controllers/) that when instantiated can be used by a Lit component to connect to the originating store instance.
+This class is a [Lit Reactive Controller](https://lit.dev/docs/composition/controllers/) that when instantiated acts as a proxy for the originating store itself.
 
-Any Consumer class instances will have access to all the same properties that the originating store does and will automatically trigger the update cycle on the host component whenever a property of the store changes.
+Any Consumer class instances will have access to all the same properties and methods that the originating store does and will automatically trigger the update cycle on the host component whenever a reactive property of the store changes.
 
 ### Instance Properties
 
-#### The Reactive `properties`
+#### Proxied Properties and Methods
 
-Just like the store has a set of properties dynamically generated, the Consumer class will have the same property accessors generated at construction time. The Consumer's properties will be directly connected to the corresponding properties on the originating store instance, so they can be used as if connecting to the store directly.
+Since the Consumer acts as a proxy for the originating store, all properties and methods from the original store will also be accessible from the Consumer. The Consumer's properties will be directly connected to the corresponding properties on the originating store instance, so they can be used as if interacting with the store directly.
 
-Setting any of these properties will call the corresponding setter on the originating store, and since the store notifies all consumers of changes, all consumers will then trigger the update cycle for their respective host components.
+The proxied properties and methods includes methods on the `ReactiveStore` base class like `forceUpdate`, `subscribe`, `unsubscribe`, etc. However, any properties/methods that conflict with the properties/methods defined by the Consumer class itself (`changedProperties`, `hostDisconnected`, etc.) will be ignored.
+
+Since updating a reactive property on the Consumer is the same as setting it on the store, updating a reactive property will notify all consumers of changes and, in turn, all consumers will then trigger the update cycle for their respective host components.
 
 #### `changedProperties`
 
@@ -356,10 +410,6 @@ The constructor for the Consumer class accepts the following parameters:
 |---|---|---|---|
 | `host` | LitElement | The host Lit element that the Consumer is to be connected to. | True |
 
-#### `forceUpdate()`
-
-This method can be used to call the originating store's own `forceUpdate()` method, which will trigger an update for all consumer host components. See the store's `forceUpdate()` definition for additional details.
-
 ## The context `Provider` class
 
 The context `Provider` class is one of the two [Lit Reactive Controllers](https://lit.dev/docs/composition/controllers/) returned by the `createContextControllers()` static method. The context `Consumer` class is the other controller returned and both of these act as a pair. Both of these controllers also have ther functionality tied to the specific store class you used to generate them.
@@ -370,11 +420,13 @@ This class is based on (and internally uses) the `ContextProvider` class from Li
 
 ### Instance Properties
 
-#### The Reactive `properties`
+#### Proxied Properties and Methods
 
-Just like the store has a set of properties dynamically generated, the context `Provider` class will have the same property accessors generated at construction time. The `Provider`'s properties will be directly connected to the corresponding properties on the store instance that it provides, so they can be used as if connecting to the store directly.
+The context `Provider` acts as a proxy for the originating store, which means that all properties and methods from the original store will also be accessible from the `Provider`. The `Provider`'s properties will be directly connected to the corresponding properties on the originating store instance, so they can be used as if interacting with the store directly.
 
-Setting any of these properties will call the corresponding setter on the provided store and the Provider will trigger a corresponding lifecycle update for its hosting component. Any context `Consumer` instances that are descendants of the `Provider` will also trigger the lifecycle update for their corresponding hosting components.
+The proxied properties and methods includes methods on the `ReactiveStore` base class like `forceUpdate`, `subscribe`, `unsubscribe`, etc. However, any properties/methods that conflict with the properties/methods defined by the `Provider` class itself (`changedProperties`, `hostDisconnected`, etc.) will be ignored.
+
+Since updating a reactive property on the `Provider` is the same as setting it on the store, updating a reactive property will notify the `Provider` and all descendant `Consumer` instances of changes and, in turn, the `Provider` and `Consumer` instances will then trigger the update cycle for their respective host components.
 
 #### `changedProperties`
 
@@ -397,10 +449,6 @@ The constructor for the context `Provider` class accepts the following parameter
 | `host` | LitElement instance | The host Lit element that the `Provider` is to be connected to. | True | |
 | `store` | ReactiveStore instance | The instance of your store that you wish to provide to descendant context `Consumer` classes. Note that if no store instance is passed to this parameter, an instance of your store will be instantiated to be used. | True | `new StoreClass()` |
 
-#### `forceUpdate()`
-
-This method can be used to call the provided store's own `forceUpdate()` method, which will trigger an update for the `Provider`'s host component as well as all context `Consumer` host components. See the store's `forceUpdate()` definition for additional details.
-
 ## The context `Consumer` class
 
 The context `Consumer` class is one of the two [Lit Reactive Controllers](https://lit.dev/docs/composition/controllers/) returned by the `createContextControllers()` static method. The context `Provider` class is the other controller returned and both of these act as a pair. Both of these controllers also have ther functionality tied to the specific store class you used to generate them.
@@ -413,11 +461,13 @@ This class is based on (and internally uses) the `ContextConsumer` class from Li
 
 ### Instance Properties
 
-#### The Reactive `properties`
+#### Proxied Properties and Methods
 
-Just like the store has a set of properties dynamically generated, the context `Consumer` class will have the same property accessors generated at construction time. The `Consumer`'s properties will be directly connected to the corresponding properties on the store instance that it receives from the context `Provider` ancestor, so they can be used as if connecting to the store directly.
+The context `Consumer` acts as a proxy for the originating store (which it receives from the `Provider` ancestor), which means that all properties and methods from the original store will also be accessible from the `Consumer`. The `Consumer`'s properties will be directly connected to the corresponding properties on the originating store instance, so they can be used as if interacting with the store directly.
 
-Setting any of these properties will call the corresponding setter on the provided store and the `Provider` will trigger a corresponding lifecycle update for its hosting component. Any context `Consumer` instances (including this one) that are descendants of that `Provider` will also trigger the lifecycle update for their corresponding hosting components.
+The proxied properties and methods includes methods on the `ReactiveStore` base class like `forceUpdate`, `subscribe`, `unsubscribe`, etc. However, any properties/methods that conflict with the properties/methods defined by the `Consumer` class itself (`changedProperties`, `hostDisconnected`, etc.) will be ignored.
+
+Since updating a reactive property on the `Consumer` is the same as setting it on the store, updating a reactive property will notify the `Provider` and all descendant `Consumer` instances of changes and, in turn, the `Provider` and `Consumer` instances will then trigger the update cycle for their respective host components.
 
 #### `changedProperties`
 
@@ -438,7 +488,3 @@ The constructor for the context `Consumer` class accepts the following parameter
 | Parameter Name | Type | Description | Required |
 |---|---|---|---|
 | `host` | LitElement instance | The host Lit element that the `Consumer` is to be connected to. | True |
-
-#### `forceUpdate()`
-
-This method can be used to call the provided store's own `forceUpdate()` method, which will trigger an update for the `Provider`'s host component as well as all context `Consumer` host components. See the store's `forceUpdate()` definition for additional details.
