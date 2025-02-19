@@ -28,16 +28,22 @@
 export default class MyStore extends ReactiveStore {
 	static get properties() {
 		return {
-			foo: { type: Number },
-			bar: { type: Number },
+			count: { type: Number },
 		};
 	}
 
 	constructor() {
 		super();
 
-		this.foo = 0;
-		this.bar = 0;
+		this.count = 0;
+	}
+
+	decrement() {
+		this.count--;
+	}
+
+	increment() {
+		this.count++;
 	}
 }</d2l-code-view>
 			</d2l-collapsible-panel>
@@ -62,19 +68,23 @@ class BasicDemo extends LitElement {
 
 	render() {
 		return html`
-			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
-			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
-			&lt;button @click=${this._updateFoo}&gt;Update foo&lt;/button&gt;
-			&lt;button @click=${this._updateBar}&gt;Update bar&lt;/button&gt;
+			&lt;div&gt;Count: ${this.consumer.count}&lt;/div&gt;
+			&lt;button @click=${this._increment}&gt;Increment&lt;/button&gt;
+			&lt;button @click=${this._decrement}&gt;Decrement&lt;/button&gt;
+			&lt;button @click=${this._reset}&gt;Reset&lt;/button&gt;
 		`;
 	}
 
-	_updateBar() {
-		this.consumer.bar += 1;
+	_decrement() {
+		this.consumer.decrement();
 	}
 
-	_updateFoo() {
-		this.consumer.foo += 1;
+	_increment() {
+		this.consumer.increment();
+	}
+
+	_reset() {
+		this.consumer.count = 0;
 	}
 }
 
@@ -105,16 +115,25 @@ class MultipleConsumersDemo extends LitElement {
 	render() {
 		return html`
 			&lt;h2&gt;Parent&lt;/h2&gt;
-			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
-			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
-			&lt;button @click=${this._click}&gt;Update foo&lt;/button&gt;
+			&lt;div&gt;Count: ${this.consumer.count}&lt;/div&gt;
+			&lt;button @click=${this._increment}&gt;Increment&lt;/button&gt;
+			&lt;button @click=${this._decrement}&gt;Decrement&lt;/button&gt;
+			&lt;button @click=${this._reset}&gt;Reset&lt;/button&gt;
 
 			&lt;multiple-consumers-demo-child&gt;&lt;/multiple-consumers-demo-child&gt;
 		`;
 	}
 
-	_click() {
-		this.consumer.foo += 1;
+	_decrement() {
+		this.consumer.decrement();
+	}
+
+	_increment() {
+		this.consumer.increment();
+	}
+
+	_reset() {
+		this.consumer.count = 0;
 	}
 }
 
@@ -124,16 +143,27 @@ class MultipleConsumersDemoChild extends LitElement {
 
 		this.consumer = new MyStoreConsumer(this);
 	}
+
 	render() {
 		return html`
 			&lt;h2&gt;Child&lt;/h2&gt;
-			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
-			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
-			&lt;button @click=${this._click}&gt;Update bar&lt;/button&gt;
+			&lt;div&gt;Count: ${this.consumer.count}&lt;/div&gt;
+			&lt;button @click=${this._increment}&gt;Increment&lt;/button&gt;
+			&lt;button @click=${this._decrement}&gt;Decrement&lt;/button&gt;
+			&lt;button @click=${this._reset}&gt;Reset&lt;/button&gt;
 		`;
 	}
-	_click() {
-		this.consumer.bar += 1;
+
+	_decrement() {
+		this.consumer.decrement();
+	}
+
+	_increment() {
+		this.consumer.increment();
+	}
+
+	_reset() {
+		this.consumer.count = 0;
 	}
 }
 
@@ -163,19 +193,29 @@ class ContextDemo extends LitElement {
 
 		this.store = new MyStoreContextProvider(this);
 	}
+
 	render() {
 		return html`
 			&lt;h2&gt;Parent&lt;/h2&gt;
-			&lt;div&gt;Foo: ${this.store.foo}&lt;/div&gt;
-			&lt;div&gt;Bar: ${this.store.bar}&lt;/div&gt;
-			&lt;button @click=${this._click}&gt;Update foo&lt;/button&gt;
+			&lt;div&gt;Count: ${this.store.count}&lt;/div&gt;
+			&lt;button @click=${this._increment}&gt;Increment&lt;/button&gt;
+			&lt;button @click=${this._decrement}&gt;Decrement&lt;/button&gt;
+			&lt;button @click=${this._reset}&gt;Reset&lt;/button&gt;
 
 			&lt;context-demo-child&gt;&lt;/context-demo-child&gt;
 		`;
 	}
 
-	_click() {
-		this.store.foo += 1;
+	_decrement() {
+		this.store.decrement();
+	}
+
+	_increment() {
+		this.store.increment();
+	}
+
+	_reset() {
+		this.store.count = 0;
 	}
 }
 
@@ -185,16 +225,27 @@ class ContextDemoChild extends LitElement {
 
 		this.consumer = new MyStoreContextConsumer(this);
 	}
+
 	render() {
 		return html`
 			&lt;h2&gt;Child&lt;/h2&gt;
-			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
-			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
-			&lt;button @click=${this._click}&gt;Update bar&lt;/button&gt;
+			&lt;div&gt;Count: ${this.consumer.count}&lt;/div&gt;
+			&lt;button @click=${this._increment}&gt;Increment&lt;/button&gt;
+			&lt;button @click=${this._decrement}&gt;Decrement&lt;/button&gt;
+			&lt;button @click=${this._reset}&gt;Reset&lt;/button&gt;
 		`;
 	}
-	_click() {
-		this.consumer.bar += 1;
+
+	_decrement() {
+		this.consumer.decrement();
+	}
+
+	_increment() {
+		this.consumer.increment();
+	}
+
+	_reset() {
+		this.consumer.count = 0;
 	}
 }
 
