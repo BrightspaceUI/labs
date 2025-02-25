@@ -111,6 +111,8 @@ class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
 				box-shadow: none;
 				box-sizing: border-box;
 				flex-grow: 1;
+				font-family: inherit;
+				font-size: inherit;
 				min-height: 1.55rem;
 				outline: none;
 				padding: 0 !important;
