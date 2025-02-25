@@ -19,7 +19,7 @@ export default {
 	"components:checkboxDrawer:checkboxExpanded": "复选框已展开", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
 	"components:navigation:back": "返回",
 	"components:navigation:next": "下一个",
-	"components:navigation:previous": "上一步",
+	"components:navigation:previous": "上一个",
 	"components:navigation:skipNav": "跳到主目录",
 	"components:optInFlyout:cancel": "取消",
 	"components:optInFlyout:close": "关闭此对话框",
