@@ -12,7 +12,8 @@ export default class ReactiveStore {
 	constructor() {
 		this._pubSub = new PubSub();
 		this._state = {};
-		this._defineProperties(this.constructor.properties);
+
+		this.#defineProperties(this.constructor.prototype);
 	}
 
 	createConsumer() {
@@ -36,7 +37,13 @@ export default class ReactiveStore {
 		this._pubSub.unsubscribe(callback);
 	}
 
-	_defineProperties(properties) {
+	#defineProperties(proto) {
+		if (!(proto instanceof ReactiveStore)) return;
+		this.#defineProperties(Object.getPrototypeOf(proto));
+
+		const { properties } = proto.constructor;
+		if (!properties) return;
+
 		Object.keys(properties).forEach((property) => {
 			Object.defineProperty(this, property, {
 				get() {

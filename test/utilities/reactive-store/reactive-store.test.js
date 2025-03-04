@@ -135,6 +135,42 @@ describe('ReactiveStore', () => {
 			expect(callbackStub1.calls.length).to.equal(1);
 			expect(callbackStub2.calls.length).to.equal(1);
 		});
+
+		it('should inherit properties from parent classes', () => {
+			class ParentStore extends ReactiveStore {
+				static properties = {
+					prop1: {}
+				};
+			}
+
+			class ChildStore extends ParentStore {
+				static properties = {
+					prop2: {}
+				};
+			}
+
+			const store = new ChildStore();
+			const callbackStub = new CallbackStub();
+			store.subscribe(callbackStub.callback);
+
+			store.prop1 = 'value1';
+			expect(callbackStub.calls.length).to.equal(1);
+			expect(callbackStub.calls[0][0]).to.deep.equal({
+				property: 'prop1',
+				value: 'value1',
+				prevValue: undefined,
+				forceUpdate: false
+			});
+
+			store.prop2 = 'value2';
+			expect(callbackStub.calls.length).to.equal(2);
+			expect(callbackStub.calls[1][0]).to.deep.equal({
+				property: 'prop2',
+				value: 'value2',
+				prevValue: undefined,
+				forceUpdate: false
+			});
+		});
 	});
 
 	describe('createConsumer()', () => {
