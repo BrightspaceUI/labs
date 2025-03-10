@@ -8,9 +8,9 @@ Add the `d2l-labs-navigation` component, and provide sub elements `d2l-labs-navi
 
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/navigation.js';
-  import '@brightspace-ui/labs/navigation/navigation-main-header.js';
-  import '@brightspace-ui/labs/navigation/navigation-main-footer.js';
+  import '@brightspace-ui/labs/components/navigation/navigation.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-main-header.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-main-footer.js';
 </script>
 
 <d2l-labs-navigation>
@@ -35,7 +35,7 @@ Please note that overridding the `left` slot will prevent the Back link from dis
 
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/navigation-immersive.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-immersive.js';
 </script>
 
 <d2l-labs-navigation-immersive back-link-href="https://www.d2l.com" back-link-text="Back to D2L">
@@ -63,7 +63,7 @@ Optionally:
 
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/navigation-band.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-band.js';
 </script>
 
 <d2l-labs-navigation-band></d2l-labs-navigation-band>
@@ -83,7 +83,7 @@ Add the `d2l-labs-navigation-main-header` component, and provide elements for th
 
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/navigation-main-header.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-main-header.js';
 </script>
 
 <d2l-labs-navigation-main-header>
@@ -105,7 +105,7 @@ Add the `d2l-labs-navigation-main-footer` component, and provide elements for th
 
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/navigation-main-footer.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-main-footer.js';
 </script>
 
 <d2l-labs-navigation-main-footer>
@@ -164,7 +164,7 @@ Similar to `<d2l-labs-navigation-button-icon>`, a link that comes with an icon a
 
 ```html
 <script type="module">
-  import '@brightspace-ui/labs/navigation/navigation-iterator.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-iterator.js';
 </script>
 
 <d2l-labs-navigation-iterator></d2l-labs-navigation-iterator>
