@@ -3,11 +3,12 @@ import {
 	ContextConsumer as LitContextConsumer,
 	ContextProvider as LitContextProvider
 } from '@lit/context';
+import { combinedPropertiesSymbol } from './constants.js';
 import StoreReactor from './store-reactor.js';
 
 export class ContextProvider {
 	constructor(host, StoreClass, store = new StoreClass()) {
-		const { properties } = StoreClass;
+		const properties = StoreClass[combinedPropertiesSymbol];
 		const storeReactor = new StoreReactor(host, store, properties);
 		new LitContextProvider(host, {
 			context: createContext(StoreClass),
@@ -31,7 +32,7 @@ export class ContextProvider {
 }
 export class ContextConsumer {
 	constructor(host, StoreClass) {
-		const { properties } = StoreClass;
+		const properties = StoreClass[combinedPropertiesSymbol];
 		const target = {
 			store: {},
 			storeReactor: {},

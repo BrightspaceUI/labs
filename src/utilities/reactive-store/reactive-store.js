@@ -1,3 +1,4 @@
+import { combinedPropertiesSymbol } from './constants.js';
 import { createContextControllers } from './context-controllers.js';
 import PubSub from '../pub-sub/pub-sub.js';
 import StoreConsumer from './store-consumer.js';
@@ -13,7 +14,11 @@ export default class ReactiveStore {
 		this._pubSub = new PubSub();
 		this._state = {};
 
-		this.#defineProperties(this.constructor.prototype);
+		this.#defineProperties();
+	}
+
+	static get [combinedPropertiesSymbol]() {
+		return getCombinedProperties(this.prototype);
 	}
 
 	createConsumer() {
@@ -37,12 +42,8 @@ export default class ReactiveStore {
 		this._pubSub.unsubscribe(callback);
 	}
 
-	#defineProperties(proto) {
-		if (!(proto instanceof ReactiveStore)) return;
-		this.#defineProperties(Object.getPrototypeOf(proto));
-
-		const { properties } = proto.constructor;
-		if (!properties) return;
+	#defineProperties() {
+		const properties = this.constructor[combinedPropertiesSymbol];
 
 		Object.keys(properties).forEach((property) => {
 			Object.defineProperty(this, property, {
@@ -61,4 +62,12 @@ export default class ReactiveStore {
 			});
 		});
 	}
+}
+
+function getCombinedProperties(proto) {
+	if (!(proto instanceof ReactiveStore)) return {};
+	return {
+		...getCombinedProperties(Object.getPrototypeOf(proto)),
+		...(proto.constructor.properties ?? {})
+	};
 }

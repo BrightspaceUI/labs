@@ -1,7 +1,8 @@
+import { combinedPropertiesSymbol } from './constants.js';
 import StoreReactor from './store-reactor.js';
 
 export default class StoreConsumer {
-	constructor(host, store, properties = store.constructor.properties) {
+	constructor(host, store, properties = store.constructor[combinedPropertiesSymbol]) {
 		const storeReactor = new StoreReactor(host, store, properties);
 
 		return new Proxy(store, {
