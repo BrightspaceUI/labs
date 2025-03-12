@@ -15,8 +15,8 @@ class LabsAccordion extends LitElement {
 	static get styles() {
 		return css`
 			:host {
-				display: block;
 				box-sizing: border-box;
+				display: block;
 			}
 		`;
 	}
