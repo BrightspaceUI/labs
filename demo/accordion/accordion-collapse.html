@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../accordion-collapse.js';
+		</script>
+	</head>
+	<body unresolved>
+		<d2l-demo-page page-title="d2l-labs-accordion-collapse">
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse title="Regular" opened>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse title="Regular with border" opened border>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse title="Flex" flex>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse title="NoIcons" no-icons>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse>
+						<button slot="header">CustomHeader</button>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse title="Disabled/Opened" disabled opened>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse title="Disabled/Closed" disabled>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+
+			<h3>Label attribute puts title attribute only on header</h3>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse label="Regular" opened>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse label="Flex" flex>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse label="NoIcons" no-icons>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse>
+						<button slot="header">CustomHeader</button>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse label="Disabled/Opened" disabled opened>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse label="Disabled/Closed" disabled>
+						Demo
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse label="Summary and flex" flex>
+						<ul slot="summary">
+							<li>Availability starts 4/13/2020 and ends 4/23/2020</li>
+							<li>One release condition</li>
+							<li>Special access</li>
+						</ul>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lectus erat, dignissim quis efficitur non, iaculis nec ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam fringilla eu orci sed tristique. Aliquam pellentesque turpis ut vehicula volutpat. Quisque euismod felis nec dolor scelerisque, ullamcorper gravida ante suscipit. Nam eget libero vel mauris tincidunt molestie. Maecenas tortor purus, sodales vel lacus vel, molestie tempor tellus.
+
+						Proin eget accumsan neque. Vestibulum semper justo erat, vitae scelerisque neque sollicitudin eget. Suspendisse vulputate vel risus sit amet vehicula. In diam orci, convallis sed elementum ut, gravida at risus. Phasellus posuere erat eu pulvinar congue. Praesent nibh nibh, tempor in ultricies et, vestibulum nec urna. Cras varius vestibulum velit, porttitor venenatis mi iaculis vel. Etiam eget eleifend metus. Donec ac nisl condimentum, venenatis massa eu, sodales quam. Aliquam egestas metus vel magna blandit placerat. Nullam gravida ultrices sapien, eget aliquet lorem gravida sed. Pellentesque ut euismod orci, at vestibulum velit. Nam faucibus sagittis aliquam. Suspendisse et libero id elit interdum eleifend. In ac nisi quis est laoreet semper. Nam eget scelerisque arcu, a pretium libero.
+
+						Maecenas sed tortor ac risus consectetur viverra ac sit amet purus. In tempor scelerisque augue in pretium. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nulla sapien, porttitor a blandit quis, convallis blandit justo. Sed luctus vitae nisl a consectetur. Proin interdum orci ex, non sodales diam faucibus in. Fusce et dolor ac ipsum vulputate pretium. Quisque nec vehicula quam.
+						</p>
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion-collapse flex header-border>
+						<h2 slot="header">Custom header, summary, border and flex 💪</h2>
+						<ul slot="summary" style="list-style-type: none; padding-left: 0px;">
+							<li>Availability starts 4/13/2020 and ends 4/23/2020</li>
+							<li>One release condition</li>
+							<li>Special access</li>
+						</ul>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lectus erat, dignissim quis efficitur non, iaculis nec ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam fringilla eu orci sed tristique. Aliquam pellentesque turpis ut vehicula volutpat. Quisque euismod felis nec dolor scelerisque, ullamcorper gravida ante suscipit. Nam eget libero vel mauris tincidunt molestie. Maecenas tortor purus, sodales vel lacus vel, molestie tempor tellus.
+
+		Proin eget accumsan neque. Vestibulum semper justo erat, vitae scelerisque neque sollicitudin eget. Suspendisse vulputate vel risus sit amet vehicula. In diam orci, convallis sed elementum ut, gravida at risus. Phasellus posuere erat eu pulvinar congue. Praesent nibh nibh, tempor in ultricies et, vestibulum nec urna. Cras varius vestibulum velit, porttitor venenatis mi iaculis vel. Etiam eget eleifend metus. Donec ac nisl condimentum, venenatis massa eu, sodales quam. Aliquam egestas metus vel magna blandit placerat. Nullam gravida ultrices sapien, eget aliquet lorem gravida sed. Pellentesque ut euismod orci, at vestibulum velit. Nam faucibus sagittis aliquam. Suspendisse et libero id elit interdum eleifend. In ac nisi quis est laoreet semper. Nam eget scelerisque arcu, a pretium libero.
+
+		Maecenas sed tortor ac risus consectetur viverra ac sit amet purus. In tempor scelerisque augue in pretium. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nulla sapien, porttitor a blandit quis, convallis blandit justo. Sed luctus vitae nisl a consectetur. Proin interdum orci ex, non sodales diam faucibus in. Fusce et dolor ac ipsum vulputate pretium. Quisque nec vehicula quam.
+		</p>
+					</d2l-labs-accordion-collapse>
+				</template>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+		<d2l-demo-snippet>
+			<template>
+				<d2l-labs-accordion-collapse label="FLEXLoremipsumdolorsitametconsecteturadipiscingelitseddoeiusmodtemporincididuntutlaboreetdoloremagnaaliquaUtenimadminimveniamquisnostrudexercitationullamcolaborisnisiutaliquipexeacommodoconsequatDuisauteiruredolorinreprehenderitinvoluptatevelitessecillumdoloreeufugiatnullapariaturExcepteursintoccaecatcupidatatnonproidentsuntinculpaquiofficiadeseruntmollitanimidestlaborum" flex icon-has-padding>
+					Demo
+				</d2l-labs-accordion-collapse>
+			</template>
+		</d2l-demo-snippet>
+	</body>
+</html>
