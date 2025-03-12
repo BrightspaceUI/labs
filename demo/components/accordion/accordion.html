@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../accordion.js';
+		</script>
+	</head>
+	<body unresolved>
+		<d2l-demo-page page-title="d2l-labs-accordion">
+			<h3>Simple</h3>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion>
+						<d2l-labs-accordion-collapse title="Regular">
+							Demo
+						</d2l-labs-accordion-collapse>
+						<div>This text is always shown</div>
+						<d2l-labs-accordion-collapse title="Flex 1" flex>
+							Demo
+						</d2l-labs-accordion-collapse>
+						<d2l-labs-accordion-collapse title="Regular with padding" icon-has-padding>
+							Icon has extra padding
+						</d2l-labs-accordion-collapse>
+						<d2l-labs-accordion-collapse title="Flex with padding" flex icon-has-padding>
+							Icon has extra padding
+						</d2l-labs-accordion-collapse>
+					</d2l-labs-accordion>
+				</template>
+			</d2l-demo-snippet>
+
+			<h3>Auto-close</h3>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion auto-close>
+						<d2l-labs-accordion-collapse title="AutoClose">
+							<d2l-labs-accordion-collapse title="- Child 1">
+								<d2l-labs-accordion-collapse title="-- Grandchild 1">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+								<d2l-labs-accordion-collapse title="-- Grandchild 2">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+							</d2l-labs-accordion-collapse>
+							<d2l-labs-accordion-collapse title="- Child 2">
+								<d2l-labs-accordion-collapse title="-- Grandchild 1">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+								<d2l-labs-accordion-collapse title="-- Grandchild 2">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+							</d2l-labs-accordion-collapse>
+						</d2l-labs-accordion-collapse>
+					</d2l-labs-accordion>
+					<d2l-labs-accordion>
+						<d2l-labs-accordion-collapse title="Not AutoClose">
+							<d2l-labs-accordion-collapse title="- Child 1">
+								<d2l-labs-accordion-collapse title="-- Grandchild 1">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+								<d2l-labs-accordion-collapse title="-- Grandchild 2">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+							</d2l-labs-accordion-collapse>
+							<d2l-labs-accordion-collapse title="- Child 2">
+								<d2l-labs-accordion-collapse title="-- Grandchild 1">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+								<d2l-labs-accordion-collapse title="-- Grandchild 2">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+							</d2l-labs-accordion-collapse>
+						</d2l-labs-accordion-collapse>
+					</d2l-labs-accordion>
+					<d2l-labs-accordion auto-close>
+						<d2l-labs-accordion-collapse title="AutoClose with Some Child Accordions Disabled">
+							<d2l-labs-accordion-collapse title="- Child 1 (opened/disabled)" opened disabled>
+								<d2l-labs-accordion-collapse title="-- Grandchild 1">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+								<d2l-labs-accordion-collapse title="-- Grandchild 2">
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+							</d2l-labs-accordion-collapse>
+							<d2l-labs-accordion-collapse title="- Child 2">
+								<d2l-labs-accordion-collapse title="-- Grandchild 1 (closed/disabled)" disabled>
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+								<d2l-labs-accordion-collapse title="-- Grandchild 2 (opened/disabled)" opened disabled>
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+								<d2l-labs-accordion-collapse title="-- Grandchild 3" disabled>
+									Demo<br>Demo<br>Demo
+								</d2l-labs-accordion-collapse>
+							</d2l-labs-accordion-collapse>
+						</d2l-labs-accordion-collapse>
+					</d2l-labs-accordion>
+				</template>
+			</d2l-demo-snippet>
+
+			<h3>Clickable Header</h3>
+			<d2l-demo-snippet>
+				<template>
+					<d2l-labs-accordion>
+						<d2l-labs-accordion-collapse
+							header-has-interactive-content
+							screen-reader-header-text="Go to D2L"
+						>
+							<span slot="header">
+								Go to
+								<a href="https://www.d2l.com/">D2L</a>
+							</span>
+							Demo
+						</d2l-labs-accordion-collapse>
+					</d2l-labs-accordion>
+				</template>
+			</d2l-demo-snippet>
+		</d2l-demo-page>
+	</body>
+</html>
