@@ -1,4 +1,4 @@
-import '../accordion.js';
+import '../../../src/components/accordion/accordion.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 const accordionCollapseFixture = html`
