@@ -5,6 +5,8 @@
   "repository": "https://github.com/BrightspaceUI/labs.git",
   "exports": {
     "./components/accessibility-disability-simulator.js": "./src/components/accessibility-disability-simulator/accessibility-disability-simulator.js",
+    "./components/accordion.js": "./src/components/accordion/accordion.js",
+    "./components/accordion-collapse.js": "./src/components/accordion/accordion-collapse.js",
     "./components/attribute-picker.js": "./src/components/attribute-picker/attribute-picker.js",
     "./components/checkbox-drawer.js": "./src/components/checkbox-drawer/checkbox-drawer.js",
     "./components/card-overlay.js": "./src/components/card-overlay/card-overlay.js",

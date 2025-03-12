@@ -1,27 +1,17 @@
 # d2l-labs-accordion
 
-[![NPM version](https://img.shields.io/npm/v/@brightspace-ui-labs/accordion.svg)](https://www.npmjs.org/package/@brightspace-ui-labs/accordion)
-
-> Note: this is a ["labs" component](https://github.com/BrightspaceUI/guide/wiki/Component-Tiers). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
->
-> - [ ] [Design organization buy-in](https://github.com/BrightspaceUI/guide/wiki/Before-you-build#working-with-design)
-> - [ ] [design.d2l entry](http://design.d2l/)
-> - [ ] [Architectural sign-off](https://github.com/BrightspaceUI/guide/wiki/Before-you-build#web-component-architecture)
-> - [x] [Continuous integration](https://github.com/BrightspaceUI/guide/wiki/Testing#testing-continuously-with-travis-ci)
-> - [x] [Cross-browser testing](https://github.com/BrightspaceUI/guide/wiki/Testing#cross-browser-testing-with-sauce-labs)
-> - [ ] [Unit tests](https://github.com/BrightspaceUI/guide/wiki/Testing#testing-with-polymer-test) (if applicable)
-> - [ ] [Accessibility tests](https://github.com/BrightspaceUI/guide/wiki/Testing#automated-accessibility-testing-with-axe)
-> - [ ] [Visual diff tests](https://github.com/BrightspaceUI/visual-diff)
-> - [x] [Localization](https://github.com/BrightspaceUI/guide/wiki/Localization) with Serge (if applicable)
-> - [x] Demo page
-> - [ ] README documentation
-
 Lit-based widget that displays a list of collapsible components. When collapsible component is clicked - it expands or collapses the associated content.
 
-## Installation
+## Usage
 
-```shell
-npm install @brightspace-ui-labs/accordion
+```html
+<script type="module">
+    import '@brightspace-ui/labs/components/accordion.js';
+	import '@brightspace-ui/labs/components/accordion-collapse.js';
+</script>
+<d2l-labs-accordion>
+	<d2l-labs-accordion-collapse></d2l-labs-accordion-collapse>
+</d2l-labs-accordion>
 ```
 
 ## Lit components:
@@ -117,38 +107,3 @@ Example 6:
 	</span>
 </d2l-labs-accordion-collapse>
 ```
-## Developing and Contributing
-
-After cloning the repo, run `npm install` to install dependencies.
-
-### Testing
-
-To run the full suite of tests:
-
-```shell
-npm test
-```
-
-Alternatively, tests can be selectively run:
-
-```shell
-# eslint
-npm run lint:eslint
-
-# unit tests
-npm run test:unit
-```
-
-### Running the demos
-
-To start a [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) that hosts the demo pages and tests:
-
-```shell
-npm start
-```
-
-### Versioning and Releasing
-
-This repo is configured to use `semantic-release`. Commits prefixed with `fix:` and `feat:` will trigger patch and minor releases when merged to `main`.
-
-To learn how to create major releases and release from maintenance branches, refer to the [semantic-release GitHub Action](https://github.com/BrightspaceUI/actions/tree/main/semantic-release) documentation.
