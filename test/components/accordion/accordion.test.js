@@ -1,5 +1,5 @@
 import '../../../src/components/accordion/accordion.js';
-import { expect, fixture, html } from '@brightspace-ui/testing';
+import { clickElem, expect, fixture, html } from '@brightspace-ui/testing';
 
 const accordionCollapseFixture = html`
 	<d2l-labs-accordion>
@@ -43,7 +43,7 @@ describe('d2l-labs-accordion', () => {
 	it('trigger test', async() => {
 		const myEl = await fixture(accordionCollapseFixture);
 		expect(myEl.items[0].opened).to.be.false;
-		myEl.items[0].shadowRoot.querySelector('#trigger').click();
+		await clickElem(myEl.items[0].shadowRoot.querySelector('#trigger'));
 		expect(myEl.items[0].opened).to.be.true;
 	});
 
