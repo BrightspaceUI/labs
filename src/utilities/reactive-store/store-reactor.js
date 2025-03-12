@@ -1,7 +1,9 @@
+import { combinedPropertiesSymbol } from './constants.js';
+
 export default class StoreReactor {
 	changedProperties;
 
-	constructor(host, store, properties = store.constructor.properties) {
+	constructor(host, store, properties = store.constructor[combinedPropertiesSymbol]) {
 		this.#host = host;
 		this.#host.addController(this);
 		this.#store = store;

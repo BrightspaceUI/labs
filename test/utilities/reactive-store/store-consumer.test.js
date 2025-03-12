@@ -119,6 +119,41 @@ describe('ReactiveStore StoreConsumer', () => {
 			const storeConsumer = new StoreConsumer(host, store);
 
 			expect(storeConsumer.changedProperties.size).to.equal(2);
+			expect(storeConsumer.changedProperties.has('prop1')).to.be.true;
+			expect(storeConsumer.changedProperties.has('prop2')).to.be.true;
+			expect(storeConsumer.changedProperties.get('prop1')).to.equal(undefined);
+			expect(storeConsumer.changedProperties.get('prop2')).to.equal(undefined);
+		});
+
+		it('should contain undefined for initialized parent properties during the initial update cycle', () => {
+			class ParentStore extends ReactiveStore {
+				static properties = {
+					prop1: {}
+				};
+
+				constructor() {
+					super();
+					this.prop1 = 'default';
+				}
+			}
+
+			class ChildStore extends ParentStore {
+				static properties = {
+					prop2: {}
+				};
+
+				constructor() {
+					super();
+					this.prop2 = 'default';
+				}
+			}
+
+			const store = new ChildStore();
+			const storeConsumer = new StoreConsumer(host, store);
+
+			expect(storeConsumer.changedProperties.size).to.equal(2);
+			expect(storeConsumer.changedProperties.has('prop1')).to.be.true;
+			expect(storeConsumer.changedProperties.has('prop2')).to.be.true;
 			expect(storeConsumer.changedProperties.get('prop1')).to.equal(undefined);
 			expect(storeConsumer.changedProperties.get('prop2')).to.equal(undefined);
 		});
