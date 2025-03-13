@@ -7,7 +7,7 @@ export class App extends LitElement {
 		return css`
 			:host {
 				display: grid;
-				grid-template-areas: 'nav main';
+				grid-template-areas: "nav main";
 				grid-template-columns: 200px 1fr;
 			}
 			aside {
