@@ -1,6 +1,6 @@
 import './route-loader.js';
 import { css, html, LitElement } from 'lit';
-import { RouteReactor } from '../index.js';
+import { RouteReactor } from '../../../src/utilities/router/index.js';
 
 export class App extends LitElement {
 	static get styles() {

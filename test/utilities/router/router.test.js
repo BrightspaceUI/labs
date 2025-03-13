@@ -1,7 +1,7 @@
 import './helpers/main-view.js';
 import './helpers/param-query-view.js';
 import { aTimeout, expect, fixture, html, waitUntil } from '@brightspace-ui/testing';
-import { navigate, registerRoutes, RouterTesting } from '../index.js';
+import { navigate, registerRoutes, RouterTesting } from '../../../src/utilities/router/index.js';
 import { loader as load1 } from './helpers/route-loader-1.js';
 import { loader as load2 } from './helpers/route-loader-2.js';
 
