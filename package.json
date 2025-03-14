@@ -44,9 +44,7 @@
     "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js",
     "./utilities/pub-sub.js": "./src/utilities/pub-sub/pub-sub.js",
     "./utilities/reactive-store.js": "./src/utilities/reactive-store/reactive-store.js",
-    "./utilities/lit-router": "./src/utilities/router/index.js",
-    "./utilities/lit-router/router.js": "./src/utilities/router/router.js",
-    "./utilities/lit-router/RouteReactor.js": "./src/utilities/router/RouteReactor.js"
+    "./utilities/lit-router": "./src/utilities/router/index.js"
   },
   "scripts": {
     "langs:sync": "mfv add-missing && mfv remove-extraneous",
