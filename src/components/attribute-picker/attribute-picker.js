@@ -430,6 +430,10 @@ class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
 		if (this._dropdownIndex >= 0) {
 			this.allowFreeform ? this._dropdownIndex = -1 : this._dropdownIndex = 0;
 		}
+
+		this.dispatchEvent(new CustomEvent('d2l-labs-attribute-picker-text-changed', {
+			detail: { text: this._text },
+		}));
 	}
 
 	_onListItemMouseMove(e) {
