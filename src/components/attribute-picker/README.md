@@ -29,3 +29,5 @@ The `d2l-labs-attribute-picker` component is an autocompleting dropdown to choos
   - `attributeList`: an array of the selected attributes, in the order they were selected.
 - `d2l-labs-attribute-picker-limit-reached`: dispatched when a user attempts to add attributes once the limit is hit. Event `detail` includes:
   - `limit`: the limit that was hit
+- `d2l-labs-attribute-picker-text-changed`: dispatched when text is entered into the text input. Event `detail` include:
+  - `text`: the current value of the text input
