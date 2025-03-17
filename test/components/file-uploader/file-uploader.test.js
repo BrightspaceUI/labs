@@ -1,7 +1,6 @@
-import '../d2l-file-uploader.js';
+import '../../../src/components/file-uploader/file-uploader.js';
 import { expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
-import fr from '../lang/fr.js';
-import sinon from 'sinon';
+import fr from '../../../src/lang/fr.js';
 
 describe('d2l-file-uploader', () => {
 
@@ -112,7 +111,7 @@ describe('d2l-file-uploader', () => {
 		});
 
 		it('should have language of "fr"', () => {
-			expect(elem.localize('file_upload_text')).to.equal(fr.file_upload_text);
+			expect(elem.localize('components:fileUploader:file_upload_text')).to.equal(fr.file_upload_text);
 		});
 
 	});
@@ -258,26 +257,26 @@ describe('d2l-file-uploader', () => {
 			it('should remove items from item list on drag-end (DataTransferItemList)', () => {
 
 				const items = [{}, {}];
-				items.remove = function() {};
-				const removeSpy = sinon.spy(items, 'remove');
+				const calledParams = {};
+				items.remove = i => calledParams[i] = true;
 
 				const event = new CustomEvent('dragend');
 				event.dataTransfer = { items: items };
 				document.dispatchEvent(event);
 
-				expect(removeSpy.calledWith(0)).to.be.true;
-				expect(removeSpy.calledWith(1)).to.be.true;
+				expect(0 in calledParams).to.be.true;
+				expect(1 in calledParams).to.be.true;
 
 			});
 
 			it('should remove items from file list on drag-end (DataTransfer)', () => {
 
 				const event = new CustomEvent('dragend');
-				event.dataTransfer = { clearData: function() {} };
-				const removeSpy = sinon.spy(event.dataTransfer, 'clearData');
+				let called = false;
+				event.dataTransfer = { clearData: () => called = true };
 				document.dispatchEvent(event);
 
-				expect(removeSpy.calledOnce).to.be.true;
+				expect(called).to.be.true;
 
 			});
 

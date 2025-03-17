@@ -12,6 +12,7 @@
     "./components/card-overlay.js": "./src/components/card-overlay/card-overlay.js",
     "./components/community-button.js": "./src/components/community/community-button.js",
     "./components/community-link.js": "./src/components/community/community-link.js",
+    "./components/file-uploader.js": "./src/components/file-uploader/file-uploader.js",
     "./components/community-url-factory.js": "./src/components/community/community-url-factory.js",
     "./components/navigation/navigation-band.js": "./src/components/navigation/navigation-band.js",
     "./components/navigation/navigation-button-icon.js": "./src/components/navigation/navigation-button-icon.js",

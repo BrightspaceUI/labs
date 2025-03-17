@@ -3,9 +3,9 @@ import '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { css, html, LitElement } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { FocusMixin } from '@brightspace-ui/core/mixins/focus/focus-mixin.js';
-import { LocalizeMixin } from './localize-behavior.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 
-class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
+class FileUploader extends FocusMixin(LocalizeLabsElement(LitElement)) {
 	static get properties() {
 		return {
 			/**
@@ -59,8 +59,8 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 			}
 
 			:host([_file-drag-over]) .d2l-file-uploader-drop-zone {
-				border-color: var(--d2l-color-celestine);
 				background-color: var(--d2l-color-celestine-plus-2);
+				border-color: var(--d2l-color-celestine);
 			}
 
 			.d2l-file-uploader-icon {
@@ -100,23 +100,23 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 			}
 
 			.d2l-file-uploader-feedback {
-				-webkit-animation-name: feedbackIn;
-				animation-name: feedbackIn;
 				-webkit-animation-duration: 0.7s;
 				animation-duration: 0.7s;
+				-webkit-animation-name: feedbackIn;
+				animation-name: feedbackIn;
 				border: 1px solid var(--d2l-color-mica);
-				border-left-width: 0.5rem;
 				border-left-color: var(--d2l-file-uploader-feedback-color);
+				border-left-width: 0.5rem;
 				border-radius: 0.3rem;
 				display: none;
 				margin-bottom: 1.5rem;
 				padding: 0.7rem 1rem 0.7rem;
 			}
 			:host(:dir(rtl)) > .d2l-file-uploader-feedback {
-				border-left-width: 1px;
 				border-left-color: var(--d2l-color-mica);
-				border-right-width: 0.5rem;
+				border-left-width: 1px;
 				border-right-color: var(--d2l-file-uploader-feedback-color);
+				border-right-width: 0.5rem;
 			}
 			:host([feedback]) > .d2l-file-uploader-feedback {
 				display: block;
@@ -155,9 +155,9 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 
 				.d2l-file-uploader-browse-label {
 					background-color: var(--d2l-color-celestine);
-					border-style: none;
-					border-radius: 0.3rem;
 					border-color: var(--d2l-color-celestine-minus-1);
+					border-radius: 0.3rem;
+					border-style: none;
 					color: #ffffff;
 					display: inline-block;
 					font-size: 0.7rem;
@@ -222,13 +222,13 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 					<path fill="#565a5c" d="M78 36.14a17.52 17.52 0 0 1-17.5 17.5c-.17 0-1.33 0-1.5-.02l-12.51.02a1.333 1.333 0 0 1-.49-.09 1.494 1.494 0 0 1 0-2.82 1.386 1.386 0 0 1 .5-.09h14a14.5 14.5 0 0 0 1.58-28.92c-.52-.05-1.05-.08-1.58-.08h-.35a1.49 1.49 0 0 1-1-.4 2.258 2.258 0 0 1-.542-1.075c-.138-.462-.306-.916-.478-1.365a20.484 20.484 0 0 0-38.26 0q-.21.54-.39 1.08a3.353 3.353 0 0 1-.53 1.26 1.542 1.542 0 0 1-1.12.5h-.33c-.53 0-1.06.03-1.58.08a14.5 14.5 0 0 0 1.58 28.92h13.99a1.5 1.5 0 0 1 .01 3s-13.5 0-13.5-.02a4.176 4.176 0 0 1-.5.02 17.5 17.5 0 0 1-.77-34.98 23.49 23.49 0 0 1 44.54 0A17.52 17.52 0 0 1 78 36.14z"></path>
 				</svg>
 				<div>
-					<span>${this.localize('file_upload_text')}&nbsp;</span>
+					<span>${this.localize('components:fileUploader:file_upload_text')}&nbsp;</span>
 					<span class="d2l-file-uploader-input-container">
 						<d2l-offscreen id="d2l-file-uploader-offscreen">${this.label}</d2l-offscreen>
 						<label class="${classMap(labelClasses)}">
 							<input class="d2l-file-uploader-input d2l-focusable" type="file" aria-describedby="d2l-file-uploader-offscreen" ?multiple=${this.multiple} @change=${this._fileSelectHandler} @focus=${this.__onInputFocus} @blur=${this.__onInputBlur}>
-							<span class="d2l-file-uploader-browse">${this.localize('browse')}</span>
-							<span class="d2l-file-uploader-browse-files">${this.localize('browse_files')}</span>
+							<span class="d2l-file-uploader-browse">${this.localize('components:fileUploader:browse')}</span>
+							<span class="d2l-file-uploader-browse-files">${this.localize('components:fileUploader:browse_files')}</span>
 						</label>
 					</span>
 				</div>
@@ -281,7 +281,7 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 		const dataTransfer = event.dataTransfer;
 		if (dataTransfer.items) {
 			if (!this.multiple && dataTransfer.items.length > 1) {
-				this.feedback = this.localize('choose_one_file_to_upload');
+				this.feedback = this.localize('components:fileUploader:choose_one_file_to_upload');
 				this.feedbackType = 'warning';
 				return;
 			}
@@ -297,7 +297,7 @@ class FileUploader extends FocusMixin(LocalizeMixin(LitElement)) {
 			}
 		} else {
 			if (!this.multiple && dataTransfer.files.length > 1) {
-				this.feedback = this.localize('choose_one_file_to_upload');
+				this.feedback = this.localize('components:fileUploader:choose_one_file_to_upload');
 				this.feedbackType = 'warning';
 				return;
 			}
