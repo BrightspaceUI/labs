@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../d2l-file-uploader.js';
+		</script>
+	</head>
+	<body unresolved>
+		<d2l-demo-page page-title="d2l-file-uploader">
+
+			<h2>Single-File Uploader</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-file-uploader></d2l-labs-file-uploader>
+			</d2l-demo-snippet>
+
+			<h2>Multiple-File Uploader</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-file-uploader multiple=""></d2l-labs-file-uploader>
+			</d2l-demo-snippet>
+
+			<h2>Feedback</h2>
+			<d2l-demo-snippet>
+				<d2l-labs-file-uploader feedback="Something might be wrong."></d2l-labs-file-uploader>
+			</d2l-demo-snippet>
+			<d2l-demo-snippet>
+				<d2l-labs-file-uploader feedback="A terrible error has occurred." feedback-type="error"></d2l-labs-file-uploader>
+			</d2l-demo-snippet>
+
+		</d2l-demo-page>
+	</body>
+</html>
