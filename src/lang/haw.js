@@ -17,10 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Kaomi, kaomi i hope, a i ʻole ke kī holoi e wehe i ka mea {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Ua hāʻule ka pahu pahu", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Hoʻonui ʻia ka pahu pahu", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:fileUploader:file_upload_text": "Drag and drop or",
-	"components:fileUploader:browse": "browse",
-	"components:fileUploader:browse_files": "Browse Files",
-	"components:fileUploader:choose_one_file_to_upload": "Choose one file to upload",
+	"components:fileUploader:file_upload_text": "Kauo a hāʻule a i ʻole",
+	"components:fileUploader:browse": "mākaʻikaʻi",
+	"components:fileUploader:browse_files": "Huli i nā faila",
+	"components:fileUploader:choose_one_file_to_upload": "E koho i hoʻokahi faila e hoʻouka ai",
 	"components:gradeResult:cannotBeNegative": "(ʻaʻole hiki ke emi ma mua o 0)",
 	"components:gradeResult:clearManualOverride": "Holoi Manual",
 	"components:gradeResult:gradeScoreLabel": "helu helu",
