@@ -145,5 +145,28 @@ describe('attribute-picker', () => {
 			expect(detail.limit).to.equal(5);
 			expect(component.attributeList.length).to.equal(5);
 		});
+
+		it('should fire the d2l-labs-attribute-picker-text-changed event when inputting text into the text input', async() => {
+			const component = await createComponent(attributeList, { limit: 5 });
+
+			const input = component.shadowRoot.querySelector('input');
+
+			await focusElem(input);
+
+			const listener1 = oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
+			await sendKeysElem(input, 'type', 'a');
+			const { detail: detail1 } = await listener1;
+			expect(detail1.text).to.equal('a');
+
+			const listener2 = oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
+			await sendKeysElem(input, 'type', 'b');
+			const { detail: detail2 } = await listener2;
+			expect(detail2.text).to.equal('ab');
+
+			const listener3 = oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
+			await sendKeysElem(input, 'type', 'c');
+			const { detail: detail3 } = await listener3;
+			expect(detail3.text).to.equal('abc');
+		});
 	});
 });
