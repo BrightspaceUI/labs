@@ -435,8 +435,6 @@ class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
 
 		this.dispatchEvent(new CustomEvent('d2l-labs-attribute-picker-text-changed', {
 			detail: { text: this._text },
-			bubbles: true,
-			composed: true,
 		}));
 	}
 
