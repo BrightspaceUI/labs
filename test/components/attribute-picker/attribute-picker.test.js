@@ -151,21 +151,16 @@ describe('attribute-picker', () => {
 
 			const input = component.shadowRoot.querySelector('input');
 
-			await focusElem(input);
-
-			const listener1 = oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
-			await sendKeysElem(input, 'type', 'a');
-			const { detail: detail1 } = await listener1;
+			sendKeysElem(input, 'type', 'a');
+			const { detail: detail1 } = await oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
 			expect(detail1.text).to.equal('a');
 
-			const listener2 = oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
-			await sendKeysElem(input, 'type', 'b');
-			const { detail: detail2 } = await listener2;
+			sendKeysElem(input, 'type', 'b');
+			const { detail: detail2 } = await oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
 			expect(detail2.text).to.equal('ab');
 
-			const listener3 = oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
-			await sendKeysElem(input, 'type', 'c');
-			const { detail: detail3 } = await listener3;
+			sendKeysElem(input, 'type', 'c');
+			const { detail: detail3 } = await oneEvent(component, 'd2l-labs-attribute-picker-text-changed');
 			expect(detail3.text).to.equal('abc');
 		});
 	});
