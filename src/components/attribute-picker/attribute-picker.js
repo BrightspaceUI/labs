@@ -426,8 +426,6 @@ class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
 	}
 
 	_onInputTextChanged(e) {
-		e.stopPropagation();
-
 		this._text = e.target.value;
 		if (this._dropdownIndex >= 0) {
 			this.allowFreeform ? this._dropdownIndex = -1 : this._dropdownIndex = 0;
