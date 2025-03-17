@@ -111,7 +111,7 @@ describe('d2l-file-uploader', () => {
 		});
 
 		it('should have language of "fr"', () => {
-			expect(elem.localize('components:fileUploader:file_upload_text')).to.equal(fr.file_upload_text);
+			expect(elem.localize('components:fileUploader:file_upload_text')).to.equal(fr['components:fileUploader:file_upload_text']);
 		});
 
 	});
