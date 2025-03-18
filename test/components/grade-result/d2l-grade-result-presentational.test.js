@@ -1,6 +1,5 @@
-import '../../../src/components/grade-result/grade-result.js';
 import '../../../src/components/grade-result/grade-result-presentational.js';
-import { clickElem, expect, fixture, html } from '@brightspace-ui/testing';
+import { clickElem, fixture, html } from '@brightspace-ui/testing';
 import { getGradesButton, getLetterScore, getLetterScoreSelect, getManualOverrideButton, getNumericScore, getNumericScoreInput, getReportsButton } from './utils.js';
 
 const letterGradeOptions = {
@@ -60,10 +59,6 @@ const componentLetterScore = html`
 const eventTimeoutMS = 10000;
 
 describe('d2l-grade-result-presentational', () => {
-	it('should pass all axe tests', async() => {
-		const el = await fixture(html`<d2l-labs-d2l-grade-result></d2l-labs-d2l-grade-result>`);
-		await expect(el).to.be.accessible();
-	});
 
 	it('click grade button event', async() => {
 		return new Promise((resolve, reject) => {

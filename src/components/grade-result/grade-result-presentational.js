@@ -1,20 +1,20 @@
-import './d2l-grade-result-icon-button.js';
-import './d2l-grade-result-numeric-score.js';
-import './d2l-grade-result-letter-score.js';
-import './d2l-grade-result-student-grade-preview.js';
+import './grade-result-icon-button.js';
+import './grade-result-numeric-score.js';
+import './grade-result-letter-score.js';
+import './grade-result-student-grade-preview.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { bodySmallStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement, nothing } from 'lit';
 import { GradeType } from '../../controllers/grade-result/Grade.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { Localizer } from './locale.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 const numberConverter = {
 	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
 	toAttribute:  (prop) => { return String(prop); }
 };
 
-export class D2LGradeResultPresentational extends Localizer(LitElement) {
+export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {
 			allowNegativeScore: { type: Boolean },
@@ -62,8 +62,8 @@ export class D2LGradeResultPresentational extends Localizer(LitElement) {
 				margin-bottom: 0.4rem;
 			}
 			.d2l-grade-result-presentational-subtitle {
-				margin-top: -4px;
 				font-weight: bold;
+				margin-top: -4px;
 			}
 		`];
 	}

@@ -2,7 +2,7 @@ import '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { bodyCompactStyles, bodySmallStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement, nothing } from 'lit';
 import { formatNumber } from '@brightspace-ui/intl/lib/number.js';
-import { Localizer } from './locale.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 const previewOptions = {
 	colour: 'colour',
@@ -10,7 +10,7 @@ const previewOptions = {
 	symbol: 'symbol'
 };
 
-export class D2LGradeResultStudentGradePreview extends Localizer(LitElement) {
+export class D2LGradeResultStudentGradePreview extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {
@@ -47,7 +47,7 @@ export class D2LGradeResultStudentGradePreview extends Localizer(LitElement) {
 			.d2l-grade-result-student-grade-preview-colour {
 				border-radius: 6px;
 				height: 0.9rem;
-			 	width: 0.9rem;
+				width: 0.9rem;
 			}
 			.d2l-label-text {
 				line-height: 1.6rem;

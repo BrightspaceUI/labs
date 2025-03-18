@@ -1,9 +1,9 @@
 import { css, html, LitElement } from 'lit';
 import { bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { Localizer } from './locale.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 
-export class D2LGradeResultLetterScore extends Localizer(LitElement) {
+export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {

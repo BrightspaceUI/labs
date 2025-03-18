@@ -2,7 +2,7 @@ import '@brightspace-ui/core/components/inputs/input-number.js';
 import '@brightspace-ui/core/components/offscreen/offscreen.js';
 import { bodyCompactStyles, bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement, nothing } from 'lit';
-import { Localizer } from './locale.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 const numberConverter = {
 	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
@@ -14,7 +14,7 @@ const MIN_WIDTH = 5.5;
 const MIN_NEGATIVE_GRADE = -9999999999;
 const MIN_POSITIVE_GRADE = 0;
 
-export class D2LGradeResultNumericScore extends Localizer(LitElement) {
+export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {
 			label: { type: String },
@@ -30,14 +30,14 @@ export class D2LGradeResultNumericScore extends Localizer(LitElement) {
 	static get styles() {
 		return [bodyCompactStyles, bodyStandardStyles, css`
 			.d2l-grade-result-numeric-score-container {
+				align-items: center;
 				display: flex;
 				flex-direction: row;
-				align-items: center;
 			}
 			.d2l-grade-result-numeric-score-score-read-only {
-				max-width: 5.25rem;
 				height: calc(2rem + 2px);
 				line-height: calc(2rem + 2px);
+				max-width: 5.25rem;
 			}
 			.d2l-grade-result-numeric-score-hint {
 				margin: 0 0.3rem;
