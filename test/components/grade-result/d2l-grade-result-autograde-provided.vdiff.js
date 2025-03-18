@@ -1,6 +1,6 @@
 import '../../../src/components/grade-result/grade-result-presentational.js';
 import { fixture, html } from '@brightspace-ui/testing';
-import { testDiff } from './utils.js';
+import { testDiff } from './vdiff-utils.js';
 
 describe('autograde provided visual diff tests', () => {
 
