@@ -1,5 +1,5 @@
-import '../../../src/components/grade-result/d2l-grade-result.js';
-import '../../../src/components/grade-result/d2l-grade-result-presentational.js';
+import '../../../src/components/grade-result/grade-result.js';
+import '../../../src/components/grade-result/grade-result-presentational.js';
 import { clickElem, expect, fixture, html } from '@brightspace-ui/testing';
 import { getGradesButton, getLetterScore, getLetterScoreSelect, getManualOverrideButton, getNumericScore, getNumericScoreInput, getReportsButton } from './utils.js';
 

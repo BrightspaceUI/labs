@@ -1,5 +1,5 @@
-import '../../src/components/d2l-grade-result-student-grade-preview.js';
-import '../../src/components/d2l-grade-result-presentational.js';
+import '../../../src/components/grade-result/grade-result-student-grade-preview.js';
+import '../../../src/components/grade-result/grade-result-presentational.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 describe('student-grade-preview', () => {

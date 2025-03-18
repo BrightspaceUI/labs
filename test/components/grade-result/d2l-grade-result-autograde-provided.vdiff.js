@@ -1,5 +1,5 @@
-import '../../d2l-grade-result.js';
-import '../../src/components/d2l-grade-result-presentational.js';
+import '../../../src/components/grade-result/grade-result.js';
+import '../../../src/components/grade-result/grade-result-presentational.js';
 import { fixture, html } from '@brightspace-ui/testing';
 import { testDiff } from './utils.js';
 
