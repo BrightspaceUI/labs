@@ -70,7 +70,7 @@ export class D2LGradeResultStudentGradePreview extends LocalizeLabsElement(LitEl
 		if (!this.hideLabel) {
 			label = html`
 				<label class="d2l-label-text d2l-skeletize" for="d2l-grade-result-student-grade-preview">
-					${this.localize('studentGradePreviewLabel')}
+					${this.localize('components:gradeResult:studentGradePreviewLabel')}
 				</label>
 			`;
 		}
@@ -80,7 +80,7 @@ export class D2LGradeResultStudentGradePreview extends LocalizeLabsElement(LitEl
 			return html`
 				${label}
 				<div class="d2l-body-small d2l-grade-result-student-grade-preview-container" id="d2l-grade-result-student-grade-preview">
-					${this.localize('studentGradePreviewNotShown')}
+					${this.localize('components:gradeResult:studentGradePreviewNotShown')}
 				</div>
 			`;
 		}
@@ -114,7 +114,7 @@ export class D2LGradeResultStudentGradePreview extends LocalizeLabsElement(LitEl
 		const score = this._shouldDisplay(previewOptions.score)
 			? `${this.studentGradePreview?.score && typeof this.studentGradePreview?.score === 'number' ? formatNumber(this.studentGradePreview?.score) : ''} / ${this.outOf && typeof this.outOf === 'number' ? formatNumber(this.outOf) : 0}`
 			: '';
-		const accessibleScore = this._shouldDisplay(previewOptions.score) ? this.localize('numeratorOutOfDenominator', { numerator: this.studentGradePreview?.score, denominator: this.outOf }) : '';
+		const accessibleScore = this._shouldDisplay(previewOptions.score) ? this.localize('components:gradeResult:numeratorOutOfDenominator', { numerator: this.studentGradePreview?.score, denominator: this.outOf }) : '';
 
 		const symbol = this._shouldDisplay(previewOptions.symbol) ? this.studentGradePreview?.symbol : '';
 

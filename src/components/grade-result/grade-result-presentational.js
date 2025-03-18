@@ -170,7 +170,7 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 			return nothing;
 		}
 
-		const text = this.customManualOverrideClearText ? this.customManualOverrideClearText : this.localize('clearManualOverride');
+		const text = this.customManualOverrideClearText ? this.customManualOverrideClearText : this.localize('components:gradeResult:clearManualOverride');
 
 		return html`
 			<d2l-button-subtle

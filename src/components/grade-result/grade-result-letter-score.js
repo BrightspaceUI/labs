@@ -41,7 +41,7 @@ export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 				<div class="d2l-grade-result-letter-score-container">
 					<select
 						id="d2l-grade"
-						aria-label=${this.label ? this.label : this.localize('gradeScoreLabel')}
+						aria-label=${this.label ? this.label : this.localize('components:gradeResult:gradeScoreLabel')}
 						class="d2l-input-select d2l-grade-result-letter-score-select"
 						@change=${this._onOptionSelected}
 						.value=${this.selectedOption}>

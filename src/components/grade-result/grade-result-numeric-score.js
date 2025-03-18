@@ -60,7 +60,7 @@ export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) 
 							<d2l-input-number
 								?required=${this.required}
 								id="d2l-grade"
-								label=${this.label ? this.label : this.localize('gradeScoreLabel')}
+								label=${this.label ? this.label : this.localize('components:gradeResult:gradeScoreLabel')}
 								label-hidden
 								value="${this.scoreNumerator}"
 								input-width="${dynamicWidth > MIN_WIDTH ? dynamicWidth : MIN_WIDTH}rem"
@@ -68,7 +68,7 @@ export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) 
 								max="9999999999"
 								max-fraction-digits="2"
 								unit="/ ${this.scoreDenominator}"
-								unit-label=${this.localize('outOfDenominator', { denominator: this.scoreDenominator })}
+								unit-label=${this.localize('components:gradeResult:outOfDenominator', { denominator: this.scoreDenominator })}
 								value-align="end"
 								@change=${this._onGradeChange}
 							></d2l-input-number>
@@ -81,11 +81,11 @@ export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) 
 						id="d2l-grade">
 						${roundedNumerator} / ${this.scoreDenominator}
 					</div>
-					<d2l-offscreen>${this.localize('numeratorOutOfDenominator', { numerator: roundedNumerator, denominator: this.scoreDenominator })}</d2l-offscreen>
+					<d2l-offscreen>${this.localize('components:gradeResult:numeratorOutOfDenominator', { numerator: roundedNumerator, denominator: this.scoreDenominator })}</d2l-offscreen>
 				`}
 				${this.showFlooredScoreWarning ? html`
 					<div class="d2l-grade-result-numeric-score-hint d2l-body-compact">
-						${this.localize('cannotBeNegative')}
+						${this.localize('components:gradeResult:cannotBeNegative')}
 					</div>
 				` : nothing}
 			</div>
