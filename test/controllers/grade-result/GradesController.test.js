@@ -1,7 +1,7 @@
 import 'd2l-polymer-siren-behaviors/store/entity-store.js';
-import { GradesController, GradesControllerErrors } from '../src/controller/GradesController.js';
+import { GradesController, GradesControllerErrors } from '../../../src/controllers/grade-result/GradesController.js';
 import { assert } from '@brightspace-ui/testing';
-import { Grade } from '../src/controller/Grade.js';
+import { Grade } from '../../../src/controllers/grade-result/Grade.js';
 import sinon from 'sinon';
 
 describe('GradesController', () => {

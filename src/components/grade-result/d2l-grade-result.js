@@ -1,7 +1,7 @@
 import './d2l-grade-result-presentational.js';
-import { Grade, GradeType } from '../controller/Grade.js';
+import { Grade, GradeType } from '../../controllers/grade-result/Grade.js';
 import { html, LitElement } from 'lit';
-import { GradesController } from '../controller/GradesController.js';
+import { GradesController } from '../../controllers/grade-result/GradesController.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { Localizer } from './locale.js';
 
