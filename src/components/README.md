@@ -1,22 +1,6 @@
 # @d2l/labs-grade-result
 
-> Note: this is a ["labs" component](https://daylight.d2l.dev/developing/getting-started/component-tiers/). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
->
-> - [ ] [Design organization buy-in](https://daylight.d2l.dev/developing/creating-component/before-building/#working-with-design)
-> - [ ] [Architectural sign-off](https://daylight.d2l.dev/developing/creating-component/before-building/#web-component-architecture)
-> - [x] [Continuous integration](https://daylight.d2l.dev/developing/testing/tools/#continuous-integration)
-> - [x] [Cross-browser testing](https://daylight.d2l.dev/developing/testing/cross-browser/)
-> - [x] [Unit tests](https://daylight.d2l.dev/developing/testing/tools/) (if applicable)
-> - [x] [Accessibility tests](https://daylight.d2l.dev/developing/testing/accessibility/)
-> - [x] [Visual diff tests](https://daylight.d2l.dev/developing/testing/visual-difference/)
-> - [x] Localization with Serge (if applicable)
-> - [x] Demo page
-> - [x] README documentation
-
 A web component used for rendering grades in Brightspace
-
-![demo screenshot of numeric grade](./docs/numeric-grade.png)
-![demo screenshot of letter grade](./docs/letter-grade.png)
 
 ## Properties
 
@@ -90,13 +74,6 @@ If you are only interested in rendering the presentational layer of the componen
 | `@d2l-grade-result-letter-score-selected`       | This event is fired on the change of the grade for a `gradeType="LetterGrade"` grade. |
 | `@d2l-grade-result-manual-override-clear-click` | This event is fired when the manual override clear is clicked. |
 
-## Installation
-
-To install from NPM:
-
-```shell
-npm install @d2l/labs-grade-result
-```
 
 ## Usage
 
@@ -106,71 +83,3 @@ npm install @d2l/labs-grade-result
 </script>
 <d2l-labs-d2l-grade-result href="href" token="token" disableAutoSave _hideTitle>My element</d2l-labs-d2l-grade-result>
 ```
-
-## Developing, Testing and Contributing
-
-After cloning the repo, run `npm install` to install dependencies.
-
-### Linting
-
-```shell
-# eslint and lit-analyzer
-npm run lint
-
-# eslint only
-npm run lint:eslint
-```
-
-### Testing
-
-```shell
-# lint & run headless unit tests
-npm test
-
-# unit tests only
-npm run test:headless
-
-# debug or run a subset of local unit tests
-npm run test:headless:watch
-```
-
-### Visual Diff Testing
-
-This repo uses the [@brightspace-ui/testing utility](https://github.com/BrightspaceUI/testing/) to compare current snapshots against a set of golden snapshots.
-
-The golden snapshots in source control must be updated by the [vdiff GitHub Action](https://github.com/BrightspaceUI/actions/tree/main/vdiff). If a pull request results in visual differences, a draft pull request with the new goldens will automatically be opened against its branch.
-
-To run the tests locally you may need to install the `d2l-test-runner` globally:
-
-```shell
-npm install @brightspace-ui/testing  --global
-```
-
-Then run the tests:
-
-```shell
-# update vdiff goldens
-npm run vdiff:goldens
-# run vdiff tests
-npm run vdiff
-# view report
-npm run vdiff:report
-```
-
-Local test results are stored in the git-ignored `/.vdiff` directory at the root of the repository
-CI goldens are stored in a directory within the test location `./golden`
-```
-
-### Running the demos
-
-To start a [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) that hosts the demo page and tests:
-
-```shell
-npm start
-```
-
-### Versioning and Releasing
-
-This repo is configured to use `semantic-release`. Commits prefixed with `fix:` and `feat:` will trigger patch and minor releases when merged to `main`.
-
-To learn how to create major releases and release from maintenance branches, refer to the [semantic-release GitHub Action](https://github.com/BrightspaceUI/actions/tree/main/semantic-release) documentation.
