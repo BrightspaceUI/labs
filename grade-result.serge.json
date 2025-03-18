@@ -1,9 +1,0 @@
-{
-    "name": "gradeResult",
-    "parser_plugin": {
-      "plugin": "parse_js"
-    },
-    "source_dir": "lang",
-    "source_match": "en\\.js$",
-    "output_file_path": "lang/%LANG%.js"
-}
