@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '@brightspace-ui/core/components/typography/styles.js';
+			import '@brightspace-ui/core/components/typography/typography.js';
+			import '../d2l-grade-result.js';
+			import '../src/components/d2l-grade-result-presentational.js';
+			import '../src/components/d2l-grade-result-student-grade-preview.js';
+			import { html, LitElement } from 'lit';
+
+			// SET THE HREF AND TOKEN HERE.
+			const href = 'href';
+			const token = 'token';
+
+			export class ComponentDemo extends LitElement {
+				static get properties() {
+					return {
+						disableAutoSave: { type: Boolean }
+					};
+				}
+
+				constructor() {
+					super();
+					this.disableAutoSave = false;
+				}
+
+				render() {
+					// eslint-disable-next-line no-console
+					console.table([
+						['href', href],
+						['token', token]
+					]);
+					return html`
+						<d2l-labs-d2l-grade-result
+							href=${href}
+							token=${token}
+							?disableAutoSave=${this.disableAutoSave}
+							@d2l-grade-result-initialized-success=${this.onInitializedSuccess}
+							@d2l-grade-result-initialized-error=${this.onInitializedError}
+							@d2l-grade-result-grade-updated-success=${this.onGradeUpdatedSuccess}
+							@d2l-grade-result-grade-updated-error=${this.onGradeUpdatedError}
+							@d2l-grade-result-grade-saved-success=${this.onGradeSavedSuccess}
+							@d2l-grade-result-grade-saved-error=${this.onGradeSavedError}
+						></d2l-labs-d2l-grade-result>
+					`;
+				}
+
+				onGradeSavedError(e) {
+					// eslint-disable-next-line no-console
+					console.log('grade saved error', e);
+				}
+
+				onGradeSavedSuccess(e) {
+					// eslint-disable-next-line no-console
+					console.log('grade saved success', e);
+				}
+
+				onGradeUpdatedError(e) {
+					// eslint-disable-next-line no-console
+					console.log('grade updated error', e);
+				}
+
+				onGradeUpdatedSuccess(e) {
+					// eslint-disable-next-line no-console
+					console.log('grade updated success', e);
+				}
+
+				onInitializedError(e) {
+					// eslint-disable-next-line no-console
+					console.log('initialized error', e);
+				}
+
+				onInitializedSuccess(e) {
+					// eslint-disable-next-line no-console
+					console.log('initialized success', e);
+				}
+
+			}
+
+			customElements.define('component-demo', ComponentDemo);
+
+		</script>
+		<title>d2l-grade-result</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<style>
+			.section {
+				padding: 1rem;
+				margin: 1rem;
+				background-color: #dee7ed;
+				border-radius: 25px;
+			}
+		</style>
+	</head>
+
+	<body class="d2l-typography">
+		<d2l-demo-page page-title="d2l-grade-result">
+
+			<div class="section">
+				<h2>Top level web component</h2>
+
+				<p>Auto saving</p>
+				<d2l-demo-snippet>
+					<component-demo></component-demo>
+				</d2l-demo-snippet>
+
+				<p>Manual Saving</p>
+
+				<d2l-demo-snippet>
+					<component-demo id="manual-save" disableAutoSave></component-demo><br/>
+					<script>
+						// eslint-disable-next-line no-unused-vars
+						async function saveGradeManually() {
+							const demo = document.querySelector('#manual-save').shadowRoot.querySelector('d2l-labs-d2l-grade-result');
+							await demo.saveGrade();
+							document.querySelector('#save-results').innerHTML += `<p>Saved at ${new Date().toTimeString()}</p>`;
+						}
+					</script>
+					<button onclick="saveGradeManually()">Save Grade Manually</button>
+					<div id="save-results"></div>
+				</d2l-demo-snippet>
+			</div>
+
+			<!-- Write permissions enabled -->
+
+			<div class="section">
+				<h2>Write Permissions Enabled</h2>
+
+				<h6>number grade, no icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						labelHeadingLevel="3"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						display-student-grade-preview
+						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>number grade with decimal, no icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="1.5555555"
+						scoreDenominator="5"
+						display-student-grade-preview
+						student-grade-preview='{"score":1.56, "symbol":"Bad", "colour":"#FF0000"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>number grade, icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						includeGradeButton
+						includeReportsButton
+						display-student-grade-preview
+						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>number grade, icons, tooltips</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="10"
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Assignment 1 Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+						display-student-grade-preview
+						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>letter grade, no icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selectedLetterGrade="2"
+						scoreDenominator="5"
+						display-student-grade-preview
+						student-grade-preview='{"score":5, "symbol":"B", "colour":"#00FF00"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>letter grade, icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						includeGradeButton
+						includeReportsButton
+						display-student-grade-preview
+						student-grade-preview='{"symbol":"-"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>letter grade, icons, tooltips</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Assignment 1 Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+						display-student-grade-preview
+						student-grade-preview='{"symbol":"- %"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+			</div>
+
+			<!-- Write permissions disabled -->
+
+			<div class="section">
+				<h2>Write Permissions Disabled</h2>
+
+				<h6>number grade, no icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						readOnly
+						display-student-grade-preview
+						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>number grade with decimals, no icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="1.555555"
+						scoreDenominator="20"
+						readOnly
+						display-student-grade-preview
+						student-grade-preview='{"score":1.56, "symbol":"Bad", "colour":"#FF0000"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>number grade, icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						includeGradeButton
+						includeReportsButton
+						readOnly
+						display-student-grade-preview
+						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>number grade, icons, tooltips</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Assignment 1 Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+						readOnly
+						display-student-grade-preview
+						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>letter grade, no icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selectedLetterGrade="2"
+						readOnly
+						display-student-grade-preview
+						student-grade-preview='{"score":5, "symbol":"B", "colour":"#00FF00"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>letter grade, icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selectedLetterGrade="2"
+						includeGradeButton
+						includeReportsButton
+						readOnly
+						display-student-grade-preview
+						student-grade-preview='{"symbol":"-"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>letter grade, icons, tooltips</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selectedLetterGrade="2"
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Assignment 1 Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+						readOnly
+						display-student-grade-preview
+						student-grade-preview='{"symbol":"- %"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+			</div>
+
+			<!-- Autograde provided -->
+
+			<div class="section">
+				<h2>Autograde Provided with Write Permissions</h2>
+
+				<h6>number grade, no icons, clear manual override option</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						isGradeAutoCompleted
+						isManualOverrideActive
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>number grade, icons, clear manual override option</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						isGradeAutoCompleted
+						isManualOverrideActive
+						includeGradeButton
+						includeReportsButton
+						display-student-grade-preview
+						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>number grade, icons, tooltips, clear manual override option</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						isGradeAutoCompleted
+						isManualOverrideActive
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Assignment 1 Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+						display-student-grade-preview
+						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+
+				<h6>letter grade, no icons, clear manual override option</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selectedLetterGrade="2"
+						isGradeAutoCompleted
+						isManualOverrideActive
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>letter grade, icons, clear manual override option</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selectedLetterGrade="2"
+						isGradeAutoCompleted
+						isManualOverrideActive
+						includeGradeButton
+						includeReportsButton
+						display-student-grade-preview
+						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>letter grade, icons, tooltips, clear manual override option</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="LetterGrade"
+						labelText="Overall Grade"
+						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selectedLetterGrade="2"
+						isGradeAutoCompleted
+						isManualOverrideActive
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Assignment 1 Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+						display-student-grade-preview
+						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+			</div>
+
+			<div class="section">
+
+				<h6>Custom manual override clear text</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="5" scoreDenominator="20" isGradeAutoCompleted isManualOverrideActive customManualOverrideClearText="Substituted Override Clear Text"></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+			</div>
+
+			<div class="section">
+
+				<h6>Show grade calculation method</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Overall Grade"
+						scoreNumerator="5"
+						scoreDenominator="20"
+						readOnly
+						includeGradeButton
+						includeReportsButton
+						subtitleText="Average post score"
+						display-student-grade-preview
+						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'>
+					</d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+			</div>
+
+			<div class="section">
+
+				<h6>Dynamic Width</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="33333333" scoreDenominator="33333333"></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+			</div>
+
+			<div class="section">
+				<h2>Negative Marking</h6>
+
+				<h6>Negative marking enabled (for question scores)</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Score"
+						scoreNumerator="-1"
+						scoreDenominator="3"
+						allowNegativeScore
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Floored negative score hint (for attempt scores)</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Attempt Grade"
+						scoreNumerator="0"
+						scoreDenominator="20"
+						showFlooredScoreWarning
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Floored negative score hint, icons (for attempt scores on quizzes with grade items)</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Attempt Grade"
+						scoreNumerator="0"
+						scoreDenominator="20"
+						showFlooredScoreWarning
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Example Quiz Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+						display-student-grade-preview
+						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Floored negative score hint, read-only</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Attempt Grade"
+						scoreNumerator="0"
+						scoreDenominator="20"
+						showFlooredScoreWarning
+						readOnly
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Floored negative score hint, read-only, icons</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational
+						gradeType="Numeric"
+						labelText="Attempt Grade"
+						scoreNumerator="0"
+						scoreDenominator="20"
+						showFlooredScoreWarning
+						readOnly
+						includeGradeButton
+						includeReportsButton
+						gradeButtonTooltip="Example Quiz Grade Item Attached"
+						reportsButtonTooltip="Class and user statistics"
+						display-student-grade-preview
+						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
+					></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+			</div>
+
+			<div class="section">
+				<h2>validation errors</h2>
+
+				<h6>Required validation error</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational inputLabelText="Overall grade" gradeType="Numeric" labelText="Overall Grade" scoreNumerator="undefined" scoreDenominator="20" required></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+				<h6>Number range validation error</h6>
+				<d2l-demo-snippet>
+					<d2l-labs-d2l-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="-1" scoreDenominator="20"></d2l-labs-d2l-grade-result-presentational>
+				</d2l-demo-snippet>
+
+			</div>
+
+			<div class="section">
+
+				<h2>Student Grade Preview</h2>
+
+				<h6>None</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10"></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>No Display</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Select Box Symbol</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Percentage Symbol</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{"score":9, "symbol":"90 %", "colour":"#AAAAFF"}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Score and Symbol Only</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{"score":2, "symbol":"Bad"}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Score and Colour Only</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{"score":10, "colour":"#11FF11"}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Symbol and Colour Only</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{"symbol":"11 %", "colour":"#666666"}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Score Only</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{"score":7}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Symbol Only</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{"symbol":"A+"}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Colour Only</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview out-of="10" student-grade-preview='{"colour":"#FFAAAA"}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Null Values</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview student-grade-preview='{"score":null, "symbol":"-%", "colour":""}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+				<h6>Hide Label</h6>
+				<d2l-demo-snippet>
+					<d2l-grade-result-student-grade-preview hide-label out-of="10" student-grade-preview='{"score":9, "symbol":"90 %", "colour":"#AAAAFF"}'></d2l-grade-result-student-grade-preview>
+				</d2l-demo-snippet>
+
+			</div>
+
+		</d2l-demo-page>
+	</body>
+</html>
