@@ -1,7 +1,7 @@
 import { aTimeout, expect, fixture, html, oneEvent, runConstructor, sendKeysElem } from '@brightspace-ui/testing';
 import { restore, spy } from 'sinon';
-import { OuFilterDataManager } from '../ou-filter.js';
-import { Tree } from '../tree-filter.js';
+import { OuFilterDataManager } from '../../../src/components/ou-filter/ou-filter.js';
+import { Tree } from '../../../src/components/ou-filter/tree-filter.js';
 
 async function waitForTree(el) {
 	await aTimeout(50);

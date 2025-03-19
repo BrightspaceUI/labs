@@ -7,7 +7,7 @@ import '@brightspace-ui/core/components/inputs/input-search.js';
 
 import { css, html, LitElement, nothing } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { Localizer } from './locales/localizer.js';
+import { Localizer } from '../../lang/localizer.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles';
 
 /**

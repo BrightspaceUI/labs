@@ -1,4 +1,4 @@
-import { Tree } from '../tree-filter.js';
+import { Tree } from '../../../src/components/ou-filter/tree-filter.js';
 
 let idCounter = 1;
 

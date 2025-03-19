@@ -1,8 +1,8 @@
 
 import { action, decorate, observable } from 'mobx';
-import { COURSE_OFFERING, Tree } from '../../tree-filter.js';
+import { COURSE_OFFERING, Tree } from '../../../src/components/ou-filter/tree-filter.js';
 import { expect, fixture, html, oneEvent, sendKeysElem } from '@brightspace-ui/testing';
-import { OuFilterDataManager } from '../../ou-filter.js';
+import { OuFilterDataManager } from '../../../src/components/ou-filter/ou-filter.js';
 
 function fetchCachedChildren() {
 	return new Map();

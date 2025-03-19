@@ -2,7 +2,7 @@ import '@brightspace-ui/core/components/icons/icon.js';
 import '@brightspace-ui/core/components/inputs/input-checkbox';
 
 import { css, html, LitElement, nothing } from 'lit';
-import { Localizer } from './locales/localizer.js';
+import { Localizer } from '../../lang/localizer.js';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
 /**

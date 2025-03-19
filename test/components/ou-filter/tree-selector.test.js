@@ -1,4 +1,4 @@
-import '../tree-selector.js';
+import '../../../src/components/ou-filter/tree-selector.js';
 
 import { aTimeout, expect, fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
 

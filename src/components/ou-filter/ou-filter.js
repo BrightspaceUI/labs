@@ -1,5 +1,5 @@
 import { css, html } from 'lit';
-import { Localizer } from './locales/localizer.js';
+import { Localizer } from '../../lang/localizer.js';
 import { MobxLitElement } from '@adobe/lit-mobx';
 import { Tree } from './tree-filter.js';
 

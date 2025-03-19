@@ -1,6 +1,6 @@
 import { action, decorate, observable } from 'mobx';
-import { COURSE_OFFERING, includesSearch, Tree } from '../tree-filter.js';
-import { OuFilterDataManager } from '../ou-filter.js';
+import { COURSE_OFFERING, includesSearch, Tree } from '../../../src/components/ou-filter/tree-filter.js';
+import { OuFilterDataManager } from '../../../src/components/ou-filter/ou-filter.js';
 
 const orgUnitChildrenCache = new Map();
 function fetchCachedChildren() {

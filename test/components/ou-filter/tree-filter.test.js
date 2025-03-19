@@ -1,5 +1,5 @@
 import { aTimeout, expect, fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
-import { startsWithSearch, Tree } from '../tree-filter.js';
+import { startsWithSearch, Tree } from '../../../src/components/ou-filter/tree-filter.js';
 
 const mockOuTypes = {
 	organization: 0,

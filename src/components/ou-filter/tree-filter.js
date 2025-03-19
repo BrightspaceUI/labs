@@ -4,7 +4,7 @@ import './tree-selector.js';
 
 import { action, computed, decorate, observable } from 'mobx';
 import { css, html, nothing } from 'lit';
-import { Localizer } from './locales/localizer.js';
+import { Localizer } from '../../lang/localizer.js';
 import { MobxLitElement } from '@adobe/lit-mobx';
 
 // node array indices

@@ -3,7 +3,7 @@ import '@brightspace-ui/core/components/inputs/input-search.js';
 import { css, html } from 'lit';
 import { DemoDataManager } from './demoDataManager.js';
 import { MobxLitElement } from '@adobe/lit-mobx';
-import { startsWithSearch } from '../tree-filter.js';
+import { startsWithSearch } from '../../../src/components/ou-filter/tree-filter.js';
 
 function parseHash(hash) {
 	return hash.substring(1).split(';').reduce((acc, curr) => {
