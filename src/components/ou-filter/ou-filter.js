@@ -1,5 +1,5 @@
 import { css, html } from 'lit';
-import { Localizer } from '../../lang/localizer.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { MobxLitElement } from '@adobe/lit-mobx';
 import { Tree } from './tree-filter.js';
 
@@ -52,7 +52,7 @@ export class OuFilterDataManager {
  * @property {Boolean} isSelectAllVisible - shows Select all button if true
  * @fires d2l-labs-ou-filter-change
  */
-class OuFilter extends Localizer(MobxLitElement) {
+class OuFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	static get properties() {
 		return {
@@ -90,8 +90,8 @@ class OuFilter extends Localizer(MobxLitElement) {
 			<d2l-labs-tree-filter
 				class="vdiff-target"
 				.tree="${this.dataManager.orgUnitTree}"
-				opener-text="${this.localize('orgUnitFilter:nameAllSelected')}"
-				opener-text-selected="${this.localize('orgUnitFilter:nameSomeSelected')}"
+				opener-text="${this.localize('components:ouFilter:orgUnitFilter:nameAllSelected')}"
+				opener-text-selected="${this.localize('components:ouFilter:orgUnitFilter:nameSomeSelected')}"
 				?select-all-ui="${this.isSelectAllVisible}"
 				?disabled="${this.disabled}"
 				@d2l-labs-tree-filter-select="${this._onChange}"

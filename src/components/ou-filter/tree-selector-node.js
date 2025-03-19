@@ -2,7 +2,7 @@ import '@brightspace-ui/core/components/icons/icon.js';
 import '@brightspace-ui/core/components/inputs/input-checkbox';
 
 import { css, html, LitElement, nothing } from 'lit';
-import { Localizer } from '../../lang/localizer.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
 /**
@@ -14,7 +14,7 @@ import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
  * @fires d2l-labs-tree-selector-node-open - user has requested that this node be expanded or collapsed
  *
  */
-class TreeSelectorNode extends Localizer(RtlMixin(LitElement)) {
+class TreeSelectorNode extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	static get properties() {
 		return {
 			name: { type: String },
@@ -120,8 +120,8 @@ class TreeSelectorNode extends Localizer(RtlMixin(LitElement)) {
 	get _arrowLabel() {
 		return this.localize(
 			this.isOpen ?
-				'treeSelector:arrowLabel:open' :
-				'treeSelector:arrowLabel:closed',
+				'components:ouFilter:treeSelector:arrowLabel:open' :
+				'components:ouFilter:treeSelector:arrowLabel:closed',
 			{ name: this.name, level: this.indentLevel, parentName: this.parentName }
 		);
 	}
@@ -172,7 +172,7 @@ class TreeSelectorNode extends Localizer(RtlMixin(LitElement)) {
 
 	_renderNode() {
 		const label = this.parentName ?
-			this.localize('treeSelector:node:ariaLabel', { name: this.name, parentName: this.parentName }) :
+			this.localize('components:ouFilter:treeSelector:node:ariaLabel', { name: this.name, parentName: this.parentName }) :
 			this.name;
 
 		return html`

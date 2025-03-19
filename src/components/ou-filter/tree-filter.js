@@ -4,7 +4,7 @@ import './tree-selector.js';
 
 import { action, computed, decorate, observable } from 'mobx';
 import { css, html, nothing } from 'lit';
-import { Localizer } from '../../lang/localizer.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { MobxLitElement } from '@adobe/lit-mobx';
 
 // node array indices
@@ -552,7 +552,7 @@ decorate(Tree, {
  * @fires d2l-labs-tree-filter-search - (dynamic tree only) owner may call this.addSearchResults with nodes and ancestors matching
  * event.detail.searchString and event.detail.bookmark (arbitrary data previously passed to this.addSearchResults)
  */
-class TreeFilter extends Localizer(MobxLitElement) {
+class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	static get properties() {
 		return {
@@ -753,12 +753,12 @@ class TreeFilter extends Localizer(MobxLitElement) {
 	}
 
 	_renderChildren(id, parentName, indentLevel = 0) {
-		parentName = parentName || this.localize('treeFilter:nodeName:root');
+		parentName = parentName || this.localize('components:ouFilter:treeFilter:nodeName:root');
 
 		if (id === undefined || this.tree.getChildIdsForDisplay(id).length === 0) {
 			return html`<d2l-empty-state-simple
 				slot="tree"
-				description="${this.localize('treeSelector:noFiltersAvailable')}"
+				description="${this.localize('components:ouFilter:treeSelector:noFiltersAvailable')}"
 			>
 			</d2l-empty-state-simple>`;
 		}
@@ -783,7 +783,7 @@ class TreeFilter extends Localizer(MobxLitElement) {
 		const orgUnitName = this.tree.getName(id);
 		const state = this.tree.getState(id);
 		return html`<d2l-labs-tree-selector-node slot="tree"
-					name="${this.localize('treeFilter:nodeName', { orgUnitName, id })}"
+					name="${this.localize('components:ouFilter:treeFilter:nodeName', { orgUnitName, id })}"
 					data-id="${id}"
 					?openable="${isOpenable}"
 					?open="${isOpen}"
@@ -807,8 +807,8 @@ class TreeFilter extends Localizer(MobxLitElement) {
 				class="d2l-tree-load-more"
 				@click="${this._onParentLoadMore}"
 				data-id="${id}"
-				description="${this.localize('treeSelector:parentLoadMore:ariaLabel')}"
-			>${this.localize('treeSelector:loadMoreLabel')}</d2l-button>`;
+				description="${this.localize('components:ouFilter:treeSelector:parentLoadMore:ariaLabel')}"
+			>${this.localize('components:ouFilter:treeSelector:loadMoreLabel')}</d2l-button>`;
 		}
 
 		return nothing;
@@ -824,8 +824,8 @@ class TreeFilter extends Localizer(MobxLitElement) {
 		if (this.isLoadMoreSearch) {
 			return html`<d2l-button slot="search-results"
 				@click="${this._onSearchLoadMore}"
-				description="${this.localize('treeSelector:searchLoadMore:ariaLabel')}"
-			>${this.localize('treeSelector:loadMoreLabel')}</d2l-button>`;
+				description="${this.localize('components:ouFilter:treeSelector:searchLoadMore:ariaLabel')}"
+			>${this.localize('components:ouFilter:treeSelector:loadMoreLabel')}</d2l-button>`;
 		}
 	}
 
@@ -840,7 +840,7 @@ class TreeFilter extends Localizer(MobxLitElement) {
 				const orgUnitName = this.tree.getName(id);
 				const state = this.tree.getState(id);
 				return html`<d2l-labs-tree-selector-node slot="search-results"
-					name="${this.localize('treeFilter:nodeName', { orgUnitName, id })}"
+					name="${this.localize('components:ouFilter:treeFilter:nodeName', { orgUnitName, id })}"
 					data-id="${id}"
 					selected-state="${state}"
 					@d2l-labs-tree-selector-node-select="${this._onSelect}"
@@ -851,7 +851,7 @@ class TreeFilter extends Localizer(MobxLitElement) {
 
 		return html`<d2l-empty-state-simple
 			slot="search-results"
-			description="${this.localize('treeSelector:noSearchResults')}"
+			description="${this.localize('components:ouFilter:treeSelector:noSearchResults')}"
 		>
 		</d2l-empty-state-simple>`;
 	}

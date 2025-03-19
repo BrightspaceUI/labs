@@ -7,7 +7,7 @@ import '@brightspace-ui/core/components/inputs/input-search.js';
 
 import { css, html, LitElement, nothing } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { Localizer } from '../../lang/localizer.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles';
 
 /**
@@ -18,7 +18,7 @@ import { selectStyles } from '@brightspace-ui/core/components/inputs/input-selec
  * @fires d2l-labs-tree-selector-clear - user requested that all selections be cleared
  * @fires d2l-labs-tree-selector-select-all - user requested that all nodes be checked
  */
-class TreeSelector extends Localizer(LitElement) {
+class TreeSelector extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {
@@ -107,7 +107,7 @@ class TreeSelector extends Localizer(LitElement) {
 				<d2l-dropdown-button-subtle text="${this.name}" ?disabled=${this.disabled}>
 					<d2l-dropdown-content align="start" no-auto-fit class="vdiff-target">
 						<div class="d2l-labs-filter-dropdown-content-header" slot="header">
-							<span>${this.localize('treeSelector:filterBy')}</span>
+							<span>${this.localize('components:ouFilter:treeSelector:filterBy')}</span>
 
 							${this._clearButton}
 
@@ -115,8 +115,8 @@ class TreeSelector extends Localizer(LitElement) {
 						</div>
 						<div class="d2l-labs-tree-selector-search">
 							<d2l-input-search
-								label="${this.localize('treeSelector:searchLabel')}"
-								placeholder="${this.localize('treeSelector:searchPlaceholder')}"
+								label="${this.localize('components:ouFilter:treeSelector:searchLabel')}"
+								placeholder="${this.localize('components:ouFilter:treeSelector:searchPlaceholder')}"
 								@d2l-input-search-searched="${this._onSearch}"
 							></d2l-input-search>
 						</div>
@@ -169,7 +169,7 @@ class TreeSelector extends Localizer(LitElement) {
 		return html`
 		<d2l-button-subtle
 			class="${classMap(styles)}"
-			text="${this.localize('treeSelector:clearLabel')}"
+			text="${this.localize('components:ouFilter:treeSelector:clearLabel')}"
 			@click="${this._onClear}"
 		></d2l-button-subtle>`;
 	}
@@ -185,7 +185,7 @@ class TreeSelector extends Localizer(LitElement) {
 		return html`
 		<d2l-button-subtle
 			class="${classMap(styles)}"
-			text="${this.localize('treeSelector:selectAllLabel')}"
+			text="${this.localize('components:ouFilter:treeSelector:selectAllLabel')}"
 			@click="${this._onSelectAll}"
 		></d2l-button-subtle>`;
 	}
