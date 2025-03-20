@@ -36,6 +36,10 @@
     "./components/opt-in-flyout.js": "./src/components/opt-in-flyout/opt-in-flyout.js",
     "./components/opt-out-flyout.js": "./src/components/opt-in-flyout/opt-out-flyout.js",
     "./components/opt-out-reason.js": "./src/components/opt-in-flyout/opt-out-reason.js",
+    "./components/ou-filter.js": "./src/components/ou-filter/ou-filter.js",
+    "./components/ou-filter/tree-filter.js": "./src/components/ou-filter/tree-filter.js",
+    "./components/ou-filter/tree-selector-node.js": "./src/components/ou-filter/tree-selector-node.js",
+    "./components/ou-filter/tree-selector.js": "./src/components/ou-filter/tree-selector.js",
     "./components/pager-numeric.js": "./src/components/pagination/pager-numeric.js",
     "./components/view-toggle.js": "./src/components/view-toggle/view-toggle.js",
     "./components/wizard.js": "./src/components/wizard/wizard.js",
@@ -69,6 +73,7 @@
     "eslint": "^9",
     "eslint-config-brightspace": "^2",
     "messageformat-validator": "^2",
+    "sinon": "^19",
     "stylelint": "^16"
   },
   "files": [
@@ -79,9 +84,12 @@
     "access": "public"
   },
   "dependencies": {
+    "@adobe/lit-mobx": "^2",
     "@brightspace-ui/core": "^3",
+    "@brightspace-ui/intl": "^3",
     "@lit/context": "^1.1.3",
-    "lit": "^3"
+    "lit": "^3",
+    "mobx": "^5"
   },
   "version": "2.18.0"
 }
