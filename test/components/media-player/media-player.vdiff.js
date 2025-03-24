@@ -6,7 +6,7 @@ describe('d2l-labs-media-player', () => {
 		const elem = await fixture(
 			html`
 			<d2l-labs-media-player
-				src="./test/videos/1_lego.webm"
+				src="./test/components/media-player/videos/1_lego.webm"
 				media-type="video">
 			</d2l-labs-media-player>`
 		);
@@ -17,7 +17,7 @@ describe('d2l-labs-media-player', () => {
 		const elem = await fixture(
 			html`
 			<d2l-labs-media-player
-				src="./test/videos/1_lego.webm"
+				src="./test/components/media-player/videos/1_lego.webm"
 				poster="./demo/components/media-player/sample-poster.png"
 				media-type="video">
 			</d2l-labs-media-player>`
@@ -29,7 +29,7 @@ describe('d2l-labs-media-player', () => {
 		const elem = await fixture(
 			html`
 			<d2l-labs-media-player
-				src="./test/audio/applause.mp3"
+				src="./test/components/media-player/audio/applause.mp3"
 				media-type="audio">
 			</d2l-labs-media-player>`
 		);
@@ -39,7 +39,7 @@ describe('d2l-labs-media-player', () => {
 	it('video-with-search', async() => {
 		const elem = await fixture(
 			html`
-			<d2l-labs-media-player src="./test/videos/1_lego.webm" media-type="video">
+			<d2l-labs-media-player src="./test/components/media-player/videos/1_lego.webm" media-type="video">
 				<track src="./demo/components/media-player/sample-vtt-en.vtt" kind="captions" srclang="en" label="English" default>
 			</d2l-labs-media-player>`
 		);
@@ -50,7 +50,7 @@ describe('d2l-labs-media-player', () => {
 	it('audio-with-search', async() => {
 		const elem = await fixture(
 			html`
-			<d2l-labs-media-player src="./test/audio/applause.mp3" media-type="audio">
+			<d2l-labs-media-player src="./test/components/media-player/audio/applause.mp3" media-type="audio">
 				<track src="./demo/components/media-player/sample-vtt-en.vtt" kind="captions" srclang="en" label="English" default>
 			</d2l-labs-media-player>`
 		);
