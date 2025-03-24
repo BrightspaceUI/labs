@@ -20,8 +20,8 @@ import fullscreenApi from './fullscreen-api.js';
 import Fuse from 'fuse.js';
 import { getFocusPseudoClass } from '@brightspace-ui/core/helpers/focus.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { InternalDynamicLocalizeMixin } from './mixins/internal-dynamic-localize-mixin.js';
 import { labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import parseSRT from 'parse-srt/src/parse-srt.js';
 import ResizeObserver from 'resize-observer-polyfill';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
@@ -71,12 +71,12 @@ const tryParseUrlExpiry = url => {
 	try {
 		const urlObj = new URL(url);
 		return urlObj.searchParams ? urlObj.searchParams.get('Expires') : null;
-	} catch (error) {
+	} catch {
 		return null;
 	}
 };
 
-class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
+class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	static get properties() {
 		return {
@@ -627,10 +627,8 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 			#audio-close-transcript-icon {
 				color: black;
 			}
-` ];
+	` ];
 	}
-
-	#searchTimeout = null;
 
 	constructor() {
 		super();
@@ -796,9 +794,9 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 		const playIcon = this._playing ? 'tier1:pause' : 'tier1:play';
 		const volumeIcon = this._muted ? 'tier1:volume-muted' : 'tier1:volume';
 
-		const fullscreenTooltip = `${fullscreenApi.isFullscreen ? this.localize('exitFullscreen') : this.localize('fullscreen')} (${KEY_BINDINGS.fullscreen})`;
-		const playTooltip = `${this._playing ? this.localize('pause') : this.localize('play')} (${KEY_BINDINGS.play})`;
-		const volumeTooltip = `${this._muted ? this.localize('unmute') : this.localize('mute')} (${KEY_BINDINGS.mute})`;
+		const fullscreenTooltip = `${fullscreenApi.isFullscreen ? this.localize('components:mediaPlayer:exitFullscreen') : this.localize('components:mediaPlayer:fullscreen')} (${KEY_BINDINGS.fullscreen})`;
+		const playTooltip = `${this._playing ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
+		const volumeTooltip = `${this._muted ? this.localize('components:mediaPlayer:unmute') : this.localize('components:mediaPlayer:mute')} (${KEY_BINDINGS.mute})`;
 
 		const height = this._maintainHeight ? `${this._maintainHeight}px` : (this._heightPixels ? `${this._heightPixels}px` : '100%');
 		const mediaContainerStyle = {
@@ -822,7 +820,7 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 		const theme = this.mediaType === SOURCE_TYPES.video ? 'dark' : undefined;
 		const volumeLevelContainerClass = { 'd2l-labs-media-player-hidden': !this._usingVolumeContainer || this._hidingCustomControls() };
 		const searchContainerClass = { 'd2l-labs-media-player-search-container-hidden' : !this._searchInstances[this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier)] };
-		this._captionsMenuReturnItem?.setAttribute('text', (this.transcriptViewerOn ? this.localize('language') : this.localize('captions')));
+		this._captionsMenuReturnItem?.setAttribute('text', (this.transcriptViewerOn ? this.localize('components:mediaPlayer:language') : this.localize('components:mediaPlayer:captions')));
 
 		const fullscreenButton = this.mediaType === SOURCE_TYPES.video ? html`<d2l-button-icon
 			class="d2l-dropdown-opener"
@@ -863,12 +861,12 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 						min="0"
 						max="${Math.floor(this._getSeekbarValue(this.duration))}"
 						value="${this._getSeekbarValue(this._currentTime)}"
-						aria-label="${this.localize('seekSlider')}"
+						aria-label="${this.localize('components:mediaPlayer:seekSlider')}"
 						aria-orientation="horizontal"
 						aria-valuemin="0"
 						aria-valuemax="${Math.floor(this._getSeekbarValue(this.duration))}"
 						aria-valuenow="${this._getSeekbarValue(this._currentTime)}"
-						title="${this.localize('seekSlider')}"
+						title="${this.localize('components:mediaPlayer:seekSlider')}"
 						@drag-start=${this._onDragStartSeek}
 						@drag-end=${this._onDragEndSeek}
 						@position-change=${this._onPositionChangeSeek}
@@ -897,11 +895,11 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 										id="d2l-labs-media-player-volume-slider"
 										vertical
 										value="${Math.round(this._volume * 100)}"
-										aria-label="${this.localize('volumeSlider')}"
+										aria-label="${this.localize('components:mediaPlayer:volumeSlider')}"
 										aria-orientation="vertical" aria-valuemin="0"
 										aria-valuemax="100"
 										aria-valuenow="${Math.floor(this._volume * 100)}"
-										title="${this.localize('volumeSlider')}"
+										title="${this.localize('components:mediaPlayer:volumeSlider')}"
 										@drag-start=${this._onDragStartVolume}
 										@focus=${this._startUsingVolumeContainer}
 										@focusout=${this._stopUsingVolumeContainer}
@@ -932,7 +930,7 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 					><d2l-button-icon
 							icon="tier1:search"
 							id="d2l-labs-media-player-search-button"
-							text=${this.localize('showSearchInput')}
+							text=${this.localize('components:mediaPlayer:showSearchInput')}
 							theme="${ifDefined(theme)}"
 						></d2l-button-icon>
 						<input
@@ -940,22 +938,22 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 							@focus=${this._onSearchInputFocus}
 							@input=${this._onSearchInputChanged}
 							id="d2l-labs-media-player-search-input"
-							placeholder="${this.localize('searchPlaceholder')}"
+							placeholder="${this.localize('components:mediaPlayer:searchPlaceholder')}"
 							theme="${ifDefined(theme)}"
 							type="text"
 						></input>
 					</div>
 					<d2l-dropdown>
-						<d2l-button-icon class="d2l-dropdown-opener" icon="tier1:gear" text="${this.localize('settings')}" theme="${ifDefined(theme)}"></d2l-button-icon>
+						<d2l-button-icon class="d2l-dropdown-opener" icon="tier1:gear" text="${this.localize('components:mediaPlayer:settings')}" theme="${ifDefined(theme)}"></d2l-button-icon>
 						<d2l-dropdown-menu id="d2l-labs-media-player-settings-menu" no-pointer theme="${ifDefined(theme)}">
-							<d2l-menu label="${this.localize('settings')}" theme="${ifDefined(theme)}">
-								<d2l-menu-item id="d2l-labs-media-player-playback-speeds" text="${this.localize('playbackSpeed')}">
+							<d2l-menu label="${this.localize('components:mediaPlayer:settings')}" theme="${ifDefined(theme)}">
+								<d2l-menu-item id="d2l-labs-media-player-playback-speeds" text="${this.localize('components:mediaPlayer:playbackSpeed')}">
 									<div slot="supporting">${this._selectedSpeed}</div>
 									<d2l-menu @d2l-menu-item-change=${this._onPlaybackSpeedsMenuItemChange} theme="${ifDefined(theme)}">
 										${PLAYBACK_SPEEDS.map(speed => html`
 											<d2l-menu-item-radio
 												?selected="${speed === this._selectedSpeed}"
-												text="${speed === DEFAULT_SPEED ? `${DEFAULT_SPEED} (${this.localize('default')})` : speed}"
+												text="${speed === DEFAULT_SPEED ? `${DEFAULT_SPEED} (${this.localize('components:mediaPlayer:default')})` : speed}"
 												value="${speed}"
 											></d2l-menu-item-radio>
 										`)}
@@ -1054,8 +1052,10 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 			}
 		}
 
-		return this.localize('off');
+		return this.localize('components:mediaPlayer:off');
 	}
+
+	#searchTimeout = null;
 
 	_clearPreference(preferenceKey) {
 		localStorage.removeItem(preferenceKey);
@@ -1179,7 +1179,7 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 	_getDownloadButtonView() {
 		const linkHref = this._getDownloadLink();
 		return html`
-			<d2l-menu-item-link href="${linkHref}" text="${this.localize('download')}" download=${this.downloadFilename}></d2l-menu-item-link>
+			<d2l-menu-item-link href="${linkHref}" text="${this.localize('components:mediaPlayer:download')}" download=${this.downloadFilename}></d2l-menu-item-link>
 		`;
 	}
 
@@ -1211,10 +1211,10 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 
 	_getMediaAreaView() {
 		const playIcon = `tier3:${this._playing ? 'pause' : 'play'}`;
-		const playTooltip = `${this._playing ? this.localize('pause') : this.localize('play')} (${KEY_BINDINGS.play})`;
+		const playTooltip = `${this._playing ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
 
 		switch (this.mediaType) {
-			case SOURCE_TYPES.video: // eslint-disable-line no-fallthrough
+			case SOURCE_TYPES.video:
 				return html`
 					${this._getPosterView()}
 					<video
@@ -1341,7 +1341,7 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 		if (!this.poster || this.autoplay || !this._posterVisible) return;
 
 		const playIcon = !this._loading ? html`
-			<button id="d2l-labs-media-player-video-poster-play-button" aria-label=${this.localize('play')} title=${this.localize('play')} transcript="${ifDefined(this.transcriptViewerOn ? true : undefined)}"
+			<button id="d2l-labs-media-player-video-poster-play-button" aria-label=${this.localize('components:mediaPlayer:play')} title=${this.localize('components:mediaPlayer:play')} transcript="${ifDefined(this.transcriptViewerOn ? true : undefined)}"
 				@click=${this._onVideoClick}>
 				<d2l-icon icon="tier1:play" theme="${ifDefined(this._getTheme())}"></d2l-icon>
 			</button>
@@ -1367,7 +1367,7 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 
 	_getQualityMenuView() {
 		return !this.src && this._sources && Object.keys(this._sources).length > 1 && this._selectedQuality ? html`
-			<d2l-menu-item text="${this.localize('quality')}">
+			<d2l-menu-item text="${this.localize('components:mediaPlayer:quality')}">
 				<div slot="supporting">${this._selectedQuality}</div>
 				<d2l-menu @d2l-menu-item-change=${this._onQualityMenuItemChange} theme="${ifDefined(this._getTheme())}">
 					${Object.keys(this._sources).map(quality => html`
@@ -1493,16 +1493,16 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 		);
 
 		return this._tracks.length > 0 && !this.hideCaptionsSelection ? html`
-			<d2l-menu-item text="${this.transcriptViewerOn ? this.localize('language') : this.localize('captions')}">
+			<d2l-menu-item text="${this.transcriptViewerOn ? this.localize('components:mediaPlayer:language') : this.localize('components:mediaPlayer:captions')}">
 				<div slot="supporting">${this._selectedTrackLabel}</div>
 				<d2l-menu id="d2l-labs-media-player-captions-menu"
 					@d2l-menu-item-change=${this._onTracksMenuItemChange} theme="${ifDefined(this._getTheme())}">
 					${this.transcriptViewerOn ? '' : html`
-					<d2l-menu-item-radio text="${this.localize('off')}" ?selected="${!this._selectedTrackIdentifier}"></d2l-menu-item-radio>`}
+					<d2l-menu-item-radio text="${this.localize('components:mediaPlayer:off')}" ?selected="${!this._selectedTrackIdentifier}"></d2l-menu-item-radio>`}
 					${this._tracks.map(track => html`
 						<d2l-menu-item-radio
 							?selected="${isTrackSelected(track)}"
-							text="${`${track.label}${track.kind === TRACK_KINDS.captions ? ` (${this.localize('closedCaptionsAcronym')})` : ''}`}"
+							text="${`${track.label}${track.kind === TRACK_KINDS.captions ? ` (${this.localize('components:mediaPlayer:closedCaptionsAcronym')})` : ''}`}"
 							value="${this._getTrackIdentifier(track.srclang, track.kind)}"
 						></d2l-menu-item-radio>
 					`)}
@@ -1854,7 +1854,7 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 			try {
 				node.cues = parseSRT(text);
 				node.srt = true;
-			} catch (error) {
+			} catch {
 				node.srt = false;
 			}
 
@@ -2095,7 +2095,7 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 		const captionsMenu = this.shadowRoot.getElementById('d2l-labs-media-player-captions-menu');
 		if (captionsMenu) {
 			this._captionsMenuReturnItem = captionsMenu.shadowRoot.querySelector('d2l-menu-item-return');
-			this._captionsMenuReturnItem?.setAttribute('text', this.localize('language'));
+			this._captionsMenuReturnItem?.setAttribute('text', this.localize('components:mediaPlayer:language'));
 		}
 
 		if (!this._transcriptViewer) {
@@ -2136,11 +2136,11 @@ class MediaPlayer extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 			</div>
 			<d2l-dropdown-button-subtle
 				id=${isVideo ? 'video-transcript-download-button' : 'audio-transcript-download-button'}
-				text="${this.localize('download')}">
+				text="${this.localize('components:mediaPlayer:download')}">
 				<d2l-dropdown-menu id=${isVideo ? 'video-transcript-download-menu' : 'audio-transcript-download-menu'}>
 					<d2l-menu>
-							<d2l-menu-item @click=${this._downloadTranscript} text="${this.localize('transcriptTxt')}"></d2l-menu-item>
-							<d2l-menu-item @click=${this._downloadCaptions} text="${this.localize('captionsVtt')}"></d2l-menu-item>
+							<d2l-menu-item @click=${this._downloadTranscript} text="${this.localize('components:mediaPlayer:transcriptTxt')}"></d2l-menu-item>
+							<d2l-menu-item @click=${this._downloadCaptions} text="${this.localize('components:mediaPlayer:captionsVtt')}"></d2l-menu-item>
 					</d2l-menu>
 				</d2l-dropdown-menu>
 			</d2l-dropdown-button-subtle>

@@ -1,9 +1,9 @@
 import '@brightspace-ui/core/components/colors/colors.js';
 import { css, html, LitElement } from 'lit';
-import { InternalDynamicLocalizeMixin } from './mixins/internal-dynamic-localize-mixin.js';
+import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
-class SliderBar extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
+class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	static get properties() {
 		return {
@@ -178,7 +178,7 @@ class SliderBar extends InternalDynamicLocalizeMixin(RtlMixin(LitElement)) {
 					id="sliderBar"
 					@mousedown="${this._barDown}"
 					role="slider"
-					aria-label="${this.localize('sliderBarProgress')}"
+					aria-label="${this.localize('components:mediaPlayer:sliderBarProgress')}"
 					aria-orientation="${this.vertical ? 'vertical' : 'horizontal'}"
 					aria-valuemin="${this.min}"
 					aria-valuemax="${this.max}"
