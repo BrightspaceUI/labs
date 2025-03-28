@@ -7,8 +7,7 @@ class NavigationDropdownButtonCustom extends DropdownOpenerMixin(LitElement) {
 
 	static get properties() {
 		return {
-			openerLabel: { type: String, attribute: 'opener-label' },
-			openerLabelledby: { type: String, attribute: 'opener-labelledby' }
+			openerLabel: { type: String, attribute: 'opener-label' }
 		};
 	}
 
@@ -30,8 +29,7 @@ class NavigationDropdownButtonCustom extends DropdownOpenerMixin(LitElement) {
 			<button
 				type="button"
 				aria-haspopup="menu"
-				aria-label="${ifDefined(this.openerLabel)}"
-				aria-labelledby="${ifDefined(this.openerLabelledby)}">
+				aria-label="${ifDefined(this.openerLabel)}">
 				<span class="d2l-labs-navigation-highlight-border"></span>
 				<slot name="opener"></slot>
 			</button>

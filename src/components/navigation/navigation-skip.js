@@ -44,6 +44,8 @@ class NavigationSkip extends FocusMixin(PropertyRequiredMixin(LitElement)) {
 	}
 
 	render() {
+		// Href attribute is needed for a11y tools to recognize anchor as a link
+		// and for click events to be dispatched using key presses
 		return html`<a href="javascript:void(0);" class="vdiff-target">${this.text}</a>`;
 	}
 
