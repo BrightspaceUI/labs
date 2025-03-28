@@ -44,14 +44,7 @@ class NavigationSkip extends FocusMixin(PropertyRequiredMixin(LitElement)) {
 	}
 
 	render() {
-		return html`<a tabindex="0" @keydown="${this._handleKeyDown}" class="vdiff-target">${this.text}</a>`;
-	}
-
-	_handleKeyDown(e) {
-		if (e.keyCode === 13) {
-			e.preventDefault();
-			this.dispatchEvent(new CustomEvent('click', { bubbles: true, composed: true }));
-		}
+		return html`<a href="javascript:void(0);" class="vdiff-target">${this.text}</a>`;
 	}
 
 }
