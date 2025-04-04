@@ -168,7 +168,7 @@ class Link extends LocalizeCoreElement(FocusMixin(LitElement)) {
 		const target = this.newWindow && this.target === undefined
 			? '_blank'
 			: this.target;
-		/* eslint-disable indent */
+		/* eslint-disable @stylistic/indent */
 		return html`
 			<a
 				aria-label="${ifDefined(this.ariaLabel)}"
@@ -186,7 +186,7 @@ class Link extends LocalizeCoreElement(FocusMixin(LitElement)) {
 				</span>
 			</a>`;
 	}
-	/* eslint-enable indent */
+	/* eslint-enable @stylistic/indent */
 
 }
 customElements.define('d2l-labs-link-temp', Link);

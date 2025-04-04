@@ -49,10 +49,9 @@ class D2LWizard extends LitElement {
 	render() {
 		return html`
 			<div class="d2l-labs-wizard-header">
-				${this.stepTitles.map((title, index) =>
-		html`
-						<d2l-labs-single-step-header total-steps="${this.stepCount}" current-step="${index}" selected-step="${this.selectedStep}" step-title="${title}" ?fill-header-width="${this.fillHeaderWidth}"></d2l-labs-single-step-header>
-					`)}
+				${this.stepTitles.map((title, index) =>	html`
+					<d2l-labs-single-step-header total-steps="${this.stepCount}" current-step="${index}" selected-step="${this.selectedStep}" step-title="${title}" ?fill-header-width="${this.fillHeaderWidth}"></d2l-labs-single-step-header>
+				`)}
 
 			</div>
 			<slot @slotchange="${this.#handleSlotChange}"></slot>
