@@ -1,7 +1,6 @@
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-ui/core/components/expand-collapse/expand-collapse-content.js';
 import '@brightspace-ui/core/components/inputs/input-checkbox.js';
-import '@brightspace-ui/core/components/inputs/input-checkbox-spacer.js';
 import '@brightspace-ui/core/components/icons/icon.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
@@ -26,18 +25,8 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 				display: block;
 			}
 
-			.d2l-input-checkbox, .d2l-input-checkbox-spacer {
+			.d2l-input-checkbox {
 				margin-bottom: 0;
-			}
-
-			.d2l-input-checkbox-description {
-				color: var(--d2l-color-tungsten);
-				font-size: 0.7rem;
-				width: fit-content;
-			}
-
-			.d2l-checkbox-content-margin {
-				margin-top: 18px;
 			}
 
 			.d2l-input-read-only-label {
@@ -64,17 +53,14 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 					class="d2l-input-checkbox"
 					?skeleton="${this.skeleton}"
 					description=${this.localize(`components:checkboxDrawer:checkbox${this.checked ? 'Expanded' : 'Collapsed'}`)}
-					@change="${this._onCheckboxChange}">${this.label}</d2l-input-checkbox>
+					@change="${this._onCheckboxChange}">
+					${this.label}
+					<div slot="inline-help">${this.description}</div>
+					<d2l-expand-collapse-content slot="supporting" ?expanded="${this.checked}" aria-busy=${this._expandCollapseBusy ? 'true' : 'false'} @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}">
+						<slot></slot>
+					</d2l-expand-collapse-content>
+				</d2l-input-checkbox>
 			`}
-			<d2l-input-checkbox-spacer class="d2l-input-checkbox-spacer">
-				<div class="d2l-input-checkbox-description d2l-skeletize">${this.description}</div>
-			</d2l-input-checkbox-spacer>
-			<d2l-input-checkbox-spacer class="d2l-input-checkbox-spacer">
-				<d2l-expand-collapse-content ?expanded="${this.checked}" aria-busy=${this._expandCollapseBusy ? 'true' : 'false'} @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}">
-					<div class="d2l-checkbox-content-margin"></div>
-					<slot></slot>
-				</d2l-expand-collapse-content>
-			</d2l-input-checkbox-spacer>
 		`;
 	}
 
