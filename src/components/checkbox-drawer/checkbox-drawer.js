@@ -29,9 +29,22 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 				margin-bottom: 0;
 			}
 
+			.d2l-input-checkbox-description {
+				color: var(--d2l-color-tungsten);
+				font-size: 0.7rem;
+				width: fit-content;
+			}
+
+			.d2l-checkbox-content-margin {
+				margin-top: 18px;
+			}
+
 			.d2l-input-read-only-label {
 				display: inline-block;
 				margin-left: 0.5rem;
+			}
+			.d2l-input-read-only-spacer {
+				padding-inline-start: 1.7rem;
 			}
 		`];
 	}
@@ -43,24 +56,34 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 	}
 
 	render() {
-		return html`
-			${this.readOnly ? html `
+		if (this.readOnly) {
+			return html `
 				<d2l-icon class="d2l-skeletize" icon="${this.checked ? 'tier1:check' : 'tier1:close-default'}"></d2l-icon>
 				<div class="d2l-body-compact d2l-input-read-only-label d2l-skeletize">${this.label}</div>
-			` : html`
-				<d2l-input-checkbox
-					?checked="${this.checked}"
-					class="d2l-input-checkbox"
-					?skeleton="${this.skeleton}"
-					description=${this.localize(`components:checkboxDrawer:checkbox${this.checked ? 'Expanded' : 'Collapsed'}`)}
-					@change="${this._onCheckboxChange}">
-					${this.label}
-					<div slot="inline-help">${this.description}</div>
-					<d2l-expand-collapse-content slot="supporting" ?expanded="${this.checked}" aria-busy=${this._expandCollapseBusy ? 'true' : 'false'} @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}">
+				<div class="d2l-input-read-only-spacer">
+					<div class="d2l-input-checkbox-description d2l-skeletize">${this.description}</div>
+				</div>
+				<div class="d2l-input-read-only-spacer">
+					<d2l-expand-collapse-content ?expanded="${this.checked}" aria-busy=${this._expandCollapseBusy ? 'true' : 'false'} @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}">
+						<div class="d2l-checkbox-content-margin"></div>
 						<slot></slot>
 					</d2l-expand-collapse-content>
-				</d2l-input-checkbox>
-			`}
+				</div>
+			`;
+		}
+		return html`
+			<d2l-input-checkbox
+				?checked="${this.checked}"
+				class="d2l-input-checkbox"
+				?skeleton="${this.skeleton}"
+				description=${this.localize(`components:checkboxDrawer:checkbox${this.checked ? 'Expanded' : 'Collapsed'}`)}
+				@change="${this._onCheckboxChange}">
+				${this.label}
+				<div slot="inline-help">${this.description}</div>
+				<d2l-expand-collapse-content slot="supporting" ?expanded="${this.checked}" aria-busy=${this._expandCollapseBusy ? 'true' : 'false'} @d2l-expand-collapse-content-expand="${this._onExpandCollapseContentToggled}" @d2l-expand-collapse-content-collapse="${this._onExpandCollapseContentToggled}">
+					<slot></slot>
+				</d2l-expand-collapse-content>
+			</d2l-input-checkbox>
 		`;
 	}
 
