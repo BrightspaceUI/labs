@@ -50,7 +50,7 @@ export default {
 	"components:mediaPlayer:retry": "Retry",
 	"components:mediaPlayer:searchPlaceholder": "Search...",
 	"components:mediaPlayer:seekSlider": "seek slider",
-	"components:mediaPlayer:settings": " Settings",
+	"components:mediaPlayer:settings": "settings",
 	"components:mediaPlayer:showSearchInput": "Show search input",
 	"components:mediaPlayer:sliderBarProgress": "slider bar progress",
 	"components:mediaPlayer:speed": "speed",
@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Org Unit: All",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Org Unit: Selections Applied",
 	"components:ouFilter:orgUnitFilter:name": "Org Unit",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "root",
 	"components:ouFilter:treeSelector:filterBy": "Filter By",
