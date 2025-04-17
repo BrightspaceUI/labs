@@ -20,8 +20,8 @@ export default {
 	"components:fileUploader:file_upload_text": "ドラッグ＆ドロップまたは",
 	"components:fileUploader:browse": "参照",
 	"components:fileUploader:browse_files": "ファイルの参照",
-	"components:fileUploader:choose_one_file_to_upload": "アップロードする 1 ファイルの選択",
-	"components:gradeResult:cannotBeNegative": "（0より小さくはできません）",
+	"components:fileUploader:choose_one_file_to_upload": "1 つのファイルを選択してアップロード",
+	"components:gradeResult:cannotBeNegative": "（0 より小さくはできません）",
 	"components:gradeResult:clearManualOverride": "手動の上書きのクリア",
 	"components:gradeResult:gradeScoreLabel": "成績スコア",
 	"components:gradeResult:manuallyOverrideGrade": "成績の手動の上書き",
@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "組織単位: すべて",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "組織単位: 適用された選択",
 	"components:ouFilter:orgUnitFilter:name": "組織単位",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "ルート",
 	"components:ouFilter:treeSelector:filterBy": "フィルタの条件",

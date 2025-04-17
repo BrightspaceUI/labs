@@ -17,10 +17,10 @@ export default {
 	"components:attributePicker:removeValue": "Klicken Sie, drücken Sie die Rücktaste, oder drücken Sie die Entfernen-Taste, um das Element {value} zu entfernen", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Kontrollkästchen ausgeblendet", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Kontrollkästchen eingeblendet", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:fileUploader:file_upload_text": "Mit Drag-and-Drop verschieben oder",
+	"components:fileUploader:file_upload_text": "Mit Drag-and-drop verschieben oder",
 	"components:fileUploader:browse": "Durchsuchen",
 	"components:fileUploader:browse_files": "Dateien durchsuchen",
-	"components:fileUploader:choose_one_file_to_upload": "Wählen Sie eine Datei zum Hochladen aus",
+	"components:fileUploader:choose_one_file_to_upload": "Eine Datei zum Hochladen auswählen",
 	"components:gradeResult:cannotBeNegative": "(darf nicht kleiner als 0 sein)",
 	"components:gradeResult:clearManualOverride": "Manuelles Überschreiben löschen",
 	"components:gradeResult:gradeScoreLabel": "Punktzahl",
@@ -48,7 +48,7 @@ export default {
 	"components:mediaPlayer:playbackSpeed": "Wiedergabegeschwindigkeit",
 	"components:mediaPlayer:quality": "Qualität",
 	"components:mediaPlayer:retry": "Erneut versuchen",
-	"components:mediaPlayer:searchPlaceholder": "Suchen ...",
+	"components:mediaPlayer:searchPlaceholder": "Suchen...",
 	"components:mediaPlayer:seekSlider": "Suchregler",
 	"components:mediaPlayer:settings": "Einstellungen",
 	"components:mediaPlayer:showSearchInput": "Sucheingabe einblenden",
@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Organisationseinheit: Alle",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Organisationseinheit: Auswahl",
 	"components:ouFilter:orgUnitFilter:name": "Organisationseinheit",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (ID: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "Stamm",
 	"components:ouFilter:treeSelector:filterBy": "Filtern nach",
@@ -96,8 +95,8 @@ export default {
 	"components:ouFilter:treeSelector:loadMoreLabel": "Mehr laden",
 	"components:ouFilter:treeSelector:noSearchResults": "Keine Suchergebnisse",
 	"components:ouFilter:treeSelector:noFiltersAvailable": "Keine verfügbaren Filter",
-	"components:ouFilter:treeSelector:parentLoadMore:ariaLabel": "Weitere untergeordnete Organisationseinheiten werden geladen.",
-	"components:ouFilter:treeSelector:searchLoadMore:ariaLabel": "Weitere Suchergebnisse werden geladen.",
+	"components:ouFilter:treeSelector:parentLoadMore:ariaLabel": "Weitere untergeordnete Organisationseinheiten laden",
+	"components:ouFilter:treeSelector:searchLoadMore:ariaLabel": "Weitere Suchergebnisse laden",
 	"components:ouFilter:treeSelector:searchPlaceholder": "Suchen...",
 	"components:ouFilter:treeSelector:dropdownAction": "Filter {name} öffnen",
 	"components:ouFilter:treeSelector:arrowLabel:closed": "{name} auf Ebene {level}, untergeordnetes Element von {parentName}, erweitern",

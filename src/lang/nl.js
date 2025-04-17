@@ -51,7 +51,7 @@ export default {
 	"components:mediaPlayer:searchPlaceholder": "Zoeken...",
 	"components:mediaPlayer:seekSlider": "zoekschuifregelaar",
 	"components:mediaPlayer:settings": "instellingen",
-	"components:mediaPlayer:showSearchInput": "Zoekopties tonen",
+	"components:mediaPlayer:showSearchInput": "Zoekinvoer weergeven",
 	"components:mediaPlayer:sliderBarProgress": "voortgang schuifbalk",
 	"components:mediaPlayer:speed": "snelheid",
 	"components:mediaPlayer:transcriptTxt": "Transcript (.txt)",
@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Organisatie-eenheid: Alle",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Organisatie-eenheid: Toegepaste selecties",
 	"components:ouFilter:orgUnitFilter:name": "Organisatie-eenheid",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "hoofdniveau",
 	"components:ouFilter:treeSelector:filterBy": "Filteren op",
