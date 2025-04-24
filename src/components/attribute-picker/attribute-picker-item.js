@@ -35,8 +35,8 @@ class AttributePickerItem extends LocalizeLabsElement(LitElement) {
 				user-select: none;
 			}
 			:host([deletable]) .d2l-labs-attribute-picker-item-wrapper {
-				padding-bottom: 0.15rem;
 				padding-inline: 0.5rem 0.1rem;
+				padding-bottom: 0.15rem;
 				padding-top: 0.1rem;
 			}
 			:host(:hover) .d2l-labs-attribute-picker-item-wrapper {
