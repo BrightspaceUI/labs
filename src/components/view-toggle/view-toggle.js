@@ -78,27 +78,10 @@ class ViewToggle extends LitElement {
 			}
 
 			.view-toggle-container {
+				align-items: center;
 				display: flex;
+				flex-wrap: nowrap;
 				margin: 0 0.9rem;
-			}
-
-			.view-toggle-container button {
-				flex: 0 1;
-			}
-
-			@media screen and (max-width: 525px) {
-				:host {
-					display: block;
-					width: auto;
-				}
-
-				.view-toggle-container {
-					display: inline;
-				}
-
-				.view-toggle-container button {
-					flex: unset;
-				}
 			}`
 		];
 	}
