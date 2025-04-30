@@ -1,4 +1,4 @@
-import '../../../src/components/pagination/pager-numeric.js';
+import '../../../src/components/view-toggle/view-toggle.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 const basicFixture = html`<d2l-labs-view-toggle
