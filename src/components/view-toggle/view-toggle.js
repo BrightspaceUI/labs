@@ -70,22 +70,34 @@ class ViewToggle extends LitElement {
 			button[aria-pressed="true"]:hover, button[aria-pressed="true"]:focus {
 				box-shadow: inset 0 0 0 2px #ffffff;
 			}
+
 			:host {
-				display: flex;
-				width: 100%;
+				display: block;
+				margin: 0 -0.9rem;
+				width: auto;
 			}
+
 			.view-toggle-container {
-				display: none;
+				display: flex;
+				margin: 0 0.9rem;
 			}
-			@media (min-width: 525px) {
+
+			.view-toggle-container button {
+				flex: 0 1;
+			}
+
+			@media screen and (max-width: 525px) {
 				:host {
 					display: block;
-					margin: 0 -0.9rem;
 					width: auto;
 				}
+
 				.view-toggle-container {
 					display: inline;
-					margin: 0 0.9rem;
+				}
+
+				.view-toggle-container button {
+					flex: unset;
 				}
 			}`
 		];
