@@ -25,7 +25,7 @@ describe('d2l-labs-view-toggle', () => {
 
 	describe('viewports', () => {
 		for (const viewport of viewports) {
-			it(`should render on ${viewport.width}px width`, async() => {
+			it(`should render on ${viewport.viewport.width}px width`, async() => {
 				const el = await fixture(basicFixture, { viewport: viewport.viewport });
 				await expect(el).to.be.golden();
 			});
