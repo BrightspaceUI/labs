@@ -19,7 +19,7 @@ const viewports = [
 
 describe('d2l-labs-view-toggle', () => {
 	it('should not wrap', async() => {
-		const el = await fixture(noWrapFixture);
+		const el = await fixture(noWrapFixture, { viewport: { height: 800, width: 430 } });
 		await expect(el).to.be.golden();
 	});
 
