@@ -42,7 +42,7 @@ class ViewToggle extends LitElement {
 				color: var(--d2l-color-ferrite);
 				cursor: pointer;
 				display: inline;
-				flex: 1;
+				flex: 0 1;
 				font-family: inherit;
 				font-size: 0.7rem;
 				font-weight: 700;
