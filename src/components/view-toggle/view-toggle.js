@@ -71,6 +71,10 @@ class ViewToggle extends LitElement {
 				box-shadow: inset 0 0 0 2px #ffffff;
 			}
 
+			span {
+				margin-inline-end: 6px;
+			}
+
 			:host {
 				display: block;
 				width: auto;
