@@ -73,7 +73,6 @@ class ViewToggle extends LitElement {
 
 			:host {
 				display: block;
-				margin: 0 -0.9rem;
 				width: auto;
 			}
 
@@ -81,7 +80,6 @@ class ViewToggle extends LitElement {
 				align-items: center;
 				display: flex;
 				flex-wrap: nowrap;
-				margin: 0 0.9rem;
 			}`
 		];
 	}
