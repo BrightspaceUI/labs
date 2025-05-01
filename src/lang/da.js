@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Organisationsenhed: Alle",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Organisationsenhed: Valgte anvendt",
 	"components:ouFilter:orgUnitFilter:name": "Organisationsenhed",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "rod",
 	"components:ouFilter:treeSelector:filterBy": "Filtrer efter",

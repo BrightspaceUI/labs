@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "組織單位：全部",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "組織單位：已套用選取項目",
 	"components:ouFilter:orgUnitFilter:name": "組織單位",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "根目錄",
 	"components:ouFilter:treeSelector:filterBy": "篩選依據",

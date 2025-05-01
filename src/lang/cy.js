@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Uned Sefydliad: Pob un",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Uned Sefydliad: Dewisiadau wedi’u Gweithredu",
 	"components:ouFilter:orgUnitFilter:name": "Uned Sefydliad",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "gwraidd",
 	"components:ouFilter:treeSelector:filterBy": "Hidlo yn ôl",

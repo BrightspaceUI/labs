@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "組織単位: すべて",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "組織単位: 適用された選択",
 	"components:ouFilter:orgUnitFilter:name": "組織単位",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "ルート",
 	"components:ouFilter:treeSelector:filterBy": "フィルタの条件",

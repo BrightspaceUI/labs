@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Hui Pūʻulu: All",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Hui Pūʻulu: Hoʻopili ʻia nā koho",
 	"components:ouFilter:orgUnitFilter:name": "Hui Hui",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "moʻa",
 	"components:ouFilter:treeSelector:filterBy": "kānana e",

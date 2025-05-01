@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "الوحدة التنظيمية: الكل",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "الوحدة التنظيمية: تم تطبيق التحديدات",
 	"components:ouFilter:orgUnitFilter:name": "الوحدة التنظيمية",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (المعرّف: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "الجذر",
 	"components:ouFilter:treeSelector:filterBy": "تصفية حسب",

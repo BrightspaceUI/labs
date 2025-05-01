@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Organisatie-eenheid: Alle",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Organisatie-eenheid: Toegepaste selecties",
 	"components:ouFilter:orgUnitFilter:name": "Organisatie-eenheid",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "hoofdniveau",
 	"components:ouFilter:treeSelector:filterBy": "Filteren op",

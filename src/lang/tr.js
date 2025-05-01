@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Org Birimi: Tümü",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Org Birimi: Seçimler Uygulandı",
 	"components:ouFilter:orgUnitFilter:name": "Org Birimi",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Kimlik: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "kök",
 	"components:ouFilter:treeSelector:filterBy": "Filtreleme Ölçütü",

@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "संगठन इकाई: सभी",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "संगठन इकाई: चयन लागू किए गए",
 	"components:ouFilter:orgUnitFilter:name": "संगठन इकाई",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "रूट",
 	"components:ouFilter:treeSelector:filterBy": "इसके अनुसार फ़िल्टर करें",

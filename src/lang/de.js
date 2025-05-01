@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Organisationseinheit: Alle",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Organisationseinheit: Auswahl",
 	"components:ouFilter:orgUnitFilter:name": "Organisationseinheit",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (ID: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "Stamm",
 	"components:ouFilter:treeSelector:filterBy": "Filtern nach",

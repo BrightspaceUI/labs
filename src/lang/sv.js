@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Organisationsenhet: alla",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Organisationsenhet: använt urval",
 	"components:ouFilter:orgUnitFilter:name": "Organisationsenhet",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "rot",
 	"components:ouFilter:treeSelector:filterBy": "Filtrera efter",

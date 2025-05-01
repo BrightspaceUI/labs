@@ -86,7 +86,6 @@ export default {
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "구성단위: 전체",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "구성단위: 선택 사항이 적용됨",
 	"components:ouFilter:orgUnitFilter:name": "구성 단위",
-
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "루트",
 	"components:ouFilter:treeSelector:filterBy": "필터링 기준",
