@@ -42,7 +42,7 @@ class ViewToggle extends LitElement {
 				color: var(--d2l-color-ferrite);
 				cursor: pointer;
 				display: inline;
-				flex: 1;
+				flex: 0 1;
 				font-family: inherit;
 				font-size: 0.7rem;
 				font-weight: 700;
@@ -70,23 +70,20 @@ class ViewToggle extends LitElement {
 			button[aria-pressed="true"]:hover, button[aria-pressed="true"]:focus {
 				box-shadow: inset 0 0 0 2px #ffffff;
 			}
+
+			span {
+				margin-inline-end: 6px;
+			}
+
 			:host {
-				display: flex;
-				width: 100%;
+				display: block;
+				width: auto;
 			}
+
 			.view-toggle-container {
-				display: none;
-			}
-			@media (min-width: 525px) {
-				:host {
-					display: block;
-					margin: 0 -0.9rem;
-					width: auto;
-				}
-				.view-toggle-container {
-					display: inline;
-					margin: 0 0.9rem;
-				}
+				align-items: center;
+				display: flex;
+				flex-wrap: nowrap;
 			}`
 		];
 	}
