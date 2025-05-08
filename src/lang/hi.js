@@ -101,7 +101,7 @@ export default {
 	"components:ouFilter:treeSelector:dropdownAction": "{name} फ़िल्टर खोलें",
 	"components:ouFilter:treeSelector:arrowLabel:closed": "{name} को स्तर {level} पर बड़ा करें, {parentName} का चाइल्ड",
 	"components:ouFilter:treeSelector:arrowLabel:open": "{name} को स्तर {level} पर छोटा करें, {parentName} का चाइल्ड",
-	"components:ouFilter:treeSelector:node:ariaLabel": "{Name}, {parentName} का चाइल्ड,",
+	"components:ouFilter:treeSelector:node:ariaLabel": "{name}, {parentName} का चाइल्ड,",
 	"components:pagination:amountPerPage": "प्रति पेज {count}",
 	"components:pagination:currentPage": "{maxPageNumber} में से पेज नंबर {pageNumber}",
 	"components:pagination:nextPage": "अगला पेज",
