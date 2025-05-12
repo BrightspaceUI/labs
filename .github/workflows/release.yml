@@ -26,3 +26,38 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.D2L_RELEASE_TOKEN }}
           NPM: true
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish:
+    name: Publish static site
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: release
+    steps:
+      - uses: Brightspace/third-party-actions@actions/checkout
+        with:
+          ref: ${{needs.release.outputs.git-head}}
+      - uses: Brightspace/third-party-actions@actions/setup-node
+        with:
+          node-version-file: .nvmrc
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static
+        run: npm run build-static
+
+      - name: Assume role
+        uses: Brightspace/third-party-actions@aws-actions/configure-aws-credentials
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          role-to-assume: arn:aws:iam::022062736489:role/r+BrightspaceUI+labs+repo
+          role-duration-seconds: 3600
+          aws-region: ca-central-1
+
+      - name: Publish
+        uses: BrightspaceUI/actions/publish-to-s3@main
+        with:
+          bucket-path: s3://d2l.dev/live/${{ github.repository }}
+          publish-directory: ./build/
