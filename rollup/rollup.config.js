@@ -12,11 +12,13 @@ const buildDate = Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto' }).
 const jsGlob = [
 	'@(src|demo)/**/*.js',
 	'./index.js',
+	'node_modules/@brightspace-ui/core/components/demo/*.js',
 	'!**/*.@(test|axe|vdiff).js',
 ];
 const nonJsGlob = [
 	'@(src|demo)/**/*.*',
 	'*.*',
+	'node_modules/@brightspace-ui/core/components/demo/styles.css',
 	'!**/*.@(js|md|json)',
 	'!**/golden/**/*',
 ];
