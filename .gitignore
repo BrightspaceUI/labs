@@ -1,3 +1,4 @@
+/build
 node_modules/
 .vdiff/
 d2l-test-report.json
