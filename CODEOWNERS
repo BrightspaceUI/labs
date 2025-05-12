@@ -1,5 +1,5 @@
 *       @BrightspaceUI/gaudi-dev
-**/media-player	@BrightspaceUI/Media
+**/media-player	@BrightspaceUI/Media @BrightspaceUI/gaudi-dev
 
 golden/
 .vdiff.json
