@@ -54,6 +54,7 @@
   },
   "scripts": {
     "build-static": "rollup -c ./rollup/rollup.config.js",
+    "host-static" : "web-dev-server --app-index build/index.html --open --watch --port 8102",
     "langs:sync": "mfv add-missing && mfv remove-extraneous",
     "langs:sort": "mfv sort",
     "lint": "npm run lint:eslint && npm run lint:style",

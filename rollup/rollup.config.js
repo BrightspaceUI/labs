@@ -12,14 +12,21 @@ const buildDate = Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto' }).
 const jsGlob = [
 	'@(src|demo)/**/*.js',
 	'./index.js',
+	'node_modules/@brightspace-ui/core/components/calendar/*.js',
+	'node_modules/@brightspace-ui/core/components/collapsible-panel/*.js',
+	'node_modules/@brightspace-ui/core/components/colors/*.js',
 	'node_modules/@brightspace-ui/core/components/demo/*.js',
+	'node_modules/@brightspace-ui/core/components/dropdown/*.js',
+	'node_modules/@brightspace-ui/core/components/icons/*.js',
+	'node_modules/@brightspace-ui/core/components/menu/*.js',
+	'node_modules/@brightspace-ui/core/components/typography/*.js',
 	'!**/*.@(test|axe|vdiff).js',
 ];
 const nonJsGlob = [
 	'@(src|demo)/**/*.*',
 	'*.*',
 	'node_modules/@brightspace-ui/core/components/demo/styles.css',
-	'!**/*.@(js|md|json)',
+	'!**/*.@(js|md)',
 	'!**/golden/**/*',
 ];
 
