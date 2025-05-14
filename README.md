@@ -61,6 +61,8 @@ To start a [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) t
 npm start
 ```
 
+D2L employees can also view the latest main-branch demos at https://live.d2l.dev/BrightspaceUI/labs/.
+
 ### Versioning and Releasing
 
 This repo is configured to use `semantic-release`. Commits prefixed with `fix:` and `feat:` will trigger patch and minor releases when merged to `main`.

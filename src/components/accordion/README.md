@@ -1,6 +1,6 @@
 # d2l-labs-accordion
 
-Lit-based widget that displays a list of collapsible components. When collapsible component is clicked - it expands or collapses the associated content.
+A Lit-based widget that displays a list of collapsible components. When a collapsible component is clicked, it expands or collapses the associated content.
 
 ## Usage
 
