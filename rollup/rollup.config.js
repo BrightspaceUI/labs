@@ -18,7 +18,6 @@ const jsGlob = [
 const nonJsGlob = [
 	'@(src|demo)/**/*.*',
 	'*.*',
-	'node_modules/@brightspace-ui/core/components/demo/styles.css',
 	'!**/*.@(js|md)',
 	'!./*.json',
 	'!**/golden/**/*',
