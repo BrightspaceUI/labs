@@ -5,7 +5,7 @@ import './grade-result-student-grade-preview.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { bodySmallStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement, nothing } from 'lit';
-import { GradeType } from '../../controllers/grade-result/Grade.js';
+import { GradeType } from './controllers/Grade.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 
