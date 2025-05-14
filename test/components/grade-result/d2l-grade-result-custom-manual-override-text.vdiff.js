@@ -8,7 +8,7 @@ describe('optional override text substitution visual diff tests', () => {
 		const fixtureElement = await fixture(
 			html`
 				<div style='margin: 10px 18px; padding: 50px; display: flex; justify-content: center;'>
-					<d2l-labs-d2l-grade-result-presentational
+					<d2l-labs-grade-result-presentational
 						gradeType='Numeric'
 						labelText='Overall Grade'
 						scoreNumerator=5
@@ -16,7 +16,7 @@ describe('optional override text substitution visual diff tests', () => {
 						customManualOverrideClearText='Substituted Override Clear Text'
 						isGradeAutoCompleted
 						isManualOverrideActive
-					></d2l-labs-d2l-grade-result-presentational>
+					></d2l-labs-grade-result-presentational>
 				<div>`,
 			{ pagePadding: false }
 		);

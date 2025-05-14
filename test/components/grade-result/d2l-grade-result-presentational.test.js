@@ -10,7 +10,7 @@ const letterGradeOptions = {
 };
 
 const componentManualOverride = html`
-	<d2l-labs-d2l-grade-result-presentational
+	<d2l-labs-grade-result-presentational
 		gradeType="Numeric"
 		labelText="Overall Grade"
 		scoreNumerator="5"
@@ -20,11 +20,11 @@ const componentManualOverride = html`
 		includeReportsButton
 		gradeButtonTooltip="Assignment 1 Grade Item Attached"
 		reportsButtonTooltip="Class and user statistics"
-	></d2l-labs-d2l-grade-result-presentational>
+	></d2l-labs-grade-result-presentational>
 `;
 
 const componentManualOverrideClear = html`
-	<d2l-labs-d2l-grade-result-presentational
+	<d2l-labs-grade-result-presentational
 		gradeType="Numeric"
 		labelText="Overall Grade"
 		scoreNumerator="5"
@@ -35,25 +35,25 @@ const componentManualOverrideClear = html`
 		includeReportsButton
 		gradeButtonTooltip="Assignment 1 Grade Item Attached"
 		reportsButtonTooltip="Class and user statistics"
-	></d2l-labs-d2l-grade-result-presentational>
+	></d2l-labs-grade-result-presentational>
 `;
 
 const componentNumericScore = html`
-	<d2l-labs-d2l-grade-result-presentational
+	<d2l-labs-grade-result-presentational
 		gradeType="Numeric"
 		labelText="Overall Grade"
 		scoreNumerator="5"
 		scoreDenominator="20"
-	></d2l-labs-d2l-grade-result-presentational>
+	></d2l-labs-grade-result-presentational>
 `;
 
 const componentLetterScore = html`
-	<d2l-labs-d2l-grade-result-presentational
+	<d2l-labs-grade-result-presentational
 		gradeType="LetterGrade"
 		labelText="Overall Grade"
 		.letterGradeOptions=${letterGradeOptions}
 		selectedLetterGrade="C"
-	></d2l-labs-d2l-grade-result-presentational>
+	></d2l-labs-grade-result-presentational>
 `;
 
 const eventTimeoutMS = 10000;
@@ -93,7 +93,7 @@ describe('d2l-grade-result-presentational', () => {
 		});
 	});
 
-	// this test fails after adding localization to d2l-grade-result-numeric-score but the component still works
+	// this test fails after adding localization to d2l-labs-grade-result-numeric-score but the component still works
 	it.skip('number grade changed', async() => {
 		return new Promise((resolve, reject) => {
 			fixture(componentNumericScore).then(el => {

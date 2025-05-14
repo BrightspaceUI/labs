@@ -136,4 +136,4 @@ export class D2LGradeResultStudentGradePreview extends LocalizeLabsElement(LitEl
 
 }
 
-customElements.define('d2l-grade-result-student-grade-preview', D2LGradeResultStudentGradePreview);
+customElements.define('d2l-labs-grade-result-student-grade-preview', D2LGradeResultStudentGradePreview);

@@ -89,12 +89,12 @@ describe('student-grade-preview', () => {
 		it(`${test.name}`, async() => {
 			const el = await fixture(
 				html`
-					<d2l-grade-result-student-grade-preview
+					<d2l-labs-grade-result-student-grade-preview
 						?hidden=${!test.displayStudentGradePreview}
 						?hide-label=${test.hideLabel}
 						out-of=${test.outOf}
 						student-grade-preview=${test.studentGradePreview}
-					></d2l-grade-result-student-grade-preview>
+					></d2l-labs-grade-result-student-grade-preview>
 				`
 			);
 
@@ -239,7 +239,7 @@ describe('presentational-with-grade-preview', () => {
 				it(`${test.name}`, async() => {
 					const el = await fixture(
 						html`
-							<d2l-labs-d2l-grade-result-presentational
+							<d2l-labs-grade-result-presentational
 								?display-student-grade-preview=${test.displayStudentGradePreview}
 								gradeType=${test.gradeType}
 								?includeGradeButton=${test.includeGradeButton}
@@ -255,7 +255,7 @@ describe('presentational-with-grade-preview', () => {
 								?showFlooredScoreWarning=${test.showFlooredScoreWarning}
 								student-grade-preview=${test.studentGradePreview}
 								subtitleText=${test.subtitleText}
-							></d2l-labs-d2l-grade-result-presentational>
+							></d2l-labs-grade-result-presentational>
 						`, { viewport: screenSizeCategory.viewport }
 					);
 
