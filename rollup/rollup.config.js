@@ -2,6 +2,7 @@ import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
 import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 import glob from 'glob-all';
+import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import { readFileSync } from 'fs';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
@@ -12,14 +13,6 @@ const buildDate = Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto' }).
 const jsGlob = [
 	'@(src|demo)/**/*.js',
 	'./index.js',
-	'node_modules/@brightspace-ui/core/components/calendar/*.js',
-	'node_modules/@brightspace-ui/core/components/collapsible-panel/*.js',
-	'node_modules/@brightspace-ui/core/components/colors/*.js',
-	'node_modules/@brightspace-ui/core/components/demo/*.js',
-	'node_modules/@brightspace-ui/core/components/dropdown/*.js',
-	'node_modules/@brightspace-ui/core/components/icons/*.js',
-	'node_modules/@brightspace-ui/core/components/menu/*.js',
-	'node_modules/@brightspace-ui/core/components/typography/*.js',
 	'!**/*.@(test|axe|vdiff).js',
 ];
 const nonJsGlob = [
@@ -27,13 +20,13 @@ const nonJsGlob = [
 	'*.*',
 	'node_modules/@brightspace-ui/core/components/demo/styles.css',
 	'!**/*.@(js|md)',
+	'!./*.json',
 	'!**/golden/**/*',
 ];
 
 export default {
 	input: glob.sync(jsGlob),
-	output: { dir: 'build', format: 'es', preserveModules: true },
-	external: ['@brightspace-ui/testing', 'sinon'],
+	output: { dir: 'build', format: 'es', preserveModules: true, assetFileNames: 'assets/[name][extname]' },
 	plugins: [
 		del({ targets: 'build' }),
 		copy({
@@ -42,6 +35,10 @@ export default {
 				dest: 'build',
 				rename: (_name, _extension, fullpath) => fullpath,
 			}],
+		}),
+		html({
+			flattenOutput: false,
+			input: [{ path: 'index.html' }, { path: 'demo/**/*.html' }]
 		}),
 		replace({
 			include: './index.js',
