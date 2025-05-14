@@ -406,4 +406,4 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this._positionKnob(this._calcRatio(value));
 	}
 }
-customElements.define('d2l-slider-bar', SliderBar);
+customElements.define('d2l-labs-slider-bar', SliderBar);

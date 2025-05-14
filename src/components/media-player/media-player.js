@@ -854,7 +854,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 					${this._getChapterMarkersView()}
 				</div>
 				${this.hideSeekBar ? '' : html`
-					<d2l-slider-bar
+					<d2l-labs-slider-bar
 						id="d2l-labs-media-player-seek-bar"
 						fullWidth
 						solid
@@ -873,7 +873,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 						@hovering-move=${this._onHoverMove}
 						@hovering-start=${this._onHoverStart}
 						@hovering-end=${this._onHoverEnd}
-					></d2l-slider-bar>
+					></d2l-labs-slider-bar>
 				`}
 				<div id="d2l-labs-media-player-buttons">
 					<d2l-button-icon icon="${playIcon}" text="${playTooltip}"  @click="${this._togglePlay}" theme="${ifDefined(theme)}"></d2l-button-icon>
@@ -891,7 +891,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 						<div id="d2l-labs-media-player-volume-level-container" class=${classMap(volumeLevelContainerClass)}>
 							<div class="d2l-labs-media-player-rotated" id="d2l-labs-media-player-volume-level-background">
 								<div id="d2l-labs-media-player-volume-slider-container">
-									<d2l-slider-bar solid
+									<d2l-labs-slider-bar solid
 										id="d2l-labs-media-player-volume-slider"
 										vertical
 										value="${Math.round(this._volume * 100)}"
@@ -904,7 +904,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 										@focus=${this._startUsingVolumeContainer}
 										@focusout=${this._stopUsingVolumeContainer}
 										@position-change=${this._onPositionChangeVolume}
-									></d2l-slider-bar>
+									></d2l-labs-slider-bar>
 								</div>
 							</div>
 						</div>
