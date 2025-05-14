@@ -88,4 +88,4 @@ export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 
 }
 
-customElements.define('d2l-grade-result-letter-score', D2LGradeResultLetterScore);
+customElements.define('d2l-labs-grade-result-letter-score', D2LGradeResultLetterScore);

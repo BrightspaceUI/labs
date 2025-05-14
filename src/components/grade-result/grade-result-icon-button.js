@@ -35,4 +35,4 @@ export class D2LGradeResultIconButton extends LitElement {
 	}
 
 }
-customElements.define('d2l-grade-result-icon-button', D2LGradeResultIconButton);
+customElements.define('d2l-labs-grade-result-icon-button', D2LGradeResultIconButton);

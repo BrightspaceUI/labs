@@ -24,7 +24,7 @@ A web component used for rendering grades in Brightspace
 
 If you are only interested in rendering the presentational layer of the component, you can simply use the `d2l-grade-result-presentational` component.
 
-#### d2l-labs-d2l-grade-result-presentational
+#### d2l-labs-grade-result-presentational
 
 | Property                          | GradeType      | Type                        | Default     | Description                                                  |
 | ----------------------------------| -------------- | --------------------------- | ----------- | ------------------------------------------------------------ |
@@ -64,7 +64,7 @@ If you are only interested in rendering the presentational layer of the componen
 | `@d2l-grade-result-reports-button-click`        | This event is fired when the reports button is clicked.      |
 | `@d2l-grade-result-manual-override-clear-click` | This event is fired when the manual override clear is clicked. |
 
-#### d2l-labs-d2l-grade-result-presentational
+#### d2l-labs-grade-result-presentational
 
 | Event                                           | Description                                                  |
 | ----------------------------------------------- | ------------------------------------------------------------ |

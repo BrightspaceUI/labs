@@ -105,4 +105,4 @@ export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) 
 
 }
 
-customElements.define('d2l-grade-result-numeric-score', D2LGradeResultNumericScore);
+customElements.define('d2l-labs-grade-result-numeric-score', D2LGradeResultNumericScore);

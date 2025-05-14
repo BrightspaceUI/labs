@@ -92,7 +92,7 @@ describe('autograde provided visual diff tests', () => {
 			const fixtureElement = await fixture(
 				html`
 				<div style='margin: 10px 18px; padding: 50px; display: flex; justify-content: center;'>
-					<d2l-labs-d2l-grade-result-presentational
+					<d2l-labs-grade-result-presentational
 						.gradeType='${test.gradeType}'
 						.labelText='${test.labelText}'
 						.scoreNumerator=${test.scoreNumerator}
@@ -105,7 +105,7 @@ describe('autograde provided visual diff tests', () => {
 						?includeReportsButton=${test.includeReportsButton}
 						isManualOverrideActive
 						isGradeAutoCompleted
-					></d2l-labs-d2l-grade-result-presentational>
+					></d2l-labs-grade-result-presentational>
 				<div>`,
 				{ pagePadding: false }
 			);

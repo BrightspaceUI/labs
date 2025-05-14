@@ -5,7 +5,7 @@ import './grade-result-student-grade-preview.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { bodySmallStyles, labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, LitElement, nothing } from 'lit';
-import { GradeType } from '../../controllers/grade-result/Grade.js';
+import { GradeType } from './controllers/Grade.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 
@@ -132,11 +132,11 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 		}
 
 		return html`
-			<d2l-grade-result-icon-button
+			<d2l-labs-grade-result-icon-button
 				icon="tier1:grade"
 				text=${this.gradeButtonTooltip}
 				@d2l-grade-result-icon-button-click=${this._onGradeButtonClick}
-			></d2l-grade-result-icon-button>
+			></d2l-labs-grade-result-icon-button>
 		`;
 	}
 
@@ -146,22 +146,22 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 		}
 
 		return html`
-			<d2l-grade-result-icon-button
+			<d2l-labs-grade-result-icon-button
 				icon="tier1:reports"
 				text=${this.reportsButtonTooltip}
 				@d2l-grade-result-icon-button-click=${this._onReportsButtonClick}
-			></d2l-grade-result-icon-button>
+			></d2l-labs-grade-result-icon-button>
 		`;
 	}
 
 	_renderLetterScoreComponent() {
 		return html`
-			<d2l-grade-result-letter-score
+			<d2l-labs-grade-result-letter-score
 				.availableOptions=${this.letterGradeOptions}
 				.label=${this.inputLabelText}
 				.readOnly=${this._isReadOnly()}
 				.selectedOption=${this.selectedLetterGrade}
-			></d2l-grade-result-letter-score>
+			></d2l-labs-grade-result-letter-score>
 		`;
 	}
 
@@ -184,7 +184,7 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 
 	_renderNumericScoreComponent() {
 		return html`
-			<d2l-grade-result-numeric-score
+			<d2l-labs-grade-result-numeric-score
 				?allowNegativeScore=${this.allowNegativeScore}
 				.label=${this.inputLabelText}
 				.readOnly=${this._isReadOnly()}
@@ -192,7 +192,7 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 				.scoreDenominator=${this.scoreDenominator}
 				.scoreNumerator=${this.scoreNumerator}
 				?showFlooredScoreWarning=${this.showFlooredScoreWarning}
-			></d2l-grade-result-numeric-score>
+			></d2l-labs-grade-result-numeric-score>
 		`;
 	}
 
@@ -240,14 +240,14 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 		}
 
 		return html`
-			<d2l-grade-result-student-grade-preview
+			<d2l-labs-grade-result-student-grade-preview
 				?hidden=${!this.displayStudentGradePreview}
 				out-of=${this.scoreDenominator}
 				.studentGradePreview=${this.studentGradePreview}
-			></d2l-grade-result-student-grade-preview>
+			></d2l-labs-grade-result-student-grade-preview>
 		`;
 	}
 
 }
 
-customElements.define('d2l-labs-d2l-grade-result-presentational', D2LGradeResultPresentational);
+customElements.define('d2l-labs-grade-result-presentational', D2LGradeResultPresentational);

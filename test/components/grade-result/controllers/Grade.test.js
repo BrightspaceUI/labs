@@ -1,4 +1,4 @@
-import { Grade, GradeErrors, GradeType } from '../../../src/controllers/grade-result/Grade.js';
+import { Grade, GradeErrors, GradeType } from '../../../../src/components/grade-result/controllers/Grade.js';
 import { assert } from '@brightspace-ui/testing';
 
 const letterGradeOptions = {
