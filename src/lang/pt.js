@@ -8,7 +8,7 @@ export default {
 	"components:accessibilityDisabilitySimulator:keyboardOnly": "Somente teclado", // Disability simulation option for users who can only use the keyboard for navigation
 	"components:accessibilityDisabilitySimulator:lowVision": "Baixa visão", // Disability simulation option for users with a limited ability to see
 	"components:accessibilityDisabilitySimulator:noVision": "Sem visão", // Disability simulation option for users without the ability to see
-	"components:accessibilityDisabilitySimulator:none": "Nenhuma", // Disability simulation option that represents having no disability
+	"components:accessibilityDisabilitySimulator:none": "Nenhum", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Ative seu leitor de tela e insira o conteúdo", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Tipo de simulação:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Clique para adicionar o valor {value}", // Label for screen readers to inform user that they can click to add the given value
