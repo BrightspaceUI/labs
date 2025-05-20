@@ -111,5 +111,5 @@
     "resize-observer-polyfill": "^1",
     "webvtt-parser": "^2.1.2"
   },
-  "version": "2.24.2"
+  "version": "2.24.3"
 }
