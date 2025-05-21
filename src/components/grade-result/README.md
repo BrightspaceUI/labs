@@ -1,10 +1,10 @@
-# Grade Results
+# Grade Result
 
 Components used for rendering grades in Brightspace.
 
 ## Presentation View [d2l-labs-grade-result-presentational]
 
-<!-- docs: demo -->
+<!-- docs: demo code -->
 ```html
 <script type="module">
   import '@brightspace-ui/labs/components/grade-result/grade-result-presentational.js';
@@ -16,7 +16,27 @@ Components used for rendering grades in Brightspace.
   scoreNumerator="5"
   scoreDenominator="20"
   display-student-grade-preview
-  student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
+  student-grade-preview='{"score": 5, "symbol": "Fine", "colour": "#FFCC00"}'
+></d2l-labs-grade-result-presentational>
+```
+
+<!-- docs: demo code -->
+```html
+<script type="module">
+  import '@brightspace-ui/labs/components/grade-result/grade-result-presentational.js';
+</script>
+<d2l-labs-grade-result-presentational
+  gradeType="Numeric"
+  labelText="Overall Grade"
+  scoreNumerator="5"
+  scoreDenominator="20"
+  isManualOverrideActive
+  includeGradeButton
+  gradeButtonTooltip="Assignment 1 Grade Item Attached"
+  includeReportsButton
+  reportsButtonTooltip="Class and user statistics"
+  display-student-grade-preview
+  student-grade-preview='{"score": 10, "symbol": "Very Good", "colour": "#00FFFF"}'
 ></d2l-labs-grade-result-presentational>
 ```
 
@@ -60,7 +80,7 @@ Components used for rendering grades in Brightspace.
 
 ## Student Grade Preview [d2l-labs-grade-result-student-grade-preview]
 
-<!-- docs: demo -->
+<!-- docs: demo code -->
 ```html
 <script type="module">
   import '@brightspace-ui/labs/components/grade-result/grade-result-student-grade-preview.js';
