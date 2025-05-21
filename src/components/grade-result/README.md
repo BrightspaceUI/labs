@@ -1,30 +1,49 @@
-# @d2l/labs-grade-result
+# Grade Result
 
-A web component used for rendering grades in Brightspace
+Components used for rendering grades in Brightspace.
 
-## Properties
+## Presentation View [d2l-labs-grade-result-presentational]
 
-#### d2l-labs-d2l-grade-result
+<!-- docs: demo code -->
+```html
+<script type="module">
+  import '@brightspace-ui/labs/components/grade-result/grade-result-presentational.js';
+</script>
+<d2l-labs-grade-result-presentational
+  gradeType="Numeric"
+  labelText="Overall Grade"
+  labelHeadingLevel="3"
+  scoreNumerator="5"
+  scoreDenominator="20"
+  display-student-grade-preview
+  student-grade-preview='{"score": 5, "symbol": "Fine", "colour": "#FFCC00"}'
+></d2l-labs-grade-result-presentational>
+```
 
-| Property                          | Type      | Default     | Description                                                  |
-| ----------------------------------| --------- | -------     | ------------------------------------------------------------ |
-| `href`                            | `string`  | `''`        | The Hypermedia route to power the component. This component runs off of the /grade route or an activity. |
-| `token`                           | `string`  | `''`        | For authentication                                           |
-| `disableAutoSave`                 | `boolean` | `false`     | Prevent the component from automatically saving the grade to the API when the grade is changed. |
-| `_hideTitle`                      | `boolean` | `false`     | This property will hide the "Overall Grade" title above the component. |
-| `customManualOverrideText`        | `string`  | `undefined` | This properly will substitute the stock text on the "Manual Override" button. |
-| `customManualOverrideClearText`   | `string`  | `undefined` | This properly will substitute the stock text on the "Clear Manual Override" button. |
+<!-- docs: demo code -->
+```html
+<script type="module">
+  import '@brightspace-ui/labs/components/grade-result/grade-result-presentational.js';
+</script>
+<d2l-labs-grade-result-presentational
+  gradeType="LetterGrade"
+  labelText="Overall Grade"
+  letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+  selectedLetterGrade="2"
+  scoreDenominator="20"
+  isManualOverrideActive
+  includeGradeButton
+  gradeButtonTooltip="Assignment 1 Grade Item Attached"
+  includeReportsButton
+  reportsButtonTooltip="Class and user statistics"
+  display-student-grade-preview
+  student-grade-preview='{"score": 10, "symbol": "Very Good", "colour": "#00FFFF"}'
+></d2l-labs-grade-result-presentational>
+```
 
-##### Public Methods
+<!-- docs: start hidden content -->
 
-| Method                         | Description                                                  |
-| ------------------------------ | ------------------------------------------------------------ |
-| `saveGrade(): void`            | This is the method used to manually save the grade to the server when `disableAutoSave = true`. This method will emit `@d2l-grade-result-grade-saved-success` or `@d2l-grade-result-grade-saved-error`. |
-| `hasUnsavedChanges(): boolean` | Determines whether the grade has been changed by the user and has not been saved to the server yet. |
-
-If you are only interested in rendering the presentational layer of the component, you can simply use the `d2l-grade-result-presentational` component.
-
-#### d2l-labs-grade-result-presentational
+### Properties
 
 | Property                          | GradeType      | Type                        | Default     | Description                                                  |
 | ----------------------------------| -------------- | --------------------------- | ----------- | ------------------------------------------------------------ |
@@ -48,23 +67,7 @@ If you are only interested in rendering the presentational layer of the componen
 | `allowNegativeScore`             | Numeric        | `boolean`                    | `'false'`   | Set to `true` if negative scores can be entered                         |
 | `showFlooredScoreWarning`        | Numeric        | `boolean`                    | `'false'`   | Set to `true` if displaying a negative grade that has been floored at 0 |
 
-## Events
-
-#### d2l-labs-d2l-grade-result
-
-| Event                                           | Description                                                  |
-| ----------------------------------------------- | ------------------------------------------------------------ |
-| `@d2l-grade-result-initialized-success`         | This event is fired when the component is successfully initialized and a grade is loaded from the API. |
-| `@d2l-grade-result-initialized-error`           | This event is fired when there is an error initializing the component. This is usually caused by an invalid `href` or `token`. |
-| `@d2l-grade-result-grade-updated-success`       | This event is fired when the grade is successfully updated on the frontend. |
-| `@d2l-grade-result-grade-updated-error`         | This event is fired when there is an error updating the grade on the frontend. |
-| `@d2l-grade-result-grade-saved-success`         | This event is fired when the grade is successfully saved to the server. |
-| `@d2l-grade-result-grade-saved-error`           | This event is fired when there is an error while saving the grade to the server. |
-| `@d2l-grade-result-grade-button-click`          | This event is fired when the grades button is clicked.       |
-| `@d2l-grade-result-reports-button-click`        | This event is fired when the reports button is clicked.      |
-| `@d2l-grade-result-manual-override-clear-click` | This event is fired when the manual override clear is clicked. |
-
-#### d2l-labs-grade-result-presentational
+### Events
 
 | Event                                           | Description                                                  |
 | ----------------------------------------------- | ------------------------------------------------------------ |
@@ -74,12 +77,17 @@ If you are only interested in rendering the presentational layer of the componen
 | `@d2l-grade-result-letter-score-selected`       | This event is fired on the change of the grade for a `gradeType="LetterGrade"` grade. |
 | `@d2l-grade-result-manual-override-clear-click` | This event is fired when the manual override clear is clicked. |
 
+<!-- docs: end hidden content -->
 
-## Usage
+## Student Grade Preview [d2l-labs-grade-result-student-grade-preview]
 
+<!-- docs: demo code -->
 ```html
 <script type="module">
-    import '@d2l/labs-grade-result/d2l-grade-result.js';
+  import '@brightspace-ui/labs/components/grade-result/grade-result-student-grade-preview.js';
 </script>
-<d2l-labs-d2l-grade-result href="href" token="token" disableAutoSave _hideTitle>My element</d2l-labs-d2l-grade-result>
+  <d2l-labs-grade-result-student-grade-preview
+    out-of="10"
+    student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
+  ></d2l-labs-grade-result-student-grade-preview>
 ```

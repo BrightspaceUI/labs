@@ -14,30 +14,120 @@ const numberConverter = {
 	toAttribute:  (prop) => { return String(prop); }
 };
 
+/**
+ * @fires d2l-grade-result-grade-button-click - Dispatched when the grade button is clicked.
+ * @fires d2l-grade-result-manual-override-clear-click - Dispatched when the manual override clear is clicked.
+ * @fires d2l-grade-result-reports-button-click - Dispatched when the reports button is clicked.
+ */
 export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {
+			/**
+			 * Set to true if negative scores can be entered
+			 * @type {boolean}
+			 */
 			allowNegativeScore: { type: Boolean },
+			/**
+			 * This property will substitute the stock text on the "Clear Manual Override" button
+			 * @type {string}
+			 */
 			customManualOverrideClearText: { type: String },
+			/**
+			 * @type {boolean}
+			 */
 			displayStudentGradePreview: { type: Boolean, attribute: 'display-student-grade-preview' },
+			/**
+			 * The text that is inside of the tooltip when hovering over the grades button
+			 * @type {string}
+			 */
 			gradeButtonTooltip: { type: String },
+			/**
+			 * Specifies the type of grade that the component is meant to render
+			 * @type {'Numeric'|'LetterGrade'}
+			 */
 			gradeType: { type: String },
+			/**
+			 * This property will hide the "Overall Grade" title above the component
+			 * @type {boolean}
+			 */
 			hideTitle: { type: Boolean },
+			/**
+			 * Determines whether the grades icon button is rendered
+			 * @type {boolean}
+			 */
 			includeGradeButton: { type: Boolean },
+			/**
+			 * Determines whether the reports icon button is rendered
+			 * @type {boolean}
+			 */
 			includeReportsButton: { type: Boolean },
+			/**
+			 * This property sets the label that will be used inside the aria-label and validation error tooltips
+			 * @type {string}
+			 */
 			inputLabelText: { type: String },
+			/**
+			 * Set to true if the user is currently manually overriding the grade. This will display the button to 'Clear Manual Override'.
+			 * @type {boolean}
+			 */
 			isManualOverrideActive: { type: Boolean },
+			/**
+			 * @type {number}
+			 */
 			labelHeadingLevel: { type: Number },
+			/**
+			 * The text that appears above the component
+			 * @type {string}
+			 */
 			labelText: { type: String },
+			/**
+			 * A dictionary where the key is a unique id and the value is an object containing the LetterGrade text and the PercentStart
+			 * @type {object}
+			 */
 			letterGradeOptions: { type: Object },
+			/**
+			 * Set to true if the user does not have permissions to edit the grade
+			 * @type {boolean}
+			 */
 			readOnly: { type: Boolean },
+			/**
+			 * The text that is inside of the tooltip when hovering over the reports button
+			 * @type {string}
+			 */
 			reportsButtonTooltip: { type: String },
+			/**
+			 * Set to true if an undefined/blank grade is not considered valid
+			 * @type {boolean}
+			 */
 			required: { type: Boolean },
+			/**
+			 * The denominator of the numeric score that is given
+			 * @type {number}
+			 */
 			scoreDenominator: { type: Number },
+			/**
+			 * The numerator of the numeric score that is given
+			 * @type {number}
+			 */
 			scoreNumerator: { type: Number, converter: numberConverter },
+			/**
+			 * The current selected letter grade of the options given
+			 * @type {string}
+			 */
 			selectedLetterGrade: { type: String },
+			/**
+			 * Set to true if displaying a negative grade that has been floored at 0
+			 * @type {boolean}
+			 */
 			showFlooredScoreWarning: { type: Boolean },
+			/**
+			 * This property will show the given text under the title
+			 * @type {string}
+			 */
 			subtitleText: { type: String },
+			/**
+			 * @type {object}
+			 */
 			studentGradePreview: { type: Object, attribute: 'student-grade-preview' },
 		};
 	}
