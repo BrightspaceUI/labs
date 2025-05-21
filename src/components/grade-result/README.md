@@ -26,9 +26,10 @@ Components used for rendering grades in Brightspace.
   import '@brightspace-ui/labs/components/grade-result/grade-result-presentational.js';
 </script>
 <d2l-labs-grade-result-presentational
-  gradeType="Numeric"
+  gradeType="LetterGrade"
   labelText="Overall Grade"
-  scoreNumerator="5"
+  letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+  selectedLetterGrade="2"
   scoreDenominator="20"
   isManualOverrideActive
   includeGradeButton
