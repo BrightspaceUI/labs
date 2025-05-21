@@ -14,6 +14,9 @@ const MIN_WIDTH = 5.5;
 const MIN_NEGATIVE_GRADE = -9999999999;
 const MIN_POSITIVE_GRADE = 0;
 
+/**
+ * @fires d2l-grade-result-grade-change - Dispatched on the change of the grade for a gradeType="Numeric" grade.
+ */
 export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) {
 	static get properties() {
 		return {

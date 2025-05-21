@@ -3,6 +3,9 @@ import { bodyStandardStyles } from '@brightspace-ui/core/components/typography/s
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 
+/**
+ * @fires d2l-grade-result-letter-score-selected - Dispatched on the change of the grade for a gradeType="LetterGrade" grade.
+ */
 export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
