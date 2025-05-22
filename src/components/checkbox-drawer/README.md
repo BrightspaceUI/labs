@@ -1,17 +1,22 @@
-# d2l-labs-checkbox-drawer
+# Checkbox Drawer
 
-The `d2l-labs-checkbox-drawer` element can be used to get a checkbox with a description. When checked, drawer contents are revealed underneath.
+The checkbox drawer can be used to get a checkbox with a description. When checked, drawer contents are revealed underneath.
 
-## Usage
+## Checkbox Drawer [d2l-labs-checkbox-drawer]
 
+<!-- docs: demo code align:flex-start autoSize:false size:small -->
 ```html
 <script type="module">
-    import '@brightspace-ui/labs/components/checkbox-drawer.js';
+  import '@brightspace-ui/labs/components/checkbox-drawer.js';
 </script>
-<d2l-labs-checkbox-drawer>
-  <p>My drawer content.</p>
+<d2l-labs-checkbox-drawer
+  label="Checkbox drawer label."
+  description="Checkbox drawer description. Check the box to see the drawer message.">
+  Hello there! Uncheck the box to hide me.
 </d2l-labs-checkbox-drawer>
 ```
+
+<!-- docs: start hidden content -->
 
 **Properties:**
 
@@ -27,3 +32,5 @@ The `d2l-labs-checkbox-drawer` element can be used to get a checkbox with a desc
 - `d2l-labs-checkbox-drawer-checked-change`: dispatched when checkbox's state changes.
 - `d2l-labs-checkbox-drawer-expand`: dispatched when the drawer starts to expand. As per the [expand collapse component](https://github.com/BrightspaceUI/core/tree/master/components/expand-collapse), the `detail` contains an `expandComplete` promise that can be waited on to determine when the content has finished expanding.
 - `d2l-labs-checkbox-drawer-collapse`: dispatched when the drawer starts to collapse. As per the [expand collapse component](https://github.com/BrightspaceUI/core/tree/master/components/expand-collapse), the `detail` contains a `collapseComplete` promise that can be waited on to determine when the content has finished collapsing.
+
+<!-- docs: end hidden content -->
