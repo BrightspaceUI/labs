@@ -1,15 +1,25 @@
-# d2l-labs-attribute-picker
+# Attribute Picker
 
-The `d2l-labs-attribute-picker` component is an autocompleting dropdown to choose one or more new or pre-existing attributes inline.
+This component is an autocompleting dropdown to choose one or more new or pre-existing attributes inline.
 
-## Usage
+## Attribute Picker [d2l-labs-attribute-picker]
 
+<!-- docs: demo code align:flex-start autoSize:false size:medium -->
 ```html
 <script type="module">
-    import '@brightspace-ui/labs/components/attribute-picker.js';
+  import '@brightspace-ui/labs/components/attribute-picker.js';
 </script>
-<d2l-labs-attribute-picker></d2l-labs-attribute-picker>
+<d2l-labs-attribute-picker
+  label="attributes"
+  invalid-tooltip-text="You're missing something"
+  required
+  allow-freeform
+  limit="5"
+  assignable-attributes='[{"name":"one","value":1},{"name":"two","value":2},{"name":"three","value":3},{"name":"four","value":4},{"name":"five","value":5},{"name":"six","value":6},{"name":"seven","value":7}]'
+></d2l-labs-attribute-picker>
 ```
+
+<!-- docs: start hidden content -->
 
 **Properties:**
 
@@ -31,3 +41,5 @@ The `d2l-labs-attribute-picker` component is an autocompleting dropdown to choos
   - `limit`: the limit that was hit
 - `d2l-labs-attribute-picker-text-changed`: dispatched when text is entered into the text input. Event `detail` include:
   - `text`: the current value of the text input
+
+<!-- docs: end hidden content -->
