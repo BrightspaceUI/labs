@@ -203,6 +203,9 @@ class LabsAccordionCollapse extends LitElement {
 			this.#resizeObserver = new ResizeObserver(() => this._fireAccordionResizeEvent());
 			this.#resizeObserver.observe(this);
 		}
+		if (this.opened) {
+			this._state = 'opened';
+		}
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback();
