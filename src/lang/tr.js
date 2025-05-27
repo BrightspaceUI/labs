@@ -21,7 +21,7 @@ export default {
 	"components:fileUploader:browse": "göz atın",
 	"components:fileUploader:browse_files": "Dosyalara Göz At",
 	"components:fileUploader:choose_one_file_to_upload": "Yüklemek için bir dosya seçin",
-	"components:gradeResult:cannotBeNegative": "(0'dan az olamaz)",
+	"components:gradeResult:cannotBeNegative": "(0’dan az olamaz)",
 	"components:gradeResult:clearManualOverride": "Manuel Olarak Geçersiz Kılmayı Temizle",
 	"components:gradeResult:gradeScoreLabel": "Not puanı",
 	"components:gradeResult:manuallyOverrideGrade": "Notu Manuel Olarak Geçersiz Kıl",

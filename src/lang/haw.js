@@ -71,7 +71,7 @@ export default {
 	"components:optInFlyout:feedbackReasonLabel": "Makemake ʻoe e haʻi mai iā mākou no ke aha ʻoe e hoʻi ai?",
 	"components:optInFlyout:feedbackReasonMissingFeature": "Ua nele kahi hiʻona aʻu e hoʻohana nei",
 	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "ʻAʻole ia he manawa maikaʻi noʻu e hoʻāʻo i kēia mana",
-	"components:optInFlyout:feedbackReasonOther": "'ē aʻe",
+	"components:optInFlyout:feedbackReasonOther": "‘ē aʻe",
 	"components:optInFlyout:feedbackReasonPreferOldExperience": "Manaʻo wau he ʻoi aku ka maikaʻi o ka mana kahiko",
 	"components:optInFlyout:feedbackTitle": "E ʻike iā mākou pehea e hoʻomaikaʻi ai!",
 	"components:optInFlyout:helpMessage": "E heluhelu i kā mākou * palapala kōkua * e hoʻomaka ai!",
