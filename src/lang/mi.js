@@ -1,5 +1,4 @@
 export default {
-	"test": "This should be \"properly\" escaped",
 	"components:accessibilityDisabilitySimulator:blurLevel": "Taumata Blur", // Label for input slider that users can use to change the level of blurriness
 	"components:accessibilityDisabilitySimulator:colorblindAchromatopsia": "Achromatopsia", // Disability simulation option for users with Achromatiopsia colorblindness
 	"components:accessibilityDisabilitySimulator:colorblindDeuteranopia": "Deuteranopia", // Disability simulation option for users with Deuteranopia colorblindness
