@@ -1,16 +1,37 @@
-# media-player
+# Media Player
 
 A Lit element based media player component, designed for similarity across browsers. Capable of playing video and audio contents.
 
+## Media Player [d2l-labs-media-player]
 
-## d2l-labs-media-player
-
+<!-- docs: demo code -->
 ```html
 <script type="module">
     import '@brightspace-ui/labs/components/media-player.js';
 </script>
-<d2l-labs-media-player src="/video.webm"></d2l-labs-media-player>
+<d2l-labs-media-player
+  thumbnails="../../demo/media-player/th90w160i1-samplevideo.png"
+  media-type="video"
+  metadata='{"chapters":[{"time":0,"title":{"en":"Chapter One","fr":"Chapitre Un","fr-ca":"Chapitre : Un"}},{"time":3,"title":{"en":"Chapter Two","fr":"Chapitre Deux","fr-ca":"Chapitre : Deux"}}]}' poster="../../demo/media-player/sample-poster.png">
+  <source src="../../demo/media-player/sample-video-144p.mp4" label="SD">
+  <source src="../../demo/media-player/sample-video-360p.mp4" label="HD" default>
+  <track src="../../demo/media-player/sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
+  <track src="../../demo/media-player/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
+</d2l-labs-media-player>
 ```
+
+<!-- docs: demo code display:block autoSize:false size:small -->
+```html
+<script type="module">
+    import '@brightspace-ui/labs/components/media-player.js';
+</script>
+<d2l-labs-media-player src="../../demo/media-player/sample-audio.mp3" media-type="audio">
+  <track src="../../demo/media-player/sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
+  <track src="../../demo/media-player/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
+</d2l-labs-media-player>
+```
+
+<!-- docs: start hidden content -->
 
 **Attributes:**
 
@@ -214,3 +235,5 @@ The following features are implemented to improve accessibility:
 - all controls can be accessed using the mouse or keyboard
 - captions can be provided to the media player
 - important events, such as a media source failing to load, are displayed visually and announced by screen readers
+
+<!-- docs: end hidden content -->
