@@ -9,9 +9,9 @@ export default {
 	"components:accessibilityDisabilitySimulator:lowVision": "Golwg Gwan", // Disability simulation option for users with a limited ability to see
 	"components:accessibilityDisabilitySimulator:noVision": "Dim Golwg", // Disability simulation option for users without the ability to see
 	"components:accessibilityDisabilitySimulator:none": "Dim", // Disability simulation option that represents having no disability
-	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Galluogwch eich darllenydd sgrîn a thab i'r cynnwys", // Alert that prompts the user to use a screenreader and tabbing to view content
+	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Galluogwch eich darllenydd sgrîn a thab i’r cynnwys", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Math o efelychiad:", // Label for the disability simulation options
-	"components:attributePicker:addValue": "Cliciwch i ychwanegu'r gwerth {value}", // Label for screen readers to inform user that they can click to add the given value
+	"components:attributePicker:addValue": "Cliciwch i ychwanegu’r gwerth {value}", // Label for screen readers to inform user that they can click to add the given value
 	"components:attributePicker:limitReached": "Rydych chi wedi cyrraedd terfyn y gwerthoedd a ddewiswyd o {value}", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Rhaid gosod o leiaf un gwerth", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "Cliciwch, pwyswch yn ôl, neu pwyswch y fysell dileu i dynnu’r eitem {value}", // Label to inform user how they can remove the given value
@@ -38,8 +38,8 @@ export default {
 	"components:mediaPlayer:exitFullscreen": "Gadael sgrîn lawn",
 	"components:mediaPlayer:fullscreen": "Sgrin Lawn",
 	"components:mediaPlayer:language": "Iaith",
-	"components:mediaPlayer:loadErrorMessage": "Wps, roedd problem wrth lwytho'r ffeil gyfryngau hon",
-	"components:mediaPlayer:loadSuccessMessage": "Mae'r cyfryngau wedi llwytho'n llwyddiannus",
+	"components:mediaPlayer:loadErrorMessage": "Wps, roedd problem wrth lwytho’r ffeil gyfryngau hon",
+	"components:mediaPlayer:loadSuccessMessage": "Mae’r cyfryngau wedi llwytho’n llwyddiannus",
 	"components:mediaPlayer:menu": "dewislen",
 	"components:mediaPlayer:mute": "Mud",
 	"components:mediaPlayer:off": "Wedi Diffodd",
@@ -110,6 +110,6 @@ export default {
 	"components:wizard:aria.steplabel": "Cam {currentStep} o {totalSteps}",
 	"components:wizard:stepper.defaults.next": "Nesaf",
 	"components:wizard:stepper.defaults.restart": "Ailddechrau",
-	"components:wizard:restart.button.tooltip": "Yn ôl i'r cam cyntaf",
+	"components:wizard:restart.button.tooltip": "Yn ôl i’r cam cyntaf",
 	"components:wizard:next.button.tooltip": "Parhau i'r cam nesaf"
 };
