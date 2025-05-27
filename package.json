@@ -51,7 +51,6 @@
     "./controllers/computed-value.js": "./src/controllers/computed-values/computed-value.js",
     "./controllers/computed-values.js": "./src/controllers/computed-values/computed-values.js",
     "./controllers/language-listener.js": "./src/controllers/language-listener/language-listener.js",
-    "./demo/components/media-player/*": "./demo/components/media-player/static/*",
     "./utilities/pub-sub.js": "./src/utilities/pub-sub/pub-sub.js",
     "./utilities/reactive-store.js": "./src/utilities/reactive-store/reactive-store.js",
     "./utilities/lit-router": "./src/utilities/router/index.js"
