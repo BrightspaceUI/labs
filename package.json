@@ -92,7 +92,8 @@
   },
   "files": [
     "labs.serge.json",
-    "/src"
+    "/src",
+    "/demo/components/media-player/static"
   ],
   "publishConfig": {
     "access": "public"

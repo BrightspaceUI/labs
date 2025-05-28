@@ -15,9 +15,9 @@
 
 			<h5>Single quality source</h5>
 			<d2l-demo-snippet>
-				<d2l-labs-media-player src="sample-video-360p.mp4" thumbnails="th90w160i1-samplevideo.png" id="single-quality" media-type="video" poster="sample-poster.png">
-					<track src="sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
-					<track src="sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
+				<d2l-labs-media-player src="static/sample-video-360p.mp4" thumbnails="static/th90w160i1-samplevideo.png" id="single-quality" media-type="video" poster="static/sample-poster.png">
+					<track src="static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
+					<track src="static/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
 				</d2l-labs-media-player>
 				<script>
 					// setting metadata JSON directly as object
@@ -27,7 +27,7 @@
 							setTimeout(singleQualityMetadata, 0);
 							return;
 						}
-						fetch('sample-metadata.json')
+						fetch('static/sample-metadata.json')
 							.then(response => response.json())
 							.then(metadata => {
 								singleQualityDemo.metadata = metadata;
@@ -39,19 +39,19 @@
 
 			<h5>Multiple qualities</h5>
 			<d2l-demo-snippet>
-				<d2l-labs-media-player thumbnails="th90w160i1-samplevideo.png" id="multiple-quality" media-type="video" metadata='{"chapters":[{"time":0,"title":{"en":"Chapter One","fr":"Chapitre Un","fr-ca":"Chapitre : Un"}},{"time":3,"title":{"en":"Chapter Two","fr":"Chapitre Deux","fr-ca":"Chapitre : Deux"}}]}' poster="sample-poster.png">
-					<source src="sample-video-144p.mp4" label="SD">
-					<source src="sample-video-360p.mp4" label="HD" default>
-					<track src="sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
-					<track src="sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
+				<d2l-labs-media-player thumbnails="static/th90w160i1-samplevideo.png" id="multiple-quality" media-type="video" metadata='{"chapters":[{"time":0,"title":{"en":"Chapter One","fr":"Chapitre Un","fr-ca":"Chapitre : Un"}},{"time":3,"title":{"en":"Chapter Two","fr":"Chapitre Deux","fr-ca":"Chapitre : Deux"}}]}' poster="static/sample-poster.png">
+					<source src="static/sample-video-144p.mp4" label="SD">
+					<source src="static/sample-video-360p.mp4" label="HD" default>
+					<track src="static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
+					<track src="static/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
 				</d2l-labs-media-player>
 			</d2l-demo-snippet>
 
 			<h2>Audio Player</h2>
 			<d2l-demo-snippet>
-				<d2l-labs-media-player src="sample-audio.mp3" media-type="audio">
-					<track src="sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
-					<track src="sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
+				<d2l-labs-media-player src="static/sample-audio.mp3" media-type="audio">
+					<track src="static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
+					<track src="static/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
 				</d2l-labs-media-player>
 			</d2l-demo-snippet>
 		</d2l-demo-page>
