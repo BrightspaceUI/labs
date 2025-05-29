@@ -1,12 +1,13 @@
 # Card Overlay
 
-A placeholder when an actual card component is loading
+A skeleton placeholder for when a card component is loading. The overlay layout is specific to summary cards in Insights repos. For further information on skeletons, see the BrightspaceUI/core SkeletonMixin.
 
-## Usage
+## Card Overlay [d2l-labs-card-overlay]
 
+<!-- docs: demo code -->
 ```html
 <script type="module">
   import '@brightspace-ui/labs/components/card-overlay.js';
 </script>
-<d2l-labs-card-overlay>My element</d2l-labs-card-overlay>
+<d2l-labs-card-overlay skeleton>My card</d2l-labs-card-overlay>
 ```
