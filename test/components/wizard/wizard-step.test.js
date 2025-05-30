@@ -1,4 +1,4 @@
-import '../../../src/components/wizard/step.js';
+import '../../../src/components/wizard/wizard-step.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 
