@@ -1,15 +1,31 @@
-# d2l-labs-pager-numeric
+# Pagination
 
-A component to indicate the existence of and provide navigation for multiple pages of content.
+A numeric paging component to indicate the existence of and provide navigation for multiple pages of content. For Load More Paging, see the [`core` component](https://daylight.d2l.dev/components/paging/).
 
-## Usage
+## Numeric Pager [d2l-labs-pager-numeric]
 
+<!-- docs: demo code -->
 ```html
 <script type="module">
-    import '@brightspace-ui/labs/components/pager-numeric.js';
+  import '@brightspace-ui/labs/components/pager-numeric.js';
+  // <!-- docs: start hidden content -->
+  requestAnimationFrame(() => {
+    const pager = document.querySelector('d2l-labs-pager-numeric');
+    pager.addEventListener('d2l-labs-pager-numeric-page-change', (e) => {
+      e.target.pageNumber = e.detail.page;
+    });
+  });
+  // <!-- docs: end hidden content -->
 </script>
-<d2l-labs-pager-numeric></d2l-labs-pager-numeric>
+<d2l-labs-pager-numeric
+  max-page-number="5"
+  show-page-size-selector
+  page-sizes="[1,10,20,100,250,1000]"
+  page-size="10">
+</d2l-labs-pager-numeric>
 ```
+
+<!-- docs: start hidden content -->
 
 ## Properties
 
@@ -27,3 +43,5 @@ A component to indicate the existence of and provide navigation for multiple pag
   * `page`: the new page number value
 * `d2l-labs-pager-numeric-page-size-change`: dispatched when the item count selector's value is changed. Event `detail` includes:
   * `itemCount`: the value the item count selector was just set to
+
+<!-- docs: end hidden content -->
