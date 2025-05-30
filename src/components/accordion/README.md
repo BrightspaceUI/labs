@@ -1,18 +1,52 @@
-# d2l-labs-accordion
+# Accordion
 
 A Lit-based widget that displays a list of collapsible components. When a collapsible component is clicked, it expands or collapses the associated content.
 
-## Usage
+## Accordion [d2l-labs-accordion]
 
+The accordion panel to manage multiple accordions.
+
+<!-- docs: demo code display:block autoSize:false size:medium -->
 ```html
 <script type="module">
-    import '@brightspace-ui/labs/components/accordion.js';
-	import '@brightspace-ui/labs/components/accordion-collapse.js';
+  import '@brightspace-ui/labs/components/accordion.js';
+  import '@brightspace-ui/labs/components/accordion-collapse.js';
 </script>
+<d2l-labs-accordion auto-close>
+  <d2l-labs-accordion-collapse label="AutoClose">
+    <d2l-labs-accordion-collapse label="Child 1">Demo</d2l-labs-accordion-collapse>
+    <d2l-labs-accordion-collapse label="Child 2">Demo</d2l-labs-accordion-collapse>
+  </d2l-labs-accordion-collapse>
+</d2l-labs-accordion>
 <d2l-labs-accordion>
-	<d2l-labs-accordion-collapse></d2l-labs-accordion-collapse>
+  <d2l-labs-accordion-collapse label="No AutoClose">
+    <d2l-labs-accordion-collapse label="- Child 1">Demo</d2l-labs-accordion-collapse>
+    <d2l-labs-accordion-collapse label="- Child 2">Demo </d2l-labs-accordion-collapse>
+  </d2l-labs-accordion-collapse>
 </d2l-labs-accordion>
 ```
+
+## Accordion Collapse [d2l-labs-accordion-collapse]
+
+The accordion component that expands or collapses the content.
+
+<!-- docs: demo code display:block autoSize:false size:medium -->
+```html
+<script type="module">
+  import '@brightspace-ui/labs/components/accordion-collapse.js';
+</script>
+<d2l-labs-accordion-collapse label="Summary" flex>
+  <ul slot="summary" style="list-style-type: none; padding-left: 0;">
+    <li>Availability starts 4/13/2020 and ends 4/23/2020</li>
+    <li>One release condition</li>
+    <li>Special access</li>
+  </ul>
+  <p>More info here!</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lectus erat, dignissim quis efficitur non, iaculis nec ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam fringilla eu orci sed tristique. Aliquam pellentesque turpis ut vehicula volutpat. Quisque euismod felis nec dolor scelerisque, ullamcorper gravida ante suscipit. Nam eget libero vel mauris tincidunt molestie. Maecenas tortor purus, sodales vel lacus vel, molestie tempor tellus.</p>
+</d2l-labs-accordion-collapse>
+```
+
+<!-- docs: start hidden content -->
 
 ## Lit components:
 ### **d2l-labs-accordion** - accordion panel.
@@ -107,3 +141,5 @@ Example 6:
 	</span>
 </d2l-labs-accordion-collapse>
 ```
+
+<!-- docs: end hidden content -->
