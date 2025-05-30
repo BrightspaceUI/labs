@@ -1,34 +1,52 @@
 # Wizard
 
-The `<d2l-labs-wizard>` can be used to be display a stepped workflow.
+The wizard component can be used to display a stepped workflow.
 
-## Usage
+## Wizard [d2l-labs-wizard]
 
+<!-- docs: demo code -->
 ```html
 <script type="module">
-    import '@brightspace-ui/labs/components/wizard.js';
-	import '@brightspace-ui/labs/components/wizard-step.js';
+  import '@brightspace-ui/labs/components/wizard.js';
+  import '@brightspace-ui/labs/components/wizard-step.js';
+  // <!-- docs: start hidden content -->
+  requestAnimationFrame(() => {
+    const wizard = document.getElementById('wizard');
+    wizard.addEventListener('stepper-next', function() {
+      wizard.next();
+    });
+    wizard.addEventListener('stepper-restart', function() {
+      wizard.restart();
+    });
+  })
+  // <!-- docs: end hidden content -->
 </script>
-<d2l-labs-wizard id="wizard">
-	<d2l-labs-wizard-step step-title="Step 1">
-		<p> First step </p>
-	</d2l-labs-wizard-step>
+<d2l-labs-wizard
+  id="wizard"
+  selected-step="1">
+  <d2l-labs-wizard-step
+    next-button-aria-label="Go to step 2"
+    step-title="Get Started"
+    hide-restart-button="true">
+    <p>First Step</p>
+  </d2l-labs-wizard-step>
 
-	<d2l-labs-wizard-step step-title="Step 2">
-		<p> Second step </p>
-	</d2l-labs-wizard-step>
+  <d2l-labs-wizard-step
+    aria-title="This is the second step"
+    restart-button-tooltip="Restart this wizard">
+    <p>Second Step</p>
+  </d2l-labs-wizard-step>
+
+  <d2l-labs-wizard-step
+    step-title="Almost Done"
+    next-button-title="Done"
+    next-button-tooltip="Save this wizard">
+    <p>Last Step</p>
+  </d2l-labs-wizard-step>
 </d2l-labs-wizard>
-<script>
-	var wizard = document.getElementById('wizard');
-	wizard.addEventListener('stepper-next', function() {
-		wizard.next();
-	});
-	wizard.addEventListener('stepper-restart', function() {
-		wizard.restart();
-	});
-</script>
 ```
 
+<!-- docs: start hidden content -->
 
 ### Properties:
 
@@ -47,3 +65,4 @@ The `<d2l-labs-wizard>` can be used to be display a stepped workflow.
 - `stepper-next`: dispatched when the Next button is clicked
 - `stepper-restart`: dispatched when the Restart button is clicked
 
+<!-- docs: end hidden content -->
