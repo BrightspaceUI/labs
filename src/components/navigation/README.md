@@ -4,6 +4,7 @@ A series of web components for top level navigation used on D2L pages. The exist
 
 <!-- docs: start hidden content -->
 > **Primary Components**
+>
 > These are the components that should be used in the **VAST MAJORITY** of use cases
 <!-- docs: end hidden content -->
 
@@ -61,8 +62,11 @@ Optionally:
 - Overflow can be enabled to facilitate components like dropdowns by including the `allow-overflow` boolean attribute
 - A shorter version of the back text can be provided by setting the `back-link-text-short` attribute
 
+---
+
 <!-- docs: start hidden content -->
 > **Secondary Components**
+>
 > These are the components that make up the Primary Components. There might be an edge case or two where it makes sense to use one of these in isolation,
 > but **PLEASE STRONGLY CONSIDER** using a Primary Component instead.
 
@@ -81,8 +85,6 @@ The `d2l-labs-navigation-band` also includes a `slot` with a custom scrollbar an
 ***Relevant CSS class name:***
 * `--d2l-branding-primary-color`: Used to customize the colour of the top navigation band.
 * `--d2l-labs-navigation-band-slot-height`: When using the slot, this is needed to setup the proper scrollbar and fading effects.
-
----
 
 ## Main Header [d2l-labs-navigation-main-header]
 
@@ -104,8 +106,6 @@ Add the `d2l-labs-navigation-main-header` component, and provide elements for th
 * `left` (required): Secondary content (that will shrink with page size) oriented on the left side of the centre gutter (whitespace)
 * `right` (required): Primary content (that will not shrink with page size) oriented on the right side of the centre gutter (whitespace)
 
----
-
 ## Main Footer [d2l-labs-navigation-main-footer]
 
 Add the `d2l-labs-navigation-main-footer` component, and provide elements for the `main` slot.
@@ -124,7 +124,10 @@ Add the `d2l-labs-navigation-main-footer` component, and provide elements for th
 
 * `main` (required): Primary content of the footer. The footer will change in size to accommodate its contents
 
+---
+
 > **Actions**
+>
 > Use these components inside of the navigation component slots.
 
 <!-- docs: end hidden content -->
