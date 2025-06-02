@@ -21,13 +21,13 @@ Add the `d2l-labs-navigation` component, and provide sub elements `d2l-labs-navi
 </script>
 
 <d2l-labs-navigation has-skip-nav>
-	<d2l-labs-navigation-main-header>
-		<div slot="left" class="d2l-labs-navigation-header-left" style="background-color: pink;">This should be on the left.  As the width changes it shrinks as needed.</div>
-		<div slot="right" class="d2l-labs-navigation-header-right" style="background-color: lightblue;">This should be on the right.  It doesn't shrink.</div>
-	</d2l-labs-navigation-main-header>
-	<d2l-labs-navigation-main-footer>
-		<div slot="main" class="d2l-labs-navigation-s-main-wrapper">Stuff goes in here (small border above and below)</div>
-	</d2l-labs-navigation-main-footer>
+  <d2l-labs-navigation-main-header>
+    <div slot="left" class="d2l-labs-navigation-header-left" style="background-color: pink;">This should be on the left.  As the width changes it shrinks as needed.</div>
+    <div slot="right" class="d2l-labs-navigation-header-right" style="background-color: lightblue;">This should be on the right.  It doesn't shrink.</div>
+  </d2l-labs-navigation-main-header>
+  <d2l-labs-navigation-main-footer>
+    <div slot="main" class="d2l-labs-navigation-s-main-wrapper">Stuff goes in here (small border above and below)</div>
+  </d2l-labs-navigation-main-footer>
 </d2l-labs-navigation>
 ```
 
@@ -47,12 +47,12 @@ Please note that overridding the `left` slot will prevent the Back link from dis
 </script>
 
 <d2l-labs-navigation-immersive back-link-href="https://www.example.org" back-link-text="Back to D2L">
-	<div class="d2l-typography d2l-body-standard" slot="middle">
-		<p>Economics 101</p>
-	</div>
-	<div slot="right">
-		<d2l-labs-navigation-iterator></d2l-labs-navigation-iterator>
-	</div>
+  <div class="d2l-typography d2l-body-standard" slot="middle">
+    <p>Economics 101</p>
+  </div>
+  <div slot="right">
+    <d2l-labs-navigation-iterator></d2l-labs-navigation-iterator>
+  </div>
 </d2l-labs-navigation-immersive>
 ```
 
@@ -96,8 +96,8 @@ Add the `d2l-labs-navigation-main-header` component, and provide elements for th
 </script>
 
 <d2l-labs-navigation-main-header>
-	<div slot="left"></div>
-	<div slot="right"></div>
+  <div slot="left"></div>
+  <div slot="right"></div>
 </d2l-labs-navigation-main-header>
 ```
 
@@ -116,7 +116,7 @@ Add the `d2l-labs-navigation-main-footer` component, and provide elements for th
 </script>
 
 <d2l-labs-navigation-main-footer>
-	<div slot="main"></div>
+  <div slot="main"></div>
 </d2l-labs-navigation-main-footer>
 ```
 
@@ -139,10 +139,10 @@ Add the `d2l-labs-navigation-main-footer` component, and provide elements for th
 <!-- docs: demo code -->
 ```html
 <script type="module">
-	import '@brightspace-ui/labs/components/navigation/navigation-link.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-link.js';
 </script>
 <div style="border: 1px solid #999999; border-top: 4px solid slateblue; height: 90px; padding: 0 18px; width: 100%;">
-	<d2l-labs-navigation-link href="https://www.example.org">Settings</d2l-labs-navigation-link>
+  <d2l-labs-navigation-link href="https://www.example.org">Settings</d2l-labs-navigation-link>
 </div>
 ```
 
@@ -158,10 +158,10 @@ Add the `d2l-labs-navigation-main-footer` component, and provide elements for th
 <!-- docs: demo code -->
 ```html
 <script type="module">
-	import '@brightspace-ui/labs/components/navigation/navigation-button-icon.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-button-icon.js';
 </script>
 <div style="border: 1px solid #999999; border-top: 4px solid slateblue; height: 90px; padding: 0 18px; width: 100%;">
-	<d2l-labs-navigation-button-icon icon="tier3:gear" text="Settings"></d2l-labs-navigation-button-icon>
+  <d2l-labs-navigation-button-icon icon="tier3:gear" text="Settings"></d2l-labs-navigation-button-icon>
 </div>
 ```
 
@@ -185,10 +185,10 @@ Similar to `<d2l-labs-navigation-button-icon>`, a link that comes with an icon a
 <!-- docs: demo code -->
 ```html
 <script type="module">
-	import '@brightspace-ui/labs/components/navigation/navigation-link-icon.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-link-icon.js';
 </script>
 <div style="border: 1px solid #999999; border-top: 4px solid slateblue; height: 90px; padding: 0 18px; width: 100%;">
-	<d2l-labs-navigation-link-icon href="https://www.example.org" icon="tier3:gear" text="Settings"></d2l-labs-navigation-link-icon>
+  <d2l-labs-navigation-link-icon href="https://www.example.org" icon="tier3:gear" text="Settings"></d2l-labs-navigation-link-icon>
 </div>
 ```
 
@@ -208,10 +208,10 @@ Similar to `<d2l-labs-navigation-button-icon>`, a link that comes with an icon a
 <!-- docs: demo -->
 ```html
 <script type="module">
-	import '@brightspace-ui/labs/components/navigation/navigation-dropdown-button-icon.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-dropdown-button-icon.js';
 </script>
 <div style="border: 1px solid #999999; border-top: 4px solid slateblue; height: 90px; padding: 0 18px; width: 100%;">
-	<d2l-labs-navigation-dropdown-button-icon icon="tier3:discussions" text="Subscription alerts" has-notification notification-text="You have new subscription alerts"></d2l-labs-navigation-dropdown-button-icon>
+  <d2l-labs-navigation-dropdown-button-icon icon="tier3:discussions" text="Subscription alerts" has-notification notification-text="You have new subscription alerts"></d2l-labs-navigation-dropdown-button-icon>
 </div>
 ```
 
@@ -220,7 +220,7 @@ Similar to `<d2l-labs-navigation-button-icon>`, a link that comes with an icon a
 <!-- docs: demo -->
 ```html
 <script type="module">
-	import '@brightspace-ui/labs/components/navigation/navigation-dropdown-button-custom.js';
+  import '@brightspace-ui/labs/components/navigation/navigation-dropdown-button-custom.js';
 </script>
 <div style="border: 1px solid #999999; border-top: 4px solid slateblue; height: 90px; padding: 0 18px; width: 100%;">
   <d2l-labs-navigation-dropdown-button-custom opener-label="User Name, avatar">
@@ -240,7 +240,7 @@ Similar to `<d2l-labs-navigation-button-icon>`, a link that comes with an icon a
   import '@brightspace-ui/labs/components/navigation/navigation-iterator.js';
 </script>
 <div style="border: 1px solid #999999; border-top: 4px solid slateblue; padding: 0 18px; width: 100%;">
-	<d2l-labs-navigation-iterator>User 1 of 17</d2l-labs-navigation-iterator>
+  <d2l-labs-navigation-iterator>User 1 of 17</d2l-labs-navigation-iterator>
 </div>
 ```
 <!-- docs: start hidden content -->
@@ -248,7 +248,7 @@ There is only one slot, and the default button text can be hidden with `hide-tex
 
 ```html
 <d2l-labs-navigation-iterator hide-text>
-	<span>User 1 of 17</span>
+  <span>User 1 of 17</span>
 </d2l-labs-navigation-iterator>
 ```
 
