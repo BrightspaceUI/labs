@@ -1,15 +1,27 @@
 # File Uploader
-Lit component for uploading files with drag and drop capability. This component does not perform the actual uploading work, it simply provides visual cues and exposes an event when files have been uploaded.
+Lit component for uploading files with drag and drop capability. This component does not perform the actual uploading work - it simply provides visual cues and exposes an event when files have been uploaded.
 
+An official component for this is in progress. Please reach out before adding a new usage of this labs version!
 
-## Usage
+## File Uploader [d2l-labs-file-uploader]
 
+<!-- docs: demo code -->
 ```html
-<head>
-  <script type="module" src="@brightspace-ui/labs/components/file-uploader.js"></script>
-</head>
+<script type="module">
+	import '@brightspace-ui/labs/components/file-uploader.js';
+</script>
+<d2l-labs-file-uploader label="profile picture"></d2l-labs-file-uploader>
 ```
 
+<!-- docs: demo code -->
+```html
+<script type="module">
+	import '@brightspace-ui/labs/components/file-uploader.js';
+</script>
+<d2l-labs-file-uploader multiple label="assignments"></d2l-labs-file-uploader>
+```
+
+<!-- docs: start hidden content -->
 ### Basic Usage with Accessible Label
 
 It's important to always provide an accessible label which describes the purpose of the uploader using the `label` attribute. The label will be hidden visually but associated with the upload input for those using assistive technologies such as a screen reader.
@@ -81,3 +93,4 @@ document.getElementById('my-uploader')
 	});
 </script>
 ```
+<!-- docs: end hidden content -->
