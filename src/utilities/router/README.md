@@ -1,14 +1,10 @@
-# @brightspace-ui/labs/utilities/lit-router
+# Router
 
-A Lit wrapper around the [Page.js Router](https://visionmedia.github.io/page.js/).
+A Lit wrapper around the [Page.js Router](https://visionmedia.github.io/page.js/), providing an easy way to define routes, lazy load the view, and react to changes to the route.
 
-The aim of this library is to provide an easy way to define routes, lazy load the view, and react to changes to the route.
+## Route Registration
 
-## Usage
-
-### Route Registration
-
-Registering routes defines the routing table used when determining the view to render.
+To define the routing table that gets used when determining which view to render, `registerRoutes` should be executed once -- typically by the root of the application.
 
 When the URL matches a particular route's pattern, the `view` function is called and returns a Lit `html` literal to render.
 
@@ -17,36 +13,29 @@ import { registerRoutes } from '@brightspace-ui/labs/utilities/lit-router';
 
 registerRoutes([
   {
-    pattern: '/example',
+    pattern: '/my-app',
     loader: () => import('./home.js'),
-    view: () => html`<test-home></test-home>`
+    view: () => html`<my-app-home></my-app-home>`
   },
   {
-    pattern: '/example/:id',
-    view: ctx => html`<test-id id=${ctx.params.id}></test-id>`
-  },
-  {
-    pattern: '/example/foo/:bar',
-    view: ctx => html`
-      <test-foo bar=${ctx.params.bar}>
-        ${ctx.search.name}
-      </test-foo>
-    `
+    pattern: '/my-app/user/:id',
+    loader: () => import('./user.js'),
+    view: ctx => html`<my-app-user id="${ctx.params.id}"></my-app-user>`
   }
 ], options);
 ```
 
-#### Route Properties
+### Route Properties
 
 Each route has the following properties:
 - `pattern` (required): The Page.js route pattern on which to match
-- `loader` (optional): Allows for lazy-loading dependencies (e.g. importing view files) before rendering the view; must return a Promise
+- `loader` (optional): Allows for lazy-loading dependencies (e.g. importing view files) before rendering the view; must return a `Promise`
 - `view` (optional): Function that returns a Lit `html` literal to render
 - `to` (optional): String indicating a redirect path, using Page.js `redirect(fromPath, toPath)`
 
-#### View Context
+### View Context
 
-The view is provided a context object containing:
+The view delegate is provided a context object containing:
  - `params`: URL segment parameters (e.g. `:id`)
  - `search`: search query values
  - `options`: object passed by the entry-point
@@ -59,20 +48,20 @@ The view is provided a context object containing:
 Example:
 ```js
 {
-  pattern: '/user/:id/:page' // search: ?semester=1
+  pattern: '/my-app/user/:id/:page' // search: ?semester=1
   view: ctx => html`
-    <user-view
-        id=${ctx.options.id}
-        page=${ctx.params.page}
-        semester=${ctx.search.semester}>
-    </user-view>
+    <my-app-user
+        id="${ctx.options.id}"
+        page="${ctx.params.page}"
+        semester="${ctx.search.semester}">
+    </my-app-user>
   `
 }
 ```
 
-#### Options
+### Options
 
-Options are the second parameter passed to `registerRoutes`. The two tables below encompasses all of the attributes that the options object can use.
+Options are the second parameter passed to `registerRoutes`. The two tables below encompass all the attributes that the options object can use.
 
 Page.js options:
 
@@ -139,9 +128,9 @@ export const loader () => [
 ]
 ```
 
-### RouteReactor
+## Rendering the Active view using RouteReactor
 
-The `RouteReactor` is a [Reactive Controller](https://lit.dev/docs/composition/controllers/) responsible for re-rendering the nested view when the route changes.
+The `RouteReactor` is a [Reactive Controller](https://lit.dev/docs/composition/controllers/) responsible for rendering (and re-rendering) the active view whenever the route changes.
 
 ```js
 import { RouteReactor } from '@brightspace-ui/labs/utilities/lit-router';
@@ -183,38 +172,40 @@ class FooBar extends LitElement {
 }
 ```
 
-### Helpers
+## Navigating and Redirecting
 
-#### Navigating and Redirecting
+Page.js will hook into any `<a>` tags and handle the navigation automatically.
 
-Page.js will hook into any `<a>` tags and handle the navigation automatically. However, to navigate manually use `navigate(path)`:
+To navigate manually and add a new browser history entry, use `navigate(path)`:
 
 ```js
 import { navigate } from '@brightspace-ui/labs/utilities/lit-router';
 
-navigate('/');
+navigate('/my-app/new-place');
 ```
 
-To programmatically redirect to a page and have the previous history item be replaced with the new one, use `redirect(path)`:
+To redirect to a page and replace the previous browser history item the new one, use `redirect(path)`:
 
 ```js
 import { redirect } from '@brightspace-ui/labs/utilities/lit-router';
 
-redirect('/');
+redirect('/my-app/new-place');
 ```
 
-### Testing Routing in Your Application
+## Testing Routing in Your Application
 
 For testing page routing in your application, this template is recommended:
 
 ```js
+import { RouterTesting } from '@brightspace-ui/labs/utilities/lit-router';
+
 describe('Page Routing', () => {
 
   beforeEach(async () => {
     // Initialize the routes here or import a file
     // that calls registerRoutes and expose a way to recall it
     initRouter();
-    entryPoint = await fixture(html`<!-- Your ViewReactor component here -->`);
+    entryPoint = await fixture(html`<!-- Your RouteReactor component here -->`);
     navigate('/'); // Reset tests back to the index, clears the url
   });
 
@@ -259,39 +250,3 @@ registerRoutes([
 ```
 
 Note: The reason this is an opt-in fix is that a lot of existing implementations of lit-router have worked around this issue by putting the wildcard routes at the start, which would break if the issue were fixed for everyone automatically.
-
-## Developing and Contributing
-
-After cloning the repo, run `npm install` to install dependencies.
-
-### Testing
-
-To run the full suite of tests:
-
-```shell
-npm test
-```
-
-Alternatively, tests can be selectively run:
-
-```shell
-# eslint
-npm run lint
-
-# unit tests
-npm run test:unit
-```
-
-### Running the demos
-
-To start a [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) that hosts the demo pages and tests:
-
-```shell
-npm start
-```
-
-### Versioning and Releasing
-
-This repo is configured to use `semantic-release`. Commits prefixed with `fix:` and `feat:` will trigger patch and minor releases when merged to `main`.
-
-To learn how to create major releases and release from maintenance branches, refer to the [semantic-release GitHub Action](https://github.com/BrightspaceUI/actions/tree/main/semantic-release) documentation.

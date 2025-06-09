@@ -1,15 +1,11 @@
+import { basePath } from './util.js';
 import { html } from 'lit';
 import { loader as peopleRouteLoader } from './people/route-loader.js';
 import { loader as placesRouteLoader } from './places/route-loader.js';
-
 import { registerRoutes } from '../../../src/utilities/router/router.js';
 
 registerRoutes(
 	[
-		{
-			pattern: '*',
-			view: () => html`<h1>Not Found</h1>`,
-		},
 		{
 			pattern: '/',
 			loader: () => import('./home.js'),
@@ -21,6 +17,13 @@ registerRoutes(
 		},
 		peopleRouteLoader,
 		placesRouteLoader,
+		{
+			pattern: '*',
+			view: () => html`<h1>Not Found</h1>`,
+		}
 	],
-	{ basePath: '/example' }
+	{
+		basePath: basePath,
+		enableRouteOrderFix: true
+	}
 );
