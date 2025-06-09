@@ -130,7 +130,7 @@ export const loader () => [
 
 ## Rendering the Active view using RouteReactor
 
-The `RouteReactor` is a [Reactive Controller](https://lit.dev/docs/composition/controllers/) responsible for renering (and re-rendering) the active view whenever the route changes.
+The `RouteReactor` is a [Reactive Controller](https://lit.dev/docs/composition/controllers/) responsible for rendering (and re-rendering) the active view whenever the route changes.
 
 ```js
 import { RouteReactor } from '@brightspace-ui/labs/utilities/lit-router';
