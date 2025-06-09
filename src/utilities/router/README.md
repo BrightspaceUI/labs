@@ -53,7 +53,7 @@ Example:
     <my-app-user
         id="${ctx.options.id}"
         page="${ctx.params.page}"
-        semester="${ctx.search.semester}>"
+        semester="${ctx.search.semester}">
     </my-app-user>
   `
 }
