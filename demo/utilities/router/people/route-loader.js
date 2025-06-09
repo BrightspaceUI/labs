@@ -1,9 +1,10 @@
+import { basePath } from '../util.js';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { redirect } from '../../../../src/utilities/router/index.js';
 
 function handleFilterChange(e) {
-	redirect(`/demo/utilities/router/people?filter=${e.detail.value}`);
+	redirect(`${basePath}/people?filter=${e.detail.value}`);
 }
 
 export function loader() {

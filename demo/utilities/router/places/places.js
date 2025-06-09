@@ -1,4 +1,5 @@
 import { html, LitElement } from 'lit';
+import { basePath } from '../util.js';
 import { heading1Styles } from '@brightspace-ui/core/components/typography/styles.js';
 import { places } from '../data.js';
 
@@ -9,7 +10,7 @@ export class Places extends LitElement {
 		return html`
 			<h1 class="d2l-heading-1">Places</h1>
 			<ul>
-				${places.map(p => html`<li><a href="/demo/utilities/router/places/${p.id}">${p.name}</a></li>`)}
+				${places.map(p => html`<li><a href="${basePath}/places/${p.id}">${p.name}</a></li>`)}
 			</ul>
 		`;
 	}

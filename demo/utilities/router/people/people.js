@@ -1,4 +1,5 @@
 import { html, LitElement } from 'lit';
+import { basePath } from '../util.js';
 import { heading1Styles } from '@brightspace-ui/core/components/typography/styles';
 import { people } from '../data.js';
 
@@ -34,7 +35,7 @@ export class People extends LitElement {
 				</select>
 			</label>
 			<ul>
-				${filteredPeople.map(p => html`<li><a href="/demo/utilities/router/people/${p.id}">${p.name}</a></li>`)}
+				${filteredPeople.map(p => html`<li><a href="${basePath}/people/${p.id}">${p.name}</a></li>`)}
 			</ul>
 		`;
 	}

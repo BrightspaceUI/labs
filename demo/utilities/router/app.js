@@ -1,5 +1,6 @@
 import './route-loader.js';
 import { css, html, LitElement } from 'lit';
+import { basePath } from './util.js';
 import { RouteReactor } from '../../../src/utilities/router/index.js';
 
 export class App extends LitElement {
@@ -27,9 +28,9 @@ export class App extends LitElement {
 			<aside>
 				<nav>
 					<ul>
-						<li><a href="/demo/utilities/router/home">Home</a></li>
-						<li><a href="/demo/utilities/router/people">People</a></li>
-						<li><a href="/demo/utilities/router/places">Places</a></li>
+						<li><a href="${basePath}/home">Home</a></li>
+						<li><a href="${basePath}/people">People</a></li>
+						<li><a href="${basePath}/places">Places</a></li>
 					</ul>
 				</nav>
 			</aside>

@@ -1,7 +1,7 @@
+import { basePath } from './util.js';
 import { html } from 'lit';
 import { loader as peopleRouteLoader } from './people/route-loader.js';
 import { loader as placesRouteLoader } from './places/route-loader.js';
-
 import { registerRoutes } from '../../../src/utilities/router/router.js';
 
 registerRoutes(
@@ -23,7 +23,7 @@ registerRoutes(
 		}
 	],
 	{
-		basePath: '/demo/utilities/router',
+		basePath: basePath,
 		enableRouteOrderFix: true
 	}
 );
