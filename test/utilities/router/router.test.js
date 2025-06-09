@@ -55,7 +55,11 @@ const initRouter = () => {
 			load1,
 			load2,
 		],
-		{ hashbang: true, customPage: true }
+		{
+			enableRouteOrderFix: true,
+			hashbang: true,
+			customPage: true
+		}
 	);
 };
 
