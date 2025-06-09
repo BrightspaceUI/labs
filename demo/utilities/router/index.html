@@ -2,9 +2,13 @@
 <html>
 	<head>
 		<title>Router Playground</title>
-		<script type="module" src="/demo/utilities/router/app.js"></script>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/typography/typography.js';
+			import './app.js';
+		</script>
 	</head>
-	<body>
+	<body class="d2l-typography">
 		<test-app></test-app>
 	</body>
 </html>

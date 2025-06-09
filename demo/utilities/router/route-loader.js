@@ -7,10 +7,6 @@ import { registerRoutes } from '../../../src/utilities/router/router.js';
 registerRoutes(
 	[
 		{
-			pattern: '*',
-			view: () => html`<h1>Not Found</h1>`,
-		},
-		{
 			pattern: '/',
 			loader: () => import('./home.js'),
 			view: () => html`<test-home></test-home>`,
@@ -21,6 +17,13 @@ registerRoutes(
 		},
 		peopleRouteLoader,
 		placesRouteLoader,
+		{
+			pattern: '*',
+			view: () => html`<h1>Not Found</h1>`,
+		}
 	],
-	{ basePath: '/example' }
+	{
+		basePath: '/demo/utilities/router',
+		enableRouteOrderFix: true
+	}
 );

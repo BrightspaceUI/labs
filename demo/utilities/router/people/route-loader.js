@@ -3,7 +3,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { redirect } from '../../../../src/utilities/router/index.js';
 
 function handleFilterChange(e) {
-	redirect(`/example/people?filter=${e.detail.value}`);
+	redirect(`/demo/utilities/router/people?filter=${e.detail.value}`);
 }
 
 export function loader() {
