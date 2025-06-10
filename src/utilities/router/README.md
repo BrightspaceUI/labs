@@ -222,31 +222,6 @@ describe('Page Routing', () => {
 
 ### Route order inversion issue
 
-There's currently an issue with the way registered routes are processed that can cause the order of matching to appear to be inverted. This is not noticeable in many cases since it's often the case that only a single route will match regardless of the order. This does however come up when dealing with wildcard (`*`) routes (e.g. 404 redirect routes).
+This issue is resolved by default but the fix can be bypassed (for backwards compatibility) by setting the `disableRouteOrderFix` option to `true`.
 
-If you notice that you have to put any routes with wildcards (`*`) before those without instead of after, this is the reason why.
-
-#### Issue Fix
-
-There is currently a fix available for this ordering issue, but it requires setting the `enableRouteOrderFix` option to `true`. Ex:
-
-```js
-registerRoutes([
-  {
-    pattern: '/home',
-    view: () => html`...`
-  },
-  {
-    pattern: '/404',
-    view: () => html`...`
-  },
-  {
-    pattern: '*',
-    to: '/404'
-  }
-], {
-  enableRouteOrderFix: true
-});
-```
-
-Note: The reason this is an opt-in fix is that a lot of existing implementations of lit-router have worked around this issue by putting the wildcard routes at the start, which would break if the issue were fixed for everyone automatically.
+Bypassing the fix causes a warning to appear in the dev console. To resolve the warning, remove the `disaableRouteOrderFix` option and thoroughly test your routing. If your routes contain wildcards (`*`, typically for 404s), you may need to register them last.

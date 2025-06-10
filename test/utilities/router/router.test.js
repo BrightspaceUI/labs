@@ -56,7 +56,6 @@ const initRouter = () => {
 			load2,
 		],
 		{
-			enableRouteOrderFix: true,
 			hashbang: true,
 			customPage: true
 		}

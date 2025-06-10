@@ -23,7 +23,6 @@ registerRoutes(
 		}
 	],
 	{
-		basePath: basePath,
-		enableRouteOrderFix: true
+		basePath: basePath
 	}
 );
