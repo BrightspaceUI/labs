@@ -39,10 +39,9 @@ const _handleRouteView = (context, next, r) => {
 
 const _handleRouteLoader = r => (context, next) => {
 	const disableRouteOrderFix = _lastOptions?.disableRouteOrderFix ?? false;
-	const enableRouteOrderFix = _lastOptions?.enableRouteOrderFix ?? false;
 
 	// Skip further pattern matches if the route has already been handled
-	if (!disableRouteOrderFix && enableRouteOrderFix && context.handled) {
+	if (!disableRouteOrderFix && context.handled) {
 		next();
 		return;
 	}
@@ -52,7 +51,7 @@ const _handleRouteLoader = r => (context, next) => {
 			_handleRouteView(context, next, r);
 		});
 	} else if (r.pattern && r.to) {
-		if (!disableRouteOrderFix && enableRouteOrderFix) {
+		if (!disableRouteOrderFix) {
 			activePage.redirect(r.to);
 		} else {
 			activePage.redirect(r.pattern, r.to);
@@ -94,7 +93,7 @@ export const registerRoutes = (routes, options) => {
 	if (hasRegistered) throw new Error('May not construct multiple routers.');
 	hasRegistered = true;
 
-	if (!options?.enableRouteOrderFix) console.warn('lit-router: The enableRouteOrderFix option is not enabled. This may cause issues with route handling. See here for details: https://github.com/BrightspaceUI/labs/tree/main/src/utilities/router#route-order-inversion-issue');
+	if (options?.disableRouteOrderFix) console.warn('lit-router: The disableRouteOrderFix option is enabled, which may cause issues with route handling. See here for details: https://github.com/BrightspaceUI/labs/tree/main/src/utilities/router#route-order-inversion-issue');
 
 	configure(options);
 
