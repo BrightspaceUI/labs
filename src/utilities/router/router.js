@@ -38,10 +38,11 @@ const _handleRouteView = (context, next, r) => {
 };
 
 const _handleRouteLoader = r => (context, next) => {
+	const disableRouteOrderFix = _lastOptions?.disableRouteOrderFix ?? false;
 	const enableRouteOrderFix = _lastOptions?.enableRouteOrderFix ?? false;
 
 	// Skip further pattern matches if the route has already been handled
-	if (enableRouteOrderFix && context.handled) {
+	if (!disableRouteOrderFix && enableRouteOrderFix && context.handled) {
 		next();
 		return;
 	}
@@ -51,7 +52,7 @@ const _handleRouteLoader = r => (context, next) => {
 			_handleRouteView(context, next, r);
 		});
 	} else if (r.pattern && r.to) {
-		if (enableRouteOrderFix) {
+		if (!disableRouteOrderFix && enableRouteOrderFix) {
 			activePage.redirect(r.to);
 		} else {
 			activePage.redirect(r.pattern, r.to);
