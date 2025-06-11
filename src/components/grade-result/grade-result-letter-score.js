@@ -12,7 +12,7 @@ export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 		return {
 			availableOptions: { type: Object },
 			label: { type: String },
-			selectedOption: { type: String },
+			selectedOption: { attribute: 'selected-option', type: String },
 			readOnly: { type: Boolean }
 		};
 	}

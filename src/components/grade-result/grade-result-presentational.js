@@ -191,10 +191,6 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 		`;
 	}
 
-	_isReadOnly() {
-		return Boolean(this.readOnly);
-	}
-
 	_onGradeButtonClick() {
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-grade-button-click', {
 			bubbles: true,
@@ -248,9 +244,9 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 		return html`
 			<d2l-labs-grade-result-letter-score
 				.availableOptions=${this.letterGradeOptions}
-				.label=${this.inputLabelText}
-				.readOnly=${this._isReadOnly()}
-				.selectedOption=${this.selectedLetterGrade}
+				label=${this.inputLabelText}
+				?readonly=${this.readOnly}
+				selected-option=${ifDefined(this.selectedLetterGrade)}
 			></d2l-labs-grade-result-letter-score>
 		`;
 	}
@@ -275,13 +271,13 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 	_renderNumericScoreComponent() {
 		return html`
 			<d2l-labs-grade-result-numeric-score
-				?allowNegativeScore=${this.allowNegativeScore}
-				.label=${this.inputLabelText}
-				.readOnly=${this._isReadOnly()}
+				?allow-negative-score=${this.allowNegativeScore}
+				label=${this.inputLabelText}
+				?readonly=${this.readOnly}
 				?required=${this.required}
-				.scoreDenominator=${this.scoreDenominator}
-				.scoreNumerator=${this.scoreNumerator}
-				?showFlooredScoreWarning=${this.showFlooredScoreWarning}
+				score-denominator=${ifDefined(this.scoreDenominator)}
+				score-numerator=${ifDefined(this.scoreNumerator)}
+				?show-floored-score-warning=${this.showFlooredScoreWarning}
 			></d2l-labs-grade-result-numeric-score>
 		`;
 	}

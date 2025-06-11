@@ -21,12 +21,12 @@ export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) 
 	static get properties() {
 		return {
 			label: { type: String },
-			scoreNumerator: { type: Number, converter: numberConverter },
-			scoreDenominator: { type: Number },
+			scoreNumerator: { attribute: 'score-numerator', type: Number, converter: numberConverter },
+			scoreDenominator: { attribute: 'score-denominator', type: Number },
 			readOnly: { type: Boolean },
 			required: { type: Boolean },
-			allowNegativeScore: { type: Boolean },
-			showFlooredScoreWarning: { type: Boolean },
+			allowNegativeScore: { attribute: 'allow-negative-score', type: Boolean },
+			showFlooredScoreWarning: { attribute: 'show-floored-score-warning', type: Boolean },
 		};
 	}
 
