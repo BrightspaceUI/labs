@@ -11,48 +11,46 @@ const letterGradeOptions = {
 
 const componentManualOverride = html`
 	<d2l-labs-grade-result-presentational
-		gradeType="Numeric"
-		labelText="Overall Grade"
-		scoreNumerator="5"
-		scoreDenominator="20"
-		isGradeAutoCompleted
-		includeGradeButton
-		includeReportsButton
-		gradeButtonTooltip="Assignment 1 Grade Item Attached"
-		reportsButtonTooltip="Class and user statistics"
+		grade-type="Numeric"
+		label-text="Overall Grade"
+		score-numerator="5"
+		score-denominator="20"
+		include-grade-button
+		include-reports-button
+		grade-button-tooltip="Assignment 1 Grade Item Attached"
+		reports-button-tooltip="Class and user statistics"
 	></d2l-labs-grade-result-presentational>
 `;
 
 const componentManualOverrideClear = html`
 	<d2l-labs-grade-result-presentational
-		gradeType="Numeric"
-		labelText="Overall Grade"
-		scoreNumerator="5"
-		scoreDenominator="20"
-		isGradeAutoCompleted
-		isManualOverrideActive
-		includeGradeButton
-		includeReportsButton
-		gradeButtonTooltip="Assignment 1 Grade Item Attached"
-		reportsButtonTooltip="Class and user statistics"
+		grade-type="Numeric"
+		label-text="Overall Grade"
+		score-numerator="5"
+		score-denominator="20"
+		is-manual-override-active
+		include-grade-button
+		include-reports-button
+		grade-button-tooltip="Assignment 1 Grade Item Attached"
+		reports-button-tooltip="Class and user statistics"
 	></d2l-labs-grade-result-presentational>
 `;
 
 const componentNumericScore = html`
 	<d2l-labs-grade-result-presentational
-		gradeType="Numeric"
-		labelText="Overall Grade"
-		scoreNumerator="5"
-		scoreDenominator="20"
+		grade-type="Numeric"
+		label-text="Overall Grade"
+		scorenumerator="5"
+		score-denominator="20"
 	></d2l-labs-grade-result-presentational>
 `;
 
 const componentLetterScore = html`
 	<d2l-labs-grade-result-presentational
-		gradeType="LetterGrade"
-		labelText="Overall Grade"
+		grade-type="LetterGrade"
+		label-text="Overall Grade"
 		.letterGradeOptions=${letterGradeOptions}
-		selectedLetterGrade="C"
+		selected-letter-grade="C"
 	></d2l-labs-grade-result-presentational>
 `;
 
@@ -142,11 +140,11 @@ describe('d2l-grade-result-presentational', () => {
 	it('should treat bounded null numerator as zero when readonly', async() => {
 		const el = await fixture(html`
 			<d2l-labs-grade-result-presentational
-				gradeType="Numeric"
-				labelText="Overall Grade"
+				grade-type="Numeric"
+				label-text="Overall Grade"
 				.scoreNumerator="${null}"
 				readonly
-				scoreDenominator="20">
+				score-denominator="20">
 			</d2l-labs-grade-result-presentational>
 		`);
 		const score = getNumericScore(el).shadowRoot.querySelector('.d2l-grade-result-numeric-score-score-read-only');
@@ -156,10 +154,10 @@ describe('d2l-grade-result-presentational', () => {
 	it('should treat missing numerator as empty string when readonly', async() => {
 		const el = await fixture(html`
 			<d2l-labs-grade-result-presentational
-				gradeType="Numeric"
-				labelText="Overall Grade"
+				grade-type="Numeric"
+				label-text="Overall Grade"
 				readonly
-				scoreDenominator="20">
+				score-denominator="20">
 			</d2l-labs-grade-result-presentational>
 		`);
 		const score = getNumericScore(el).shadowRoot.querySelector('.d2l-grade-result-numeric-score-score-read-only');

@@ -1,5 +1,6 @@
 import '../../../src/components/grade-result/grade-result-presentational.js';
 import { fixture, html } from '@brightspace-ui/testing';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { testDiff } from './vdiff-utils.js';
 
 describe('autograde provided visual diff tests', () => {
@@ -93,18 +94,17 @@ describe('autograde provided visual diff tests', () => {
 				html`
 				<div style='margin: 10px 18px; padding: 50px; display: flex; justify-content: center;'>
 					<d2l-labs-grade-result-presentational
-						.gradeType='${test.gradeType}'
-						.labelText='${test.labelText}'
-						.scoreNumerator=${test.scoreNumerator}
-						.scoreDenominator=${test.scoreDenominator}
-						.gradeButtonTooltip='${test.gradeButtonTooltip}'
-						.reportsButtonTooltip='${test.reportsButtonTooltip}'
-						.letterGradeOptions=${test.letterGradeOptions}
-						.selectedLetterGrade='${test.selectedLetterGrade}'
-						?includeGradeButton=${test.includeGradeButton}
-						?includeReportsButton=${test.includeReportsButton}
-						isManualOverrideActive
-						isGradeAutoCompleted
+						grade-type="${test.gradeType}"
+						label-text="${test.labelText}"
+						score-numerator="${ifDefined(test.scoreNumerator)}"
+						score-denominator="${ifDefined(test.scoreDenominator)}"
+						grade-button-tooltip="${ifDefined(test.gradeButtonTooltip)}"
+						reports-button-tooltip="${ifDefined(test.reportsButtonTooltip)}"
+						.letterGradeOptions="${test.letterGradeOptions}"
+						selected-letter-grade="${ifDefined(test.selectedLetterGrade)}"
+						?include-grade-button="${test.includeGradeButton}"
+						?include-reports-button="${test.includeReportsButton}"
+						is-manual-override-active
 					></d2l-labs-grade-result-presentational>
 				<div>`,
 				{ pagePadding: false }

@@ -7,25 +7,21 @@ export class D2LGradeResultIconButton extends LitElement {
 		return {
 			text: { type: String },
 			icon: { type: String },
-			_id: { type: String },
 		};
-	}
-
-	constructor() {
-		super();
-		this._id = getUniqueId();
 	}
 
 	render() {
 		return html`
 			<d2l-button-icon
-				id="d2l-grade-result-icon-button-${this._id}"
+				id="d2l-grade-result-icon-button-${this.#id}"
 				icon="${this.icon}"
 				@click="${this._onClick}"
 				text="${this.text}"
 			></d2l-button-icon>
 		`;
 	}
+
+	#id = getUniqueId();
 
 	_onClick() {
 		this.dispatchEvent(new CustomEvent('d2l-grade-result-icon-button-click', {
