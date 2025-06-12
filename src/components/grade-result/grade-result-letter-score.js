@@ -13,7 +13,7 @@ export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 			availableOptions: { type: Object },
 			label: { type: String },
 			selectedOption: { attribute: 'selected-option', type: String },
-			readOnly: { type: Boolean }
+			readonly: { type: Boolean }
 		};
 	}
 
@@ -39,7 +39,7 @@ export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 	}
 
 	render() {
-		if (!this.readOnly) {
+		if (!this.readonly) {
 			return html`
 				<div class="d2l-grade-result-letter-score-container">
 					<select

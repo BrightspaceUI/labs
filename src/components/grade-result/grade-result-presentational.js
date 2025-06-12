@@ -89,7 +89,7 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 			 * Set to true if the user does not have permissions to edit the grade
 			 * @type {boolean}
 			 */
-			readOnly: { type: Boolean },
+			readonly: { type: Boolean },
 			/**
 			 * The text that is inside of the tooltip when hovering over the reports button
 			 * @type {string}
@@ -167,7 +167,7 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 		this.includeReportsButton = false;
 		this.isManualOverrideActive = false;
 		this.labelHeadingLevel = undefined;
-		this.readOnly = false;
+		this.readonly = false;
 		this.selectedLetterGrade = '';
 		this.showFlooredScoreWarning = false;
 		this.subtitleText = undefined;
@@ -245,7 +245,7 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 			<d2l-labs-grade-result-letter-score
 				.availableOptions=${this.letterGradeOptions}
 				label=${this.inputLabelText}
-				?readonly=${this.readOnly}
+				?readonly=${this.readonly}
 				selected-option=${ifDefined(this.selectedLetterGrade)}
 			></d2l-labs-grade-result-letter-score>
 		`;
@@ -273,7 +273,7 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 			<d2l-labs-grade-result-numeric-score
 				?allow-negative-score=${this.allowNegativeScore}
 				label=${this.inputLabelText}
-				?readonly=${this.readOnly}
+				?readonly=${this.readonly}
 				?required=${this.required}
 				score-denominator=${ifDefined(this.scoreDenominator)}
 				score-numerator=${ifDefined(this.scoreNumerator)}
