@@ -1,5 +1,5 @@
 import '../../../src/components/grade-result/grade-result-presentational.js';
-import { clickElem, fixture, html } from '@brightspace-ui/testing';
+import { clickElem, expect, fixture, html } from '@brightspace-ui/testing';
 import { getGradesButton, getLetterScore, getLetterScoreSelect, getManualOverrideButton, getNumericScore, getNumericScoreInput, getReportsButton } from './utils.js';
 
 const letterGradeOptions = {
@@ -136,5 +136,33 @@ describe('d2l-grade-result-presentational', () => {
 				setTimeout(() => reject(`timeout waiting for ${event} event`), eventTimeoutMS);
 			});
 		});
+	});
+
+	// consistent-eval binds null like this and because isNaN(null) is false, it converts it to a number
+	it('should treat bounded null numerator as zero when readonly', async() => {
+		const el = await fixture(html`
+			<d2l-labs-grade-result-presentational
+				gradeType="Numeric"
+				labelText="Overall Grade"
+				.scoreNumerator="${null}"
+				readonly
+				scoreDenominator="20">
+			</d2l-labs-grade-result-presentational>
+		`);
+		const score = getNumericScore(el).shadowRoot.querySelector('.d2l-grade-result-numeric-score-score-read-only');
+		expect(score.innerText).to.equal('0 / 20');
+	});
+
+	it('should treat missing numerator as empty string when readonly', async() => {
+		const el = await fixture(html`
+			<d2l-labs-grade-result-presentational
+				gradeType="Numeric"
+				labelText="Overall Grade"
+				readonly
+				scoreDenominator="20">
+			</d2l-labs-grade-result-presentational>
+		`);
+		const score = getNumericScore(el).shadowRoot.querySelector('.d2l-grade-result-numeric-score-score-read-only');
+		expect(score.innerText).to.equal('/ 20');
 	});
 });
