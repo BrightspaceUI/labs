@@ -275,8 +275,8 @@ export class D2LGradeResultPresentational extends LocalizeLabsElement(LitElement
 				label=${this.inputLabelText}
 				?readonly=${this.readonly}
 				?required=${this.required}
-				score-denominator=${ifDefined(this.scoreDenominator)}
-				score-numerator=${ifDefined(this.scoreNumerator)}
+				.scoreDenominator=${this.scoreDenominator}
+				.scoreNumerator=${this.scoreNumerator}
 				?show-floored-score-warning=${this.showFlooredScoreWarning}
 			></d2l-labs-grade-result-numeric-score>
 		`;
