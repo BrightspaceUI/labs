@@ -144,7 +144,7 @@ describe('read only visual diff tests', () => {
 						?includeGradeButton=${test.includeGradeButton}
 						?includeReportsButton=${test.includeReportsButton}
 						?showFlooredScoreWarning=${test.showFlooredScoreWarning}
-						readOnly
+						readonly
 					></d2l-labs-grade-result-presentational>
 				<div>`,
 				{ pagePadding: false }

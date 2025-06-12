@@ -115,7 +115,7 @@ describe('presentational-with-grade-preview', () => {
 			scoreDenominator: '20',
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: false,
+			readonly: false,
 			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
@@ -128,7 +128,7 @@ describe('presentational-with-grade-preview', () => {
 			scoreDenominator: '5',
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: false,
+			readonly: false,
 			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"B", "colour":"#00FF00"}'
 		},
@@ -140,7 +140,7 @@ describe('presentational-with-grade-preview', () => {
 			scoreDenominator: '20',
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: true,
+			readonly: true,
 			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
@@ -153,7 +153,7 @@ describe('presentational-with-grade-preview', () => {
 			scoreDenominator: '5',
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: true,
+			readonly: true,
 			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"B", "colour":"#00FF00"}'
 		},
@@ -166,7 +166,7 @@ describe('presentational-with-grade-preview', () => {
 			scoreDenominator: '5',
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: true,
+			readonly: true,
 			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"B", "colour":"#00FF00"}'
 		},
@@ -180,7 +180,7 @@ describe('presentational-with-grade-preview', () => {
 			isManualOverrideActive: true,
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: false,
+			readonly: false,
 			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
@@ -194,7 +194,7 @@ describe('presentational-with-grade-preview', () => {
 			isManualOverrideActive: false,
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: true,
+			readonly: true,
 			subtitleText: 'Average post score',
 			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
@@ -210,7 +210,7 @@ describe('presentational-with-grade-preview', () => {
 			isManualOverrideActive: false,
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: false,
+			readonly: false,
 			displayStudentGradePreview: true,
 			studentGradePreview: '{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 		},
@@ -222,7 +222,7 @@ describe('presentational-with-grade-preview', () => {
 			scoreDenominator: '20',
 			includeGradeButton: true,
 			includeReportsButton: true,
-			readOnly: false,
+			readonly: false,
 			displayStudentGradePreview: true,
 			studentGradePreview: '{}'
 		},
@@ -248,7 +248,7 @@ describe('presentational-with-grade-preview', () => {
 								?isGradeAutoCompleted=${test.isGradeAutoCompleted}
 								labelText=${test.labelText}
 								letterGradeOptions=${test.letterGradeOptions}
-								?readOnly=${test.readOnly}
+								?readonly=${test.readonly}
 								scoreDenominator=${test.scoreDenominator}
 								scoreNumerator=${test.scoreNumerator}
 								selectedLetterGrade=${test.selectedLetterGrade}

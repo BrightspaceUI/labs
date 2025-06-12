@@ -21,12 +21,12 @@ export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) 
 	static get properties() {
 		return {
 			label: { type: String },
-			scoreNumerator: { type: Number, converter: numberConverter },
-			scoreDenominator: { type: Number },
-			readOnly: { type: Boolean },
+			scoreNumerator: { attribute: 'score-numerator', type: Number, converter: numberConverter },
+			scoreDenominator: { attribute: 'score-denominator', type: Number },
+			readonly: { type: Boolean },
 			required: { type: Boolean },
-			allowNegativeScore: { type: Boolean },
-			showFlooredScoreWarning: { type: Boolean },
+			allowNegativeScore: { attribute: 'allow-negative-score', type: Boolean },
+			showFlooredScoreWarning: { attribute: 'show-floored-score-warning', type: Boolean },
 		};
 	}
 
@@ -57,7 +57,7 @@ export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) 
 
 		return html`
 			<div class="d2l-grade-result-numeric-score-container">
-				${!this.readOnly ? html`
+				${!this.readonly ? html`
 					<div class="d2l-grade-result-numeric-score-score">
 						<d2l-form>
 							<d2l-input-number
