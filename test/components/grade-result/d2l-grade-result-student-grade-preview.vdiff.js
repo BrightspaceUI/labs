@@ -1,6 +1,7 @@
 import '../../../src/components/grade-result/grade-result-student-grade-preview.js';
 import '../../../src/components/grade-result/grade-result-presentational.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 describe('student-grade-preview', () => {
 
@@ -176,7 +177,6 @@ describe('presentational-with-grade-preview', () => {
 			labelText: 'Overall Grade',
 			scoreNumerator: '5',
 			scoreDenominator: '20',
-			isGradeAutoCompleted: true,
 			isManualOverrideActive: true,
 			includeGradeButton: true,
 			includeReportsButton: true,
@@ -190,7 +190,6 @@ describe('presentational-with-grade-preview', () => {
 			labelText: 'Overall Grade',
 			scoreNumerator: '5',
 			scoreDenominator: '20',
-			isGradeAutoCompleted: false,
 			isManualOverrideActive: false,
 			includeGradeButton: true,
 			includeReportsButton: true,
@@ -206,7 +205,6 @@ describe('presentational-with-grade-preview', () => {
 			scoreNumerator: '0',
 			scoreDenominator: '20',
 			showFlooredScoreWarning: true,
-			isGradeAutoCompleted: false,
 			isManualOverrideActive: false,
 			includeGradeButton: true,
 			includeReportsButton: true,
@@ -240,21 +238,20 @@ describe('presentational-with-grade-preview', () => {
 					const el = await fixture(
 						html`
 							<d2l-labs-grade-result-presentational
-								?display-student-grade-preview=${test.displayStudentGradePreview}
-								gradeType=${test.gradeType}
-								?includeGradeButton=${test.includeGradeButton}
-								?includeReportsButton=${test.includeReportsButton}
-								?isManualOverrideActive=${test.isManualOverrideActive}
-								?isGradeAutoCompleted=${test.isGradeAutoCompleted}
-								labelText=${test.labelText}
-								letterGradeOptions=${test.letterGradeOptions}
-								?readonly=${test.readonly}
-								scoreDenominator=${test.scoreDenominator}
-								scoreNumerator=${test.scoreNumerator}
-								selectedLetterGrade=${test.selectedLetterGrade}
-								?showFlooredScoreWarning=${test.showFlooredScoreWarning}
-								student-grade-preview=${test.studentGradePreview}
-								subtitleText=${test.subtitleText}
+								?display-student-grade-preview="${test.displayStudentGradePreview}"
+								grade-type="${test.gradeType}"
+								?include-grade-button="${test.includeGradeButton}"
+								?include-reports-button="${test.includeReportsButton}"
+								?is-manual-override-active="${test.isManualOverrideActive}"
+								label-text="${test.labelText}"
+								letter-grade-options="${ifDefined(test.letterGradeOptions)}"
+								?readonly="${test.readonly}"
+								score-denominator="${ifDefined(test.scoreDenominator)}"
+								score-numerator="${ifDefined(test.scoreNumerator)}"
+								selected-letter-grade="${ifDefined(test.selectedLetterGrade)}"
+								?show-floored-score-warning="${test.showFlooredScoreWarning}"
+								student-grade-preview="${test.studentGradePreview}"
+								subtitle-text="${ifDefined(test.subtitleText)}"
 							></d2l-labs-grade-result-presentational>
 						`, { viewport: screenSizeCategory.viewport }
 					);

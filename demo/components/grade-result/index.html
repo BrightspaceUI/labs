@@ -33,11 +33,11 @@
 				<h6>number grade, no icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						labelHeadingLevel="3"
-						scoreNumerator="5"
-						scoreDenominator="20"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						label-heading-level="3"
+						score-numerator="5"
+						score-denominator="20"
 						display-student-grade-preview
 						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 					></d2l-labs-grade-result-presentational>
@@ -46,10 +46,10 @@
 				<h6>number grade with decimal, no icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="1.5555555"
-						scoreDenominator="5"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="1.5555555"
+						score-denominator="5"
 						display-student-grade-preview
 						student-grade-preview='{"score":1.56, "symbol":"Bad", "colour":"#FF0000"}'
 					></d2l-labs-grade-result-presentational>
@@ -58,14 +58,14 @@
 				<h6>number grade, icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="20"
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 					></d2l-labs-grade-result-presentational>
@@ -74,14 +74,14 @@
 				<h6>number grade, icons, tooltips</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="10"
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="10"
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
 					></d2l-labs-grade-result-presentational>
@@ -90,11 +90,11 @@
 				<h6>letter grade, no icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						selectedLetterGrade="2"
-						scoreDenominator="5"
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selected-letter-grade="2"
+						score-denominator="5"
 						display-student-grade-preview
 						student-grade-preview='{"score":5, "symbol":"B", "colour":"#00FF00"}'
 					></d2l-labs-grade-result-presentational>
@@ -103,13 +103,13 @@
 				<h6>letter grade, icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"symbol":"-"}'
 					></d2l-labs-grade-result-presentational>
@@ -118,13 +118,13 @@
 				<h6>letter grade, icons, tooltips</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"symbol":"- %"}'
 					></d2l-labs-grade-result-presentational>
@@ -139,10 +139,10 @@
 				<h6>number grade, no icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="20"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
 						readonly
 						display-student-grade-preview
 						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
@@ -152,10 +152,10 @@
 				<h6>number grade with decimals, no icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="1.555555"
-						scoreDenominator="20"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="1.555555"
+						score-denominator="20"
 						readonly
 						display-student-grade-preview
 						student-grade-preview='{"score":1.56, "symbol":"Bad", "colour":"#FF0000"}'
@@ -165,14 +165,14 @@
 				<h6>number grade, icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="20"
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						readonly
 						display-student-grade-preview
 						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
@@ -182,14 +182,14 @@
 				<h6>number grade, icons, tooltips</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="20"
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						readonly
 						display-student-grade-preview
 						student-grade-preview='{"score":5, "symbol":"Fine", "colour":"#FFCC00"}'
@@ -199,10 +199,10 @@
 				<h6>letter grade, no icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						selectedLetterGrade="2"
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selected-letter-grade="2"
 						readonly
 						display-student-grade-preview
 						student-grade-preview='{"score":5, "symbol":"B", "colour":"#00FF00"}'
@@ -212,14 +212,14 @@
 				<h6>letter grade, icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						selectedLetterGrade="2"
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selected-letter-grade="2"
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						readonly
 						display-student-grade-preview
 						student-grade-preview='{"symbol":"-"}'
@@ -229,14 +229,14 @@
 				<h6>letter grade, icons, tooltips</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						selectedLetterGrade="2"
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selected-letter-grade="2"
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						readonly
 						display-student-grade-preview
 						student-grade-preview='{"symbol":"- %"}'
@@ -252,28 +252,28 @@
 				<h6>number grade, no icons, clear manual override option</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="20"
-						isGradeAutoCompleted
-						isManualOverrideActive
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
+						is-grade-auto-completed
+						is-manual-override-active
 					></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
 
 				<h6>number grade, icons, clear manual override option</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="20"
-						isGradeAutoCompleted
-						isManualOverrideActive
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
+						is-grade-auto-completed
+						is-manual-override-active
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
 					></d2l-labs-grade-result-presentational>
@@ -282,16 +282,16 @@
 				<h6>number grade, icons, tooltips, clear manual override option</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="20"
-						isGradeAutoCompleted
-						isManualOverrideActive
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
+						is-grade-auto-completed
+						is-manual-override-active
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
 					></d2l-labs-grade-result-presentational>
@@ -301,28 +301,27 @@
 				<h6>letter grade, no icons, clear manual override option</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						selectedLetterGrade="2"
-						isGradeAutoCompleted
-						isManualOverrideActive
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selected-letter-grade="2"
+						is-manual-override-active
 					></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
 
 				<h6>letter grade, icons, clear manual override option</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						selectedLetterGrade="2"
-						isGradeAutoCompleted
-						isManualOverrideActive
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selected-letterGrade="2"
+						is-grade-auto-completed
+						is-manual-override-active
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
 					></d2l-labs-grade-result-presentational>
@@ -331,16 +330,16 @@
 				<h6>letter grade, icons, tooltips, clear manual override option</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="LetterGrade"
-						labelText="Overall Grade"
-						letterGradeOptions='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
-						selectedLetterGrade="2"
-						isGradeAutoCompleted
-						isManualOverrideActive
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="LetterGrade"
+						label-text="Overall Grade"
+						letter-grade-options='{ "0": { "LetterGrade": "None", "PercentStart": null}, "1": { "LetterGrade": "A", "PercentStart": "75"}, "2": { "LetterGrade": "B", "PercentStart": "50"}}'
+						selected-letter-grade="2"
+						is-grade-auto-completed
+						is-manual-override-active
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
 					></d2l-labs-grade-result-presentational>
@@ -352,7 +351,13 @@
 
 				<h6>Custom manual override clear text</h6>
 				<d2l-demo-snippet>
-					<d2l-labs-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="5" scoreDenominator="20" isGradeAutoCompleted isManualOverrideActive customManualOverrideClearText="Substituted Override Clear Text"></d2l-labs-grade-result-presentational>
+					<d2l-labs-grade-result-presentational
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
+						is-manual-override-active
+						custom-manual-override-clear-text="Substituted Override Clear Text"></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
 
 			</div>
@@ -362,16 +367,16 @@
 				<h6>Show grade calculation method</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Overall Grade"
-						scoreNumerator="5"
-						scoreDenominator="20"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
 						readonly
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Assignment 1 Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
-						subtitleText="Average post score"
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Assignment 1 Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
+						subtitle-text="Average post score"
 						display-student-grade-preview
 						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'>
 					</d2l-labs-grade-result-presentational>
@@ -383,7 +388,11 @@
 
 				<h6>Dynamic Width</h6>
 				<d2l-demo-snippet>
-					<d2l-labs-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="33333333" scoreDenominator="33333333"></d2l-labs-grade-result-presentational>
+					<d2l-labs-grade-result-presentational
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="33333333"
+						score-denominator="33333333"></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
 
 			</div>
@@ -394,37 +403,37 @@
 				<h6>Negative marking enabled (for question scores)</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Score"
-						scoreNumerator="-1"
-						scoreDenominator="3"
-						allowNegativeScore
+						grade-type="Numeric"
+						label-text="Score"
+						score-numerator="-1"
+						score-denominator="3"
+						allow-negative-score
 					></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
 
 				<h6>Floored negative score hint (for attempt scores)</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Attempt Grade"
-						scoreNumerator="0"
-						scoreDenominator="20"
-						showFlooredScoreWarning
+						grade-type="Numeric"
+						label-text="Attempt Grade"
+						score-numerator="0"
+						score-denominator="20"
+						show-floored-score-warning
 					></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
 
 				<h6>Floored negative score hint, icons (for attempt scores on quizzes with grade items)</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Attempt Grade"
-						scoreNumerator="0"
-						scoreDenominator="20"
-						showFlooredScoreWarning
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Example Quiz Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						grade-type="Numeric"
+						label-text="Attempt Grade"
+						score-numerator="0"
+						score-denominator="20"
+						show-floored-score-warning
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Example Quiz Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
 					></d2l-labs-grade-result-presentational>
@@ -433,11 +442,11 @@
 				<h6>Floored negative score hint, read-only</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Attempt Grade"
-						scoreNumerator="0"
-						scoreDenominator="20"
-						showFlooredScoreWarning
+						grade-type="Numeric"
+						label-text="Attempt Grade"
+						score-numerator="0"
+						score-denominator="20"
+						show-floored-score-warning
 						readonly
 					></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
@@ -445,16 +454,16 @@
 				<h6>Floored negative score hint, read-only, icons</h6>
 				<d2l-demo-snippet>
 					<d2l-labs-grade-result-presentational
-						gradeType="Numeric"
-						labelText="Attempt Grade"
-						scoreNumerator="0"
-						scoreDenominator="20"
-						showFlooredScoreWarning
+						grade-type="Numeric"
+						label-text="Attempt Grade"
+						score-numerator="0"
+						score-denominator="20"
+						show-floored-score-warning
 						readonly
-						includeGradeButton
-						includeReportsButton
-						gradeButtonTooltip="Example Quiz Grade Item Attached"
-						reportsButtonTooltip="Class and user statistics"
+						include-grade-button
+						include-reports-button
+						grade-button-tooltip="Example Quiz Grade Item Attached"
+						reports-button-tooltip="Class and user statistics"
 						display-student-grade-preview
 						student-grade-preview='{"score":10, "symbol":"Very Good", "colour":"#00FFFF"}'
 					></d2l-labs-grade-result-presentational>
@@ -466,12 +475,22 @@
 
 				<h6>Required validation error</h6>
 				<d2l-demo-snippet>
-					<d2l-labs-grade-result-presentational inputLabelText="Overall grade" gradeType="Numeric" labelText="Overall Grade" scoreNumerator="undefined" scoreDenominator="20" required></d2l-labs-grade-result-presentational>
+					<d2l-labs-grade-result-presentational
+						input-label-text="Overall grade"
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="undefined"
+						score-denominator="20"
+						required></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
 
 				<h6>Number range validation error</h6>
 				<d2l-demo-snippet>
-					<d2l-labs-grade-result-presentational gradeType="Numeric" labelText="Overall Grade" scoreNumerator="-1" scoreDenominator="20"></d2l-labs-grade-result-presentational>
+					<d2l-labs-grade-result-presentational
+					grade-type="Numeric"
+					label-text="Overall Grade"
+					score-numerator="-1"
+					score-denominator="20"></d2l-labs-grade-result-presentational>
 				</d2l-demo-snippet>
 
 			</div>

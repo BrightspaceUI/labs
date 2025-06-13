@@ -10,7 +10,7 @@ export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {
-			availableOptions: { type: Object },
+			availableOptions: { attribute: 'available-options', type: Object },
 			label: { type: String },
 			selectedOption: { attribute: 'selected-option', type: String },
 			readonly: { type: Boolean }

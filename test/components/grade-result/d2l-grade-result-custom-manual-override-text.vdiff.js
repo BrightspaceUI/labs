@@ -9,13 +9,12 @@ describe('optional override text substitution visual diff tests', () => {
 			html`
 				<div style='margin: 10px 18px; padding: 50px; display: flex; justify-content: center;'>
 					<d2l-labs-grade-result-presentational
-						gradeType='Numeric'
-						labelText='Overall Grade'
-						scoreNumerator=5
-						scoreDenominator=20
-						customManualOverrideClearText='Substituted Override Clear Text'
-						isGradeAutoCompleted
-						isManualOverrideActive
+						grade-type="Numeric"
+						label-text="Overall Grade"
+						score-numerator="5"
+						score-denominator="20"
+						custom-manual-override-clear-text="Substituted Override Clear Text"
+						is-manual-override-active
 					></d2l-labs-grade-result-presentational>
 				<div>`,
 			{ pagePadding: false }
