@@ -10,7 +10,7 @@ export default {
 	"components:accessibilityDisabilitySimulator:noVision": "全盲", // Disability simulation option for users without the ability to see
 	"components:accessibilityDisabilitySimulator:none": "なし", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "スクリーンリーダーを有効にして、コンテンツを利用します", // Alert that prompts the user to use a screenreader and tabbing to view content
-	"components:accessibilityDisabilitySimulator:simulationType": "シミュレーションタイプ: ", // Label for the disability simulation options
+	"components:accessibilityDisabilitySimulator:simulationType": "シミュレーションタイプ:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "クリックして値 {value} を追加", // Label for screen readers to inform user that they can click to add the given value
 	"components:attributePicker:limitReached": "選択した値の上限値 {value} に達しました", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "少なくとも 1 つの値を設定する必要があります", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state

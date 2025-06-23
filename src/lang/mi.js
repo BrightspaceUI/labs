@@ -111,5 +111,5 @@ export default {
 	"components:wizard:stepper.defaults.next": "Whai Ake",
 	"components:wizard:stepper.defaults.restart": "Tīmata anō",
 	"components:wizard:restart.button.tooltip": "Hoki ki te tapawhā tuatahi",
-	"components:wizard:next.button.tooltip": "Haere ki te whakatikanga whai ake "
+	"components:wizard:next.button.tooltip": "Haere ki te whakatikanga whai ake"
 };
