@@ -111,5 +111,5 @@ export default {
 	"components:wizard:stepper.defaults.next": "Nesaf",
 	"components:wizard:stepper.defaults.restart": "Ailddechrau",
 	"components:wizard:restart.button.tooltip": "Yn ôl i’r cam cyntaf",
-	"components:wizard:next.button.tooltip": "Parhau i'r cam nesaf"
+	"components:wizard:next.button.tooltip": "Parhau i’r cam nesaf"
 };
