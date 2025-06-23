@@ -12,7 +12,7 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Whakahohea tō pānui mata me te ripa ki te ihirangi", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Momo kōwae:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Pāwhiri hei tāpiri uara {value}", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "Kua tae koe ki te rohe o ngā uara {uara} kua tīpakohia", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:limitReached": "Kua tae koe ki te rohe o ngā uara {value} kua tīpakohia", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Me whakarite tētahi uara", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "Pāwhiritia, pēhia te whakakore rānei, pēhia te huapae muku hei tango i te tūemi {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Kua hinga te Pouakataki", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
