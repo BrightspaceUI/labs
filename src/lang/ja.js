@@ -70,7 +70,7 @@ export default {
 	"components:optInFlyout:feedbackReasonJustCheckingSomething": "確認したいことがあるので戻すだけです",
 	"components:optInFlyout:feedbackReasonLabel": "元に戻した理由を教えていただけますか？",
 	"components:optInFlyout:feedbackReasonMissingFeature": "使用している機能がありません",
-	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "今はタイミングが悪いのでこのバージョンを試すことはできない",
+	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "今はタイミングが悪いのでこのバージョンを試すことはできません",
 	"components:optInFlyout:feedbackReasonOther": "その他",
 	"components:optInFlyout:feedbackReasonPreferOldExperience": "古いバージョンのほうが使いやすい",
 	"components:optInFlyout:feedbackTitle": "改善できる点についてご意見をお聞かせください。",

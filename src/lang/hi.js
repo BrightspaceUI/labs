@@ -69,7 +69,7 @@ export default {
 	"components:optInFlyout:feedbackLabel": "इसे ऐसा कुछ बनाने के लिए हम क्या कर सकते हैं जिसका आप उपयोग करना पसंद करेंगे?",
 	"components:optInFlyout:feedbackReasonJustCheckingSomething": "कुछ जाँचने के लिए बस वापस स्विच करना है",
 	"components:optInFlyout:feedbackReasonLabel": "क्या आप हमें यह बताना चाहेंगे कि आप वापस स्विच क्यों कर रहे हैं?",
-	"components:optInFlyout:feedbackReasonMissingFeature": "इसमें वह फ़ीचर नहीं है जिसका मैं उपयोग करता हूँ",
+	"components:optInFlyout:feedbackReasonMissingFeature": "इसमें वह फ़ीचर नहीं है जिसका मैं उपयोग करता/करती हूँ",
 	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "इस वर्ज़न को आज़माने हेतु मेरे लिए यह समय अच्छा नहीं है",
 	"components:optInFlyout:feedbackReasonOther": "अन्य",
 	"components:optInFlyout:feedbackReasonPreferOldExperience": "मुझे लगता है कि पुराने वर्ज़न का अनुभव बेहतर है",

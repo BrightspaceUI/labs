@@ -70,7 +70,7 @@ export default {
 	"components:optInFlyout:feedbackReasonJustCheckingSomething": "Ich wechsele nur zurück, um etwas nachzusehen",
 	"components:optInFlyout:feedbackReasonLabel": "Mögen Sie uns mitteilen, warum Sie wieder zurückwechseln?",
 	"components:optInFlyout:feedbackReasonMissingFeature": "Es fehlt eine Funktion, die ich nutze",
-	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "Es ist kein guter Zeitpunkt für mich, um diese Version auszuprobieren",
+	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "Es ist kein guter Zeitpunkt für mich, diese Version auszuprobieren",
 	"components:optInFlyout:feedbackReasonOther": "Andere",
 	"components:optInFlyout:feedbackReasonPreferOldExperience": "Ich finde, dass die alte Version ein besseres Erlebnis bietet",
 	"components:optInFlyout:feedbackTitle": "Sagen Sie uns, wie wir uns verbessern können!",

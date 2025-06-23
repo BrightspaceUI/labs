@@ -70,7 +70,7 @@ export default {
 	"components:optInFlyout:feedbackReasonJustCheckingSomething": "أرجع للتحقق من أمر ما فحسب",
 	"components:optInFlyout:feedbackReasonLabel": "هلا أخبرتنا بسبب رجوعك إلى الإصدار القديم؟",
 	"components:optInFlyout:feedbackReasonMissingFeature": "لا يتضمن ميزة أستخدمها",
-	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "ليس الوقت مناسبًا لتجربة هذا الإصدار",
+	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "ليس الوقت مناسبًا بالنسبة إليّ لتجربة هذا الإصدار",
 	"components:optInFlyout:feedbackReasonOther": "غير ذلك",
 	"components:optInFlyout:feedbackReasonPreferOldExperience": "أعتقد أن الإصدار القديم يوفر تجربة أفضل",
 	"components:optInFlyout:feedbackTitle": "أخبرنا كيف يمكننا تحسين أدائنا!",
