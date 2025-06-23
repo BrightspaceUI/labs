@@ -12,15 +12,15 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Habilite su lector de pantalla y tableta en el contenido", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Tipo de simulación:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Haga clic para agregar el valor {value}", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "Alcanzó el límite de {value} valores seleccionados", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:limitReached": "Alcanzó el límite de {value} valores seleccionados", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Se debe definir al menos un valor", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "Haga clic, presione Retroceso o presione la tecla Suprimir para eliminar el elemento {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Casilla de selección contraída", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Casilla de selección expandida", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:fileUploader:file_upload_text": "Arrastrar y soltar o",
 	"components:fileUploader:browse": "examinar",
 	"components:fileUploader:browse_files": "Examinar archivos",
 	"components:fileUploader:choose_one_file_to_upload": "Elija un archivo para cargar",
+	"components:fileUploader:file_upload_text": "Arrastrar y soltar o",
 	"components:gradeResult:cannotBeNegative": "(no puede ser menor que 0)",
 	"components:gradeResult:clearManualOverride": "Borrar anulación manual",
 	"components:gradeResult:gradeScoreLabel": "Puntaje de calificación",
@@ -83,33 +83,33 @@ export default {
 	"components:optInFlyout:turnOn": "Activar",
 	"components:optInFlyout:tutorialAndHelpMessage": "Vea nuestros *tutoriales* o lea nuestra ~documentación de ayuda~ para comenzar",
 	"components:optInFlyout:tutorialMessage": "Vea nuestros *tutoriales* para saber cómo comenzar",
+	"components:ouFilter:orgUnitFilter:name": "Unidad de organización",
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Unidad de organización: todos",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Unidad de organización: selecciones aplicadas",
-	"components:ouFilter:orgUnitFilter:name": "Unidad de organización",
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "raíz",
-	"components:ouFilter:treeSelector:filterBy": "Filtrar por",
-	"components:ouFilter:treeSelector:selectAllLabel": "Seleccionar todo",
-	"components:ouFilter:treeSelector:clearLabel": "Borrar",
-	"components:ouFilter:treeSelector:searchLabel": "Buscar",
-	"components:ouFilter:treeSelector:loadMoreLabel": "Cargar más",
-	"components:ouFilter:treeSelector:noSearchResults": "No hay resultados de búsqueda",
-	"components:ouFilter:treeSelector:noFiltersAvailable": "No hay filtros disponibles",
-	"components:ouFilter:treeSelector:parentLoadMore:ariaLabel": "Cargar más unidades de organización secundarias",
-	"components:ouFilter:treeSelector:searchLoadMore:ariaLabel": "Cargar más resultados de búsqueda",
-	"components:ouFilter:treeSelector:searchPlaceholder": "Buscar…",
-	"components:ouFilter:treeSelector:dropdownAction": "Abrir filtro {name}",
 	"components:ouFilter:treeSelector:arrowLabel:closed": "Expandir {name} en el nivel {level}, elemento secundario de {parentName}",
 	"components:ouFilter:treeSelector:arrowLabel:open": "Contraer {name} en el nivel {level}, elemento secundario de {parentName}",
+	"components:ouFilter:treeSelector:clearLabel": "Borrar",
+	"components:ouFilter:treeSelector:dropdownAction": "Abrir filtro {name}",
+	"components:ouFilter:treeSelector:filterBy": "Filtrar por",
+	"components:ouFilter:treeSelector:loadMoreLabel": "Cargar más",
+	"components:ouFilter:treeSelector:noFiltersAvailable": "No hay filtros disponibles",
+	"components:ouFilter:treeSelector:noSearchResults": "No hay resultados de búsqueda",
 	"components:ouFilter:treeSelector:node:ariaLabel": "{name}, elemento secundario de {parentName},",
+	"components:ouFilter:treeSelector:parentLoadMore:ariaLabel": "Cargar más unidades de organización secundarias",
+	"components:ouFilter:treeSelector:searchLabel": "Buscar",
+	"components:ouFilter:treeSelector:searchLoadMore:ariaLabel": "Cargar más resultados de búsqueda",
+	"components:ouFilter:treeSelector:searchPlaceholder": "Buscar…",
+	"components:ouFilter:treeSelector:selectAllLabel": "Seleccionar todo",
 	"components:pagination:amountPerPage": "{count} por página",
 	"components:pagination:currentPage": "Página número {pageNumber} de {maxPageNumber}",
 	"components:pagination:nextPage": "Página siguiente",
 	"components:pagination:previousPage": "Página anterior",
 	"components:pagination:resultsPerPage": "Resultados por página",
 	"components:wizard:aria.steplabel": "Paso {currentStep} de {totalSteps}",
-	"components:wizard:stepper.defaults.next": "Siguiente",
-	"components:wizard:stepper.defaults.restart": "Reiniciar",
+	"components:wizard:next.button.tooltip": "Avanzar al siguiente paso",
 	"components:wizard:restart.button.tooltip": "Volver al primer paso",
-	"components:wizard:next.button.tooltip": "Avanzar al siguiente paso"
+	"components:wizard:stepper.defaults.next": "Siguiente",
+	"components:wizard:stepper.defaults.restart": "Reiniciar"
 };
