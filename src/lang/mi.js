@@ -12,15 +12,15 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Whakahohea tō pānui mata me te ripa ki te ihirangi", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Momo kōwae:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Pāwhiri hei tāpiri uara {value}", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "Kua tae koe ki te rohe o ngā uara {uara} kua tīpakohia", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:limitReached": "Kua tae koe ki te rohe o ngā uara {value} kua tīpakohia", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Me whakarite tētahi uara", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "Pāwhiritia, pēhia te whakakore rānei, pēhia te huapae muku hei tango i te tūemi {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Kua hinga te Pouakataki", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "Kua roha te Pouakataki", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:fileUploader:file_upload_text": "Tō me te whakarereke, ka whakarereke rānei",
 	"components:fileUploader:browse": "rapu",
 	"components:fileUploader:browse_files": "Tirohia ngā kōnae",
 	"components:fileUploader:choose_one_file_to_upload": "Kōwhiria tētahi kōnae hei tukuatu",
+	"components:fileUploader:file_upload_text": "Tō me te whakarereke, ka whakarereke rānei",
 	"components:gradeResult:cannotBeNegative": "(kāore e taea te iti ake i te 0)",
 	"components:gradeResult:clearManualOverride": "Ūkui Whakakore ā-Ringa",
 	"components:gradeResult:gradeScoreLabel": "Tohu Kounga",
@@ -83,33 +83,33 @@ export default {
 	"components:optInFlyout:turnOn": "Whakakāia",
 	"components:optInFlyout:tutorialAndHelpMessage": "Mātakina ā mātou *akoranga*, pānui rānei i ā mātou tuhinga ~āwhina~ kia tīmata ai!",
 	"components:optInFlyout:tutorialMessage": "Mātakina ā mātou akoranga *akoranga* hei āwhina i a koe kia tīmata!",
+	"components:ouFilter:orgUnitFilter:name": "Tīpuna Whakahaere",
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Tari: Katoa",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Tari: Nga Whiringa Kua Whakamahia",
-	"components:ouFilter:orgUnitFilter:name": "Tīpuna Whakahaere",
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "pakiaka",
-	"components:ouFilter:treeSelector:filterBy": "Tātari Mā",
-	"components:ouFilter:treeSelector:selectAllLabel": "Kōwhiri Katoa",
-	"components:ouFilter:treeSelector:clearLabel": "Muku",
-	"components:ouFilter:treeSelector:searchLabel": "Rapu",
-	"components:ouFilter:treeSelector:loadMoreLabel": "Utu Anō",
-	"components:ouFilter:treeSelector:noSearchResults": "Kāore he hua rapu",
-	"components:ouFilter:treeSelector:noFiltersAvailable": "Kāore he tātari e wātea ana",
-	"components:ouFilter:treeSelector:parentLoadMore:ariaLabel": "Utu ētahi atu wae org tamariki",
-	"components:ouFilter:treeSelector:searchLoadMore:ariaLabel": "Utu ētahi atu hua rapu",
-	"components:ouFilter:treeSelector:searchPlaceholder": "Rapua...",
-	"components:ouFilter:treeSelector:dropdownAction": "Whakatuwhera {name} tātari",
 	"components:ouFilter:treeSelector:arrowLabel:closed": "Whakawhānui {name} i te taumata {level}, tamaiti a {parentName}",
 	"components:ouFilter:treeSelector:arrowLabel:open": "Tiango {name} i te taumata {level}, tamaiti a {parentName}",
+	"components:ouFilter:treeSelector:clearLabel": "Muku",
+	"components:ouFilter:treeSelector:dropdownAction": "Whakatuwhera {name} tātari",
+	"components:ouFilter:treeSelector:filterBy": "Tātari Mā",
+	"components:ouFilter:treeSelector:loadMoreLabel": "Utu Anō",
+	"components:ouFilter:treeSelector:noFiltersAvailable": "Kāore he tātari e wātea ana",
+	"components:ouFilter:treeSelector:noSearchResults": "Kāore he hua rapu",
 	"components:ouFilter:treeSelector:node:ariaLabel": "{name}, tamaiti a {parentName},",
+	"components:ouFilter:treeSelector:parentLoadMore:ariaLabel": "Utu ētahi atu wae org tamariki",
+	"components:ouFilter:treeSelector:searchLabel": "Rapu",
+	"components:ouFilter:treeSelector:searchLoadMore:ariaLabel": "Utu ētahi atu hua rapu",
+	"components:ouFilter:treeSelector:searchPlaceholder": "Rapua...",
+	"components:ouFilter:treeSelector:selectAllLabel": "Kōwhiri Katoa",
 	"components:pagination:amountPerPage": "{count} mō ia whārangi",
 	"components:pagination:currentPage": "Tau whārangi {pageNumber} o {maxPageNumber}",
 	"components:pagination:nextPage": "Whārangi whai ake",
 	"components:pagination:previousPage": "Whārangi o mua",
 	"components:pagination:resultsPerPage": "Ngā kitenga mō ia whārangi",
 	"components:wizard:aria.steplabel": "Taumata {currentStep} o {totalSteps}",
-	"components:wizard:stepper.defaults.next": "Whai Ake",
-	"components:wizard:stepper.defaults.restart": "Tīmata anō",
+	"components:wizard:next.button.tooltip": "Haere ki te whakatikanga whai ake",
 	"components:wizard:restart.button.tooltip": "Hoki ki te tapawhā tuatahi",
-	"components:wizard:next.button.tooltip": "Haere ki te whakatikanga whai ake "
+	"components:wizard:stepper.defaults.next": "Whai Ake",
+	"components:wizard:stepper.defaults.restart": "Tīmata anō"
 };

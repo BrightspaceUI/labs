@@ -10,17 +10,17 @@ export default {
 	"components:accessibilityDisabilitySimulator:noVision": "全盲", // Disability simulation option for users without the ability to see
 	"components:accessibilityDisabilitySimulator:none": "なし", // Disability simulation option that represents having no disability
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "スクリーンリーダーを有効にして、コンテンツを利用します", // Alert that prompts the user to use a screenreader and tabbing to view content
-	"components:accessibilityDisabilitySimulator:simulationType": "シミュレーションタイプ: ", // Label for the disability simulation options
+	"components:accessibilityDisabilitySimulator:simulationType": "シミュレーションタイプ:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "クリックして値 {value} を追加", // Label for screen readers to inform user that they can click to add the given value
 	"components:attributePicker:limitReached": "選択した値の上限値 {value} に達しました", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "少なくとも 1 つの値を設定する必要があります", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "クリックする、Backspace キーを押す、または Delete キーを押すと項目 {value} が削除されます", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "折りたたまれたチェックボックス", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
 	"components:checkboxDrawer:checkboxExpanded": "展開されたチェックボックス", // Read by screen readers when focusing the expanded (checked) checkbox, with the inner content shown
-	"components:fileUploader:file_upload_text": "ドラッグ＆ドロップまたは",
 	"components:fileUploader:browse": "参照",
 	"components:fileUploader:browse_files": "ファイルの参照",
 	"components:fileUploader:choose_one_file_to_upload": "1 つのファイルを選択してアップロード",
+	"components:fileUploader:file_upload_text": "ドラッグ＆ドロップまたは",
 	"components:gradeResult:cannotBeNegative": "（0 より小さくはできません）",
 	"components:gradeResult:clearManualOverride": "手動の上書きのクリア",
 	"components:gradeResult:gradeScoreLabel": "成績スコア",
@@ -83,33 +83,33 @@ export default {
 	"components:optInFlyout:turnOn": "オンにする",
 	"components:optInFlyout:tutorialAndHelpMessage": "はじめに*チュートリアル*をご覧になるか、～ヘルプドキュメント～をお読みください。",
 	"components:optInFlyout:tutorialMessage": "ぜひ*チュートリアル*をご覧になり、ご利用を開始してください。",
+	"components:ouFilter:orgUnitFilter:name": "組織単位",
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "組織単位: すべて",
 	"components:ouFilter:orgUnitFilter:nameSomeSelected": "組織単位: 適用された選択",
-	"components:ouFilter:orgUnitFilter:name": "組織単位",
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (Id: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "ルート",
-	"components:ouFilter:treeSelector:filterBy": "フィルタの条件",
-	"components:ouFilter:treeSelector:selectAllLabel": "すべてを選択",
-	"components:ouFilter:treeSelector:clearLabel": "クリア",
-	"components:ouFilter:treeSelector:searchLabel": "検索",
-	"components:ouFilter:treeSelector:loadMoreLabel": "さらに読み込む",
-	"components:ouFilter:treeSelector:noSearchResults": "検索結果 0 件",
-	"components:ouFilter:treeSelector:noFiltersAvailable": "使用可能なフィルタはありません",
-	"components:ouFilter:treeSelector:parentLoadMore:ariaLabel": "子組織単位をさらに読み込む",
-	"components:ouFilter:treeSelector:searchLoadMore:ariaLabel": "検索結果をさらに読み込む",
-	"components:ouFilter:treeSelector:searchPlaceholder": "検索...",
-	"components:ouFilter:treeSelector:dropdownAction": "{name} フィルタを開く",
 	"components:ouFilter:treeSelector:arrowLabel:closed": "レベル {level} の {name}、{parentName} の子を展開",
 	"components:ouFilter:treeSelector:arrowLabel:open": "レベル {level} の {name}、{parentName} の子を折りたたむ",
+	"components:ouFilter:treeSelector:clearLabel": "クリア",
+	"components:ouFilter:treeSelector:dropdownAction": "{name} フィルタを開く",
+	"components:ouFilter:treeSelector:filterBy": "フィルタの条件",
+	"components:ouFilter:treeSelector:loadMoreLabel": "さらに読み込む",
+	"components:ouFilter:treeSelector:noFiltersAvailable": "使用可能なフィルタはありません",
+	"components:ouFilter:treeSelector:noSearchResults": "検索結果 0 件",
 	"components:ouFilter:treeSelector:node:ariaLabel": "{name}、{parentName} の子、",
+	"components:ouFilter:treeSelector:parentLoadMore:ariaLabel": "子組織単位をさらに読み込む",
+	"components:ouFilter:treeSelector:searchLabel": "検索",
+	"components:ouFilter:treeSelector:searchLoadMore:ariaLabel": "検索結果をさらに読み込む",
+	"components:ouFilter:treeSelector:searchPlaceholder": "検索...",
+	"components:ouFilter:treeSelector:selectAllLabel": "すべてを選択",
 	"components:pagination:amountPerPage": "ページごとの {count}",
 	"components:pagination:currentPage": "{maxPageNumber} のページ番号 {pageNumber}",
 	"components:pagination:nextPage": "次のページ",
 	"components:pagination:previousPage": "前のページ",
 	"components:pagination:resultsPerPage": "ページごとの結果",
 	"components:wizard:aria.steplabel": "手順 {currentStep}/{totalSteps}",
-	"components:wizard:stepper.defaults.next": "次へ",
-	"components:wizard:stepper.defaults.restart": "再開",
+	"components:wizard:next.button.tooltip": "次の手順に進む",
 	"components:wizard:restart.button.tooltip": "最初の手順に戻る",
-	"components:wizard:next.button.tooltip": "次の手順に進む"
+	"components:wizard:stepper.defaults.next": "次へ",
+	"components:wizard:stepper.defaults.restart": "再開"
 };
