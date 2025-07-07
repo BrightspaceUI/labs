@@ -17,7 +17,7 @@ A Lit component that renders an org unit structure tree. It supports load more a
 ```js
 import { action, decorate, observable } from 'mobx';
 import { MobxLitElement } from '@adobe/lit-mobx';
-import { OuFilterDataManager } from '@brightspace-ui-labs/ou-filter/ou-filter.js';
+import { OuFilterDataManager } from '@brightspace-ui/labs/components/ou-filter.js';
 
 class FooDataManager extends OuFilterDataManager {
 
