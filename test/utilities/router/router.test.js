@@ -191,14 +191,14 @@ describe('Router', () => {
 	});
 
 	it('Should receive passed values from navigateAndPass', async() => {
-		// chech that data can be passed
-		navigateAndPass('/pass', { hello: 'world' });
+		// check that data can be passed
+		navigateAndPass('/pass', 'hello world');
 		await entryPoint.updateComplete;
 		await waitUntil(
 			() => entryPoint.shadowRoot.querySelector('p') !== null
 		);
 		const p1 = entryPoint.shadowRoot.querySelector('p').innerText;
-		expect(p1).to.equal('world');
+		expect(p1).to.equal('hello world');
 
 		// validate that data isn't accessible after the first pass
 		navigate('/pass');
@@ -206,7 +206,7 @@ describe('Router', () => {
 			() => entryPoint.shadowRoot.querySelector('p') !== null
 		);
 		const p2 = entryPoint.shadowRoot.querySelector('p').innerText;
-		expect(p2).to.equal('undefined');
+		expect(p2).to.equal('');
 	});
 
 	it('Should receive entry-point as this', async() => {
