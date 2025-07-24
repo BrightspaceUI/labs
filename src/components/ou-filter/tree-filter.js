@@ -757,7 +757,7 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 		const emptyState = html`<d2l-empty-state-simple
 			slot="tree"
-			description="${this.localize('treeSelector:noFiltersAvailable')}"
+			description="${this.localize('components:ouFilter:treeSelector:noFiltersAvailable')}"
 		></d2l-empty-state-simple>`;
 
 		if (id === undefined) {
