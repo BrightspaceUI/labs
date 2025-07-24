@@ -3,6 +3,7 @@ import page from 'page';
 let activePage = page;
 let _lastOptions = {};
 let _lastContext = {};
+let passedData = undefined;
 
 export const _createReducedContext = pageContext => ({
 	params: pageContext.params,
@@ -13,6 +14,7 @@ export const _createReducedContext = pageContext => ({
 	route: pageContext.routePath,
 	title: pageContext.title,
 	options: {},
+	passedData
 });
 
 const _storeCtx = () => {
@@ -27,7 +29,9 @@ const _handleRouteView = (context, next, r) => {
 		const reducedContext = _createReducedContext(context);
 		context.view = (host, options) => {
 			reducedContext.options = options || {};
-			return r.view.call(host, reducedContext);
+			const resultingView = r.view.call(host, reducedContext);
+			passedData = undefined;
+			return resultingView;
 		};
 		context.handled = true;
 
@@ -119,6 +123,13 @@ const addMiddleware = callback => {
 // Triggers navigation to the specified route path.
 // Creates a new entry in the browser's history stack.
 export const navigate = path => {
+	activePage.show(path);
+};
+
+// Triggers navigation to the specified route path and passes along some data.
+// Creates a new entry in the browser's history stack.
+export const navigateAndPass = (path, data) => {
+	passedData = data;
 	activePage.show(path);
 };
 

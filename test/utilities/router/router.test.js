@@ -1,7 +1,7 @@
 import './helpers/main-view.js';
 import './helpers/param-query-view.js';
 import { aTimeout, expect, fixture, html, waitUntil } from '@brightspace-ui/testing';
-import { navigate, registerRoutes, RouterTesting } from '../../../src/utilities/router/index.js';
+import { navigate, navigateAndPass, registerRoutes, RouterTesting } from '../../../src/utilities/router/index.js';
 import { loader as load1 } from './helpers/route-loader-1.js';
 import { loader as load2 } from './helpers/route-loader-2.js';
 
@@ -51,6 +51,10 @@ const initRouter = () => {
 				view() {
 					return html`<p>${this['main-prop']}</p>`;
 				},
+			},
+			{
+				pattern: '/pass',
+				view: ctx => html`<p>${ctx.passedData}</p>`
 			},
 			load1,
 			load2,
@@ -184,6 +188,25 @@ describe('Router', () => {
 		);
 		const p = entryPoint.shadowRoot.querySelector('p').innerText;
 		expect(p).to.equal('Passed');
+	});
+
+	it('Should receive passed values from navigateAndPass', async() => {
+		// chech that data can be passed
+		navigateAndPass('/pass', { hello: 'world' });
+		await entryPoint.updateComplete;
+		await waitUntil(
+			() => entryPoint.shadowRoot.querySelector('p') !== null
+		);
+		const p1 = entryPoint.shadowRoot.querySelector('p').innerText;
+		expect(p1).to.equal('world');
+
+		// validate that data isn't accessible after the first pass
+		navigate('/pass');
+		await waitUntil(
+			() => entryPoint.shadowRoot.querySelector('p') !== null
+		);
+		const p2 = entryPoint.shadowRoot.querySelector('p').innerText;
+		expect(p2).to.equal('undefined');
 	});
 
 	it('Should receive entry-point as this', async() => {
