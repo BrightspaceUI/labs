@@ -1,2 +1,2 @@
-export { ContextReactor, redirect, navigate, navigateAndPass, registerRoutes, RouterTesting } from './router.js';
+export { ContextReactor, redirect, navigate, registerRoutes, RouterTesting } from './router.js';
 export { RouteReactor } from './RouteReactor.js';

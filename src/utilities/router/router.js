@@ -122,14 +122,9 @@ const addMiddleware = callback => {
 
 // Triggers navigation to the specified route path.
 // Creates a new entry in the browser's history stack.
-export const navigate = path => {
-	activePage.show(path);
-};
-
-// Triggers navigation to the specified route path and passes along some data.
-// Creates a new entry in the browser's history stack.
-export const navigateAndPass = (path, data) => {
-	passedData = data;
+// data in the options object is available to the next view in ctx.passedData
+export const navigate = (path, options) => {
+	passedData = options?.data;
 	activePage.show(path);
 };
 
