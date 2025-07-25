@@ -184,6 +184,15 @@ import { navigate } from '@brightspace-ui/labs/utilities/lit-router';
 navigate('/my-app/new-place');
 ```
 
+navigate can also be used to pass data between views. This is useful for sharing state objects between views without needing to make additional server calls. If the data you are sharing with a view is part of the state of the next view consider using a search param instead.
+
+```js
+import { navigate } from '@brightspace-ui/labs/utilities/lit-router';
+
+navigate(`/users?userId=${userId}`, { data: { /* sharing the user object here so I don't need to fetch it again */ } });
+```
+
+
 To redirect to a page and replace the previous browser history item the new one, use `redirect(path)`:
 
 ```js

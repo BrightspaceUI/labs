@@ -52,6 +52,10 @@ const initRouter = () => {
 					return html`<p>${this['main-prop']}</p>`;
 				},
 			},
+			{
+				pattern: '/pass',
+				view: ctx => html`<p>${ctx.passedData}</p>`
+			},
 			load1,
 			load2,
 		],
@@ -184,6 +188,25 @@ describe('Router', () => {
 		);
 		const p = entryPoint.shadowRoot.querySelector('p').innerText;
 		expect(p).to.equal('Passed');
+	});
+
+	it('Should receive passed values from navigateAndPass', async() => {
+		// check that data can be passed
+		navigate('/pass', { data: 'hello world' });
+		await entryPoint.updateComplete;
+		await waitUntil(
+			() => entryPoint.shadowRoot.querySelector('p') !== null
+		);
+		const p1 = entryPoint.shadowRoot.querySelector('p').innerText;
+		expect(p1).to.equal('hello world');
+
+		// validate that data isn't accessible after the first pass
+		navigate('/pass');
+		await waitUntil(
+			() => entryPoint.shadowRoot.querySelector('p') !== null
+		);
+		const p2 = entryPoint.shadowRoot.querySelector('p').innerText;
+		expect(p2).to.equal('');
 	});
 
 	it('Should receive entry-point as this', async() => {
