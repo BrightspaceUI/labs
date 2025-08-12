@@ -56,6 +56,14 @@ const initRouter = () => {
 				pattern: '/pass',
 				view: ctx => html`<p>${ctx.passedData}</p>`
 			},
+			{
+				pattern: '/ctx-load',
+				loader: ctx => {
+					ctx.loaderData = 'Loaded from loader';
+					return Promise.resolve();
+				},
+				view: ctx => html`<p>${ctx.loaderData}</p>`
+			},
 			load1,
 			load2,
 		],
@@ -207,6 +215,13 @@ describe('Router', () => {
 		);
 		const p2 = entryPoint.shadowRoot.querySelector('p').innerText;
 		expect(p2).to.equal('');
+	});
+
+	it('Should access context from loader and modify it', async() => {
+		navigate('/ctx-load');
+		await waitUntil(() => entryPoint.shadowRoot.querySelector('p'));
+		const p = entryPoint.shadowRoot.querySelector('p').innerText;
+		expect(p).to.equal('Loaded from loader');
 	});
 
 	it('Should receive entry-point as this', async() => {

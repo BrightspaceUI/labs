@@ -8,8 +8,11 @@ registerRoutes(
 	[
 		{
 			pattern: '/',
-			loader: () => import('./home.js'),
-			view: () => html`<test-home></test-home>`,
+			loader: async(ctx) => {
+				await import('./home.js');
+				ctx.loaderData = 'test';
+			},
+			view: ({ loaderData }) => html`<test-home>${ loaderData }</test-home>`,
 		},
 		{
 			pattern: '/home',
