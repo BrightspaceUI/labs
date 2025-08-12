@@ -59,10 +59,10 @@ const initRouter = () => {
 			{
 				pattern: '/ctx-load',
 				loader: ctx => {
-					ctx.passedData = 'Loaded from loader';
+					ctx.loaderData = 'Loaded from loader';
 					return Promise.resolve();
 				},
-				view: ctx => html`<p>${ctx.passedData}</p>`
+				view: ctx => html`<p>${ctx.loaderData}</p>`
 			},
 			load1,
 			load2,
