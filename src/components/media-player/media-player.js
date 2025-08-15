@@ -1447,10 +1447,11 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				</div>
 			`;
 
-		// format of the thumbnail is [url]/th<height>w<height>i<interval>-<hash>.[png|jpg]
-		const matches = this.thumbnails.match(/th(\d+)w(\d+)i(\d+)[^/]*$/i);
-		if (matches && matches.length !== 4) return; // no matches
-		const [ , thumbHeight, thumbWidth, interval] = matches;
+		// format of the thumbnail is either [url]/timelineThumbnails-h<height>w<height>i<interval>-<hash>.[png|jpg]
+		// or [url]/th<height>w<height>i<interval>-<hash>.[png|jpg]
+		const matches = this.thumbnails.match(/(timelineThumbnails-|t)h(\d+)w(\d+)i(\d+)[^/]*$/i);
+		if (matches && matches.length !== 5) return; // no matches
+		const [ , , thumbHeight, thumbWidth, interval] = matches;
 
 		const width = this._thumbnailsImage.width;
 		const height = this._thumbnailsImage.height;
