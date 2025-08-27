@@ -4,6 +4,7 @@
 		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
 		<script type="module">
 			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '@brightspace-ui/core/components/button/button.js';
 			import '../../../src/components/navigation/navigation-band.js';
 			import '../../../src/components/navigation/navigation-immersive.js';
 		</script>
@@ -14,7 +15,16 @@
 				height: 400px;
 				width: 100%;
 			}
+			
+			d2l-button {
+				margin-bottom: 10px;
+			}
 		</style>
+		<script>
+			function toggleAccessibilityMode() {
+				javascript:(function(){var d=document,id='phltsbkmklt',el=d.getElementById(id),f=d.querySelectorAll('iframe'),i=0,l=f.length;if(el){function removeFromShadows(root){for(var el of root.querySelectorAll('*')){if(el.shadowRoot){el.shadowRoot.getElementById(id).remove();removeFromShadows(el.shadowRoot);}}}el.remove();if(l){for(i=0;i<l;i++){try{f[i].contentWindow.document.getElementById(id).remove();removeFromShadows(f[i].contentWindow.document);}catch(e){console.log(e)}}}removeFromShadows(d);}else{s=d.createElement('style');s.id=id;s.appendChild(d.createTextNode('*{line-height:1.5 !important;letter-spacing:0.12em !important;word-spacing:0.16em !important;}p{margin-bottom:2em !important;}'));function applyToShadows(root){for(var el of root.querySelectorAll('*')){if(el.shadowRoot){el.shadowRoot.appendChild(s.cloneNode(true));applyToShadows(el.shadowRoot);}}}d.getElementsByTagName('head')[0].appendChild(s);for(i=0;i<l;i++){try{f[i].contentWindow.document.getElementsByTagName('head')[0].appendChild(s.cloneNode(true));applyToShadows(f[i].contentWindow.document);}catch(e){console.log(e)}}applyToShadows(d);}})();
+			}
+		</script>
 	</head>
 	<body>
 		<d2l-demo-page page-title="d2l-labs-navigation-immersive">
@@ -28,6 +38,9 @@
 			<iframe src="./immersive-overflow.html"></iframe>
 
 			<h2>With Context Bar</h2>
+			<d2l-button onclick="toggleAccessibilityMode()">
+				Toggle Accessibility Mode
+			</d2l-button>
 			<iframe src="./immersive-context-bar.html"></iframe>
 		</d2l-demo-page>
 	</body>
