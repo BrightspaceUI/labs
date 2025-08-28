@@ -4,6 +4,7 @@ import './navigation-link-back.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { getFlag } from '@brightspace-ui/core/helpers/flags.js';
 import { navigationSharedStyle } from './navigation-shared-styles.js';
 import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver.es.js';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -172,7 +173,12 @@ class NavigationImmersive extends LitElement {
 		this._middleNoRightBorder = true;
 		this._middleObserver = new ResizeObserver(this._onMiddleResize.bind(this));
 		this._rightObserver = new ResizeObserver(this._onRightResize.bind(this));
-		this._navigationObserver = new ResizeObserver(this._onNavigationResize.bind(this));
+
+		// Only create navigation observer if feature flag is enabled
+		if (getFlag('GAUD-8465-immersive-nav-text-spacing', true)) {
+			this._navigationObserver = new ResizeObserver(this._onNavigationResize.bind(this));
+		}
+
 		this._smallWidth = false;
 		this._dynamicSpacingHeight = undefined;
 	}
@@ -284,9 +290,13 @@ class NavigationImmersive extends LitElement {
 		if (right) {
 			this._rightObserver.observe(right);
 		}
-		const navigation = this.shadowRoot?.querySelector('.d2l-navigiation-immersive-fixed');
-		if (navigation) {
-			this._navigationObserver.observe(navigation);
+
+		if (this._navigationObserver) {
+			// does not need to be nested within if statement after GAUD-8465-immersive-nav-text-spacing is cleaned up
+			const navigation = this.shadowRoot?.querySelector('.d2l-navigiation-immersive-fixed');
+			if (navigation) {
+				this._navigationObserver.observe(navigation);
+			}
 		}
 	}
 
