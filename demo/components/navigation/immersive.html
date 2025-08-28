@@ -21,8 +21,87 @@
 			}
 		</style>
 		<script>
+			// eslint-disable-next-line no-unused-vars
 			function toggleAccessibilityMode() {
-				javascript:(function(){var d=document,id='phltsbkmklt',el=d.getElementById(id),f=d.querySelectorAll('iframe'),i=0,l=f.length;if(el){function removeFromShadows(root){for(var el of root.querySelectorAll('*')){if(el.shadowRoot){el.shadowRoot.getElementById(id).remove();removeFromShadows(el.shadowRoot);}}}el.remove();if(l){for(i=0;i<l;i++){try{f[i].contentWindow.document.getElementById(id).remove();removeFromShadows(f[i].contentWindow.document);}catch(e){console.log(e)}}}removeFromShadows(d);}else{s=d.createElement('style');s.id=id;s.appendChild(d.createTextNode('*{line-height:1.5 !important;letter-spacing:0.12em !important;word-spacing:0.16em !important;}p{margin-bottom:2em !important;}'));function applyToShadows(root){for(var el of root.querySelectorAll('*')){if(el.shadowRoot){el.shadowRoot.appendChild(s.cloneNode(true));applyToShadows(el.shadowRoot);}}}d.getElementsByTagName('head')[0].appendChild(s);for(i=0;i<l;i++){try{f[i].contentWindow.document.getElementsByTagName('head')[0].appendChild(s.cloneNode(true));applyToShadows(f[i].contentWindow.document);}catch(e){console.log(e)}}applyToShadows(d);}})();
+				const styleId = 'phltsbkmklt';
+				const document = window.document;
+				const existingStyle = document.getElementById(styleId);
+				const iframes = document.querySelectorAll('iframe');
+
+				if (existingStyle) {
+					// Remove accessibility styles
+
+					// Helper function to remove styles from shadow DOM elements
+					function removeFromShadows(root) {
+						const elements = root.querySelectorAll('*');
+						for (const element of elements) {
+							if (element.shadowRoot) {
+								const shadowStyle = element.shadowRoot.getElementById(styleId);
+								if (shadowStyle) {
+									shadowStyle.remove();
+								}
+								removeFromShadows(element.shadowRoot);
+							}
+						}
+					}
+
+					// Remove main style
+					existingStyle.remove();
+
+					// Remove from iframes
+					for (let i = 0; i < iframes.length; i++) {
+						try {
+							const iframeStyle = iframes[i].contentWindow.document.getElementById(styleId);
+							if (iframeStyle) {
+								iframeStyle.remove();
+							}
+							removeFromShadows(iframes[i].contentWindow.document);
+						} catch (error) {
+							console.log(error);
+						}
+					}
+
+					// Remove from main document shadows
+					removeFromShadows(document);
+
+				} else {
+					// Add accessibility styles
+
+					// Create style element
+					const style = document.createElement('style');
+					style.id = styleId;
+					style.appendChild(document.createTextNode(
+						'*{line-height:1.5 !important;letter-spacing:0.12em !important;word-spacing:0.16em !important;}' +
+						'p{margin-bottom:2em !important;}'
+					));
+
+					// Helper function to apply styles to shadow DOM elements
+					function applyToShadows(root) {
+						const elements = root.querySelectorAll('*');
+						for (const element of elements) {
+							if (element.shadowRoot) {
+								element.shadowRoot.appendChild(style.cloneNode(true));
+								applyToShadows(element.shadowRoot);
+							}
+						}
+					}
+
+					// Add to main document
+					document.getElementsByTagName('head')[0].appendChild(style);
+
+					// Add to iframes
+					for (let i = 0; i < iframes.length; i++) {
+						try {
+							iframes[i].contentWindow.document.getElementsByTagName('head')[0].appendChild(style.cloneNode(true));
+							applyToShadows(iframes[i].contentWindow.document);
+						} catch (error) {
+							console.log(error);
+						}
+					}
+
+					// Apply to main document shadows
+					applyToShadows(document);
+				}
 			}
 		</script>
 	</head>

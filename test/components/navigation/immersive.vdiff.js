@@ -1,5 +1,6 @@
 import '../../../src/components/navigation/navigation-immersive.js';
-import { aTimeout, expect, fixture, focusElem, html, nextFrame } from '@brightspace-ui/testing';
+import '@brightspace-ui/core/templates/primary-secondary/primary-secondary.js';
+import { expect, fixture, focusElem, html, nextFrame } from '@brightspace-ui/testing';
 
 const pageContent = html`<div style="background-color: pink;">Main Page Content</div>`;
 const normalFixture = html`<d2l-labs-navigation-immersive width-type="normal" back-link-href="https://www.d2l.com"></d2l-labs-navigation-immersive>${pageContent}`;
@@ -7,7 +8,40 @@ const noRightSlotFixture = html`<d2l-labs-navigation-immersive><div slot="middle
 const noMiddleSlotFixture = html`<d2l-labs-navigation-immersive><div slot="right">Right</div></d2l-labs-navigation-immersive>${pageContent}`;
 const allowOverflowFixture = html`<d2l-labs-navigation-immersive allow-overflow><div slot="right" style="background-color: red; height: 200px;">Should overflow</div></d2l-labs-navigation-immersive>${pageContent}`;
 const backLinkTextFixture = html`<d2l-labs-navigation-immersive back-link-text="Long Text" back-link-text-short="Short Text"></d2l-labs-navigation-immersive>`;
-const iframeFixture = html`<iframe src="../../../demo/components/navigation/immersive-context-bar.html" style="width: 100%; height: 400px; border: none;"></iframe>`;
+const contextBarFixture = html`
+	<style>
+		.context-bar {
+			align-items: center;
+			background-color: #f8f9fa;
+			border-bottom: 1px solid #e3e9f1;
+			display: flex;
+			padding: 12px 24px;
+		}
+	</style>
+	<d2l-template-primary-secondary resizable width-type="fullscreen">
+		<div slot="header">
+			<d2l-labs-navigation-immersive 
+				width-type="fullscreen" 
+				back-link-href="https://www.d2l.com"
+				back-link-text="Back to D2L">
+				<div slot="middle">Economics 101</div>
+				<div slot="right">Right slot</div>
+			</d2l-labs-navigation-immersive>
+			<div class="context-bar">
+				<div>Additional Context Information</div>
+			</div>
+		</div>
+		<div slot="primary">
+			<h2>Main Content Area</h2>
+			<p>First Item in Page Content</p>
+			<p>Page Contents</p>
+		</div>
+		<div slot="secondary">
+			<h3>Secondary Area</h3>
+			<p>This is the secondary content area.</p>
+		</div>
+	</d2l-template-primary-secondary>
+`;
 
 describe('d2l-labs-navigation-immersive', () => {
 
@@ -19,6 +53,7 @@ describe('d2l-labs-navigation-immersive', () => {
 			{ name: 'no-right-slot', template: noRightSlotFixture },
 			{ name: 'no-middle-slot', template: noMiddleSlotFixture },
 			{ name: 'allow-overflow', template: allowOverflowFixture },
+			{ name: 'immersive-context-bar', template: contextBarFixture }
 		].forEach(({ name, template }) => {
 			describe(name, () => {
 				it(`${width}`, async() => {
@@ -72,69 +107,32 @@ describe('d2l-labs-navigation-immersive', () => {
 		});
 	});
 
-	describe('demo-pages', () => {
-		it('immersive-context-bar', async() => {
-			await fixture(iframeFixture, { viewport: { height: 400, width: 1500 } });
-			await aTimeout(100);
-			
-			await expect(document).to.be.golden();
-		});
+	describe('context-bar', () => {
 
-		it('immersive-context-bar-with-text-spacing', async() => {
-			const elem = await fixture(iframeFixture, { viewport: { height: 400, width: 1500 } });
-			await aTimeout(100);
+		it('with-text-spacing-change', async() => {
+			await fixture(contextBarFixture, { viewport: { height: 400, width: 1500 } });
+			await nextFrame();
 
-			try {
-				const iframeWindow = elem.contentWindow;
-				iframeWindow.eval(`
-					(function(){
-						var d=document,id='phltsbkmklt',el=d.getElementById(id),f=d.querySelectorAll('iframe'),i=0,l=f.length;
-						if(el){
-							function removeFromShadows(root){
-								for(var el of root.querySelectorAll('*')){
-									if(el.shadowRoot){
-										el.shadowRoot.getElementById(id).remove();
-										removeFromShadows(el.shadowRoot);
-									}
-								}
-							}
-							el.remove();
-							if(l){
-								for(i=0;i<l;i++){
-									try{
-										f[i].contentWindow.document.getElementById(id).remove();
-										removeFromShadows(f[i].contentWindow.document);
-									}catch(e){console.log(e)}
-								}
-							}
-							removeFromShadows(d);
-						}else{
-							s=d.createElement('style');
-							s.id=id;
-							s.appendChild(d.createTextNode('*{line-height:1.5 !important;letter-spacing:0.12em !important;word-spacing:0.16em !important;}p{margin-bottom:2em !important;}'));
-							function applyToShadows(root){
-								for(var el of root.querySelectorAll('*')){
-									if(el.shadowRoot){
-										el.shadowRoot.appendChild(s.cloneNode(true));
-										applyToShadows(el.shadowRoot);
-									}
-								}
-							}
-							d.getElementsByTagName('head')[0].appendChild(s);
-							for(i=0;i<l;i++){
-								try{
-									f[i].contentWindow.document.getElementsByTagName('head')[0].appendChild(s.cloneNode(true));
-									applyToShadows(f[i].contentWindow.document);
-								}catch(e){console.log(e)}
-							}
-							applyToShadows(d);
-						}
-					})();
-				`);
-			} catch(e) {
-				console.log('Could not access iframe content:', e);
+			// Apply accessibility styles directly to the page
+			const style = document.createElement('style');
+			style.id = 'phltsbkmklt';
+			style.appendChild(document.createTextNode('*{line-height:1.5 !important;letter-spacing:0.12em !important;word-spacing:0.16em !important;}p{margin-bottom:2em !important;}'));
+
+			// Add to head
+			document.head.appendChild(style);
+
+			// Apply to shadow roots
+			function applyToShadows(root) {
+				for (const el of root.querySelectorAll('*')) {
+					if (el.shadowRoot) {
+						el.shadowRoot.appendChild(style.cloneNode(true));
+						applyToShadows(el.shadowRoot);
+					}
+				}
 			}
+			applyToShadows(document);
 
+			// Wait for any ResizeObserver callbacks to complete
 			await nextFrame();
 
 			await expect(document).to.be.golden();

@@ -11,53 +11,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
 		<style>
-			body {
-				background-color: pink;
-				margin: 0;
-				padding: 0;
-			}
-			
 			.context-bar {
+				align-items: center;
 				background-color: #f8f9fa;
 				border-bottom: 1px solid #e3e9f1;
+				display: flex;
 				padding: 12px 24px;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-			}
-			
-			.context-bar-info {
-				display: flex;
-				align-items: center;
-				gap: 12px;
-			}
-			
-			.context-bar-student {
-				font-weight: 600;
-				color: #202122;
-			}
-			
-			.context-bar-meta {
-				color: #565a5c;
-				font-size: 0.9rem;
-			}
-			
-			.primary-content {
-				padding: 24px;
-			}
-			
-			.secondary-content {
-				padding: 24px;
-			}
-			
-			.footer-content {
-				padding: 16px 24px;
-				background-color: #f0f0f0;
-				border-top: 1px solid #e3e9f1;
 			}
 			div[slot="middle"] {
 				display: table-cell;
 				vertical-align: middle;
+			}
+			p {
+				padding-inline-start: 20px;
 			}
 		</style>
 	</head>
@@ -79,10 +45,7 @@
 				
 				<!-- Context Bar -->
 				<div class="context-bar">
-					<div class="context-bar-info">
-						<div class="context-bar-student">Additional Context Information</div>
-						<div class="context-bar-meta">Sample context bar content</div>
-					</div>
+					<div>Additional Context Information</div>
 				</div>
 			</div>
 			
