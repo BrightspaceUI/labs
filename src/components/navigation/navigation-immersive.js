@@ -191,9 +191,9 @@ class NavigationImmersive extends LitElement {
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		if (this._middleObserver) this._middleObserver.disconnect();
-		if (this._rightObserver) this._rightObserver.disconnect();
-		if (this._navigationObserver) this._navigationObserver.disconnect();
+		this._middleObserver?.disconnect();
+		this._rightObserver?.disconnect();
+		this._navigationObserver?.disconnect();
 		if (mediaQueryList.removeEventListener) mediaQueryList.removeEventListener('change', this._handlePageResize);
 	}
 
@@ -210,7 +210,7 @@ class NavigationImmersive extends LitElement {
 			'd2l-labs-navigation-immersive-middle-no-right-border': this._middleNoRightBorder
 		};
 		const backLinkText = this._smallWidth ? (this.backLinkTextShort || this.backLinkText) : this.backLinkText;
-		const spacingStyles = { height: this._dynamicSpacingHeight };
+		const spacingStyles = { height: (this._dynamicSpacingHeight ? `${this._dynamicSpacingHeight}px` : undefined) };
 		return html`
 			<div class="d2l-navigiation-immersive-fixed">
 				<d2l-labs-navigation>
@@ -271,7 +271,7 @@ class NavigationImmersive extends LitElement {
 		}
 
 		this.#prevHeight = newHeight;
-		this._dynamicSpacingHeight = `${newHeight + 5}px`; // 5px is the standard spacing buffer
+		this._dynamicSpacingHeight = newHeight + 5; // 5px is the standard spacing buffer
 	}
 
 	_onRightResize(entries) {
