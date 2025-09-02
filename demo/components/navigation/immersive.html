@@ -4,7 +4,9 @@
 		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
 		<script type="module">
 			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '@brightspace-ui/core/components/button/button.js';
 			import '../../../src/components/navigation/navigation-band.js';
+			import '../../../src/components/navigation/navigation-immersive.js';
 		</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
@@ -13,7 +15,95 @@
 				height: 400px;
 				width: 100%;
 			}
+			
+			d2l-button {
+				margin-bottom: 10px;
+			}
 		</style>
+		<script>
+			// eslint-disable-next-line no-unused-vars
+			function toggleAccessibilityMode() {
+				const styleId = 'phltsbkmklt';
+				const document = window.document;
+				const existingStyle = document.getElementById(styleId);
+				const iframes = document.querySelectorAll('iframe');
+
+				if (existingStyle) {
+					// Remove accessibility styles
+
+					// Helper function to remove styles from shadow DOM elements
+					function removeFromShadows(root) {
+						const elements = root.querySelectorAll('*');
+						for (const element of elements) {
+							if (element.shadowRoot) {
+								const shadowStyle = element.shadowRoot.getElementById(styleId);
+								if (shadowStyle) {
+									shadowStyle.remove();
+								}
+								removeFromShadows(element.shadowRoot);
+							}
+						}
+					}
+
+					// Remove main style
+					existingStyle.remove();
+
+					// Remove from iframes
+					for (let i = 0; i < iframes.length; i++) {
+						try {
+							const iframeStyle = iframes[i].contentWindow.document.getElementById(styleId);
+							if (iframeStyle) {
+								iframeStyle.remove();
+							}
+							removeFromShadows(iframes[i].contentWindow.document);
+						} catch (error) {
+							console.log(error);
+						}
+					}
+
+					// Remove from main document shadows
+					removeFromShadows(document);
+
+				} else {
+					// Add accessibility styles
+
+					// Create style element
+					const style = document.createElement('style');
+					style.id = styleId;
+					style.appendChild(document.createTextNode(
+						'*{line-height:1.5 !important;letter-spacing:0.12em !important;word-spacing:0.16em !important;}' +
+						'p{margin-bottom:2em !important;}'
+					));
+
+					// Helper function to apply styles to shadow DOM elements
+					function applyToShadows(root) {
+						const elements = root.querySelectorAll('*');
+						for (const element of elements) {
+							if (element.shadowRoot) {
+								element.shadowRoot.appendChild(style.cloneNode(true));
+								applyToShadows(element.shadowRoot);
+							}
+						}
+					}
+
+					// Add to main document
+					document.getElementsByTagName('head')[0].appendChild(style);
+
+					// Add to iframes
+					for (let i = 0; i < iframes.length; i++) {
+						try {
+							iframes[i].contentWindow.document.getElementsByTagName('head')[0].appendChild(style.cloneNode(true));
+							applyToShadows(iframes[i].contentWindow.document);
+						} catch (error) {
+							console.log(error);
+						}
+					}
+
+					// Apply to main document shadows
+					applyToShadows(document);
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<d2l-demo-page page-title="d2l-labs-navigation-immersive">
@@ -25,6 +115,12 @@
 
 			<h2>Allow overflow</h2>
 			<iframe src="./immersive-overflow.html"></iframe>
+
+			<h2>With Context Bar</h2>
+			<d2l-button onclick="toggleAccessibilityMode()">
+				Toggle Accessibility Mode
+			</d2l-button>
+			<iframe src="./immersive-context-bar.html"></iframe>
 		</d2l-demo-page>
 	</body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '@brightspace-ui/core/templates/primary-secondary/primary-secondary.js';
+			import '../../../src/components/navigation/navigation-immersive.js';
+		</script>
+		<title>d2l-labs-navigation-immersive with context bar demo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		<style>
+			.context-bar {
+				align-items: center;
+				background-color: #f8f9fa;
+				border-bottom: 1px solid #e3e9f1;
+				display: flex;
+				padding: 12px 24px;
+			}
+			div[slot="middle"] {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			p {
+				padding-inline-start: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<d2l-template-primary-secondary resizable width-type="fullscreen">
+			<!-- Header Slot -->
+			<div slot="header">
+				<d2l-labs-navigation-immersive 
+					width-type="fullscreen" 
+					back-link-href="https://www.d2l.com"
+					back-link-text="Back to D2L">
+					<div slot="middle">
+						Economics 101
+					</div>
+					<div slot="right">
+						Right slot
+					</div>
+				</d2l-labs-navigation-immersive>
+				
+				<!-- Context Bar -->
+				<div class="context-bar">
+					<div>Additional Context Information</div>
+				</div>
+			</div>
+			
+			<!-- Primary Content Slot -->
+			<div slot="primary" class="primary-content">
+				<h2>Main Content Area</h2>
+				<p>First Item in Page Content</p>
+				<p>Page Contents</p>
+				<p>Page Contents</p>
+				<p>Page Contents</p>
+				<p>This demonstrates how the navigation component works with additional header content like a context bar.</p>
+				<p>More page content...</p>
+				<p>More page content...</p>
+				<p>More page content...</p>
+			</div>
+			
+			<!-- Secondary Content Slot -->
+			<div slot="secondary" class="secondary-content">
+				<h3>Secondary Area</h3>
+				<p>This is the secondary content area.</p>
+				<p>It can contain sidebar information.</p>
+				
+				<h3>Additional Info</h3>
+				<p>More secondary content here.</p>
+				<p>Sample content to show the layout.</p>
+			</div>
+		</d2l-template-primary-secondary>
+	</body>
+</html>
