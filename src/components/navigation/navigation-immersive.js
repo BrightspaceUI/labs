@@ -194,7 +194,7 @@ class NavigationImmersive extends LitElement {
 		this._middleObserver?.disconnect();
 		this._rightObserver?.disconnect();
 		this._navigationObserver?.disconnect();
-		if (mediaQueryList.removeEventListener) mediaQueryList.removeEventListener('change', this._handlePageResize);
+		mediaQueryList.removeEventListener?.('change', this._handlePageResize);
 	}
 
 	firstUpdated(changedProperties) {
