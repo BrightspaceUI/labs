@@ -85,7 +85,7 @@ export default {
 	"components:optInFlyout:tutorialMessage": "Hãy xem *hướng dẫn* của chúng tôi để giúp bạn bắt đầu!",
 	"components:ouFilter:orgUnitFilter:name": "Đơn vị Tổ chức",
 	"components:ouFilter:orgUnitFilter:nameAllSelected": "Đơn vị tổ chức: Tất cả",
-	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Đơn vị tổ chức: Những Lựa chọn đã Áp dụng ",
+	"components:ouFilter:orgUnitFilter:nameSomeSelected": "Đơn vị tổ chức: Những Lựa chọn đã Áp dụng",
 	"components:ouFilter:treeFilter:nodeName": "{orgUnitName} (ID: {id})",
 	"components:ouFilter:treeFilter:nodeName:root": "gốc",
 	"components:ouFilter:treeSelector:arrowLabel:closed": "Mở rộng {name} ở cấp độ {level}, đơn vị con của {parentName}",
