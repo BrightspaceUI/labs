@@ -130,7 +130,6 @@ class NavigationImmersive extends LitElement {
 			}
 
 			.d2l-labs-navigation-immersive-spacing {
-				height: calc(var(--d2l-labs-navigation-immersive-height-main) + 5px);
 				position: unset;
 			}
 
@@ -235,8 +234,6 @@ class NavigationImmersive extends LitElement {
 		`;
 	}
 
-	#prevHeight = 0;
-
 	_handleBackClick() {
 		this.dispatchEvent(
 			new CustomEvent(
@@ -263,15 +260,9 @@ class NavigationImmersive extends LitElement {
 		}
 
 		const newHeight = entries[0].contentRect.height;
-		if (this.#prevHeight === 0) {
-			this.#prevHeight = newHeight;
-			return;
-		} else if (this.#prevHeight === newHeight) {
-			return;
-		}
+		if (!newHeight) return;
 
-		this.#prevHeight = newHeight;
-		this._dynamicSpacingHeight = newHeight + 5; // 5px is the standard spacing buffer
+		this._dynamicSpacingHeight = newHeight;
 	}
 
 	_onRightResize(entries) {
