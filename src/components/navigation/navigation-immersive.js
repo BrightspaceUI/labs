@@ -10,6 +10,7 @@ import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver.es.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 const mediaQueryList = window.matchMedia('(max-width: 615px)');
+const immersiveNavTextSpacingFlag = getFlag('GAUD-8465-immersive-nav-text-spacing', false);
 
 class NavigationImmersive extends LitElement {
 
@@ -38,6 +39,7 @@ class NavigationImmersive extends LitElement {
 				reflect: true
 			},
 			_dynamicSpacingHeight: { state: true },
+			_spacingUseHeightVar: { attribute: '_spacing-use-height-var', type: Boolean, reflect: true },
 			_middleHidden: { state: true },
 			_middleNoRightBorder: { state: true },
 			_smallWidth: { state: true }
@@ -133,6 +135,10 @@ class NavigationImmersive extends LitElement {
 				position: unset;
 			}
 
+			:host([_spacing-use-height-var]) .d2l-labs-navigation-immersive-spacing {
+				height: calc(var(--d2l-labs-navigation-immersive-height-main) + 5px);
+			}
+
 			@media (max-width: 929px) {
 				.d2l-labs-navigation-immersive-margin {
 					margin: 0 24px;
@@ -172,9 +178,10 @@ class NavigationImmersive extends LitElement {
 		this._middleNoRightBorder = true;
 		this._middleObserver = new ResizeObserver(this._onMiddleResize.bind(this));
 		this._rightObserver = new ResizeObserver(this._onRightResize.bind(this));
+		this._spacingUseHeightVar = !immersiveNavTextSpacingFlag;
 
 		// Only create navigation observer if feature flag is enabled
-		if (getFlag('GAUD-8465-immersive-nav-text-spacing', true)) {
+		if (immersiveNavTextSpacingFlag) {
 			this._navigationObserver = new ResizeObserver(this._onNavigationResize.bind(this));
 		}
 
