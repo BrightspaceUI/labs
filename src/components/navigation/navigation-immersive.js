@@ -175,7 +175,7 @@ class NavigationImmersive extends LitElement {
 		this._rightObserver = new ResizeObserver(this._onRightResize.bind(this));
 
 		// Only create navigation observer if feature flag is enabled
-		if (getFlag('GAUD-8465-immersive-nav-text-spacing', true)) {
+		if (getFlag('GAUD-8465-immersive-nav-text-spacing', false)) {
 			this._navigationObserver = new ResizeObserver(this._onNavigationResize.bind(this));
 		}
 
