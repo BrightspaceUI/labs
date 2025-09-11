@@ -1234,6 +1234,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 						@playing=${this._onPlaying}
 						@pause=${this._onPause}
 						@loadedmetadata=${this._onLoadedMetadata}
+						tabindex="-1"
 						@timeupdate=${this._onTimeUpdate}
 						@volumechange=${this._onVolumeChange}
 					>
