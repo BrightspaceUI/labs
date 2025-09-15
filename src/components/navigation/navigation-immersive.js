@@ -10,7 +10,7 @@ import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver.es.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 const mediaQueryList = window.matchMedia('(max-width: 615px)');
-const immersiveNavTextSpacingFlag = getFlag('GAUD-8465-immersive-nav-text-spacing', true);
+const immersiveNavTextSpacingFlag = getFlag('GAUD-8465-immersive-nav-text-spacing', false);
 
 class NavigationImmersive extends LitElement {
 
