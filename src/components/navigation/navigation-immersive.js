@@ -10,6 +10,7 @@ import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver.es.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 const mediaQueryList = window.matchMedia('(max-width: 615px)');
+const immersiveNavTextSpacingFlag = getFlag('GAUD-8465-immersive-nav-text-spacing', false);
 
 class NavigationImmersive extends LitElement {
 
@@ -38,6 +39,7 @@ class NavigationImmersive extends LitElement {
 				reflect: true
 			},
 			_dynamicSpacingHeight: { state: true },
+			_spacingUseHeightVar: { attribute: '_spacing-use-height-var', type: Boolean, reflect: true },
 			_middleHidden: { state: true },
 			_middleNoRightBorder: { state: true },
 			_smallWidth: { state: true }
@@ -130,8 +132,11 @@ class NavigationImmersive extends LitElement {
 			}
 
 			.d2l-labs-navigation-immersive-spacing {
-				height: calc(var(--d2l-labs-navigation-immersive-height-main) + 5px);
 				position: unset;
+			}
+
+			:host([_spacing-use-height-var]) .d2l-labs-navigation-immersive-spacing {
+				height: calc(var(--d2l-labs-navigation-immersive-height-main) + 5px);
 			}
 
 			@media (max-width: 929px) {
@@ -173,9 +178,10 @@ class NavigationImmersive extends LitElement {
 		this._middleNoRightBorder = true;
 		this._middleObserver = new ResizeObserver(this._onMiddleResize.bind(this));
 		this._rightObserver = new ResizeObserver(this._onRightResize.bind(this));
+		this._spacingUseHeightVar = !immersiveNavTextSpacingFlag;
 
 		// Only create navigation observer if feature flag is enabled
-		if (getFlag('GAUD-8465-immersive-nav-text-spacing', false)) {
+		if (immersiveNavTextSpacingFlag) {
 			this._navigationObserver = new ResizeObserver(this._onNavigationResize.bind(this));
 		}
 
@@ -235,8 +241,6 @@ class NavigationImmersive extends LitElement {
 		`;
 	}
 
-	#prevHeight = 0;
-
 	_handleBackClick() {
 		this.dispatchEvent(
 			new CustomEvent(
@@ -263,15 +267,9 @@ class NavigationImmersive extends LitElement {
 		}
 
 		const newHeight = entries[0].contentRect.height;
-		if (this.#prevHeight === 0) {
-			this.#prevHeight = newHeight;
-			return;
-		} else if (this.#prevHeight === newHeight) {
-			return;
-		}
+		if (!newHeight) return;
 
-		this.#prevHeight = newHeight;
-		this._dynamicSpacingHeight = newHeight + 5; // 5px is the standard spacing buffer
+		this._dynamicSpacingHeight = newHeight;
 	}
 
 	_onRightResize(entries) {
