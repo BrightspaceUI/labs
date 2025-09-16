@@ -1,4 +1,4 @@
-import './link-temp.js';
+import '@brightspace-ui/core/components/link/link.js';
 import { html, LitElement } from 'lit';
 import { CommunityBase } from './community-base.js';
 
@@ -12,7 +12,7 @@ class CommunityLink extends CommunityBase(LitElement) {
 	}
 
 	render() {
-		return html`<d2l-labs-link-temp new-window href="${this.communityArticleDirective(this.langController.language)}" ?small=${this.small} >${this.text}</d2l-labs-link-temp>`;
+		return html`<d2l-link target="_blank" href="${this.communityArticleDirective(this.langController.language)}" ?small=${this.small} >${this.text}</d2l-link>`;
 	}
 }
 
