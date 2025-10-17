@@ -109,7 +109,6 @@
     "lit": "^3",
     "lodash-es": "^4",
     "mobx": "^5",
-    "page": "^1",
     "parse-srt": "^1.0.0-alpha",
     "resize-observer-polyfill": "^1",
     "webvtt-parser": "^2"
