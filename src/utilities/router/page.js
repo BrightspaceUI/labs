@@ -26,20 +26,22 @@ var PATH_REGEXP = new RegExp([
   // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
   // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
   // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
-  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^()])+)\\))?|\\(((?:\\\\.|[^()])+)\\))([+*?])?|(\\*))'
+  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
 ].join('|'), 'g');
 
 /**
  * Parse a string for the raw tokens.
  *
- * @param  {String} str
- * @return {Array}
+ * @param  {string}  str
+ * @param  {Object=} options
+ * @return {!Array}
  */
-function parse (str) {
+function parse (str, options) {
   var tokens = [];
   var key = 0;
   var index = 0;
   var path = '';
+  var defaultDelimiter = options && options.delimiter || '/';
   var res;
 
   while ((res = PATH_REGEXP.exec(str)) != null) {
@@ -55,23 +57,26 @@ function parse (str) {
       continue
     }
 
+    var next = str[index];
+    var prefix = res[2];
+    var name = res[3];
+    var capture = res[4];
+    var group = res[5];
+    var modifier = res[6];
+    var asterisk = res[7];
+
     // Push the current path onto the tokens.
     if (path) {
       tokens.push(path);
       path = '';
     }
 
-    var prefix = res[2];
-    var name = res[3];
-    var capture = res[4];
-    var group = res[5];
-    var suffix = res[6];
-    var asterisk = res[7];
-
-    var repeat = suffix === '+' || suffix === '*';
-    var optional = suffix === '?' || suffix === '*';
-    var delimiter = prefix || '/';
-    var pattern = capture || group || (asterisk ? '.*' : '[^' + delimiter + ']+?');
+    var partial = prefix != null && next != null && next !== prefix;
+    var repeat = modifier === '+' || modifier === '*';
+    var optional = modifier === '?' || modifier === '*';
+    var delimiter = prefix || defaultDelimiter;
+    var pattern = capture || group;
+    var prevText = prefix || (typeof tokens[tokens.length - 1] === 'string' ? tokens[tokens.length - 1] : '');
 
     tokens.push({
       name: name || key++,
@@ -79,7 +84,9 @@ function parse (str) {
       delimiter: delimiter,
       optional: optional,
       repeat: repeat,
-      pattern: escapeGroup(pattern)
+      partial: partial,
+      asterisk: !!asterisk,
+      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : restrictBacktrack(delimiter, prevText))
     });
   }
 
@@ -96,33 +103,68 @@ function parse (str) {
   return tokens
 }
 
+function restrictBacktrack(delimiter, prevText) {
+  if (!prevText || prevText.indexOf(delimiter) > -1) {
+    return '[^' + escapeString(delimiter) + ']+?'
+  }
+
+  return escapeString(prevText) + '|(?:(?!' + escapeString(prevText) + ')[^' + escapeString(delimiter) + '])+?'
+}
+
 /**
  * Compile a string to a template function for the path.
  *
- * @param  {String}   str
- * @return {Function}
+ * @param  {string}             str
+ * @param  {Object=}            options
+ * @return {!function(Object=, Object=)}
  */
-function compile (str) {
-  return tokensToFunction(parse(str))
+function compile (str, options) {
+  return tokensToFunction(parse(str, options), options)
+}
+
+/**
+ * Prettier encoding of URI path segments.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeURIComponentPretty (str) {
+  return encodeURI(str).replace(/[\/?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeAsterisk (str) {
+  return encodeURI(str).replace(/[?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
 }
 
 /**
  * Expose a method for transforming tokens into the path function.
  */
-function tokensToFunction (tokens) {
+function tokensToFunction (tokens, options) {
   // Compile all the tokens into regexps.
   var matches = new Array(tokens.length);
 
   // Compile all the patterns before compilation.
   for (var i = 0; i < tokens.length; i++) {
     if (typeof tokens[i] === 'object') {
-      matches[i] = new RegExp('^' + tokens[i].pattern + '$');
+      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$', flags(options));
     }
   }
 
-  return function (obj) {
+  return function (obj, opts) {
     var path = '';
     var data = obj || {};
+    var options = opts || {};
+    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent;
 
     for (var i = 0; i < tokens.length; i++) {
       var token = tokens[i];
@@ -138,6 +180,11 @@ function tokensToFunction (tokens) {
 
       if (value == null) {
         if (token.optional) {
+          // Prepend partial segment prefixes.
+          if (token.partial) {
+            path += token.prefix;
+          }
+
           continue
         } else {
           throw new TypeError('Expected "' + token.name + '" to be defined')
@@ -146,7 +193,7 @@ function tokensToFunction (tokens) {
 
       if (isarray(value)) {
         if (!token.repeat) {
-          throw new TypeError('Expected "' + token.name + '" to not repeat, but received "' + value + '"')
+          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
         }
 
         if (value.length === 0) {
@@ -158,10 +205,10 @@ function tokensToFunction (tokens) {
         }
 
         for (var j = 0; j < value.length; j++) {
-          segment = encodeURIComponent(value[j]);
+          segment = encode(value[j]);
 
           if (!matches[i].test(segment)) {
-            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
+            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
           }
 
           path += (j === 0 ? token.prefix : token.delimiter) + segment;
@@ -170,7 +217,7 @@ function tokensToFunction (tokens) {
         continue
       }
 
-      segment = encodeURIComponent(value);
+      segment = token.asterisk ? encodeAsterisk(value) : encode(value);
 
       if (!matches[i].test(segment)) {
         throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
@@ -186,18 +233,18 @@ function tokensToFunction (tokens) {
 /**
  * Escape a regular expression string.
  *
- * @param  {String} str
- * @return {String}
+ * @param  {string} str
+ * @return {string}
  */
 function escapeString (str) {
-  return str.replace(/([.+*?=^!:${}()[\]|\/])/g, '\\$1')
+  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
 }
 
 /**
  * Escape the capturing group by escaping special characters and meaning.
  *
- * @param  {String} group
- * @return {String}
+ * @param  {string} group
+ * @return {string}
  */
 function escapeGroup (group) {
   return group.replace(/([=!:$\/()])/g, '\\$1')
@@ -206,9 +253,9 @@ function escapeGroup (group) {
 /**
  * Attach the keys as a property of the regexp.
  *
- * @param  {RegExp} re
- * @param  {Array}  keys
- * @return {RegExp}
+ * @param  {!RegExp} re
+ * @param  {Array}   keys
+ * @return {!RegExp}
  */
 function attachKeys (re, keys) {
   re.keys = keys;
@@ -219,18 +266,18 @@ function attachKeys (re, keys) {
  * Get the flags for a regexp from the options.
  *
  * @param  {Object} options
- * @return {String}
+ * @return {string}
  */
 function flags (options) {
-  return options.sensitive ? '' : 'i'
+  return options && options.sensitive ? '' : 'i'
 }
 
 /**
  * Pull out keys from a regexp.
  *
- * @param  {RegExp} path
- * @param  {Array}  keys
- * @return {RegExp}
+ * @param  {!RegExp} path
+ * @param  {!Array}  keys
+ * @return {!RegExp}
  */
 function regexpToRegexp (path, keys) {
   // Use a negative lookahead to match only capturing groups.
@@ -244,6 +291,8 @@ function regexpToRegexp (path, keys) {
         delimiter: null,
         optional: false,
         repeat: false,
+        partial: false,
+        asterisk: false,
         pattern: null
       });
     }
@@ -255,10 +304,10 @@ function regexpToRegexp (path, keys) {
 /**
  * Transform an array into a regexp.
  *
- * @param  {Array}  path
- * @param  {Array}  keys
- * @param  {Object} options
- * @return {RegExp}
+ * @param  {!Array}  path
+ * @param  {Array}   keys
+ * @param  {!Object} options
+ * @return {!RegExp}
  */
 function arrayToRegexp (path, keys, options) {
   var parts = [];
@@ -275,41 +324,34 @@ function arrayToRegexp (path, keys, options) {
 /**
  * Create a path regexp from string input.
  *
- * @param  {String} path
- * @param  {Array}  keys
- * @param  {Object} options
- * @return {RegExp}
+ * @param  {string}  path
+ * @param  {!Array}  keys
+ * @param  {!Object} options
+ * @return {!RegExp}
  */
 function stringToRegexp (path, keys, options) {
-  var tokens = parse(path);
-  var re = tokensToRegExp(tokens, options);
-
-  // Attach keys back to the regexp.
-  for (var i = 0; i < tokens.length; i++) {
-    if (typeof tokens[i] !== 'string') {
-      keys.push(tokens[i]);
-    }
-  }
-
-  return attachKeys(re, keys)
+  return tokensToRegExp(parse(path, options), keys, options)
 }
 
 /**
  * Expose a function for taking tokens and returning a RegExp.
  *
- * @param  {Array}  tokens
- * @param  {Array}  keys
- * @param  {Object} options
- * @return {RegExp}
+ * @param  {!Array}          tokens
+ * @param  {(Array|Object)=} keys
+ * @param  {Object=}         options
+ * @return {!RegExp}
  */
-function tokensToRegExp (tokens, options) {
+function tokensToRegExp (tokens, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options);
+    keys = [];
+  }
+
   options = options || {};
 
   var strict = options.strict;
   var end = options.end !== false;
   var route = '';
-  var lastToken = tokens[tokens.length - 1];
-  var endsWithSlash = typeof lastToken === 'string' && /\/$/.test(lastToken);
 
   // Iterate over the tokens and create our regexp string.
   for (var i = 0; i < tokens.length; i++) {
@@ -319,17 +361,19 @@ function tokensToRegExp (tokens, options) {
       route += escapeString(token);
     } else {
       var prefix = escapeString(token.prefix);
-      var capture = token.pattern;
+      var capture = '(?:' + token.pattern + ')';
+
+      keys.push(token);
 
       if (token.repeat) {
         capture += '(?:' + prefix + capture + ')*';
       }
 
       if (token.optional) {
-        if (prefix) {
+        if (!token.partial) {
           capture = '(?:' + prefix + '(' + capture + '))?';
         } else {
-          capture = '(' + capture + ')?';
+          capture = prefix + '(' + capture + ')?';
         }
       } else {
         capture = prefix + '(' + capture + ')';
@@ -339,12 +383,15 @@ function tokensToRegExp (tokens, options) {
     }
   }
 
+  var delimiter = escapeString(options.delimiter || '/');
+  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter;
+
   // In non-strict mode we allow a slash at the end of match. If the path to
   // match already ends with a slash, we remove it for consistency. The slash
   // is valid at the end of a path match, not in the middle. This is important
   // in non-ending mode, where "/test/" shouldn't match "/test//route".
   if (!strict) {
-    route = (endsWithSlash ? route.slice(0, -2) : route) + '(?:\\/(?=$))?';
+    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?';
   }
 
   if (end) {
@@ -352,10 +399,10 @@ function tokensToRegExp (tokens, options) {
   } else {
     // In non-ending mode, we need the capturing groups to match as much as
     // possible by using a positive lookahead to the end or next path segment.
-    route += strict && endsWithSlash ? '' : '(?=\\/|$)';
+    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)';
   }
 
-  return new RegExp('^' + route, flags(options))
+  return attachKeys(new RegExp('^' + route, flags(options)), keys)
 }
 
 /**
@@ -365,30 +412,28 @@ function tokensToRegExp (tokens, options) {
  * placeholder key descriptions. For example, using `/user/:id`, `keys` will
  * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
  *
- * @param  {(String|RegExp|Array)} path
- * @param  {Array}                 [keys]
- * @param  {Object}                [options]
- * @return {RegExp}
+ * @param  {(string|RegExp|Array)} path
+ * @param  {(Array|Object)=}       keys
+ * @param  {Object=}               options
+ * @return {!RegExp}
  */
 function pathToRegexp (path, keys, options) {
-  keys = keys || [];
-
   if (!isarray(keys)) {
-    options = keys;
+    options = /** @type {!Object} */ (keys || options);
     keys = [];
-  } else if (!options) {
-    options = {};
   }
 
+  options = options || {};
+
   if (path instanceof RegExp) {
-    return regexpToRegexp(path, keys, options)
+    return regexpToRegexp(path, /** @type {!Array} */ (keys))
   }
 
   if (isarray(path)) {
-    return arrayToRegexp(path, keys, options)
+    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
   }
 
-  return stringToRegexp(path, keys, options)
+  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
 }
 
 pathToRegexp_1.parse = parse_1;
