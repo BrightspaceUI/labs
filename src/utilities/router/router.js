@@ -1,4 +1,4 @@
-import page from './page.js';
+import page from 'page';
 
 let activePage = page;
 let _lastOptions = {};
