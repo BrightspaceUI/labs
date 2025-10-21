@@ -2,7 +2,7 @@ import { addExtensions, litConfig, setDirectoryConfigs, testingConfig } from 'es
 
 export default [
 	{
-		ignores: ['build', './src/utilities/router/page.js']
+		ignores: ['build']
 	},
 	...setDirectoryConfigs(
 		addExtensions(litConfig, ['.js', '.html']),
