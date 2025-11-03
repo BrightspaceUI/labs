@@ -4,7 +4,6 @@ import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-ui/core/components/inputs/input-textarea.js';
 import './opt-out-reason-selector.js';
 import { css, html, LitElement } from 'lit';
-import { composeMixins } from '@brightspace-ui/core/helpers/composeMixins.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 const defaultEventProperties = {
@@ -12,10 +11,7 @@ const defaultEventProperties = {
 	composed: true
 };
 
-class OptOutDialog extends composeMixins(
-	LitElement,
-	LocalizeLabsElement
-) {
+class OptOutDialog extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {

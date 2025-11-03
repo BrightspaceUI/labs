@@ -1,13 +1,10 @@
 import './opt-out-reason.js';
 import { css, html, LitElement } from 'lit';
-import { composeMixins } from '@brightspace-ui/core/helpers/composeMixins.js';
 import { inputStyles } from '@brightspace-ui/core/components/inputs/input-styles.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 
-class OptOutReasonSelector extends composeMixins(
-	LitElement,
-	LocalizeLabsElement
-) {
+class OptOutReasonSelector extends LocalizeLabsElement(LitElement) {
+
 	static get properties() {
 		return {
 			_reasons: { state: true }
