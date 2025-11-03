@@ -12,7 +12,7 @@ export default {
 	"components:accessibilityDisabilitySimulator:screenreaderAndTabAlert": "Bật trình đọc màn hình và tab vào nội dung", // Alert that prompts the user to use a screenreader and tabbing to view content
 	"components:accessibilityDisabilitySimulator:simulationType": "Loại mô phỏng:", // Label for the disability simulation options
 	"components:attributePicker:addValue": "Nhấp để thêm giá trị {value}", // Label for screen readers to inform user that they can click to add the given value
-	"components:attributePicker:limitReached": "Bạn đã đạt đến giới hạn của {value} giá trị đã chọn", //  Tooltip that appears when the user has reach the maximum amount of attributes
+	"components:attributePicker:limitReached": "Bạn đã đạt đến giới hạn của {value} giá trị được chọn", //  Tooltip that appears when the user has reach the maximum amount of attributes
 	"components:attributePicker:minimumRequirement": "Phải đặt ít nhất một giá trị", // Tooltip that appears when no values have been set and we need to inform the user that this is an invalid state
 	"components:attributePicker:removeValue": "Nhấp, nhấn phím lùi hoặc nhấn phím xóa để xóa mục {value}", // Label to inform user how they can remove the given value
 	"components:checkboxDrawer:checkboxCollapsed": "Đã thu gọn hộp kiểm", // Read by screen readers when focusing the collapsed (unchecked) checkbox, with the inner content hidden
@@ -69,7 +69,7 @@ export default {
 	"components:optInFlyout:feedbackLabel": "Chúng tôi có thể làm gì để biến sản phẩm này thành thứ bạn thích sử dụng?",
 	"components:optInFlyout:feedbackReasonJustCheckingSomething": "Chỉ đang chuyển lại để kiểm tra một cái gì đó",
 	"components:optInFlyout:feedbackReasonLabel": "Bạn có thể cho chúng tôi biết lý do tại sao bạn đang chuyển đổi trở lại không?",
-	"components:optInFlyout:feedbackReasonMissingFeature": "Nó thiếu một tính năng mà tôi sử dùng",
+	"components:optInFlyout:feedbackReasonMissingFeature": "Nó thiếu một tính năng mà tôi sử dụng",
 	"components:optInFlyout:feedbackReasonNotReadyForSomethingNew": "Đây không phải là thời điểm phù hợp để tôi thử phiên bản này",
 	"components:optInFlyout:feedbackReasonOther": "Khác",
 	"components:optInFlyout:feedbackReasonPreferOldExperience": "Tôi nghĩ phiên bản cũ là trải nghiệm tốt hơn",
