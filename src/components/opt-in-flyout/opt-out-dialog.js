@@ -6,7 +6,6 @@ import './opt-out-reason-selector.js';
 import { css, html, LitElement } from 'lit';
 import { composeMixins } from '@brightspace-ui/core/helpers/composeMixins.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
-import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
 const defaultEventProperties = {
 	bubbles: true,
@@ -15,8 +14,7 @@ const defaultEventProperties = {
 
 class OptOutDialog extends composeMixins(
 	LitElement,
-	LocalizeLabsElement,
-	RtlMixin
+	LocalizeLabsElement
 ) {
 
 	static get properties() {
@@ -81,15 +79,9 @@ class OptOutDialog extends composeMixins(
 			}
 
 			.close-button {
-				left: auto;
+				inset-block-start: 0.6rem;
+				inset-inline-end: 0.6rem;
 				position: absolute;
-				right: 0.6rem;
-				top: 0.6rem;
-			}
-
-			:host([dir="rtl"]) .close-button {
-				left: 0.6rem;
-				right: auto;
 			}
 		`;
 	}
