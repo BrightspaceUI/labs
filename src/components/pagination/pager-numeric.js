@@ -4,10 +4,9 @@ import '@brightspace-ui/core/components/inputs/input-text.js';
 import { css, html, LitElement } from 'lit';
 import { formatNumber } from '@brightspace-ui/intl';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
-import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles.js';
 
-class PagerNumeric extends RtlMixin(LocalizeLabsElement(LitElement)) {
+class PagerNumeric extends LocalizeLabsElement(LitElement) {
 
 	static get properties() {
 		return {
