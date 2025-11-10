@@ -633,10 +633,19 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 	}
 
 	async updated() {
-		if (!this._needResize) return;
 
-		await this.resize();
-		this._needResize = false;
+		if (!this._needResize) return;
+		if (this._resizeQueued) return;
+		this._resizeQueued = true;
+
+		requestAnimationFrame(async () => {
+			try {
+				await this.resize();
+			} finally {
+				this._needResize = false;
+				this._resizeQueued = false;
+			}
+		});
 	}
 
 	/**
@@ -670,9 +679,12 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 	}
 
 	async resize() {
+		console.log('TreeFilter.resize called');
 		await this.updateComplete;
 		const treeSelector = this.shadowRoot?.querySelector('d2l-labs-tree-selector');
-		treeSelector && treeSelector.resize();
+		if (treeSelector) {
+			await treeSelector.resize();
+		}
 	}
 
 	get _isSearch() {
@@ -715,7 +727,7 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	_onOpen(event) {
 		event.stopPropagation();
-		this._needResize = true;
+		this._needResize = false;
 		this.tree.setOpen(event.detail.id, event.detail.isOpen);
 	}
 

@@ -105,7 +105,7 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 		return html`
 			<d2l-dropdown>
 				<d2l-dropdown-button-subtle text="${this.name}" ?disabled=${this.disabled}>
-					<d2l-dropdown-content align="start" no-auto-fit class="vdiff-target">
+					<d2l-dropdown-content align="start" class="vdiff-target">
 						<div class="d2l-labs-filter-dropdown-content-header" slot="header">
 							<span>${this.localize('components:ouFilter:treeSelector:filterBy')}</span>
 
@@ -145,8 +145,6 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 
 	async resize() {
 		await this.treeUpdateComplete;
-		const content = this.shadowRoot?.querySelector('d2l-dropdown-content');
-		content && await content.resize();
 	}
 
 	simulateSearch(searchString) {
