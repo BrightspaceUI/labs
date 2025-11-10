@@ -633,12 +633,11 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 	}
 
 	async updated() {
-
 		if (!this._needResize) return;
 		if (this._resizeQueued) return;
 		this._resizeQueued = true;
 
-		requestAnimationFrame(async () => {
+		requestAnimationFrame(async() => {
 			try {
 				await this.resize();
 			} finally {
@@ -679,7 +678,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 	}
 
 	async resize() {
-		console.log('TreeFilter.resize called');
 		await this.updateComplete;
 		const treeSelector = this.shadowRoot?.querySelector('d2l-labs-tree-selector');
 		if (treeSelector) {
