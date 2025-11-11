@@ -146,7 +146,7 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 	async resize() {
 		await this.treeUpdateComplete;
 		const content = this.shadowRoot?.querySelector('d2l-dropdown-content');
-		if(!content || !content.opened) return;
+		if (!content || !content.opened) return;
 		// await content.resize();
 
 		// const options = { updateHeight: false };
