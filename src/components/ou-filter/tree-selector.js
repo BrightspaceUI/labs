@@ -147,8 +147,8 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 		await this.treeUpdateComplete;
 		const content = this.shadowRoot?.querySelector('d2l-dropdown-content');
 		if (!content || !content.opened) return;
-		// await content.resize();
 
+		//-----------Option 1----------- call the private __position/position depending on flag -> no jump.
 		// const options = { updateHeight: false };
 
 		// if (typeof content.__position === 'function') {
@@ -161,9 +161,13 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 		// 	return;
 		// }
 
+		//-----------Option 2----------- call the (marked private) scrollTo() to capture/restore scroll around public resize() -> brief jump
 		const prevTop = content.scrollTo();
 		await content.resize();
 		content.scrollTo(prevTop);
+
+		//-----------Option 3----------- do not call content.resize() -> no jump
+		// await content.resize();
 	}
 
 	simulateSearch(searchString) {
