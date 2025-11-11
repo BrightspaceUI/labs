@@ -145,6 +145,25 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 
 	async resize() {
 		await this.treeUpdateComplete;
+		const content = this.shadowRoot?.querySelector('d2l-dropdown-content');
+		if(!content || !content.opened) return;
+		// await content.resize();
+
+		// const options = { updateHeight: false };
+
+		// if (typeof content.__position === 'function') {
+		// 	content.__position(null, options);
+		// 	return;
+		// }
+
+		// if (typeof content.position === 'function') {
+		// 	content.position(null, options);
+		// 	return;
+		// }
+
+		const prevTop = content.scrollTo();
+		await content.resize();
+		content.scrollTo(prevTop);
 	}
 
 	simulateSearch(searchString) {

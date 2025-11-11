@@ -725,7 +725,7 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	_onOpen(event) {
 		event.stopPropagation();
-		this._needResize = false;
+		this._needResize = true;
 		this.tree.setOpen(event.detail.id, event.detail.isOpen);
 	}
 
