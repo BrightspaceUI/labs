@@ -99,13 +99,10 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 	}
 
 	render() {
-		// Using no-auto-fit on d2l-dropdown-content to avoid having the component jump to the top on every
-		// node open and load. The tradeoff is that the user has to scroll the whole page now.
-		// We have a defect logged to improve this in future.
 		return html`
 			<d2l-dropdown>
 				<d2l-dropdown-button-subtle text="${this.name}" ?disabled=${this.disabled}>
-					<d2l-dropdown-content align="start" class="vdiff-target">
+					<d2l-dropdown-content align="start" min-width="320"class="vdiff-target">
 						<div class="d2l-labs-filter-dropdown-content-header" slot="header">
 							<span>${this.localize('components:ouFilter:treeSelector:filterBy')}</span>
 
@@ -145,29 +142,6 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 
 	async resize() {
 		await this.treeUpdateComplete;
-		const content = this.shadowRoot?.querySelector('d2l-dropdown-content');
-		if (!content || !content.opened) return;
-
-		//-----------Option 1----------- call the private __position/position depending on flag -> no jump.
-		// const options = { updateHeight: false };
-
-		// if (typeof content.__position === 'function') {
-		// 	content.__position(null, options);
-		// 	return;
-		// }
-
-		// if (typeof content.position === 'function') {
-		// 	content.position(null, options);
-		// 	return;
-		// }
-
-		//-----------Option 2----------- call the (marked private) scrollTo() to capture/restore scroll around public resize() -> brief jump
-		const prevTop = content.scrollTo();
-		await content.resize();
-		content.scrollTo(prevTop);
-
-		//-----------Option 3----------- do not call content.resize() -> no jump
-		// await content.resize();
 	}
 
 	simulateSearch(searchString) {
