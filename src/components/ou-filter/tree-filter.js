@@ -634,9 +634,17 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	async updated() {
 		if (!this._needResize) return;
+		if (this._resizeQueued) return;
+		this._resizeQueued = true;
 
-		await this.resize();
-		this._needResize = false;
+		requestAnimationFrame(async() => {
+			try {
+				await this.resize();
+			} finally {
+				this._needResize = false;
+				this._resizeQueued = false;
+			}
+		});
 	}
 
 	/**
@@ -672,7 +680,9 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 	async resize() {
 		await this.updateComplete;
 		const treeSelector = this.shadowRoot?.querySelector('d2l-labs-tree-selector');
-		treeSelector && treeSelector.resize();
+		if (treeSelector) {
+			await treeSelector.resize();
+		}
 	}
 
 	get _isSearch() {
