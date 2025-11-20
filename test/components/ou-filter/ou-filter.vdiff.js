@@ -159,7 +159,7 @@ describe('ou-filter', () => {
 	it('Mobile', async() => {
 		const elem = await fixture(
 			html`<d2l-labs-ou-filter .dataManager=${dataManager}></d2l-labs-ou-filter>`,
-			{ viewport: { width: 320 } }
+			{ viewport: { width: 340 } }
 		);
 		await expandDepartment1Node(elem);
 		await expect(elem).to.be.golden();
@@ -168,7 +168,7 @@ describe('ou-filter', () => {
 	it('Mobile - Disabled', async() => {
 		const elem = await fixture(
 			html`<d2l-labs-ou-filter disabled .dataManager=${dataManager}></d2l-labs-ou-filter>`,
-			{ viewport: { width: 320 } }
+			{ viewport: { width: 340 } }
 		);
 		await expect(elem).to.be.golden();
 	});
@@ -190,7 +190,7 @@ describe('ou-filter', () => {
 					html`<d2l-labs-ou-filter .dataManager=${dataManager} select-all-ui></d2l-labs-ou-filter>`,
 					{
 						rtl: dir === 'rtl',
-						viewport: { width: 320 }
+						viewport: { width: 340 }
 					}
 				);
 				await expandDepartment1Node(elem);
@@ -214,7 +214,7 @@ describe('ou-filter', () => {
 					html`<d2l-labs-ou-filter .dataManager=${emptyDataManager}></d2l-labs-ou-filter>`,
 					{
 						rtl: dir === 'rtl',
-						viewport: { width: 320 }
+						viewport: { width: 340 }
 					}
 				);
 				await openFilter(elem);
