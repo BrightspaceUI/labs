@@ -205,6 +205,12 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 		));
 	}
 
+	_onDropdownOpenerClick() {
+		const isMobile = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
+		this._dropdownMinWidth = isMobile ? DROPDOWN_MOBILE_WIDTH : DROPDOWN_WIDTH;
+		this._dropdownMaxWidth = isMobile ? DROPDOWN_MOBILE_WIDTH : DROPDOWN_WIDTH;
+	}
+
 	_onSearch(event, generateEvent = true) {
 		if (!generateEvent) {
 			return;
@@ -244,12 +250,6 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 			const childNodes = slot.assignedNodes({ flatten: false });
 			return Promise.all(childNodes.map(node => node.treeUpdateComplete));
 		}));
-	}
-
-	_onDropdownOpenerClick() {
-		const isMobile = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
-		this._dropdownMinWidth = isMobile ? DROPDOWN_MOBILE_WIDTH : DROPDOWN_WIDTH;
-		this._dropdownMaxWidth = isMobile ? DROPDOWN_MOBILE_WIDTH : DROPDOWN_WIDTH;
 	}
 }
 customElements.define('d2l-labs-tree-selector', TreeSelector);
