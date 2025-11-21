@@ -10,6 +10,10 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { selectStyles } from '@brightspace-ui/core/components/inputs/input-select-styles';
 
+const MOBILE_BREAKPOINT = 616;
+const DROPDOWN_MOBILE_WIDTH = 320;
+const DROPDOWN_WIDTH = 368;
+
 /**
  * @property {String} name
  * @property {Boolean} isSearch - if true, show "search-results" slot instead of "tree" slot
@@ -26,7 +30,9 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 			disabled: { type: Boolean, attribute: 'disabled' },
 			isSelectAllVisible: { type: Boolean, attribute: 'select-all-ui', reflect: true },
 			isSearch: { type: Boolean, attribute: 'search', reflect: true },
-			isSelected: { type: Boolean, attribute: 'selected', reflect: true }
+			isSelected: { type: Boolean, attribute: 'selected', reflect: true },
+			_dropdownMinWidth: { type: Number },
+			_dropdownMaxWidth: { type: Number },
 		};
 	}
 
@@ -89,6 +95,8 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 		this._isSearch = false;
 		this.isSelectAllVisible = false;
 		this.disabled = false;
+		this._dropdownMinWidth = DROPDOWN_WIDTH;
+		this._dropdownMaxWidth = DROPDOWN_WIDTH;
 	}
 
 	/**
@@ -99,13 +107,10 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 	}
 
 	render() {
-		// Using no-auto-fit on d2l-dropdown-content to avoid having the component jump to the top on every
-		// node open and load. The tradeoff is that the user has to scroll the whole page now.
-		// We have a defect logged to improve this in future.
 		return html`
 			<d2l-dropdown>
-				<d2l-dropdown-button-subtle text="${this.name}" ?disabled=${this.disabled}>
-					<d2l-dropdown-content align="start" no-auto-fit class="vdiff-target">
+				<d2l-dropdown-button-subtle text="${this.name}" ?disabled=${this.disabled} @d2l-dropdown-opener-click="${this._onDropdownOpenerClick}">
+					<d2l-dropdown-content align="start" min-width=${this._dropdownMinWidth} max-width=${this._dropdownMaxWidth} mobile-breakpoint=${MOBILE_BREAKPOINT} class="vdiff-target">
 						<div class="d2l-labs-filter-dropdown-content-header" slot="header">
 							<span>${this.localize('components:ouFilter:treeSelector:filterBy')}</span>
 
@@ -141,12 +146,6 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 		}, generateEvent);
 
 		this._onClear(generateEvent);
-	}
-
-	async resize() {
-		await this.treeUpdateComplete;
-		const content = this.shadowRoot?.querySelector('d2l-dropdown-content');
-		content && await content.resize();
 	}
 
 	simulateSearch(searchString) {
@@ -204,6 +203,12 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 				composed: false
 			}
 		));
+	}
+
+	_onDropdownOpenerClick() {
+		const isMobile = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
+		this._dropdownMinWidth = isMobile ? DROPDOWN_MOBILE_WIDTH : DROPDOWN_WIDTH;
+		this._dropdownMaxWidth = isMobile ? DROPDOWN_MOBILE_WIDTH : DROPDOWN_WIDTH;
 	}
 
 	_onSearch(event, generateEvent = true) {
