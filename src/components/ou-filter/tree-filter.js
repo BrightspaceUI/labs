@@ -679,10 +679,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	async resize() {
 		await this.updateComplete;
-		const treeSelector = this.shadowRoot?.querySelector('d2l-labs-tree-selector');
-		if (treeSelector) {
-			await treeSelector.resize();
-		}
 	}
 
 	get _isSearch() {

@@ -148,11 +148,6 @@ class TreeSelector extends LocalizeLabsElement(LitElement) {
 		this._onClear(generateEvent);
 	}
 
-	// Kept for backwards compatibility – no longer required for layout.
-	async resize() {
-		await this.treeUpdateComplete;
-	}
-
 	simulateSearch(searchString) {
 		this._onSearch({
 			detail: {
