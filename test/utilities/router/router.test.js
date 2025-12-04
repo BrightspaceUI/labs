@@ -1,9 +1,12 @@
 import './helpers/main-view.js';
 import './helpers/param-query-view.js';
+import { addMiddleware, navigate, registerRoutes, RouterTesting } from '../../../src/utilities/router/index.js';
 import { aTimeout, expect, fixture, html, waitUntil } from '@brightspace-ui/testing';
-import { navigate, registerRoutes, RouterTesting } from '../../../src/utilities/router/index.js';
 import { loader as load1 } from './helpers/route-loader-1.js';
 import { loader as load2 } from './helpers/route-loader-2.js';
+import Sinon from 'sinon';
+
+const sinon = Sinon.createSandbox();
 
 let entryPoint;
 
@@ -232,5 +235,21 @@ describe('Router', () => {
 		);
 		const p = entryPoint.shadowRoot.querySelector('p').innerText;
 		expect(p).to.equal('Passed');
+	});
+
+	it('Should call any added middleware', async() => {
+
+		const testMiddleware = sinon.fake();
+
+		await entryPoint.updateComplete;
+		await waitUntil(() => entryPoint.shadowRoot.querySelector('p'));
+
+		addMiddleware(testMiddleware);
+		navigate('/ctx-load');
+
+		await entryPoint.updateComplete;
+		await waitUntil(() => entryPoint.shadowRoot.querySelector('p'));
+		expect(testMiddleware.calledOnce).to.be.true;
+		expect(testMiddleware.firstCall.args[0]).to.have.property('path', '/ctx-load');
 	});
 });
