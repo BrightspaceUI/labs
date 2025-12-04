@@ -592,7 +592,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 		this.isSelectAllVisible = false;
 		this.disabled = false;
 
-		this._needResize = false;
 		this._searchBookmark = null;
 	}
 
@@ -632,13 +631,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 		</div>`;
 	}
 
-	async updated() {
-		if (!this._needResize) return;
-
-		await this.resize();
-		this._needResize = false;
-	}
-
 	/**
 	 * Adds the given children to the given parent. See Tree.addNodes().
 	 * @param parent
@@ -647,7 +639,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 	 * @param bookmark - Opaque data that will be sent in the request-children event if the user asks to load more results
 	 */
 	addChildren(parent, children, hasMore, bookmark) {
-		this._needResize = true;
 		this.tree.addNodes(parent, children, hasMore, bookmark);
 	}
 
@@ -658,7 +649,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 	 * @param {Object}bookmark - Opaque data that will be sent in the search event if the user asks to load more results
 	 */
 	addSearchResults(nodes, hasMore, bookmark) {
-		this._needResize = true;
 		this.tree.addTree(nodes);
 		this.isLoadMoreSearch = hasMore;
 		this._searchBookmark = bookmark;
@@ -667,12 +657,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	clearSearchAndSelection(generateEvent = true) {
 		this.shadowRoot.querySelector('d2l-labs-tree-selector').clearSearchAndSelection(generateEvent);
-	}
-
-	async resize() {
-		await this.updateComplete;
-		const treeSelector = this.shadowRoot?.querySelector('d2l-labs-tree-selector');
-		treeSelector && treeSelector.resize();
 	}
 
 	get _isSearch() {
@@ -715,7 +699,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	_onOpen(event) {
 		event.stopPropagation();
-		this._needResize = true;
 		this.tree.setOpen(event.detail.id, event.detail.isOpen);
 	}
 
@@ -727,7 +710,6 @@ class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
 	_onSearch(event) {
 		event.stopPropagation();
-		this._needResize = true;
 		this.searchString = event.detail.value;
 
 		if (this.tree.isDynamic) {

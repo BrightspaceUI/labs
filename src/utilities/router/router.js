@@ -1,4 +1,4 @@
-import page from 'page';
+import page from '@brightspace-ui/page.js';
 
 let activePage = page;
 let _lastOptions = {};

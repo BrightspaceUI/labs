@@ -13,7 +13,7 @@ First, define and instantiate your own Reactive Store:
 ```js
 // my-store.js
 
-import ReactiveStore from '@brightspace-ui/labs/utilites/reactive-store.js';
+import ReactiveStore from '@brightspace-ui/labs/utilities/reactive-store.js';
 
 // Define your store with its reactive properties
 class MyStore extends ReactiveStore {
@@ -100,7 +100,7 @@ Like the basic usage example, you'll first define and instantiate your own React
 ```js
 // my-store.js
 
-import ReactiveStore from '@brightspace-ui/labs/utilites/reactive-store.js';
+import ReactiveStore from '@brightspace-ui/labs/utilities/reactive-store.js';
 
 // Define your store with its reactive properties
 class MyStore extends ReactiveStore {
@@ -239,7 +239,7 @@ Similar to other uses, you'll first define and instantiate your own Reactive Sto
 ```js
 // my-store.js
 
-import ReactiveStore from '@brightspace-ui/labs/utilites/reactive-store.js';
+import ReactiveStore from '@brightspace-ui/labs/utilities/reactive-store.js';
 
 // Define your store with its reactive properties
 class MyStore extends ReactiveStore {
