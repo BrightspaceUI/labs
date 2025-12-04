@@ -114,8 +114,12 @@ export const registerRoutes = (routes, options) => {
 	_storeCtx();
 };
 
-const addMiddleware = callback => {
-	activePage('*', (ctx, next) => {
+/**
+ *  Used internally to decide which view should be loaded and then rendered.
+ *  Additional middleware added will be run after your view has been selected.
+ */
+export const addMiddleware = (callback, pattern = '*') => {
+	activePage(pattern, (ctx, next) => {
 		callback(ctx);
 		next();
 	});
