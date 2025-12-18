@@ -177,6 +177,8 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				<div
 					id="sliderBar"
 					@mousedown="${this._barDown}"
+					@keydown="${this._onKeyPress}"
+					tabindex="0"
 					role="slider"
 					aria-label="${this.localize('components:mediaPlayer:sliderBarProgress')}"
 					aria-orientation="${this.vertical ? 'vertical' : 'horizontal'}"
@@ -192,8 +194,6 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			<div id="knobContainer">
 				<div id="sliderKnob"
 					class="slider-knob"
-					@keydown="${this._onKeyPress}"
-					tabindex="0"
 				>
 					<div class="slider-knob-inner"></div>
 				</div>
