@@ -194,7 +194,6 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			<div id="knobContainer">
 				<div id="sliderKnob"
 					class="slider-knob"
-					aria-hidden="true"
 				>
 					<div class="slider-knob-inner"></div>
 				</div>
