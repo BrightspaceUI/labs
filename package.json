@@ -80,7 +80,7 @@
     "@rollup/plugin-node-resolve": "^16",
     "@rollup/plugin-replace": "^6",
     "@web/dev-server": "^0.4",
-    "@web/rollup-plugin-html": "^2",
+    "@web/rollup-plugin-html": "^3",
     "eslint": "^9",
     "eslint-config-brightspace": "^2",
     "glob-all": "^3",
