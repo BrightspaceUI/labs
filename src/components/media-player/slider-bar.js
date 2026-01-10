@@ -155,12 +155,16 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	connectedCallback() {
 		super.connectedCallback();
+		this.setAttribute('role', 'slider');
+		this.setAttribute('tabindex', '0');
+		this.addEventListener('keydown', this._onKeyPress);
 		window.addEventListener('mouseup', () => { this._barUp(); });
 		window.addEventListener('mousemove', (event) => { this._onTrack(event); });
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
+		this.removeEventListener('keydown', this._onKeyPress);
 		window.removeEventListener('mouseup', () => { this._barUp(); });
 		window.removeEventListener('mousemove', (event) => { this._onTrack(event); });
 	}
@@ -177,14 +181,6 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				<div
 					id="sliderBar"
 					@mousedown="${this._barDown}"
-					@keydown="${this._onKeyPress}"
-					tabindex="0"
-					role="slider"
-					aria-label="${this.localize('components:mediaPlayer:sliderBarProgress')}"
-					aria-orientation="${this.vertical ? 'vertical' : 'horizontal'}"
-					aria-valuemin="${this.min}"
-					aria-valuemax="${this.max}"
-					aria-valuenow="${this.immediateValue ? this.immediateValue : 0}"
 				>
 					<div id="progressContainer">
 						<div id="primaryProgress"></div>
