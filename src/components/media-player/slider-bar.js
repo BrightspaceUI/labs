@@ -5,9 +5,6 @@ import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
 class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
-	#mouseUpBound;
-	#mouseMoveBound;
-
 	static get properties() {
 		return {
 			value: { type: Number },
@@ -250,6 +247,9 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			this.setAttribute('aria-label', this.label || 'slider');
 		}
 	}
+
+	#mouseUpBound;
+	#mouseMoveBound;
 
 	_barDown(event) {
 		const knobContainer = this.shadowRoot.getElementById('knobContainer');
