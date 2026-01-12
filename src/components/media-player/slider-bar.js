@@ -15,7 +15,8 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			vertical: { type: Boolean },
 			fullWidth: { type: Boolean },
 			min: { type: Number },
-			max: { type: Number }
+			max: { type: Number },
+			label: { type: String }
 		};
 	}
 
@@ -155,8 +156,17 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	connectedCallback() {
 		super.connectedCallback();
+		if (!this.label) {
+			console.error('d2l-labs-slider-bar requires a "label" property for accessibility');
+		}
+		this.setAttribute('aria-label', this.label || 'slider');
 		this.setAttribute('role', 'slider');
 		this.setAttribute('tabindex', '0');
+		this.setAttribute('aria-orientation', this.vertical ? 'vertical' : 'horizontal');
+		this.setAttribute('aria-valuemin', String(this.min));
+		this.setAttribute('aria-valuemax', String(this.max));
+		this.setAttribute('aria-valuenow', String(Math.floor(this.immediateValue || this.value || 0)));
+
 		this.addEventListener('keydown', this._onKeyPress);
 		window.addEventListener('mouseup', () => { this._barUp(); });
 		window.addEventListener('mousemove', (event) => { this._onTrack(event); });
@@ -216,6 +226,23 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		}
 		if (changedProperties.has('hovering')) {
 			this._hoveringChanged(this.hovering);
+		}
+
+		if (changedProperties.has('vertical')) {
+			this.setAttribute('aria-orientation', this.vertical ? 'vertical' : 'horizontal');
+		}
+		if (changedProperties.has('min')) {
+			this.setAttribute('aria-valuemin', String(this.min));
+		}
+		if (changedProperties.has('max')) {
+			this.setAttribute('aria-valuemax', String(this.max));
+		}
+		if (changedProperties.has('immediateValue') || changedProperties.has('value')) {
+			const currentValue = this.immediateValue !== undefined ? this.immediateValue : this.value;
+			this.setAttribute('aria-valuenow', String(Math.floor(currentValue)));
+		}
+		if (changedProperties.has('label')) {
+			this.setAttribute('aria-label', this.label || 'slider');
 		}
 	}
 
