@@ -5,6 +5,9 @@ import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
 class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
+	#mouseUpBound;
+	#mouseMoveBound;
+
 	static get properties() {
 		return {
 			value: { type: Number },
@@ -152,6 +155,8 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this.fullWidth = false;
 		this.min = 0;
 		this.max = 100;
+		this.#mouseUpBound = this._barUp.bind(this);
+		this.#mouseMoveBound = this._onTrack.bind(this);
 	}
 
 	connectedCallback() {
@@ -168,15 +173,15 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this.setAttribute('aria-valuenow', String(Math.floor(this.immediateValue || this.value || 0)));
 
 		this.addEventListener('keydown', this._onKeyPress);
-		window.addEventListener('mouseup', () => { this._barUp(); });
-		window.addEventListener('mousemove', (event) => { this._onTrack(event); });
+		window.addEventListener('mouseup', this.#mouseUpBound);
+		window.addEventListener('mousemove', this.#mouseMoveBound);
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
 		this.removeEventListener('keydown', this._onKeyPress);
-		window.removeEventListener('mouseup', () => { this._barUp(); });
-		window.removeEventListener('mousemove', (event) => { this._onTrack(event); });
+		window.removeEventListener('mouseup', this.#mouseUpBound);
+		window.removeEventListener('mousemove', this.#mouseMoveBound);
 	}
 
 	render() {
