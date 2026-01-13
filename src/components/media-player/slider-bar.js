@@ -45,11 +45,11 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 		display: block;
 	}
 
-	:host(:focus) {
+	:host(:focus-within) {
 		outline: none;
 	}
 
-	:host(:focus) .slider-knob::after {
+	:host(:focus-within) .slider-knob::after {
 		border-radius: 50%;
 		bottom: 0;
 		box-shadow: 0 0 0 var(--d2l-calculated-knob-focus-size) var(--d2l-calculated-knob-focus-color);
@@ -159,29 +159,31 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 
 	connectedCallback() {
 		super.connectedCallback();
-		this.setAttribute('aria-label', this.label || 'slider');
-		this.setAttribute('role', 'slider');
-		this.setAttribute('tabindex', '0');
-		this.setAttribute('aria-orientation', this.vertical ? 'vertical' : 'horizontal');
-		this.setAttribute('aria-valuemin', String(this.min));
-		this.setAttribute('aria-valuemax', String(this.max));
-		this.setAttribute('aria-valuenow', String(Math.floor(this.immediateValue || this.value || 0)));
-
-		this.addEventListener('keydown', this._onKeyPress);
 		window.addEventListener('mouseup', this.#mouseUpBound);
 		window.addEventListener('mousemove', this.#mouseMoveBound);
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		this.removeEventListener('keydown', this._onKeyPress);
 		window.removeEventListener('mouseup', this.#mouseUpBound);
 		window.removeEventListener('mousemove', this.#mouseMoveBound);
 	}
 
 	render() {
+		const currentValue = this.dragging
+			? this.immediateValue
+			: (this.value ?? this.immediateValue);
+		const ariaValueNow = Math.floor(currentValue || 0);
 		return html`
 		<div id="sliderContainer"
+			role="slider"
+			tabindex="0"
+			aria-label="${this.label}"
+			aria-orientation="${this.vertical ? 'vertical' : 'horizontal'}"
+			aria-valuemin="${String(this.min)}"
+			aria-valuemax="${String(this.max)}"
+			aria-valuenow="${String(ariaValueNow)}"
+			@keydown=${this._onKeyPress}
 			@mouseover="${this._onHostHover}"
 			@mousemove="${this._onHostMove}"
 			@mouseout="${this._onHostUnhover}"
@@ -227,23 +229,6 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 		if (changedProperties.has('hovering')) {
 			this._hoveringChanged(this.hovering);
 		}
-
-		if (changedProperties.has('vertical')) {
-			this.setAttribute('aria-orientation', this.vertical ? 'vertical' : 'horizontal');
-		}
-		if (changedProperties.has('min')) {
-			this.setAttribute('aria-valuemin', String(this.min));
-		}
-		if (changedProperties.has('max')) {
-			this.setAttribute('aria-valuemax', String(this.max));
-		}
-		if (changedProperties.has('immediateValue') || changedProperties.has('value')) {
-			const currentValue = this.immediateValue !== undefined ? this.immediateValue : this.value;
-			this.setAttribute('aria-valuenow', String(Math.floor(currentValue)));
-		}
-		if (changedProperties.has('label')) {
-			this.setAttribute('aria-label', this.label || 'slider');
-		}
 	}
 
 	#mouseUpBound;
@@ -265,7 +250,7 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 		this._positionKnob(ratio);
 
 		event.preventDefault();
-		this.shadowRoot.getElementById('sliderKnob').focus();
+		this.shadowRoot.getElementById('sliderContainer')?.focus();
 	}
 
 	_barUp() {
