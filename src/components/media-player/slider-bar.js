@@ -1,9 +1,10 @@
 import '@brightspace-ui/core/components/colors/colors.js';
 import { css, html, LitElement } from 'lit';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
+import { PropertyRequiredMixin } from '@brightspace-ui/core/mixins/property-required/property-required-mixin.js';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
-class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
+class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitElement))) {
 
 	static get properties() {
 		return {
@@ -16,7 +17,7 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			fullWidth: { type: Boolean },
 			min: { type: Number },
 			max: { type: Number },
-			label: { type: String }
+			label: { type: String, required: true },
 		};
 	}
 
@@ -158,9 +159,6 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	connectedCallback() {
 		super.connectedCallback();
-		if (!this.label) {
-			console.error('d2l-labs-slider-bar requires a "label" property for accessibility');
-		}
 		this.setAttribute('aria-label', this.label || 'slider');
 		this.setAttribute('role', 'slider');
 		this.setAttribute('tabindex', '0');
