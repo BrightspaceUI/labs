@@ -183,7 +183,7 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 			aria-valuemin="${String(this.min)}"
 			aria-valuemax="${String(this.max)}"
 			aria-valuenow="${String(ariaValueNow)}"
-			@keydown=${this._onKeyPress}
+			@keydown=${this._onKeyDown}
 			@mouseover="${this._onHostHover}"
 			@mousemove="${this._onHostMove}"
 			@mouseout="${this._onHostUnhover}"
@@ -332,7 +332,7 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 		this.removeEventListener('mousemove', this._onTrack);
 	}
 
-	_onKeyPress(event) {
+	_onKeyDown(event) {
 		if (this.vertical) {
 			this._checkKey(event, 'ArrowUp', 5);
 			this._checkKey(event, 'ArrowDown', -5);

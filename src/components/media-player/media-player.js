@@ -862,7 +862,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 						max="${Math.floor(this._getSeekbarValue(this.duration))}"
 						value="${this._getSeekbarValue(this._currentTime)}"
 						label="${this.localize('components:mediaPlayer:seekSlider')}"
-						title="${this.localize('components:mediaPlayer:seekSlider')}"
 						@drag-start=${this._onDragStartSeek}
 						@drag-end=${this._onDragEndSeek}
 						@position-change=${this._onPositionChangeSeek}
@@ -892,7 +891,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 										vertical
 										value="${Math.round(this._volume * 100)}"
 										label="${this.localize('components:mediaPlayer:volumeSlider')}"
-										title="${this.localize('components:mediaPlayer:volumeSlider')}"
 										@drag-start=${this._onDragStartVolume}
 										@focus=${this._startUsingVolumeContainer}
 										@focusout=${this._stopUsingVolumeContainer}
