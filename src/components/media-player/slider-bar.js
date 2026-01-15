@@ -1,9 +1,10 @@
 import '@brightspace-ui/core/components/colors/colors.js';
 import { css, html, LitElement } from 'lit';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
+import { PropertyRequiredMixin } from '@brightspace-ui/core/mixins/property-required/property-required-mixin.js';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
-class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
+class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitElement))) {
 
 	static get properties() {
 		return {
@@ -15,7 +16,8 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			vertical: { type: Boolean },
 			fullWidth: { type: Boolean },
 			min: { type: Number },
-			max: { type: Number }
+			max: { type: Number },
+			label: { type: String, required: true },
 		};
 	}
 
@@ -43,11 +45,11 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		display: block;
 	}
 
-	:host(:focus) {
+	:host(:focus-within) {
 		outline: none;
 	}
 
-	:host(:focus) .slider-knob::after {
+	:host(:focus-within) .slider-knob::after {
 		border-radius: 50%;
 		bottom: 0;
 		box-shadow: 0 0 0 var(--d2l-calculated-knob-focus-size) var(--d2l-calculated-knob-focus-color);
@@ -151,23 +153,37 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this.fullWidth = false;
 		this.min = 0;
 		this.max = 100;
+		this.#mouseUpBound = this._barUp.bind(this);
+		this.#mouseMoveBound = this._onTrack.bind(this);
 	}
 
 	connectedCallback() {
 		super.connectedCallback();
-		window.addEventListener('mouseup', () => { this._barUp(); });
-		window.addEventListener('mousemove', (event) => { this._onTrack(event); });
+		window.addEventListener('mouseup', this.#mouseUpBound);
+		window.addEventListener('mousemove', this.#mouseMoveBound);
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		window.removeEventListener('mouseup', () => { this._barUp(); });
-		window.removeEventListener('mousemove', (event) => { this._onTrack(event); });
+		window.removeEventListener('mouseup', this.#mouseUpBound);
+		window.removeEventListener('mousemove', this.#mouseMoveBound);
 	}
 
 	render() {
+		const currentValue = this.dragging
+			? this.immediateValue
+			: (this.value ?? this.immediateValue);
+		const ariaValueNow = Math.floor(currentValue || 0);
 		return html`
 		<div id="sliderContainer"
+			role="slider"
+			tabindex="0"
+			aria-label="${this.label}"
+			aria-orientation="${this.vertical ? 'vertical' : 'horizontal'}"
+			aria-valuemin="${String(this.min)}"
+			aria-valuemax="${String(this.max)}"
+			aria-valuenow="${String(ariaValueNow)}"
+			@keydown=${this._onKeyDown}
 			@mouseover="${this._onHostHover}"
 			@mousemove="${this._onHostMove}"
 			@mouseout="${this._onHostUnhover}"
@@ -177,14 +193,6 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				<div
 					id="sliderBar"
 					@mousedown="${this._barDown}"
-					@keydown="${this._onKeyPress}"
-					tabindex="0"
-					role="slider"
-					aria-label="${this.localize('components:mediaPlayer:sliderBarProgress')}"
-					aria-orientation="${this.vertical ? 'vertical' : 'horizontal'}"
-					aria-valuemin="${this.min}"
-					aria-valuemax="${this.max}"
-					aria-valuenow="${this.immediateValue ? this.immediateValue : 0}"
 				>
 					<div id="progressContainer">
 						<div id="primaryProgress"></div>
@@ -223,6 +231,9 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		}
 	}
 
+	#mouseUpBound;
+	#mouseMoveBound;
+
 	_barDown(event) {
 		const knobContainer = this.shadowRoot.getElementById('knobContainer');
 		this._w = knobContainer.offsetWidth;
@@ -239,7 +250,7 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this._positionKnob(ratio);
 
 		event.preventDefault();
-		this.shadowRoot.getElementById('sliderKnob').focus();
+		this.shadowRoot.getElementById('sliderContainer')?.focus();
 	}
 
 	_barUp() {
@@ -321,7 +332,7 @@ class SliderBar extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this.removeEventListener('mousemove', this._onTrack);
 	}
 
-	_onKeyPress(event) {
+	_onKeyDown(event) {
 		if (this.vertical) {
 			this._checkKey(event, 'ArrowUp', 5);
 			this._checkKey(event, 'ArrowDown', -5);

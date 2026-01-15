@@ -861,12 +861,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 						min="0"
 						max="${Math.floor(this._getSeekbarValue(this.duration))}"
 						value="${this._getSeekbarValue(this._currentTime)}"
-						aria-label="${this.localize('components:mediaPlayer:seekSlider')}"
-						aria-orientation="horizontal"
-						aria-valuemin="0"
-						aria-valuemax="${Math.floor(this._getSeekbarValue(this.duration))}"
-						aria-valuenow="${this._getSeekbarValue(this._currentTime)}"
-						title="${this.localize('components:mediaPlayer:seekSlider')}"
+						label="${this.localize('components:mediaPlayer:seekSlider')}"
 						@drag-start=${this._onDragStartSeek}
 						@drag-end=${this._onDragEndSeek}
 						@position-change=${this._onPositionChangeSeek}
@@ -895,11 +890,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 										id="d2l-labs-media-player-volume-slider"
 										vertical
 										value="${Math.round(this._volume * 100)}"
-										aria-label="${this.localize('components:mediaPlayer:volumeSlider')}"
-										aria-orientation="vertical" aria-valuemin="0"
-										aria-valuemax="100"
-										aria-valuenow="${Math.floor(this._volume * 100)}"
-										title="${this.localize('components:mediaPlayer:volumeSlider')}"
+										label="${this.localize('components:mediaPlayer:volumeSlider')}"
 										@drag-start=${this._onDragStartVolume}
 										@focus=${this._startUsingVolumeContainer}
 										@focusout=${this._stopUsingVolumeContainer}
