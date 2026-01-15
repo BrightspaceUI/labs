@@ -55,7 +55,7 @@ describe('attribute-picker-item', () => {
 	});
 
 	it('truncated with tooltip', async() => {
-		const component = await fixture(html`<d2l-labs-attribute-picker-item style="margin-top: 50px;" text="This is a very long attribute that's being used to show off truncation"></d2l-labs-attribute-picker-item>`);
+		const component = await fixture(html`<d2l-labs-attribute-picker-item style="margin-top: 100px;" text="This is a very long attribute that's being used to show off truncation"></d2l-labs-attribute-picker-item>`);
 		const tooltip = component.shadowRoot.querySelector('d2l-tooltip');
 
 		hoverElem(component);
