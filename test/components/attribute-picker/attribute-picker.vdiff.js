@@ -15,7 +15,7 @@ const selectedAttributeList = createAttributeList(['one', 'two', 'three']);
 
 async function createComponent(attributeList = [], { allowFreeform = false, required = false, limit, hasTooltip = false } = {}) {
 	const styles = {
-		marginTop: hasTooltip ? '25px' : ''
+		marginTop: hasTooltip ? '40px' : ''
 	};
 
 	return await fixture(html`
