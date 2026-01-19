@@ -1,11 +1,15 @@
 import './helpers/main-view.js';
 import './helpers/param-query-view.js';
+import { assert, spy } from 'sinon';
 import { aTimeout, expect, fixture, html, waitUntil } from '@brightspace-ui/testing';
-import { navigate, registerRoutes, RouterTesting } from '../../../src/utilities/router/index.js';
+import { navigate, registerRoutes, RouterHooks, RouterTesting } from '../../../src/utilities/router/index.js';
 import { loader as load1 } from './helpers/route-loader-1.js';
 import { loader as load2 } from './helpers/route-loader-2.js';
 
 let entryPoint;
+
+const viewSpy = spy();
+const loaderSpy = spy();
 
 const initRouter = () => {
 	registerRoutes(
@@ -63,6 +67,17 @@ const initRouter = () => {
 					return Promise.resolve();
 				},
 				view: ctx => html`<p>${ctx.loaderData}</p>`
+			},
+			{
+				pattern: '/spy',
+				loader: () => {
+					loaderSpy();
+					return Promise.resolve();
+				},
+				view: () => {
+					viewSpy();
+					return html`<p>hey</p>`;
+				},
 			},
 			load1,
 			load2,
@@ -232,5 +247,23 @@ describe('Router', () => {
 		);
 		const p = entryPoint.shadowRoot.querySelector('p').innerText;
 		expect(p).to.equal('Passed');
+	});
+
+	it('Should execute pre and post navigation hooks', async() => {
+		RouterHooks.reset();
+
+		const preHook = spy();
+		const postHook = spy();
+		RouterHooks.registerPreNavigate((context) => {
+			if (context.path === '/spy') { preHook();}
+		});
+		RouterHooks.registerPostNavigate((context) => {
+			if (context.path === '/spy') { postHook();}
+		});
+
+		navigate('/spy');
+		await waitUntil(() => entryPoint.shadowRoot.querySelector('p'));
+
+		assert.callOrder(preHook, loaderSpy, postHook, viewSpy);
 	});
 });

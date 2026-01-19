@@ -85,6 +85,37 @@ const _registerRoutes = routes => {
 	});
 };
 
+export class RouterHooks {
+	static registerPreNavigate = (callback) => {
+		RouterHooks.preNavigate.push(callback);
+	};
+
+	static registerPostNavigate = (callback) => {
+		RouterHooks.postNavigate.push(callback);
+	};
+
+	static reset() {
+		this.preNavigate = [];
+		this.postNavigate = [];
+	};
+}
+
+RouterHooks.reset();
+
+const _registerPreNavigateHooks = () => {
+	activePage('*', (context, next) => {
+		RouterHooks.preNavigate.forEach(h => h(context));
+		next();
+	});
+};
+
+const _registerPostNavigateHooks = () => {
+	activePage('*', (context, next) => {
+		RouterHooks.postNavigate.forEach(h => h(context));
+		next();
+	});
+};
+
 const configure = options => {
 	if (options && options.customPage) activePage = page.create();
 	if (options && options.basePath) activePage.base(options.basePath);
@@ -110,7 +141,9 @@ export const registerRoutes = (routes, options) => {
 		});
 		next();
 	});
+	_registerPreNavigateHooks();
 	_registerRoutes(routes);
+	_registerPostNavigateHooks();
 	_storeCtx();
 };
 
@@ -175,6 +208,7 @@ export const RouterTesting = {
 		activePage = page.create();
 		hasRegistered = false;
 		ContextReactor.reset();
+		RouterHooks.reset();
 	},
 
 	restart: () => {
