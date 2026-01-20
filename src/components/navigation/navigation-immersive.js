@@ -10,7 +10,6 @@ import ResizeObserver from 'resize-observer-polyfill/dist/ResizeObserver.es.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 const mediaQueryList = window.matchMedia('(max-width: 615px)');
-const immersiveNavTextSpacingFlag = getFlag('GAUD-8465-immersive-nav-text-spacing', true);
 
 class NavigationImmersive extends LitElement {
 
@@ -39,7 +38,6 @@ class NavigationImmersive extends LitElement {
 				reflect: true
 			},
 			_dynamicSpacingHeight: { state: true },
-			_spacingUseHeightVar: { attribute: '_spacing-use-height-var', type: Boolean, reflect: true },
 			_middleHidden: { state: true },
 			_middleNoRightBorder: { state: true },
 			_smallWidth: { state: true }
@@ -135,10 +133,6 @@ class NavigationImmersive extends LitElement {
 				position: unset;
 			}
 
-			:host([_spacing-use-height-var]) .d2l-labs-navigation-immersive-spacing {
-				height: calc(var(--d2l-labs-navigation-immersive-height-main) + 5px);
-			}
-
 			@media (max-width: 929px) {
 				.d2l-labs-navigation-immersive-margin {
 					margin: 0 24px;
@@ -178,12 +172,8 @@ class NavigationImmersive extends LitElement {
 		this._middleNoRightBorder = true;
 		this._middleObserver = new ResizeObserver(this._onMiddleResize.bind(this));
 		this._rightObserver = new ResizeObserver(this._onRightResize.bind(this));
-		this._spacingUseHeightVar = !immersiveNavTextSpacingFlag;
 
-		// Only create navigation observer if feature flag is enabled
-		if (immersiveNavTextSpacingFlag) {
-			this._navigationObserver = new ResizeObserver(this._onNavigationResize.bind(this));
-		}
+		this._navigationObserver = new ResizeObserver(this._onNavigationResize.bind(this));
 
 		this._smallWidth = false;
 		this._dynamicSpacingHeight = undefined;
@@ -289,12 +279,9 @@ class NavigationImmersive extends LitElement {
 			this._rightObserver.observe(right);
 		}
 
-		if (this._navigationObserver) {
-			// does not need to be nested within if statement after GAUD-8465-immersive-nav-text-spacing is cleaned up
-			const navigation = this.shadowRoot?.querySelector('.d2l-navigiation-immersive-fixed');
-			if (navigation) {
-				this._navigationObserver.observe(navigation);
-			}
+		const navigation = this.shadowRoot?.querySelector('.d2l-navigiation-immersive-fixed');
+		if (navigation) {
+			this._navigationObserver.observe(navigation);
 		}
 	}
 
