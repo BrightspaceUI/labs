@@ -227,6 +227,17 @@ describe('Page Routing', () => {
 });
 ```
 
+## Router Navigation Hooks
+
+If you want to execute code that doesn't belong to a web component before or after navigation, you can use the RouterHooks class. This is helpful for data models that care about changes in navigation, like a module responsible for timing page loads.
+
+```
+import { RouterHooks } from '@brightspace-ui/labs/utilities/lit-router';
+
+RouterHooks.registerPreNavigate((context) => { console.log('this runs before we navigate', context);});
+RouterHooks.registerPostNavigate((context) => { console.log('post', context);});
+```
+
 ## Known Issues
 
 ### Route order inversion issue
