@@ -84,7 +84,6 @@ The `d2l-labs-navigation-band` also includes a `slot` with a custom scrollbar an
 
 ***Relevant CSS class name:***
 * `--d2l-branding-primary-color`: Used to customize the colour of the top navigation band.
-* `--d2l-labs-navigation-band-slot-height`: When using the slot, this is needed to setup the proper scrollbar and fading effects.
 
 ## Main Header [d2l-labs-navigation-main-header]
 
