@@ -95,12 +95,12 @@ class NavigationBand extends LitElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		this.addEventListener('d2l-labs-navigation-band-slot-scroll-request', this._handleScrollRequest);
+		this.addEventListener('d2l-navigation-band-slot-scroll-request', this._handleScrollRequest);
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		this.removeEventListener('d2l-labs-navigation-band-slot-scroll-request', this._handleScrollRequest);
+		this.removeEventListener('d2l-navigation-band-slot-scroll-request', this._handleScrollRequest);
 	}
 
 	render() {
