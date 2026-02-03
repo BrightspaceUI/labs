@@ -12,7 +12,7 @@ class NavigationBand extends LitElement {
 	static get styles() {
 		return [centererStyles, guttersStyles, css`
 			:host {
-				background: linear-gradient(180deg, var(--d2l-branding-primary-color, var(--d2l-color-celestine)) var(--d2l-labs-navigation-band-slot-height, 1.5rem), #ffffff 0%);
+				background: linear-gradient(180deg, var(--d2l-branding-primary-color, var(--d2l-color-celestine)) 1.5rem, #ffffff 0%);
 				display: block;
 				min-height: 4px;
 				position: relative; /* Needed for Firefox */
@@ -48,7 +48,7 @@ class NavigationBand extends LitElement {
 			.d2l-labs-navigation-scroll-before,
 			.d2l-labs-navigation-scroll-after {
 				height: 100%;
-				max-height: var(--d2l-labs-navigation-band-slot-height, 1.5rem);
+				max-height: 1.5rem; /* should match linear-background height */
 				pointer-events: none;
 				position: absolute;
 				top: 0;
@@ -95,12 +95,12 @@ class NavigationBand extends LitElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		this.addEventListener('d2l-labs-navigation-band-slot-scroll-request', this._handleScrollRequest);
+		this.addEventListener('d2l-navigation-band-slot-scroll-request', this._handleScrollRequest);
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		this.removeEventListener('d2l-labs-navigation-band-slot-scroll-request', this._handleScrollRequest);
+		this.removeEventListener('d2l-navigation-band-slot-scroll-request', this._handleScrollRequest);
 	}
 
 	render() {
