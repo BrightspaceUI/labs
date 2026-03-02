@@ -7,9 +7,19 @@ import { combinedPropertiesSymbol } from './constants.js';
 import StoreReactor from './store-reactor.js';
 
 export class ContextProvider {
-	constructor(host, StoreClass, store = new StoreClass()) {
+	constructor(host, StoreClass, options = {}) {
+		const {
+			detectDependentProperties = false,
+			dependentProperties = detectDependentProperties ? [] : undefined,
+			store = new StoreClass(),
+			...restOptions
+		} = options;
+
 		const properties = StoreClass[combinedPropertiesSymbol];
-		const storeReactor = new StoreReactor(host, store, properties);
+		const storeReactor = new StoreReactor(host, store, {
+			dependentProperties,
+			...restOptions,
+		});
 		new LitContextProvider(host, {
 			context: createContext(StoreClass),
 			initialValue: store,
@@ -18,6 +28,10 @@ export class ContextProvider {
 		return new Proxy(store, {
 			get(target, prop) {
 				if (prop in storeReactor) return storeReactor[prop];
+
+				if (detectDependentProperties && prop in properties)
+					storeReactor.dependentProperties.add(prop);
+
 				return Reflect.get(target, prop);
 			},
 			set(target, prop, value) {
@@ -25,13 +39,23 @@ export class ContextProvider {
 					storeReactor[prop] = value;
 					return true;
 				}
+
+				if (detectDependentProperties && prop in properties)
+					storeReactor.dependentProperties.add(prop);
+
 				return Reflect.set(target, prop, value);
 			}
 		});
 	}
 }
 export class ContextConsumer {
-	constructor(host, StoreClass) {
+	constructor(host, StoreClass, options = {}) {
+		const {
+			detectDependentProperties = false,
+			dependentProperties = detectDependentProperties ? [] : undefined,
+			...restOptions
+		} = options;
+
 		const properties = StoreClass[combinedPropertiesSymbol];
 		const target = {
 			store: {},
@@ -41,13 +65,20 @@ export class ContextConsumer {
 			context: createContext(StoreClass),
 			callback: (store) => {
 				target.store = store;
-				target.storeReactor = new StoreReactor(host, store, properties);
+				target.storeReactor = new StoreReactor(host, store, {
+					dependentProperties,
+					...restOptions,
+				});
 			},
 		});
 
 		return new Proxy(target, {
 			get({ store, storeReactor }, prop) {
 				if (prop in storeReactor) return storeReactor[prop];
+
+				if (detectDependentProperties && prop in properties)
+					storeReactor.dependentProperties.add(prop);
+
 				return Reflect.get(store, prop);
 			},
 			set({ store, storeReactor }, prop, value) {
@@ -55,6 +86,10 @@ export class ContextConsumer {
 					storeReactor[prop] = value;
 					return true;
 				}
+
+				if (detectDependentProperties && prop in properties)
+					storeReactor.dependentProperties.add(prop);
+
 				return Reflect.set(store, prop, value);
 			}
 		});
@@ -64,13 +99,13 @@ export class ContextConsumer {
 export function createContextControllers(StoreClass) {
 	return {
 		Provider: class extends ContextProvider {
-			constructor(host, store = new StoreClass()) {
-				super(host, StoreClass, store);
+			constructor(host, options) {
+				super(host, StoreClass, options);
 			}
 		},
 		Consumer: class extends ContextConsumer {
-			constructor(host) {
-				super(host, StoreClass);
+			constructor(host, options) {
+				super(host, StoreClass, options);
 			}
 		},
 	};
