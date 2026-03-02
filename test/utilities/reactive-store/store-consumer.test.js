@@ -248,6 +248,14 @@ describe('ReactiveStore StoreConsumer', () => {
 
 			expect(forceUpdateCallCount).to.equal(1);
 		});
+
+		it('should call requestUpdate on the host', () => {
+			const storeConsumer = new StoreConsumer(host, store);
+			const requestUpdateCallCount = host.requestUpdateCallCount;
+			storeConsumer.forceUpdate();
+
+			expect(host.requestUpdateCallCount).to.equal(requestUpdateCallCount + 1);
+		});
 	});
 
 	describe('non-reactive properties and methods', () => {
@@ -277,6 +285,139 @@ describe('ReactiveStore StoreConsumer', () => {
 			storeConsumer.nonReactiveProp = 'value';
 
 			expect(storeConsumer.changedProperties.has('nonReactiveProp')).to.be.false;
+		});
+	});
+
+	describe('dependentProperties', () => {
+		it('should include all reactive properties by default', () => {
+			const storeConsumer = new StoreConsumer(host, store);
+			expect(storeConsumer.dependentProperties.size).to.equal(2);
+			expect(storeConsumer.dependentProperties.has('prop1')).to.be.true;
+			expect(storeConsumer.dependentProperties.has('prop2')).to.be.true;
+		});
+
+		it('should be possible to set dependentProperties through initialization options', () => {
+			const storeConsumer = new StoreConsumer(host, store, {
+				dependentProperties: ['prop1']
+			});
+			expect(storeConsumer.dependentProperties.size).to.equal(1);
+			expect(storeConsumer.dependentProperties.has('prop1')).to.be.true;
+		});
+
+		it('should call requestUpdate when updating dependentProperties', () => {
+			const storeConsumer = new StoreConsumer(host, store, {
+				dependentProperties: ['prop1']
+			});
+			storeConsumer.dependentProperties.add('prop2');
+
+			const requestUpdateCallCount = host.requestUpdateCallCount;
+			store.prop1 = 'value1';
+			storeConsumer.prop1 = 'value2';
+			store.prop2 = 'value3';
+			storeConsumer.prop2 = 'value4';
+
+			expect(host.requestUpdateCallCount).to.equal(requestUpdateCallCount + 4);
+		});
+
+		it('should not call requestUpdate when updating non-dependentProperties', () => {
+			new StoreConsumer(host, store, {
+				dependentProperties: ['prop1']
+			});
+
+			const requestUpdateCallCount = host.requestUpdateCallCount;
+			store.prop2 = 'value2';
+
+			expect(host.requestUpdateCallCount).to.equal(requestUpdateCallCount);
+		});
+
+		it('should ignore non-reactive properties', () => {
+			const storeConsumer = new StoreConsumer(host, store, {
+				dependentProperties: ['nonReactiveProp1']
+			});
+			storeConsumer.dependentProperties.add('nonReactiveProp2');
+
+			const requestUpdateCallCount = host.requestUpdateCallCount;
+			storeConsumer.nonReactiveProp1 = 'value';
+			storeConsumer.nonReactiveProp2 = 'value';
+
+			expect(host.requestUpdateCallCount).to.equal(requestUpdateCallCount);
+		});
+
+		describe('detectDependentProperties', () => {
+			describe('when true', () => {
+				it('should initialize dependentProperties to an empty Set', () => {
+					const storeConsumer = new StoreConsumer(host, store, {
+						detectDependentProperties: true
+					});
+
+					expect(storeConsumer.dependentProperties.size).to.equal(0);
+				});
+
+				it('should add a property to dependentProperties when accessed or set', () => {
+					const storeConsumer = new StoreConsumer(host, store, {
+						detectDependentProperties: true
+					});
+
+					storeConsumer.prop1;
+					storeConsumer.prop2 = 'value';
+					expect(storeConsumer.dependentProperties.size).to.equal(2);
+
+					expect(storeConsumer.dependentProperties.has('prop1')).to.be.true;
+					expect(storeConsumer.dependentProperties.has('prop2')).to.be.true;
+				});
+
+				it('should not add a property to dependentProperties when accessed or set through the store directly', () => {
+					const storeConsumer = new StoreConsumer(host, store, {
+						detectDependentProperties: true
+					});
+
+					store.prop1;
+					store.prop2 = 'value';
+					expect(storeConsumer.dependentProperties.size).to.equal(0);
+
+					expect(storeConsumer.dependentProperties.has('prop1')).to.be.false;
+					expect(storeConsumer.dependentProperties.has('prop2')).to.be.false;
+				});
+
+				it('should not add non-reactive properties to dependentProperties', () => {
+					const storeConsumer = new StoreConsumer(host, store, {
+						detectDependentProperties: true
+					});
+
+					storeConsumer.nonReactiveProp;
+					storeConsumer.nonReactiveProp = 'value';
+					expect(storeConsumer.dependentProperties.size).to.equal(0);
+
+					expect(storeConsumer.dependentProperties.has('nonReactiveProp')).to.be.false;
+				});
+			});
+
+			describe('when false', () => {
+				it('should initialize dependentProperties to include all reactive properties', () => {
+					const storeConsumer = new StoreConsumer(host, store, {
+						detectDependentProperties: false
+					});
+					expect(storeConsumer.dependentProperties.size).to.equal(2);
+					expect(storeConsumer.dependentProperties.has('prop1')).to.be.true;
+					expect(storeConsumer.dependentProperties.has('prop2')).to.be.true;
+				});
+
+				it('should not add dependentProperties when accessed or set', () => {
+					const storeConsumer = new StoreConsumer(host, store, {
+						detectDependentProperties: false,
+						dependentProperties: [],
+					});
+
+					storeConsumer.prop1;
+					storeConsumer.prop2 = 'value';
+					storeConsumer.nonReactiveProp = 'value';
+					expect(storeConsumer.dependentProperties.size).to.equal(0);
+
+					expect(storeConsumer.dependentProperties.has('prop1')).to.be.false;
+					expect(storeConsumer.dependentProperties.has('prop2')).to.be.false;
+					expect(storeConsumer.dependentProperties.has('nonReactiveProp')).to.be.false;
+				});
+			});
 		});
 	});
 });
