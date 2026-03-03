@@ -9,6 +9,7 @@
 			import './basic-demo.js';
 			import './context-demo.js';
 			import './multiple-consumers-demo.js';
+			import './individual-reactivity-demo.js';
 		</script>
 		<style>
 			d2l-collapsible-panel {
@@ -21,7 +22,7 @@
 	</head>
 	<body>
 		<d2l-demo-page page-title="ReactiveStore">
-			The following demos all use the same ReactiveStore definition, which is shown below:
+			The following demos all use one of the ReactiveStore definitions shown below:
 			<d2l-collapsible-panel panel-title="my-store.js" type="subtle">
 				<d2l-code-view language="js">import ReactiveStore from '../../../src/utilities/reactive-store/reactive-store.js';
 
@@ -44,6 +45,27 @@ export default class MyStore extends ReactiveStore {
 
 	increment() {
 		this.count++;
+	}
+}</d2l-code-view>
+			</d2l-collapsible-panel>
+			<d2l-collapsible-panel panel-title="multi-prop-store.js" type="subtle">
+				<d2l-code-view language="js">import ReactiveStore from '../../../src/utilities/reactive-store/reactive-store.js';
+
+export default class MultiPropStore extends ReactiveStore {
+	static get properties() {
+		return {
+			foo: { type: Number },
+			bar: { type: Number },
+			baz: { type: Number },
+		};
+	}
+
+	constructor() {
+		super();
+
+		this.foo = 0;
+		this.bar = 0;
+		this.baz = 0;
 	}
 }</d2l-code-view>
 			</d2l-collapsible-panel>
@@ -254,6 +276,131 @@ customElements.define('context-demo', ContextDemo);</d2l-code-view>
 			</d2l-collapsible-panel>
 			<d2l-demo-snippet>
                 <context-demo></context-demo>
+			</d2l-demo-snippet>
+
+			<h2 class="d2l-heading-3">Individual Property Reactivity Demo</h2>
+			This demo uses a store with 3 properties (foo, bar and baz) and defines 2 components:
+			<br>1. A simple component with buttons to update the store properties.
+			<br>2. A component that consumes the store, displays the foo and bar properties (but not baz), and is instantiated 3 separate times with different properties.
+			<p>The consuming component also has the option to pass the <code>dependentProperties</code> and <code>detectDependentProperties</code> options to the store consumer controller. Additionally, it displays how many times its render cycle has been executed.</p>
+			<p>See the definition for both of these components here:</p>
+			<d2l-collapsible-panel panel-title="individual-reactivity-demo.js" type="subtle">
+				<d2l-code-view language="js">import { html, LitElement } from 'lit';
+import MultiPropStore from './multi-prop-store.js';
+
+// Create a new instance of MultiPropStore
+// Note that this would normally be defined in a separate file so that it can be imported by other components
+const multiPropStore = new MultiPropStore();
+const MultiPropStoreConsumer = multiPropStore.createConsumer();
+
+// This component is only used to show the store state and update its properties
+class IndividualReactivityStoreControls extends LitElement {
+	constructor() {
+		super();
+
+		this.consumer = new MultiPropStoreConsumer(this);
+	}
+
+	render() {
+		return html`
+			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
+			&lt;button @click=${this._incrementFoo}&gt;Increment Foo&lt;/button&gt;
+			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
+			&lt;button @click=${this._incrementBar}&gt;Increment Bar&lt;/button&gt;
+			&lt;div&gt;Baz: ${this.consumer.baz}&lt;/div&gt;
+			&lt;button @click=${this._incrementBaz}&gt;Increment Baz&lt;/button&gt;
+		`;
+	}
+
+	_incrementBar() {
+		this.consumer.bar++;
+	}
+
+	_incrementBaz() {
+		this.consumer.baz++;
+	}
+
+	_incrementFoo() {
+		this.consumer.foo++;
+	}
+}
+customElements.define('individual-reactivity-store-controls', IndividualReactivityStoreControls);
+
+// This component is used to show the individual reactivity features of the store consumer
+class IndividualReactivityConsumingComponent extends LitElement {
+	static properties = {
+		// This property is directly passed to the store consumer's dependentProperties option
+		dependentProperties: {
+			type: Array,
+			attribute: 'dependent-properties',
+			converter: (value) => (value ? value.split(',') : undefined),
+		},
+		// This property is directly passed to the store consumer's detectDependentProperties option
+		detectDependentProperties: {
+			type: Boolean,
+			attribute: 'detect-dependent-properties'
+		},
+	};
+
+	constructor() {
+		super();
+
+		this.renderCount = 0;
+	}
+
+	connectedCallback() {
+		super.connectedCallback();
+
+		this.consumer = new MultiPropStoreConsumer(this, {
+			// The store consumer options are passed in from the component's own properties for the
+			// sake of the demo, but in a real use case they would likely be hardcoded values.
+			dependentProperties: this.dependentProperties,
+			detectDependentProperties: this.detectDependentProperties,
+		});
+	}
+
+	render() {
+		this.renderCount++;
+
+		// From the store, we only render the foo and bar properties. The baz property is not used
+		// by this component.
+		// A render count is also included to show when the component re-renders.
+		return html`
+			&lt;div&gt;Foo: ${this.consumer.foo}&lt;/div&gt;
+			&lt;div&gt;Bar: ${this.consumer.bar}&lt;/div&gt;
+			&lt;div&gt;Render Count: ${this.renderCount}&lt;/div&gt;
+		`;
+	}
+}
+customElements.define('individual-reactivity-consuming-component', IndividualReactivityConsumingComponent);
+</d2l-code-view>
+			</d2l-collapsible-panel>
+			<p>
+				Since the consuming components only use the foo and bar properties from the store, they should theoretically only need to re-render when those properties change and not when baz changes.
+				However, by default, the consuming components are dependent on all properties from the store, so they will re-render when baz changes even though they don't use it.
+			</p>
+			<p>
+				In order to avoid unnecessary re-renders, we have two options:
+				<br>1. Explicitly specify dependent properties by passing the <code>dependentProperties</code> option to the store consumer controller. This is shown in the second consuming component in the demo, which is passing dependant properties to the consumer via <code>dependent-properties="foo,bar"</code>.
+				<br>2. Enable automatic detection of dependent properties by passing the <code>detectDependentProperties</code> option to the store consumer controller. This is shown in the third consuming component in the demo, which is enabling dependency detection via the <code>detect-dependent-properties</code> attribute.
+			</p>
+			<p>With these options, we can ensure that the consuming components only re-render when the properties they actually depend on change.</p>
+			<d2l-demo-snippet>
+				<h3 class="d2l-heading-3">Store Controls</h3>
+				<individual-reactivity-store-controls></individual-reactivity-store-controls>
+
+				<h4 class="d2l-heading-3">Default Consumer (dependent on all store properties)</h4>
+				<individual-reactivity-consuming-component></individual-reactivity-consuming-component>
+
+				<h4 class="d2l-heading-3">Consumer with specified dependent properties</h4>
+				<individual-reactivity-consuming-component
+					dependent-properties="foo,bar"
+				></individual-reactivity-consuming-component>
+
+				<h4 class="d2l-heading-3">Consumer with detected dependent properties</h4>
+				<individual-reactivity-consuming-component
+					detect-dependent-properties
+				></individual-reactivity-consuming-component>
 			</d2l-demo-snippet>
 		</d2l-demo-page>
 	</body>
