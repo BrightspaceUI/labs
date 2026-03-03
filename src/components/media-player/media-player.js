@@ -168,8 +168,10 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			}
 
 			#d2l-labs-media-player-video-poster {
+				background-color: #000000;
 				cursor: pointer;
-				height: auto;
+				height: 100%;
+				object-fit: contain;
 				position: absolute;
 				width: 100%;
 				z-index: 1;
