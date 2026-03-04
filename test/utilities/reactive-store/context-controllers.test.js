@@ -1,6 +1,6 @@
 import '../../../src/components/view-toggle/view-toggle.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
-import { LitElement } from 'lit';
+import { LitElement, nothing } from 'lit';
 import ReactiveStore from '../../../src/utilities/reactive-store/reactive-store.js';
 
 // Create 2 separate stores for testing
@@ -45,13 +45,30 @@ const { Provider: Provider2, Consumer: Consumer2 } = TestStore2.createContextCon
 // Create a component that hosts both stores
 class HostingComponent extends LitElement {
 
-	constructor() {
-		super();
-		this.storeProvider1 = new Provider1(this);
-		this.storeProvider2 = new Provider2(this);
+	static properties = {
+		provider1Options: {
+			type: Object,
+			attribute: false,
+		},
+		provider2Options: {
+			type: Object,
+			attribute: false,
+		},
+		dontRenderProps: {
+			type: Boolean,
+			attribute: 'dont-render-props',
+		},
+	};
+
+	connectedCallback() {
+		super.connectedCallback();
+		this.storeProvider1 = new Provider1(this, this.provider1Options);
+		this.storeProvider2 = new Provider2(this, this.provider2Options);
 	}
 
 	render() {
+		if (this.dontRenderProps) return html`<slot></slot>`;
+
 		return html`
 			<div id="prop1">${this.storeProvider1.prop1}</div>
 			<div id="prop2">${this.storeProvider1.prop2}</div>
@@ -83,14 +100,30 @@ customElements.define('middle-component', MiddleComponent);
 // Create a component that consumes both stores
 class ConsumingComponent extends LitElement {
 
-	constructor() {
-		super();
+	static properties = {
+		consumer1Options: {
+			type: Object,
+			attribute: false,
+		},
+		consumer2Options: {
+			type: Object,
+			attribute: false,
+		},
+		dontRenderProps: {
+			type: Boolean,
+			attribute: 'dont-render-props',
+		},
+	};
 
-		this.storeConsumer1 = new Consumer1(this);
-		this.storeConsumer2 = new Consumer2(this);
+	connectedCallback() {
+		super.connectedCallback();
+		this.storeConsumer1 = new Consumer1(this, this.consumer1Options);
+		this.storeConsumer2 = new Consumer2(this, this.consumer2Options);
 	}
 
 	render() {
+		if (this.dontRenderProps) return nothing;
+
 		return html`
 			<div id="prop1">${this.storeConsumer1.prop1}</div>
 			<div id="prop2">${this.storeConsumer1.prop2}</div>
@@ -107,12 +140,37 @@ class ConsumingComponent extends LitElement {
 }
 customElements.define('consuming-component', ConsumingComponent);
 
-const basicFixture = async() => {
+const basicFixture = async({
+	provider1Options = {},
+	provider2Options = {},
+	consumer1_1Options = {},
+	consumer1_2Options = {},
+	consumer2_1Options = {},
+	consumer2_2Options = {},
+	hostDontRenderProps = false,
+	consumer1DontRenderProps = false,
+	consumer2DontRenderProps = false,
+} = {}) => {
 	const hostingComponent = await fixture(html`
-		<hosting-component id="host">
-			<consuming-component id="consuming1"></consuming-component>
+		<hosting-component
+			id="host"
+			.provider1Options=${provider1Options}
+			.provider2Options=${provider2Options}
+			?dont-render-props=${hostDontRenderProps}
+		>
+			<consuming-component
+				id="consuming1"
+				.consumer1Options=${consumer1_1Options}
+				.consumer2Options=${consumer1_2Options}
+				?dont-render-props=${consumer1DontRenderProps}
+			></consuming-component>
 			<middle-component>
-				<consuming-component id="consuming2"></consuming-component>
+				<consuming-component
+					id="consuming2"
+					.consumer1Options=${consumer2_1Options}
+					.consumer2Options=${consumer2_2Options}
+					?dont-render-props=${consumer2DontRenderProps}
+				></consuming-component>
 			</middle-component>
 		</hosting-component>
 	`);
@@ -121,19 +179,56 @@ const basicFixture = async() => {
 
 	return { hostingComponent, consumingComponent1, consumingComponent2 };
 };
-const doubleFixture = async() => {
+const doubleFixture = async({
+	host1Provider1Options = {},
+	host1Provider2Options = {},
+	host1Consumer1_1Options = {},
+	host1Consumer1_2Options = {},
+	host1Consumer2_1Options = {},
+	host1Consumer2_2Options = {},
+	host2Provider1Options = {},
+	host2Provider2Options = {},
+	host2Consumer1_1Options = {},
+	host2Consumer1_2Options = {},
+	host2Consumer2_1Options = {},
+	host2Consumer2_2Options = {},
+} = {}) => {
 	const divComponent = await fixture(html`
 		<div>
-			<hosting-component id="host1">
-				<consuming-component id="consuming1_1"></consuming-component>
+			<hosting-component
+				id="host1"
+				.provider1Options=${host1Provider1Options}
+				.provider2Options=${host1Provider2Options}
+			>
+				<consuming-component
+					id="consuming1_1"
+					.consumer1Options=${host1Consumer1_1Options}
+					.consumer2Options=${host1Consumer1_2Options}
+				></consuming-component>
 				<middle-component>
-					<consuming-component id="consuming1_2"></consuming-component>
+					<consuming-component
+						id="consuming1_2"
+						.consumer1Options=${host1Consumer2_1Options}
+						.consumer2Options=${host1Consumer2_2Options}
+					></consuming-component>
 				</middle-component>
 			</hosting-component>
-			<hosting-component id="host2">
-				<consuming-component id="consuming2_1"></consuming-component>
+			<hosting-component
+				id="host2"
+				.provider1Options=${host2Provider1Options}
+				.provider2Options=${host2Provider2Options}
+			>
+				<consuming-component
+					id="consuming2_1"
+					.consumer1Options=${host2Consumer1_1Options}
+					.consumer2Options=${host2Consumer1_2Options}
+				></consuming-component>
 				<middle-component>
-					<consuming-component id="consuming2_2"></consuming-component>
+					<consuming-component
+						id="consuming2_2"
+						.consumer1Options=${host2Consumer2_1Options}
+						.consumer2Options=${host2Consumer2_2Options}
+					></consuming-component>
 				</middle-component>
 			</hosting-component>
 		</div>
@@ -308,7 +403,7 @@ describe('ReactiveStore Context Controllers', () => {
 				await consumingComponent1.updateComplete;
 				await consumingComponent2.updateComplete;
 
-				verifyRenderedValues(consumingComponent1, {
+				verifyRenderedValues(hostingComponent, {
 					nestedProp: 'value1',
 				});
 				verifyRenderedValues(consumingComponent1, {
@@ -341,6 +436,154 @@ describe('ReactiveStore Context Controllers', () => {
 				});
 				verifyRenderedValues(consumingComponent2_1, {
 					nestedProp: 'default',
+				});
+			});
+		});
+
+		describe('dependentProperties', () => {
+			it('provider should include all reactive properties by default', async() => {
+				const { hostingComponent } = await basicFixture();
+
+				expect(Array.from(hostingComponent.storeProvider1.dependentProperties)).to.deep.equal([
+					'prop1',
+					'prop2',
+					'objectProp',
+				]);
+			});
+
+			it('should re-render when changing dependentProperties', async() => {
+				const { hostingComponent } = await basicFixture({
+					provider1Options: {
+						dependentProperties: ['prop1'],
+					},
+				});
+				hostingComponent.storeProvider1.dependentProperties.add('prop2');
+
+				verifyRenderedValues(hostingComponent, {
+					prop1: 'default',
+					prop2: 'default',
+				});
+
+				await hostingComponent.updateComplete;
+				const prevUpdateCompletePromise = hostingComponent.updateComplete;
+
+				hostingComponent.storeProvider1.prop1 = 'value1';
+				hostingComponent.storeProvider1.prop2 = 'value2';
+
+				await hostingComponent.updateComplete;
+				expect(hostingComponent.updateComplete).to.not.equal(prevUpdateCompletePromise);
+			});
+
+			it('should not re-render when changing non-dependentProperties', async() => {
+				const { hostingComponent } = await basicFixture({
+					provider1Options: {
+						dependentProperties: ['prop1'],
+					},
+				});
+
+				verifyRenderedValues(hostingComponent, {
+					prop1: 'default',
+					prop2: 'default',
+				});
+
+				await hostingComponent.updateComplete;
+				const prevUpdateCompletePromise = hostingComponent.updateComplete;
+
+				hostingComponent.storeProvider1.prop2 = 'value2';
+
+				expect(hostingComponent.updateComplete).to.equal(prevUpdateCompletePromise);
+			});
+
+			it('should ignore non-reactive properties', async() => {
+				const { hostingComponent } = await basicFixture({
+					provider1Options: {
+						dependentProperties: ['nonReactiveProp'],
+					},
+				});
+
+				verifyRenderedValues(hostingComponent, {
+					nonReactiveProp: 'default',
+				});
+
+				await hostingComponent.updateComplete;
+				const prevUpdateCompletePromise = hostingComponent.updateComplete;
+
+				hostingComponent.storeProvider1.nonReactiveProp = 'value1';
+
+				expect(hostingComponent.updateComplete).to.equal(prevUpdateCompletePromise);
+			});
+
+			describe('detectDependentProperties', () => {
+				describe('when true', () => {
+					it('should initialize dependentProperties to an empty Set', async() => {
+						const { hostingComponent } = await basicFixture({
+							provider1Options: {
+								detectDependentProperties: true,
+							},
+							hostDontRenderProps: true,
+						});
+
+						expect(hostingComponent.storeProvider1.dependentProperties.size).to.equal(0);
+					});
+
+					it('should add a property to dependentProperties when accessed or set', async() => {
+						const { hostingComponent } = await basicFixture({
+							provider1Options: {
+								detectDependentProperties: true,
+							},
+							hostDontRenderProps: true,
+						});
+
+						hostingComponent.storeProvider1.prop1;
+						hostingComponent.storeProvider1.prop2 = 'value1';
+
+						expect(hostingComponent.storeProvider1.dependentProperties.size).to.equal(2);
+						expect(hostingComponent.storeProvider1.dependentProperties.has('prop1')).to.be.true;
+						expect(hostingComponent.storeProvider1.dependentProperties.has('prop2')).to.be.true;
+					});
+
+					it('should not add non-reactive properties to dependentProperties', async() => {
+						const { hostingComponent } = await basicFixture({
+							provider1Options: {
+								detectDependentProperties: true,
+							},
+						});
+
+						hostingComponent.storeProvider1.nonReactiveProp;
+						hostingComponent.storeProvider1.nonReactiveProp = 'value1';
+
+						expect(hostingComponent.storeProvider1.dependentProperties.has('nonReactiveProp')).to.be.false;
+					});
+				});
+
+				describe('when false', () => {
+					it('should initialize dependentProperties to include all reactive properties', async() => {
+						const { hostingComponent } = await basicFixture({
+							provider1Options: {
+								detectDependentProperties: false,
+							},
+						});
+
+						expect(Array.from(hostingComponent.storeProvider1.dependentProperties)).to.deep.equal([
+							'prop1',
+							'prop2',
+							'objectProp',
+						]);
+					});
+
+					it('should not add dependentProperties when accessed or set', async() => {
+						const { hostingComponent } = await basicFixture({
+							provider1Options: {
+								detectDependentProperties: false,
+								dependentProperties: [],
+							},
+						});
+
+						hostingComponent.storeProvider1.prop1;
+						hostingComponent.storeProvider1.prop2 = 'value1';
+
+						expect(hostingComponent.storeProvider1.dependentProperties.size).to.equal(0);
+					});
 				});
 			});
 		});
@@ -511,6 +754,229 @@ describe('ReactiveStore Context Controllers', () => {
 				});
 				verifyRenderedValues(consumingComponent2_1, {
 					nestedProp: 'default',
+				});
+			});
+		});
+
+		describe('dependentProperties', () => {
+			it('consumer should include all reactive properties by default', async() => {
+				const { consumingComponent1, consumingComponent2 } = await basicFixture();
+
+				expect(Array.from(consumingComponent1.storeConsumer1.dependentProperties)).to.deep.equal([
+					'prop1',
+					'prop2',
+					'objectProp',
+				]);
+				expect(Array.from(consumingComponent2.storeConsumer1.dependentProperties)).to.deep.equal([
+					'prop1',
+					'prop2',
+					'objectProp',
+				]);
+			});
+
+			it('should re-render when changing dependentProperties', async() => {
+				const { consumingComponent1, consumingComponent2 } = await basicFixture({
+					consumer1_1Options: {
+						dependentProperties: ['prop1'],
+					},
+					consumer2_1Options: {
+						dependentProperties: ['prop1'],
+					},
+				});
+				consumingComponent1.storeConsumer1.dependentProperties.add('prop2');
+				consumingComponent2.storeConsumer1.dependentProperties.add('prop2');
+
+				verifyRenderedValues(consumingComponent1, {
+					prop1: 'default',
+					prop2: 'default',
+				});
+				verifyRenderedValues(consumingComponent2, {
+					prop1: 'default',
+					prop2: 'default',
+				});
+
+				await consumingComponent1.updateComplete;
+				await consumingComponent2.updateComplete;
+				const prevUpdateCompletePromise1 = consumingComponent1.updateComplete;
+				const prevUpdateCompletePromise2 = consumingComponent2.updateComplete;
+
+				consumingComponent1.storeConsumer1.prop1 = 'value1';
+				consumingComponent1.storeConsumer1.prop2 = 'value2';
+				consumingComponent2.storeConsumer1.prop1 = 'value3';
+				consumingComponent2.storeConsumer1.prop2 = 'value4';
+
+				await consumingComponent1.updateComplete;
+				await consumingComponent2.updateComplete;
+				expect(consumingComponent1.updateComplete).to.not.equal(prevUpdateCompletePromise1);
+				expect(consumingComponent2.updateComplete).to.not.equal(prevUpdateCompletePromise2);
+			});
+
+			it('should not re-render when changing non-dependentProperties', async() => {
+				const { consumingComponent1, consumingComponent2 } = await basicFixture({
+					consumer1_1Options: {
+						dependentProperties: ['prop1'],
+					},
+					consumer2_1Options: {
+						dependentProperties: ['prop1'],
+					},
+				});
+
+				verifyRenderedValues(consumingComponent1, {
+					prop1: 'default',
+					prop2: 'default',
+				});
+				verifyRenderedValues(consumingComponent2, {
+					prop1: 'default',
+					prop2: 'default',
+				});
+
+				await consumingComponent1.updateComplete;
+				await consumingComponent2.updateComplete;
+				const prevUpdateCompletePromise1 = consumingComponent1.updateComplete;
+				const prevUpdateCompletePromise2 = consumingComponent2.updateComplete;
+
+				consumingComponent1.storeConsumer1.prop2 = 'value2';
+				consumingComponent2.storeConsumer1.prop2 = 'value4';
+
+				expect(consumingComponent1.updateComplete).to.equal(prevUpdateCompletePromise1);
+				expect(consumingComponent2.updateComplete).to.equal(prevUpdateCompletePromise2);
+			});
+
+			it('should ignore non-reactive properties', async() => {
+				const { consumingComponent1, consumingComponent2 } = await basicFixture({
+					consumer1_1Options: {
+						dependentProperties: ['nonReactiveProp'],
+					},
+					consumer2_1Options: {
+						dependentProperties: ['nonReactiveProp'],
+					},
+				});
+
+				verifyRenderedValues(consumingComponent1, {
+					nonReactiveProp: 'default',
+				});
+				verifyRenderedValues(consumingComponent2, {
+					nonReactiveProp: 'default',
+				});
+
+				await consumingComponent1.updateComplete;
+				await consumingComponent2.updateComplete;
+				const prevUpdateCompletePromise1 = consumingComponent1.updateComplete;
+				const prevUpdateCompletePromise2 = consumingComponent2.updateComplete;
+
+				consumingComponent1.storeConsumer1.nonReactiveProp = 'value1';
+				consumingComponent2.storeConsumer1.nonReactiveProp = 'value2';
+
+				expect(consumingComponent1.updateComplete).to.equal(prevUpdateCompletePromise1);
+				expect(consumingComponent2.updateComplete).to.equal(prevUpdateCompletePromise2);
+			});
+
+			describe('detectDependentProperties', () => {
+				describe('when true', () => {
+					it('should initialize dependentProperties to an empty Set', async() => {
+						const { consumingComponent1, consumingComponent2 } = await basicFixture({
+							consumer1_1Options: {
+								detectDependentProperties: true,
+							},
+							consumer2_1Options: {
+								detectDependentProperties: true,
+							},
+							consumer1DontRenderProps: true,
+							consumer2DontRenderProps: true,
+						});
+
+						expect(consumingComponent1.storeConsumer1.dependentProperties.size).to.equal(0);
+						expect(consumingComponent2.storeConsumer1.dependentProperties.size).to.equal(0);
+					});
+
+					it('should add a property to dependentProperties when accessed or set', async() => {
+						const { consumingComponent1, consumingComponent2 } = await basicFixture({
+							consumer1_1Options: {
+								detectDependentProperties: true,
+							},
+							consumer2_1Options: {
+								detectDependentProperties: true,
+							},
+							consumer1DontRenderProps: true,
+							consumer2DontRenderProps: true,
+						});
+
+						consumingComponent1.storeConsumer1.prop1;
+						consumingComponent1.storeConsumer1.prop2 = 'value1';
+						consumingComponent2.storeConsumer1.prop1;
+						consumingComponent2.storeConsumer1.prop2 = 'value2';
+
+						expect(consumingComponent1.storeConsumer1.dependentProperties.size).to.equal(2);
+						expect(consumingComponent2.storeConsumer1.dependentProperties.size).to.equal(2);
+						expect(consumingComponent1.storeConsumer1.dependentProperties.has('prop1')).to.be.true;
+						expect(consumingComponent1.storeConsumer1.dependentProperties.has('prop2')).to.be.true;
+						expect(consumingComponent2.storeConsumer1.dependentProperties.has('prop1')).to.be.true;
+						expect(consumingComponent2.storeConsumer1.dependentProperties.has('prop2')).to.be.true;
+					});
+
+					it('should not add non-reactive properties to dependentProperties', async() => {
+						const { consumingComponent1, consumingComponent2 } = await basicFixture({
+							consumer1_1Options: {
+								detectDependentProperties: true,
+							},
+							consumer2_1Options: {
+								detectDependentProperties: true,
+							},
+						});
+
+						consumingComponent1.storeConsumer1.nonReactiveProp;
+						consumingComponent1.storeConsumer1.nonReactiveProp = 'value1';
+						consumingComponent2.storeConsumer1.nonReactiveProp;
+						consumingComponent2.storeConsumer1.nonReactiveProp = 'value2';
+
+						expect(consumingComponent1.storeConsumer1.dependentProperties.has('nonReactiveProp')).to.be.false;
+						expect(consumingComponent2.storeConsumer1.dependentProperties.has('nonReactiveProp')).to.be.false;
+					});
+				});
+
+				describe('when false', () => {
+					it('should initialize dependentProperties to include all reactive properties', async() => {
+						const { consumingComponent1, consumingComponent2 } = await basicFixture({
+							consumer1_1Options: {
+								detectDependentProperties: false,
+							},
+							consumer2_1Options: {
+								detectDependentProperties: false,
+							},
+						});
+
+						expect(Array.from(consumingComponent1.storeConsumer1.dependentProperties)).to.deep.equal([
+							'prop1',
+							'prop2',
+							'objectProp',
+						]);
+						expect(Array.from(consumingComponent2.storeConsumer1.dependentProperties)).to.deep.equal([
+							'prop1',
+							'prop2',
+							'objectProp',
+						]);
+					});
+
+					it('should not add dependentProperties when accessed or set', async() => {
+						const { consumingComponent1, consumingComponent2 } = await basicFixture({
+							consumer1_1Options: {
+								detectDependentProperties: false,
+								dependentProperties: [],
+							},
+							consumer2_1Options: {
+								detectDependentProperties: false,
+								dependentProperties: [],
+							},
+						});
+
+						consumingComponent1.storeConsumer1.prop1;
+						consumingComponent1.storeConsumer1.prop2 = 'value1';
+						consumingComponent2.storeConsumer1.prop1;
+						consumingComponent2.storeConsumer1.prop2 = 'value2';
+
+						expect(consumingComponent1.storeConsumer1.dependentProperties.size).to.equal(0);
+						expect(consumingComponent2.storeConsumer1.dependentProperties.size).to.equal(0);
+					});
 				});
 			});
 		});

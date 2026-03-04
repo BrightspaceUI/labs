@@ -3,11 +3,18 @@ import { combinedPropertiesSymbol } from './constants.js';
 export default class StoreReactor {
 	changedProperties;
 
-	constructor(host, store, properties = store.constructor[combinedPropertiesSymbol]) {
+	constructor(host, store, options = {}) {
 		this.#host = host;
 		this.#host.addController(this);
 		this.#store = store;
 
+		const properties = store.constructor[combinedPropertiesSymbol];
+
+		const {
+			dependentProperties = Object.keys(properties),
+		} = options;
+
+		this.dependentProperties = new Set(dependentProperties);
 		this.changedProperties = new Map();
 
 		this.#store.subscribe(this.#onPropertyChange);
@@ -27,12 +34,13 @@ export default class StoreReactor {
 		prevValue,
 		forceUpdate = false,
 	}) => {
-		if (!forceUpdate && !this.changedProperties.has(property)) this.changedProperties.set(property, prevValue);
+		if (forceUpdate) return this.#requestUpdate();
 
-		this.#host.requestUpdate();
-		this.#host.updateComplete.then(() => {
-			this.changedProperties.clear();
-		});
+		// If the property has changed multiple times within the same update cycle, we want to
+		// preserve the value from before the first change.
+		if (!this.changedProperties.has(property)) this.changedProperties.set(property, prevValue);
+
+		if (this.dependentProperties.has(property)) this.#requestUpdate();
 	};
 
 	#initializeChangedProperties(properties) {
@@ -41,11 +49,16 @@ export default class StoreReactor {
 			if (this.#store[property] === undefined) return;
 
 			this.changedProperties.set(property, undefined);
-			shouldUpdate = true;
+
+			if (this.dependentProperties.has(property)) {
+				shouldUpdate = true;
+			}
 		});
 
-		if (!shouldUpdate) return;
+		if (shouldUpdate) this.#requestUpdate();
+	}
 
+	#requestUpdate() {
 		this.#host.requestUpdate();
 		this.#host.updateComplete.then(() => {
 			this.changedProperties.clear();
