@@ -23,7 +23,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import parseSRT from 'parse-srt/src/parse-srt.js';
-import ResizeObserver from 'resize-observer-polyfill';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
