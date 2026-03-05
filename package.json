@@ -113,5 +113,5 @@
     "parse-srt": "^1.0.0-alpha",
     "webvtt-parser": "^2"
   },
-  "version": "2.46.0"
+  "version": "2.46.1"
 }
