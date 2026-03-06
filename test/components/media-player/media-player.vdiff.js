@@ -24,9 +24,9 @@ describe('d2l-labs-media-player', () => {
 		);
 		await expect(elem).to.be.golden();
 	});
-  
-  it('video-with-poster-4x3', async() => {
-    const elem = await fixture(
+
+	it('video-with-poster-4x3', async() => {
+		const elem = await fixture(
 			html`
 			<d2l-labs-media-player
 				src="./test/components/media-player/videos/1_lego.webm"
@@ -34,7 +34,7 @@ describe('d2l-labs-media-player', () => {
 				media-type="video">
 			</d2l-labs-media-player>`
 		);
-    await expect(elem).to.be.golden();
+		await expect(elem).to.be.golden();
 	});
 
 	it('video with settings menu open', async() => {
