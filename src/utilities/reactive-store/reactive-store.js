@@ -24,8 +24,8 @@ export default class ReactiveStore {
 	createConsumer() {
 		const store = this;
 		return class extends StoreConsumer {
-			constructor(host) {
-				super(host, store);
+			constructor(host, options) {
+				super(host, store, options);
 			}
 		};
 	}

@@ -111,8 +111,7 @@
     "lodash-es": "^4",
     "mobx": "^5",
     "parse-srt": "^1.0.0-alpha",
-    "resize-observer-polyfill": "^1",
     "webvtt-parser": "^2"
   },
-  "version": "2.45.0"
+  "version": "2.46.1"
 }

@@ -2,7 +2,7 @@
 
 A simple data store that will automatically notify subscribers when any of its properties changes.
 
-It's designed to work as a state store for Lit based apps and mimics Lit's component class API.
+It's designed to work as a state store for Lit based apps and mimics Lit's component class API, but it can just as easily support many non-Lit contexts.
 
 ## Usage Examples
 
@@ -400,15 +400,26 @@ This map serves a similar function to the `changedProperties` map that [Lit prov
 
 Note that `changedProperties` is unique for each instance of the Consumer class and is explicitly tied to the hosting component's update cycle.
 
+#### `dependentProperties`
+
+A Set containing all the property names of the properties that the Consumer instance is watching for changes. This Set can be modified in order to specify which property changes from the store actually trigger a re-render. The host component will only re-render if one or more of the properties named in this Set change.
+
+By default, this Set will initialize with all properties from the store. However, if the Consumer's `detectDependentProperties` option is set to true, this Set will initialize with no properties.
+
+Additionally, the initial properties in this Set can be overriden by using the Consumer's `dependentProperties` option.
+
 ### Instance Methods
 
-#### `constructor(host)`
+#### `constructor(host, options = {})`
 
 The constructor for the Consumer class accepts the following parameters:
 
-| Parameter Name | Type | Description | Required |
-|---|---|---|---|
-| `host` | LitElement | The host Lit element that the Consumer is to be connected to. | True |
+| Parameter Name | Type | Description | Required | Default Value |
+|---|---|---|---|---|
+| `host` | LitElement | The host Lit element that the Consumer is to be connected to. | True | |
+| `options` | Object | An object containing various initialization options. | False | `{}` |
+| `options.dependentProperties` | Array | An array of strings where each string is the name of a property from the store. Each property listed here will be used to initialize the Consumer instance's `dependentProperties` Set. | False | If the `detectDependentProperties` option is set to false, this array will defult with all properties from the store. Otherwise, this array will default to an empty array. |
+| `options.detectDependentProperties` | Boolean | If this options is set to true, store properties will be automatically added to the `dependentProperties` Set whenever they're accessed through their corresponding getter or setter on the Consumer instance. | False | `false` |
 
 ## The context `Provider` class
 
@@ -438,16 +449,27 @@ This map serves a similar function to the `changedProperties` map that [Lit prov
 
 Note that `changedProperties` is unique for each instance of the `Provider` class and is explicitly tied to the hosting component's update cycle.
 
+#### `dependentProperties`
+
+A Set containing all the property names of the properties that the context `Provider` instance is watching for changes. This Set can be modified in order to specify which property changes from the store actually trigger a re-render. The host component will only re-render if one or more of the properties named in this Set change.
+
+By default, this Set will initialize with all properties from the store. However, if the context `Provider`'s `detectDependentProperties` option is set to true, this Set will initialize with no properties.
+
+Additionally, the initial properties in this Set can be overriden by using the context `Provider`'s `dependentProperties` option.
+
 ### Instance Methods
 
-#### `constructor(host, store = new StoreClass())`
+#### `constructor(host, options = {})`
 
 The constructor for the context `Provider` class accepts the following parameters:
 
 | Parameter Name | Type | Description | Required | Default Value |
 |---|---|---|---|---|
 | `host` | LitElement instance | The host Lit element that the `Provider` is to be connected to. | True | |
-| `store` | ReactiveStore instance | The instance of your store that you wish to provide to descendant context `Consumer` classes. Note that if no store instance is passed to this parameter, an instance of your store will be instantiated to be used. | True | `new StoreClass()` |
+| `options` | Object | An object containing various initialization options. | False | `{}` |
+| `options.store` | ReactiveStore instance | The instance of your store that you wish to provide to descendant context `Consumer` classes. Note that if no store instance is passed to this parameter, an instance of your store will be instantiated to be used. | False | `new StoreClass()` |
+| `options.dependentProperties` | Array | An array of strings where each string is the name of a property from the store. Each property listed here will be used to initialize the context `Provider` instance's `dependentProperties` Set. | False | If the `detectDependentProperties` option is set to false, this array will defult with all properties from the store. Otherwise, this array will default to an empty array. |
+| `options.detectDependentProperties` | Boolean | If this options is set to true, store properties will be automatically added to the `dependentProperties` Set whenever they're accessed through their corresponding getter or setter on the context `Provider` instance. | False | `false` |
 
 ## The context `Consumer` class
 
@@ -479,12 +501,23 @@ This map serves a similar function to the `changedProperties` map that [Lit prov
 
 Note that `changedProperties` is unique for each instance of the context `Consumer` class and is explicitly tied to the hosting component's update cycle.
 
+#### `dependentProperties`
+
+A Set containing all the property names of the properties that the context `Consumer` instance is watching for changes. This Set can be modified in order to specify which property changes from the store actually trigger a re-render. The host component will only re-render if one or more of the properties named in this Set change.
+
+By default, this Set will initialize with all properties from the store. However, if the context `Consumer`'s `detectDependentProperties` option is set to true, this Set will initialize with no properties.
+
+Additionally, the initial properties in this Set can be overriden by using the context `Consumer`'s `dependentProperties` option.
+
 ### Instance Methods
 
 #### `constructor(host)`
 
 The constructor for the context `Consumer` class accepts the following parameters:
 
-| Parameter Name | Type | Description | Required |
-|---|---|---|---|
-| `host` | LitElement instance | The host Lit element that the `Consumer` is to be connected to. | True |
+| Parameter Name | Type | Description | Required | Default value |
+|---|---|---|---|---|
+| `host` | LitElement instance | The host Lit element that the `Consumer` is to be connected to. | True | |
+| `options` | Object | An object containing various initialization options. | False | `{}` |
+| `options.dependentProperties` | Array | An array of strings where each string is the name of a property from the store. Each property listed here will be used to initialize the context `Consumer` instance's `dependentProperties` Set. | False | If the `detectDependentProperties` option is set to false, this array will defult with all properties from the store. Otherwise, this array will default to an empty array. |
+| `options.detectDependentProperties` | Boolean | If this options is set to true, store properties will be automatically added to the `dependentProperties` Set whenever they're accessed through their corresponding getter or setter on the context `Consumer` instance. | False | `false` |
