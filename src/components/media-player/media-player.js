@@ -524,16 +524,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				color: white;
 			}
 
-			#d2l-labs-media-player-settings-menu {
-				bottom: calc(1.8rem + 18px);
-				left: calc(0.2rem + 14px);
-			}
-
-			[dir="rtl"] #d2l-labs-media-player-settings-menu {
-				left: 0;
-				right: -0.8rem;
-			}
-
 			.d2l-labs-media-player-full-area-centered {
 				align-items: center;
 				display: flex;
