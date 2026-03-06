@@ -30,7 +30,7 @@ describe('d2l-labs-media-player', () => {
 			html`
 			<d2l-labs-media-player
 				src="./test/components/media-player/videos/1_lego.webm"
-        poster="./demo/components/media-player/static/sample-poster-4x3.png"
+				poster="./demo/components/media-player/static/sample-poster-4x3.png"
 				media-type="video">
 			</d2l-labs-media-player>`
 		);
