@@ -927,7 +927,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 					</div>
 					<d2l-dropdown>
 						<d2l-button-icon class="d2l-dropdown-opener" icon="tier1:gear" text="${this.localize('components:mediaPlayer:settings')}" theme="${ifDefined(theme)}"></d2l-button-icon>
-						<d2l-dropdown-menu id="d2l-labs-media-player-settings-menu" no-pointer theme="${ifDefined(theme)}">
+						<d2l-dropdown-menu id="d2l-labs-media-player-settings-menu" class="vdiff-target" no-pointer theme="${ifDefined(theme)}">
 							<d2l-menu label="${this.localize('components:mediaPlayer:settings')}" theme="${ifDefined(theme)}">
 								<d2l-menu-item id="d2l-labs-media-player-playback-speeds" text="${this.localize('components:mediaPlayer:playbackSpeed')}">
 									<div slot="supporting">${this._selectedSpeed}</div>

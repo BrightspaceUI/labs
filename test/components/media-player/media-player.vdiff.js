@@ -47,7 +47,6 @@ describe('d2l-labs-media-player', () => {
 			</d2l-labs-media-player>`
 		);
 		const settingsMenu = elem.shadowRoot.querySelector('#d2l-labs-media-player-settings-menu');
-		settingsMenu.classList.add('vdiff-target');
 		settingsMenu.setAttribute('opened', true);
 		await oneEvent(settingsMenu, 'd2l-dropdown-open');
 		await expect(elem).to.be.golden();
@@ -74,7 +73,6 @@ describe('d2l-labs-media-player', () => {
 			</d2l-labs-media-player>`
 		);
 		const settingsMenu = elem.shadowRoot.querySelector('#d2l-labs-media-player-settings-menu');
-		settingsMenu.classList.add('vdiff-target');
 		settingsMenu.setAttribute('opened', true);
 		await oneEvent(settingsMenu, 'd2l-dropdown-open');
 		await expect(elem).to.be.golden();
