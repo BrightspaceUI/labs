@@ -180,7 +180,8 @@ class TreeSelectorNode extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				<d2l-input-checkbox
 					?checked="${this._showSelected}"
 					?indeterminate="${this._showIndeterminate}"
-					aria-label="${label}"
+					label="${label}"
+					label-hidden
 					@change="${this._onChange}"
 				></d2l-input-checkbox>
 				<span class="d2l-labs-tree-selector-node-text" @click="${this._onArrowClick}" aria-hidden="true">${this.name}</span>
