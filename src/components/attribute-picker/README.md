@@ -16,6 +16,7 @@ This component is an autocompleting dropdown to choose one or more new or pre-ex
   allow-freeform
   limit="5"
   assignable-attributes='[{"name":"one","value":1},{"name":"two","value":2},{"name":"three","value":3},{"name":"four","value":4},{"name":"five","value":5},{"name":"six","value":6},{"name":"seven","value":7}]'
+  attribute-list='[{"name":"one","value":1},{"name":"two","value":2}]'
 ></d2l-labs-attribute-picker>
 ```
 
