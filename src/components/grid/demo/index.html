@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+QA Checklist (verify after each phase):
+
+Phase 1 — Scaffolding:
+  [ ] d2l-accessible-grid renders without console errors
+  [ ] role="grid" present on host; aria-rowcount / aria-colcount reflect rows/cols
+  [ ] d2l-accessible-grid-cell renders inside grid with role="gridcell"
+
+Phase 2 — Cell element:
+  [ ] Cells positioned correctly via CSS grid (grid-column / grid-row)
+  [ ] Spanning cells occupy the right number of rows/columns visually
+  [ ] Focus ring visible on :focus-visible
+
+Phase 3 — Slot observation, validation, layout:
+  [ ] DOM reading order matches visual Z order for uniform grids
+  [ ] DOM reading order matches N order when a multi-row spanning cell is present
+  [ ] Overlapping cell is hidden (visibility:hidden + aria-hidden) and console.warn fired
+  [ ] RTL grid reads right-to-left
+
+Phase 4 — Localization:
+  [ ] lang/en.js contains all required keys (panel, pickedUp, droppedAt, etc.)
+  [ ] No missing-key warnings in console
+
+Phase 5–6 — Editing / drag & keyboard reorder:
+  [ ] Drag-handle visible in editable mode; hidden in static mode
+  [ ] HTML5 drag-and-drop repositions cell and triggers d2l-accessible-grid-move event
+  [ ] Enter/Space on focused cell or drag-handle announces pickup via screen reader
+  [ ] Arrow keys move ghost; edge announces edgeOfGrid
+  [ ] Escape cancels and restores original position
+  [ ] Tab commits move
+
+Phase 7 — Move menu (WCAG 2.5.7):
+  [ ] "Move" button opens menu with Up/Down/Left/Right items
+  [ ] Disabled items when at grid edge
+  [ ] "Move to position…" dialog accepts row/col input and commits
+
+Phase 8 — Displacement & undo:
+  [ ] Displaced cells re-pack into row-major order after a move
+  [ ] d2l-accessible-grid-move event fired with correct detail (movedKey, from, to, displaced)
+  [ ] Toast with "Undo" button appears after move
+  [ ] Ctrl+Z undoes last move and announces undoPerformed
+
+Accessibility spot-checks (NVDA+Firefox, VoiceOver+Safari):
+  [ ] Reading order matches visual layout (Z for uniform, N for multi-row spanning)
+  [ ] Pickup / move / drop / cancel announcements all heard
+  [ ] Move menu is operable by single-pointer touch
+-->
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../accessible-grid.js';
+		</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body unresolved>
+		<d2l-demo-page page-title="Accessible Grid">
+			<h2>Static Grid — Z Layout</h2>
+			<d2l-demo-snippet>
+				<template>
+					<!--
+						3×2 uniform grid; reading order is A→B→C→D→E (Z order).
+						Cell B spans 2 columns to show multi-column spanning (still Z order
+						because height=1 throughout -- no column-group dividers).
+
+						Here D and C are reversed, but they are rendered and read in the correct order by screen readers
+					-->
+					<d2l-accessible-grid cols="3" label="Z-layout static grid" rows="2">
+						<d2l-accessible-grid-cell label="Cell A" x="0" y="0">
+							<strong>A</strong> (0,0)
+						</d2l-accessible-grid-cell>
+						<d2l-accessible-grid-cell label="Cell B — wide" width="2" x="1" y="0">
+							<strong>B</strong> (1,0) width=2
+						</d2l-accessible-grid-cell>
+						<d2l-accessible-grid-cell label="Cell D" x="1" y="1">
+							<strong>D</strong> (1,1)
+						</d2l-accessible-grid-cell>
+						<d2l-accessible-grid-cell label="Cell C" x="0" y="1">
+							<strong>C</strong> (0,1)
+						</d2l-accessible-grid-cell>
+						<d2l-accessible-grid-cell label="Cell E" x="2" y="1">
+							<strong>E</strong> (2,1)
+						</d2l-accessible-grid-cell>
+					</d2l-accessible-grid>
+				</template>
+			</d2l-demo-snippet>
+
+			<!-- ═══════════════════════════════════════════════════════════════
+			     Static Grid — N Layout
+			     Includes a multi-row spanning cell that acts as a column-group
+			     divider; reading order follows N order within the band.
+			     ═══════════════════════════════════════════════════════════════ -->
+			<h2>Static Grid — N Layout</h2>
+			<d2l-demo-snippet>
+				<template>
+					<!-- Placeholder: Phase 3 will replace this with a grid containing
+					     a cell with height>1 to demonstrate N reading order.
+					     Expected order: A, D, B, C, E (see plan Phase 3 N example). -->
+					<p><em>Static N-layout grid coming in Phase 3.</em></p>
+				</template>
+			</d2l-demo-snippet>
+
+			<!-- ═══════════════════════════════════════════════════════════════
+			     Editable Grid
+			     Dashboard-style with spanning cells and editable attribute.
+			     Drag handles, keyboard reorder, and Move menu all active.
+			     ═══════════════════════════════════════════════════════════════ -->
+			<h2>Editable Grid</h2>
+			<d2l-demo-snippet>
+				<template>
+					<!-- Placeholder: Phase 5–8 will replace this with an editable
+					     d2l-accessible-grid that has drag/keyboard/menu affordances. -->
+					<p><em>Editable grid coming in Phase 5.</em></p>
+				</template>
+			</d2l-demo-snippet>
+
+			<!-- ═══════════════════════════════════════════════════════════════
+			     RTL Grid
+			     dir="rtl" mirrors horizontal reading direction.
+			     Both Z and N order are read right→left in RTL mode.
+			     ═══════════════════════════════════════════════════════════════ -->
+			<h2>RTL Grid</h2>
+			<d2l-demo-snippet>
+				<template>
+					<!-- Placeholder: Phase 3 will add a dir="rtl" grid here. -->
+					<p><em>RTL grid coming in Phase 3.</em></p>
+				</template>
+			</d2l-demo-snippet>
+
+			<!-- ═══════════════════════════════════════════════════════════════
+			     Collision Demo
+			     Intentional overlap between two cells; first cell (DOM order)
+			     renders normally, second is hidden with a console.warn.
+			     ═══════════════════════════════════════════════════════════════ -->
+			<h2>Collision Demo</h2>
+			<d2l-demo-snippet>
+				<template>
+					<!-- Placeholder: Phase 3 will add two overlapping cells here.
+					     Open DevTools console to see the expected warning. -->
+					<p><em>Collision demo coming in Phase 3.</em></p>
+				</template>
+			</d2l-demo-snippet>
+
+		</d2l-demo-page>
+	</body>
+</html>

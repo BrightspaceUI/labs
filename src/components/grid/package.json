@@ -1,0 +1,37 @@
+{
+  "name": "@brightspace-ui/accessible-grid",
+  "description": "Scannable and Editable grids for Brightspace",
+  "type": "module",
+  "repository": "https://github.com/BrightspaceUI/accessible-grid.git",
+  "scripts": {
+    "lint": "npm run lint:eslint && npm run lint:style",
+    "lint:eslint": "eslint .",
+    "lint:style": "stylelint \"**/*.{js,html}\"",
+    "test": "npm run lint && npm run test:axe && npm run test:unit",
+    "test:axe": "d2l-test-runner axe --chrome",
+    "test:unit": "d2l-test-runner",
+    "test:vdiff": "d2l-test-runner vdiff",
+    "start": "web-dev-server --app-index demo/index.html --node-resolve --open --watch"
+  },
+  "author": "D2L Corporation",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@brightspace-ui/stylelint-config": "^2",
+    "@brightspace-ui/testing": "^1",
+    "@web/dev-server": "^0.4",
+    "eslint": "^9",
+    "eslint-config-brightspace": "^2",
+    "stylelint": "^17"
+  },
+  "files": [
+    "accessible-grid.js",
+    "accessible-grid.serge.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@brightspace-ui/core": "^3",
+    "lit": "^3"
+  }
+}
