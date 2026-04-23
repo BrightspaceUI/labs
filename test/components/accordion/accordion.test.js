@@ -18,6 +18,11 @@ const accordionCollapseFixtureLabel = html`
 
 describe('d2l-labs-accordion', () => {
 
+	it('accessibility', async() => {
+		const myEl = await fixture(accordionCollapseFixtureLabel);
+		await expect(myEl).to.be.accessible();
+	});
+
 	it('initial select state', async() => {
 		const myEl = await fixture(accordionCollapseFixture);
 		expect(myEl.selected).to.not.exist;

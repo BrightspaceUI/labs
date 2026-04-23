@@ -221,7 +221,7 @@ class LabsAccordionCollapse extends LitElement {
 	render() {
 		return html`
 			<div id="header-container">
-				<a href="javascript:void(0)" id="trigger" ?aria-expanded=${this.opened} class="header-grid-item" aria-controls="collapse" role="button" ?data-border="${this.headerBorder}" @blur=${this._triggerBlur} @click=${this.toggle} @focus=${this._triggerFocus}>
+				<a href="javascript:void(0)" id="trigger" aria-expanded=${this.opened ? 'true' : 'false'} class="header-grid-item" aria-controls="collapse" role="button" ?data-border="${this.headerBorder}" @blur=${this._triggerBlur} @click=${this.toggle} @focus=${this._triggerFocus}>
 					${!this.headerHasInteractiveContent ? html`
 						<div class="collapse-title" title="${this.label}">${this.title}${this.label}<slot name="header"></slot>
 						</div>
@@ -243,7 +243,7 @@ class LabsAccordionCollapse extends LitElement {
 				` : nothing}
 			</div>
 
-			<div class="content">
+			<div class="content" id="collapse">
 				<d2l-expand-collapse-content ?expanded=${this.opened} @d2l-expand-collapse-content-expand=${this._handleExpand} @d2l-expand-collapse-content-collapse=${this._handleCollapse}>
 					<slot></slot>
 				</d2l-expand-collapse-content>
