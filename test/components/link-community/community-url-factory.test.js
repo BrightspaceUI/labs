@@ -2,15 +2,7 @@ import '../../../src/components/community/community-button.js';
 import '../../../src/components/community/community-link.js';
 import { communityUrlFactory } from '../../../src/components/community/community-url-factory.js';
 import { expect } from '@brightspace-ui/testing';
-
-export const langArticleMap = {
-	'en': 4545,
-	'ar-SA': 10489,
-	'es-MX': 9214,
-	'pt-BR': 9978,
-	'nl-NL': 7833,
-	'fr-CA': 6739
-};
+import { langArticleMap } from './helpers.js';
 
 const langUrlMap = {
 	'en': 'https://community.d2l.com/brightspace/kb/articles/4545',
