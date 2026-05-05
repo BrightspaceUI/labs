@@ -59,7 +59,7 @@ const eventTimeoutMS = 10000;
 describe('d2l-grade-result-presentational', () => {
 
 	it('click grade button event', async() => {
-		return new Promise((resolve, reject) => {
+		await new Promise((resolve, reject) => {
 			fixture(componentManualOverride).then(el => {
 				const event = 'd2l-grade-result-grade-button-click';
 				el.addEventListener(event, resolve);
@@ -70,7 +70,7 @@ describe('d2l-grade-result-presentational', () => {
 	});
 
 	it('click reports button event', async() => {
-		return new Promise((resolve, reject) => {
+		await new Promise((resolve, reject) => {
 			fixture(componentManualOverride).then(el => {
 				const event = 'd2l-grade-result-reports-button-click';
 				el.addEventListener(event, resolve);
@@ -81,7 +81,7 @@ describe('d2l-grade-result-presentational', () => {
 	});
 
 	it('click manual override clear button event', async() => {
-		return new Promise((resolve, reject) => {
+		await new Promise((resolve, reject) => {
 			fixture(componentManualOverrideClear).then(el => {
 				const event = 'd2l-grade-result-manual-override-clear-click';
 				el.addEventListener(event, resolve);
@@ -93,7 +93,7 @@ describe('d2l-grade-result-presentational', () => {
 
 	// this test fails after adding localization to d2l-labs-grade-result-numeric-score but the component still works
 	it.skip('number grade changed', async() => {
-		return new Promise((resolve, reject) => {
+		await new Promise((resolve, reject) => {
 			fixture(componentNumericScore).then(el => {
 				const event = 'd2l-grade-result-grade-change';
 				const value = 10;
@@ -115,7 +115,7 @@ describe('d2l-grade-result-presentational', () => {
 	});
 
 	it('letter score changed', async() => {
-		return new Promise((resolve, reject) => {
+		await new Promise((resolve, reject) => {
 			fixture(componentLetterScore).then(el => {
 				const event = 'd2l-grade-result-letter-score-selected';
 				const value = '2';

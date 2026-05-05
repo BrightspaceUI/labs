@@ -63,7 +63,9 @@ describe('d2l-labs-navigation-button', () => {
 		describe(name, () => {
 
 			let elem;
-			beforeEach(async() => elem = await fixture(template));
+			beforeEach(async() => {
+				elem = await fixture(template);
+			});
 
 			it('normal', async() => {
 				await expect(elem).to.be.golden();
