@@ -1,5 +1,5 @@
 import '../../../src/components/button-subtle-ai/button-subtle-ai.js';
-import { expect, fixture, runConstructor } from '@brightspace-ui/testing';
+import { assert, expect, fixture, runConstructor } from '@brightspace-ui/testing';
 import { html } from 'lit';
 
 describe('button-subtle-ai', () => {

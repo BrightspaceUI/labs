@@ -1,6 +1,7 @@
 
 import '@brightspace-ui/core/components/button/button-subtle.js';
-import { css, html, ifDefined, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 class ButtonSubtleAI extends LitElement {
 	static get properties() {
