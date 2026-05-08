@@ -1,8 +1,9 @@
 import { css, html, LitElement, nothing } from 'lit';
 import { getFocusRingStyles } from '@brightspace-ui/core/helpers/focus.js';
-import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize/localize-mixin.js';
+import { LocalizeLabsElement } from '../../localize-labs-element.js';
 import { PropertyRequiredMixin } from '@brightspace-ui/core/mixins/property-required/property-required-mixin.js';
 import { SkeletonMixin } from '@brightspace-ui/core/components/skeleton/skeleton-mixin.js';
+import { styleMap } from 'lit/directives/style-map.js';
 
 /**
  * A 2-D accessible grid with author-defined spanning cells.
@@ -15,7 +16,7 @@ import { SkeletonMixin } from '@brightspace-ui/core/components/skeleton/skeleton
  *
  * @fires d2l-accessible-grid-move - Fired when a cell is moved (cancelable).
  */
-class AccessibleGrid extends LocalizeMixin(SkeletonMixin(PropertyRequiredMixin(LitElement))) {
+class AccessibleGrid extends LocalizeLabsElement(SkeletonMixin(PropertyRequiredMixin(LitElement))) {
 
 	static get properties() {
 		return {
@@ -35,34 +36,34 @@ class AccessibleGrid extends LocalizeMixin(SkeletonMixin(PropertyRequiredMixin(L
 	static get styles() {
 		return [
 			css`
-:host {
-	display: block;
-}
-:host([hidden]) {
-	display: none;
-}
-.grid {
-	box-sizing: border-box;
-	display: grid;
-	gap: var(--d2l-accessible-grid-gap, 0.6rem);
-	width: 100%;
-}
-[role="row"] {
-	display: contents;
-}
-.cell {
-	background: var(--d2l-accessible-grid-cell-background, var(--d2l-color-sylvite));
-	border-radius: var(--d2l-accessible-grid-cell-border-radius, 0.3rem);
-	box-sizing: border-box;
-	min-height: 0;
-	min-width: 0;
-	overflow: hidden;
-	padding: var(--d2l-accessible-grid-cell-padding, 0.75rem);
-}
-.slot-observer {
-	display: none;
-}
-`,
+				:host {
+					display: block;
+				}
+				:host([hidden]) {
+					display: none;
+				}
+				.grid {
+					box-sizing: border-box;
+					display: grid;
+					gap: var(--d2l-accessible-grid-gap, 0.6rem);
+					width: 100%;
+				}
+				[role="row"] {
+					display: contents;
+				}
+				.cell {
+					background: var(--d2l-accessible-grid-cell-background, var(--d2l-color-sylvite));
+					border-radius: var(--d2l-accessible-grid-cell-border-radius, 0.3rem);
+					box-sizing: border-box;
+					min-height: 0;
+					min-width: 0;
+					overflow: hidden;
+					padding: var(--d2l-accessible-grid-cell-padding, 0.75rem);
+				}
+				.slot-observer {
+					display: none;
+				}
+			`,
 			getFocusRingStyles('.cell:focus-visible'),
 		];
 	}
@@ -82,12 +83,6 @@ class AccessibleGrid extends LocalizeMixin(SkeletonMixin(PropertyRequiredMixin(L
 		this._mutationObservers = new Map();
 	}
 
-	static get localizeConfig() {
-		return {
-			importFunc: async lang => (await import(`../../lang/${lang}.js`)).default,
-		};
-	}
-
 	connectedCallback() {
 		super.connectedCallback();
 		this.addEventListener('d2l-accessible-grid-cell-connected', this.#handleCellLifecycle);
@@ -102,52 +97,37 @@ class AccessibleGrid extends LocalizeMixin(SkeletonMixin(PropertyRequiredMixin(L
 	}
 
 	render() {
-		// Group cells by anchor-y for role="row" wrappers (simple sort for Phase 1;
-		// full reading-order computation is added in Phase 3).
+		// left to right, top to bottom sorting to start
+		// TODO implement N reading order
 		const rowMap = new Map();
 		for (const cell of this._cells) {
 			if (!rowMap.has(cell.y)) rowMap.set(cell.y, []);
 			rowMap.get(cell.y).push(cell);
 		}
 		const sortedYs = [...rowMap.keys()].sort((a, b) => a - b);
+		const gridStyles = {
+			gridTemplateColumns: `repeat(${this.cols},minmax(0,1fr))`,
+			gridTemplateRows: `repeat(${this.rows},minmax(var(--d2l-accessible-grid-min-row-height,4rem),auto))`
+		};
+
+		const ariaColmCount = this.cols > 0 ? this.cols : nothing;
+		const ariaRowCount = this.rows > 0 ? this.rows : nothing;
 
 		return html`
-<div
-aria-colcount="${this.cols > 0 ? this.cols : nothing}"
-aria-label="${this.label}"
-aria-rowcount="${this.rows > 0 ? this.rows : nothing}"
-class="grid"
-part="grid"
-role="grid"
-style="grid-template-columns:repeat(${this.cols},minmax(0,1fr));grid-template-rows:repeat(${this.rows},minmax(var(--d2l-accessible-grid-min-row-height,4rem),auto));"
->
-${sortedYs.map(y => {
-	const rowCells = rowMap.get(y).sort((a, b) => a.x - b.x);
-	return html`
-<div role="row">
-${rowCells.map(cell => html`
-<div
-aria-colindex="${cell.x + 1}"
-aria-colspan="${cell.width > 1 ? cell.width : nothing}"
-aria-rowindex="${cell.y + 1}"
-aria-rowspan="${cell.height > 1 ? cell.height : nothing}"
-class="cell"
-part="cell"
-role="gridcell"
-style="grid-column:${cell.x + 1} / span ${cell.width};grid-row:${cell.y + 1} / span ${cell.height};"
-tabindex="${this._activeCellKey === cell.key ? '0' : '-1'}"
->
-<slot name="cell-${cell.key}"></slot>
-</div>
-`)}
-</div>
-`;
-})}
-</div>
-<div class="slot-observer">
-<slot @slotchange="${this.#handleSlotChange}"></slot>
-</div>
-`;
+			<div aria-colcount="${ariaColmCount}"
+				aria-label="${this.label}"
+				aria-rowcount="${ariaRowCount}"
+				class="grid"
+				part="grid"
+				role="grid"
+				style="${styleMap(gridStyles)}"
+			>
+				${this.#renderRow(sortedYs, rowMap)}
+			</div>
+			<div class="slot-observer">
+				<slot @slotchange="${this.#handleSlotChange}"></slot>
+			</div>
+		`;
 	}
 
 	#describeCellElement(el) {
@@ -181,10 +161,6 @@ tabindex="${this._activeCellKey === cell.key ? '0' : '-1'}"
 		this.#rebuildCells();
 	}
 
-	/**
- * Reads authored cells directly from this.children (not slot.assignedElements)
- * so that repeated slotchange firings after slot reassignment are idempotent.
- */
 	#rebuildCells() {
 		const cells = [...this.children].filter(el => el.tagName === 'D2L-ACCESSIBLE-GRID-CELL');
 
@@ -214,6 +190,31 @@ tabindex="${this._activeCellKey === cell.key ? '0' : '-1'}"
 		this.#validateLayout();
 	}
 
+	#renderRow(sortedYs, rowMap) {
+		return sortedYs.map(y => {
+			const rowCells = rowMap.get(y).sort((a, b) => a.x - b.x);
+			return html`
+			<div role="row">
+				${rowCells.map(cell => html`
+					<div
+						aria-colindex="${cell.x + 1}"
+						aria-colspan="${cell.width > 1 ? cell.width : nothing}"
+						aria-rowindex="${cell.y + 1}"
+						aria-rowspan="${cell.height > 1 ? cell.height : nothing}"
+						class="cell"
+						part="cell"
+						role="gridcell"
+						style="grid-column:${cell.x + 1} / span ${cell.width};grid-row:${cell.y + 1} / span ${cell.height};"
+						tabindex="${this._activeCellKey === cell.key ? '0' : '-1'}"
+					>
+						<slot name="cell-${cell.key}"></slot>
+					</div>
+				`)}
+			</div>
+			`;
+		});
+	}
+
 	#validateLayout() {
 		if (!this._cells.length) return;
 
@@ -233,13 +234,13 @@ tabindex="${this._activeCellKey === cell.key ? '0' : '-1'}"
 		const occupancy = new Map();
 		for (const cell of this._cells) {
 			let hasCollision = false;
-			for (let r = cell.y; r < cell.y + cell.height; r++) {
-				for (let c = cell.x; c < cell.x + cell.width; c++) {
-					const gridSlot = `${r},${c}`;
+			for (let gridRow = cell.y; gridRow < cell.y + cell.height; gridRow++) {
+				for (let gridColumn = cell.x; gridColumn < cell.x + cell.width; gridColumn++) {
+					const gridSlot = `${gridRow},${gridColumn}`;
 					if (occupancy.has(gridSlot)) {
 						const winner = occupancy.get(gridSlot);
 						if (!hasCollision) {
-							console.warn(`d2l-accessible-grid: cell "${cell.label || cell.key}" collides with "${winner}" at row ${r}, col ${c}. The later cell will be hidden.`);
+							console.warn(`d2l-accessible-grid: cell "${cell.label || cell.key}" collides with "${winner}" at row ${gridRow}, col ${gridColumn}. The later cell will be hidden.`);
 							hasCollision = true;
 						}
 						cell.element.setAttribute('aria-hidden', 'true');
@@ -251,7 +252,6 @@ tabindex="${this._activeCellKey === cell.key ? '0' : '-1'}"
 			}
 		}
 	}
-
 }
 
 customElements.define('d2l-accessible-grid', AccessibleGrid);

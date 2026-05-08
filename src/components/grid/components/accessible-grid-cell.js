@@ -1,15 +1,13 @@
 import { css, html, LitElement } from 'lit';
-import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize/localize-mixin.js';
+import { LocalizeLabsElement } from '../../localize-labs-element.js';
 import { PropertyRequiredMixin } from '@brightspace-ui/core/mixins/property-required/property-required-mixin.js';
-
 /**
  * Data-only model carrier for `d2l-accessible-grid`.
  * This element exposes authored cell geometry/label and dispatches lifecycle
  * events so the host can rebuild its rendered tree. It renders NO chrome,
- * NO ARIA, and NO focus management -- all of that lives on the host-rendered
- * role="gridcell" divs (see accessible-grid.js).
+ * Aria and focus management live on the host-rendered role="gridcell" divs (see accessible-grid.js).
  */
-class AccessibleGridCell extends LocalizeMixin(PropertyRequiredMixin(LitElement)) {
+class AccessibleGridCell extends LocalizeLabsElement(PropertyRequiredMixin(LitElement)) {
 
 	static get properties() {
 		return {
@@ -40,12 +38,6 @@ class AccessibleGridCell extends LocalizeMixin(PropertyRequiredMixin(LitElement)
 		this.width = 1;
 		this.x = 0;
 		this.y = 0;
-	}
-
-	static get localizeConfig() {
-		return {
-			importFunc: async lang => (await import(`../../lang/${lang}.js`)).default,
-		};
 	}
 
 	connectedCallback() {
