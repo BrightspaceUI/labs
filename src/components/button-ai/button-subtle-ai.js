@@ -19,8 +19,6 @@ class ButtonSubtleAI extends FocusMixin(LitElement) {
 		return [css`
 			:host {
 				display: inline-block;
-			}
-			:host {
 				border: 0.1rem solid transparent;
 				border-radius: 0.3rem;
 				background:
