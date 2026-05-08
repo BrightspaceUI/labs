@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
 		<script type="module">
 			import '@brightspace-ui/core/components/demo/demo-page.js';
-			import "../../../src/components/button-subtle-ai/button-subtle-ai.js";
+			import '../../../src/components/button-subtle-ai/button-subtle-ai.js';
 		</script>
 		<title>d2l-labs-button-subtle-ai</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +12,18 @@
 	</head>
 	<body>
 		<d2l-demo-page page-title="d2l-labs-button-subtle-ai">
-			<h2>d2l-labs-button-subtle-ai</h2>
+			<h2>AI Button (focus)</h2>
 			<d2l-demo-snippet>
+				<button id="setFocusButton" style="display: block; margin-block-end: 1rem;">Focus It!</button>
 				<d2l-labs-button-subtle-ai text="New AI Feature"></d2l-labs-button-subtle-ai>
+				<script>
+					document.getElementById('setFocusButton').addEventListener('click', () => document.querySelector('d2l-labs-button-subtle-ai').focus());
+					document.querySelector('d2l-labs-button-subtle-ai').addEventListener('focus', () => console.log('Focused!'));
+					document.querySelector('d2l-labs-button-subtle-ai').addEventListener('click', (e) => {
+						if (e.target.tagName.toLowerCase() !== 'd2l-labs-button-subtle-ai') return;
+						console.log(`${e.target.tagName.toLowerCase()} clicked!`)
+					});
+				</script>
 			</d2l-demo-snippet>
 		</d2l-demo-page>
 	</body>
