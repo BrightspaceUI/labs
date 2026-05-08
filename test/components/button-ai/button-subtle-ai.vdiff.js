@@ -1,23 +1,31 @@
 import '../../../src/components/button-ai/button-subtle-ai.js';
-import { expect, fixture, focusElem, hoverElem } from '@brightspace-ui/testing';
+import { clickElem, expect, fixture, focusElem, hoverElem } from '@brightspace-ui/testing';
 import { html } from 'lit';
 
 describe('button-subtle-ai', () => {
 	describe('states', () => {
+
+		let element;
+		beforeEach(async() => {
+			element = await fixture(html`<d2l-labs-button-subtle-ai text="Test"></d2l-labs-button-subtle-ai>`);
+		});
+
 		it('normal', async() => {
-			const element = await fixture(html`<d2l-labs-button-subtle-ai text="Test"></d2l-labs-button-subtle-ai>`);
 			await expect(element).to.be.golden();
 		});
 
 		it('focus', async() => {
-			const element = await fixture(html`<d2l-labs-button-subtle-ai text="Test"></d2l-labs-button-subtle-ai>`);
-			await focusElem(element.shadowRoot.querySelector('d2l-button-subtle'));
+			await focusElem(element);
 			await expect(element).to.be.golden();
 		});
 
 		it('hover', async() => {
-			const element = await fixture(html`<d2l-labs-button-subtle-ai text="Test"></d2l-labs-button-subtle-ai>`);
-			await hoverElem(element.shadowRoot.querySelector('d2l-button-subtle'));
+			await hoverElem(element);
+			await expect(element).to.be.golden();
+		});
+
+		it('clicked', async() => {
+			await clickElem(element);
 			await expect(element).to.be.golden();
 		});
 	});
