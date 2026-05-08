@@ -16,6 +16,9 @@ class ButtonSubtleAI extends LitElement {
 
 	static get styles() {
 		return [css`
+			:host {
+				display: inline-block;
+			}
 			:host d2l-button-subtle {
 				border: 2px solid transparent;
 				border-radius: 6px;
