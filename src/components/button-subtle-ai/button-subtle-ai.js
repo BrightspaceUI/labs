@@ -1,9 +1,10 @@
 
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { css, html, LitElement } from 'lit';
+import { FocusMixin } from '@brightspace-ui/core/mixins/focus-mixin.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-class ButtonSubtleAI extends LitElement {
+class ButtonSubtleAI extends FocusMixin(LitElement) {
 	static get properties() {
 		return {
 			/**
@@ -19,18 +20,21 @@ class ButtonSubtleAI extends LitElement {
 			:host {
 				display: inline-block;
 			}
-			:host d2l-button-subtle {
-				border: 2px solid transparent;
-				border-radius: 6px;
+			:host {
+				border: 0.1rem solid transparent;
+				border-radius: 0.3rem;
 				background:
 					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-celestine), var(--d2l-color-fluorite-plus-1)) border-box;
-
-				&:focus-within {
-					background: none;
-				}
+			}
+			:host(:focus-within) {
+				background: none;
 			}
 		`];
+	}
+
+	static get focusElementSelector() {
+		return 'd2l-button-subtle';
 	}
 
 	render() {
