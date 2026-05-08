@@ -1,4 +1,4 @@
-import '../../../src/components/button-subtle-ai/button-subtle-ai.js';
+import '../../../src/components/button-ai/button-subtle-ai.js';
 import { expect, fixture, focusElem, hoverElem } from '@brightspace-ui/testing';
 import { html } from 'lit';
 
