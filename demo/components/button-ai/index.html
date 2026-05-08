@@ -17,9 +17,10 @@
 				<button id="setFocusButton" style="display: block; margin-block-end: 1rem;">Focus It!</button>
 				<d2l-labs-button-subtle-ai text="New AI Feature"></d2l-labs-button-subtle-ai>
 				<script>
-					document.getElementById('setFocusButton').addEventListener('click', () => document.querySelector('d2l-labs-button-subtle-ai').focus());
-					document.querySelector('d2l-labs-button-subtle-ai').addEventListener('focus', () => console.log('Focused!'));
-					document.querySelector('d2l-labs-button-subtle-ai').addEventListener('click', (e) => {
+					const buttonSubtleAi = document.querySelector('d2l-labs-button-subtle-ai');
+					document.getElementById('setFocusButton').addEventListener('click', () => buttonSubtleAi.focus());
+					buttonSubtleAi.addEventListener('focus', () => console.log('Focused!'));
+					buttonSubtleAi.addEventListener('click', (e) => {
 						if (e.target.tagName.toLowerCase() !== 'd2l-labs-button-subtle-ai') return;
 						console.log(`${e.target.tagName.toLowerCase()} clicked!`);
 					});
