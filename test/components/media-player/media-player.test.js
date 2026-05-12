@@ -29,6 +29,8 @@ describe('d2l-labs-media-player', () => {
 				configurable: true,
 				get: () => ({ play: () => Promise.reject(abortError) })
 			});
+			// An unhandled rejection in an async test function causes the test to fail,
+			// so if the AbortError is not suppressed, this call will fail the test
 			await el._play();
 		});
 
