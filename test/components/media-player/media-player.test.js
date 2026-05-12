@@ -29,13 +29,7 @@ describe('d2l-labs-media-player', () => {
 				configurable: true,
 				get: () => ({ play: () => Promise.reject(abortError) })
 			});
-			let threw = false;
-			try {
-				await el._play();
-			} catch {
-				threw = true;
-			}
-			expect(threw).to.be.false;
+			await el._play();
 		});
 
 		it('should rethrow non-AbortError errors from play()', async() => {
