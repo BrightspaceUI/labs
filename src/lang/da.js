@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Tilbage",
 	"components:navigation:next": "Næste",
 	"components:navigation:previous": "Forrige",
-	"components:navigation:skipNav": "spring videre til hovedindhold",
 	"components:optInFlyout:cancel": "Annuller",
 	"components:optInFlyout:close": "Luk denne dialogboks",
 	"components:optInFlyout:done": "Udført",

@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Geri",
 	"components:navigation:next": "İleri",
 	"components:navigation:previous": "Önceki",
-	"components:navigation:skipNav": "ana içeriğe atla",
 	"components:optInFlyout:cancel": "İptal et",
 	"components:optInFlyout:close": "Bu iletişim kutusunu kapat",
 	"components:optInFlyout:done": "Bitti",

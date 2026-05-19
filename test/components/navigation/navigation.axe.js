@@ -2,7 +2,6 @@ import '../../../src/components/navigation/navigation.js';
 import '../../../src/components/navigation/navigation-band.js';
 import '../../../src/components/navigation/navigation-main-header.js';
 import '../../../src/components/navigation/navigation-main-footer.js';
-import '../../../src/components/navigation/navigation-separator.js';
 import { expect, fixture, html } from '@brightspace-ui/testing';
 
 describe('d2l-labs-navigation', () => {
@@ -48,17 +47,6 @@ describe('d2l-labs-navigation-main-footer', () => {
 			const el = await fixture(html`<d2l-labs-navigation-main-footer>
 				<div slot="main">Footer</div>
 			</d2l-labs-navigation-main-footer>`);
-			await expect(el).to.be.accessible();
-		});
-	});
-
-});
-
-describe('d2l-labs-navigation-separator', () => {
-
-	describe('accessibility', () => {
-		it('should pass all aXe tests', async() => {
-			const el = await fixture(html`<d2l-labs-navigation-separator></d2l-labs-navigation-separator>`);
 			await expect(el).to.be.accessible();
 		});
 	});

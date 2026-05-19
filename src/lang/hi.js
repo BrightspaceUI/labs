@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "वापस जाएँ",
 	"components:navigation:next": "अगला",
 	"components:navigation:previous": "पिछला",
-	"components:navigation:skipNav": "मुख्य सामग्री में जाएँ",
 	"components:optInFlyout:cancel": "कैंसल करें",
 	"components:optInFlyout:close": "यह संवाद बंद करें",
 	"components:optInFlyout:done": "पूरा हो गया",

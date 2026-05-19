@@ -1,6 +1,5 @@
 import '../../../src/components/navigation/navigation.js';
 import '../../../src/components/navigation/navigation-band.js';
-import '../../../src/components/navigation/navigation-separator.js';
 import '../../../src/components/navigation/navigation-main-header.js';
 import '../../../src/components/navigation/navigation-main-footer.js';
 import { expect, fixture, focusElem, html } from '@brightspace-ui/testing';
@@ -12,7 +11,6 @@ describe('d2l-labs-navigation', () => {
 	[
 		{ name: 'band-default', template: html`<d2l-labs-navigation-band></d2l-labs-navigation-band>` },
 		{ name: 'band-custom-color', template: html`<d2l-labs-navigation-band style="--d2l-branding-primary-color: #ff0000;"></d2l-labs-navigation-band>` },
-		{ name: 'separator', template: html`<d2l-labs-navigation-separator></d2l-labs-navigation-band>` },
 		{ name: 'main-footer', template: html`<d2l-labs-navigation-main-footer><div slot="main">Footer</div></d2l-labs-navigation-main-footer>` },
 		{ name: 'navigation-default', template: navigationDefaultFixture },
 		{
@@ -49,7 +47,7 @@ describe('d2l-labs-navigation', () => {
 
 	it('skip-nav', async() => {
 		const elem = await fixture(navigationDefaultFixture);
-		await focusElem(elem.shadowRoot.querySelector('d2l-labs-navigation-skip-main'));
+		await focusElem(elem.shadowRoot.querySelector('d2l-skip-nav-main'));
 		await expect(elem).to.be.golden();
 	});
 
