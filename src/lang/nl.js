@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Terug",
 	"components:navigation:next": "Volgende",
 	"components:navigation:previous": "Vorige",
-	"components:navigation:skipNav": "meteen naar hoofdinhoud gaan",
 	"components:optInFlyout:cancel": "Annuleren",
 	"components:optInFlyout:close": "Dit dialoogvenster sluiten",
 	"components:optInFlyout:done": "Gereed",

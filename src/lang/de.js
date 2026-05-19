@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Zurück",
 	"components:navigation:next": "Weiter",
 	"components:navigation:previous": "Zurück",
-	"components:navigation:skipNav": "zum Hauptinhalt springen",
 	"components:optInFlyout:cancel": "Abbrechen",
 	"components:optInFlyout:close": "Dieses Dialogfeld schließen",
 	"components:optInFlyout:done": "Fertig",

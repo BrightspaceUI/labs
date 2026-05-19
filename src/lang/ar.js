@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "العودة",
 	"components:navigation:next": "التالي",
 	"components:navigation:previous": "السابق",
-	"components:navigation:skipNav": "تجاوز إلى المحتوى الرئيسي",
 	"components:optInFlyout:cancel": "إلغاء",
 	"components:optInFlyout:close": "إغلاق مربع الحوار هذا",
 	"components:optInFlyout:done": "تم",

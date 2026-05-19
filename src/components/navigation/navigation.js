@@ -1,5 +1,5 @@
+import '@brightspace-ui/core/components/skip-nav/skip-nav-main.js';
 import './navigation-band.js';
-import './navigation-skip-main.js';
 import { css, html, LitElement, nothing } from 'lit';
 import { getNextFocusable } from '@brightspace-ui/core/helpers/focus.js';
 
@@ -40,7 +40,7 @@ class Navigation extends LitElement {
 	}
 
 	render() {
-		const skipNav = this.hasSkipNav ? html`<d2l-labs-navigation-skip-main @d2l-labs-navigation-skip-fail="${this._handleSkipNavFail}"></d2l-labs-navigation-skip-main>` : nothing;
+		const skipNav = this.hasSkipNav ? html`<d2l-skip-nav-main @d2l-skip-nav-main-fail="${this._handleSkipNavFail}"></d2l-skip-nav-main>` : nothing;
 		return html`
 			${skipNav}<d2l-labs-navigation-band><slot name="navigation-band"></slot></d2l-labs-navigation-band>
 			<slot></slot>

@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Hoki Whakamuri",
 	"components:navigation:next": "Whai Ake",
 	"components:navigation:previous": "Mua",
-	"components:navigation:skipNav": "whakarereke ki te ihirangi matua",
 	"components:optInFlyout:cancel": "Whakakore",
 	"components:optInFlyout:close": "Katia tēnei kōrero",
 	"components:optInFlyout:done": "Kua oti",

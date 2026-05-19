@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "กลับ",
 	"components:navigation:next": "ถัดไป",
 	"components:navigation:previous": "ก่อนหน้า",
-	"components:navigation:skipNav": "ข้ามไปยังเนื้อหาหลัก",
 	"components:optInFlyout:cancel": "ยกเลิก",
 	"components:optInFlyout:close": "ปิดกล่องโต้ตอบนี้",
 	"components:optInFlyout:done": "เสร็จสิ้น",

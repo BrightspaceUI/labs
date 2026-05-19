@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Quay lại",
 	"components:navigation:next": "Tiếp theo",
 	"components:navigation:previous": "Trước",
-	"components:navigation:skipNav": "chuyển sang đến nội dung chính",
 	"components:optInFlyout:cancel": "Hủy",
 	"components:optInFlyout:close": "Đóng hộp thoại này",
 	"components:optInFlyout:done": "Hoàn tất",

@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Tillbaka",
 	"components:navigation:next": "Nästa",
 	"components:navigation:previous": "Föregående",
-	"components:navigation:skipNav": "fortsätt till huvudinnehåll",
 	"components:optInFlyout:cancel": "Avbryt",
 	"components:optInFlyout:close": "Stäng dialogrutan",
 	"components:optInFlyout:done": "Klar",

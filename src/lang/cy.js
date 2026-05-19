@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Yn ôl",
 	"components:navigation:next": "Nesaf",
 	"components:navigation:previous": "Blaenorol",
-	"components:navigation:skipNav": "neidio i’r prif gynnwys",
 	"components:optInFlyout:cancel": "Canslo",
 	"components:optInFlyout:close": "Cau’r dialog hwn",
 	"components:optInFlyout:done": "Wedi Gorffen",
