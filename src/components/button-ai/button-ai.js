@@ -18,18 +18,23 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 	static styles = [super.styles, labelStyles, buttonStyles,
 		css`
 			:host {
+				display: inline-block;
+			}
+
+			.d2l-labs-button-ai-container {
 				background:
 					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 				border: 0.1rem solid transparent;
 				border-radius: 0.4rem;
-				display: inline-block;
 			}
-			:host(:focus-within) {
+
+			.d2l-labs-button-ai-container:focus-within {
 				background:
 					linear-gradient(var(--d2l-theme-background-color-interactive-tertiary-hover), var(--d2l-theme-background-color-interactive-tertiary-hover)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 			}
+
 			button {
 				--d2l-button-subtle-padding-inline-start: 0.6rem;
 				--d2l-button-subtle-padding-inline-end: 0.6rem;
@@ -91,10 +96,12 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 
 	render() {
 		return html `
-			<button ?disabled=${this.disabled} id="${this.#buttonId}" class="d2l-label-text">
-				${this._renderIcon()}
-				<span class="d2l-button-subtle-content">${this.text}</span>
-			</button>
+			<div class="d2l-labs-button-ai-container">
+				<button ?disabled=${this.disabled} id="${this.#buttonId}" class="d2l-label-text">
+					${this._renderIcon()}
+					<span class="d2l-button-subtle-content">${this.text}</span>
+				</button>
+			</div>
 			${this.disabled && this.disabledTooltip ? html`<d2l-tooltip class="vdiff-target" for="${this.#buttonId}">${this.disabledTooltip}</d2l-tooltip>` : ''}
 		`;
 	};
