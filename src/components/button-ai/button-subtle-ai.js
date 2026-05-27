@@ -18,12 +18,12 @@ class ButtonSubtleAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 	static styles = [super.styles, labelStyles, buttonStyles,
 		css`
 			:host {
-				display: inline-block;
 				background:
 					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-celestine), var(--d2l-color-fluorite-plus-1)) border-box;
 				border: 0.1rem solid transparent;
 				border-radius: 0.4rem;
+				display: inline-block;
 			}
 			:host(:focus-within) {
 				background: none;
