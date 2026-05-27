@@ -20,17 +20,20 @@ class ButtonSubtleAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			:host {
 				background:
 					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
-					linear-gradient(to top left, var(--d2l-color-celestine), var(--d2l-color-fluorite-plus-1)) border-box;
+					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 				border: 0.1rem solid transparent;
 				border-radius: 0.4rem;
 				display: inline-block;
 			}
 			:host(:focus-within) {
-				background: none;
+				background:
+					linear-gradient(var(--d2l-theme-background-color-interactive-tertiary-hover), var(--d2l-theme-background-color-interactive-tertiary-hover)) padding-box,
+					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 			}
 			button {
 				--d2l-button-subtle-padding-inline-start: 0.6rem;
 				--d2l-button-subtle-padding-inline-end: 0.6rem;
+				--d2l-focus-ring-offset: 0.2rem;
 				align-items: center;
 				background-color: var(--d2l-theme-background-color-interactive-tertiary-default);
 				border-color: transparent;
@@ -61,7 +64,8 @@ class ButtonSubtleAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			}
 
 			.property-icon,
-			.d2l-button-subtle-content {
+			.d2l-button-subtle-content,
+			slot[name="icon"]::slotted(d2l-icon-custom) {
 				color: var(--d2l-theme-text-color-interactive-default);
 			}
 
