@@ -6,7 +6,7 @@ import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId';
 import { labelStyles } from '@brightspace-ui/core/components/typography/styles';
 import { SlottedIconMixin } from '@brightspace-ui/core/components/icons/slotted-icon-mixin.js';
 
-class ButtonSubtleAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
+class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 	static properties = {
 		/**
 		 * ACCESSIBILITY: REQUIRED: Text for the button
@@ -81,20 +81,25 @@ class ButtonSubtleAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 
 	constructor() {
 		super();
-		this.icon = 'tier1:ai';
-		this.disabledTooltip = 'This feature is not yet available.';
-		this._buttonId = getUniqueId();
+		this.#buttonId = getUniqueId();
 	};
+
+	firstUpdated() {
+		super.firstUpdated();
+		this.icon = this.icon || 'tier1:ai';
+	}
 
 	render() {
 		return html `
-			<button ?disabled=${this.disabled} id="${this._buttonId}" class="d2l-label-text">
+			<button ?disabled=${this.disabled} id="${this.#buttonId}" class="d2l-label-text">
 				${this._renderIcon()}
 				<span class="d2l-button-subtle-content">${this.text}</span>
 			</button>
-			${this.disabled && this.disabledTooltip ? html`<d2l-tooltip class="vdiff-target" for="${this._buttonId}">${this.disabledTooltip}</d2l-tooltip>` : ''}
+			${this.disabled && this.disabledTooltip ? html`<d2l-tooltip class="vdiff-target" for="${this.#buttonId}">${this.disabledTooltip}</d2l-tooltip>` : ''}
 		`;
 	};
+
+	#buttonId;
 };
 
-customElements.define('d2l-labs-button-subtle-ai', ButtonSubtleAI);
+customElements.define('d2l-labs-button-ai', ButtonAI);
