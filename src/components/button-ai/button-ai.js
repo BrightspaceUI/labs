@@ -1,9 +1,9 @@
 import '@brightspace-ui/core/components/tooltip/tooltip.js';
 import { css, html, LitElement } from 'lit';
 import { ButtonMixin } from '@brightspace-ui/core/components/button/button-mixin.js';
-import { buttonStyles } from '@brightspace-ui/core/components/button/button-styles';
-import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId';
-import { labelStyles } from '@brightspace-ui/core/components/typography/styles';
+import { buttonStyles } from '@brightspace-ui/core/components/button/button-styles.js';
+import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId.js';
+import { labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { SlottedIconMixin } from '@brightspace-ui/core/components/icons/slotted-icon-mixin.js';
 
 class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
