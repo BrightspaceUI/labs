@@ -21,27 +21,15 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 				display: inline-block;
 			}
 
-			.d2l-labs-button-ai-container {
+			button {
+				--d2l-button-subtle-padding-inline-start: 0.6rem;
+				--d2l-button-subtle-padding-inline-end: 0.6rem;
+				align-items: center;
 				background:
 					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 				border: 0.1rem solid transparent;
 				border-radius: 0.4rem;
-			}
-
-			.d2l-labs-button-ai-container:focus-within {
-				background:
-					linear-gradient(var(--d2l-theme-background-color-interactive-tertiary-hover), var(--d2l-theme-background-color-interactive-tertiary-hover)) padding-box,
-					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
-			}
-
-			button {
-				--d2l-button-subtle-padding-inline-start: 0.6rem;
-				--d2l-button-subtle-padding-inline-end: 0.6rem;
-				--d2l-focus-ring-offset: 0.2rem;
-				align-items: center;
-				background-color: var(--d2l-theme-background-color-interactive-tertiary-default);
-				border-color: transparent;
 				column-gap: 0.3rem;
 				display: inline-flex;
 				font-family: inherit;
@@ -50,10 +38,13 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 				padding-inline-start: var(--d2l-button-subtle-padding-inline-start);
 				position: relative;
 			}
+
 			button:hover,
 			button:focus,
 			:host([active]) button {
-				background-color: var(--d2l-theme-background-color-interactive-tertiary-hover);
+				background:
+					linear-gradient(var(--d2l-theme-background-color-interactive-tertiary-hover), var(--d2l-theme-background-color-interactive-tertiary-hover)) padding-box,
+					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 			}
 
 			button:hover:not([disabled]) .d2l-button-subtle-content,
@@ -96,12 +87,10 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 
 	render() {
 		return html `
-			<div class="d2l-labs-button-ai-container">
-				<button ?disabled=${this.disabled} id="${this.#buttonId}" class="d2l-label-text">
-					${this._renderIcon()}
-					<span class="d2l-button-subtle-content">${this.text}</span>
-				</button>
-			</div>
+			<button ?disabled=${this.disabled} id="${this.#buttonId}" class="d2l-label-text">
+				${this._renderIcon()}
+				<span class="d2l-button-subtle-content">${this.text}</span>
+			</button>
 			${this.disabled && this.disabledTooltip ? html`<d2l-tooltip class="vdiff-target" for="${this.#buttonId}">${this.disabledTooltip}</d2l-tooltip>` : ''}
 		`;
 	};
