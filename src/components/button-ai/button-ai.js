@@ -50,9 +50,9 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 			}
 
-			button:hover:not([disabled]) .d2l-button-subtle-content,
-			button:focus:not([disabled]) .d2l-button-subtle-content,
-			:host([active]:not([disabled])) button .d2l-button-subtle-content {
+			button:hover:not([disabled]) .content,
+			button:focus:not([disabled]) .content,
+			:host([active]:not([disabled])) button .content {
 				color: var(--d2l-theme-text-color-interactive-hover);
 			}
 
@@ -63,7 +63,7 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			}
 
 			.property-icon,
-			.d2l-button-subtle-content,
+			.content,
 			slot[name="icon"]::slotted(d2l-icon-custom) {
 				color: var(--d2l-theme-text-color-interactive-default);
 			}
@@ -92,7 +92,7 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 		return html `
 			<button ?disabled=${this.disabled} id="${this.#buttonId}" class="d2l-label-text">
 				${this._renderIcon()}
-				<span class="d2l-button-subtle-content">${this.text}</span>
+				<span class="content">${this.text}</span>
 			</button>
 			${this.disabled && this.disabledTooltip ? html`<d2l-tooltip class="vdiff-target" for="${this.#buttonId}">${this.disabledTooltip}</d2l-tooltip>` : ''}
 		`;
