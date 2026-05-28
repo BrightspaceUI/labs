@@ -80,12 +80,7 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 
 	constructor() {
 		super();
-		this.#buttonId = getUniqueId();
-	};
-
-	firstUpdated() {
-		super.firstUpdated();
-		this.icon = this.icon || 'tier1:ai';
+		this.icon = 'tier1:ai';
 	}
 
 	render() {
@@ -98,7 +93,7 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 		`;
 	};
 
-	#buttonId;
+	#buttonId = getUniqueId();
 };
 
 customElements.define('d2l-labs-button-ai', ButtonAI);
