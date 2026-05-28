@@ -25,8 +25,6 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			}
 
 			button {
-				--d2l-button-subtle-padding-inline-start: 0.6rem;
-				--d2l-button-subtle-padding-inline-end: 0.6rem;
 				align-items: center;
 				background:
 					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
@@ -37,8 +35,7 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 				display: inline-flex;
 				font-family: inherit;
 				padding-block: 0;
-				padding-inline-end: var(--d2l-button-subtle-padding-inline-end);
-				padding-inline-start: var(--d2l-button-subtle-padding-inline-start);
+				padding-inline: 0.6rem;
 				position: relative;
 			}
 
