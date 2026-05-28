@@ -43,22 +43,19 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			}
 
 			button:hover,
-			button:focus,
-			:host([active]) button {
+			button:focus {
 				background:
 					linear-gradient(var(--d2l-theme-background-color-interactive-tertiary-hover), var(--d2l-theme-background-color-interactive-tertiary-hover)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 			}
 
 			button:hover:not([disabled]) .content,
-			button:focus:not([disabled]) .content,
-			:host([active]:not([disabled])) button .content {
+			button:focus:not([disabled]) .content {
 				color: var(--d2l-theme-text-color-interactive-hover);
 			}
 
 			button:hover:not([disabled]),
-			button:focus:not([disabled]),
-			:host([active]:not([disabled])) {
+			button:focus:not([disabled]) {
 				--d2l-count-badge-background-color: var(--d2l-theme-text-color-interactive-hover);
 			}
 
@@ -70,10 +67,8 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 
 			button:hover:not([disabled]) .property-icon,
 			button:focus:not([disabled]) .property-icon,
-			:host([active]:not([disabled])) button .property-icon,
 			button:hover:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom),
-			button:focus:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom),
-			:host([active]:not([disabled])) slot[name="icon"]::slotted(d2l-icon-custom) {
+			button:focus:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom) {
 				color: var(--d2l-theme-text-color-interactive-hover);
 			}
 	`];
