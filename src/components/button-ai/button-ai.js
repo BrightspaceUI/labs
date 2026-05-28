@@ -54,11 +54,6 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 				color: var(--d2l-theme-text-color-interactive-hover);
 			}
 
-			button:hover:not([disabled]),
-			button:focus:not([disabled]) {
-				--d2l-count-badge-background-color: var(--d2l-theme-text-color-interactive-hover);
-			}
-
 			.property-icon,
 			.content,
 			slot[name="icon"]::slotted(d2l-icon-custom) {
