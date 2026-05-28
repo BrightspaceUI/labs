@@ -20,6 +20,9 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			:host {
 				display: inline-block;
 			}
+			:host([hidden]) {
+				display: none;
+			}
 
 			button {
 				--d2l-button-subtle-padding-inline-start: 0.6rem;
