@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Voltar",
 	"components:navigation:next": "Avançar",
 	"components:navigation:previous": "Anterior",
-	"components:navigation:skipNav": "passar para conteúdo principal",
 	"components:optInFlyout:cancel": "Cancelar",
 	"components:optInFlyout:close": "Fechar esta caixa de diálogo",
 	"components:optInFlyout:done": "Concluído",

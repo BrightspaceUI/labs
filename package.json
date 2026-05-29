@@ -32,10 +32,7 @@
     "./components/navigation/navigation-main-footer.js": "./src/components/navigation/navigation-main-footer.js",
     "./components/navigation/navigation-main-header.js": "./src/components/navigation/navigation-main-header.js",
     "./components/navigation/navigation-notification-icon.js": "./src/components/navigation/navigation-notification-icon.js",
-    "./components/navigation/navigation-separator.js": "./src/components/navigation/navigation-separator.js",
     "./components/navigation/navigation-shared-styles.js": "./src/components/navigation/navigation-shared-styles.js",
-    "./components/navigation/navigation-skip-main.js": "./src/components/navigation/navigation-skip-main.js",
-    "./components/navigation/navigation-skip.js": "./src/components/navigation/navigation-skip.js",
     "./components/navigation/navigation-styles.js": "./src/components/navigation/navigation-styles.js",
     "./components/navigation/navigation.js": "./src/components/navigation/navigation.js",
     "./components/opt-in-flyout.js": "./src/components/opt-in-flyout/opt-in-flyout.js",
@@ -89,7 +86,7 @@
     "rollup": "^4",
     "rollup-plugin-copy": "^3",
     "rollup-plugin-delete": "^3",
-    "sinon": "^21",
+    "sinon": "^22",
     "stylelint": "^17"
   },
   "files": [
@@ -114,5 +111,5 @@
     "parse-srt": "^1.0.0-alpha",
     "webvtt-parser": "^2"
   },
-  "version": "2.50.1"
+  "version": "2.53.0"
 }

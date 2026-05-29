@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "뒤로",
 	"components:navigation:next": "다음",
 	"components:navigation:previous": "이전",
-	"components:navigation:skipNav": "기본 콘텐츠로 건너뛰기",
 	"components:optInFlyout:cancel": "취소",
 	"components:optInFlyout:close": "이 대화 상자 닫기",
 	"components:optInFlyout:done": "완료",

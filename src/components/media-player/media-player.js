@@ -1576,7 +1576,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			this._updateCurrentTimeFromSeekbarProgress();
 
 			if (this._pausedForSeekDrag) {
-				this._media.play();
+				this._play();
 			}
 			this._dragging = false;
 		}
@@ -2030,6 +2030,12 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return quality;
 	}
 
+	// Calling play() returns a Promise. If pause() is called before that Promise resolves,
+	// the browser rejects it with an AbortError. This is benign, so we suppress it.
+	_play() {
+		return this._media.play().catch((e) => { if (e.name !== 'AbortError') throw e; });
+	}
+
 	_reloadSource() {
 		if (this._media) {
 			const oldSourceNode = this._media.getElementsByTagName('source')[0];
@@ -2243,7 +2249,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				this._loadVisibilityObserver({ target: this._mediaContainer });
 			}
 			this._playRequested = true;
-			this._media.play();
+			this._play();
 		} else {
 			this._playRequested = false;
 			this._media.pause();

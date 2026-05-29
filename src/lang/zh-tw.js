@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "返回",
 	"components:navigation:next": "下一個",
 	"components:navigation:previous": "上一個",
-	"components:navigation:skipNav": "跳至主要內容",
 	"components:optInFlyout:cancel": "取消",
 	"components:optInFlyout:close": "關閉此對話方塊",
 	"components:optInFlyout:done": "完成",

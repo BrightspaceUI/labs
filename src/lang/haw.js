@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "Hoʻi",
 	"components:navigation:next": "Hiki mai",
 	"components:navigation:previous": "I mua",
-	"components:navigation:skipNav": "lele i ka mea nui o ka ʻike",
 	"components:optInFlyout:cancel": "Hoʻopau",
 	"components:optInFlyout:close": "Pani i kēia kamaʻilio",
 	"components:optInFlyout:done": "Pau",

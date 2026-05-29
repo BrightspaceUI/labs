@@ -61,7 +61,6 @@ export default {
 	"components:navigation:back": "戻る",
 	"components:navigation:next": "次へ",
 	"components:navigation:previous": "前へ",
-	"components:navigation:skipNav": "メインコンテンツへスキップ",
 	"components:optInFlyout:cancel": "キャンセル",
 	"components:optInFlyout:close": "このダイアログを閉じる",
 	"components:optInFlyout:done": "終了",
