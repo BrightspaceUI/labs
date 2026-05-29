@@ -28,5 +28,10 @@ describe('button-ai', () => {
 			await clickElem(element);
 			await expect(element).to.be.golden();
 		});
+
+		it('disabled', async() => {
+			element.disabled = true;
+			await expect(element).to.be.golden();
+		});
 	});
 });
