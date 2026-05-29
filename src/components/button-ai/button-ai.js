@@ -20,6 +20,8 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 		css`
 			:host {
 				display: inline-block;
+				--d2l-color-fluorite-plus-1-opacity-50: #ce68fa80;		/* comes from --d2l-color-fluorite-plus-1 + 0.5 opacity */
+				--d2l-color-celestine-plus-1-opacity-50: #29a6ff80;	/* comes from --d2l-color-celestine-plus-1 + 0.5 opacity */
 			}
 			:host([hidden]) {
 				display: none;
@@ -51,14 +53,14 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			:host([disabled]) button {
 				background:
 						linear-gradient(#ffffff, #ffffff) padding-box,
-						linear-gradient(to top left, #ce68fa80, #29a6ff80) border-box;
+						linear-gradient(to top left, var(--d2l-color-fluorite-plus-1-opacity-50), var(--d2l-color-celestine-plus-1-opacity-50)) border-box;
 				cursor: default;
 			}
 
 			:host([disabled]) button::before {
 				background:
 					linear-gradient(#ffffff, #ffffff) padding-box,
-					linear-gradient(to top left, #ce68fa80, #29a6ff80) border-box; /* these colors have a 0.5 opacity needed for the disabled state */
+					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1-opacity-50), var(--d2l-color-celestine-plus-1-opacity-50)) border-box;
 				border-radius: inherit;
 				content: '';
 				inset: 0;
