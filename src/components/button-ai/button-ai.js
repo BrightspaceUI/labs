@@ -19,9 +19,12 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 	static styles = [super.styles, labelStyles, buttonStyles,
 		css`
 			:host {
+				/* comes from --d2l-color-celestine-plus-1 + 0.5 opacity */
+				--d2l-color-celestine-plus-1-opacity-50: #29a6ff80;
+
+				/* comes from --d2l-color-fluorite-plus-1 + 0.5 opacity */
+				--d2l-color-fluorite-plus-1-opacity-50: #ce68fa80;
 				display: inline-block;
-				--d2l-color-fluorite-plus-1-opacity-50: #ce68fa80;		/* comes from --d2l-color-fluorite-plus-1 + 0.5 opacity */
-				--d2l-color-celestine-plus-1-opacity-50: #29a6ff80;	/* comes from --d2l-color-celestine-plus-1 + 0.5 opacity */
 			}
 			:host([hidden]) {
 				display: none;
@@ -52,8 +55,8 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 
 			:host([disabled]) button {
 				background:
-						linear-gradient(#ffffff, #ffffff) padding-box,
-						linear-gradient(to top left, var(--d2l-color-fluorite-plus-1-opacity-50), var(--d2l-color-celestine-plus-1-opacity-50)) border-box;
+					linear-gradient(#ffffff, #ffffff) padding-box,
+					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1-opacity-50), var(--d2l-color-celestine-plus-1-opacity-50)) border-box;
 				cursor: default;
 			}
 
@@ -62,11 +65,11 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 					linear-gradient(#ffffff, #ffffff) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1-opacity-50), var(--d2l-color-celestine-plus-1-opacity-50)) border-box;
 				border-radius: inherit;
-				content: '';
+				content: "";
 				inset: 0;
 				opacity: 0.5;
 				position: absolute;
-			},
+			}
 
 			:host([disabled]) button:hover,
 			:host([disabled]) button:focus {
