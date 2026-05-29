@@ -1,9 +1,10 @@
 import '../../../src/components/button-ai/button-ai.js';
-import { clickElem, expect, fixture, focusElem, hoverElem } from '@brightspace-ui/testing';
+import { clickElem, expect, fixture, focusElem, hoverElem, oneEvent } from '@brightspace-ui/testing';
 import { html } from 'lit';
 
 describe('button-ai', () => {
-	describe('states', () => {
+
+	describe('enabled', () => {
 
 		let element;
 		beforeEach(async() => {
@@ -29,35 +30,49 @@ describe('button-ai', () => {
 			await expect(element).to.be.golden();
 		});
 
-		it('disabled', async() => {
-			element.disabled = true;
+	});
+
+	describe('disabled', () => {
+
+		let element;
+		beforeEach(async() => {
+			element = await fixture(html`<d2l-labs-button-ai disabled text="Test"></d2l-labs-button-ai>`);
+		});
+
+		it('normal', async() => {
 			await expect(element).to.be.golden();
 		});
 
-		it('disabled + focus', async() => {
-			element.disabled = true;
+		it('focus', async() => {
 			await focusElem(element);
 			await expect(element).to.be.golden();
 		});
 
-		it('disabled + hover', async() => {
-			element.disabled = true;
+		it('hover', async() => {
 			await hoverElem(element);
 			await expect(element).to.be.golden();
 		});
 
-		it('disabled with tooltip + focus', async() => {
-			element.disabled = true;
-			element.disabledTooltip = 'Custom tooltip';
-			await focusElem(element);
+	});
+
+	describe('disabled-tooltip', () => {
+
+		let element;
+		beforeEach(async() => {
+			element = await fixture(html`<d2l-labs-button-ai disabled disabled-tooltip="Custom tooltip" text="Test"></d2l-labs-button-ai>`);
+		});
+
+		it('focus', async() => {
+			focusElem(element);
+			await oneEvent(element, 'd2l-tooltip-show');
 			await expect(element).to.be.golden();
 		});
 
-		it('disabled with tooltip + hover', async() => {
-			element.disabled = true;
-			element.disabledTooltip = 'Custom tooltip';
-			await hoverElem(element);
+		it('hover', async() => {
+			hoverElem(element);
+			await oneEvent(element, 'd2l-tooltip-show');
 			await expect(element).to.be.golden();
 		});
+
 	});
 });
