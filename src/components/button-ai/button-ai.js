@@ -114,7 +114,7 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 				${this._renderIcon()}
 				<span class="content">${this.text}</span>
 			</button>
-			${this.disabled && this.disabledTooltip ? html`<d2l-tooltip class="vdiff-target" for="${this.#buttonId}">${this.disabledTooltip}</d2l-tooltip>` : ''}
+			${this.disabled && this.disabledTooltip ? html`<d2l-tooltip class="vdiff-include" for="${this.#buttonId}">${this.disabledTooltip}</d2l-tooltip>` : ''}
 		`;
 	};
 

@@ -33,5 +33,31 @@ describe('button-ai', () => {
 			element.disabled = true;
 			await expect(element).to.be.golden();
 		});
+
+		it('disabled + focus', async() => {
+			element.disabled = true;
+			await focusElem(element);
+			await expect(element).to.be.golden();
+		});
+
+		it('disabled + hover', async() => {
+			element.disabled = true;
+			await hoverElem(element);
+			await expect(element).to.be.golden();
+		});
+
+		it('disabled with tooltip + focus', async() => {
+			element.disabled = true;
+			element.disabledTooltip = 'Custom tooltip';
+			await focusElem(element);
+			await expect(element).to.be.golden();
+		});
+
+		it('disabled with tooltip + hover', async() => {
+			element.disabled = true;
+			element.disabledTooltip = 'Custom tooltip';
+			await hoverElem(element);
+			await expect(element).to.be.golden();
+		});
 	});
 });
