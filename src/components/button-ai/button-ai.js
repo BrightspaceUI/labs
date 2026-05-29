@@ -45,31 +45,38 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 				background:
 					linear-gradient(var(--d2l-theme-background-color-interactive-tertiary-hover), var(--d2l-theme-background-color-interactive-tertiary-hover)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
+				color: var(--d2l-theme-text-color-interactive-hover);
 			}
 
 			:host([disabled]) button {
+				background:
+						linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
+						linear-gradient(to top left, #ce68fa80, #29a6ff80) border-box;
 				cursor: default;
 			}
-
-
-			:host([disabled]) button:hover,
-			:host([disabled]) button:focus {
-				background:
-					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
-					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
-			}
-
 
 			:host([disabled]) button::before {
 				background:
 					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
-					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
+					linear-gradient(to top left, #ce68fa80, #29a6ff80) border-box; /* these colors have a 0.5 opacity needed for the disabled state */
 				border-radius: inherit;
 				content: '';
 				inset: 0;
 				opacity: 0.5;
 				position: absolute;
 			},
+
+			:host([disabled]) button:hover,
+			:host([disabled]) button:focus {
+				cursor: default;
+			}
+
+			:host([disabled]) button:hover .content,
+			:host([disabled]) button:hover .property-icon,
+			:host([disabled]) button:focus .content,
+			:host([disabled]) button:focus .property-icon {
+				color: var(--d2l-theme-text-color-interactive-default);
+			}
 
 			button:hover:not([disabled]) .content,
 			button:focus:not([disabled]) .content {
@@ -84,6 +91,8 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 
 			button:hover:not([disabled]) .property-icon,
 			button:focus:not([disabled]) .property-icon,
+			button:hover:not([disabled]) .content,
+			button:focus:not([disabled]) .content,
 			button:hover:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom),
 			button:focus:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom) {
 				color: var(--d2l-theme-text-color-interactive-hover);
