@@ -28,7 +28,7 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			button {
 				align-items: center;
 				background:
-					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
+					linear-gradient(#ffffff, #ffffff) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
 				border: 0.1rem solid transparent;
 				border-radius: 0.4rem;
@@ -43,21 +43,21 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			button:hover,
 			button:focus {
 				background:
-					linear-gradient(var(--d2l-theme-background-color-interactive-tertiary-hover), var(--d2l-theme-background-color-interactive-tertiary-hover)) padding-box,
+					linear-gradient(var(--d2l-color-gypsum), var(--d2l-color-gypsum)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
-				color: var(--d2l-theme-text-color-interactive-hover);
+				color: var(--d2l-color-celestine-minus-1);
 			}
 
 			:host([disabled]) button {
 				background:
-						linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
+						linear-gradient(#ffffff, #ffffff) padding-box,
 						linear-gradient(to top left, #ce68fa80, #29a6ff80) border-box;
 				cursor: default;
 			}
 
 			:host([disabled]) button::before {
 				background:
-					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
+					linear-gradient(#ffffff, #ffffff) padding-box,
 					linear-gradient(to top left, #ce68fa80, #29a6ff80) border-box; /* these colors have a 0.5 opacity needed for the disabled state */
 				border-radius: inherit;
 				content: '';
@@ -75,18 +75,18 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			:host([disabled]) button:hover .property-icon,
 			:host([disabled]) button:focus .content,
 			:host([disabled]) button:focus .property-icon {
-				color: var(--d2l-theme-text-color-interactive-default);
+				color: var(--d2l-color-celestine);
 			}
 
 			button:hover:not([disabled]) .content,
 			button:focus:not([disabled]) .content {
-				color: var(--d2l-theme-text-color-interactive-hover);
+				color: var(--d2l-color-celestine-minus-1);
 			}
 
 			.property-icon,
 			.content,
 			slot[name="icon"]::slotted(d2l-icon-custom) {
-				color: var(--d2l-theme-text-color-interactive-default);
+				color: var(--d2l-color-celestine);
 			}
 
 			button:hover:not([disabled]) .property-icon,
@@ -95,7 +95,7 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			button:focus:not([disabled]) .content,
 			button:hover:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom),
 			button:focus:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom) {
-				color: var(--d2l-theme-text-color-interactive-hover);
+				color: var(--d2l-color-celestine-minus-1);
 			}
 	`];
 
