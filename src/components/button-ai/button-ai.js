@@ -48,12 +48,28 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 			}
 
 			:host([disabled]) button {
+				cursor: default;
+			}
+
+
+			:host([disabled]) button:hover,
+			:host([disabled]) button:focus {
 				background:
 					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
-				cursor: default;
-				opacity: 0.5;
 			}
+
+
+			:host([disabled]) button::before {
+				background:
+					linear-gradient(var(--d2l-theme-background-color-base), var(--d2l-theme-background-color-base)) padding-box,
+					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
+				border-radius: inherit;
+				content: '';
+				inset: 0;
+				opacity: 0.5;
+				position: absolute;
+			},
 
 			button:hover:not([disabled]) .content,
 			button:focus:not([disabled]) .content {
