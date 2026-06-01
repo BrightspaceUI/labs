@@ -13,6 +13,8 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 		return {
 			checked: { type: Boolean },
 			description: { type: String },
+			disabled: { type: Boolean },
+			disabledTooltip: { type: String, attribute: 'disabled-tooltip' },
 			label: { type: String },
 			readOnly: { type: Boolean, attribute: 'read-only' },
 			_expandCollapseBusy: { state: true }
@@ -77,6 +79,8 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 				class="d2l-input-checkbox"
 				?skeleton="${this.skeleton}"
 				description=${this.localize(`components:checkboxDrawer:checkbox${this.checked ? 'Expanded' : 'Collapsed'}`)}
+				?disabled="${this.disabled}"
+				disabled-tooltip="${this.disabledTooltip}"
 				@change="${this._onCheckboxChange}">
 				${this.label}
 				<div slot="inline-help">${this.description}</div>
