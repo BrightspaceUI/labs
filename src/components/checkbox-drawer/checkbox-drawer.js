@@ -4,6 +4,7 @@ import '@brightspace-ui/core/components/inputs/input-checkbox.js';
 import '@brightspace-ui/core/components/icons/icon.js';
 import { css, html, LitElement } from 'lit';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { SkeletonMixin } from '@brightspace-ui/core/components/skeleton/skeleton-mixin.js';
 
@@ -13,6 +14,8 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 		return {
 			checked: { type: Boolean },
 			description: { type: String },
+			disabled: { type: Boolean },
+			disabledTooltip: { type: String, attribute: 'disabled-tooltip' },
 			label: { type: String },
 			readOnly: { type: Boolean, attribute: 'read-only' },
 			_expandCollapseBusy: { state: true }
@@ -52,6 +55,7 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 	constructor() {
 		super();
 		this.checked = false;
+		this.disabled = false;
 		this._expandCollapseBusy = false;
 	}
 
@@ -77,6 +81,8 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 				class="d2l-input-checkbox"
 				?skeleton="${this.skeleton}"
 				description=${this.localize(`components:checkboxDrawer:checkbox${this.checked ? 'Expanded' : 'Collapsed'}`)}
+				?disabled="${this.disabled}"
+				disabled-tooltip=${ifDefined(this.disabledTooltip)}
 				@change="${this._onCheckboxChange}">
 				${this.label}
 				<div slot="inline-help">${this.description}</div>

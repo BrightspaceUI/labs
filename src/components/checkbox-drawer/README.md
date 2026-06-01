@@ -24,6 +24,8 @@ The checkbox drawer can be used to get a checkbox with a description. When check
 |--|--|--|
 | `checked` | Boolean | True if the checkbox is checked. False if not checked. |
 | `description` | String | Extra information that is displayed beneath the `label`. Optionally used when `label` is used. |
+| `disabled` | Boolean | Disables the input |
+| `disabled-tooltip` | String | Tooltip text when disabled |
 | `label` | String | Provides visible information about the component. |
 | `read-only` | Boolean | Makes the checkbox non-interactable, replacing it with checkmark if checked is true or an X otherwise |
 
