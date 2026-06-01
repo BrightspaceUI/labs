@@ -19,11 +19,6 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 	static styles = [super.styles, labelStyles, buttonStyles,
 		css`
 			:host {
-				/* comes from --d2l-color-celestine-plus-1 + 0.5 opacity */
-				--d2l-color-celestine-plus-1-opacity-50: #29a6ff80;
-
-				/* comes from --d2l-color-fluorite-plus-1 + 0.5 opacity */
-				--d2l-color-fluorite-plus-1-opacity-50: #ce68fa80;
 				display: inline-block;
 			}
 			:host([hidden]) {
@@ -45,61 +40,30 @@ class ButtonAI extends SlottedIconMixin(ButtonMixin(LitElement)) {
 				position: relative;
 			}
 
-			button:hover,
-			button:focus {
+			:host(:not([disabled])) button:hover,
+			:host(:not([disabled])) button:focus {
 				background:
 					linear-gradient(var(--d2l-color-gypsum), var(--d2l-color-gypsum)) padding-box,
 					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1), var(--d2l-color-celestine-plus-1)) border-box;
-				color: var(--d2l-color-celestine-minus-1);
 			}
 
 			:host([disabled]) button {
-				background:
-					linear-gradient(#ffffff, #ffffff) padding-box,
-					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1-opacity-50), var(--d2l-color-celestine-plus-1-opacity-50)) border-box;
 				cursor: default;
-			}
-
-			:host([disabled]) button::before {
-				background:
-					linear-gradient(#ffffff, #ffffff) padding-box,
-					linear-gradient(to top left, var(--d2l-color-fluorite-plus-1-opacity-50), var(--d2l-color-celestine-plus-1-opacity-50)) border-box;
-				border-radius: inherit;
-				content: "";
-				inset: 0;
 				opacity: 0.5;
-				position: absolute;
 			}
 
-			:host([disabled]) button:hover,
-			:host([disabled]) button:focus {
-				cursor: default;
-			}
-
-			:host([disabled]) button:hover .content,
-			:host([disabled]) button:hover .property-icon,
-			:host([disabled]) button:focus .content,
-			:host([disabled]) button:focus .property-icon {
-				color: var(--d2l-color-celestine);
-			}
-
-			button:hover:not([disabled]) .content,
-			button:focus:not([disabled]) .content {
-				color: var(--d2l-color-celestine-minus-1);
-			}
-
+			button,
 			.property-icon,
-			.content,
 			slot[name="icon"]::slotted(d2l-icon-custom) {
 				color: var(--d2l-color-celestine);
 			}
 
-			button:hover:not([disabled]) .property-icon,
-			button:focus:not([disabled]) .property-icon,
-			button:hover:not([disabled]) .content,
-			button:focus:not([disabled]) .content,
-			button:hover:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom),
-			button:focus:not([disabled]) slot[name="icon"]::slotted(d2l-icon-custom) {
+			:host(:not([disabled])) button:hover,
+			:host(:not([disabled])) button:focus,
+			:host(:not([disabled])) button:hover .property-icon,
+			:host(:not([disabled])) button:focus .property-icon,
+			:host(:not([disabled])) button:hover slot[name="icon"]::slotted(d2l-icon-custom),
+			:host(:not([disabled])) button:focus slot[name="icon"]::slotted(d2l-icon-custom) {
 				color: var(--d2l-color-celestine-minus-1);
 			}
 	`];
