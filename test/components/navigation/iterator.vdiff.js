@@ -1,5 +1,5 @@
 import '../../../src/components/navigation/navigation-iterator.js';
-import { expect, fixture, html } from '@brightspace-ui/testing';
+import { expect, fixture, hoverElem, html } from '@brightspace-ui/testing';
 
 describe('d2l-labs-navigation-iterator', () => {
 
@@ -16,6 +16,29 @@ describe('d2l-labs-navigation-iterator', () => {
 				const elem = await fixture(template, { viewport: { width: 366 } });
 				await expect(elem).to.be.golden();
 			});
+		});
+
+	});
+
+	describe('no-highlight-border', () => {
+
+		let elem;
+		beforeEach(async() => {
+			elem = await fixture(html`<d2l-labs-navigation-iterator no-highlight-border></d2l-labs-navigation-iterator>`, { viewport: { width: 366 } });
+		});
+
+		it('default', async() => {
+			await expect(elem).to.be.golden();
+		});
+
+		it('previous-hover', async() => {
+			await hoverElem(elem.shadowRoot.querySelector('d2l-labs-navigation-button-icon[icon-position="start"]'));
+			await expect(elem).to.be.golden();
+		});
+
+		it('next-hover', async() => {
+			await hoverElem(elem.shadowRoot.querySelector('d2l-labs-navigation-button-icon[icon-position="end"]'));
+			await expect(elem).to.be.golden();
 		});
 
 	});

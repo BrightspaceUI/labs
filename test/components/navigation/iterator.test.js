@@ -1,5 +1,5 @@
 import '../../../src/components/navigation/navigation-iterator.js';
-import { fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
+import { expect, fixture, html, oneEvent, runConstructor } from '@brightspace-ui/testing';
 
 describe('d2l-labs-navigation-iterator', () => {
 
@@ -8,6 +8,11 @@ describe('d2l-labs-navigation-iterator', () => {
 	describe('constructor', () => {
 		it('should construct', () => {
 			runConstructor('d2l-labs-navigation-iterator');
+		});
+
+		it('should default noHighlightBorder to false', async() => {
+			const el = await fixture(iteratorFixture);
+			expect(el.noHighlightBorder).to.be.false;
 		});
 	});
 
