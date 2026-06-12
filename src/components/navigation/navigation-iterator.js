@@ -12,6 +12,7 @@ class NavigationIterator extends LocalizeLabsElement(LitElement) {
 			previousText: { attribute: 'previous-text', type: String },
 			nextDisabled: { attribute: 'next-disabled', type: Boolean },
 			nextText: { attribute: 'next-text', type: String },
+			noHighlightBorder: { attribute: 'no-highlight-border', type: Boolean },
 		};
 	}
 
@@ -38,6 +39,7 @@ class NavigationIterator extends LocalizeLabsElement(LitElement) {
 		this.nextText = '';
 		this.previousDisabled = false;
 		this.previousText = '';
+		this.noHighlightBorder = false;
 	}
 
 	render() {
@@ -50,6 +52,7 @@ class NavigationIterator extends LocalizeLabsElement(LitElement) {
 				icon-position="start"
 				text="${previousText}"
 				?text-hidden="${this.hideText}"
+				?no-highlight-border="${this.noHighlightBorder}"
 				?disabled="${this.previousDisabled}"
 				@click="${this._dispatchPreviousClicked}"></d2l-labs-navigation-button-icon>
 			<slot class="d2l-body-compact"></slot>
@@ -59,6 +62,7 @@ class NavigationIterator extends LocalizeLabsElement(LitElement) {
 				icon-position="end"
 				text="${nextText}"
 				?text-hidden="${this.hideText}"
+				?no-highlight-border="${this.noHighlightBorder}"
 				?disabled="${this.nextDisabled}"
 				@click="${this._dispatchNextClicked}"></d2l-labs-navigation-button-icon>
 		`;
