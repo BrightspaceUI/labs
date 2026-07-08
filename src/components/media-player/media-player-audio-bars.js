@@ -61,41 +61,38 @@ const AUDIO_BAR_WIDTH_PX = AUDIO_BAR_WIDTH_REM * PX_PER_REM;
 const AUDIO_BAR_HORIZONTAL_MARGIN_PX = AUDIO_BAR_HORIZONTAL_MARGIN_REM * PX_PER_REM;
 
 class MediaPlayerAudioBars extends LitElement {
-	static get properties() {
-		return {
-			playing: { type: Boolean },
-			_visibleAudioBars: { type: Array, attribute: false },
-		};
-	}
 
-	static get styles() {
-		return css`
-			:host {
-				width: 100%;
-			}
+	static properties = {
+		playing: { type: Boolean },
+		_visibleAudioBars: { type: Array, attribute: false },
+	};
 
-			#d2l-labs-media-player-audio-bars-row {
-				align-items: center;
-				display: flex;
-				flex-direction: row;
-				height: 100%;
-				justify-content: center;
-			}
+	static styles = css`
+		:host {
+			width: 100%;
+		}
 
-			#d2l-labs-media-player-audio-bar-container {
-				display: flex;
-				flex-direction: column;
-				height: 100%;
-			}
+		#d2l-labs-media-player-audio-bars-row {
+			align-items: center;
+			display: flex;
+			flex-direction: row;
+			height: 100%;
+			justify-content: center;
+		}
 
-			.d2l-labs-media-player-audio-bar {
-				border-top-left-radius: 0.075rem;
-				border-top-right-radius: 0.075rem;
-				margin: 0 ${AUDIO_BAR_HORIZONTAL_MARGIN_REM}rem;
-				width: ${AUDIO_BAR_WIDTH_REM}rem;
-			}
-`;
-	}
+		#d2l-labs-media-player-audio-bar-container {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+
+		.d2l-labs-media-player-audio-bar {
+			border-top-left-radius: 0.075rem;
+			border-top-right-radius: 0.075rem;
+			margin: 0 ${AUDIO_BAR_HORIZONTAL_MARGIN_REM}rem;
+			width: ${AUDIO_BAR_WIDTH_REM}rem;
+		}
+	`;
 
 	constructor() {
 		super();

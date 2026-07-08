@@ -6,172 +6,169 @@ import { findComposedAncestor, isComposedAncestor } from '@brightspace-ui/core/h
 import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen.js';
 
 class LabsAccordionCollapse extends LitElement {
-	static get properties() {
-		return {
-			/**
-			 * Label. Does not apply title to entire accordion
-			 */
-			label: { type: String },
-			/**
-			 * Header text hidden on the screen, but to be read by a screen reader
-			 */
-			screenReaderHeaderText: { type: String, attribute: 'screen-reader-header-text' },
-			/**
-			 * Corresponds to the iron-collapse's noAnimation property.
-			 */
-			noAnimation: { type: Boolean, attribute: 'no-animation' },
-			/**
-			 * Whether currently expanded.
-			 */
-			opened: { type: Boolean, reflect: true },
-			/**
-			 * The icon when collapsed.
-			 */
-			expandIcon: { type: String, attribute: 'expand-icon' },
-			/**
-			 * The icon when expanded.
-			 */
-			collapseIcon: { type: String, attribute: 'collapse-icon' },
-			/**
-			 * Whether to hide the expand/collapse icon.
-			 */
-			noIcons: { type: Boolean, attribute: 'no-icons' },
-			/**
-			 * Whether or not to use flex layout.
-			 */
-			flex: { type: Boolean, reflect: true },
-			/**
-			 * Whether or not to add extra padding for icon.
-			 */
-			iconHasPadding: { type: Boolean, attribute: 'icon-has-padding', reflect: true },
-			/**
-			 * Whether or not to add a border between the header and the content.
-			 */
-			headerBorder: { type: Boolean, attribute: 'header-border' },
-			/**
-			 * Whether the accordion's expand/collapse function is disabled.
-			 */
-			disabled: { type: Boolean, reflect: true },
-			/**
-			 * Whether or not to disable default focus styles
-			 */
-			disableDefaultTriggerFocus: { type: Boolean, attribute: 'disable-default-trigger-focus', reflect: true },
-			/**
-			 * Whether or not the header contains an interactive element inside it (e.g. clickable)
-			 */
-			headerHasInteractiveContent: { type: Boolean, attribute: 'header-has-interactive-content', reflect: true },
-			/**
-			 * Listener for state changes.
-			 */
-			_boundListener: { type: Function, attribute: '_bound-listener' },
-			/**
-			 * The current state of the accordion (opened, closed)
-			 */
-			_state: { type: String, reflect: true }
-		};
-	}
 
-	static get styles() {
-		return [offscreenStyles, css`
-	:host {
-		display: block;
-	}
-	#interactive-header-content {
-		align-items: center;
-		display: flex;
-	}
-	#trigger {
-		align-items: center;
-		display: flex;
-		text-decoration: none;
-	}
-	#trigger:focus-visible {
-		outline-offset: 3px;
-	}
-	#trigger[data-border] {
-		border-bottom: solid 1px var(--d2l-color-corundum);
-		margin-bottom: 0.4rem;
-		padding-bottom: 0.4rem;
-	}
-	#trigger, #trigger:visited, #trigger:hover, #trigger:active {
-		color: inherit;
-	}
-	:host([flex]) .collapse-title {
-		flex: 1;
-		flex-basis: 0.000000001px;
-		overflow: hidden;
-	}
-	:host([icon-has-padding]) d2l-icon {
-		padding-left: 1.25rem;
-		padding-right: 0;
-	}
-	:host([icon-has-padding][dir="rtl"]) d2l-icon {
-		padding-left: 0;
-		padding-right: 1.25rem;
-	}
-	:host([flex][icon-has-padding]) d2l-icon {
-		padding-left: 0;
-		padding-right: 1.25rem;
-	}
-	:host([flex][icon-has-padding][dir="rtl"]) d2l-icon {
-		padding-left: 1.25rem;
-		padding-right: 0;
-	}
-	.content {
-		height: auto;
-		margin: -1px;
-		padding: 1px;
-		position: relative;
-	}
-	.summary {
-		transition: opacity 500ms ease;
-	}
-	:host([_state="closing"]) .content,
-	:host([_state="opening"]) .content {
-		overflow: hidden;
-	}
-	:host([_state="closed"]) .summary,
-	:host([_state="closing"]) .summary {
-		transition-delay: 500ms;
-	}
-	:host([_state="opening"]) .summary,
-	:host([_state="opened"]) .summary {
-		opacity: 0;
-	}
-	:host([_state="closing"]) .summary,
-	:host([_state="opening"]) .summary,
-	:host([_state="opened"]) .summary {
-		pointer-events: none;
-		position: absolute;
-	}
-	:host([_state="closing"]) .summary,
-	:host([_state="opened"]) .summary {
-		transition-property: none;
-	}
-	:host([disabled]) a {
-		cursor: default;
-	}
-	:host([disabled]) d2l-icon {
-		color: var(--d2l-color-chromite);
-	}
-	:host([disable-default-trigger-focus]) #trigger:focus {
-		outline: none;
-	}
+	static properties = {
+		/**
+		 * Label. Does not apply title to entire accordion
+		 */
+		label: { type: String },
+		/**
+		 * Header text hidden on the screen, but to be read by a screen reader
+		 */
+		screenReaderHeaderText: { type: String, attribute: 'screen-reader-header-text' },
+		/**
+		 * Corresponds to the iron-collapse's noAnimation property.
+		 */
+		noAnimation: { type: Boolean, attribute: 'no-animation' },
+		/**
+		 * Whether currently expanded.
+		 */
+		opened: { type: Boolean, reflect: true },
+		/**
+		 * The icon when collapsed.
+		 */
+		expandIcon: { type: String, attribute: 'expand-icon' },
+		/**
+		 * The icon when expanded.
+		 */
+		collapseIcon: { type: String, attribute: 'collapse-icon' },
+		/**
+		 * Whether to hide the expand/collapse icon.
+		 */
+		noIcons: { type: Boolean, attribute: 'no-icons' },
+		/**
+		 * Whether or not to use flex layout.
+		 */
+		flex: { type: Boolean, reflect: true },
+		/**
+		 * Whether or not to add extra padding for icon.
+		 */
+		iconHasPadding: { type: Boolean, attribute: 'icon-has-padding', reflect: true },
+		/**
+		 * Whether or not to add a border between the header and the content.
+		 */
+		headerBorder: { type: Boolean, attribute: 'header-border' },
+		/**
+		 * Whether the accordion's expand/collapse function is disabled.
+		 */
+		disabled: { type: Boolean, reflect: true },
+		/**
+		 * Whether or not to disable default focus styles
+		 */
+		disableDefaultTriggerFocus: { type: Boolean, attribute: 'disable-default-trigger-focus', reflect: true },
+		/**
+		 * Whether or not the header contains an interactive element inside it (e.g. clickable)
+		 */
+		headerHasInteractiveContent: { type: Boolean, attribute: 'header-has-interactive-content', reflect: true },
+		/**
+		 * Listener for state changes.
+		 */
+		_boundListener: { type: Function, attribute: '_bound-listener' },
+		/**
+		 * The current state of the accordion (opened, closed)
+		 */
+		_state: { type: String, reflect: true }
+	};
 
-	:host([header-has-interactive-content]) #header-container {
-		display: grid;
-		grid-template-columns: auto;
-		grid-template-rows: auto;
-	}
-	:host([header-has-interactive-content]) .header-grid-item {
-		grid-column: 1;
-		grid-row: 1;
-	}
-	:host([header-has-interactive-content]) #interactive-header-content {
-		cursor: pointer;
-	}
-		`];
-	}
+	static styles = [offscreenStyles, css`
+		:host {
+			display: block;
+		}
+		#interactive-header-content {
+			align-items: center;
+			display: flex;
+		}
+		#trigger {
+			align-items: center;
+			display: flex;
+			text-decoration: none;
+		}
+		#trigger:focus-visible {
+			outline-offset: 3px;
+		}
+		#trigger[data-border] {
+			border-bottom: solid 1px var(--d2l-color-corundum);
+			margin-bottom: 0.4rem;
+			padding-bottom: 0.4rem;
+		}
+		#trigger, #trigger:visited, #trigger:hover, #trigger:active {
+			color: inherit;
+		}
+		:host([flex]) .collapse-title {
+			flex: 1;
+			flex-basis: 0.000000001px;
+			overflow: hidden;
+		}
+		:host([icon-has-padding]) d2l-icon {
+			padding-left: 1.25rem;
+			padding-right: 0;
+		}
+		:host([icon-has-padding][dir="rtl"]) d2l-icon {
+			padding-left: 0;
+			padding-right: 1.25rem;
+		}
+		:host([flex][icon-has-padding]) d2l-icon {
+			padding-left: 0;
+			padding-right: 1.25rem;
+		}
+		:host([flex][icon-has-padding][dir="rtl"]) d2l-icon {
+			padding-left: 1.25rem;
+			padding-right: 0;
+		}
+		.content {
+			height: auto;
+			margin: -1px;
+			padding: 1px;
+			position: relative;
+		}
+		.summary {
+			transition: opacity 500ms ease;
+		}
+		:host([_state="closing"]) .content,
+		:host([_state="opening"]) .content {
+			overflow: hidden;
+		}
+		:host([_state="closed"]) .summary,
+		:host([_state="closing"]) .summary {
+			transition-delay: 500ms;
+		}
+		:host([_state="opening"]) .summary,
+		:host([_state="opened"]) .summary {
+			opacity: 0;
+		}
+		:host([_state="closing"]) .summary,
+		:host([_state="opening"]) .summary,
+		:host([_state="opened"]) .summary {
+			pointer-events: none;
+			position: absolute;
+		}
+		:host([_state="closing"]) .summary,
+		:host([_state="opened"]) .summary {
+			transition-property: none;
+		}
+		:host([disabled]) a {
+			cursor: default;
+		}
+		:host([disabled]) d2l-icon {
+			color: var(--d2l-color-chromite);
+		}
+		:host([disable-default-trigger-focus]) #trigger:focus {
+			outline: none;
+		}
+
+		:host([header-has-interactive-content]) #header-container {
+			display: grid;
+			grid-template-columns: auto;
+			grid-template-rows: auto;
+		}
+		:host([header-has-interactive-content]) .header-grid-item {
+			grid-column: 1;
+			grid-row: 1;
+		}
+		:host([header-has-interactive-content]) #interactive-header-content {
+			cursor: pointer;
+		}
+	`];
 
 	constructor() {
 		super();

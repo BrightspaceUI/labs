@@ -21,173 +21,165 @@ class FlyoutImplementation extends composeMixins(
 	LocalizeLabsElement
 ) {
 
-	static get properties() {
-		return {
-			optOut: { type: Boolean, attribute: 'opt-out' },
-			opened: { type: Boolean, reflect: true },
-			flyoutTitle: { attribute: 'flyout-title', type: String },
-			shortDescription: { type: String, attribute: 'short-description' },
-			longDescription: { type: String, attribute: 'long-description' },
-			tutorialLink: { type: String, attribute: 'tutorial-link' },
-			helpDocsLink: { type: String, attribute: 'help-docs-link' },
-			hideReason: { type: Boolean, attribute: 'hide-reason' },
-			hideFeedback: { type: Boolean, attribute: 'hide-feedback' },
-			_optOutDialogOpen: { state: true },
-			_primaryButtonText: { state: true },
-			_secondaryButtonText: { state: true },
-			_visibleState: { state: true },
-			_ariaLabel: { state: true },
-			_tabIndex: { state: true }
-		};
-	}
+	static properties = {
+		optOut: { type: Boolean, attribute: 'opt-out' },
+		opened: { type: Boolean, reflect: true },
+		flyoutTitle: { attribute: 'flyout-title', type: String },
+		shortDescription: { type: String, attribute: 'short-description' },
+		longDescription: { type: String, attribute: 'long-description' },
+		tutorialLink: { type: String, attribute: 'tutorial-link' },
+		helpDocsLink: { type: String, attribute: 'help-docs-link' },
+		hideReason: { type: Boolean, attribute: 'hide-reason' },
+		hideFeedback: { type: Boolean, attribute: 'hide-feedback' },
+		_optOutDialogOpen: { state: true },
+		_primaryButtonText: { state: true },
+		_secondaryButtonText: { state: true },
+		_visibleState: { state: true },
+		_ariaLabel: { state: true },
+		_tabIndex: { state: true }
+	};
 
-	static get styles() {
-		return [
-			bodyStandardStyles,
-			heading1Styles,
-			css`
-				:host {
-					height: var(--d2l-flyout-custom-element-height, auto);
-					overflow: hidden;
-					pointer-events: none;
-					position: absolute;
-					width: 100%;
-				}
+	static styles = [bodyStandardStyles, heading1Styles, css`
+		:host {
+			height: var(--d2l-flyout-custom-element-height, auto);
+			overflow: hidden;
+			pointer-events: none;
+			position: absolute;
+			width: 100%;
+		}
 
-				:host([opened]) {
-					background-color: rgba(255, 255, 255, 0.7);
-					height: 100%;
-					pointer-events: auto;
-				}
+		:host([opened]) {
+			background-color: rgba(255, 255, 255, 0.7);
+			height: 100%;
+			pointer-events: auto;
+		}
 
-				#flyout {
-					background-color: white;
-					border-bottom: 1px solid var(--d2l-color-mica);
-					box-sizing: border-box;
-					margin-bottom: 1.2rem;
-					overflow: visible;
-					padding-bottom: 2rem;
-					pointer-events: auto;
-					position: var(--d2l-flyout-custom-element-position, relative);
-					top: var(--d2l-flyout-custom-element-top, 0);
-					width: 100%;
-					z-index: var(--d2l-flyout-custom-element-z-index, 900);
-				}
+		#flyout {
+			background-color: white;
+			border-bottom: 1px solid var(--d2l-color-mica);
+			box-sizing: border-box;
+			margin-bottom: 1.2rem;
+			overflow: visible;
+			padding-bottom: 2rem;
+			pointer-events: auto;
+			position: var(--d2l-flyout-custom-element-position, relative);
+			top: var(--d2l-flyout-custom-element-top, 0);
+			width: 100%;
+			z-index: var(--d2l-flyout-custom-element-z-index, 900);
+		}
 
-				#flyout.flyout-opened {
-					transition: transform 0.2s ease-out;
-				}
+		#flyout.flyout-opened {
+			transition: transform 0.2s ease-out;
+		}
 
-				#flyout.flyout-closed {
-					transition: transform 0.2s ease-in;
-				}
+		#flyout.flyout-closed {
+			transition: transform 0.2s ease-in;
+		}
 
-				.flyout-opened {
-					transform: translateY(0);
-				}
-				.flyout-closed {
-					transform: translateY(-100%);
-				}
+		.flyout-opened {
+			transform: translateY(0);
+		}
+		.flyout-closed {
+			transform: translateY(-100%);
+		}
 
-				.flyout-content {
-					text-align: center;
-				}
+		.flyout-content {
+			text-align: center;
+		}
 
-				.flyout-content h1 {
-					margin-bottom: 1.2rem;
-				}
+		.flyout-content h1 {
+			margin-bottom: 1.2rem;
+		}
 
-				.flyout-text {
-					align-items: center;
-					display: flex;
-					flex-direction: column;
-					margin-bottom: 1.5rem;
-				}
+		.flyout-text {
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 1.5rem;
+		}
 
-				#short-description {
-					margin-bottom: 0.5rem;
-				}
+		#short-description {
+			margin-bottom: 0.5rem;
+		}
 
-				#long-description {
-					max-width: 800px;
-				}
+		#long-description {
+			max-width: 800px;
+		}
 
-				.flyout-tutorial {
-					margin: auto;
-					margin-top: 0.5em;
-				}
+		.flyout-tutorial {
+			margin: auto;
+			margin-top: 0.5em;
+		}
 
-				.flyout-tutorial a {
-					color: var(--d2l-color-celestine);
-					text-decoration: none;
-				}
+		.flyout-tutorial a {
+			color: var(--d2l-color-celestine);
+			text-decoration: none;
+		}
 
-				.flyout-tutorial a:hover, .flyout-tutorial a:focus {
-					text-decoration: underline;
-				}
+		.flyout-tutorial a:hover, .flyout-tutorial a:focus {
+			text-decoration: underline;
+		}
 
-				.flyout-buttons {
-					margin-left: auto;
-					margin-right: auto;
-				}
+		.flyout-buttons {
+			margin-left: auto;
+			margin-right: auto;
+		}
 
-				.flyout-buttons d2l-button {
-					margin-left: 0.5rem;
-					margin-right: 0.5rem;
-				}
+		.flyout-buttons d2l-button {
+			margin-left: 0.5rem;
+			margin-right: 0.5rem;
+		}
 
-				.flyout-tab-container {
-					height: 1.2rem;
-					left: 50%;
-					max-width: 1230px;
-					overflow: hidden;
-					pointer-events: none;
-					position: absolute;
-					top: 100%;
-					transform: translateX(-50%);
-					width: 100%;
-				}
+		.flyout-tab-container {
+			height: 1.2rem;
+			left: 50%;
+			max-width: 1230px;
+			overflow: hidden;
+			pointer-events: none;
+			position: absolute;
+			top: 100%;
+			transform: translateX(-50%);
+			width: 100%;
+		}
 
-				.flyout-tab {
-					background-color: white;
-					border: 1px solid var(--d2l-color-mica);
-					border-radius: 0 0 8px 8px;
-					border-top: none;
-					box-sizing: border-box;
-					cursor: pointer;
-					height: 1rem;
-					inset-block-start: 0;
-					inset-inline-end: 15px;
-					min-height: 0;
-					padding: 1px;
-					pointer-events: auto;
-					position: absolute;
-					text-align: center;
-					width: 5rem;
-				}
+		.flyout-tab {
+			background-color: white;
+			border: 1px solid var(--d2l-color-mica);
+			border-radius: 0 0 8px 8px;
+			border-top: none;
+			box-sizing: border-box;
+			cursor: pointer;
+			height: 1rem;
+			inset-block-start: 0;
+			inset-inline-end: 15px;
+			min-height: 0;
+			padding: 1px;
+			pointer-events: auto;
+			position: absolute;
+			text-align: center;
+			width: 5rem;
+		}
 
-				.flyout-tab:hover, .flyout-tab:focus {
-					background-color: var(--d2l-color-gypsum);
-				}
+		.flyout-tab:hover, .flyout-tab:focus {
+			background-color: var(--d2l-color-gypsum);
+		}
 
-				.flyout-tab:focus {
-					border-color: rgba(0, 111, 191, 0.4);
-					border-style: solid;
-					border-width: 0 1px 1px 1px;
-					box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.3);
-				}
+		.flyout-tab:focus {
+			border-color: rgba(0, 111, 191, 0.4);
+			border-style: solid;
+			border-width: 0 1px 1px 1px;
+			box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.3);
+		}
 
-				.flyout-tab:active, .flyout-tab:focus {
-					outline: 0;
-				}
+		.flyout-tab:active, .flyout-tab:focus {
+			outline: 0;
+		}
 
-				.flyout-tab > d2l-icon {
-					margin: auto;
-					vertical-align: top !important;
-				}
-			`
-		];
-	}
+		.flyout-tab > d2l-icon {
+			margin: auto;
+			vertical-align: top !important;
+		}
+	`];
 
 	constructor() {
 		super();

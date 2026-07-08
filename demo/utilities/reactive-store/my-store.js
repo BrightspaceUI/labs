@@ -1,11 +1,9 @@
 import ReactiveStore from '../../../src/utilities/reactive-store/reactive-store.js';
 
 export default class MyStore extends ReactiveStore {
-	static get properties() {
-		return {
-			count: { type: Number },
-		};
-	}
+	static properties = {
+		count: { type: Number },
+	};
 
 	constructor() {
 		super();

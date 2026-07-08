@@ -4,12 +4,10 @@ import { CommunityBase } from './community-base.js';
 
 class CommunityLink extends CommunityBase(LitElement) {
 
-	static get properties() {
-		return {
-			text: { type: String },
-			small: { type: Boolean }
-		};
-	}
+	static properties = {
+		text: { type: String },
+		small: { type: Boolean }
+	};
 
 	render() {
 		return html`<d2l-link target="_blank" href="${this.communityArticleDirective(this.langController.language)}" ?small=${this.small} >${this.text}</d2l-link>`;

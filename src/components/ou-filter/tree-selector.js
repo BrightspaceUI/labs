@@ -24,69 +24,62 @@ const DROPDOWN_WIDTH = 368;
  */
 class TreeSelector extends LocalizeLabsElement(LitElement) {
 
-	static get properties() {
-		return {
-			name: { type: String },
-			disabled: { type: Boolean, attribute: 'disabled' },
-			isSelectAllVisible: { type: Boolean, attribute: 'select-all-ui', reflect: true },
-			isSearch: { type: Boolean, attribute: 'search', reflect: true },
-			isSelected: { type: Boolean, attribute: 'selected', reflect: true },
-			_dropdownMinWidth: { type: Number },
-			_dropdownMaxWidth: { type: Number },
-		};
-	}
+	static properties = {
+		name: { type: String },
+		disabled: { type: Boolean, attribute: 'disabled' },
+		isSelectAllVisible: { type: Boolean, attribute: 'select-all-ui', reflect: true },
+		isSearch: { type: Boolean, attribute: 'search', reflect: true },
+		isSelected: { type: Boolean, attribute: 'selected', reflect: true },
+		_dropdownMinWidth: { type: Number },
+		_dropdownMaxWidth: { type: Number },
+	};
 
-	static get styles() {
-		return [
-			selectStyles,
-			css`
-				:host {
-					display: inline-block;
-				}
-				:host([hidden]) {
-					display: none;
-				}
+	static styles = [selectStyles, css`
+		:host {
+			display: inline-block;
+		}
+		:host([hidden]) {
+			display: none;
+		}
 
-				.d2l-labs-filter-dropdown-content-header {
-					display: flex;
-					justify-content: start;
-				}
-				.d2l-labs-filter-dropdown-content-header > span {
-					align-self: center;
-				}
+		.d2l-labs-filter-dropdown-content-header {
+			display: flex;
+			justify-content: start;
+		}
+		.d2l-labs-filter-dropdown-content-header > span {
+			align-self: center;
+		}
 
-				.d2l-labs-tree-selector-margin-button {
-					margin-inline-end: 6px;
-				}
+		.d2l-labs-tree-selector-margin-button {
+			margin-inline-end: 6px;
+		}
 
-				.d2l-labs-tree-selector-margin-auto {
-					margin-inline-start: auto;
-				}
+		.d2l-labs-tree-selector-margin-auto {
+			margin-inline-start: auto;
+		}
 
-				.d2l-labs-tree-selector-search {
-					display: flex;
-					flex-wrap: nowrap;
-					padding-bottom: 26px;
-					padding-top: 4px;
-				}
-				@media screen and (max-width: 400px) {
-					.d2l-labs-tree-selector-search {
-						width: 100%;
-					}
-				}
-				:host([search]) d2l-dropdown d2l-dropdown-content .d2l-labs-tree-selector-tree {
-					display: none;
-				}
+		.d2l-labs-tree-selector-search {
+			display: flex;
+			flex-wrap: nowrap;
+			padding-bottom: 26px;
+			padding-top: 4px;
+		}
+		@media screen and (max-width: 400px) {
+			.d2l-labs-tree-selector-search {
+				width: 100%;
+			}
+		}
+		:host([search]) d2l-dropdown d2l-dropdown-content .d2l-labs-tree-selector-tree {
+			display: none;
+		}
 
-				.d2l-labs-tree-selector-search-results {
-					display: none;
-				}
-				:host([search]) d2l-dropdown d2l-dropdown-content .d2l-labs-tree-selector-search-results {
-					display: block;
-				}
-			`
-		];
-	}
+		.d2l-labs-tree-selector-search-results {
+			display: none;
+		}
+		:host([search]) d2l-dropdown d2l-dropdown-content .d2l-labs-tree-selector-search-results {
+			display: block;
+		}
+	`];
 
 	constructor() {
 		super();

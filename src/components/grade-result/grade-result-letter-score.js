@@ -8,29 +8,25 @@ import { selectStyles } from '@brightspace-ui/core/components/inputs/input-selec
  */
 export class D2LGradeResultLetterScore extends LocalizeLabsElement(LitElement) {
 
-	static get properties() {
-		return {
-			availableOptions: { attribute: 'available-options', type: Object },
-			label: { type: String },
-			selectedOption: { attribute: 'selected-option', type: String },
-			readonly: { type: Boolean }
-		};
-	}
+	static properties = {
+		availableOptions: { attribute: 'available-options', type: Object },
+		label: { type: String },
+		selectedOption: { attribute: 'selected-option', type: String },
+		readonly: { type: Boolean }
+	};
 
-	static get styles() {
-		return [selectStyles, bodyStandardStyles, css`
-			.d2l-grade-result-letter-score-container {
-				width: 8rem;
-			}
-			.d2l-grade-result-letter-score-select {
-				width: 100%;
-			}
-			.d2l-grade-result-letter-score-score-read-only {
-				height: calc(2rem + 2px);
-				line-height: calc(2rem + 2px);
-			}
-		`];
-	}
+	static styles = [selectStyles, bodyStandardStyles, css`
+		.d2l-grade-result-letter-score-container {
+			width: 8rem;
+		}
+		.d2l-grade-result-letter-score-select {
+			width: 100%;
+		}
+		.d2l-grade-result-letter-score-score-read-only {
+			height: calc(2rem + 2px);
+			line-height: calc(2rem + 2px);
+		}
+	`];
 
 	constructor() {
 		super();

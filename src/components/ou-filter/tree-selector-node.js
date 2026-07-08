@@ -15,77 +15,73 @@ import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
  *
  */
 class TreeSelectorNode extends LocalizeLabsElement(RtlMixin(LitElement)) {
-	static get properties() {
-		return {
-			name: { type: String },
-			dataId: { type: Number, attribute: 'data-id' },
-			isOpen: { type: Boolean, reflect: true, attribute: 'open' },
-			selectedState: { type: String, reflect: true, attribute: 'selected-state' },
-			isOpenable: { type: Boolean, reflect: true, attribute: 'openable' },
-			// for screen readers
-			indentLevel: { type: Number, attribute: 'indent-level' },
-			parentName: { type: String, attribute: 'parent-name' },
-			// for search: if isSearch, only search-result nodes are shown; the caller should ensure their ancestors are open
-			isSearch: { type: Boolean, reflect: true, attribute: 'search' },
-			isSearchResult: { type: Boolean, reflect: true, attribute: 'search-result' }
-		};
-	}
+	static properties = {
+		name: { type: String },
+		dataId: { type: Number, attribute: 'data-id' },
+		isOpen: { type: Boolean, reflect: true, attribute: 'open' },
+		selectedState: { type: String, reflect: true, attribute: 'selected-state' },
+		isOpenable: { type: Boolean, reflect: true, attribute: 'openable' },
+		// for screen readers
+		indentLevel: { type: Number, attribute: 'indent-level' },
+		parentName: { type: String, attribute: 'parent-name' },
+		// for search: if isSearch, only search-result nodes are shown; the caller should ensure their ancestors are open
+		isSearch: { type: Boolean, reflect: true, attribute: 'search' },
+		isSearchResult: { type: Boolean, reflect: true, attribute: 'search-result' }
+	};
 
-	static get styles() {
-		return css`
-			:host {
-				display: block;
-				font-size: 0.8rem;
-			}
-			:host([hidden]) {
-				display: none;
-			}
+	static styles = css`
+		:host {
+			display: block;
+			font-size: 0.8rem;
+		}
+		:host([hidden]) {
+			display: none;
+		}
 
-			.d2l-labs-tree-selector-node-node {
-				display: flex;
-				flex-wrap: nowrap;
-				margin-bottom: 16px;
-			}
+		.d2l-labs-tree-selector-node-node {
+			display: flex;
+			flex-wrap: nowrap;
+			margin-bottom: 16px;
+		}
 
-			d2l-input-checkbox {
-				display: inline-block;
-			}
+		d2l-input-checkbox {
+			display: inline-block;
+		}
 
-			.d2l-labs-tree-selector-node-open-control {
-				cursor: default;
-				margin-top: -3px;
-			}
-			.d2l-labs-tree-selector-node-open-control .d2l-labs-tree-selector-node-open {
-				display: none;
-			}
-			.d2l-labs-tree-selector-node-open-control[open] .d2l-labs-tree-selector-node-open {
-				display: inline-block;
-			}
-			.d2l-labs-tree-selector-node-open-control[open] .d2l-labs-tree-selector-node-closed {
-				display: none;
-			}
+		.d2l-labs-tree-selector-node-open-control {
+			cursor: default;
+			margin-top: -3px;
+		}
+		.d2l-labs-tree-selector-node-open-control .d2l-labs-tree-selector-node-open {
+			display: none;
+		}
+		.d2l-labs-tree-selector-node-open-control[open] .d2l-labs-tree-selector-node-open {
+			display: inline-block;
+		}
+		.d2l-labs-tree-selector-node-open-control[open] .d2l-labs-tree-selector-node-closed {
+			display: none;
+		}
 
-			.d2l-labs-tree-selector-node-subtree {
-				margin-left: 34px;
-				margin-right: 0;
-			}
-			:host([dir="rtl"]) .d2l-labs-tree-selector-node-subtree {
-				margin-left: 0;
-				margin-right: 34px;
-			}
-			.d2l-labs-tree-selector-node-subtree[hidden] {
-				display: none;
-			}
+		.d2l-labs-tree-selector-node-subtree {
+			margin-left: 34px;
+			margin-right: 0;
+		}
+		:host([dir="rtl"]) .d2l-labs-tree-selector-node-subtree {
+			margin-left: 0;
+			margin-right: 34px;
+		}
+		.d2l-labs-tree-selector-node-subtree[hidden] {
+			display: none;
+		}
 
-			.d2l-labs-tree-selector-node-text {
-				cursor: default;
-				display: inline-block;
-				margin-left: 0.5rem;
-				margin-right: 0.5rem;
-				width: 100%;
-			}
-		`;
-	}
+		.d2l-labs-tree-selector-node-text {
+			cursor: default;
+			display: inline-block;
+			margin-left: 0.5rem;
+			margin-right: 0.5rem;
+			width: 100%;
+		}
+	`;
 
 	constructor() {
 		super();

@@ -2,24 +2,21 @@ import './accordion-collapse.js';
 import { css, html, LitElement } from 'lit';
 
 class LabsAccordion extends LitElement {
-	static get properties() {
-		return {
-			/**
-			 * Whether to automatically close other opened branches
-			 */
-			autoClose: { type: Boolean, attribute: 'auto-close' },
-			_selected: { type: Number }
-		};
-	}
 
-	static get styles() {
-		return css`
-			:host {
-				box-sizing: border-box;
-				display: block;
-			}
-		`;
-	}
+	static properties = {
+		/**
+		 * Whether to automatically close other opened branches
+		 */
+		autoClose: { type: Boolean, attribute: 'auto-close' },
+		_selected: { type: Number }
+	};
+
+	static styles = css`
+		:host {
+			box-sizing: border-box;
+			display: block;
+		}
+	`;
 
 	constructor() {
 		super();

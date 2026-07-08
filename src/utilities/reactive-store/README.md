@@ -17,11 +17,10 @@ import ReactiveStore from '@brightspace-ui/labs/utilities/reactive-store.js';
 
 // Define your store with its reactive properties
 class MyStore extends ReactiveStore {
-	static get properties() {
-		return {
-			count: { type: Number },
-		};
-	}
+
+	static properties = {
+		count: { type: Number },
+	};
 
 	constructor() {
 		super();
@@ -104,11 +103,9 @@ import ReactiveStore from '@brightspace-ui/labs/utilities/reactive-store.js';
 
 // Define your store with its reactive properties
 class MyStore extends ReactiveStore {
-	static get properties() {
-		return {
-			count: { type: Number },
-		};
-	}
+	static properties = {
+		count: { type: Number },
+	};
 
 	constructor() {
 		super();
@@ -243,11 +240,9 @@ import ReactiveStore from '@brightspace-ui/labs/utilities/reactive-store.js';
 
 // Define your store with its reactive properties
 class MyStore extends ReactiveStore {
-	static get properties() {
-		return {
-			count: { type: Number },
-		};
-	}
+	static properties = {
+		count: { type: Number },
+	};
 
 	constructor() {
 		super();

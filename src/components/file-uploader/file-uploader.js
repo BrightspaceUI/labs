@@ -6,177 +6,174 @@ import { FocusMixin } from '@brightspace-ui/core/mixins/focus/focus-mixin.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 class FileUploader extends FocusMixin(LocalizeLabsElement(LitElement)) {
-	static get properties() {
-		return {
-			/**
-			 * When set, displays a feedback message to the user. Used in conjunction with `feedback-type`.
-			 */
-			feedback: { type: String, reflect: true },
-			/**
-			 * The type of feedback to display. One of: "error", "warning"
-			 */
-			feedbackType: { type: String, attribute: 'feedback-type', reflect: true },
-			/**
-			 * A descriptive label to associate with the file input. Should
-			 * be unique enough to distinguish the input from others on the page.
-			 */
-			label: { type: String },
-			/**
-			 * Whether multiple files can be uploaded.
-			 */
-			multiple: { type: Boolean, reflect: true },
-			/**
-			 * Collection of uploaded files, as [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
-			 */
-			_files: { type: Object },
-			/**
-			 * Whether a file is currently being dragged over the document.
-			 */
-			_fileDragOver: { type: Boolean, attribute: '_file-drag-over', reflect: true },
-			_inputFocus: { type: Boolean }
-		};
-	}
 
-	static get styles() {
-		return css`
-			:host {
-				box-sizing: border-box;
-				display: block;
-				max-width: 27rem;
-			}
-			:host([feedback-type="warning"]) {
-				--d2l-file-uploader-feedback-color: var(--d2l-color-feedback-warning);
-			}
-			:host([feedback-type="error"]) {
-				--d2l-file-uploader-feedback-color: var(--d2l-color-feedback-error);
-			}
+	static properties = {
+		/**
+		 * When set, displays a feedback message to the user. Used in conjunction with `feedback-type`.
+		 */
+		feedback: { type: String, reflect: true },
+		/**
+		 * The type of feedback to display. One of: "error", "warning"
+		 */
+		feedbackType: { type: String, attribute: 'feedback-type', reflect: true },
+		/**
+		 * A descriptive label to associate with the file input. Should
+		 * be unique enough to distinguish the input from others on the page.
+		 */
+		label: { type: String },
+		/**
+		 * Whether multiple files can be uploaded.
+		 */
+		multiple: { type: Boolean, reflect: true },
+		/**
+		 * Collection of uploaded files, as [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
+		 */
+		_files: { type: Object },
+		/**
+		 * Whether a file is currently being dragged over the document.
+		 */
+		_fileDragOver: { type: Boolean, attribute: '_file-drag-over', reflect: true },
+		_inputFocus: { type: Boolean }
+	};
 
-			.d2l-file-uploader-drop-zone {
-				border: 2px dashed var(--d2l-color-ferrite);
-				border-radius: 0.3rem;
-				padding: 1.5rem;
-				text-align: center;
-			}
+	static styles = css`
+		:host {
+			box-sizing: border-box;
+			display: block;
+			max-width: 27rem;
+		}
+		:host([feedback-type="warning"]) {
+			--d2l-file-uploader-feedback-color: var(--d2l-color-feedback-warning);
+		}
+		:host([feedback-type="error"]) {
+			--d2l-file-uploader-feedback-color: var(--d2l-color-feedback-error);
+		}
 
-			:host([_file-drag-over]) .d2l-file-uploader-drop-zone {
-				background-color: var(--d2l-color-celestine-plus-2);
-				border-color: var(--d2l-color-celestine);
-			}
+		.d2l-file-uploader-drop-zone {
+			border: 2px dashed var(--d2l-color-ferrite);
+			border-radius: 0.3rem;
+			padding: 1.5rem;
+			text-align: center;
+		}
 
-			.d2l-file-uploader-icon {
-				padding-bottom: 0.5rem;
-			}
+		:host([_file-drag-over]) .d2l-file-uploader-drop-zone {
+			background-color: var(--d2l-color-celestine-plus-2);
+			border-color: var(--d2l-color-celestine);
+		}
 
-			:host([_file-drag-over]) svg path {
-				fill: var(--d2l-color-celestine);
-			}
+		.d2l-file-uploader-icon {
+			padding-bottom: 0.5rem;
+		}
 
-			.d2l-file-uploader-input {
-				display: inline-block;
-				height: 100%;
-				left: 0;
+		:host([_file-drag-over]) svg path {
+			fill: var(--d2l-color-celestine);
+		}
+
+		.d2l-file-uploader-input {
+			display: inline-block;
+			height: 100%;
+			left: 0;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+
+		.d2l-file-uploader-browse-label {
+			background: none;
+			border: none;
+			color: var(--d2l-color-celestine);
+			overflow: hidden;
+			padding-right: 0;
+			position: relative;
+		}
+		.d2l-file-uploader-browse-label:hover,
+		.d2l-file-uploader-browse-label-focus {
+			color: var(--d2l-color-celestine-minus-1);
+			text-decoration: underline;
+		}
+
+		.d2l-file-uploader-browse-files {
+			display: none;
+		}
+
+		.d2l-file-uploader-feedback {
+			-webkit-animation-duration: 0.7s;
+			animation-duration: 0.7s;
+			-webkit-animation-name: feedbackIn;
+			animation-name: feedbackIn;
+			border: 1px solid var(--d2l-color-mica);
+			border-left-color: var(--d2l-file-uploader-feedback-color);
+			border-left-width: 0.5rem;
+			border-radius: 0.3rem;
+			display: none;
+			margin-bottom: 1.5rem;
+			padding: 0.7rem 1rem 0.7rem;
+		}
+		:host(:dir(rtl)) > .d2l-file-uploader-feedback {
+			border-left-color: var(--d2l-color-mica);
+			border-left-width: 1px;
+			border-right-color: var(--d2l-file-uploader-feedback-color);
+			border-right-width: 0.5rem;
+		}
+		:host([feedback]) > .d2l-file-uploader-feedback {
+			display: block;
+		}
+
+		@keyframes feedbackIn {
+			0% {
+				max-height: 0.1rem;
 				opacity: 0;
-				position: absolute;
-				top: 0;
-				width: 100%;
 			}
+			20% {
+				opacity: 0;
+			}
+			80% {
+				max-height: 3rem;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
 
-			.d2l-file-uploader-browse-label {
-				background: none;
-				border: none;
-				color: var(--d2l-color-celestine);
-				overflow: hidden;
-				padding-right: 0;
-				position: relative;
-			}
-			.d2l-file-uploader-browse-label:hover,
-			.d2l-file-uploader-browse-label-focus {
-				color: var(--d2l-color-celestine-minus-1);
-				text-decoration: underline;
+		@media (max-width: 992px) {
+
+			.d2l-file-uploader-input-container {
+				display: block;
+				margin-top: 0.8rem;
 			}
 
 			.d2l-file-uploader-browse-files {
+				display: inline;
+			}
+
+			.d2l-file-uploader-browse {
 				display: none;
 			}
 
-			.d2l-file-uploader-feedback {
-				-webkit-animation-duration: 0.7s;
-				animation-duration: 0.7s;
-				-webkit-animation-name: feedbackIn;
-				animation-name: feedbackIn;
-				border: 1px solid var(--d2l-color-mica);
-				border-left-color: var(--d2l-file-uploader-feedback-color);
-				border-left-width: 0.5rem;
+			.d2l-file-uploader-browse-label {
+				background-color: var(--d2l-color-celestine);
+				border-color: var(--d2l-color-celestine-minus-1);
 				border-radius: 0.3rem;
-				display: none;
-				margin-bottom: 1.5rem;
-				padding: 0.7rem 1rem 0.7rem;
-			}
-			:host(:dir(rtl)) > .d2l-file-uploader-feedback {
-				border-left-color: var(--d2l-color-mica);
-				border-left-width: 1px;
-				border-right-color: var(--d2l-file-uploader-feedback-color);
-				border-right-width: 0.5rem;
-			}
-			:host([feedback]) > .d2l-file-uploader-feedback {
-				display: block;
+				border-style: none;
+				color: #ffffff;
+				display: inline-block;
+				font-size: 0.7rem;
+				padding: 0.35rem 1.5rem;
 			}
 
-			@keyframes feedbackIn {
-				0% {
-					max-height: 0.1rem;
-					opacity: 0;
-				}
-				20% {
-					opacity: 0;
-				}
-				80% {
-					max-height: 3rem;
-				}
-				100% {
-					opacity: 1;
-				}
+			.d2l-file-uploader-browse-label:hover,
+			.d2l-file-uploader-browse-label-focus {
+				background-color: var(--d2l-color-celestine-minus-1);
+				color: #ffffff;
+				text-decoration: none;
+			}
+			.d2l-file-uploader-browse-label-focus {
+				box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--d2l-color-celestine);
 			}
 
-			@media (max-width: 992px) {
-
-				.d2l-file-uploader-input-container {
-					display: block;
-					margin-top: 0.8rem;
-				}
-
-				.d2l-file-uploader-browse-files {
-					display: inline;
-				}
-
-				.d2l-file-uploader-browse {
-					display: none;
-				}
-
-				.d2l-file-uploader-browse-label {
-					background-color: var(--d2l-color-celestine);
-					border-color: var(--d2l-color-celestine-minus-1);
-					border-radius: 0.3rem;
-					border-style: none;
-					color: #ffffff;
-					display: inline-block;
-					font-size: 0.7rem;
-					padding: 0.35rem 1.5rem;
-				}
-
-				.d2l-file-uploader-browse-label:hover,
-				.d2l-file-uploader-browse-label-focus {
-					background-color: var(--d2l-color-celestine-minus-1);
-					color: #ffffff;
-					text-decoration: none;
-				}
-				.d2l-file-uploader-browse-label-focus {
-					box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--d2l-color-celestine);
-				}
-
-			}
-		`;
-	}
+		}
+	`;
 
 	constructor() {
 		super();

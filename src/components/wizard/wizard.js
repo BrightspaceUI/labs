@@ -2,40 +2,37 @@ import './single-step-header.js';
 import { css, html, LitElement } from 'lit';
 
 class D2LWizard extends LitElement {
-	static get properties() {
-		return {
-			stepTitles: {
-				type: Array,
-				attribute: 'step-titles'
-			},
-			stepCount: {
-				type: Number,
-				attribute: 'step-count'
-			},
-			selectedStep: {
-				type: Number,
-				attribute: 'selected-step'
-			},
-			fillHeaderWidth: {
-				type: Boolean,
-				attribute: 'fill-header-width',
-				reflect: true
-			}
-		};
-	}
 
-	static get styles() {
-		return css`
-			.d2l-labs-wizard-header {
-				display: flex;
-				flex: 1;
-				justify-content: center;
-				margin: 30px 0;
-				overflow-x: auto;
-				width: 100%;
-			}
-		`;
-	}
+	static properties = {
+		stepTitles: {
+			type: Array,
+			attribute: 'step-titles'
+		},
+		stepCount: {
+			type: Number,
+			attribute: 'step-count'
+		},
+		selectedStep: {
+			type: Number,
+			attribute: 'selected-step'
+		},
+		fillHeaderWidth: {
+			type: Boolean,
+			attribute: 'fill-header-width',
+			reflect: true
+		}
+	};
+
+	static styles = css`
+		.d2l-labs-wizard-header {
+			display: flex;
+			flex: 1;
+			justify-content: center;
+			margin: 30px 0;
+			overflow-x: auto;
+			width: 100%;
+		}
+	`;
 
 	constructor() {
 		super();

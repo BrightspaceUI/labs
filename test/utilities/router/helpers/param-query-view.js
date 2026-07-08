@@ -2,12 +2,10 @@ import { html, LitElement } from 'lit';
 import { RouteReactor } from '../../../../src/utilities/router/index.js';
 
 class ParamQueryView extends LitElement {
-	static get properties() {
-		return {
-			params: { type: Object, attribute: false },
-			search: { type: Object, attribute: false },
-		};
-	}
+	static properties = {
+		params: { type: Object, attribute: false },
+		search: { type: Object, attribute: false },
+	};
 
 	constructor() {
 		super();
