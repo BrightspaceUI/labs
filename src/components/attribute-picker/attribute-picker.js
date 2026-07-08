@@ -84,10 +84,8 @@ class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
 			--d2l-input-padding-focus: 4px;
 		}
 		.d2l-attribute-picker-container:focus-within {
-			padding: var(--d2l-input-padding-focus);
-		}
-		.d2l-attribute-picker-container:focus-within {
 			border: 2px solid var(--d2l-color-celestine);
+			padding: var(--d2l-input-padding-focus);
 		}
 		[aria-invalid="true"].d2l-attribute-picker-container:focus-within {
 			border-color: var(--d2l-color-cinnabar);
