@@ -18,35 +18,32 @@ const MIN_POSITIVE_GRADE = 0;
  * @fires d2l-grade-result-grade-change - Dispatched on the change of the grade for a gradeType="Numeric" grade.
  */
 export class D2LGradeResultNumericScore extends LocalizeLabsElement(LitElement) {
-	static get properties() {
-		return {
-			label: { type: String },
-			scoreNumerator: { attribute: 'score-numerator', type: Number, converter: numberConverter },
-			scoreDenominator: { attribute: 'score-denominator', type: Number },
-			readonly: { type: Boolean },
-			required: { type: Boolean },
-			allowNegativeScore: { attribute: 'allow-negative-score', type: Boolean },
-			showFlooredScoreWarning: { attribute: 'show-floored-score-warning', type: Boolean },
-		};
-	}
 
-	static get styles() {
-		return [bodyCompactStyles, bodyStandardStyles, css`
-			.d2l-grade-result-numeric-score-container {
-				align-items: center;
-				display: flex;
-				flex-direction: row;
-			}
-			.d2l-grade-result-numeric-score-score-read-only {
-				height: calc(2rem + 2px);
-				line-height: calc(2rem + 2px);
-				max-width: 5.25rem;
-			}
-			.d2l-grade-result-numeric-score-hint {
-				margin: 0 0.3rem;
-			}
-		`];
-	}
+	static properties = {
+		label: { type: String },
+		scoreNumerator: { attribute: 'score-numerator', type: Number, converter: numberConverter },
+		scoreDenominator: { attribute: 'score-denominator', type: Number },
+		readonly: { type: Boolean },
+		required: { type: Boolean },
+		allowNegativeScore: { attribute: 'allow-negative-score', type: Boolean },
+		showFlooredScoreWarning: { attribute: 'show-floored-score-warning', type: Boolean },
+	};
+
+	static styles = [bodyCompactStyles, bodyStandardStyles, css`
+		.d2l-grade-result-numeric-score-container {
+			align-items: center;
+			display: flex;
+			flex-direction: row;
+		}
+		.d2l-grade-result-numeric-score-score-read-only {
+			height: calc(2rem + 2px);
+			line-height: calc(2rem + 2px);
+			max-width: 5.25rem;
+		}
+		.d2l-grade-result-numeric-score-hint {
+			margin: 0 0.3rem;
+		}
+	`];
 
 	render() {
 		const roundedNumerator = isNaN(this.scoreNumerator) ? '' : Math.round((this.scoreNumerator + Number.EPSILON) * 100) / 100;

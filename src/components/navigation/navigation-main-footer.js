@@ -3,15 +3,13 @@ import { navigationSharedStyle } from './navigation-shared-styles.js';
 
 class NavigationMainFooter extends LitElement {
 
-	static get styles() {
-		return [navigationSharedStyle, css`
-			:host {
-				border-bottom: 1px solid rgba(124, 134, 149, 0.18);
-				border-top: 1px solid rgba(124, 134, 149, 0.18);
-				display: block;
-			}
-		`];
-	}
+	static styles = [navigationSharedStyle, css`
+		:host {
+			border-bottom: 1px solid rgba(124, 134, 149, 0.18);
+			border-top: 1px solid rgba(124, 134, 149, 0.18);
+			display: block;
+		}
+	`];
 
 	render() {
 		return html`

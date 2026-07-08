@@ -3,11 +3,9 @@ import { LanguageListenerController } from '../../controllers/language-listener/
 
 export const CommunityBase = (superClass) => class CommunityBaseMixin extends superClass {
 
-	static get properties() {
-		return {
-			articleMap: { attribute: 'article-map', type: Object }
-		};
-	}
+	static properties = {
+		articleMap: { attribute: 'article-map', type: Object }
+	};
 
 	constructor() {
 		super();

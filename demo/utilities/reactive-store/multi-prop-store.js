@@ -1,13 +1,11 @@
 import ReactiveStore from '../../../src/utilities/reactive-store/reactive-store.js';
 
 export default class MultiPropStore extends ReactiveStore {
-	static get properties() {
-		return {
-			foo: { type: Number },
-			bar: { type: Number },
-			baz: { type: Number },
-		};
-	}
+	static properties = {
+		foo: { type: Number },
+		bar: { type: Number },
+		baz: { type: Number },
+	};
 
 	constructor() {
 		super();

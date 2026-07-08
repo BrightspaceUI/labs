@@ -19,141 +19,138 @@ const keyCodes = {
 };
 
 class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
-	static get properties() {
-		return {
-			/* When true, the user can manually enter any attribute they wish. If false, they must match a value from the dropdown. */
-			allowFreeform: { type: Boolean, attribute: 'allow-freeform', reflect: true },
 
-			/* An array of strings available in the dropdown list */
-			assignableAttributes: { type: Array, attribute: 'assignable-attributes', reflect: true },
+	static properties = {
+		/* When true, the user can manually enter any attribute they wish. If false, they must match a value from the dropdown. */
+		allowFreeform: { type: Boolean, attribute: 'allow-freeform', reflect: true },
 
-			/* An array of strings representing the attributes currently selected in the picker */
-			attributeList: { type: Array, attribute: 'attribute-list', reflect: true },
+		/* An array of strings available in the dropdown list */
+		assignableAttributes: { type: Array, attribute: 'assignable-attributes', reflect: true },
 
-			/*
-				The text that will appear in the tooltip that informs a user that the state is invalid
-				The default value is: 'At least one attribute must be set'
-			*/
-			invalidTooltipText: { type: String, attribute: 'invalid-tooltip-text', reflect: true },
+		/* An array of strings representing the attributes currently selected in the picker */
+		attributeList: { type: Array, attribute: 'attribute-list', reflect: true },
 
-			/* Required. The label associated with the attribute picker for screen reader users */
-			label: { type: String, reflect: true },
+		/*
+			The text that will appear in the tooltip that informs a user that the state is invalid
+			The default value is: 'At least one attribute must be set'
+		*/
+		invalidTooltipText: { type: String, attribute: 'invalid-tooltip-text', reflect: true },
 
-			/* The maximum number of attributes permitted. */
-			limit: { type: Number, attribute: 'limit', reflect: true },
+		/* Required. The label associated with the attribute picker for screen reader users */
+		label: { type: String, reflect: true },
 
-			/* When true, an error state will appear if no attributes are set */
-			required: { type: Boolean, attribute: 'required', reflect: true },
+		/* The maximum number of attributes permitted. */
+		limit: { type: Number, attribute: 'limit', reflect: true },
 
-			/* Represents the index of the currently focused attribute. If no attribute is focused, equals -1 */
-			_activeAttributeIndex: { state: true },
+		/* When true, an error state will appear if no attributes are set */
+		required: { type: Boolean, attribute: 'required', reflect: true },
 
-			/* Represents the index of the currently focused dropdown list item. If no item is focused, equals -1 */
-			_dropdownIndex: { state: true },
+		/* Represents the index of the currently focused attribute. If no attribute is focused, equals -1 */
+		_activeAttributeIndex: { state: true },
 
-			/* When true, the user currently has focus within the component */
-			_hasFocus: { state: true },
+		/* Represents the index of the currently focused dropdown list item. If no item is focused, equals -1 */
+		_dropdownIndex: { state: true },
 
-			/* When true, the user has yet to lose focus for the first time, meaning the validation won't be shown until they've lost focus for the first time */
-			_initialFocus: { state: true },
+		/* When true, the user currently has focus within the component */
+		_hasFocus: { state: true },
 
-			/* When true, the user currently has focus within the input */
-			_inputFocused: { state: true },
+		/* When true, the user has yet to lose focus for the first time, meaning the validation won't be shown until they've lost focus for the first time */
+		_initialFocus: { state: true },
 
-			/* When true, the user has reached the limit of attributes that can be added */
-			_limitReached: { state: true },
+		/* When true, the user currently has focus within the input */
+		_inputFocused: { state: true },
 
-			/* The inner text of the input */
-			_text: { state: true }
-		};
-	}
+		/* When true, the user has reached the limit of attributes that can be added */
+		_limitReached: { state: true },
 
-	static get styles() {
-		return [inputStyles, css`
-			:host {
-				display: inline-block;
-				font-size: 0.8rem;
-				width: 100%;
-			}
-			:host:disabled {
-				opacity: 0.5;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-			.d2l-attribute-picker-container {
-				--d2l-input-padding: 5px;
-				--d2l-input-padding-focus: 4px;
-			}
-			.d2l-attribute-picker-container:focus-within {
-				padding: var(--d2l-input-padding-focus);
-			}
-			.d2l-attribute-picker-container:focus-within {
-				border: 2px solid var(--d2l-color-celestine);
-			}
-			[aria-invalid="true"].d2l-attribute-picker-container:focus-within {
-				border-color: var(--d2l-color-cinnabar);
-			}
-			.d2l-attribute-picker-content {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.2rem;
-			}
-			.d2l-attribute-picker-attribute {
-				height: 1.55rem;
-			}
-			.d2l-attribute-picker-attribute:focus-visible {
-				outline: none;
-			}
-			.d2l-attribute-picker-input {
-				background: transparent;
-				border: none;
-				box-shadow: none;
-				box-sizing: border-box;
-				flex-grow: 1;
-				font-family: inherit;
-				font-size: inherit;
-				min-height: 1.55rem;
-				outline: none;
-				padding: 0 !important;
-				width: 4rem;
-			}
-			.d2l-attribute-list {
-				background-color: white;
-				border: 1px solid var(--d2l-color-gypsum);
-				border-radius: 0.3rem;
-				max-height: 7.8rem;
-				overflow-y: auto;
-				padding-left: 0;
-				text-overflow: ellipsis;
-			}
-			.d2l-attribute-picker-li {
-				cursor: pointer;
-				margin: 0;
-				padding: 0.4rem 6rem 0.4rem 0.6rem;
-			}
-			.d2l-attribute-picker-li[aria-selected="true"] {
-				background-color: var(--d2l-color-celestine-plus-2);
-				color: var(--d2l-color-celestine);
-			}
-			.d2l-attribute-picker-absolute-container {
-				margin: 0 0.3rem 0 -0.3rem;
-				position: absolute;
-				width: 100%;
-				z-index: 1;
-			}
-			.d2l-input-text-invalid-icon {
-				background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0wIDBoMjJ2MjJIMHoiLz4KICAgIDxwYXRoIGQ9Ik0xOC44NjQgMTYuNDdMMTIuNjIzIDMuOTg5YTEuNzgzIDEuNzgzIDAgMDAtMy4xOTIgMEwzLjE4OSAxNi40N2ExLjc2MSAxLjc2MSAwIDAwLjA4IDEuNzNjLjMyNS41MjUuODk4Ljc5OCAxLjUxNi43OTloMTIuNDgzYy42MTggMCAxLjE5Mi0uMjczIDEuNTE2LS44LjIzNy0uMzM1LjI2NS0xLjM3LjA4LTEuNzN6IiBmaWxsPSIjQ0QyMDI2IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz4KICAgIDxwYXRoIGQ9Ik0xMS4wMjcgMTcuMjY0YTEuMzM3IDEuMzM3IDAgMTEwLTIuNjc1IDEuMzM3IDEuMzM3IDAgMDEwIDIuNjc1ek0xMS45IDEyLjk4YS44OTIuODkyIDAgMDEtMS43NDcgMEw5LjI3IDguNTJhLjg5Mi44OTIgMCAwMS44NzQtMS4wNjRoMS43NjhhLjg5Mi44OTIgMCAwMS44NzQgMS4wNjVsLS44ODYgNC40NTh6IiBmaWxsPSIjRkZGIi8+CiAgPC9nPgo8L3N2Zz4K");
-				display: flex;
-				height: 22px;
-				inset-inline-end: 8px;
-				position: absolute;
-				top: 50%;
-				transform: translateY(-50%);
-				width: 22px;
-			}
-		`];
-	}
+		/* The inner text of the input */
+		_text: { state: true }
+	};
+
+	static styles = [inputStyles, css`
+		:host {
+			display: inline-block;
+			font-size: 0.8rem;
+			width: 100%;
+		}
+		:host:disabled {
+			opacity: 0.5;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+		.d2l-attribute-picker-container {
+			padding: 5px;
+		}
+		.d2l-attribute-picker-container:hover,
+		.d2l-attribute-picker-container:focus-within {
+			padding: 4px;
+		}
+		.d2l-attribute-picker-container:focus-within {
+			border: 2px solid var(--d2l-color-celestine);
+		}
+		[aria-invalid="true"].d2l-attribute-picker-container:focus-within {
+			border-color: var(--d2l-color-cinnabar);
+		}
+		.d2l-attribute-picker-content {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.2rem;
+		}
+		.d2l-attribute-picker-attribute {
+			height: 1.55rem;
+		}
+		.d2l-attribute-picker-attribute:focus-visible {
+			outline: none;
+		}
+		.d2l-attribute-picker-input {
+			background: transparent;
+			border: none;
+			box-shadow: none;
+			box-sizing: border-box;
+			flex-grow: 1;
+			font-family: inherit;
+			font-size: inherit;
+			min-height: 1.55rem;
+			outline: none;
+			padding: 0 !important;
+			width: 4rem;
+		}
+		.d2l-attribute-list {
+			background-color: white;
+			border: 1px solid var(--d2l-color-gypsum);
+			border-radius: 0.3rem;
+			max-height: 7.8rem;
+			overflow-y: auto;
+			padding-left: 0;
+			text-overflow: ellipsis;
+		}
+		.d2l-attribute-picker-li {
+			cursor: pointer;
+			margin: 0;
+			padding: 0.4rem 6rem 0.4rem 0.6rem;
+		}
+		.d2l-attribute-picker-li[aria-selected="true"] {
+			background-color: var(--d2l-color-celestine-plus-2);
+			color: var(--d2l-color-celestine);
+		}
+		.d2l-attribute-picker-absolute-container {
+			margin: 0 0.3rem 0 -0.3rem;
+			position: absolute;
+			width: 100%;
+			z-index: 1;
+		}
+		.d2l-input-text-invalid-icon {
+			background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0wIDBoMjJ2MjJIMHoiLz4KICAgIDxwYXRoIGQ9Ik0xOC44NjQgMTYuNDdMMTIuNjIzIDMuOTg5YTEuNzgzIDEuNzgzIDAgMDAtMy4xOTIgMEwzLjE4OSAxNi40N2ExLjc2MSAxLjc2MSAwIDAwLjA4IDEuNzNjLjMyNS41MjUuODk4Ljc5OCAxLjUxNi43OTloMTIuNDgzYy42MTggMCAxLjE5Mi0uMjczIDEuNTE2LS44LjIzNy0uMzM1LjI2NS0xLjM3LjA4LTEuNzN6IiBmaWxsPSIjQ0QyMDI2IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz4KICAgIDxwYXRoIGQ9Ik0xMS4wMjcgMTcuMjY0YTEuMzM3IDEuMzM3IDAgMTEwLTIuNjc1IDEuMzM3IDEuMzM3IDAgMDEwIDIuNjc1ek0xMS45IDEyLjk4YS44OTIuODkyIDAgMDEtMS43NDcgMEw5LjI3IDguNTJhLjg5Mi44OTIgMCAwMS44NzQtMS4wNjRoMS43NjhhLjg5Mi44OTIgMCAwMS44NzQgMS4wNjVsLS44ODYgNC40NTh6IiBmaWxsPSIjRkZGIi8+CiAgPC9nPgo8L3N2Zz4K");
+			display: flex;
+			height: 22px;
+			inset-inline-end: 8px;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 22px;
+		}
+	`];
 
 	constructor() {
 		super();

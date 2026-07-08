@@ -96,7 +96,8 @@
     "/demo/components/ou-filter/*.js"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "@adobe/lit-mobx": "^2",
@@ -111,5 +112,5 @@
     "parse-srt": "^1.0.0-alpha",
     "webvtt-parser": "^2"
   },
-  "version": "2.56.0"
+  "version": "2.56.2"
 }

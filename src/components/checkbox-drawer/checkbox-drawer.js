@@ -10,47 +10,43 @@ import { SkeletonMixin } from '@brightspace-ui/core/components/skeleton/skeleton
 
 class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 
-	static get properties() {
-		return {
-			checked: { type: Boolean },
-			description: { type: String },
-			disabled: { type: Boolean },
-			disabledTooltip: { type: String, attribute: 'disabled-tooltip' },
-			label: { type: String },
-			readOnly: { type: Boolean, attribute: 'read-only' },
-			_expandCollapseBusy: { state: true }
-		};
-	}
+	static properties = {
+		checked: { type: Boolean },
+		description: { type: String },
+		disabled: { type: Boolean },
+		disabledTooltip: { type: String, attribute: 'disabled-tooltip' },
+		label: { type: String },
+		readOnly: { type: Boolean, attribute: 'read-only' },
+		_expandCollapseBusy: { state: true }
+	};
 
-	static get styles() {
-		return [super.styles, bodyCompactStyles, css`
-			:host {
-				display: block;
-			}
+	static styles = [super.styles, bodyCompactStyles, css`
+		:host {
+			display: block;
+		}
 
-			.d2l-input-checkbox {
-				margin-bottom: 0;
-			}
+		.d2l-input-checkbox {
+			margin-bottom: 0;
+		}
 
-			.d2l-input-checkbox-description {
-				color: var(--d2l-color-tungsten);
-				font-size: 0.7rem;
-				width: fit-content;
-			}
+		.d2l-input-checkbox-description {
+			color: var(--d2l-color-tungsten);
+			font-size: 0.7rem;
+			width: fit-content;
+		}
 
-			.d2l-checkbox-content-margin {
-				margin-top: 18px;
-			}
+		.d2l-checkbox-content-margin {
+			margin-top: 18px;
+		}
 
-			.d2l-input-read-only-label {
-				display: inline-block;
-				margin-left: 0.5rem;
-			}
-			.d2l-input-read-only-spacer {
-				padding-inline-start: 1.7rem;
-			}
-		`];
-	}
+		.d2l-input-read-only-label {
+			display: inline-block;
+			margin-left: 0.5rem;
+		}
+		.d2l-input-read-only-spacer {
+			padding-inline-start: 1.7rem;
+		}
+	`];
 
 	constructor() {
 		super();

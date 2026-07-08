@@ -554,33 +554,29 @@ decorate(Tree, {
  */
 class TreeFilter extends LocalizeLabsElement(MobxLitElement) {
 
-	static get properties() {
-		return {
-			tree: { type: Object, attribute: false },
-			openerText: { type: String, attribute: 'opener-text' },
-			openerTextSelected: { type: String, attribute: 'opener-text-selected' },
-			searchString: { type: String, attribute: 'search-string', reflect: true },
-			isLoadMoreSearch: { type: Boolean, attribute: 'load-more-search', reflect: true },
-			isSelectAllVisible: { type: Boolean, attribute: 'select-all-ui', reflect: true },
-			disabled: { type: Boolean, attribute: 'disabled' },
-			_isLoadingSearch: { type: Boolean, attribute: false }
-		};
-	}
+	static properties = {
+		tree: { type: Object, attribute: false },
+		openerText: { type: String, attribute: 'opener-text' },
+		openerTextSelected: { type: String, attribute: 'opener-text-selected' },
+		searchString: { type: String, attribute: 'search-string', reflect: true },
+		isLoadMoreSearch: { type: Boolean, attribute: 'load-more-search', reflect: true },
+		isSelectAllVisible: { type: Boolean, attribute: 'select-all-ui', reflect: true },
+		disabled: { type: Boolean, attribute: 'disabled' },
+		_isLoadingSearch: { type: Boolean, attribute: false }
+	};
 
-	static get styles() {
-		return css`
-			:host {
-				display: inline-block;
-			}
-			:host([hidden]) {
-				display: none;
-			}
+	static styles = css`
+		:host {
+			display: inline-block;
+		}
+		:host([hidden]) {
+			display: none;
+		}
 
-			d2l-button.d2l-tree-load-more {
-				padding-bottom: 12px;
-			}
-		`;
-	}
+		d2l-button.d2l-tree-load-more {
+			padding-bottom: 12px;
+		}
+	`;
 
 	constructor() {
 		super();

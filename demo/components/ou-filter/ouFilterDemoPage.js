@@ -16,22 +16,20 @@ function parseHash(hash) {
 /* eslint-disable no-console */
 class OuFilterDemoPage extends MobxLitElement {
 
-	static get styles() {
-		return [
-			css`
-				:host {
-					display: inline-block;
-				}
-				div {
-					padding: 30px;
-				}
-				label {
-					display: block;
-					margin-top: 25px;
-				}
-			`
-		];
-	}
+	static styles = [
+		css`
+			:host {
+				display: inline-block;
+			}
+			div {
+				padding: 30px;
+			}
+			label {
+				display: block;
+				margin-top: 25px;
+			}
+		`
+	];
 
 	constructor() {
 		super();

@@ -12,49 +12,45 @@ const previewOptions = {
 
 export class D2LGradeResultStudentGradePreview extends LocalizeLabsElement(LitElement) {
 
-	static get properties() {
-		return {
-			hideLabel: {
-				type: Boolean,
-				attribute: 'hide-label'
-			},
-			outOf: {
-				type: Number,
-				attribute: 'out-of'
-			},
-			studentGradePreview: {
-				type: Object,
-				attribute: 'student-grade-preview'
-			}
-		};
-	}
+	static properties = {
+		hideLabel: {
+			type: Boolean,
+			attribute: 'hide-label'
+		},
+		outOf: {
+			type: Number,
+			attribute: 'out-of'
+		},
+		studentGradePreview: {
+			type: Object,
+			attribute: 'student-grade-preview'
+		}
+	};
 
-	static get styles() {
-		return [bodySmallStyles, bodyCompactStyles, labelStyles, css`
-			:host {
-				display: inline-block;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-			.d2l-grade-result-student-grade-preview-container {
-				align-items: center;
-				display: flex;
-				flex-direction: row;
-				gap: 0.5rem;
-				min-height: calc(2rem + 2px);
-			}
-			.d2l-grade-result-student-grade-preview-colour {
-				border-radius: 6px;
-				height: 0.9rem;
-				width: 0.9rem;
-			}
-			.d2l-label-text {
-				line-height: 1.6rem;
-				margin-bottom: 0.4rem;
-			}
-		`];
-	}
+	static styles = [bodySmallStyles, bodyCompactStyles, labelStyles, css`
+		:host {
+			display: inline-block;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+		.d2l-grade-result-student-grade-preview-container {
+			align-items: center;
+			display: flex;
+			flex-direction: row;
+			gap: 0.5rem;
+			min-height: calc(2rem + 2px);
+		}
+		.d2l-grade-result-student-grade-preview-colour {
+			border-radius: 6px;
+			height: 0.9rem;
+			width: 0.9rem;
+		}
+		.d2l-label-text {
+			line-height: 1.6rem;
+			margin-bottom: 0.4rem;
+		}
+	`];
 
 	constructor() {
 		super();

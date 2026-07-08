@@ -4,11 +4,9 @@ import { CommunityBase } from './community-base.js';
 
 class CommunityLink extends CommunityBase(LitElement) {
 
-	static get properties() {
-		return {
-			text: { type: String },
-		};
-	}
+	static properties = {
+		text: { type: String },
+	};
 
 	render() {
 		return html`<d2l-button-subtle

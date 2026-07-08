@@ -54,24 +54,20 @@ export class OuFilterDataManager {
  */
 class OuFilter extends LocalizeLabsElement(MobxLitElement) {
 
-	static get properties() {
-		return {
-			dataManager: { type: Object, attribute: false },
-			isSelectAllVisible: { type: Boolean, attribute: 'select-all-ui', reflect: true },
-			disabled: { type: Boolean, attribute: 'disabled' }
-		};
-	}
+	static properties = {
+		dataManager: { type: Object, attribute: false },
+		isSelectAllVisible: { type: Boolean, attribute: 'select-all-ui', reflect: true },
+		disabled: { type: Boolean, attribute: 'disabled' }
+	};
 
-	static get styles() {
-		return css`
-			:host {
-				display: inline-block;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-		`;
-	}
+	static styles = css`
+		:host {
+			display: inline-block;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+	`;
 
 	constructor() {
 		super();

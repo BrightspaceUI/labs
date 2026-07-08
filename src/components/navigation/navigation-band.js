@@ -9,84 +9,82 @@ function useCustomScroll() {
 
 class NavigationBand extends LitElement {
 
-	static get styles() {
-		return [centererStyles, guttersStyles, css`
-			:host {
-				background: linear-gradient(180deg, var(--d2l-branding-primary-color, var(--d2l-color-celestine)) 1.5rem, #ffffff 0%);
-				display: block;
-				min-height: 4px;
-				position: relative; /* Needed for Firefox */
-			}
-			:host([hidden]) {
-				display: none;
-			}
+	static styles = [centererStyles, guttersStyles, css`
+		:host {
+			background: linear-gradient(180deg, var(--d2l-branding-primary-color, var(--d2l-color-celestine)) 1.5rem, #ffffff 0%);
+			display: block;
+			min-height: 4px;
+			position: relative; /* Needed for Firefox */
+		}
+		:host([hidden]) {
+			display: none;
+		}
 
-			.d2l-labs-navigation-scroll {
-				overflow-x: auto;
-				overflow-y: hidden;
-				scroll-behavior: smooth;
-			}
+		.d2l-labs-navigation-scroll {
+			overflow-x: auto;
+			overflow-y: hidden;
+			scroll-behavior: smooth;
+		}
 
-			.d2l-labs-navigation-scroll[data-custom-scroll] {
-				/* Firefox Styles */
-				scrollbar-color: var(--d2l-color-galena) var(--d2l-color-sylvite);
-				scrollbar-width: thin;
-			}
-			/* Webkit Styles */
-			.d2l-labs-navigation-scroll[data-custom-scroll]::-webkit-scrollbar {
-				background-color: var(--d2l-color-sylvite);
-				border-radius: 8px;
-				height: 9px;
-			}
-			.d2l-labs-navigation-scroll[data-custom-scroll]::-webkit-scrollbar-thumb {
-				background-color: var(--d2l-color-galena);
-				border-bottom: 1px solid var(--d2l-color-sylvite);
-				border-radius: 8px;
-				border-top: 1px solid var(--d2l-color-sylvite);
-			}
-			/* Faded edges styles */
+		.d2l-labs-navigation-scroll[data-custom-scroll] {
+			/* Firefox Styles */
+			scrollbar-color: var(--d2l-color-galena) var(--d2l-color-sylvite);
+			scrollbar-width: thin;
+		}
+		/* Webkit Styles */
+		.d2l-labs-navigation-scroll[data-custom-scroll]::-webkit-scrollbar {
+			background-color: var(--d2l-color-sylvite);
+			border-radius: 8px;
+			height: 9px;
+		}
+		.d2l-labs-navigation-scroll[data-custom-scroll]::-webkit-scrollbar-thumb {
+			background-color: var(--d2l-color-galena);
+			border-bottom: 1px solid var(--d2l-color-sylvite);
+			border-radius: 8px;
+			border-top: 1px solid var(--d2l-color-sylvite);
+		}
+		/* Faded edges styles */
+		.d2l-labs-navigation-scroll-before,
+		.d2l-labs-navigation-scroll-after {
+			height: 100%;
+			max-height: 1.5rem; /* should match linear-background height */
+			pointer-events: none;
+			position: absolute;
+			top: 0;
+			width: 2.439%; /* should match gutter width */
+			z-index: 2;
+		}
+		.d2l-labs-navigation-scroll-before {
+			background: linear-gradient(to right, var(--d2l-branding-primary-color, var(--d2l-color-celestine)), transparent);
+			left: 0;
+		}
+		.d2l-labs-navigation-scroll-after {
+			background: linear-gradient(to left, var(--d2l-branding-primary-color, var(--d2l-color-celestine)), transparent);
+			right: 0;
+		}
+		/* Styles to ensure the right padding is respected when scrolling */
+		.d2l-labs-navigation-centerer {
+			line-height: 0;
+			position: relative;
+		}
+		.d2l-labs-navigation-gutters {
+			display: inline-block;
+			position: unset;
+			vertical-align: top;
+		}
+		@media (max-width: 615px) {
 			.d2l-labs-navigation-scroll-before,
 			.d2l-labs-navigation-scroll-after {
-				height: 100%;
-				max-height: 1.5rem; /* should match linear-background height */
-				pointer-events: none;
-				position: absolute;
-				top: 0;
-				width: 2.439%; /* should match gutter width */
-				z-index: 2;
+				width: 15px;
 			}
-			.d2l-labs-navigation-scroll-before {
-				background: linear-gradient(to right, var(--d2l-branding-primary-color, var(--d2l-color-celestine)), transparent);
-				left: 0;
-			}
+		}
+		@media (min-width: 1230px) {
+			.d2l-labs-navigation-scroll-before,
 			.d2l-labs-navigation-scroll-after {
-				background: linear-gradient(to left, var(--d2l-branding-primary-color, var(--d2l-color-celestine)), transparent);
-				right: 0;
+				width: 30px;
 			}
-			/* Styles to ensure the right padding is respected when scrolling */
-			.d2l-labs-navigation-centerer {
-				line-height: 0;
-				position: relative;
-			}
-			.d2l-labs-navigation-gutters {
-				display: inline-block;
-				position: unset;
-				vertical-align: top;
-			}
-			@media (max-width: 615px) {
-				.d2l-labs-navigation-scroll-before,
-				.d2l-labs-navigation-scroll-after {
-					width: 15px;
-				}
-			}
-			@media (min-width: 1230px) {
-				.d2l-labs-navigation-scroll-before,
-				.d2l-labs-navigation-scroll-after {
-					width: 30px;
-				}
-			}
-		`];
-	}
+		}
+	`];
 
 	constructor() {
 		super();

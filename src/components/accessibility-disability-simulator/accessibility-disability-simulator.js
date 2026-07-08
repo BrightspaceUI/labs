@@ -23,81 +23,77 @@ const otherTypes = Object.entries(DISABILITY_TYPES).filter(value => !value[0].in
 
 class AccessibilityDisabilitySimulator extends LocalizeLabsElement(LitElement) {
 
-	static get properties() {
-		return {
-			/**
-			 * The level of blurriness when the low-vision filter is being used, should range between 1 and 100
-			 * @type {Number}
-			 */
-			blurLevel: { type: Number, attribute: 'blur-level', reflect: true },
-			/**
-			 * The type of disability to simulate
-			 * @type {'no-vision'|'low-vision'|'keyboard-only'|'colorblind-achromatopsia'|'colorblind-deuteranopia'|'colorblind-protanopia'|'colorblind-tritanopia'}
-			 */
-			disabilityType: { type: String, attribute: 'disability-type', reflect: true },
-			/**
-			 * Whether or not the alert should be shown
-			 * @type {Boolean}
-			 */
-			hideAlert: { type: Boolean, attribute: 'hide-alert' },
-			/**
-			 * Whether or not to show the disability type selection and blur level controls
-			 * @type {Boolean}
-			 */
-			hideControls: { type: Boolean, attribute: 'hide-controls' }
-		};
-	}
+	static properties = {
+		/**
+		 * The level of blurriness when the low-vision filter is being used, should range between 1 and 100
+		 * @type {Number}
+		 */
+		blurLevel: { type: Number, attribute: 'blur-level', reflect: true },
+		/**
+		 * The type of disability to simulate
+		 * @type {'no-vision'|'low-vision'|'keyboard-only'|'colorblind-achromatopsia'|'colorblind-deuteranopia'|'colorblind-protanopia'|'colorblind-tritanopia'}
+		 */
+		disabilityType: { type: String, attribute: 'disability-type', reflect: true },
+		/**
+		 * Whether or not the alert should be shown
+		 * @type {Boolean}
+		 */
+		hideAlert: { type: Boolean, attribute: 'hide-alert' },
+		/**
+		 * Whether or not to show the disability type selection and blur level controls
+		 * @type {Boolean}
+		 */
+		hideControls: { type: Boolean, attribute: 'hide-controls' }
+	};
 
-	static get styles() {
-		return [ bodyCompactStyles, bodyStandardStyles, offscreenStyles, selectStyles, css`
-			.simulator-controls {
-				align-items: center;
-				display: flex;
-				gap: 0.5rem;
-				margin-bottom: 1rem;
-			}
+	static styles = [bodyCompactStyles, bodyStandardStyles, offscreenStyles, selectStyles, css`
+		.simulator-controls {
+			align-items: center;
+			display: flex;
+			gap: 0.5rem;
+			margin-bottom: 1rem;
+		}
 
-			.low-vision-slider {
-				align-items: center;
-				display: flex;
-				gap: 0.5rem;
-			}
+		.low-vision-slider {
+			align-items: center;
+			display: flex;
+			gap: 0.5rem;
+		}
 
-			.alert-message {
-				display: inline-block;
-				margin-bottom: 1rem;
-				padding: 0.5rem;
-			}
+		.alert-message {
+			display: inline-block;
+			margin-bottom: 1rem;
+			padding: 0.5rem;
+		}
 
-			.svg-filter {
-				display: none;
-			}
+		.svg-filter {
+			display: none;
+		}
 
-			:host([disability-type="keyboard-only"]) .wrapper-slot {
-				pointer-events: none;
-			}
+		:host([disability-type="keyboard-only"]) .wrapper-slot {
+			pointer-events: none;
+		}
 
-			:host([disability-type="no-vision"]) .wrapper-slot {
-				filter: grayscale(1);
-			}
+		:host([disability-type="no-vision"]) .wrapper-slot {
+			filter: grayscale(1);
+		}
 
-			:host([disability-type="colorblind-achromatopsia"]) .wrapper-slot {
-				filter: grayscale(1);
-			}
+		:host([disability-type="colorblind-achromatopsia"]) .wrapper-slot {
+			filter: grayscale(1);
+		}
 
-			:host([disability-type="colorblind-deuteranopia"]) .wrapper-slot {
-				filter: url("#deuteranopia");
-			}
+		:host([disability-type="colorblind-deuteranopia"]) .wrapper-slot {
+			filter: url("#deuteranopia");
+		}
 
-			:host([disability-type="colorblind-protanopia"]) .wrapper-slot {
-				filter: url("#protanopia");
-			}
+		:host([disability-type="colorblind-protanopia"]) .wrapper-slot {
+			filter: url("#protanopia");
+		}
 
-			:host([disability-type="colorblind-tritanopia"]) .wrapper-slot {
-				filter: url("#tritanopia");
-			}
-		` ];
-	}
+		:host([disability-type="colorblind-tritanopia"]) .wrapper-slot {
+			filter: url("#tritanopia");
+		}
+	`];
 
 	constructor() {
 		super();

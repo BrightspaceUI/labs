@@ -5,24 +5,20 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 
 class NavigationDropdownButtonCustom extends DropdownOpenerMixin(LitElement) {
 
-	static get properties() {
-		return {
-			openerLabel: { type: String, attribute: 'opener-label' }
-		};
-	}
+	static properties = {
+		openerLabel: { type: String, attribute: 'opener-label' }
+	};
 
-	static get styles() {
-		return [highlightBorderStyles, highlightButtonStyles, css`
-			:host {
-				display: inline-block;
-				height: 100%;
-				position: relative;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-		`];
-	}
+	static styles = [highlightBorderStyles, highlightButtonStyles, css`
+		:host {
+			display: inline-block;
+			height: 100%;
+			position: relative;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+	`];
 
 	render() {
 		return html`

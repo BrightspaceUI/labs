@@ -10,32 +10,28 @@ import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offsc
 
 class NavigationDropdownButtonIcon extends DropdownOpenerMixin(LitElement) {
 
-	static get properties() {
-		return {
-			icon: { type: String },
-			hasNotification: { attribute: 'has-notification', reflect: true, type: Boolean },
-			text: { type: String },
-			notificationText: { attribute: 'notification-text', type: String },
-			tooltipOffset: { attribute: 'tooltip-offset', type: Number }
-		};
-	}
+	static properties = {
+		icon: { type: String },
+		hasNotification: { attribute: 'has-notification', reflect: true, type: Boolean },
+		text: { type: String },
+		notificationText: { attribute: 'notification-text', type: String },
+		tooltipOffset: { attribute: 'tooltip-offset', type: Number }
+	};
 
-	static get styles() {
-		return [highlightBorderStyles, highlightButtonStyles, offscreenStyles, css`
-			:host {
-				display: inline-block;
-				height: 100%;
-				position: relative;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-			.icon-container {
-				display: inline-block;
-				position: relative;
-			}
-		`];
-	}
+	static styles = [highlightBorderStyles, highlightButtonStyles, offscreenStyles, css`
+		:host {
+			display: inline-block;
+			height: 100%;
+			position: relative;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+		.icon-container {
+			display: inline-block;
+			position: relative;
+		}
+	`];
 
 	constructor() {
 		super();
