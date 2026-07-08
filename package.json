@@ -96,7 +96,8 @@
     "/demo/components/ou-filter/*.js"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "@adobe/lit-mobx": "^2",
