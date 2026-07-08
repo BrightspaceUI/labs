@@ -13,74 +13,70 @@ const defaultEventProperties = {
 
 class OptOutDialog extends LocalizeLabsElement(LitElement) {
 
-	static get properties() {
-		return {
-			hideReason: { type: Boolean, attribute: 'hide-reason' },
-			hideFeedback: { type: Boolean, attribute: 'hide-feedback' }
-		};
-	}
+	static properties = {
+		hideReason: { type: Boolean, attribute: 'hide-reason' },
+		hideFeedback: { type: Boolean, attribute: 'hide-feedback' }
+	};
 
-	static get styles() {
-		return css`
-			:host {
-				height: 100%;
-				overflow: hidden;
-				pointer-events: auto;
-				position: absolute;
-				width: 100%;
-				z-index: 950;
-			}
+	static styles = css`
+		:host {
+			height: 100%;
+			overflow: hidden;
+			pointer-events: auto;
+			position: absolute;
+			width: 100%;
+			z-index: 950;
+		}
 
-			.opt-out-modal-fade {
-				background-color: #ffffff;
-				height: 100%;
-				opacity: 0.7;
-				position: absolute;
-				width: 100%;
-				z-index: 1;
-			}
+		.opt-out-modal-fade {
+			background-color: #ffffff;
+			height: 100%;
+			opacity: 0.7;
+			position: absolute;
+			width: 100%;
+			z-index: 1;
+		}
 
-			.dialog {
-				background-color: #ffffff;
-				border: 1px solid var(--d2l-color-mica);
-				border-radius: 0.3rem;
-				box-shadow: 0 2px 12px rgba(86, 90, 92, 0.25);
-				box-sizing: border-box;
-				left: 50%;
-				max-width: 680px;
-				padding: 1rem;
-				position: absolute;
-				top: 7.5%;
-				transform: translateX(-50%);
-				width: 90%;
-				z-index: 2;
-			}
+		.dialog {
+			background-color: #ffffff;
+			border: 1px solid var(--d2l-color-mica);
+			border-radius: 0.3rem;
+			box-shadow: 0 2px 12px rgba(86, 90, 92, 0.25);
+			box-sizing: border-box;
+			left: 50%;
+			max-width: 680px;
+			padding: 1rem;
+			position: absolute;
+			top: 7.5%;
+			transform: translateX(-50%);
+			width: 90%;
+			z-index: 2;
+		}
 
-			label {
-				display: block;
-				margin-bottom: 0.5rem;
-			}
+		label {
+			display: block;
+			margin-bottom: 0.5rem;
+		}
 
-			#title-label {
-				display: inline;
-				font-weight: bold;
-			}
+		#title-label {
+			display: inline;
+			font-weight: bold;
+		}
 
-			d2l-input-textarea {
-				margin-bottom: 1rem;
-			}
+		d2l-input-textarea {
+			margin-bottom: 1rem;
+		}
 
-			d2l-button {
-				margin-right: 1rem;
-			}
+		d2l-button {
+			margin-right: 1rem;
+		}
 
-			.close-button {
-				inset-block-start: 0.6rem;
-				inset-inline-end: 0.6rem;
-				position: absolute;
-			}
-		`;
-	}
+		.close-button {
+			inset-block-start: 0.6rem;
+			inset-inline-end: 0.6rem;
+			position: absolute;
+		}
+	`;
 
 	constructor() {
 		super();

@@ -4,24 +4,20 @@ import { css, html, LitElement } from 'lit';
 
 class OptInFlyout extends LitElement {
 
-	static get properties() {
-		return {
-			opened: { type: Boolean, reflect: true },
-			flyoutTitle: { attribute: 'flyout-title', type: String },
-			shortDescription: { type: String, attribute: 'short-description' },
-			longDescription: { type: String, attribute: 'long-description' },
-			tutorialLink: { type: String, attribute: 'tutorial-link' },
-			helpDocsLink: { type: String, attribute: 'help-docs-link' }
-		};
-	}
+	static properties = {
+		opened: { type: Boolean, reflect: true },
+		flyoutTitle: { attribute: 'flyout-title', type: String },
+		shortDescription: { type: String, attribute: 'short-description' },
+		longDescription: { type: String, attribute: 'long-description' },
+		tutorialLink: { type: String, attribute: 'tutorial-link' },
+		helpDocsLink: { type: String, attribute: 'help-docs-link' }
+	};
 
-	static get styles() {
-		return css`
-			d2l-labs-opt-in-flyout-impl {
-				font-size: 20px;
-			}
-		`;
-	}
+	static styles = css`
+		d2l-labs-opt-in-flyout-impl {
+			font-size: 20px;
+		}
+	`;
 
 	constructor() {
 		super();

@@ -5,32 +5,28 @@ import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 class NavigationIterator extends LocalizeLabsElement(LitElement) {
 
-	static get properties() {
-		return {
-			hideText: { attribute: 'hide-text', type: Boolean },
-			previousDisabled: { attribute: 'previous-disabled', type: Boolean },
-			previousText: { attribute: 'previous-text', type: String },
-			nextDisabled: { attribute: 'next-disabled', type: Boolean },
-			nextText: { attribute: 'next-text', type: String },
-			noHighlightBorder: { attribute: 'no-highlight-border', type: Boolean },
-		};
-	}
+	static properties = {
+		hideText: { attribute: 'hide-text', type: Boolean },
+		previousDisabled: { attribute: 'previous-disabled', type: Boolean },
+		previousText: { attribute: 'previous-text', type: String },
+		nextDisabled: { attribute: 'next-disabled', type: Boolean },
+		nextText: { attribute: 'next-text', type: String },
+		noHighlightBorder: { attribute: 'no-highlight-border', type: Boolean },
+	};
 
-	static get styles() {
-		return [bodyCompactStyles, css`
-			:host {
-				align-items: center;
-				display: flex;
-				gap: 1.2rem;
-				height: 3.3rem;
-				justify-content: space-between;
-				max-width: 20rem;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-		`];
-	}
+	static styles = [bodyCompactStyles, css`
+		:host {
+			align-items: center;
+			display: flex;
+			gap: 1.2rem;
+			height: 3.3rem;
+			justify-content: space-between;
+			max-width: 20rem;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+	`];
 
 	constructor() {
 		super();

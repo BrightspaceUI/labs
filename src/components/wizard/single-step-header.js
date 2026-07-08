@@ -4,117 +4,113 @@ import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 class D2LSingleStepHeader extends LocalizeLabsElement(LitElement) {
 
-	static get properties() {
-		return {
-			stepTitle: {
-				type: String,
-				attribute: 'step-title'
-			},
-			totalSteps: {
-				type: Number,
-				attribute: 'total-steps'
-			},
-			currentStep: {
-				type: Number,
-				attribute: 'current-step'
-			},
-			selectedStep: {
-				type: Number,
-				attribute: 'selected-step'
-			},
-			fillHeaderWidth: {
-				type: Boolean,
-				attribute: 'fill-header-width',
-				reflect: true
-			}
-		};
-	}
+	static properties = {
+		stepTitle: {
+			type: String,
+			attribute: 'step-title'
+		},
+		totalSteps: {
+			type: Number,
+			attribute: 'total-steps'
+		},
+		currentStep: {
+			type: Number,
+			attribute: 'current-step'
+		},
+		selectedStep: {
+			type: Number,
+			attribute: 'selected-step'
+		},
+		fillHeaderWidth: {
+			type: Boolean,
+			attribute: 'fill-header-width',
+			reflect: true
+		}
+	};
 
-	static get styles() {
-		return [bodySmallStyles, css`
-			.d2l-labs-single-step-header-circle {
-				border: 2px solid;
-				border-radius: 50%;
-				height: 26px;
-				width: 26px;
-			}
+	static styles = [bodySmallStyles, css`
+		.d2l-labs-single-step-header-circle {
+			border: 2px solid;
+			border-radius: 50%;
+			height: 26px;
+			width: 26px;
+		}
 
-			.d2l-labs-single-step-header-inner-progress-circle {
-				background-color: var(--d2l-color-celestine);
-				border-radius: 50%;
-				height: 22px;
-				margin: 2px;
-				width: 22px;
-			}
+		.d2l-labs-single-step-header-inner-progress-circle {
+			background-color: var(--d2l-color-celestine);
+			border-radius: 50%;
+			height: 22px;
+			margin: 2px;
+			width: 22px;
+		}
 
-			.d2l-labs-single-step-header-step {
-				display: inline-block;
-				text-align: center;
-			}
+		.d2l-labs-single-step-header-step {
+			display: inline-block;
+			text-align: center;
+		}
 
-			hr {
-				height: 4px;
-				margin: auto;
-				width: 60px;
-			}
+		hr {
+			height: 4px;
+			margin: auto;
+			width: 60px;
+		}
 
-			.d2l-labs-single-step-header-step-header {
-				display: flex;
-			}
+		.d2l-labs-single-step-header-step-header {
+			display: flex;
+		}
 
-			.d2l-labs-single-step-header-step-title {
-				background: none !important;
-				border: none !important;
-				color: var(--d2l-color-ferrite);
-				margin: auto;
-				max-width: 120px;
-				overflow-wrap: break-word;
-			}
+		.d2l-labs-single-step-header-step-title {
+			background: none !important;
+			border: none !important;
+			color: var(--d2l-color-ferrite);
+			margin: auto;
+			max-width: 120px;
+			overflow-wrap: break-word;
+		}
 
-			:host([fill-header-width]) .d2l-labs-single-step-header-step-title {
-				max-width: 150px;
-			}
+		:host([fill-header-width]) .d2l-labs-single-step-header-step-title {
+			max-width: 150px;
+		}
 
-			.d2l-labs-single-step-header-done-icon {
-				color: var(--d2l-color-olivine);
-				height: 20px;
-				padding: 2px;
-				width: 20px;
-			}
+		.d2l-labs-single-step-header-done-icon {
+			color: var(--d2l-color-olivine);
+			height: 20px;
+			padding: 2px;
+			width: 20px;
+		}
 
-			.d2l-labs-single-step-header-done {
-				border-color: var(--d2l-color-olivine);
-				color: var(--d2l-color-olivine);
-			}
+		.d2l-labs-single-step-header-done {
+			border-color: var(--d2l-color-olivine);
+			color: var(--d2l-color-olivine);
+		}
 
-			.d2l-labs-single-step-header-done hr,
-			.d2l-labs-single-step-header-in-progress hr:first-child {
-				background: var(--d2l-color-olivine);
-				border: var(--d2l-color-olivine);
-			}
+		.d2l-labs-single-step-header-done hr,
+		.d2l-labs-single-step-header-in-progress hr:first-child {
+			background: var(--d2l-color-olivine);
+			border: var(--d2l-color-olivine);
+		}
 
-			.d2l-labs-single-step-header-in-progress {
-				border-color: var(--d2l-color-celestine);
-				color: var(--d2l-color-celestine);
-			}
+		.d2l-labs-single-step-header-in-progress {
+			border-color: var(--d2l-color-celestine);
+			color: var(--d2l-color-celestine);
+		}
 
-			.d2l-labs-single-step-header-not-started .d2l-labs-single-step-header-circle {
-				background-color: var(--d2l-color-mica);
-				border-color: var(--d2l-color-mica);
-			}
+		.d2l-labs-single-step-header-not-started .d2l-labs-single-step-header-circle {
+			background-color: var(--d2l-color-mica);
+			border-color: var(--d2l-color-mica);
+		}
 
-			.d2l-labs-single-step-header-in-progress hr:last-child,
-			.d2l-labs-single-step-header-not-started hr {
-				background: var(--d2l-color-mica);
-				border: var(--d2l-color-mica);
-			}
+		.d2l-labs-single-step-header-in-progress hr:last-child,
+		.d2l-labs-single-step-header-not-started hr {
+			background: var(--d2l-color-mica);
+			border: var(--d2l-color-mica);
+		}
 
-			.d2l-labs-single-step-header-first hr:first-child,
-			.d2l-labs-single-step-header-last hr:last-child {
-				visibility: hidden;
-			}
-		`];
-	}
+		.d2l-labs-single-step-header-first hr:first-child,
+		.d2l-labs-single-step-header-last hr:last-child {
+			visibility: hidden;
+		}
+	`];
 
 	constructor() {
 		super();

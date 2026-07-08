@@ -12,47 +12,43 @@ import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offsc
  */
 class NavigationLinkIcon extends FocusMixin(LitElement) {
 
-	static get properties() {
-		return {
-			/**
-			 * REQUIRED: URL or URL fragment of the link
-			 * @type {string}
-			 */
-			href: { type: String },
-			/**
-			 * REQUIRED: Preset icon key (e.g. "tier1:gear")
-			 * @type {string}
-			 */
-			icon: { type: String },
-			/**
-			 * REQUIRED: Text for the link
-			 * @type {string}
-			 */
-			text: { type: String },
-			/**
-			 * Visually hides the text but still accessible
-			 * @type {boolean}
-			 */
-			textHidden: { attribute: 'text-hidden', type: Boolean },
-			/**
-			 * Offset of the tooltip
-			 * @type {Number}
-			 */
-			tooltipOffset: { attribute: 'tooltip-offset', type: Number }
-		};
-	}
+	static properties = {
+		/**
+		 * REQUIRED: URL or URL fragment of the link
+		 * @type {string}
+		 */
+		href: { type: String },
+		/**
+		 * REQUIRED: Preset icon key (e.g. "tier1:gear")
+		 * @type {string}
+		 */
+		icon: { type: String },
+		/**
+		 * REQUIRED: Text for the link
+		 * @type {string}
+		 */
+		text: { type: String },
+		/**
+		 * Visually hides the text but still accessible
+		 * @type {boolean}
+		 */
+		textHidden: { attribute: 'text-hidden', type: Boolean },
+		/**
+		 * Offset of the tooltip
+		 * @type {Number}
+		 */
+		tooltipOffset: { attribute: 'tooltip-offset', type: Number }
+	};
 
-	static get styles() {
-		return [highlightBorderStyles, highlightLinkStyles, offscreenStyles, css`
-			:host {
-				display: inline-block;
-				height: 100%;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-		`];
-	}
+	static styles = [highlightBorderStyles, highlightLinkStyles, offscreenStyles, css`
+		:host {
+			display: inline-block;
+			height: 100%;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+	`];
 
 	constructor() {
 		super();

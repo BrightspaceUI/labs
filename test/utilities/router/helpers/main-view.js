@@ -2,11 +2,9 @@ import { LitElement } from 'lit';
 import { RouteReactor } from '../../../../src/utilities/router/index.js';
 
 class MainView extends LitElement {
-	static get properties() {
-		return {
-			'main-prop': { type: String, attribute: true },
-		};
-	}
+	static properties = {
+		'main-prop': { type: String, attribute: true },
+	};
 
 	constructor() {
 		super();

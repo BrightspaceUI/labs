@@ -4,76 +4,73 @@ import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen.js';
 
 class D2LStep extends LocalizeLabsElement(LitElement) {
-	static get properties() {
-		return {
-			nextButtonTitle: {
-				type: String,
-				attribute: 'next-button-title'
-			},
-			nextButtonTooltip: {
-				type: String,
-				attribute: 'next-button-tooltip'
-			},
-			restartButtonTitle: {
-				type: String,
-				attribute: 'restart-button-title'
-			},
-			restartButtonTooltip: {
-				type: String,
-				attribute: 'restart-button-tooltip'
-			},
-			hideRestartButton: {
-				type: Boolean,
-				attribute: 'hide-restart-button'
-			},
-			hideNextButton: {
-				type: Boolean,
-				attribute: 'hide-next-button'
-			},
-			disableNextButton: {
-				type: Boolean,
-				attribute: 'disable-next-button'
-			},
-			nextButtonAriaLabel: {
-				type: String,
-				attribute: 'next-button-aria-label'
-			},
-			restartButtonAriaLabel: {
-				type: String,
-				attribute: 'restart-button-aria-label'
-			},
-			ariaTitle: {
-				type: String,
-				attribute: 'aria-title'
-			},
-			stepTitle: {
-				type: String,
-				attribute: 'step-title'
-			},
-			stepCount: {
-				type: Number,
-				attribute: 'step-count'
-			},
-			thisStep: {
-				type: Number,
-				attribute: 'this-step'
-			}
-		};
-	}
 
-	static get styles() {
-		return [offscreenStyles, css`
-			.d2l-labs-wizard-step-footer {
-				display: flex;
-				justify-content: space-between;
-				width: 100%;
-			}
+	static properties = {
+		nextButtonTitle: {
+			type: String,
+			attribute: 'next-button-title'
+		},
+		nextButtonTooltip: {
+			type: String,
+			attribute: 'next-button-tooltip'
+		},
+		restartButtonTitle: {
+			type: String,
+			attribute: 'restart-button-title'
+		},
+		restartButtonTooltip: {
+			type: String,
+			attribute: 'restart-button-tooltip'
+		},
+		hideRestartButton: {
+			type: Boolean,
+			attribute: 'hide-restart-button'
+		},
+		hideNextButton: {
+			type: Boolean,
+			attribute: 'hide-next-button'
+		},
+		disableNextButton: {
+			type: Boolean,
+			attribute: 'disable-next-button'
+		},
+		nextButtonAriaLabel: {
+			type: String,
+			attribute: 'next-button-aria-label'
+		},
+		restartButtonAriaLabel: {
+			type: String,
+			attribute: 'restart-button-aria-label'
+		},
+		ariaTitle: {
+			type: String,
+			attribute: 'aria-title'
+		},
+		stepTitle: {
+			type: String,
+			attribute: 'step-title'
+		},
+		stepCount: {
+			type: Number,
+			attribute: 'step-count'
+		},
+		thisStep: {
+			type: Number,
+			attribute: 'this-step'
+		}
+	};
 
-			.d2l-labs-wizard-step-button-next {
-				float: right;
-			}
-		`];
-	}
+	static styles = [offscreenStyles, css`
+		.d2l-labs-wizard-step-footer {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+		}
+
+		.d2l-labs-wizard-step-button-next {
+			float: right;
+		}
+	`];
 
 	constructor() {
 		super();

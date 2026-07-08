@@ -8,51 +8,47 @@ import { selectStyles } from '@brightspace-ui/core/components/inputs/input-selec
 
 class PagerNumeric extends LocalizeLabsElement(LitElement) {
 
-	static get properties() {
-		return {
-			maxPageNumber: { type: Number, attribute: 'max-page-number', reflect: true },
-			pageNumber: { type: Number, attribute: 'page-number', reflect: true },
-			pageSize : { type: Number, attribute: 'page-size', reflect: true },
-			pageSizes : { type: Array, attribute: 'page-sizes' },
-			showPageSizeSelector : { type: Boolean, attribute: 'show-page-size-selector', reflect: true }
-		};
-	}
+	static properties = {
+		maxPageNumber: { type: Number, attribute: 'max-page-number', reflect: true },
+		pageNumber: { type: Number, attribute: 'page-number', reflect: true },
+		pageSize : { type: Number, attribute: 'page-size', reflect: true },
+		pageSizes : { type: Array, attribute: 'page-sizes' },
+		showPageSizeSelector : { type: Boolean, attribute: 'show-page-size-selector', reflect: true }
+	};
 
-	static get styles() {
-		return [selectStyles, css`
+	static styles = [selectStyles, css`
+		:host {
+			align-items: center;
+			display: flex;
+			justify-content: center;
+			white-space: nowrap;
+		}
+
+		.d2l-page-selector-container {
+			margin: 0.75rem;
+		}
+
+		.d2l-page-number-container {
+			direction: ltr;
+			display: inline-block;
+		}
+
+		d2l-input-number {
+			margin-left: 0.25rem;
+			margin-right: 0.25rem;
+			width: 3.8rem;
+		}
+
+		.d2l-page-max-text {
+			margin-right: 0.25rem;
+		}
+
+		@media (max-width: 544px) {
 			:host {
-				align-items: center;
-				display: flex;
-				justify-content: center;
-				white-space: nowrap;
+				flex-direction: column-reverse;
 			}
-
-			.d2l-page-selector-container {
-				margin: 0.75rem;
-			}
-
-			.d2l-page-number-container {
-				direction: ltr;
-				display: inline-block;
-			}
-
-			d2l-input-number {
-				margin-left: 0.25rem;
-				margin-right: 0.25rem;
-				width: 3.8rem;
-			}
-
-			.d2l-page-max-text {
-				margin-right: 0.25rem;
-			}
-
-			@media (max-width: 544px) {
-				:host {
-					flex-direction: column-reverse;
-				}
-			}
-		`];
-	}
+		}
+	`];
 
 	constructor() {
 		super();

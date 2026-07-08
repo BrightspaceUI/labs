@@ -5,24 +5,20 @@ import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 class NavigationLinkBack extends LocalizeLabsElement(FocusMixin(LitElement)) {
 
-	static get properties() {
-		return {
-			text: { type: String },
-			href: { type: String }
-		};
-	}
+	static properties = {
+		text: { type: String },
+		href: { type: String }
+	};
 
-	static get styles() {
-		return css`
-			:host {
-				display: inline-block;
-				height: 100%;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-		`;
-	}
+	static styles = css`
+		:host {
+			display: inline-block;
+			height: 100%;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+	`;
 
 	static get focusElementSelector() {
 		return 'd2l-labs-navigation-link-icon';

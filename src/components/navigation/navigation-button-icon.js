@@ -12,62 +12,58 @@ import { ifDefined } from 'lit/directives/if-defined.js';
  */
 class NavigationButtonIcon extends FocusMixin(LitElement) {
 
-	static get properties() {
-		return {
-			/**
-			 * Disables the button
-			 * @type {boolean}
-			 */
-			disabled: { reflect: true, type: Boolean },
-			/**
-			 * REQUIRED: Preset icon key (e.g. "tier1:gear")
-			 * @type {string}
-			 */
-			icon: { type: String },
-			/**
-			 * Position of the icon.
-			 * @type {'start'|'end'}
-			 */
-			iconPosition: { attribute: 'icon-position', type: String },
-			/**
-			 * Visually hides the highlight border when hovered/focused
-			 * @type {boolean}
-			 */
-			noHighlightBorder: { attribute: 'no-highlight-border', type: Boolean },
-			/**
-			 * REQUIRED: Text for the button
-			 * @type {string}
-			 */
-			text: { type: String },
-			/**
-			 * Visually hides the text but still accessible
-			 * @type {boolean}
-			 */
-			textHidden: { attribute: 'text-hidden', type: Boolean },
-			/**
-			 * Offset of the tooltip
-			 * @type {Number}
-			 */
-			tooltipOffset: { attribute: 'tooltip-offset', type: Number },
-			/**
-			 * Position of the tooltip
-			 * @type {'top'|'bottom'|'left'|'right'}
-			 */
-			tooltipPosition: { attribute: 'tooltip-position', type: String }
-		};
-	}
+	static properties = {
+		/**
+		 * Disables the button
+		 * @type {boolean}
+		 */
+		disabled: { reflect: true, type: Boolean },
+		/**
+		 * REQUIRED: Preset icon key (e.g. "tier1:gear")
+		 * @type {string}
+		 */
+		icon: { type: String },
+		/**
+		 * Position of the icon.
+		 * @type {'start'|'end'}
+		 */
+		iconPosition: { attribute: 'icon-position', type: String },
+		/**
+		 * Visually hides the highlight border when hovered/focused
+		 * @type {boolean}
+		 */
+		noHighlightBorder: { attribute: 'no-highlight-border', type: Boolean },
+		/**
+		 * REQUIRED: Text for the button
+		 * @type {string}
+		 */
+		text: { type: String },
+		/**
+		 * Visually hides the text but still accessible
+		 * @type {boolean}
+		 */
+		textHidden: { attribute: 'text-hidden', type: Boolean },
+		/**
+		 * Offset of the tooltip
+		 * @type {Number}
+		 */
+		tooltipOffset: { attribute: 'tooltip-offset', type: Number },
+		/**
+		 * Position of the tooltip
+		 * @type {'top'|'bottom'|'left'|'right'}
+		 */
+		tooltipPosition: { attribute: 'tooltip-position', type: String }
+	};
 
-	static get styles() {
-		return [highlightBorderStyles, highlightButtonStyles, css`
-			:host {
-				display: inline-block;
-				height: 100%;
-			}
-			:host([hidden]) {
-				display: none;
-			}
-		`];
-	}
+	static styles = [highlightBorderStyles, highlightButtonStyles, css`
+		:host {
+			display: inline-block;
+			height: 100%;
+		}
+		:host([hidden]) {
+			display: none;
+		}
+	`];
 
 	constructor() {
 		super();

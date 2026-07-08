@@ -6,141 +6,138 @@ import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
 class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitElement))) {
 
-	static get properties() {
-		return {
-			value: { type: Number },
-			immediateValue: { type: Number, reflect: true },
-			hoverValue: { type: Number, reflect: true },
-			dragging: { type: Boolean, reflect: true },
-			hovering: { type: Boolean, reflect: true },
-			vertical: { type: Boolean },
-			fullWidth: { type: Boolean },
-			min: { type: Number },
-			max: { type: Number },
-			label: { type: String, required: true },
-		};
-	}
+	static properties = {
+		value: { type: Number },
+		immediateValue: { type: Number, reflect: true },
+		hoverValue: { type: Number, reflect: true },
+		dragging: { type: Boolean, reflect: true },
+		hovering: { type: Boolean, reflect: true },
+		vertical: { type: Boolean },
+		fullWidth: { type: Boolean },
+		min: { type: Number },
+		max: { type: Number },
+		label: { type: String, required: true },
+	};
 
-	static get styles() {
-		return css`
-	:host {
-		--d2l-color-corundum-65-opacity: rgba(177, 185, 190, 0.65);
-		--d2l-color-galena-88-opacity: rgba(110, 116, 119, 0.88);
-		--d2l-calculated-seek-bar-height: var(--d2l-seek-bar-height, 6px);
-		--d2l-calculated-knob-size: var(--d2l-knob-size, 32px);
-		--d2l-half-knob-size: calc(var(--d2l-calculated-knob-size)/2);
-		--d2l-half-knob-size-overflow: calc((var(--d2l-calculated-knob-size) - var(--d2l-calculated-seek-bar-height)) / 2 - 1px);
-		--d2l-calculated-inner-knob-margin: var(--d2l-inner-knob-margin, 8px);
-		--d2l-calculated-knob-box-shadow: var(--d2l-knob-box-shadow, 0 2px 4px 0 rgba(0, 0, 0, 0.52));
-		--d2l-calculated-outer-knob-color: var(--d2l-outer-knob-color, var(--d2l-color-regolith));
-		--d2l-calculated-outer-knob-border-color: var(--d2l-outer-knob-border-color, var(--d2l-color-pressicus));
-		--d2l-inner-knob-color: var(--d2l-inner-knob-color, var(--d2l-color-celestine-plus-1));
-		--d2l-calculated-knob-focus-color: var(--d2l-knob-focus-color, var(--d2l-color-celestine));
-		--d2l-calculated-knob-focus-size: var(--d2l-knob-focus-size, 2px);
-		--d2l-calculated-progress-border-color: var(--d2l-progress-border-color, var(--d2l-color-pressicus));
-		--d2l-calculated-progress-border-radius: var(--d2l-progress-border-radius, 6px);
-		--d2l-calculated-progress-shadow-color: var(--d2l-progress-shadow-color, var(--d2l-color-galena-88-opacity));
-		--d2l-calculated-progress-active-color: var(--d2l-progress-active-color, var(--d2l-color-celestine-plus-1));
-		--d2l-calculated-progress-background-color: var(--d2l-progress-background-color, var(--d2l-color-corundum-65-opacity));
-		display: block;
-	}
+	static styles = css`
+		:host {
+			--d2l-color-corundum-65-opacity: rgba(177, 185, 190, 0.65);
+			--d2l-color-galena-88-opacity: rgba(110, 116, 119, 0.88);
+			--d2l-calculated-seek-bar-height: var(--d2l-seek-bar-height, 6px);
+			--d2l-calculated-knob-size: var(--d2l-knob-size, 32px);
+			--d2l-half-knob-size: calc(var(--d2l-calculated-knob-size)/2);
+			--d2l-half-knob-size-overflow: calc((var(--d2l-calculated-knob-size) - var(--d2l-calculated-seek-bar-height)) / 2 - 1px);
+			--d2l-calculated-inner-knob-margin: var(--d2l-inner-knob-margin, 8px);
+			--d2l-calculated-knob-box-shadow: var(--d2l-knob-box-shadow, 0 2px 4px 0 rgba(0, 0, 0, 0.52));
+			--d2l-calculated-outer-knob-color: var(--d2l-outer-knob-color, var(--d2l-color-regolith));
+			--d2l-calculated-outer-knob-border-color: var(--d2l-outer-knob-border-color, var(--d2l-color-pressicus));
+			--d2l-inner-knob-color: var(--d2l-inner-knob-color, var(--d2l-color-celestine-plus-1));
+			--d2l-calculated-knob-focus-color: var(--d2l-knob-focus-color, var(--d2l-color-celestine));
+			--d2l-calculated-knob-focus-size: var(--d2l-knob-focus-size, 2px);
+			--d2l-calculated-progress-border-color: var(--d2l-progress-border-color, var(--d2l-color-pressicus));
+			--d2l-calculated-progress-border-radius: var(--d2l-progress-border-radius, 6px);
+			--d2l-calculated-progress-shadow-color: var(--d2l-progress-shadow-color, var(--d2l-color-galena-88-opacity));
+			--d2l-calculated-progress-active-color: var(--d2l-progress-active-color, var(--d2l-color-celestine-plus-1));
+			--d2l-calculated-progress-background-color: var(--d2l-progress-background-color, var(--d2l-color-corundum-65-opacity));
+			display: block;
+		}
 
-	:host(:focus-within) {
-		outline: none;
-	}
+		:host(:focus-within) {
+			outline: none;
+		}
 
-	:host(:focus-within) .slider-knob::after {
-		border-radius: 50%;
-		bottom: 0;
-		box-shadow: 0 0 0 var(--d2l-calculated-knob-focus-size) var(--d2l-calculated-knob-focus-color);
-		content: "";
-		left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
-	}
+		:host(:focus-within) .slider-knob::after {
+			border-radius: 50%;
+			bottom: 0;
+			box-shadow: 0 0 0 var(--d2l-calculated-knob-focus-size) var(--d2l-calculated-knob-focus-color);
+			content: "";
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
 
-	:host([solid]) .slider-knob-inner {
-		display: none;
-	}
+		:host([solid]) .slider-knob-inner {
+			display: none;
+		}
 
-	#sliderContainer {
-		height: var(--d2l-calculated-knob-size);
-		margin-left: var(--d2l-half-knob-size);
-		margin-right: var(--d2l-half-knob-size);
-		position: relative;
-	}
+		#sliderContainer {
+			height: var(--d2l-calculated-knob-size);
+			margin-left: var(--d2l-half-knob-size);
+			margin-right: var(--d2l-half-knob-size);
+			position: relative;
+		}
 
-	#knobContainer {
-		bottom: 0;
-		left: 0;
-		pointer-events: none;
-		position: absolute;
-		right: 0;
-		top: 0;
-	}
+		#knobContainer {
+			bottom: 0;
+			left: 0;
+			pointer-events: none;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
 
-	:host([fullWidth]) #sliderContainer {
-		margin-left: 0;
-		margin-right: 0;
-	}
+		:host([fullWidth]) #sliderContainer {
+			margin-left: 0;
+			margin-right: 0;
+		}
 
-	:host([fullWidth]) #knobContainer {
-		left: var(--d2l-half-knob-size);
-		right: var(--d2l-half-knob-size);
-	}
+		:host([fullWidth]) #knobContainer {
+			left: var(--d2l-half-knob-size);
+			right: var(--d2l-half-knob-size);
+		}
 
-	.bar-container {
-		cursor: pointer;
-		overflow: hidden;
-	}
+		.bar-container {
+			cursor: pointer;
+			overflow: hidden;
+		}
 
-	#sliderBar {
-		padding: var(--d2l-half-knob-size-overflow) 0;
-		width: 100%;
-	}
+		#sliderBar {
+			padding: var(--d2l-half-knob-size-overflow) 0;
+			width: 100%;
+		}
 
-	#progressContainer {
-		--d2l-progress-container-color: var(--d2l-calculated-progress-background-color);
-		background: var(--d2l-progress-container-color, var(--d2l-color-gypsum));
-		border-radius: var(--d2l-calculated-progress-border-radius);
-		box-shadow: inset 0 1px 0 0 var(--d2l-calculated-progress-shadow-color);
-		height: var(--d2l-progress-height, 6px);
-		position: relative;
-	}
+		#progressContainer {
+			--d2l-progress-container-color: var(--d2l-calculated-progress-background-color);
+			background: var(--d2l-progress-container-color, var(--d2l-color-gypsum));
+			border-radius: var(--d2l-calculated-progress-border-radius);
+			box-shadow: inset 0 1px 0 0 var(--d2l-calculated-progress-shadow-color);
+			height: var(--d2l-progress-height, 6px);
+			position: relative;
+		}
 
-	#primaryProgress {
-		--d2l-progress-active-color: var(--d2l-calculated-progress-active-color);
-		background: var(--d2l-progress-active-color, var(--d2l-color-celestine));
-		border-radius: var(--d2l-calculated-progress-border-radius);
-		box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.07);
-		height: 100%;
-	}
+		#primaryProgress {
+			--d2l-progress-active-color: var(--d2l-calculated-progress-active-color);
+			background: var(--d2l-progress-active-color, var(--d2l-color-celestine));
+			border-radius: var(--d2l-calculated-progress-border-radius);
+			box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.07);
+			height: 100%;
+		}
 
-	.slider-knob {
-		background-color: var(--d2l-calculated-outer-knob-color);
-		border-radius: 50%;
-		box-shadow: var(--d2l-calculated-knob-box-shadow);
-		cursor: pointer;
-		height: calc((((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) * 2) + var(--d2l-calculated-seek-bar-height) - 2px);
-		left: 0;
-		margin-left: calc(-1 * ((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) - var(--d2l-calculated-seek-bar-height) / 2);
-		position: absolute;
-		top: 0;
-		width: calc((((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) * 2) + var(--d2l-calculated-seek-bar-height) - 2px);
-		z-index: 1;
-	}
+		.slider-knob {
+			background-color: var(--d2l-calculated-outer-knob-color);
+			border-radius: 50%;
+			box-shadow: var(--d2l-calculated-knob-box-shadow);
+			cursor: pointer;
+			height: calc((((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) * 2) + var(--d2l-calculated-seek-bar-height) - 2px);
+			left: 0;
+			margin-left: calc(-1 * ((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) - var(--d2l-calculated-seek-bar-height) / 2);
+			position: absolute;
+			top: 0;
+			width: calc((((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) * 2) + var(--d2l-calculated-seek-bar-height) - 2px);
+			z-index: 1;
+		}
 
-	.slider-knob-inner {
-		background-color: var(--d2l-inner-knob-color);
-		border-radius: 50%;
-		box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
-		box-sizing: border-box;
-		height: calc(100% - var(--d2l-calculated-inner-knob-margin) *2);
-		margin: var(--d2l-calculated-inner-knob-margin);
-		width: calc(100% - var(--d2l-calculated-inner-knob-margin) *2);
-	}`;
-	}
+		.slider-knob-inner {
+			background-color: var(--d2l-inner-knob-color);
+			border-radius: 50%;
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
+			box-sizing: border-box;
+			height: calc(100% - var(--d2l-calculated-inner-knob-margin) *2);
+			margin: var(--d2l-calculated-inner-knob-margin);
+			width: calc(100% - var(--d2l-calculated-inner-knob-margin) *2);
+		}
+	`;
 
 	constructor() {
 		super();

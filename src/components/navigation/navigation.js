@@ -10,29 +10,25 @@ import { getNextFocusable } from '@brightspace-ui/core/helpers/focus.js';
  */
 class Navigation extends LitElement {
 
-	static get properties() {
-		return {
-			hasSkipNav: { attribute: 'has-skip-nav', type: Boolean }
-		};
-	}
+	static properties = {
+		hasSkipNav: { attribute: 'has-skip-nav', type: Boolean }
+	};
 
-	static get styles() {
-		return css`
-			:host {
-				display: block;
-				position: relative;
-			}
-			.d2l-labs-navigation-shadow-drop-border {
-				background-color: rgba(0, 0, 0, 0.02);
-				bottom: -4px;
-				display: var(--d2l-labs-navigation-shadow-drop-border-display, block);
-				height: 4px;
-				pointer-events: none;
-				position: absolute;
-				width: 100%;
-			}
-		`;
-	}
+	static styles = css`
+		:host {
+			display: block;
+			position: relative;
+		}
+		.d2l-labs-navigation-shadow-drop-border {
+			background-color: rgba(0, 0, 0, 0.02);
+			bottom: -4px;
+			display: var(--d2l-labs-navigation-shadow-drop-border-display, block);
+			height: 4px;
+			pointer-events: none;
+			position: absolute;
+			width: 100%;
+		}
+	`;
 
 	constructor() {
 		super();

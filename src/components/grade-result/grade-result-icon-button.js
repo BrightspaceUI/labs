@@ -3,12 +3,11 @@ import { html, LitElement } from 'lit';
 import { getUniqueId } from '@brightspace-ui/core/helpers/uniqueId.js';
 
 export class D2LGradeResultIconButton extends LitElement {
-	static get properties() {
-		return {
-			text: { type: String },
-			icon: { type: String },
-		};
-	}
+
+	static properties = {
+		text: { type: String },
+		icon: { type: String },
+	};
 
 	render() {
 		return html`
