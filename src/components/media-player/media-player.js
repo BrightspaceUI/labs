@@ -661,6 +661,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		};
 		this.afterCaptions = [];
 		this.beforeCaptions = [];
+		this._iosVideoFullscreen = false;
 	}
 
 	get currentTime() {
@@ -825,14 +826,13 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			${this.transcriptViewerOn ? this._renderTranscriptViewer() : ''}
 			${this._getMediaAreaView()}
 
-			${this.isIOSVideo ? null : html`
-				${!this._trackText || this.transcriptViewerOn ? null : html`
+			${!this._trackText || this.transcriptViewerOn ? null : html`
 				<div id="d2l-labs-media-player-track-container" style=${styleMap(trackContainerStyle)} @click=${this._onTrackContainerClick}>
 					<div>
 						<span style=${styleMap(trackSpanStyle)} role="status">${this._trackText}</span>
 					</div>
 				</div>
-				`}
+			`}
 
 			<div class=${classMap(mediaControlsClass)} id="d2l-labs-media-player-media-controls" @mouseenter=${this._startHoveringControls} @mouseleave=${this._stopHoveringControls}>
 				${this._getTimelinePreview()}
@@ -948,7 +948,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 					${fullscreenButton}
 
 				</div>
-			</div>`}
+			</div>
 		</div>
 		`;
 	}
@@ -1035,6 +1035,10 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	#searchTimeout = null;
 
+	_beginIOSVideoFullscreen() {
+		this._iosVideoFullscreen = true;
+	}
+
 	_clearPreference(preferenceKey) {
 		localStorage.removeItem(preferenceKey);
 	}
@@ -1062,6 +1066,10 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	_downloadTranscript() {
 		this.dispatchEvent(new CustomEvent('download-transcript', { bubbles: true, composed: true }));
+	}
+
+	_endIOSVideoFullscreen() {
+		this._iosVideoFullscreen = false;
 	}
 
 	static _formatTime(totalSeconds) {
@@ -1197,7 +1205,8 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 					${this._getPosterView()}
 					<video
 						id="d2l-labs-media-player-video"
-						?controls="${IS_IOS}"
+						playsinline
+						webkit-playsinline
 						?autoplay="${this.autoplay}"
 						?loop="${this.loop}"
 						crossorigin="${ifDefined(this.crossorigin)}"
@@ -1215,6 +1224,8 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 						tabindex="-1"
 						@timeupdate=${this._onTimeUpdate}
 						@volumechange=${this._onVolumeChange}
+						@webkitbeginfullscreen=${this._beginIOSVideoFullscreen}
+						@webkitendfullscreen=${this._endIOSVideoFullscreen}
 					>
 						<source @error=${this._onError}>
 					</video>
@@ -1493,7 +1504,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	_hidingCustomControls() {
 		const settingsMenuOpened = this._settingsMenu && this._settingsMenu.opened;
-		return this.isIOSVideo || (this._playing && !this._recentlyShowedCustomControls && !this._hoveringMediaControls && !settingsMenuOpened && !this._usingVolumeContainer && this.mediaType === SOURCE_TYPES.video);
+		return (this._playing && !this._recentlyShowedCustomControls && !this._hoveringMediaControls && !settingsMenuOpened && !this._usingVolumeContainer && this.mediaType === SOURCE_TYPES.video);
 	}
 
 	_listenForKeyboard(e) {
@@ -2216,14 +2227,23 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	}
 
 	_toggleFullscreen() {
-		if (!FULLSCREEN_ENABLED) return;
-
 		if (this.mediaType !== SOURCE_TYPES.video) return;
 
-		if (fullscreenApi.isFullscreen) {
-			fullscreenApi.exit();
-		} else {
-			fullscreenApi.request(this._mediaContainer);
+		if (FULLSCREEN_ENABLED) {
+			if (fullscreenApi.isFullscreen) {
+				fullscreenApi.exit();
+			} else {
+				fullscreenApi.request(this._mediaContainer);
+			}
+			return;
+		}
+
+		if (this.isIOSVideo) {
+			if (this._media.webkitDisplayingFullscreen) {
+				this._media.webkitExitFullscreen();
+			} else {
+				this._media.webkitEnterFullscreen();
+			}
 		}
 	}
 
