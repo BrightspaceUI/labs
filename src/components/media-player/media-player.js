@@ -661,7 +661,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		};
 		this.afterCaptions = [];
 		this.beforeCaptions = [];
-		this._isoVideoFullscreen = false;
+		this._iosVideoFullscreen = false;
 	}
 
 	get currentTime() {
@@ -1036,7 +1036,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	#searchTimeout = null;
 
 	_beginIOSVideoFullscreen() {
-		this._isoVideoFullscreen = true;
+		this._iosVideoFullscreen = true;
 	}
 
 	_clearPreference(preferenceKey) {
@@ -1069,7 +1069,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	}
 
 	_endIOSVideoFullscreen() {
-		this._isoVideoFullscreen = false;
+		this._iosVideoFullscreen = false;
 	}
 
 	static _formatTime(totalSeconds) {
