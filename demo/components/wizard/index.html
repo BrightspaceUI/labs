@@ -49,7 +49,7 @@
 		</d2l-demo-snippet>
 		<h2>Basic Wizard Without Back Button</h2>
 		<d2l-demo-snippet>
-			<d2l-labs-wizard selected-step="1">
+			<d2l-labs-wizard id="wizard-without-back-button" selected-step="1">
 				<d2l-labs-wizard-step next-button-aria-label="Go to step 2" step-title="Lets get started" hide-restart-button="true">
 					<p> first step </p>
 				</d2l-labs-wizard-step>
@@ -62,6 +62,15 @@
 					<p> Last step </p>
 				</d2l-labs-wizard-step>
 			</d2l-labs-wizard>
+			<script>
+				const wizardWithoutBackButton = document.getElementById('wizard-without-back-button');
+				wizardWithoutBackButton.addEventListener('stepper-next', () => {
+					wizardWithoutBackButton.next();
+				});
+				wizardWithoutBackButton.addEventListener('stepper-restart', () => {
+					wizardWithoutBackButton.restart();
+				});
+			</script>
 		</d2l-demo-snippet>
 		<d2l-demo-snippet>
 			<d2l-labs-wizard id="wizard2" selected-step="0">
