@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "ʻaoʻao mua",
 	"components:pagination:resultsPerPage": "Nā hualoaʻa no kēlā me kēia ʻaoʻao",
 	"components:wizard:aria.steplabel": "Hele Helu {currentStep} o {totalSteps}",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "E hoʻomau i ka mea aʻe",
 	"components:wizard:restart.button.tooltip": "E hoʻi i ka hana mua",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "Hiki mai",
 	"components:wizard:stepper.defaults.restart": "Hoʻomaka hou"
 };

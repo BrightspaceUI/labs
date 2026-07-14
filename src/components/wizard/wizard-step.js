@@ -22,6 +22,18 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			type: String,
 			attribute: 'restart-button-tooltip'
 		},
+		backButtonTitle: {
+			type: String,
+			attribute: 'back-button-title'
+		},
+		backButtonTooltip: {
+			type: String,
+			attribute: 'back-button-tooltip'
+		},
+		displayBackButton: {
+			type: Boolean,
+			attribute: 'display-back-button'
+		},
 		hideRestartButton: {
 			type: Boolean,
 			attribute: 'hide-restart-button'
@@ -67,6 +79,11 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			width: 100%;
 		}
 
+		.d2l-labs-wizard-step-footer-start {
+			display: flex;
+			gap: 0.6rem;
+		}
+
 		.d2l-labs-wizard-step-button-next {
 			float: right;
 		}
@@ -74,6 +91,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 
 	constructor() {
 		super();
+		this.displayBackButton = false;
 		this.hideRestartButton = false;
 		this.hideNextButton = false;
 		this.disableNextButton = false;
@@ -90,8 +108,9 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			<div id="aria-title" tabindex="0" class="d2l-offscreen">${this._getAriaTitle()}</div>
 			<slot></slot>
 			<div class="d2l-labs-wizard-step-footer">
+				<div class="d2l-labs-wizard-step-footer-start">
 	${this.hideRestartButton
-		? html`<div></div>`
+		? html``
 		: html`
 			<d2l-button
 				title="${!this.restartButtonTooltip ? this.localize('components:wizard:restart.button.tooltip') : this.restartButtonTooltip}"
@@ -100,6 +119,17 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			>
 			${!this.restartButtonTitle ? this.localize('components:wizard:stepper.defaults.restart') : this.restartButtonTitle}
 			</d2l-button>`}
+
+	${this.displayBackButton
+		? html`
+			<d2l-button
+				title="${!this.backButtonTooltip ? this.localize('components:wizard:back.button.tooltip') : this.backButtonTooltip}"
+				@click="${this._backClick}"
+			>
+			${!this.backButtonTitle ? this.localize('components:wizard:stepper.defaults.back') : this.backButtonTitle}
+			</d2l-button>`
+		: html``}
+				</div>
 
 	${this.hideNextButton
 		? html`<div></div>`
@@ -134,6 +164,10 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 
 	_nextClick() {
 		this.dispatchEvent(new CustomEvent('stepper-next', { bubbles: true, composed: true }));
+	}
+
+	_backClick() {
+		this.dispatchEvent(new CustomEvent('stepper-back', { bubbles: true, composed: true }));
 	}
 
 	_restartClick() {

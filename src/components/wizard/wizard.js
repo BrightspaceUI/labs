@@ -71,6 +71,14 @@ class D2LWizard extends LitElement {
 		this.#focusAriaTitleOfStep();
 	}
 
+	back() {
+		this.selectedStep = this.selectedStep === 0 ? this.selectedStep : (this.selectedStep - 1);
+
+		this.#updateStep();
+
+		this.#focusAriaTitleOfStep();
+	}
+
 	restart() {
 		this.selectedStep = 0;
 

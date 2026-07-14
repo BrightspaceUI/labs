@@ -26,11 +26,11 @@
 					<p> first step </p>
 				</d2l-labs-wizard-step>
 
-				<d2l-labs-wizard-step aria-title="This is the second step" restart-button-tooltip="Restart this wizard">
+				<d2l-labs-wizard-step aria-title="This is the second step" display-back-button restart-button-tooltip="Restart this wizard">
 					<p> second step </p>
 				</d2l-labs-wizard-step>
 
-				<d2l-labs-wizard-step step-title="Almost done" next-button-title="Done" next-button-tooltip="Save this wizard">
+				<d2l-labs-wizard-step step-title="Almost done" display-back-button next-button-title="Done" next-button-tooltip="Save this wizard">
 					<p> Last step </p>
 				</d2l-labs-wizard-step>
 			</d2l-labs-wizard>
@@ -38,6 +38,9 @@
 				const wizard = document.getElementById('wizard');
 				wizard.addEventListener('stepper-next', () => {
 					wizard.next();
+				});
+				wizard.addEventListener('stepper-back', () => {
+					wizard.back();
 				});
 				wizard.addEventListener('stepper-restart', () => {
 					wizard.restart();

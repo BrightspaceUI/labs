@@ -38,12 +38,39 @@ describe('d2l-labs-wizard-step', () => {
 			elem._nextClick();
 		});
 
+		it('should create stepper-back event', async() => {
+			const elem = await fixture(defaultFixture);
+			elem.addEventListener('stepper-back', (event) => {
+				expect(event.type).to.equal('stepper-back');
+			});
+			elem._backClick();
+		});
+
 		it('should create stepper-restart event', async() => {
 			const elem = await fixture(defaultFixture);
 			elem.addEventListener('stepper-restart', (event) => {
 				expect(event.type).to.equal('stepper-restart');
 			});
 			elem._restartClick();
+		});
+	});
+
+	describe('back button', () => {
+		it('should not render by default', async() => {
+			const elem = await fixture(defaultFixture);
+			const buttons = elem.shadowRoot.querySelectorAll('d2l-button');
+
+			expect(buttons.length).to.equal(2);
+		});
+
+		it('should render when display-back-button is set', async() => {
+			const elem = await fixture(html`<d2l-labs-wizard-step display-back-button back-button-title="Previous" back-button-tooltip="Go to previous step"></d2l-labs-wizard-step>`);
+			const buttons = elem.shadowRoot.querySelectorAll('d2l-button');
+			const backButton = buttons[1];
+
+			expect(buttons.length).to.equal(3);
+			expect(backButton.title).to.equal('Go to previous step');
+			expect(backButton.textContent.trim()).to.equal('Previous');
 		});
 	});
 

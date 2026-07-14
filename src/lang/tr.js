@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "Önceki sayfa",
 	"components:pagination:resultsPerPage": "Sayfa başına sonuç",
 	"components:wizard:aria.steplabel": "Adım {currentStep} / {totalSteps}",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "Sonraki adıma ilerle",
 	"components:wizard:restart.button.tooltip": "İlk adıma geri dön",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "İleri",
 	"components:wizard:stepper.defaults.restart": "Yeniden Başlat"
 };

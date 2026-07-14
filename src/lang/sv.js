@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "Föregående sida",
 	"components:pagination:resultsPerPage": "Resultat per sida",
 	"components:wizard:aria.steplabel": "Steg {currentStep} av {totalSteps}",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "Gå vidare till nästa steg",
 	"components:wizard:restart.button.tooltip": "Tillbaka till första steget",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "Nästa",
 	"components:wizard:stepper.defaults.restart": "Starta om"
 };

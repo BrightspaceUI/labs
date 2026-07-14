@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "पिछला पेज",
 	"components:pagination:resultsPerPage": "प्रति पेज के परिणाम",
 	"components:wizard:aria.steplabel": "{totalSteps} में से {currentStep} चरण",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "अगले चरण पर आगे बढ़ें",
 	"components:wizard:restart.button.tooltip": "पहले चरण पर वापस जाएँ",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "अगला",
 	"components:wizard:stepper.defaults.restart": "पुनरारंभ करें"
 };
