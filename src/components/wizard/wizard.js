@@ -55,6 +55,14 @@ class D2LWizard extends LitElement {
 		`;
 	}
 
+	back() {
+		this.selectedStep = this.selectedStep === 0 ? this.selectedStep : (this.selectedStep - 1);
+
+		this.#updateStep();
+
+		this.#focusAriaTitleOfStep();
+	}
+
 	currentStep() {
 		return this.selectedStep;
 	}
@@ -67,14 +75,6 @@ class D2LWizard extends LitElement {
 		if (window.parentIFrame) {
 			window.parentIFrame.scrollTo(0, 0);
 		}
-
-		this.#focusAriaTitleOfStep();
-	}
-
-	back() {
-		this.selectedStep = this.selectedStep === 0 ? this.selectedStep : (this.selectedStep - 1);
-
-		this.#updateStep();
 
 		this.#focusAriaTitleOfStep();
 	}

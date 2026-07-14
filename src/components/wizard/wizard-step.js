@@ -1,5 +1,5 @@
 import '@brightspace-ui/core/components/button/button.js';
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen.js';
 
@@ -110,7 +110,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			<div class="d2l-labs-wizard-step-footer">
 				<div class="d2l-labs-wizard-step-footer-start">
 	${this.hideRestartButton
-		? html``
+		? nothing
 		: html`
 			<d2l-button
 				title="${!this.restartButtonTooltip ? this.localize('components:wizard:restart.button.tooltip') : this.restartButtonTooltip}"
@@ -128,7 +128,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			>
 			${!this.backButtonTitle ? this.localize('components:wizard:stepper.defaults.back') : this.backButtonTitle}
 			</d2l-button>`
-		: html``}
+		: nothing}
 				</div>
 
 	${this.hideNextButton
@@ -149,6 +149,10 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		`;
 	}
 
+	_backClick() {
+		this.dispatchEvent(new CustomEvent('stepper-back', { bubbles: true, composed: true }));
+	}
+
 	_getAriaTitle() {
 		if (this.ariaTitle) {
 			return this.ariaTitle;
@@ -164,10 +168,6 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 
 	_nextClick() {
 		this.dispatchEvent(new CustomEvent('stepper-next', { bubbles: true, composed: true }));
-	}
-
-	_backClick() {
-		this.dispatchEvent(new CustomEvent('stepper-back', { bubbles: true, composed: true }));
 	}
 
 	_restartClick() {
