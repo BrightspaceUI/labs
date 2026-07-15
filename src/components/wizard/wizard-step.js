@@ -109,48 +109,21 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			<slot></slot>
 			<div class="d2l-labs-wizard-step-footer">
 				<div class="d2l-labs-wizard-step-footer-start">
+	${this.displayBackButton
+		? this.#renderBackButton()
+		: nothing}
+
 	${this.hideRestartButton
 		? nothing
-		: html`
-			<d2l-button
-				title="${!this.restartButtonTooltip ? this.localize('components:wizard:restart.button.tooltip') : this.restartButtonTooltip}"
-				aria-label="${this.restartButtonAriaLabel}"
-				@click="${this._restartClick}"
-			>
-			${!this.restartButtonTitle ? this.localize('components:wizard:stepper.defaults.restart') : this.restartButtonTitle}
-			</d2l-button>`}
-
-	${this.displayBackButton
-		? html`
-			<d2l-button
-				title="${!this.backButtonTooltip ? this.localize('components:wizard:back.button.tooltip') : this.backButtonTooltip}"
-				@click="${this._backClick}"
-			>
-			${!this.backButtonTitle ? this.localize('components:wizard:stepper.defaults.back') : this.backButtonTitle}
-			</d2l-button>`
-		: nothing}
+		: this.#renderRestartButton()}
 				</div>
 
 	${this.hideNextButton
 		? html`<div></div>`
-		: html`
-			<d2l-button
-				class="d2l-labs-wizard-step-button-next"
-				title="${!this.nextButtonTooltip ? this.localize('components:wizard:next.button.tooltip') : this.nextButtonTooltip}"
-				aria-label="${this.nextButtonAriaLabel}"
-				@click="${this._nextClick}"
-				primary
-				?disabled="${this.disableNextButton}"
-			>
-			${!this.nextButtonTitle ? this.localize('components:wizard:stepper.defaults.next') : this.nextButtonTitle}
-			</d2l-button>`}
+		: this.#renderNextButton()}
 
 			</div>
 		`;
-	}
-
-	_backClick() {
-		this.dispatchEvent(new CustomEvent('stepper-back', { bubbles: true, composed: true }));
 	}
 
 	_getAriaTitle() {
@@ -166,12 +139,51 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		return this.localize('components:wizard:aria.steplabel', 'totalSteps', this.stepCount, 'currentStep', this.thisStep);
 	}
 
-	_nextClick() {
+	#handleBackClick() {
+		this.dispatchEvent(new CustomEvent('stepper-back', { bubbles: true, composed: true }));
+	}
+
+	#handleNextClick() {
 		this.dispatchEvent(new CustomEvent('stepper-next', { bubbles: true, composed: true }));
 	}
 
-	_restartClick() {
+	#handleRestartClick() {
 		this.dispatchEvent(new CustomEvent('stepper-restart', { bubbles: true, composed: true }));
+	}
+
+	#renderBackButton() {
+		return html`
+			<d2l-button
+				title="${!this.backButtonTooltip ? this.localize('components:wizard:back.button.tooltip') : this.backButtonTooltip}"
+				@click="${this.#handleBackClick}"
+			>
+			${!this.backButtonTitle ? this.localize('components:wizard:stepper.defaults.back') : this.backButtonTitle}
+			</d2l-button>`;
+	}
+
+	#renderNextButton() {
+		return html`
+			<d2l-button
+				class="d2l-labs-wizard-step-button-next"
+				title="${!this.nextButtonTooltip ? this.localize('components:wizard:next.button.tooltip') : this.nextButtonTooltip}"
+				aria-label="${this.nextButtonAriaLabel}"
+				@click="${this.#handleNextClick}"
+				primary
+				?disabled="${this.disableNextButton}"
+			>
+			${!this.nextButtonTitle ? this.localize('components:wizard:stepper.defaults.next') : this.nextButtonTitle}
+			</d2l-button>`;
+	}
+
+	#renderRestartButton() {
+		return html`
+			<d2l-button
+				title="${!this.restartButtonTooltip ? this.localize('components:wizard:restart.button.tooltip') : this.restartButtonTooltip}"
+				aria-label="${this.restartButtonAriaLabel}"
+				@click="${this.#handleRestartClick}"
+			>
+			${!this.restartButtonTitle ? this.localize('components:wizard:stepper.defaults.restart') : this.restartButtonTitle}
+			</d2l-button>`;
 	}
 }
 
