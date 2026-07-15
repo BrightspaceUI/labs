@@ -1,3 +1,4 @@
+import '@brightspace-ui/core/components/icons/icon.js';
 import { css, html, LitElement, nothing } from 'lit';
 import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
