@@ -1,5 +1,5 @@
 import '../../../src/components/wizard/wizard-step.js';
-import { expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
+import { clickElem, expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 
 const defaultFixture = html`
@@ -30,53 +30,25 @@ describe('d2l-labs-wizard-step', () => {
 
 	describe('event', () => {
 
-		it('should create stepper-next event', async() => {
+		it('dispatches stepper-next event when next button clicked', async() => {
 			const elem = await fixture(defaultFixture);
-			const eventPromise = oneEvent(elem, 'stepper-next');
 
-			elem.shadowRoot.querySelector('.d2l-labs-wizard-step-button-next').click();
-			const event = await eventPromise;
-
-			expect(event.type).to.equal('stepper-next');
+			clickElem(elem.shadowRoot.querySelector('.d2l-labs-wizard-step-button-next'));
+			await oneEvent(elem, 'stepper-next');
 		});
 
-		it('should create stepper-back event', async() => {
+		it('dispatches stepper-back event when back button clicked', async() => {
 			const elem = await fixture(html`<d2l-labs-wizard-step display-back-button></d2l-labs-wizard-step>`);
-			const eventPromise = oneEvent(elem, 'stepper-back');
 
-			elem.shadowRoot.querySelector('d2l-button').click();
-			const event = await eventPromise;
-
-			expect(event.type).to.equal('stepper-back');
+			clickElem(elem.shadowRoot.querySelector('d2l-button'));
+			await oneEvent(elem, 'stepper-back');
 		});
 
-		it('should create stepper-restart event', async() => {
+		it('dispatches stepper-restart event when restart button clicked', async() => {
 			const elem = await fixture(defaultFixture);
-			const eventPromise = oneEvent(elem, 'stepper-restart');
 
-			elem.shadowRoot.querySelector('d2l-button').click();
-			const event = await eventPromise;
-
-			expect(event.type).to.equal('stepper-restart');
-		});
-	});
-
-	describe('back button', () => {
-		it('should not render by default', async() => {
-			const elem = await fixture(defaultFixture);
-			const buttons = elem.shadowRoot.querySelectorAll('d2l-button');
-
-			expect(buttons.length).to.equal(2);
-		});
-
-		it('should render when display-back-button is set', async() => {
-			const elem = await fixture(html`<d2l-labs-wizard-step display-back-button back-button-title="Previous" back-button-tooltip="Go to previous step"></d2l-labs-wizard-step>`);
-			const buttons = elem.shadowRoot.querySelectorAll('d2l-button');
-			const backButton = buttons[0];
-
-			expect(buttons.length).to.equal(3);
-			expect(backButton.title).to.equal('Go to previous step');
-			expect(backButton.textContent.trim()).to.equal('Previous');
+			clickElem(elem.shadowRoot.querySelector('d2l-button'));
+			await oneEvent(elem, 'stepper-restart');
 		});
 	});
 

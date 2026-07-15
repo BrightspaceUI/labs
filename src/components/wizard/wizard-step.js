@@ -154,35 +154,32 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 	#renderBackButton() {
 		return html`
 			<d2l-button
-				title="${!this.backButtonTooltip ? this.localize('components:wizard:back.button.tooltip') : this.backButtonTooltip}"
 				@click="${this.#handleBackClick}"
-			>
-			${!this.backButtonTitle ? this.localize('components:wizard:stepper.defaults.back') : this.backButtonTitle}
+				title="${!this.backButtonTooltip ? this.localize('components:wizard:back.button.tooltip') : this.backButtonTooltip}">
+				${!this.backButtonTitle ? this.localize('components:wizard:stepper.defaults.back') : this.backButtonTitle}
 			</d2l-button>`;
 	}
 
 	#renderNextButton() {
 		return html`
 			<d2l-button
-				class="d2l-labs-wizard-step-button-next"
-				title="${!this.nextButtonTooltip ? this.localize('components:wizard:next.button.tooltip') : this.nextButtonTooltip}"
 				aria-label="${this.nextButtonAriaLabel}"
+				class="d2l-labs-wizard-step-button-next"
 				@click="${this.#handleNextClick}"
-				primary
 				?disabled="${this.disableNextButton}"
-			>
-			${!this.nextButtonTitle ? this.localize('components:wizard:stepper.defaults.next') : this.nextButtonTitle}
+				primary
+				title="${!this.nextButtonTooltip ? this.localize('components:wizard:next.button.tooltip') : this.nextButtonTooltip}">
+				${!this.nextButtonTitle ? this.localize('components:wizard:stepper.defaults.next') : this.nextButtonTitle}
 			</d2l-button>`;
 	}
 
 	#renderRestartButton() {
 		return html`
 			<d2l-button
-				title="${!this.restartButtonTooltip ? this.localize('components:wizard:restart.button.tooltip') : this.restartButtonTooltip}"
 				aria-label="${this.restartButtonAriaLabel}"
 				@click="${this.#handleRestartClick}"
-			>
-			${!this.restartButtonTitle ? this.localize('components:wizard:stepper.defaults.restart') : this.restartButtonTitle}
+				title="${!this.restartButtonTooltip ? this.localize('components:wizard:restart.button.tooltip') : this.restartButtonTooltip}">
+				${!this.restartButtonTitle ? this.localize('components:wizard:stepper.defaults.restart') : this.restartButtonTitle}
 			</d2l-button>`;
 	}
 }
