@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "Forrige side",
 	"components:pagination:resultsPerPage": "Resultater pr. side",
 	"components:wizard:aria.steplabel": "Trin {currentStep} af {totalSteps}",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "Fortsæt til næste trin",
 	"components:wizard:restart.button.tooltip": "Tilbage til første trin",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "Next",
 	"components:wizard:stepper.defaults.restart": "Genstart"
 };

@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "上一页",
 	"components:pagination:resultsPerPage": "每页结果数",
 	"components:wizard:aria.steplabel": "全部 {currentStep} 步中的 {totalSteps} 步",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "继续下一步",
 	"components:wizard:restart.button.tooltip": "返回第一步",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "下一个",
 	"components:wizard:stepper.defaults.restart": "重新开始"
 };

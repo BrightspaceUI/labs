@@ -1,5 +1,5 @@
 import '../../../src/components/wizard/wizard-step.js';
-import { expect, fixture, html } from '@brightspace-ui/testing';
+import { clickElem, expect, fixture, html, oneEvent } from '@brightspace-ui/testing';
 import { runConstructor } from '@brightspace-ui/core/tools/constructor-test-helper.js';
 
 const defaultFixture = html`
@@ -30,20 +30,25 @@ describe('d2l-labs-wizard-step', () => {
 
 	describe('event', () => {
 
-		it('should create stepper-next event', async() => {
+		it('dispatches stepper-next event when next button clicked', async() => {
 			const elem = await fixture(defaultFixture);
-			elem.addEventListener('stepper-next', (event) => {
-				expect(event.type).to.equal('stepper-next');
-			});
-			elem._nextClick();
+
+			clickElem(elem.shadowRoot.querySelector('.d2l-labs-wizard-step-button-next'));
+			await oneEvent(elem, 'stepper-next');
 		});
 
-		it('should create stepper-restart event', async() => {
+		it('dispatches stepper-back event when back button clicked', async() => {
+			const elem = await fixture(html`<d2l-labs-wizard-step display-back-button></d2l-labs-wizard-step>`);
+
+			clickElem(elem.shadowRoot.querySelector('d2l-button'));
+			await oneEvent(elem, 'stepper-back');
+		});
+
+		it('dispatches stepper-restart event when restart button clicked', async() => {
 			const elem = await fixture(defaultFixture);
-			elem.addEventListener('stepper-restart', (event) => {
-				expect(event.type).to.equal('stepper-restart');
-			});
-			elem._restartClick();
+
+			clickElem(elem.shadowRoot.querySelector('d2l-button'));
+			await oneEvent(elem, 'stepper-restart');
 		});
 	});
 

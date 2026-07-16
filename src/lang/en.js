@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "Previous page",
 	"components:pagination:resultsPerPage": "Results per page",
 	"components:wizard:aria.steplabel": "Step {currentStep} of {totalSteps}",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "Proceed to next step",
 	"components:wizard:restart.button.tooltip": "Back to first step",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "Next",
 	"components:wizard:stepper.defaults.restart": "Restart"
 };

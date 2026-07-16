@@ -19,9 +19,39 @@
 
 <body unresolved>
 	<d2l-demo-page page-title="d2l-labs-wizard">
-		<h2>Basic Wizard</h2>
+		<h2>Basic Wizard With Back Button</h2>
 		<d2l-demo-snippet>
-			<d2l-labs-wizard id="wizard" selected-step="1">
+			<d2l-labs-wizard selected-step="1">
+				<d2l-labs-wizard-step next-button-aria-label="Go to step 2" step-title="Lets get started" hide-restart-button="true">
+					<p> first step </p>
+				</d2l-labs-wizard-step>
+
+				<d2l-labs-wizard-step aria-title="This is the second step" display-back-button restart-button-tooltip="Restart this wizard">
+					<p> second step </p>
+				</d2l-labs-wizard-step>
+
+				<d2l-labs-wizard-step step-title="Almost done" display-back-button next-button-title="Done" next-button-tooltip="Save this wizard">
+					<p> Last step </p>
+				</d2l-labs-wizard-step>
+			</d2l-labs-wizard>
+			<script>
+				(demo => {
+					const wizard = demo.querySelector('d2l-labs-wizard');
+					wizard.addEventListener('stepper-next', () => {
+						wizard.next();
+					});
+					wizard.addEventListener('stepper-back', () => {
+						wizard.back();
+					});
+					wizard.addEventListener('stepper-restart', () => {
+						wizard.restart();
+					});
+				})(document.currentScript.parentNode);
+			</script>
+		</d2l-demo-snippet>
+		<h2>Basic Wizard Without Back Button</h2>
+		<d2l-demo-snippet>
+			<d2l-labs-wizard selected-step="1">
 				<d2l-labs-wizard-step next-button-aria-label="Go to step 2" step-title="Lets get started" hide-restart-button="true">
 					<p> first step </p>
 				</d2l-labs-wizard-step>
@@ -35,17 +65,19 @@
 				</d2l-labs-wizard-step>
 			</d2l-labs-wizard>
 			<script>
-				const wizard = document.getElementById('wizard');
-				wizard.addEventListener('stepper-next', () => {
-					wizard.next();
-				});
-				wizard.addEventListener('stepper-restart', () => {
-					wizard.restart();
-				});
+				(demo => {
+					const wizard = demo.querySelector('d2l-labs-wizard');
+					wizard.addEventListener('stepper-next', () => {
+						wizard.next();
+					});
+					wizard.addEventListener('stepper-restart', () => {
+						wizard.restart();
+					});
+				})(document.currentScript.parentNode);
 			</script>
 		</d2l-demo-snippet>
 		<d2l-demo-snippet>
-			<d2l-labs-wizard id="wizard2" selected-step="0">
+			<d2l-labs-wizard selected-step="0">
 				<d2l-labs-wizard-step step-title="Lets get started" hide-restart-button="true" hide-next-button="true">
 					<p> first step </p>
 				</d2l-labs-wizard-step>

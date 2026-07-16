@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "Whārangi o mua",
 	"components:pagination:resultsPerPage": "Ngā kitenga mō ia whārangi",
 	"components:wizard:aria.steplabel": "Taumata {currentStep} o {totalSteps}",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "Haere ki te whakatikanga whai ake",
 	"components:wizard:restart.button.tooltip": "Hoki ki te tapawhā tuatahi",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "Whai Ake",
 	"components:wizard:stepper.defaults.restart": "Tīmata anō"
 };

@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "이전 페이지",
 	"components:pagination:resultsPerPage": "페이지당 결과 수",
 	"components:wizard:aria.steplabel": "{currentStep}/{totalSteps}단계",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "다음 단계로 진행",
 	"components:wizard:restart.button.tooltip": "첫 번째 단계로 돌아가기",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "다음",
 	"components:wizard:stepper.defaults.restart": "다시 시작"
 };

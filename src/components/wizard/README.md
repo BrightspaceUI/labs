@@ -15,6 +15,9 @@ The wizard component can be used to display a stepped workflow.
     wizard.addEventListener('stepper-next', function() {
       wizard.next();
     });
+    wizard.addEventListener('stepper-back', function() {
+      wizard.back();
+    });
     wizard.addEventListener('stepper-restart', function() {
       wizard.restart();
     });
@@ -33,12 +36,14 @@ The wizard component can be used to display a stepped workflow.
 
   <d2l-labs-wizard-step
     aria-title="This is the second step"
+    display-back-button
     restart-button-tooltip="Restart this wizard">
     <p>Second Step</p>
   </d2l-labs-wizard-step>
 
   <d2l-labs-wizard-step
     step-title="Almost Done"
+    display-back-button
     next-button-title="Done"
     next-button-tooltip="Save this wizard">
     <p>Last Step</p>
@@ -53,6 +58,9 @@ The wizard component can be used to display a stepped workflow.
 | Properties | Type | Description |
 |--|--|--|
 | `step-title` | String | Text displayed in the wizard step |
+| `back-button-title` | String | Text that is displayed within the button |
+| `back-button-tooltip` | String | Text that is displayed within the button tooltip |
+| `display-back-button` | Boolean | Display the Back button |
 | `restart-button-title` | String | Text that is displayed within the button |
 | `restart-button-tooltip` | String | Text that is displayed within the button tooltip |
 | `hide-restart-button` | Boolean | Hide the Restart button |
@@ -63,6 +71,7 @@ The wizard component can be used to display a stepped workflow.
 
 ### Events:
 - `stepper-next`: dispatched when the Next button is clicked
+- `stepper-back`: dispatched when the Back button is clicked
 - `stepper-restart`: dispatched when the Restart button is clicked
 
 <!-- docs: end hidden content -->

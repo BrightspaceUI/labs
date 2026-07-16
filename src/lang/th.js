@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "หน้าก่อนหน้า",
 	"components:pagination:resultsPerPage": "ผลลัพธ์ต่อหน้า",
 	"components:wizard:aria.steplabel": "ขั้นตอน{currentStep} จาก {totalSteps}",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "ไปยังขั้นตอนถัดไป",
 	"components:wizard:restart.button.tooltip": "กลับไปที่ขั้นตอนแรก",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "ถัดไป",
 	"components:wizard:stepper.defaults.restart": "เริ่มต้นใหม่"
 };

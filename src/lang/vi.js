@@ -107,8 +107,10 @@ export default {
 	"components:pagination:previousPage": "Trang trước",
 	"components:pagination:resultsPerPage": "Số kết quả cho mỗi trang",
 	"components:wizard:aria.steplabel": "Bước {currentStep} của {totalSteps}",
+	"components:wizard:back.button.tooltip": "Return to previous step",
 	"components:wizard:next.button.tooltip": "Chuyển sang bước tiếp theo",
 	"components:wizard:restart.button.tooltip": "Quay lại bước đầu tiên",
+	"components:wizard:stepper.defaults.back": "Back",
 	"components:wizard:stepper.defaults.next": "Tiếp theo",
 	"components:wizard:stepper.defaults.restart": "Khởi động lại"
 };
