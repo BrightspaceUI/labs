@@ -107,7 +107,7 @@ export default {
 	"components:pagination:previousPage": "Page précédente",
 	"components:pagination:resultsPerPage": "Résultats par page",
 	"components:wizard:aria.steplabel": "Étape {currentStep} de {totalSteps}",
-	"components:wizard:back.button.tooltip": "Retour à l'étape précédente",
+	"components:wizard:back.button.tooltip": "Retour à l’étape précédente",
 	"components:wizard:next.button.tooltip": "Passer à la prochaine étape",
 	"components:wizard:restart.button.tooltip": "Retour à la première étape",
 	"components:wizard:stepper.defaults.back": "Retour",
