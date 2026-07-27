@@ -107,10 +107,10 @@ export default {
 	"components:pagination:previousPage": "Y dudalen flaenorol",
 	"components:pagination:resultsPerPage": "Canlyniadau fesul tudalen",
 	"components:wizard:aria.steplabel": "Cam {currentStep} o {totalSteps}",
-	"components:wizard:back.button.tooltip": "Return to previous step",
+	"components:wizard:back.button.tooltip": "Dychwelyd i’r cam blaenorol",
 	"components:wizard:next.button.tooltip": "Parhau i’r cam nesaf",
 	"components:wizard:restart.button.tooltip": "Yn ôl i’r cam cyntaf",
-	"components:wizard:stepper.defaults.back": "Back",
+	"components:wizard:stepper.defaults.back": "Yn ôl",
 	"components:wizard:stepper.defaults.next": "Nesaf",
 	"components:wizard:stepper.defaults.restart": "Ailddechrau"
 };
