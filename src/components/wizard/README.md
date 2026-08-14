@@ -61,11 +61,10 @@ The wizard component can be used to display a stepped workflow.
 | `back-button-title` | String | Text that is displayed within the button |
 | `back-button-tooltip` | String | Text that is displayed within the button tooltip |
 | `display-back-button` | Boolean | Display the Back button |
-| `primary-back-button` | Boolean | Make the Back button primary |
+| `primary-button` | String | Button to make primary: `next`, `back`, or `restart`. Defaults to `next` |
 | `restart-button-title` | String | Text that is displayed within the button |
 | `restart-button-tooltip` | String | Text that is displayed within the button tooltip |
 | `hide-restart-button` | Boolean | Hide the Restart button |
-| `primary-restart-button` | Boolean | Make the Restart button primary |
 | `next-button-title` | String | Text that is displayed within the button |
 | `next-button-tooltip` | String | Text that is displayed within the button tooltip |
 | `disable-next-button` | Boolean | Disable the Next button |

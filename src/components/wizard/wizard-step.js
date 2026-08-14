@@ -3,6 +3,12 @@ import { css, html, LitElement, nothing } from 'lit';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen.js';
 
+const PRIMARY_BUTTON = Object.freeze({
+	NEXT: 'next',
+	BACK: 'back',
+	RESTART: 'restart'
+});
+
 class D2LStep extends LocalizeLabsElement(LitElement) {
 
 	static properties = {
@@ -34,13 +40,9 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			type: Boolean,
 			attribute: 'display-back-button'
 		},
-		primaryBackButton: {
-			type: Boolean,
-			attribute: 'primary-back-button'
-		},
-		primaryRestartButton: {
-			type: Boolean,
-			attribute: 'primary-restart-button'
+		primaryButton: {
+			type: String,
+			attribute: 'primary-button'
 		},
 		hideRestartButton: {
 			type: Boolean,
@@ -100,9 +102,8 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 	constructor() {
 		super();
 		this.displayBackButton = false;
-		this.primaryBackButton = false;
 		this.hideRestartButton = false;
-		this.primaryRestartButton = false;
+		this.primaryButton = PRIMARY_BUTTON.NEXT;
 		this.hideNextButton = false;
 		this.disableNextButton = false;
 		this.nextButtonAriaLabel = '';
@@ -165,7 +166,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		return html`
 			<d2l-button
 				@click="${this.#handleBackClick}"
-				?primary="${this.primaryBackButton}"
+				?primary="${this.primaryButton === PRIMARY_BUTTON.BACK}"
 				title="${!this.backButtonTooltip ? this.localize('components:wizard:back.button.tooltip') : this.backButtonTooltip}">
 				${!this.backButtonTitle ? this.localize('components:wizard:stepper.defaults.back') : this.backButtonTitle}
 			</d2l-button>`;
@@ -178,7 +179,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 				class="d2l-labs-wizard-step-button-next"
 				@click="${this.#handleNextClick}"
 				?disabled="${this.disableNextButton}"
-				primary
+				?primary="${this.primaryButton === PRIMARY_BUTTON.NEXT}"
 				title="${!this.nextButtonTooltip ? this.localize('components:wizard:next.button.tooltip') : this.nextButtonTooltip}">
 				${!this.nextButtonTitle ? this.localize('components:wizard:stepper.defaults.next') : this.nextButtonTitle}
 			</d2l-button>`;
@@ -189,7 +190,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			<d2l-button
 				aria-label="${this.restartButtonAriaLabel}"
 				@click="${this.#handleRestartClick}"
-				?primary="${this.primaryRestartButton}"
+				?primary="${this.primaryButton === PRIMARY_BUTTON.RESTART}"
 				title="${!this.restartButtonTooltip ? this.localize('components:wizard:restart.button.tooltip') : this.restartButtonTooltip}">
 				${!this.restartButtonTitle ? this.localize('components:wizard:stepper.defaults.restart') : this.restartButtonTitle}
 			</d2l-button>`;
