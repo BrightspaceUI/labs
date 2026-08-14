@@ -56,6 +56,14 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			type: Boolean,
 			attribute: 'disable-next-button'
 		},
+		disableBackButton: {
+			type: Boolean,
+			attribute: 'disable-back-button'
+		},
+		disableRestartButton: {
+			type: Boolean,
+			attribute: 'disable-restart-button'
+		},
 		nextButtonAriaLabel: {
 			type: String,
 			attribute: 'next-button-aria-label'
@@ -106,6 +114,8 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		this.primaryButton = PRIMARY_BUTTON.NEXT;
 		this.hideNextButton = false;
 		this.disableNextButton = false;
+		this.disableBackButton = false;
+		this.disableRestartButton = false;
 		this.nextButtonAriaLabel = '';
 		this.restartButtonAriaLabel = '';
 		this.ariaTitle = '';
@@ -166,6 +176,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		return html`
 			<d2l-button
 				@click="${this.#handleBackClick}"
+				?disabled="${this.disableBackButton}"
 				?primary="${this.primaryButton === PRIMARY_BUTTON.BACK}"
 				title="${!this.backButtonTooltip ? this.localize('components:wizard:back.button.tooltip') : this.backButtonTooltip}">
 				${!this.backButtonTitle ? this.localize('components:wizard:stepper.defaults.back') : this.backButtonTitle}
@@ -190,6 +201,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 			<d2l-button
 				aria-label="${this.restartButtonAriaLabel}"
 				@click="${this.#handleRestartClick}"
+				?disabled="${this.disableRestartButton}"
 				?primary="${this.primaryButton === PRIMARY_BUTTON.RESTART}"
 				title="${!this.restartButtonTooltip ? this.localize('components:wizard:restart.button.tooltip') : this.restartButtonTooltip}">
 				${!this.restartButtonTitle ? this.localize('components:wizard:stepper.defaults.restart') : this.restartButtonTitle}
