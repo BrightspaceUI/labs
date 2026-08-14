@@ -28,6 +28,24 @@ describe('d2l-labs-wizard-step', () => {
 		});
 	});
 
+	it('should make both Back, Restart and Next buttons primary', async() => {
+		const elem = await fixture(html`<d2l-labs-wizard-step display-back-button primary-back-button primary-restart-button></d2l-labs-wizard-step>`);
+		const backButton = elem.shadowRoot.querySelector('d2l-button');
+		const nextButton = elem.shadowRoot.querySelector('.d2l-labs-wizard-step-button-next');
+
+		expect(backButton.hasAttribute('primary')).to.equal(true);
+		expect(nextButton.hasAttribute('primary')).to.equal(true);
+	});
+
+	it('should make only the Next button primary', async() => {
+		const elem = await fixture(html`<d2l-labs-wizard-step display-back-button></d2l-labs-wizard-step>`);
+		const backButton = elem.shadowRoot.querySelector('d2l-button');
+		const nextButton = elem.shadowRoot.querySelector('.d2l-labs-wizard-step-button-next');
+
+		expect(backButton.hasAttribute('primary')).to.equal(false);
+		expect(nextButton.hasAttribute('primary')).to.equal(true);
+	});
+
 	describe('event', () => {
 
 		it('dispatches stepper-next event when next button clicked', async() => {
