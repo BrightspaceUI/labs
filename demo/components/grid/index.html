@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/node_modules/@brightspace-ui/core/components/demo/styles.css" type="text/css">
+		<script type="module">
+			import '@brightspace-ui/core/components/demo/demo-page.js';
+			import '../../../src/components/grid/grid.js';
+		</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+	</head>
+	<body unresolved>
+		<d2l-demo-page page-title="Accessible Grid">
+			<h2>Static Grid — Z Layout</h2>
+			<d2l-demo-snippet>
+				<template>
+					<!--
+						Here D and C are reversed, but they are rendered and read in the correct order by screen readers
+					-->
+					<d2l-accessible-grid cols="3" label="Z-layout static grid" rows="2">
+						<d2l-accessible-grid-cell label="Cell A" x="0" y="0">
+							<strong>A</strong> (0,0)
+						</d2l-accessible-grid-cell>
+						<d2l-accessible-grid-cell label="Cell B — wide" width="2" x="1" y="0">
+							<strong>B</strong> (1,0) width=2
+						</d2l-accessible-grid-cell>
+						<d2l-accessible-grid-cell label="Cell D" x="1" y="1">
+							<strong>D</strong> (1,1)
+						</d2l-accessible-grid-cell>
+						<d2l-accessible-grid-cell label="Cell C" x="0" y="1">
+							<strong>C</strong> (0,1)
+						</d2l-accessible-grid-cell>
+						<d2l-accessible-grid-cell label="Cell E" x="2" y="1">
+							<strong>E</strong> (2,1)
+						</d2l-accessible-grid-cell>
+					</d2l-accessible-grid>
+				</template>
+			</d2l-demo-snippet>
+			<h2>Static Grid — N Layout</h2>
+			<d2l-demo-snippet>
+				<template>
+					<p><em>Static N-layout grid placeholder.</em></p>
+				</template>
+			</d2l-demo-snippet>
+			<h2>Editable Grid</h2>
+			<d2l-demo-snippet>
+				<template>
+					<p><em>Editable grid placeholder.</em></p>
+				</template>
+			</d2l-demo-snippet>
+			<h2>RTL Grid</h2>
+			<d2l-demo-snippet>
+				<template>
+					<p><em>RTL grid placeholder.</em></p>
+				</template>
+			</d2l-demo-snippet>
+			<h2>Collision Demo</h2>
+			<d2l-demo-snippet>
+				<template>
+					<p><em>Collision demo placeholder.</em></p>
+				</template>
+			</d2l-demo-snippet>
+
+		</d2l-demo-page>
+	</body>
+</html>
