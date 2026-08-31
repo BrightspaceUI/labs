@@ -19,6 +19,7 @@
     "./components/grade-result/grade-result-presentational.js": "./src/components/grade-result/grade-result-presentational.js",
     "./components/grade-result/grade-result-student-grade-preview.js": "./src/components/grade-result/grade-result-student-grade-preview.js",
     "./components/media-player.js": "./src/components/media-player/media-player.js",
+    "./components/menu-item-ai.js": "./src/components/menu-item-ai/menu-item-ai.js",
     "./components/navigation/navigation-band.js": "./src/components/navigation/navigation-band.js",
     "./components/navigation/navigation-button-icon.js": "./src/components/navigation/navigation-button-icon.js",
     "./components/navigation/navigation-dropdown-button-custom.js": "./src/components/navigation/navigation-dropdown-button-custom.js",
