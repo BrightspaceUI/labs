@@ -18,20 +18,20 @@ class MenuItemAI extends MenuItemMixin(LitElement) {
 		d2l-icon {
 			flex: none;
 		}
-		.d2l-menu-item-ai-icon {
+		d2l-icon[icon="tier1:ai"] {
 			margin-inline-end: 6px;
 		}
-		.d2l-menu-item-ai-chevron {
+		d2l-icon[icon="tier1:chevron-right"] {
 			margin-inline-start: 6px;
 		}
 	`];
 
 	render() {
 		const chevron = this.hasChildView ?
-			html`<d2l-icon class="d2l-menu-item-ai-chevron" icon="tier1:chevron-right"></d2l-icon>` : null;
+			html`<d2l-icon icon="tier1:chevron-right"></d2l-icon>` : null;
 
 		return html`
-			<d2l-icon class="d2l-menu-item-ai-icon" icon="tier1:ai"></d2l-icon>
+			<d2l-icon icon="tier1:ai"></d2l-icon>
 			<div class="d2l-menu-item-text">${this.text}</div>
 			${chevron}
 			<slot></slot>

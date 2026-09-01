@@ -19,9 +19,11 @@
 					<d2l-menu-item-ai text="Manage Lumi Learner Mode"></d2l-menu-item-ai>
 				</d2l-menu>
 				<script>
-					document.querySelector('d2l-menu').addEventListener('d2l-menu-item-select', (e) => {
-						console.log(`${e.target.text} selected!`);
-					});
+					(demo => {
+						demo.querySelector('d2l-menu').addEventListener('d2l-menu-item-select', e => {
+							console.log(`${e.target.text} selected!`);
+						});
+					})(document.currentScript.parentNode);
 				</script>
 			</d2l-demo-snippet>
 

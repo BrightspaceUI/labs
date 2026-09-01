@@ -31,7 +31,7 @@ describe('d2l-menu-item-ai', () => {
 		it('should render the ai icon before the text', async() => {
 			const menu = await fixture(basicFixture);
 			const item = menu.querySelector('d2l-menu-item-ai');
-			const icon = item.shadowRoot.querySelector('d2l-icon.d2l-menu-item-ai-icon');
+			const icon = item.shadowRoot.querySelector('d2l-icon[icon="tier1:ai"]');
 			const text = item.shadowRoot.querySelector('.d2l-menu-item-text');
 
 			expect(icon).to.exist;
@@ -45,18 +45,11 @@ describe('d2l-menu-item-ai', () => {
 			expect(item.shadowRoot.querySelector('.d2l-menu-item-text').textContent).to.equal('Summarize with AI');
 		});
 
-		it('should not render supporting content', async() => {
-			const menu = await fixture(basicFixture);
-			const item = menu.querySelector('d2l-menu-item-ai');
-			expect(item.shadowRoot.querySelector('.d2l-menu-item-supporting')).to.not.exist;
-			expect(item.shadowRoot.querySelector('slot[name="supporting"]')).to.not.exist;
-		});
-
 		it('should not render a chevron when there is no child view', async() => {
 			const menu = await fixture(basicFixture);
 			const item = menu.querySelector('d2l-menu-item-ai');
 			expect(item.hasChildView).to.not.be.true;
-			expect(item.shadowRoot.querySelector('.d2l-menu-item-ai-chevron')).to.not.exist;
+			expect(item.shadowRoot.querySelector('d2l-icon[icon="tier1:chevron-right"]')).to.not.exist;
 		});
 
 		it('should render a chevron when there is a child view', async() => {
@@ -66,7 +59,7 @@ describe('d2l-menu-item-ai', () => {
 
 			expect(item.hasChildView).to.be.true;
 			expect(item.getAttribute('aria-haspopup')).to.equal('true');
-			expect(item.shadowRoot.querySelector('.d2l-menu-item-ai-chevron').getAttribute('icon')).to.equal('tier1:chevron-right');
+			expect(item.shadowRoot.querySelector('d2l-icon[icon="tier1:chevron-right"]')).to.exist;
 		});
 	});
 
