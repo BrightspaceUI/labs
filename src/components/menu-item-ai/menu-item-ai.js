@@ -13,6 +13,7 @@ class MenuItemAI extends MenuItemMixin(LitElement) {
 		:host {
 			align-items: center;
 			display: flex;
+			gap: 6px;
 			padding: 0.75rem 1rem;
 		}
 		:host([hidden]) {
@@ -20,9 +21,6 @@ class MenuItemAI extends MenuItemMixin(LitElement) {
 		}
 		d2l-icon {
 			flex: none;
-		}
-		d2l-icon[icon="tier1:ai"] {
-			margin-inline-end: 6px;
 		}
 		d2l-icon[icon="tier1:chevron-right"] {
 			margin-inline-start: 6px;

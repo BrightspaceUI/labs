@@ -2,7 +2,7 @@
 
 A menu item that renders the AI icon before its text, used to draw extra attention to a new AI-powered feature within a `<d2l-menu>`; it is not an official design pattern and each usage should be carefully considered.
 
-It behaves like `<d2l-menu-item>` from `@brightspace-ui/core`, except the AI icon is always rendered before the text and there is no `supporting` slot.
+It behaves like `<d2l-menu-item>` from `@brightspace-ui/core`, except the AI icon is always rendered before the text.
 
 ## AI Menu Item [d2l-menu-item-ai]
 
