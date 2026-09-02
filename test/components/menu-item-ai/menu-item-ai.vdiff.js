@@ -48,54 +48,24 @@ const singleLineFixture = html`
 
 describe('menu-item-ai', () => {
 
-	[false, true].forEach(rtl => {
-
-		describe(rtl ? 'rtl' : 'ltr', () => {
-
-			it('default', async() => {
-				const menu = await fixture(defaultFixture, { rtl });
-				await expect(menu).to.be.golden();
-			});
-
-			it('mixed', async() => {
-				const menu = await fixture(mixedFixture, { rtl });
-				await expect(menu).to.be.golden();
-			});
-
-			it('child view', async() => {
-				const menu = await fixture(childViewFixture, { rtl });
-				await expect(menu).to.be.golden();
-			});
-
-			it('disabled', async() => {
-				const menu = await fixture(disabledFixture, { rtl });
-				await expect(menu).to.be.golden();
-			});
-
-			it('long text', async() => {
-				const menu = await fixture(longTextFixture, { rtl });
-				await expect(menu).to.be.golden();
-			});
-
-			it('single line', async() => {
-				const menu = await fixture(singleLineFixture, { rtl });
-				await expect(menu).to.be.golden();
-			});
-
-			it('focus', async() => {
-				const menu = await fixture(defaultFixture, { rtl });
-				await focusElem(menu.querySelector('d2l-menu-item-ai'));
-				await expect(menu).to.be.golden();
-			});
-
-			it('hover', async() => {
-				const menu = await fixture(defaultFixture, { rtl });
-				await hoverElem(menu.querySelector('d2l-menu-item-ai'));
-				await expect(menu).to.be.golden();
-			});
-
+	[
+		{ name: 'default', template: defaultFixture },
+		{ name: 'default-rtl', template: defaultFixture, rtl: true },
+		{ name: 'mixed', template: mixedFixture },
+		{ name: 'child-view', template: childViewFixture },
+		{ name: 'child-view-rtl', template: childViewFixture, rtl: true },
+		{ name: 'disabled', template: disabledFixture },
+		{ name: 'long-text', template: longTextFixture },
+		{ name: 'single-line', template: singleLineFixture },
+		{ name: 'single-line-rtl', template: singleLineFixture, rtl: true },
+		{ name: 'focus', template: defaultFixture, action: elem => focusElem(elem.querySelector('d2l-menu-item-ai')) },
+		{ name: 'hover', template: defaultFixture, action: elem => hoverElem(elem.querySelector('d2l-menu-item-ai')) }
+	].forEach(({ name, rtl, template, action }) => {
+		it(name, async() => {
+			const elem = await fixture(template, { rtl });
+			if (action) await action(elem);
+			await expect(elem).to.be.golden();
 		});
-
 	});
 
 });
