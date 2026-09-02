@@ -22,9 +22,6 @@ class MenuItemAI extends MenuItemMixin(LitElement) {
 		d2l-icon {
 			flex: none;
 		}
-		d2l-icon[icon="tier1:chevron-right"] {
-			margin-inline-start: 6px;
-		}
 	`];
 
 	render() {
