@@ -15,6 +15,9 @@ class MenuItemAI extends MenuItemMixin(LitElement) {
 			display: flex;
 			padding: 0.75rem 1rem;
 		}
+		:host([hidden]) {
+			display: none;
+		}
 		d2l-icon {
 			flex: none;
 		}
