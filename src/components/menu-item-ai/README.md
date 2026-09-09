@@ -4,7 +4,7 @@ A menu item that renders the AI icon before its text, used to draw extra attenti
 
 It behaves like `<d2l-menu-item>` from `@brightspace-ui/core`, except the AI icon is always rendered before the text.
 
-## AI Menu Item [d2l-menu-item-ai]
+## AI Menu Item [d2l-labs-menu-item-ai]
 
 <!-- docs: demo code -->
 ```html
@@ -13,7 +13,7 @@ It behaves like `<d2l-menu-item>` from `@brightspace-ui/core`, except the AI ico
   import '@brightspace-ui/labs/components/menu-item-ai.js';
 </script>
 <d2l-menu label="Astronomy">
-  <d2l-menu-item-ai text="Summarize with AI"></d2l-menu-item-ai>
+  <d2l-labs-menu-item-ai text="Summarize with AI"></d2l-labs-menu-item-ai>
 </d2l-menu>
 ```
 
