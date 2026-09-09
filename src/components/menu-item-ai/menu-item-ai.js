@@ -37,8 +37,4 @@ class MenuItemAI extends MenuItemMixin(LitElement) {
 	}
 }
 
-class MenuItemAITemp extends MenuItemAI { }
-
-customElements.define('d2l-menu-item-ai', MenuItemAITemp);
-
 customElements.define('d2l-labs-menu-item-ai', MenuItemAI);
