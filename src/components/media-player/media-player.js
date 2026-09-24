@@ -737,6 +737,11 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return this._media ? this._media.textTracks : null;
 	}
 
+	disconnectedCallback() {
+		this._cancelAudioDescription();
+		super.disconnectedCallback();
+	}
+
 	firstUpdated(changedProperties) {
 		super.firstUpdated(changedProperties);
 
@@ -1020,11 +1025,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this._toggleFullscreen();
 	}
 
-	disconnectedCallback() {
-		this._cancelAudioDescription();
-		super.disconnectedCallback();
-	}
-
 	get _media() {
 		if (!this.shadowRoot) return null;
 		switch (this.mediaType) {
@@ -1055,6 +1055,14 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	_beginIOSVideoFullscreen() {
 		this._iosVideoFullscreen = true;
+	}
+
+	_cancelAudioDescription() {
+		if (this._audioDescriptionUtterance && window.speechSynthesis) {
+			window.speechSynthesis.cancel();
+		}
+		this._audioDescriptionUtterance = null;
+		this._audioDescriptionPausedVideo = false;
 	}
 
 	_clearPreference(preferenceKey) {
@@ -1118,17 +1126,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return str.join('');
 	}
 
-	static _parseTimeCode(timeCode) {
-		if (typeof timeCode !== 'string') return NaN;
-		const parts = timeCode.split(':');
-		if (parts.length !== 2 && parts.length !== 3) return NaN;
-		const seconds = Number(parts.pop());
-		const minutes = Number(parts.pop());
-		const hours = parts.length ? Number(parts.pop()) : 0;
-		if (![hours, minutes, seconds].every(Number.isFinite) || minutes >= 60 || seconds >= 60) return NaN;
-		return hours * 3600 + minutes * 60 + seconds;
-	}
-
 	_getAbsoluteUrl(url) {
 		const a = document.createElement('a');
 		a.setAttribute('href', url);
@@ -1142,7 +1139,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return html`
 			<d2l-menu-item text="${this.localize('components:mediaPlayer:audioDescriptions')}">
 				<div slot="supporting">${this._selectedAudioDescriptionLanguage || this.localize('components:mediaPlayer:off')}</div>
-				<d2l-menu @d2l-menu-item-change=${this._onAudioDescriptionsMenuItemChange} theme="${ifDefined(this._getTheme())}">
+				<d2l-menu @d2l-menu-item-change=${this._onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
 					<d2l-menu-item-radio
 						?selected="${!this._selectedAudioDescriptionLanguage}"
 						text="${this.localize('components:mediaPlayer:off')}"
@@ -1157,98 +1154,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				</d2l-menu>
 			</d2l-menu-item>
 		`;
-	}
-
-	_initializeAudioDescriptions() {
-		this._cancelAudioDescription();
-		this._normalizedAudioDescriptions = (this.audioDescriptions || [])
-			.filter(description => description?.language && Array.isArray(description.descriptions))
-			.map(description => ({
-				...description,
-				descriptions: description.descriptions
-					.map(item => ({ ...item, time: MediaPlayer._parseTimeCode(item.time) }))
-					.filter(item => Number.isFinite(item.time) && item.text)
-					.sort((a, b) => a.time - b.time)
-			}))
-			.filter(description => description.descriptions.length > 0);
-
-		const preference = this._getPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
-		this._selectedAudioDescriptionLanguage = this._normalizedAudioDescriptions.some(description => description.language === preference)
-			? preference
-			: null;
-	}
-
-	_onAudioDescriptionsMenuItemChange(e) {
-		this._cancelAudioDescription();
-		this._selectedAudioDescriptionLanguage = e.target.value || null;
-		this._resetAudioDescriptionCursor(this.currentTime);
-		if (this._selectedAudioDescriptionLanguage) {
-			this._setPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY, this._selectedAudioDescriptionLanguage);
-		} else {
-			this._clearPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
-		}
-	}
-
-	_onAudioDescriptionTimeUpdate(currentTime) {
-		const description = this._normalizedAudioDescriptions?.find(item => item.language === this._selectedAudioDescriptionLanguage);
-		if (!description) return;
-
-		if (currentTime < this._audioDescriptionPreviousTime) {
-			this._audioDescriptionIndex = description.descriptions.findIndex(item => item.time >= currentTime);
-			if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = description.descriptions.length;
-			this._cancelAudioDescription();
-		}
-
-		const next = description.descriptions[this._audioDescriptionIndex];
-		if (next && this._audioDescriptionPreviousTime < next.time && currentTime >= next.time) {
-			this._audioDescriptionIndex += 1;
-			this._speakAudioDescription(next);
-		}
-		this._audioDescriptionPreviousTime = currentTime;
-	}
-
-	_speakAudioDescription(description) {
-		if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
-
-		this._cancelAudioDescription();
-		const utterance = new window.SpeechSynthesisUtterance(description.text);
-		utterance.lang = description.language;
-		this._audioDescriptionUtterance = utterance;
-
-		if (description.pauseVideo && this._media && !this._media.paused) {
-			this._audioDescriptionPausedVideo = true;
-			this._media.pause();
-		}
-
-		const finish = () => {
-			if (this._audioDescriptionUtterance !== utterance) return;
-			this._audioDescriptionUtterance = null;
-			if (this._audioDescriptionPausedVideo) {
-				this._audioDescriptionPausedVideo = false;
-				this._play();
-			}
-		};
-		utterance.onend = finish;
-		utterance.onerror = finish;
-		window.speechSynthesis.speak(utterance);
-	}
-
-	_cancelAudioDescription() {
-		if (this._audioDescriptionUtterance && window.speechSynthesis) {
-			window.speechSynthesis.cancel();
-		}
-		this._audioDescriptionUtterance = null;
-		this._audioDescriptionPausedVideo = false;
-	}
-
-	_resetAudioDescriptionCursor(time) {
-		this._cancelAudioDescription();
-		const description = this._normalizedAudioDescriptions?.find(item => item.language === this._selectedAudioDescriptionLanguage);
-		this._audioDescriptionIndex = description
-			? description.descriptions.findIndex(item => item.time >= time)
-			: 0;
-		if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = description?.descriptions.length || 0;
-		this._audioDescriptionPreviousTime = time - 0.001;
 	}
 
 	_getChapterMarkersView() {
@@ -1651,6 +1556,25 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return (this._playing && !this._recentlyShowedCustomControls && !this._hoveringMediaControls && !settingsMenuOpened && !this._usingVolumeContainer && this.mediaType === SOURCE_TYPES.video);
 	}
 
+	_initializeAudioDescriptions() {
+		this._cancelAudioDescription();
+		this._normalizedAudioDescriptions = (this.audioDescriptions || [])
+			.filter(description => description?.language && Array.isArray(description.descriptions))
+			.map(description => ({
+				...description,
+				descriptions: description.descriptions
+					.map(item => ({ ...item, time: MediaPlayer._parseTimeCode(item.time) }))
+					.filter(item => Number.isFinite(item.time) && item.text)
+					.sort((a, b) => a.time - b.time)
+			}))
+			.filter(description => description.descriptions.length > 0);
+
+		const preference = this._getPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
+		this._selectedAudioDescriptionLanguage = this._normalizedAudioDescriptions.some(description => description.language === preference)
+			? preference
+			: null;
+	}
+
 	_listenForKeyboard(e) {
 		if (this._searchInputFocused) {
 			return;
@@ -1684,6 +1608,35 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			threshold: 0.05, // if 5% of the target is in the viewport
 		});
 		this._observer.observe(target);
+	}
+
+	_onAudioDescriptionMenuItemChange(e) {
+		this._cancelAudioDescription();
+		this._selectedAudioDescriptionLanguage = e.target.value || null;
+		this._resetAudioDescriptionCursor(this.currentTime);
+		if (this._selectedAudioDescriptionLanguage) {
+			this._setPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY, this._selectedAudioDescriptionLanguage);
+		} else {
+			this._clearPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
+		}
+	}
+
+	_onAudioDescriptionTimeUpdate(currentTime) {
+		const description = this._normalizedAudioDescriptions?.find(item => item.language === this._selectedAudioDescriptionLanguage);
+		if (!description) return;
+
+		if (currentTime < this._audioDescriptionPreviousTime) {
+			this._audioDescriptionIndex = description.descriptions.findIndex(item => item.time >= currentTime);
+			if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = description.descriptions.length;
+			this._cancelAudioDescription();
+		}
+
+		const next = description.descriptions[this._audioDescriptionIndex];
+		if (next && this._audioDescriptionPreviousTime < next.time && currentTime >= next.time) {
+			this._audioDescriptionIndex += 1;
+			this._speakAudioDescription(next);
+		}
+		this._audioDescriptionPreviousTime = currentTime;
 	}
 
 	_onContextMenu(e) {
@@ -2185,6 +2138,17 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return quality;
 	}
 
+	static _parseTimeCode(timeCode) {
+		if (typeof timeCode !== 'string') return NaN;
+		const parts = timeCode.split(':');
+		if (parts.length !== 2 && parts.length !== 3) return NaN;
+		const seconds = Number(parts.pop());
+		const minutes = Number(parts.pop());
+		const hours = parts.length ? Number(parts.pop()) : 0;
+		if (![hours, minutes, seconds].every(Number.isFinite) || minutes >= 60 || seconds >= 60) return NaN;
+		return hours * 3600 + minutes * 60 + seconds;
+	}
+
 	// Calling play() returns a Promise. If pause() is called before that Promise resolves,
 	// the browser rejects it with an AbortError. This is benign, so we suppress it.
 	_play() {
@@ -2293,6 +2257,16 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		`;
 	}
 
+	_resetAudioDescriptionCursor(time) {
+		this._cancelAudioDescription();
+		const description = this._normalizedAudioDescriptions?.find(item => item.language === this._selectedAudioDescriptionLanguage);
+		this._audioDescriptionIndex = description
+			? description.descriptions.findIndex(item => item.time >= time)
+			: 0;
+		if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = description?.descriptions.length || 0;
+		this._audioDescriptionPreviousTime = time - 0.001;
+	}
+
 	_sanitizeText(text) {
 		return text.replace(/<br \/>/g, '\n');
 	}
@@ -2325,6 +2299,32 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				this._recentlyShowedCustomControls = false;
 			}, HIDE_DELAY_MS);
 		}
+	}
+
+	_speakAudioDescription(description) {
+		if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+
+		this._cancelAudioDescription();
+		const utterance = new window.SpeechSynthesisUtterance(description.text);
+		utterance.lang = description.language;
+		this._audioDescriptionUtterance = utterance;
+
+		if (description.pauseVideo && this._media && !this._media.paused) {
+			this._audioDescriptionPausedVideo = true;
+			this._media.pause();
+		}
+
+		const finish = () => {
+			if (this._audioDescriptionUtterance !== utterance) return;
+			this._audioDescriptionUtterance = null;
+			if (this._audioDescriptionPausedVideo) {
+				this._audioDescriptionPausedVideo = false;
+				this._play();
+			}
+		};
+		utterance.onend = finish;
+		utterance.onerror = finish;
+		window.speechSynthesis.speak(utterance);
 	}
 
 	_startHoveringControls() {
