@@ -75,5 +75,66 @@ describe('d2l-labs-media-player', () => {
 			el._onAudioDescriptionTimeUpdate(10.5);
 			expect(el._audioDescriptionIndex).to.equal(1);
 		});
+
+		it('should pause the video when an audio description requests it', () => {
+			let paused = false;
+			const speechSynthesis = {
+				speak: () => {},
+				cancel: () => {},
+				getVoices: () => [{ lang: 'en-US', name: 'English (United States)' }]
+			};
+			window.speechSynthesis = speechSynthesis;
+			window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) {
+				this.text = text;
+				this.lang = 'en-US';
+				this.onend = null;
+				this.onerror = null;
+			};
+			const media = {
+				paused: false,
+				pause: () => {
+					paused = true;
+					media.paused = true;
+				},
+				play: () => Promise.resolve()
+			};
+			el._media = media;
+			el._selectedAudioDescriptionLanguage = 'en-US';
+			el._normalizedAudioDescriptions = [{
+				language: 'en-US',
+				pauseVideo: true,
+				descriptions: [{ time: 10, text: 'A person enters.' }]
+			}];
+			el._audioDescriptionPreviousTime = 9;
+			el._audioDescriptionIndex = 0;
+
+			el._onAudioDescriptionTimeUpdate(10);
+			expect(paused).to.equal(true);
+		});
+
+		it('should select the closest voice for the description language', () => {
+			const speechSynthesis = {
+				speak: () => {},
+				cancel: () => {},
+				getVoices: () => [
+					{ lang: 'en-GB', name: 'English (United Kingdom)' },
+					{ lang: 'fr-FR', name: 'French (France)' },
+					{ lang: 'en-US', name: 'English (United States)' }
+				]
+			};
+			window.speechSynthesis = speechSynthesis;
+			window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) {
+				this.text = text;
+				this.lang = 'en-US';
+				this.voice = null;
+				this.onend = null;
+				this.onerror = null;
+			};
+
+			const utterance = new window.SpeechSynthesisUtterance('hello');
+			const voice = el._getAudioDescriptionVoice('en-US');
+			utterance.voice = voice;
+			expect(utterance.voice.name).to.equal('English (United States)');
+		});
 	});
 });

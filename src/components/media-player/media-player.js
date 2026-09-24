@@ -1563,7 +1563,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			.map(description => ({
 				...description,
 				descriptions: description.descriptions
-					.map(item => ({ ...item, time: MediaPlayer._parseTimeCode(item.time) }))
+					.map(item => ({ ...item, pauseVideo: description.pauseVideo, time: MediaPlayer._parseTimeCode(item.time) }))
 					.filter(item => Number.isFinite(item.time) && item.text)
 					.sort((a, b) => a.time - b.time)
 			}))
@@ -2306,7 +2306,9 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 		this._cancelAudioDescription();
 		const utterance = new window.SpeechSynthesisUtterance(description.text);
+		const voice = this._getAudioDescriptionVoice(description.language);
 		utterance.lang = description.language;
+		if (voice) utterance.voice = voice;
 		this._audioDescriptionUtterance = utterance;
 
 		if (description.pauseVideo && this._media && !this._media.paused) {
@@ -2325,6 +2327,22 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		utterance.onend = finish;
 		utterance.onerror = finish;
 		window.speechSynthesis.speak(utterance);
+	}
+
+	_getAudioDescriptionVoice(language) {
+		const normalizedLanguage = (language || '').toLowerCase();
+		if (!normalizedLanguage || !window.speechSynthesis?.getVoices) return null;
+
+		const voices = window.speechSynthesis.getVoices();
+		if (!voices.length) return null;
+
+		const bestMatch = voices.find(voice => (voice.lang || '').toLowerCase() === normalizedLanguage)
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}-`))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}_`))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(normalizedLanguage.split('-')[0]))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().includes(normalizedLanguage.split('-')[0]))
+			|| voices[0];
+		return bestMatch || null;
 	}
 
 	_startHoveringControls() {
