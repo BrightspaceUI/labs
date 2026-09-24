@@ -38,6 +38,7 @@ A Lit element based media player component, designed for similarity across brows
 | Attribute | Type | Default | Description |
 |--|--|--|--|
 | allow-download| Boolean | false | If set, will allow the media to be downloaded.
+| audio-descriptions | Array | [] | Timed audio descriptions grouped by language. Each item must contain `language`, `pauseVideo`, and `descriptions` with `time` and `text` values. The language is selected from the Settings menu and spoken with the browser SpeechSynthesis API.
 | autoplay | Boolean | false | If set, will play the media as soon as it has been loaded. |
 | crossorigin | String | null | If set, will set the `crossorigin` attribute on the underlying media element to the set value.
 | download-filename | String | null | If set along with `allow-download`, will use the provided value as the base of the filename (the extension will be automatically appended)
@@ -63,6 +64,7 @@ A Lit element based media player component, designed for similarity across brows
 | Property | Type | Get/Set | Description |
 |--|--|--|--|
 | currentTime | Number | Get & Set | Current time playback time of the media in seconds. |
+| audioDescriptions | Array | Set | Timed audio descriptions, one item per language. Times use `HH:MM:SS` or `HH:MM:SS.mmm`; descriptions are spoken using the browser SpeechSynthesis API. |
 | activeCue | Object | Get | VTTCue instance for the currently-displayed captions cue. If no cue is currently displayed, the value is null. |
 | duration | Number | Get | Total duration of the media in seconds. |
 | ended | Boolean | Get | Whether or not the video has ended. |

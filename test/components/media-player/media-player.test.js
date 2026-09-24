@@ -49,4 +49,31 @@ describe('d2l-labs-media-player', () => {
 			expect(caught).to.equal(mediaError);
 		});
 	});
+
+	describe('audio descriptions', () => {
+		let el;
+
+		beforeEach(async() => {
+			el = await fixture(html`<d2l-labs-media-player></d2l-labs-media-player>`);
+		});
+
+		it('should parse audio description time codes', () => {
+			expect(el.constructor._parseTimeCode('01:02:03.500')).to.equal(3723.5);
+		});
+
+		it('should speak a description once when its timestamp is crossed', () => {
+			const description = { time: 10, text: 'A person enters.', language: 'en-US' };
+			el._selectedAudioDescriptionLanguage = 'en-US';
+			el._normalizedAudioDescriptions = [{
+				language: 'en-US',
+				descriptions: [description]
+			}];
+			el._audioDescriptionPreviousTime = 9;
+			el._speakAudioDescription = (spokenDescription) => expect(spokenDescription).to.equal(description);
+
+			el._onAudioDescriptionTimeUpdate(10);
+			el._onAudioDescriptionTimeUpdate(10.5);
+			expect(el._audioDescriptionIndex).to.equal(1);
+		});
+	});
 });

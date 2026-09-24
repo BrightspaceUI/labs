@@ -42,6 +42,7 @@ const PREFERENCES_KEY_PREFIX = 'D2L.MediaPlayer.Preferences';
 const PREFERENCES_SPEED_KEY = `${PREFERENCES_KEY_PREFIX}.Speed`;
 const PREFERENCES_TRACK_IDENTIFIER_KEY = `${PREFERENCES_KEY_PREFIX}.Track`;
 const PREFERENCES_VOLUME_KEY = `${PREFERENCES_KEY_PREFIX}.Volume`;
+const PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY = `${PREFERENCES_KEY_PREFIX}.AudioDescriptionLanguage`;
 const SEEK_BAR_UPDATE_PERIOD_MS = 0;
 const SOURCE_TYPES = {
 	audio: 'audio',
@@ -79,6 +80,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	static properties = {
 		allowDownload: { type: Boolean, attribute: 'allow-download', reflect: true },
+		audioDescriptions: { type: Array, attribute: 'audio-descriptions' },
 		autoplay: { type: Boolean },
 		crossorigin: { type: String },
 		downloadFilename: { type: String, attribute: 'download-filename' },
@@ -110,6 +112,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		_recentlyShowedCustomControls: { type: Boolean, attribute: false },
 		_searchResults: { type: Array, attribute: false },
 		_selectedQuality: { type: String, attribute: false },
+		_selectedAudioDescriptionLanguage: { type: String, attribute: false },
 		_selectedSpeed: { type: String, attribute: false },
 		_selectedTrackIdentifier: { type: Object, attribute: false },
 		_sources: { type: Object, attribute: false },
@@ -621,6 +624,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		super();
 
 		this.allowDownload = false;
+		this.audioDescriptions = [];
 		this.autoplay = false;
 		this.loop = false;
 		this.playInView = false;
@@ -641,6 +645,9 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this._muted = false;
 		this._playing = false;
 		this._posterVisible = true;
+		this._audioDescriptionIndex = 0;
+		this._audioDescriptionPreviousTime = -0.001;
+		this._audioDescriptionPausedVideo = false;
 		this._recentlyShowedCustomControls = false;
 		this._searchInputFocused = false;
 		this._searchInstances = {};
@@ -673,6 +680,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		if (this._media) {
 			this._media.currentTime = time;
 		}
+		this._resetAudioDescriptionCursor(time);
 		this._syncDisplayedTrackTextToSelectedTrack();
 	}
 
@@ -938,6 +946,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 									</d2l-menu>
 								</d2l-menu-item>
 								${this._getTracksMenuView()}
+								${this._getAudioDescriptionsMenuView()}
 								${this._getQualityMenuView()}
 								${(this.allowDownload && this._getCurrentSource()) ? this._getDownloadButtonView() : ''}
 								<slot name="settings-menu-item"></slot>
@@ -955,6 +964,10 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	updated(changedProperties) {
 		super.updated(changedProperties);
+
+		if (changedProperties.has('audioDescriptions')) {
+			this._initializeAudioDescriptions();
+		}
 
 		if (changedProperties.has('src') || changedProperties.has('mediaType')) {
 			this._reloadSource();
@@ -1005,6 +1018,11 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		}
 
 		this._toggleFullscreen();
+	}
+
+	disconnectedCallback() {
+		this._cancelAudioDescription();
+		super.disconnectedCallback();
 	}
 
 	get _media() {
@@ -1100,11 +1118,137 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return str.join('');
 	}
 
+	static _parseTimeCode(timeCode) {
+		if (typeof timeCode !== 'string') return NaN;
+		const parts = timeCode.split(':');
+		if (parts.length !== 2 && parts.length !== 3) return NaN;
+		const seconds = Number(parts.pop());
+		const minutes = Number(parts.pop());
+		const hours = parts.length ? Number(parts.pop()) : 0;
+		if (![hours, minutes, seconds].every(Number.isFinite) || minutes >= 60 || seconds >= 60) return NaN;
+		return hours * 3600 + minutes * 60 + seconds;
+	}
+
 	_getAbsoluteUrl(url) {
 		const a = document.createElement('a');
 		a.setAttribute('href', url);
 
 		return a.href;
+	}
+
+	_getAudioDescriptionsMenuView() {
+		if (!this._normalizedAudioDescriptions?.length) return null;
+
+		return html`
+			<d2l-menu-item text="${this.localize('components:mediaPlayer:audioDescriptions')}">
+				<div slot="supporting">${this._selectedAudioDescriptionLanguage || this.localize('components:mediaPlayer:off')}</div>
+				<d2l-menu @d2l-menu-item-change=${this._onAudioDescriptionsMenuItemChange} theme="${ifDefined(this._getTheme())}">
+					<d2l-menu-item-radio
+						?selected="${!this._selectedAudioDescriptionLanguage}"
+						text="${this.localize('components:mediaPlayer:off')}"
+					></d2l-menu-item-radio>
+					${this._normalizedAudioDescriptions.map(description => html`
+						<d2l-menu-item-radio
+							?selected="${description.language === this._selectedAudioDescriptionLanguage}"
+							text="${description.language}"
+							value="${description.language}"
+						></d2l-menu-item-radio>
+					`)}
+				</d2l-menu>
+			</d2l-menu-item>
+		`;
+	}
+
+	_initializeAudioDescriptions() {
+		this._cancelAudioDescription();
+		this._normalizedAudioDescriptions = (this.audioDescriptions || [])
+			.filter(description => description?.language && Array.isArray(description.descriptions))
+			.map(description => ({
+				...description,
+				descriptions: description.descriptions
+					.map(item => ({ ...item, time: MediaPlayer._parseTimeCode(item.time) }))
+					.filter(item => Number.isFinite(item.time) && item.text)
+					.sort((a, b) => a.time - b.time)
+			}))
+			.filter(description => description.descriptions.length > 0);
+
+		const preference = this._getPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
+		this._selectedAudioDescriptionLanguage = this._normalizedAudioDescriptions.some(description => description.language === preference)
+			? preference
+			: null;
+	}
+
+	_onAudioDescriptionsMenuItemChange(e) {
+		this._cancelAudioDescription();
+		this._selectedAudioDescriptionLanguage = e.target.value || null;
+		this._resetAudioDescriptionCursor(this.currentTime);
+		if (this._selectedAudioDescriptionLanguage) {
+			this._setPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY, this._selectedAudioDescriptionLanguage);
+		} else {
+			this._clearPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
+		}
+	}
+
+	_onAudioDescriptionTimeUpdate(currentTime) {
+		const description = this._normalizedAudioDescriptions?.find(item => item.language === this._selectedAudioDescriptionLanguage);
+		if (!description) return;
+
+		if (currentTime < this._audioDescriptionPreviousTime) {
+			this._audioDescriptionIndex = description.descriptions.findIndex(item => item.time >= currentTime);
+			if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = description.descriptions.length;
+			this._cancelAudioDescription();
+		}
+
+		const next = description.descriptions[this._audioDescriptionIndex];
+		if (next && this._audioDescriptionPreviousTime < next.time && currentTime >= next.time) {
+			this._audioDescriptionIndex += 1;
+			this._speakAudioDescription(next);
+		}
+		this._audioDescriptionPreviousTime = currentTime;
+	}
+
+	_speakAudioDescription(description) {
+		if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+
+		this._cancelAudioDescription();
+		const utterance = new window.SpeechSynthesisUtterance(description.text);
+		utterance.lang = description.language;
+		this._audioDescriptionUtterance = utterance;
+
+		if (description.pauseVideo && this._media && !this._media.paused) {
+			this._audioDescriptionPausedVideo = true;
+			this._media.pause();
+		}
+
+		const finish = () => {
+			if (this._audioDescriptionUtterance !== utterance) return;
+			this._audioDescriptionUtterance = null;
+			if (this._audioDescriptionPausedVideo) {
+				this._audioDescriptionPausedVideo = false;
+				this._play();
+			}
+		};
+		utterance.onend = finish;
+		utterance.onerror = finish;
+		window.speechSynthesis.speak(utterance);
+	}
+
+	_cancelAudioDescription() {
+		if (this._audioDescriptionUtterance && window.speechSynthesis) {
+			window.speechSynthesis.cancel();
+		}
+		this._audioDescriptionUtterance = null;
+		this._audioDescriptionPausedVideo = false;
+	}
+
+	_resetAudioDescriptionCursor(time) {
+		this._cancelAudioDescription();
+		const description = this._normalizedAudioDescriptions?.find(item => item.language === this._selectedAudioDescriptionLanguage);
+		this._audioDescriptionIndex = description
+			? description.descriptions.findIndex(item => item.time >= time)
+			: 0;
+		if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = description?.descriptions.length || 0;
+		this._audioDescriptionPreviousTime = time - 0.001;
 	}
 
 	_getChapterMarkersView() {
@@ -1592,6 +1736,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	}
 
 	_onDragStartSeek() {
+		this._cancelAudioDescription();
 		if (this._playing) {
 			this._media.pause();
 			this._pausedForSeekDrag = true;
@@ -1622,6 +1767,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	}
 
 	_onEnded() {
+		this._cancelAudioDescription();
 		this._playRequested = false;
 		this.dispatchEvent(new CustomEvent('ended'));
 	}
@@ -1684,6 +1830,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	}
 
 	_onPause() {
+		if (!this._audioDescriptionPausedVideo) this._cancelAudioDescription();
 		this._playing = false;
 		this.dispatchEvent(new CustomEvent('pause'));
 	}
@@ -1947,7 +2094,8 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return () => this.currentTime = time;
 	}
 
-	_onTimeUpdate() {
+	_onTimeUpdate(e) {
+		this._onAudioDescriptionTimeUpdate(e.target.currentTime);
 		this.dispatchEvent(new CustomEvent('timeupdate'));
 	}
 
@@ -2044,6 +2192,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	}
 
 	_reloadSource() {
+		this._cancelAudioDescription();
 		if (this._media) {
 			const oldSourceNode = this._media.getElementsByTagName('source')[0];
 			const updatedSource = this._getCurrentSource();
