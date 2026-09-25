@@ -53,6 +53,7 @@ const TRACK_KINDS = {
 	captions: 'captions',
 	subtitles: 'subtitles'
 };
+const AUDIO_DESCRIPTION_TRACK_KIND = 'descriptions';
 const Url = URL || window.URL;
 const FUSE_OPTIONS = options => ({
 	keys: ['text'],
@@ -80,7 +81,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	static properties = {
 		allowDownload: { type: Boolean, attribute: 'allow-download', reflect: true },
-		audioDescriptions: { type: Array, attribute: 'audio-descriptions' },
 		autoplay: { type: Boolean },
 		crossorigin: { type: String },
 		downloadFilename: { type: String, attribute: 'download-filename' },
@@ -96,6 +96,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		disableSetPreferences: { type: Boolean, attribute: 'disable-set-preferences' },
 		transcriptViewerOn: { type: Boolean, attribute: 'transcript-viewer-on' },
 		playInView: { type: Boolean, attribute: 'play-in-view' },
+		_audioDescriptionTracks: { type: Array, attribute: false },
 		_chapters: { type: Array, attribute: false },
 		_currentTime: { type: Number, attribute: false },
 		_duration: { type: Number, attribute: false },
@@ -624,11 +625,11 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		super();
 
 		this.allowDownload = false;
-		this.audioDescriptions = [];
 		this.autoplay = false;
 		this.loop = false;
 		this.playInView = false;
 
+		this._audioDescriptionTracks = [];
 		this._chapters = [];
 		this._currentTime = 0;
 		this._determiningSourceType = true;
@@ -970,10 +971,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	updated(changedProperties) {
 		super.updated(changedProperties);
 
-		if (changedProperties.has('audioDescriptions')) {
-			this._initializeAudioDescriptions();
-		}
-
 		if (changedProperties.has('src') || changedProperties.has('mediaType')) {
 			this._reloadSource();
 		}
@@ -1134,26 +1131,44 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	}
 
 	_getAudioDescriptionsMenuView() {
-		if (!this._normalizedAudioDescriptions?.length) return null;
+		if (!this._audioDescriptionTracks?.length) return null;
+
+		const selectedTrack = this._audioDescriptionTracks.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
 
 		return html`
 			<d2l-menu-item text="${this.localize('components:mediaPlayer:audioDescriptions')}">
-				<div slot="supporting">${this._selectedAudioDescriptionLanguage || this.localize('components:mediaPlayer:off')}</div>
+				<div slot="supporting">${selectedTrack?.label || this.localize('components:mediaPlayer:off')}</div>
 				<d2l-menu @d2l-menu-item-change=${this._onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
 					<d2l-menu-item-radio
 						?selected="${!this._selectedAudioDescriptionLanguage}"
 						text="${this.localize('components:mediaPlayer:off')}"
 					></d2l-menu-item-radio>
-					${this._normalizedAudioDescriptions.map(description => html`
+					${this._audioDescriptionTracks.map(track => html`
 						<d2l-menu-item-radio
-							?selected="${description.language === this._selectedAudioDescriptionLanguage}"
-							text="${description.language}"
-							value="${description.language}"
+							?selected="${track.srclang === this._selectedAudioDescriptionLanguage}"
+							text="${track.label}"
+							value="${track.srclang}"
 						></d2l-menu-item-radio>
 					`)}
 				</d2l-menu>
 			</d2l-menu-item>
 		`;
+	}
+
+	_getAudioDescriptionVoice(language) {
+		const normalizedLanguage = (language || '').toLowerCase();
+		if (!normalizedLanguage || !window.speechSynthesis?.getVoices) return null;
+
+		const voices = window.speechSynthesis.getVoices();
+		if (!voices.length) return null;
+
+		const bestMatch = voices.find(voice => (voice.lang || '').toLowerCase() === normalizedLanguage)
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}-`))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}_`))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(normalizedLanguage.split('-')[0]))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().includes(normalizedLanguage.split('-')[0]))
+			|| voices[0];
+		return bestMatch || null;
 	}
 
 	_getChapterMarkersView() {
@@ -1556,25 +1571,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return (this._playing && !this._recentlyShowedCustomControls && !this._hoveringMediaControls && !settingsMenuOpened && !this._usingVolumeContainer && this.mediaType === SOURCE_TYPES.video);
 	}
 
-	_initializeAudioDescriptions() {
-		this._cancelAudioDescription();
-		this._normalizedAudioDescriptions = (this.audioDescriptions || [])
-			.filter(description => description?.language && Array.isArray(description.descriptions))
-			.map(description => ({
-				...description,
-				descriptions: description.descriptions
-					.map(item => ({ ...item, pauseVideo: description.pauseVideo, time: MediaPlayer._parseTimeCode(item.time) }))
-					.filter(item => Number.isFinite(item.time) && item.text)
-					.sort((a, b) => a.time - b.time)
-			}))
-			.filter(description => description.descriptions.length > 0);
-
-		const preference = this._getPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
-		this._selectedAudioDescriptionLanguage = this._normalizedAudioDescriptions.some(description => description.language === preference)
-			? preference
-			: null;
-	}
-
 	_listenForKeyboard(e) {
 		if (this._searchInputFocused) {
 			return;
@@ -1591,6 +1587,49 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				this._toggleFullscreen();
 				break;
 		}
+	}
+
+	async _loadAudioDescriptionTrack(node) {
+		if (!node.label) {
+			console.warn("d2l-labs-media-player component requires 'label' text on track");
+			return;
+		}
+
+		if (!node.src) {
+			console.warn("d2l-labs-media-player component requires 'src' text on track");
+			return;
+		}
+
+		if (!node.srclang) {
+			console.warn("d2l-labs-media-player component requires 'srclang' text on track");
+			return;
+		}
+
+		const res = await fetch(node.src);
+		if (res.status !== 200) {
+			console.warn(`d2l-labs-media-player component could not load track from '${node.src}'`);
+			this.dispatchEvent(new CustomEvent('trackloadfailed'));
+			return;
+		}
+
+		const text = await res.text();
+
+		// Audio descriptions are spoken via SpeechSynthesis rather than displayed, so only each cue's start time and text are needed
+		const { cues } = this._webVTTParser.parse(text, 'metadata');
+		const descriptions = cues
+			.map(cue => ({ text: cue.text, time: cue.startTime }))
+			.filter(description => Number.isFinite(description.time) && description.text)
+			.sort((a, b) => a.time - b.time);
+
+		if (descriptions.length === 0) return;
+
+		this._audioDescriptionTracks.push({
+			descriptions,
+			label: node.label,
+			pauseVideo: node.hasAttribute('pause-video'),
+			srclang: node.srclang,
+		});
+		this.dispatchEvent(new CustomEvent('trackloaded'));
 	}
 
 	_loadVisibilityObserver({ target }) {
@@ -1622,19 +1661,19 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 	}
 
 	_onAudioDescriptionTimeUpdate(currentTime) {
-		const description = this._normalizedAudioDescriptions?.find(item => item.language === this._selectedAudioDescriptionLanguage);
-		if (!description) return;
+		const track = this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
+		if (!track) return;
 
 		if (currentTime < this._audioDescriptionPreviousTime) {
-			this._audioDescriptionIndex = description.descriptions.findIndex(item => item.time >= currentTime);
-			if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = description.descriptions.length;
+			this._audioDescriptionIndex = track.descriptions.findIndex(description => description.time >= currentTime);
+			if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = track.descriptions.length;
 			this._cancelAudioDescription();
 		}
 
-		const next = description.descriptions[this._audioDescriptionIndex];
+		const next = track.descriptions[this._audioDescriptionIndex];
 		if (next && this._audioDescriptionPreviousTime < next.time && currentTime >= next.time) {
 			this._audioDescriptionIndex += 1;
-			this._speakAudioDescription(next);
+			this._speakAudioDescription(next, track);
 		}
 		this._audioDescriptionPreviousTime = currentTime;
 	}
@@ -1886,6 +1925,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	async _onSlotChange(e) {
 		this._tracks = [];
+		this._audioDescriptionTracks = [];
 		const nodes = e.target.assignedNodes();
 		let defaultTrack;
 
@@ -1912,6 +1952,11 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			const node = nodes[i];
 
 			if (node.nodeType !== Node.ELEMENT_NODE || node.nodeName !== 'TRACK') continue;
+
+			if (node.getAttribute('kind') === AUDIO_DESCRIPTION_TRACK_KIND) {
+				await this._loadAudioDescriptionTrack(node);
+				continue;
+			}
 
 			if (!(node.kind in TRACK_KINDS)) {
 				console.warn(`d2l-labs-media-player component requires 'kind' text on track to be one of ${Object.keys(TRACK_KINDS)}`);
@@ -1970,6 +2015,12 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 				};
 			}
 		}
+
+		const audioDescriptionPreference = this._getPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
+		this._selectedAudioDescriptionLanguage = this._audioDescriptionTracks.some(track => track.srclang === audioDescriptionPreference)
+			? audioDescriptionPreference
+			: null;
+		this._resetAudioDescriptionCursor(this.currentTime);
 
 		await new Promise(resolve => {
 			const interval = setInterval(() => {
@@ -2138,17 +2189,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return quality;
 	}
 
-	static _parseTimeCode(timeCode) {
-		if (typeof timeCode !== 'string') return NaN;
-		const parts = timeCode.split(':');
-		if (parts.length !== 2 && parts.length !== 3) return NaN;
-		const seconds = Number(parts.pop());
-		const minutes = Number(parts.pop());
-		const hours = parts.length ? Number(parts.pop()) : 0;
-		if (![hours, minutes, seconds].every(Number.isFinite) || minutes >= 60 || seconds >= 60) return NaN;
-		return hours * 3600 + minutes * 60 + seconds;
-	}
-
 	// Calling play() returns a Promise. If pause() is called before that Promise resolves,
 	// the browser rejects it with an AbortError. This is benign, so we suppress it.
 	_play() {
@@ -2259,11 +2299,11 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 	_resetAudioDescriptionCursor(time) {
 		this._cancelAudioDescription();
-		const description = this._normalizedAudioDescriptions?.find(item => item.language === this._selectedAudioDescriptionLanguage);
-		this._audioDescriptionIndex = description
-			? description.descriptions.findIndex(item => item.time >= time)
+		const track = this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
+		this._audioDescriptionIndex = track
+			? track.descriptions.findIndex(description => description.time >= time)
 			: 0;
-		if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = description?.descriptions.length || 0;
+		if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = track?.descriptions.length || 0;
 		this._audioDescriptionPreviousTime = time - 0.001;
 	}
 
@@ -2301,17 +2341,17 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		}
 	}
 
-	_speakAudioDescription(description) {
+	_speakAudioDescription(description, track) {
 		if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
 
 		this._cancelAudioDescription();
 		const utterance = new window.SpeechSynthesisUtterance(description.text);
-		const voice = this._getAudioDescriptionVoice(description.language);
-		utterance.lang = description.language;
+		const voice = this._getAudioDescriptionVoice(track.srclang);
+		utterance.lang = track.srclang;
 		if (voice) utterance.voice = voice;
 		this._audioDescriptionUtterance = utterance;
 
-		if (description.pauseVideo && this._media && !this._media.paused) {
+		if (track.pauseVideo && this._media && !this._media.paused) {
 			this._audioDescriptionPausedVideo = true;
 			this._media.pause();
 		}
@@ -2327,22 +2367,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		utterance.onend = finish;
 		utterance.onerror = finish;
 		window.speechSynthesis.speak(utterance);
-	}
-
-	_getAudioDescriptionVoice(language) {
-		const normalizedLanguage = (language || '').toLowerCase();
-		if (!normalizedLanguage || !window.speechSynthesis?.getVoices) return null;
-
-		const voices = window.speechSynthesis.getVoices();
-		if (!voices.length) return null;
-
-		const bestMatch = voices.find(voice => (voice.lang || '').toLowerCase() === normalizedLanguage)
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}-`))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}_`))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(normalizedLanguage.split('-')[0]))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().includes(normalizedLanguage.split('-')[0]))
-			|| voices[0];
-		return bestMatch || null;
 	}
 
 	_startHoveringControls() {
