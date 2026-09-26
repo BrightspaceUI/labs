@@ -1,10 +1,13 @@
 import '@brightspace-ui/core/components/alert/alert.js';
 import '@brightspace-ui/core/components/button/button-icon.js';
+import '@brightspace-ui/core/components/button/button-subtle.js';
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-ui/core/components/dropdown/dropdown.js';
 import '@brightspace-ui/core/components/dropdown/dropdown-menu.js';
 import '@brightspace-ui/core/components/dropdown/dropdown-button-subtle.js';
+import '@brightspace-ui/core/components/dropdown/dropdown-content.js';
 import '@brightspace-ui/core/components/icons/icon.js';
+import '@brightspace-ui/core/components/icons/icon-custom.js';
 import '@brightspace-ui/core/components/loading-spinner/loading-spinner.js';
 import '@brightspace-ui/core/components/menu/menu.js';
 import '@brightspace-ui/core/components/menu/menu-item.js';
@@ -96,6 +99,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		disableSetPreferences: { type: Boolean, attribute: 'disable-set-preferences' },
 		transcriptViewerOn: { type: Boolean, attribute: 'transcript-viewer-on' },
 		playInView: { type: Boolean, attribute: 'play-in-view' },
+		_audioDescriptionPlaying: { type: Boolean, attribute: false },
 		_audioDescriptionTracks: { type: Array, attribute: false },
 		_chapters: { type: Array, attribute: false },
 		_currentTime: { type: Number, attribute: false },
@@ -262,6 +266,20 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 			--d2l-button-icon-min-height: 1.8rem;
 			--d2l-button-icon-min-width: 1.8rem;
 			margin: 6px 6px 6px 0;
+		}
+
+		#d2l-labs-media-player-audio-description-button {
+			background-color: transparent;
+			border: none;
+			border-radius: 0.3rem;
+			color: inherit;
+			cursor: pointer;
+			font-size: 0.7rem;
+			font-weight: 700;
+			margin: 6px 6px 6px 0;
+			min-height: 1.8rem;
+			min-width: 1.8rem;
+			padding: 0;
 		}
 
 		#d2l-labs-media-player-time:hover {
@@ -649,6 +667,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		this._audioDescriptionIndex = 0;
 		this._audioDescriptionPreviousTime = -0.001;
 		this._audioDescriptionPausedVideo = false;
+		this._audioDescriptionPlaying = false;
 		this._recentlyShowedCustomControls = false;
 		this._searchInputFocused = false;
 		this._searchInstances = {};
@@ -914,6 +933,8 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 
 					<div class="d2l-labs-media-player-flex-filler"></div>
 
+					${this._getAudioDescriptionsButtonView()}
+
 					<div
 						@mouseenter=${this._onSearchContainerHover}
 						@mouseleave=${this._onSearchContainerHover}
@@ -952,7 +973,6 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 									</d2l-menu>
 								</d2l-menu-item>
 								${this._getTracksMenuView()}
-								${this._getAudioDescriptionsMenuView()}
 								${this._getQualityMenuView()}
 								${(this.allowDownload && this._getCurrentSource()) ? this._getDownloadButtonView() : ''}
 								<slot name="settings-menu-item"></slot>
@@ -1060,6 +1080,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		}
 		this._audioDescriptionUtterance = null;
 		this._audioDescriptionPausedVideo = false;
+		this._audioDescriptionPlaying = false;
 	}
 
 	_clearPreference(preferenceKey) {
@@ -1130,28 +1151,39 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		return a.href;
 	}
 
-	_getAudioDescriptionsMenuView() {
+	_getAudioDescriptionsButtonView() {
 		if (!this._audioDescriptionTracks?.length) return null;
 
-		const selectedTrack = this._audioDescriptionTracks.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
+		const tooltip = this.localize('components:mediaPlayer:audioDescriptions');
 
 		return html`
-			<d2l-menu-item text="${this.localize('components:mediaPlayer:audioDescriptions')}">
-				<div slot="supporting">${selectedTrack?.label || this.localize('components:mediaPlayer:off')}</div>
-				<d2l-menu @d2l-menu-item-change=${this._onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
-					<d2l-menu-item-radio
-						?selected="${!this._selectedAudioDescriptionLanguage}"
-						text="${this.localize('components:mediaPlayer:off')}"
-					></d2l-menu-item-radio>
-					${this._audioDescriptionTracks.map(track => html`
+			<d2l-dropdown>
+				<d2l-button-icon
+					aria-label="${tooltip}"
+					class="d2l-dropdown-opener"
+					id="d2l-labs-media-player-audio-description-button"
+					title="${tooltip}"
+					theme="${ifDefined(this._getTheme())}"
+					?active="${this._audioDescriptionPlaying}"
+				><d2l-icon-custom slot="icon"><svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.89199 8.55L7.21999 3.9805C7.13766 3.77783 7.05216 3.53717 6.96349 3.2585C6.87483 2.97983 6.78616 2.679 6.69749 2.356C6.61516 2.679 6.52966 2.983 6.44099 3.268C6.35233 3.54667 6.26683 3.7905 6.18449 3.9995L4.52199 8.55H8.89199ZM13.4045 13.737H11.4285C11.2068 13.737 11.0263 13.6832 10.887 13.5755C10.7477 13.4615 10.6432 13.3222 10.5735 13.1575L9.54749 10.355H3.85699L2.83099 13.1575C2.78033 13.3032 2.68216 13.4362 2.53649 13.5565C2.39083 13.6768 2.21033 13.737 1.99499 13.737H-7.82078e-06L5.40549 -1.43051e-06H8.00849L13.4045 13.737ZM27.2244 6.8685C27.2244 7.8755 27.0565 8.80017 26.7209 9.6425C26.3852 10.4848 25.9134 11.21 25.3054 11.818C24.6974 12.426 23.9659 12.8978 23.1109 13.2335C22.2559 13.5692 21.3059 13.737 20.2609 13.737H15.0264V-1.43051e-06H20.2609C21.3059 -1.43051e-06 22.2559 0.170999 23.1109 0.512999C23.9659 0.848665 24.6974 1.3205 25.3054 1.9285C25.9134 2.53017 26.3852 3.25217 26.7209 4.0945C27.0565 4.93683 27.2244 5.8615 27.2244 6.8685ZM24.6024 6.8685C24.6024 6.11483 24.501 5.44033 24.2984 4.845C24.102 4.24333 23.8139 3.73667 23.4339 3.325C23.0602 2.907 22.6042 2.58717 22.0659 2.3655C21.5339 2.14383 20.9322 2.033 20.2609 2.033H17.5914V11.704H20.2609C20.9322 11.704 21.5339 11.5932 22.0659 11.3715C22.6042 11.1498 23.0602 10.8332 23.4339 10.4215C23.8139 10.0035 24.102 9.49683 24.2984 8.9015C24.501 8.29983 24.6024 7.62217 24.6024 6.8685Z" fill="white"/>
+</svg></d2l-icon-custom></d2l-button-icon>
+				<d2l-dropdown-menu class="vdiff-target" no-pointer theme="${ifDefined(this._getTheme())}">
+					<d2l-menu label="${tooltip}" @d2l-menu-item-change=${this._onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
 						<d2l-menu-item-radio
-							?selected="${track.srclang === this._selectedAudioDescriptionLanguage}"
-							text="${track.label}"
-							value="${track.srclang}"
+							?selected="${!this._selectedAudioDescriptionLanguage}"
+							text="${this.localize('components:mediaPlayer:off')}"
 						></d2l-menu-item-radio>
-					`)}
-				</d2l-menu>
-			</d2l-menu-item>
+						${this._audioDescriptionTracks.map(track => html`
+							<d2l-menu-item-radio
+								?selected="${track.srclang === this._selectedAudioDescriptionLanguage}"
+								text="${track.label}"
+								value="${track.srclang}"
+							></d2l-menu-item-radio>
+						`)}
+					</d2l-menu>
+				</d2l-dropdown-menu>
+			</d2l-dropdown>
 		`;
 	}
 
@@ -2350,6 +2382,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		utterance.lang = track.srclang;
 		if (voice) utterance.voice = voice;
 		this._audioDescriptionUtterance = utterance;
+		this._audioDescriptionPlaying = true;
 
 		if (track.pauseVideo && this._media && !this._media.paused) {
 			this._audioDescriptionPausedVideo = true;
@@ -2359,6 +2392,7 @@ class MediaPlayer extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		const finish = () => {
 			if (this._audioDescriptionUtterance !== utterance) return;
 			this._audioDescriptionUtterance = null;
+			this._audioDescriptionPlaying = false;
 			if (this._audioDescriptionPausedVideo) {
 				this._audioDescriptionPausedVideo = false;
 				this._play();
