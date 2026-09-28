@@ -16,7 +16,7 @@ import '@brightspace-ui/core/components/offscreen/offscreen.js';
 import './slider-bar.js';
 import 'webvtt-parser';
 import './media-player-audio-bars.js';
-import { AUDIO_DESCRIPTION_TRACK_KIND, MediaPlayerAudioDescriptionsMixin } from './media-player-audio-descriptions.js';
+import { AUDIO_DESCRIPTION_REPLAY_KEY, AUDIO_DESCRIPTION_TRACK_KIND, MediaPlayerAudioDescriptionsMixin } from './media-player-audio-descriptions.js';
 import { css, html, LitElement, unsafeCSS } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import fullscreenApi from './fullscreen-api.js';
@@ -36,7 +36,8 @@ const HIDE_DELAY_MS = 3000;
 const KEY_BINDINGS = {
 	play: 'k',
 	mute: 'm',
-	fullscreen: 'f'
+	fullscreen: 'f',
+	replayAudioDescription: AUDIO_DESCRIPTION_REPLAY_KEY
 };
 const MIN_TRACK_WIDTH_PX = 250;
 const IS_IOS = /iPad|iPhone|iPod/.test(navigator.platform);
@@ -1527,6 +1528,9 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 				break;
 			case KEY_BINDINGS.fullscreen:
 				this._toggleFullscreen();
+				break;
+			case KEY_BINDINGS.replayAudioDescription:
+				this._replayAudioDescription();
 				break;
 		}
 	}

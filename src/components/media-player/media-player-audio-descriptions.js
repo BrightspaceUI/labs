@@ -4,17 +4,21 @@ import '@brightspace-ui/core/components/dropdown/dropdown-menu.js';
 import '@brightspace-ui/core/components/icons/icon-custom.js';
 import '@brightspace-ui/core/components/menu/menu.js';
 import '@brightspace-ui/core/components/menu/menu-item-radio.js';
+import '@brightspace-ui/core/components/tooltip/tooltip.js';
 import { css, html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
+export const AUDIO_DESCRIPTION_REPLAY_KEY = 'r';
 export const AUDIO_DESCRIPTION_TRACK_KIND = 'descriptions';
 const PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY = 'D2L.MediaPlayer.Preferences.AudioDescriptionLanguage';
+const VOICES_LOAD_TIMEOUT_MS = 1000;
 
 export const MediaPlayerAudioDescriptionsMixin = superclass => class extends superclass {
 
 	static properties = {
 		_audioDescriptionPlaying: { type: Boolean, attribute: false },
 		_audioDescriptionTracks: { type: Array, attribute: false },
+		_canReplayAudioDescription: { type: Boolean, attribute: false },
 		_selectedAudioDescriptionLanguage: { type: String, attribute: false },
 	};
 
@@ -42,6 +46,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._audioDescriptionPreviousTime = -0.001;
 		this._audioDescriptionPausedVideo = false;
 		this._audioDescriptionPlaying = false;
+		this._canReplayAudioDescription = false;
 	}
 
 	disconnectedCallback() {
@@ -62,8 +67,20 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		if (!this._audioDescriptionTracks?.length) return null;
 
 		const tooltip = this.localize('components:mediaPlayer:audioDescriptions');
+		const replayTooltip = this.localize('components:mediaPlayer:replayAudioDescription');
 
 		return html`
+			${this._selectedAudioDescriptionLanguage ? html`
+				<d2l-button-icon
+					icon="tier1:undo"
+					id="d2l-labs-media-player-audio-description-replay-button"
+					text="${replayTooltip}"
+					theme="${ifDefined(this._getTheme())}"
+					?disabled="${!this._audioDescriptionPlaying}"
+					@click="${this._replayAudioDescription}"
+				></d2l-button-icon>
+				<d2l-tooltip position="top" for="d2l-labs-media-player-audio-description-replay-button">${replayTooltip}</d2l-tooltip>
+			` : null}
 			<d2l-dropdown>
 				<d2l-button-icon
 					aria-label="${tooltip}"
@@ -145,6 +162,9 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 
 		if (descriptions.length === 0) return;
 
+		// Some browsers (e.g. Chrome) load voices asynchronously on the first getVoices() call
+		window.speechSynthesis?.getVoices?.();
+
 		this._audioDescriptionTracks.push({
 			descriptions,
 			label: node.label,
@@ -183,6 +203,18 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._audioDescriptionPreviousTime = currentTime;
 	}
 
+	_replayAudioDescription() {
+		if (!this._audioDescriptionPlaying) return;
+		const track = this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
+		const description = track?.descriptions.findLast(description => description.time <= this.currentTime);
+		if (!description) return;
+
+		// Preserve the pause from the original playback so the video still resumes after the replay
+		const pausedVideo = this._audioDescriptionPausedVideo;
+		this._speakAudioDescription(description, track);
+		if (pausedVideo) this._audioDescriptionPausedVideo = true;
+	}
+
 	_resetAudioDescriptionCursor(time) {
 		this._cancelAudioDescription();
 		const track = this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
@@ -206,9 +238,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 
 		this._cancelAudioDescription();
 		const utterance = new window.SpeechSynthesisUtterance(description.text);
-		const voice = this._getAudioDescriptionVoice(track.srclang);
 		utterance.lang = track.srclang;
-		if (voice) utterance.voice = voice;
 		this._audioDescriptionUtterance = utterance;
 		this._audioDescriptionPlaying = true;
 
@@ -228,6 +258,27 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		};
 		utterance.onend = finish;
 		utterance.onerror = finish;
-		window.speechSynthesis.speak(utterance);
+
+		const speak = () => {
+			if (this._audioDescriptionUtterance !== utterance) return;
+			const voice = this._getAudioDescriptionVoice(track.srclang);
+			if (voice) utterance.voice = voice;
+			window.speechSynthesis.speak(utterance);
+		};
+
+		if (window.speechSynthesis.getVoices().length) {
+			speak();
+			return;
+		}
+
+		// Speaking before voices have loaded is silently dropped in some browsers
+		let timeout;
+		const onVoicesChanged = () => {
+			clearTimeout(timeout);
+			window.speechSynthesis.removeEventListener('voiceschanged', onVoicesChanged);
+			speak();
+		};
+		timeout = setTimeout(onVoicesChanged, VOICES_LOAD_TIMEOUT_MS);
+		window.speechSynthesis.addEventListener('voiceschanged', onVoicesChanged);
 	}
 };

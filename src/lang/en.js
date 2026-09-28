@@ -49,6 +49,7 @@ export default {
 	"components:mediaPlayer:play": "Play",
 	"components:mediaPlayer:playbackSpeed": "Playback speed",
 	"components:mediaPlayer:quality": "Quality",
+	"components:mediaPlayer:replayAudioDescription": "Replay Audio Description (r). Available when a description plays.",
 	"components:mediaPlayer:retry": "Retry",
 	"components:mediaPlayer:searchPlaceholder": "Search...",
 	"components:mediaPlayer:seekSlider": "seek slider",
