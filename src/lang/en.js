@@ -37,6 +37,7 @@ export default {
 	"components:mediaPlayer:default": "Default",
 	"components:mediaPlayer:download": "Download",
 	"components:mediaPlayer:exitFullscreen": "Exit fullscreen",
+	"components:mediaPlayer:extendedAudioDescription": "Extended Audio Description",
 	"components:mediaPlayer:fullscreen": "Fullscreen",
 	"components:mediaPlayer:language": "Language",
 	"components:mediaPlayer:loadErrorMessage": "Oops, there was a problem loading this media file",
