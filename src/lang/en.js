@@ -54,6 +54,7 @@ export default {
 	"components:mediaPlayer:searchPlaceholder": "Search...",
 	"components:mediaPlayer:seekSlider": "seek slider",
 	"components:mediaPlayer:settings": "settings",
+	"components:mediaPlayer:skipAudioDescription": "Skip Audio Description (s). Available when a description plays.",
 	"components:mediaPlayer:showSearchInput": "Show search input",
 	"components:mediaPlayer:sliderBarProgress": "slider bar progress",
 	"components:mediaPlayer:speed": "speed",

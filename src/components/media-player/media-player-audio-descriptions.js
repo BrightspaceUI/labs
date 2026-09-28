@@ -9,6 +9,7 @@ import { css, html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 export const AUDIO_DESCRIPTION_REPLAY_KEY = 'r';
+export const AUDIO_DESCRIPTION_SKIP_KEY = 's';
 export const AUDIO_DESCRIPTION_TRACK_KIND = 'descriptions';
 const PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY = 'D2L.MediaPlayer.Preferences.AudioDescriptionLanguage';
 const VOICES_LOAD_TIMEOUT_MS = 1000;
@@ -68,6 +69,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 
 		const tooltip = this.localize('components:mediaPlayer:audioDescriptions');
 		const replayTooltip = this.localize('components:mediaPlayer:replayAudioDescription');
+		const skipTooltip = this.localize('components:mediaPlayer:skipAudioDescription');
 
 		return html`
 			${this._selectedAudioDescriptionLanguage ? html`
@@ -80,6 +82,15 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 					@click="${this._replayAudioDescription}"
 				></d2l-button-icon>
 				<d2l-tooltip position="top" for="d2l-labs-media-player-audio-description-replay-button">${replayTooltip}</d2l-tooltip>
+				<d2l-button-icon
+					icon="tier1:redo"
+					id="d2l-labs-media-player-audio-description-skip-button"
+					text="${skipTooltip}"
+					theme="${ifDefined(this._getTheme())}"
+					?disabled="${!this._audioDescriptionPlaying}"
+					@click="${this._skipAudioDescription}"
+				></d2l-button-icon>
+				<d2l-tooltip position="top" for="d2l-labs-media-player-audio-description-skip-button">${skipTooltip}</d2l-tooltip>
 			` : null}
 			<d2l-dropdown>
 				<d2l-button-icon
@@ -231,6 +242,13 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			? audioDescriptionPreference
 			: null;
 		this._resetAudioDescriptionCursor(this.currentTime);
+	}
+
+	_skipAudioDescription() {
+		if (!this._audioDescriptionPlaying) return;
+		const pausedVideo = this._audioDescriptionPausedVideo;
+		this._cancelAudioDescription();
+		if (pausedVideo) this._play();
 	}
 
 	_speakAudioDescription(description, track) {
