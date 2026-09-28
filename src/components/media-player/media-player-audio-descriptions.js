@@ -23,21 +23,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		_selectedAudioDescriptionLanguage: { type: String, attribute: false },
 	};
 
-	static styles = css`
-		#d2l-labs-media-player-audio-description-button {
-			background-color: transparent;
-			border: none;
-			border-radius: 0.3rem;
-			color: inherit;
-			cursor: pointer;
-			font-size: 0.7rem;
-			font-weight: 700;
-			margin: 6px 6px 6px 0;
-			min-height: 1.8rem;
-			min-width: 1.8rem;
-			padding: 0;
-		}
-	`;
+	static styles = css``;
 
 	constructor() {
 		super();
