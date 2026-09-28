@@ -1,4 +1,5 @@
 import '@brightspace-ui/core/components/button/button-icon.js';
+import '@brightspace-ui/core/components/button/button-subtle.js';
 import '@brightspace-ui/core/components/dropdown/dropdown.js';
 import '@brightspace-ui/core/components/dropdown/dropdown-menu.js';
 import '@brightspace-ui/core/components/icons/icon-custom.js';
@@ -13,10 +14,12 @@ export const AUDIO_DESCRIPTION_SKIP_KEY = 's';
 export const AUDIO_DESCRIPTION_TRACK_KIND = 'descriptions';
 const PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY = 'D2L.MediaPlayer.Preferences.AudioDescriptionLanguage';
 const VOICES_LOAD_TIMEOUT_MS = 1000;
+const AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX = 768;
 
 export const MediaPlayerAudioDescriptionsMixin = superclass => class extends superclass {
 
 	static properties = {
+		_audioDescriptionControlsInMenu: { type: Boolean, attribute: false },
 		_audioDescriptionPlaying: { type: Boolean, attribute: false },
 		_audioDescriptionTracks: { type: Array, attribute: false },
 		_canReplayAudioDescription: { type: Boolean, attribute: false },
@@ -41,6 +44,22 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			color: white;
 			padding: 1rem;
 		}
+		.d2l-labs-media-player-audio-description-menu-controls {
+			border-bottom: 1px solid var(--d2l-color-mica);
+			align-items: flex-start;
+			display: flex;
+			flex-direction: column;
+			gap: 0.3rem;
+			padding: 0.3rem;
+		}
+		/* d2l-button-subtle has no theme attribute, so override the semantic variables it consumes */
+		.d2l-labs-media-player-audio-description-menu-controls[theme="dark"] {
+			--d2l-focus-ring-color: var(--d2l-color-celestine-plus-1);
+			--d2l-theme-background-color-interactive-tertiary-hover: #123559;
+			--d2l-theme-text-color-interactive-default: var(--d2l-color-sylvite);
+			--d2l-theme-text-color-interactive-hover: #ffffff;
+			border-bottom-color: var(--d2l-color-tungsten);
+		}
 		#d2l-labs-media-player-audio-description-button[data-enabled]::after {
 			border: 2px solid var(--d2l-color-sylvite);
 			border-radius: var(--d2l-button-icon-border-radius, 0.3rem);
@@ -60,10 +79,22 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._audioDescriptionPreviousTime = -0.001;
 		this._audioDescriptionPausedVideo = false;
 		this._audioDescriptionPlaying = false;
+		this._audioDescriptionControlsInMenu = false;
 		this._canReplayAudioDescription = false;
 	}
 
+	connectedCallback() {
+		super.connectedCallback();
+		this._audioDescriptionResizeObserver ??= new ResizeObserver(entries => {
+			for (const entry of entries) {
+				this._audioDescriptionControlsInMenu = entry.contentRect.width < AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX;
+			}
+		});
+		this._audioDescriptionResizeObserver.observe(this);
+	}
+
 	disconnectedCallback() {
+		this._audioDescriptionResizeObserver?.disconnect();
 		this._cancelAudioDescription();
 		super.disconnectedCallback();
 	}
@@ -85,7 +116,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		const skipTooltip = this.localize('components:mediaPlayer:skipAudioDescription');
 
 		return html`
-			${this._selectedAudioDescriptionLanguage ? html`
+			${this._selectedAudioDescriptionLanguage && !this._audioDescriptionControlsInMenu ? html`
 				<d2l-button-icon
 					icon="tier1:undo"
 					id="d2l-labs-media-player-audio-description-replay-button"
@@ -118,6 +149,22 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 </svg></d2l-icon-custom></d2l-button-icon>
 				<d2l-dropdown-content no-padding no-padding-header no-pointer theme="${ifDefined(this._getTheme())}">
 					<div class="d2l-labs-media-player-audio-description-header" slot="header">${this.localizeHTML('components:mediaPlayer:extendedAudioDescription')}</div>
+					${this._selectedAudioDescriptionLanguage && this._audioDescriptionControlsInMenu ? html`
+						<div class="d2l-labs-media-player-audio-description-menu-controls" theme="${ifDefined(this._getTheme())}">
+							<d2l-button-subtle
+								icon="tier1:undo"
+								text="${this.localize('components:mediaPlayer:replay')}"
+								?disabled="${!this._audioDescriptionPlaying}"
+								@click="${this._replayAudioDescription}"
+							></d2l-button-subtle>
+							<d2l-button-subtle
+								icon="tier1:redo"
+								text="${this.localize('components:mediaPlayer:skip')}"
+								?disabled="${!this._audioDescriptionPlaying}"
+								@click="${this._skipAudioDescription}"
+							></d2l-button-subtle>
+						</div>
+					` : null}
                     <d2l-menu label="${tooltip}" @d2l-menu-item-change=${this._onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
                         <d2l-menu-item-radio
                             ?selected="${!this._selectedAudioDescriptionLanguage}"
