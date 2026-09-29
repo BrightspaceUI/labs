@@ -1,11 +1,10 @@
 import '@brightspace-ui/core/components/button/button-icon.js';
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import '@brightspace-ui/core/components/dropdown/dropdown.js';
-import '@brightspace-ui/core/components/dropdown/dropdown-menu.js';
+import '@brightspace-ui/core/components/dropdown/dropdown-content.js';
 import '@brightspace-ui/core/components/icons/icon-custom.js';
 import '@brightspace-ui/core/components/menu/menu.js';
 import '@brightspace-ui/core/components/menu/menu-item-radio.js';
-import '@brightspace-ui/core/components/tooltip/tooltip.js';
 import { css, html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -37,8 +36,8 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			position: relative;
 		}
 		#d2l-labs-media-player-audio-description-button d2l-icon-custom {
-			height: calc(1rem - 6px);
-			width: calc(2rem - 8px);
+			height: calc(1rem - 7px);
+			width: calc(2rem - 9px);
 		}
 		.d2l-labs-media-player-audio-description-header {
 			background-color: var(--d2l-color-tungsten);
