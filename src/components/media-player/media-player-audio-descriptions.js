@@ -6,8 +6,8 @@ import '@brightspace-ui/core/components/menu/menu.js';
 import '@brightspace-ui/core/components/menu/menu-item-radio.js';
 import '@brightspace-ui/core/components/menu/menu-item.js';
 import '@brightspace-ui/core/components/menu/menu-item-separator.js';
-import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html } from 'lit';
+import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 export const AUDIO_DESCRIPTION_REPLAY_KEY = 'r';
