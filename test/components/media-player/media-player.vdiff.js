@@ -72,7 +72,7 @@ describe('d2l-labs-media-player', () => {
 				<track kind="captions" src="./demo/components/media-player/static/sample-vtt-en.vtt" srclang="en" label="English" default>
 			</d2l-labs-media-player>`
 		);
-		const settingsMenu = elem.shadowRoot.querySelector('#d2l-labs-media-player-settings-menu');
+		const settingsMenu = elem.shadowRoot.querySelector('#settings-menu');
 		settingsMenu.setAttribute('opened', true);
 		await oneEvent(settingsMenu, 'd2l-dropdown-open');
 		await expect(elem).to.be.golden();
@@ -85,7 +85,7 @@ describe('d2l-labs-media-player', () => {
 				<track src="./demo/components/media-player/static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English" default>
 			</d2l-labs-media-player>`
 		);
-		await focusElem(elem.shadowRoot.querySelector('#d2l-labs-media-player-search-container'));
+		await focusElem(elem.shadowRoot.querySelector('#search-container'));
 		await expect(elem).to.be.golden();
 	});
 
@@ -96,7 +96,7 @@ describe('d2l-labs-media-player', () => {
 				<track src="./demo/components/media-player/static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English" default>
 			</d2l-labs-media-player>`
 		);
-		await focusElem(elem.shadowRoot.querySelector('#d2l-labs-media-player-search-container'));
+		await focusElem(elem.shadowRoot.querySelector('#search-container'));
 		await expect(elem).to.be.golden();
 	});
 
@@ -114,12 +114,12 @@ describe('d2l-labs-media-player', () => {
 					</d2l-labs-media-player>`,
 					{ viewport }
 				);
-				await waitUntil(() => elem.shadowRoot.querySelector('#d2l-labs-media-player-audio-description-button'));
+				await waitUntil(() => elem.shadowRoot.querySelector('#audio-description-button'));
 				return elem;
 			};
 
 			const openAudioDescriptions = async elem => {
-				const dropdownContent = elem.shadowRoot.querySelector('#d2l-labs-media-player-audio-description-dropdown-content');
+				const dropdownContent = elem.shadowRoot.querySelector('#audio-description-dropdown-content');
 				dropdownContent.setAttribute('opened', true);
 				await oneEvent(dropdownContent, 'd2l-dropdown-open');
 			};
