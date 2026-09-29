@@ -135,7 +135,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			display: none;
 		}
 
-		#container {
+		#media-container {
 			align-items: center;
 			justify-content: center;
 			/* This max-height prevents the video from growing out of bounds and appearing cut off inside of ISF iframes */
