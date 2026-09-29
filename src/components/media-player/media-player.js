@@ -326,7 +326,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			width: calc(100% - 4.2rem - 12px);
 		}
 
-		audio-bars {
+		d2l-labs-media-player-audio-bars {
 			height: 2rem;
 		}
 
