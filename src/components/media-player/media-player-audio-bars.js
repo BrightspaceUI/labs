@@ -64,7 +64,7 @@ class MediaPlayerAudioBars extends LitElement {
 
 	static properties = {
 		playing: { type: Boolean },
-		_visibleAudioBars: { type: Array, attribute: false },
+		_visibleAudioBars: { state: true },
 	};
 
 	static styles = css`

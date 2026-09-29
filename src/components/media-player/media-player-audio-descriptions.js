@@ -19,11 +19,11 @@ const AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX = 768;
 export const MediaPlayerAudioDescriptionsMixin = superclass => class extends superclass {
 
 	static properties = {
-		_audioDescriptionControlsInMenu: { type: Boolean, attribute: false },
-		_audioDescriptionPlaying: { type: Boolean, attribute: false },
-		_audioDescriptionTracks: { type: Array, attribute: false },
-		_canReplayAudioDescription: { type: Boolean, attribute: false },
-		_selectedAudioDescriptionLanguage: { type: String, attribute: false },
+		_audioDescriptionControlsInMenu: { state: true },
+		_audioDescriptionPlaying: { state: true },
+		_audioDescriptionTracks: { state: true },
+		_canReplayAudioDescription: { state: true },
+		_selectedAudioDescriptionLanguage: { state: true },
 	};
 
 	static styles = css`
