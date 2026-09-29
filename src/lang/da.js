@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Studerendes visning af karakter",
 	"components:gradeResult:studentGradePreviewNotShown": "Karakter vises ikke til studerende",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Undertekster",
 	"components:mediaPlayer:captionsVtt": "Undertekster (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

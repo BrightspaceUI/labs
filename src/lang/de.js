@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Lerneransicht der Note",
 	"components:gradeResult:studentGradePreviewNotShown": "Note wird Lernern nicht angezeigt",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Beschriftungen",
 	"components:mediaPlayer:captionsVtt": "Untertitel (vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

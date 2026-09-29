@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Learner View of Grade",
 	"components:gradeResult:studentGradePreviewNotShown": "Grade not shown to learners",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Captions",
 	"components:mediaPlayer:captionsVtt": "Captions (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

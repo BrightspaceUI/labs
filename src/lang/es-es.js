@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Vista de calificación del estudiante",
 	"components:gradeResult:studentGradePreviewNotShown": "Calificación no mostrada a los estudiantes",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Subtítulos",
 	"components:mediaPlayer:captionsVtt": "Subtítulos (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "学员成绩视图",
 	"components:gradeResult:studentGradePreviewNotShown": "不向学员显示成绩",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "字幕",
 	"components:mediaPlayer:captionsVtt": "字幕 (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "字幕",

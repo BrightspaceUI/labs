@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "ग्रेड का छात्र दृश्य",
 	"components:gradeResult:studentGradePreviewNotShown": "ग्रेड को छात्रों को नहीं दिखाया गया",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "कैप्शन",
 	"components:mediaPlayer:captionsVtt": "कैप्शन (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "प्रतिलिपि",

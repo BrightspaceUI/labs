@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "受講者の成績ビュー",
 	"components:gradeResult:studentGradePreviewNotShown": "成績は受講者には表示されません",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "キャプション",
 	"components:mediaPlayer:captionsVtt": "キャプション（.vtt）",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

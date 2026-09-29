@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Chế độ xem điểm của người học",
 	"components:gradeResult:studentGradePreviewNotShown": "Điểm không hiển thị cho người học",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Phụ đề",
 	"components:mediaPlayer:captionsVtt": "Phụ đề (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

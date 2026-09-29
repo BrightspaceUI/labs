@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Vista d’estudiant de la qualificació",
 	"components:gradeResult:studentGradePreviewNotShown": "Qualificació no mostrada als estudiants",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Subtítols",
 	"components:mediaPlayer:captionsVtt": "Subtítols (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

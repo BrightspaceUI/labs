@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Te Tirohanga Ākonga o te Kōeke",
 	"components:gradeResult:studentGradePreviewNotShown": "Kāore te mahi whakakore i whakaaturia ki ngā ākonga",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Ngā Whakaāhua",
 	"components:mediaPlayer:captionsVtt": "Ngā Whakamaumaharatanga (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "PC",

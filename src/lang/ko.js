@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "학습자 평점 보기",
 	"components:gradeResult:studentGradePreviewNotShown": "학습자에게 평점이 표시되지 않음",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "캡션",
 	"components:mediaPlayer:captionsVtt": "캡션(.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "참조",

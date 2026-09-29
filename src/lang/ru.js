@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Вид класса для учащегося",
 	"components:gradeResult:studentGradePreviewNotShown": "Класс не показывается учащимся",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Подписи",
 	"components:mediaPlayer:captionsVtt": "Подписи (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "Копия",

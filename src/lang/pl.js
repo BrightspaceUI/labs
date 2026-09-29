@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Widok oceny ucznia",
 	"components:gradeResult:studentGradePreviewNotShown": "Ocena niepokazana uczniom",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Napisy",
 	"components:mediaPlayer:captionsVtt": "Napisy (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "DW",

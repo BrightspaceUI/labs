@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Notun Öğrenci Görünümü",
 	"components:gradeResult:studentGradePreviewNotShown": "Not öğrencilere gösterilmiyor",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Alt yazı",
 	"components:mediaPlayer:captionsVtt": "Alt yazılar (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "Bilgi",

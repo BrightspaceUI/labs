@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Nānā Nā Kaha o ka haumāna",
 	"components:gradeResult:studentGradePreviewNotShown": "ʻAʻole hōʻike ʻia ka Nā Kaha i nā haumāna",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Nā huaʻōlelo",
 	"components:mediaPlayer:captionsVtt": "Nā huaʻōlelo (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

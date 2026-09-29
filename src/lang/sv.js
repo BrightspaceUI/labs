@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Elevvy över betyg",
 	"components:gradeResult:studentGradePreviewNotShown": "Betyg visas inte för eleverna",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Bildtexter",
 	"components:mediaPlayer:captionsVtt": "Bildtexter (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "Kopia",

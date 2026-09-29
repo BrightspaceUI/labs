@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Weergave van score voor cursist",
 	"components:gradeResult:studentGradePreviewNotShown": "Score wordt niet voor cursisten weergegeven",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Bijschriften",
 	"components:mediaPlayer:captionsVtt": "Ondertitels (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",

@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "عرض المتعلّم للعلامات",
 	"components:gradeResult:studentGradePreviewNotShown": "العلامة لا تظهر للمتعلّمين",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "التسميات التوضيحية",
 	"components:mediaPlayer:captionsVtt": "التسميات التوضيحية (‎.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "التسميات التوضيحية المغلقة",

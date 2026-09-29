@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "มุมมองเกรดของผู้เรียน",
 	"components:gradeResult:studentGradePreviewNotShown": "ไม่แสดงเกรดให้ผู้เรียนเห็น",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "คำบรรยายภาพ",
 	"components:mediaPlayer:captionsVtt": "คำบรรยายภาพ (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "สำเนาถึง",

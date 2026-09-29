@@ -31,7 +31,6 @@ export default {
 	"components:gradeResult:studentGradePreviewLabel": "Gwedd Dysgwr o Radd",
 	"components:gradeResult:studentGradePreviewNotShown": "Ni ddangosir y radd i ddysgwyr",
 	"components:mediaPlayer:audioDescription": "Audio Description",
-	"components:mediaPlayer:audioDescriptions": "Audio descriptions",
 	"components:mediaPlayer:captions": "Penawdau",
 	"components:mediaPlayer:captionsVtt": "Capsiynau (.vtt)",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",
