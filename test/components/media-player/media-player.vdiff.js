@@ -1,5 +1,5 @@
 import '../../../src/components/media-player/media-player.js';
-import { expect, fixture, focusElem, html, oneEvent } from '@brightspace-ui/testing';
+import { expect, fixture, focusElem, html, oneEvent, waitUntil } from '@brightspace-ui/testing';
 
 describe('d2l-labs-media-player', () => {
 	it('video', async() => {
@@ -98,5 +98,51 @@ describe('d2l-labs-media-player', () => {
 		);
 		await focusElem(elem.shadowRoot.querySelector('#d2l-labs-media-player-search-container'));
 		await expect(elem).to.be.golden();
+	});
+
+	[
+		{ name: 'desktop', viewport: { width: 1000 } },
+		{ name: 'mobile', viewport: { width: 600 } }
+	].forEach(({ name, viewport }) => {
+		describe(name, () => {
+			const audioDescriptionsFixture = async() => {
+				const elem = await fixture(
+					html`
+					<d2l-labs-media-player src="./test/components/media-player/videos/1_lego.webm" media-type="video">
+						<track src="./demo/components/media-player/static/sample-vtt-en-descriptions.vtt" kind="descriptions" srclang="en" label="English" pause-video>
+						<track src="./demo/components/media-player/static/sample-vtt-fr-descriptions.vtt" kind="descriptions" srclang="fr" label="French">
+					</d2l-labs-media-player>`,
+					{ viewport }
+				);
+				await waitUntil(() => elem.shadowRoot.querySelector('#d2l-labs-media-player-audio-description-button'));
+				return elem;
+			};
+
+			const openAudioDescriptions = async elem => {
+				const dropdownContent = elem.shadowRoot.querySelector('#d2l-labs-media-player-audio-description-dropdown-content');
+				dropdownContent.setAttribute('opened', true);
+				await oneEvent(dropdownContent, 'd2l-dropdown-open');
+			};
+
+			it('video with audio descriptions', async() => {
+				const elem = await audioDescriptionsFixture();
+				await expect(elem).to.be.golden();
+			});
+
+			it('video with audio descriptions open', async() => {
+				const elem = await audioDescriptionsFixture();
+				await openAudioDescriptions(elem);
+				await expect(elem).to.be.golden();
+			});
+
+			it('video with audio descriptions pause-video open', async() => {
+				const elem = await audioDescriptionsFixture();
+				// Set directly to avoid persisting the selection to localStorage
+				elem._selectedAudioDescriptionLanguage = 'en';
+				await elem.updateComplete;
+				await openAudioDescriptions(elem);
+				await expect(elem).to.be.golden();
+			});
+		});
 	});
 });
