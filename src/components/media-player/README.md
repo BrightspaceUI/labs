@@ -238,7 +238,7 @@ The media player supports audio descriptions, provided as `.vtt` files, one per 
 | label | String, required | | The label for the track, displayed to the user for selection. |
 | src | String, required | | The URL of the `.vtt` source file. |
 | srclang | String, required | | The language's code. Used as the SpeechSynthesis voice/language and stored as the selection preference. |
-| pause-video | Boolean | false | If set, playback is paused for the duration of each spoken description and resumes automatically once the description finishes. |
+| pause-video | Boolean | false | If set, playback is paused for the duration of each spoken description and resumes automatically once the description finishes, and replay/skip controls are shown. If not set, descriptions play inline with the video and the replay/skip controls are hidden. |
 
 ## Local Storage
 
