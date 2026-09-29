@@ -36,6 +36,10 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		#d2l-labs-media-player-audio-description-button[data-enabled] {
 			position: relative;
 		}
+		#d2l-labs-media-player-audio-description-button d2l-icon-custom {
+			height: calc(1rem - 6px);
+			width: calc(2rem - 8px);
+		}
 		.d2l-labs-media-player-audio-description-header {
 			background-color: var(--d2l-color-tungsten);
 			border-bottom: 1px solid var(--d2l-color-mica);
