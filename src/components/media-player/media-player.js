@@ -60,7 +60,7 @@ const FUSE_OPTIONS = options => ({
 	threshold: 0.1,
 	...options
 });
-const SEARCH_CONTAINER_HOVER_CLASS = 'd2l-labs-media-player-search-container-hover';
+const SEARCH_CONTAINER_HOVER_CLASS = 'search-container-hover';
 const DEFAULT_PREVIEW_WIDTH = 160;
 const DEFAULT_PREVIEW_HEIGHT = 90;
 
@@ -135,7 +135,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			display: none;
 		}
 
-		#d2l-labs-media-player-media-container {
+		#container {
 			align-items: center;
 			justify-content: center;
 			/* This max-height prevents the video from growing out of bounds and appearing cut off inside of ISF iframes */
@@ -145,17 +145,17 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			width: 100%;
 		}
 
-		.d2l-labs-media-player-type-is-audio {
+		.type-is-audio {
 			background-color: #ffffff;
 		}
 
-		.d2l-labs-media-player-type-is-video {
+		.type-is-video {
 			background-color: #000000;
 			color: #ffffff;
 		}
 
 
-		#d2l-labs-media-player-video {
+		#video {
 			display: block;
 			height: 100%;
 			max-height: var(--d2l-labs-media-player-video-max-height, 100vh);
@@ -164,7 +164,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			width: 100%;
 		}
 
-		#d2l-labs-media-player-video-poster {
+		#video-poster {
 			background-color: #000000;
 			cursor: pointer;
 			height: 100%;
@@ -174,7 +174,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 1;
 		}
 
-		#d2l-labs-media-player-video-poster-play-button {
+		#video-poster-play-button {
 			background-color: rgba(0, 0, 0, 0.69);
 			border: none;
 			border-radius: 50%;
@@ -184,7 +184,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 2;
 		}
 
-		#d2l-labs-media-player-video-poster-play-button[transcript] {
+		#video-poster-play-button[transcript] {
 			background-color: rgba(0, 0, 0, 0.69);
 			border: none;
 			border-radius: 50%;
@@ -198,11 +198,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		}
 
 
-		#d2l-labs-media-player-video-poster-play-button > d2l-icon {
+		#video-poster-play-button > d2l-icon {
 			color: #ffffff;
 		}
 
-		#d2l-labs-media-player-media-controls {
+		#media-controls {
 			bottom: 0;
 			position: absolute;
 			transition: bottom 500ms ease;
@@ -210,18 +210,18 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 2;
 		}
 
-		.d2l-labs-media-player-type-is-audio #d2l-labs-media-player-media-controls {
+		.type-is-audio #media-controls {
 			background-color: #ffffff;
 		}
-		.d2l-labs-media-player-type-is-video #d2l-labs-media-player-media-controls {
+		.type-is-video #media-controls {
 			background-color: rgba(0, 0, 0, 0.69);
 		}
 
-		#d2l-labs-media-player-media-controls.d2l-labs-media-player-hidden {
+		#media-controls.hidden {
 			bottom: -8rem;
 		}
 
-		#d2l-labs-media-player-seek-bar {
+		#seek-bar {
 			--d2l-knob-focus-color: #ffffff;
 			--d2l-knob-focus-size: 4px;
 			--d2l-knob-size: 16px;
@@ -233,11 +233,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 1;
 		}
 
-		#d2l-labs-media-player-seek-bar:focus {
+		#seek-bar:focus {
 			--d2l-knob-box-shadow: 0 2px 6px 3px rgba(0, 0, 0, 1);
 		}
 
-		#d2l-labs-media-player-buttons {
+		#buttons {
 			align-items: center;
 			direction: ltr;
 			display: flex;
@@ -246,12 +246,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			margin-left: 6px;
 		}
 
-		[dir="rtl"] #d2l-labs-media-player-buttons {
+		[dir="rtl"] #buttons {
 			margin-left: 0;
 			margin-right: 6px;
 		}
 
-		.d2l-labs-media-player-flex-filler {
+		.flex-filler {
 			flex: auto;
 		}
 
@@ -261,15 +261,15 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			margin: 6px 6px 6px 0;
 		}
 
-		#d2l-labs-media-player-time:hover {
+		#time:hover {
 			cursor: auto;
 		}
 
-		#d2l-labs-media-player-volume-container {
+		#volume-container {
 			position: relative;
 		}
 
-		#d2l-labs-media-player-volume-level-container {
+		#volume-level-container {
 			bottom: calc(1.8rem + 6px);
 			height: 11px;
 			left: 0;
@@ -278,11 +278,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 2;
 		}
 
-		#d2l-labs-media-player-volume-level-container.d2l-labs-media-player-hidden {
+		#volume-level-container.hidden {
 			left: -10000px;
 		}
 
-		#d2l-labs-media-player-volume-level-background {
+		#volume-level-background {
 			align-items: center;
 			background-color: rgba(0, 0, 0, 0.69);
 			border-radius: 0 0.3rem 0.3rem 0;
@@ -296,12 +296,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			width: 6rem;
 		}
 
-		#d2l-labs-media-player-volume-slider-container {
+		#volume-slider-container {
 			height: 100%;
 			width: 100%;
 		}
 
-		#d2l-labs-media-player-volume-slider {
+		#volume-slider {
 			--d2l-knob-focus-color: #ffffff;
 			--d2l-knob-focus-size: 0.25rem;
 			--d2l-knob-size: 0.8rem;
@@ -310,11 +310,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			top: calc(0.5rem + 1px);
 		}
 
-		.d2l-labs-media-player-rotated {
+		.rotated {
 			transform: rotate(-90deg);
 		}
 
-		#d2l-labs-media-player-audio-bars-container {
+		#audio-bars-container {
 			align-items: center;
 			display: flex;
 			flex-wrap: nowrap;
@@ -326,11 +326,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			width: calc(100% - 4.2rem - 12px);
 		}
 
-		d2l-labs-media-player-audio-bars {
+		audio-bars {
 			height: 2rem;
 		}
 
-		#d2l-labs-media-player-track-container {
+		#track-container {
 			align-items: center;
 			color: #ffffff;
 			display: flex;
@@ -343,7 +343,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		}
 
 		@media screen and (min-width: 768px) {
-			#d2l-labs-media-player-track-container > div {
+			#track-container > div {
 				align-items: center;
 				display: flex;
 				justify-content: center;
@@ -353,7 +353,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		}
 
 		@media screen and (max-width: 767px) {
-			#d2l-labs-media-player-track-container > div {
+			#track-container > div {
 				align-items: center;
 				display: flex;
 				justify-content: center;
@@ -361,7 +361,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			}
 		}
 
-		#d2l-labs-media-player-track-container > div > span {
+		#track-container > div > span {
 			background-color: rgba(0, 0, 0, 0.69);
 			box-shadow: 0.3rem 0 0 rgba(0, 0, 0, 0.69), -0.3rem 0 0 rgba(0, 0, 0, 0.69);
 			color: white;
@@ -369,12 +369,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			white-space: pre-wrap;
 		}
 
-		#d2l-labs-media-player-audio-play-button-container {
+		#audio-play-button-container {
 			background-color: white;
 			position: absolute;
 		}
 
-		#d2l-labs-media-player-audio-play-button {
+		#audio-play-button {
 			background-color: transparent;
 			border: none;
 			border-radius: 12px;
@@ -382,26 +382,26 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			padding: 2px;
 		}
 
-		#d2l-labs-media-player-audio-play-button:focus {
+		#audio-play-button:focus {
 			outline: none;
 		}
 
-		#d2l-labs-media-player-audio-play-button:hover {
+		#audio-play-button:hover {
 			background: var(--d2l-color-mica);
 			background-clip: content-box;
 			cursor: pointer;
 		}
 
-		#d2l-labs-media-player-audio-play-button:${unsafeCSS(getFocusPseudoClass())} {
+		#audio-play-button:${unsafeCSS(getFocusPseudoClass())} {
 			border: 2px solid var(--d2l-color-celestine);
 		}
 
-		#d2l-labs-media-player-audio-play-button > d2l-icon {
+		#audio-play-button > d2l-icon {
 			height: 2.75rem;
 			width: 2.75rem;
 		}
 
-		.d2l-labs-media-player-chapter-marker, .d2l-labs-media-player-chapter-marker-highlight {
+		.chapter-marker, .chapter-marker-highlight {
 			cursor: pointer;
 			height: 6px;
 			pointer-events: none;
@@ -411,27 +411,27 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 2;
 		}
 
-		.d2l-labs-media-player-chapter-marker {
+		.chapter-marker {
 			background-color: var(--d2l-color-ferrite);
 		}
 
-		.d2l-labs-media-player-chapter-marker-highlight {
+		.chapter-marker-highlight {
 			background-color: var(--d2l-color-celestine-minus-1);
 		}
 
-		.d2l-labs-media-player-chapter-marker[theme="dark"] {
+		.chapter-marker[theme="dark"] {
 			background-color: white;
 		}
 
-		#d2l-labs-media-player-search-container {
+		#search-container {
 			align-items: center;
 			display: flex;
 		}
-		#d2l-labs-media-player-search-container.d2l-labs-media-player-search-container-hidden {
+		#search-container.search-container-hidden {
 			display: none;
 		}
 
-		#d2l-labs-media-player-search-container #d2l-labs-media-player-search-input {
+		#search-container #search-input {
 			border-color: rgba(48, 52, 54, 0.1);
 			border-radius: 20px;
 			color: var(--d2l-color-ferrite);
@@ -445,19 +445,19 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			width: 0;
 		}
 
-		#d2l-labs-media-player-search-container #d2l-labs-media-player-search-input[theme="dark"] {
+		#search-container #search-input[theme="dark"] {
 			background-color: rgba(24, 26, 27, 0.15);
 			color: rgb(206, 216, 225);
 		}
 
-		#d2l-labs-media-player-search-container #d2l-labs-media-player-search-input:focus,
-		#d2l-labs-media-player-search-container #d2l-labs-media-player-search-input:active {
+		#search-container #search-input:focus,
+		#search-container #search-input:active {
 			box-shadow: rgb(24 26 27) 0 0 1px;
 			outline-color: initial;
 		}
 
-		#d2l-labs-media-player-search-container:hover #d2l-labs-media-player-search-input,
-		#d2l-labs-media-player-search-container.d2l-labs-media-player-search-container-hover #d2l-labs-media-player-search-input {
+		#search-container:hover #search-input,
+		#search-container.search-container-hover #search-input {
 			height: 1.2rem;
 			opacity: 1;
 			padding: 0 0.35rem;
@@ -465,21 +465,21 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			width: 6rem;
 		}
 
-		#d2l-labs-media-player-timeline-markers-container {
+		#timeline-markers-container {
 			position: absolute;
 			top: -9px;
 			transition: all 0.2s;
 			width: 100%;
 		}
 
-		#d2l-labs-media-player-thumbnails-preview-container {
+		#thumbnails-preview-container {
 			bottom: 60px;
 			position: absolute;
 			transform: translateX(-50%);
 			z-index: 2;
 		}
 
-		#d2l-labs-media-player-thumbnails-preview-chapter {
+		#thumbnails-preview-chapter {
 			background: #00000072;
 			position: absolute;
 			text-align: center;
@@ -488,7 +488,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 2;
 		}
 
-		#d2l-labs-media-player-thumbnails-preview-time {
+		#thumbnails-preview-time {
 			background: #00000042;
 			bottom: 3px;
 			font-size: 14px;
@@ -500,14 +500,14 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 2;
 		}
 
-		#d2l-labs-media-player-thumbnails-preview-image {
+		#thumbnails-preview-image {
 			background-repeat: no-repeat;
 			position: relative;
 			width: 100%;
 			z-index: 2;
 		}
 
-		.d2l-labs-media-player-search-marker {
+		.search-marker {
 			color: var(--d2l-color-ferrite);
 			cursor: pointer;
 			height: 6px;
@@ -518,11 +518,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 2;
 		}
 
-		.d2l-labs-media-player-search-marker[theme="dark"] {
+		.search-marker[theme="dark"] {
 			color: white;
 		}
 
-		.d2l-labs-media-player-full-area-centered {
+		.full-area-centered {
 			align-items: center;
 			display: flex;
 			height: 100%;
@@ -534,18 +534,18 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			z-index: 2;
 		}
 
-		#d2l-labs-media-player-alert-inner {
+		#alert-inner {
 			display: flex;
 			flex-direction: row;
 			justify-content: flex-start;
 		}
 
-		#d2l-labs-media-player-alert-inner > svg {
+		#alert-inner > svg {
 			flex-shrink: 0;
 			margin-right: 0.5rem;
 		}
 
-		#d2l-labs-media-player-alert-inner > span {
+		#alert-inner > span {
 			font-size: 1rem;
 			line-height: 2.1rem;
 		}
@@ -739,14 +739,14 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			if (sourceNodes.length < 1) console.warn('d2l-labs-media-player component requires source tags if src is not set');
 		}
 
-		this._mediaContainer = this.shadowRoot.getElementById('d2l-labs-media-player-media-container');
-		this._playButton = this.shadowRoot.getElementById('d2l-labs-media-player-play-button');
-		this._seekBar = this.shadowRoot.getElementById('d2l-labs-media-player-seek-bar');
-		this._settingsMenu = this.shadowRoot.getElementById('d2l-labs-media-player-settings-menu');
-		this._speedLevelBackground = this.shadowRoot.getElementById('d2l-labs-media-player-speed-level-background');
-		this._volumeSlider = this.shadowRoot.getElementById('d2l-labs-media-player-volume-slider');
-		this._searchInput = this.shadowRoot.getElementById('d2l-labs-media-player-search-input');
-		this._searchContainer = this.shadowRoot.getElementById('d2l-labs-media-player-search-container');
+		this._mediaContainer = this.shadowRoot.getElementById('media-container');
+		this._playButton = this.shadowRoot.getElementById('play-button');
+		this._seekBar = this.shadowRoot.getElementById('seek-bar');
+		this._settingsMenu = this.shadowRoot.getElementById('settings-menu');
+		this._speedLevelBackground = this.shadowRoot.getElementById('speed-level-background');
+		this._volumeSlider = this.shadowRoot.getElementById('volume-slider');
+		this._searchInput = this.shadowRoot.getElementById('search-input');
+		this._searchContainer = this.shadowRoot.getElementById('search-container');
 
 		this._getMetadata();
 
@@ -805,12 +805,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		const trackContainerStyle = { bottom: this._hidingCustomControls() ? '12px' : 'calc(1.8rem + 38px)' };
 		const trackSpanStyle = { fontSize: `${this._trackFontSizeRem}rem`, lineHeight: `${this._trackFontSizeRem * 1.2}rem` };
 
-		const mediaContainerClass = { 'd2l-labs-media-player-type-is-audio': this.mediaType === SOURCE_TYPES.audio, 'd2l-labs-media-player-type-is-video': this.mediaType === SOURCE_TYPES.video };
-		const mediaControlsClass = { 'd2l-labs-media-player-hidden': this._hidingCustomControls() };
+		const mediaContainerClass = { 'type-is-audio': this.mediaType === SOURCE_TYPES.audio, 'type-is-video': this.mediaType === SOURCE_TYPES.video };
+		const mediaControlsClass = { 'hidden': this._hidingCustomControls() };
 		const theme = this.mediaType === SOURCE_TYPES.video ? 'dark' : undefined;
-		const volumeLevelContainerClass = { 'd2l-labs-media-player-hidden': !this._usingVolumeContainer || this._hidingCustomControls() };
+		const volumeLevelContainerClass = { 'hidden': !this._usingVolumeContainer || this._hidingCustomControls() };
 		const hideSearchForAudioDescriptions = this._audioDescriptionTracks.length > 0 && this._audioDescriptionControlsInMenu;
-		const searchContainerClass = { 'd2l-labs-media-player-search-container-hidden' : !this._searchInstances[this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier)] || hideSearchForAudioDescriptions };
+		const searchContainerClass = { 'search-container-hidden' : !this._searchInstances[this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier)] || hideSearchForAudioDescriptions };
 		this._captionsMenuReturnItem?.setAttribute('text', (this.transcriptViewerOn ? this.localize('components:mediaPlayer:language') : this.localize('components:mediaPlayer:captions')));
 
 		const fullscreenButton = this.mediaType === SOURCE_TYPES.video ? html`<d2l-button-icon
@@ -825,27 +825,27 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 
 		${this._getLoadingSpinnerView()}
 
-		<div id="d2l-labs-media-player-media-container" class=${classMap(mediaContainerClass)} style=${styleMap(mediaContainerStyle)} @mousemove=${this._onVideoContainerMouseMove} @keydown=${this._listenForKeyboard}>
+		<div id="media-container" class=${classMap(mediaContainerClass)} style=${styleMap(mediaContainerStyle)} @mousemove=${this._onVideoContainerMouseMove} @keydown=${this._listenForKeyboard}>
 			${this.transcriptViewerOn ? this._renderTranscriptViewer() : ''}
 			${this._getMediaAreaView()}
 
 			${!this._trackText || this.transcriptViewerOn ? null : html`
-				<div id="d2l-labs-media-player-track-container" style=${styleMap(trackContainerStyle)} @click=${this._onTrackContainerClick}>
+				<div id="track-container" style=${styleMap(trackContainerStyle)} @click=${this._onTrackContainerClick}>
 					<div>
 						<span style=${styleMap(trackSpanStyle)} role="status">${this._trackText}</span>
 					</div>
 				</div>
 			`}
 
-			<div class=${classMap(mediaControlsClass)} id="d2l-labs-media-player-media-controls" @mouseenter=${this._startHoveringControls} @mouseleave=${this._stopHoveringControls}>
+			<div class=${classMap(mediaControlsClass)} id="media-controls" @mouseenter=${this._startHoveringControls} @mouseleave=${this._stopHoveringControls}>
 				${this._getTimelinePreview()}
-				<div id="d2l-labs-media-player-timeline-markers-container">
+				<div id="timeline-markers-container">
 					${this._getSearchResultsView()}
 					${this._getChapterMarkersView()}
 				</div>
 				${this.hideSeekBar ? '' : html`
 					<d2l-labs-slider-bar
-						id="d2l-labs-media-player-seek-bar"
+						id="seek-bar"
 						fullWidth
 						solid
 						min="0"
@@ -860,10 +860,10 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 						@hovering-end=${this._onHoverEnd}
 					></d2l-labs-slider-bar>
 				`}
-				<div id="d2l-labs-media-player-buttons">
+				<div id="buttons">
 					<d2l-button-icon icon="${playIcon}" text="${playTooltip}"  @click="${this._togglePlay}" theme="${ifDefined(theme)}"></d2l-button-icon>
 
-					<div id="d2l-labs-media-player-volume-container" @mouseenter="${this._startUsingVolumeContainer}" @mouseleave="${this._stopUsingVolumeContainer}" ?hidden="${IS_IOS}">
+					<div id="volume-container" @mouseenter="${this._startUsingVolumeContainer}" @mouseleave="${this._stopUsingVolumeContainer}" ?hidden="${IS_IOS}">
 						<d2l-button-icon
 							class="d2l-dropdown-opener"
 							icon="${volumeIcon}"
@@ -873,11 +873,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 							@click="${this._toggleMute}"
 							@focus="${this._startUsingVolumeContainer}"
 						></d2l-button-icon>
-						<div id="d2l-labs-media-player-volume-level-container" class=${classMap(volumeLevelContainerClass)}>
-							<div class="d2l-labs-media-player-rotated" id="d2l-labs-media-player-volume-level-background">
-								<div id="d2l-labs-media-player-volume-slider-container">
+						<div id="volume-level-container" class=${classMap(volumeLevelContainerClass)}>
+							<div class="rotated" id="volume-level-background">
+								<div id="volume-slider-container">
 									<d2l-labs-slider-bar solid
-										id="d2l-labs-media-player-volume-slider"
+										id="volume-slider"
 										vertical
 										value="${Math.round(this._volume * 100)}"
 										label="${this.localize('components:mediaPlayer:volumeSlider')}"
@@ -891,7 +891,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 						</div>
 					</div>
 
-					<div id="d2l-labs-media-player-time"
+					<div id="time"
 						aria-live="off"
 						aria-hidden="true"
 						tabindex="-1"
@@ -901,7 +901,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 						${MediaPlayer._formatTime(this.currentTime)} / ${MediaPlayer._formatTime(this.duration)}
 					</div>
 
-					<div class="d2l-labs-media-player-flex-filler"></div>
+					<div class="flex-filler"></div>
 
 					${this._getAudioDescriptionsButtonView()}
 
@@ -909,10 +909,10 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 						@mouseenter=${this._onSearchContainerHover}
 						@mouseleave=${this._onSearchContainerHover}
 						class=${classMap(searchContainerClass)}
-						id="d2l-labs-media-player-search-container"
+						id="search-container"
 					><d2l-button-icon
 							icon="tier1:search"
-							id="d2l-labs-media-player-search-button"
+							id="search-button"
 							text=${this.localize('components:mediaPlayer:showSearchInput')}
 							theme="${ifDefined(theme)}"
 						></d2l-button-icon>
@@ -920,7 +920,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 							@blur=${this._onSearchInputBlur}
 							@focus=${this._onSearchInputFocus}
 							@input=${this._onSearchInputChanged}
-							id="d2l-labs-media-player-search-input"
+							id="search-input"
 							placeholder="${this.localize('components:mediaPlayer:searchPlaceholder')}"
 							theme="${ifDefined(theme)}"
 							type="text"
@@ -928,9 +928,9 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 					</div>
 					<d2l-dropdown>
 						<d2l-button-icon class="d2l-dropdown-opener" icon="tier1:gear" text="${this.localize('components:mediaPlayer:settings')}" theme="${ifDefined(theme)}"></d2l-button-icon>
-						<d2l-dropdown-menu id="d2l-labs-media-player-settings-menu" class="vdiff-target" no-pointer theme="${ifDefined(theme)}">
+						<d2l-dropdown-menu id="settings-menu" class="vdiff-target" no-pointer theme="${ifDefined(theme)}">
 							<d2l-menu label="${this.localize('components:mediaPlayer:settings')}" theme="${ifDefined(theme)}">
-								<d2l-menu-item id="d2l-labs-media-player-playback-speeds" text="${this.localize('components:mediaPlayer:playbackSpeed')}">
+								<d2l-menu-item id="playback-speeds" text="${this.localize('components:mediaPlayer:playbackSpeed')}">
 									<div slot="supporting">${this._selectedSpeed}</div>
 									<d2l-menu @d2l-menu-item-change=${this._onPlaybackSpeedsMenuItemChange} theme="${ifDefined(theme)}">
 										${PLAYBACK_SPEEDS.map(speed => html`
@@ -1016,9 +1016,9 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		if (!this.shadowRoot) return null;
 		switch (this.mediaType) {
 			case SOURCE_TYPES.audio:
-				return this.shadowRoot.getElementById('d2l-labs-media-player-audio');
+				return this.shadowRoot.getElementById('audio');
 			case SOURCE_TYPES.video:
-				return this.shadowRoot.getElementById('d2l-labs-media-player-video');
+				return this.shadowRoot.getElementById('video');
 			default:
 				return null;
 		}
@@ -1134,7 +1134,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			const highlight = this._hovering && this._hoverTime >= this._chapters[0].time && (chapter.time === start || chapter.time === end);
 			return chapter.time > 0 ? html`
 				<div
-					class=${highlight ? 'd2l-labs-media-player-chapter-marker-highlight' : 'd2l-labs-media-player-chapter-marker'}
+					class=${highlight ? 'chapter-marker-highlight' : 'chapter-marker'}
 					theme="${ifDefined(this._getTheme())}"
 					style=${styleMap({ left: `${this._getPercentageTime(chapter.time)}%` })}
 				></div>
@@ -1194,7 +1194,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 
 	_getLoadingSpinnerView() {
 		return this._loading ? html`
-			<div class="d2l-labs-media-player-full-area-centered">
+			<div class="full-area-centered">
 				<d2l-loading-spinner size="100"></d2l-loading-spinner>
 			</div>
 		` : null;
@@ -1209,7 +1209,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 				return html`
 					${this._getPosterView()}
 					<video
-						id="d2l-labs-media-player-video"
+						id="video"
 						playsinline
 						webkit-playsinline
 						?autoplay="${this.autoplay}"
@@ -1238,7 +1238,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			case SOURCE_TYPES.audio:
 				return html`
 					<audio
-						id="d2l-labs-media-player-audio"
+						id="audio"
 						?autoplay="${this.autoplay}"
 						?loop="${this.loop}"
 						crossorigin="${ifDefined(this.crossorigin)}"
@@ -1258,9 +1258,9 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 						<source @error=${this._onError}></source>
 					</audio>
 					${this.transcriptViewerOn ? null : html`
-					<div id="d2l-labs-media-player-audio-bars-container">
-						<div id="d2l-labs-media-player-audio-play-button-container">
-							<button id="d2l-labs-media-player-audio-play-button" title="${playTooltip}" aria-label="${playTooltip}" @click=${this._togglePlay}>
+					<div id="audio-bars-container">
+						<div id="audio-play-button-container">
+							<button id="audio-play-button" title="${playTooltip}" aria-label="${playTooltip}" @click=${this._togglePlay}>
 								<d2l-icon icon="${playIcon}"></d2l-icon>
 							</button>
 						</div>
@@ -1336,7 +1336,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		if (!this.poster || this.autoplay || !this._posterVisible) return;
 
 		const playIcon = !this._loading ? html`
-			<button id="d2l-labs-media-player-video-poster-play-button" aria-label=${this.localize('components:mediaPlayer:play')} title=${this.localize('components:mediaPlayer:play')} transcript="${ifDefined(this.transcriptViewerOn ? true : undefined)}"
+			<button id="video-poster-play-button" aria-label=${this.localize('components:mediaPlayer:play')} title=${this.localize('components:mediaPlayer:play')} transcript="${ifDefined(this.transcriptViewerOn ? true : undefined)}"
 				@click=${this._onVideoClick}>
 				<d2l-icon icon="tier1:play" theme="${ifDefined(this._getTheme())}"></d2l-icon>
 			</button>
@@ -1345,7 +1345,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		return html`
 			${playIcon}
 			<img
-				id="d2l-labs-media-player-video-poster"
+				id="video-poster"
 				src="${ifDefined(this.poster)}"
 				@click=${this._onVideoClick}
 			/>
@@ -1382,7 +1382,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			return html`
 				<d2l-icon
 					@click=${this._onTimelineMarkerClick(result)}
-					class="d2l-labs-media-player-search-marker"
+					class="search-marker"
 					icon="tier1:subscribe-filled"
 					theme="${ifDefined(this._getTheme())}"
 					style=${styleMap({ left: `${this._getPercentageTime(result)}%` })}
@@ -1430,15 +1430,15 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 
 		if (!(this.thumbnails && this._thumbnailsImage))
 			return html`
-				<div id="d2l-labs-media-player-thumbnails-preview-container"
+				<div id="thumbnails-preview-container"
 					style="width: ${DEFAULT_PREVIEW_WIDTH}px; left: clamp(${DEFAULT_PREVIEW_WIDTH / 2}px, ${this._timelinePreviewOffset}%, calc(100% - ${DEFAULT_PREVIEW_WIDTH / 2}px));">
 					<div
-						id="d2l-labs-media-player-thumbnails-preview-image"
+						id="thumbnails-preview-image"
 					>
-						<span id="d2l-labs-media-player-thumbnails-preview-time">${MediaPlayer._formatTime(this._hoverTime)}</span>
+						<span id="thumbnails-preview-time">${MediaPlayer._formatTime(this._hoverTime)}</span>
 					</div>
 					${chapterTitleLabel &&
-						html`<span class="d2l-label-text" id="d2l-labs-media-player-thumbnails-preview-chapter" style="bottom: ${DEFAULT_PREVIEW_HEIGHT - 60}px">${chapterTitleLabel}</span>`}
+						html`<span class="d2l-label-text" id="thumbnails-preview-chapter" style="bottom: ${DEFAULT_PREVIEW_HEIGHT - 60}px">${chapterTitleLabel}</span>`}
 				</div>
 			`;
 
@@ -1461,16 +1461,16 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		const column = thumbNum % columns;
 
 		return html`
-			<div id="d2l-labs-media-player-thumbnails-preview-container"
+			<div id="thumbnails-preview-container"
 				style="width: ${thumbWidth}px; left: clamp(${thumbWidth / 2}px, ${this._timelinePreviewOffset}%, calc(100% - ${thumbWidth / 2}px));">
 				<div
-					id="d2l-labs-media-player-thumbnails-preview-image"
+					id="thumbnails-preview-image"
 					style="height: ${thumbHeight}px; background: url(${this._thumbnailsImage.src}) ${-column * thumbWidth}px ${-row * thumbHeight}px / ${width}px ${height}px;"
 				>
-					<span id="d2l-labs-media-player-thumbnails-preview-time">${MediaPlayer._formatTime(this._hoverTime)}</span>
+					<span id="thumbnails-preview-time">${MediaPlayer._formatTime(this._hoverTime)}</span>
 				</div>
 				${chapterTitleLabel &&
-					html`<span class="d2l-label-text" id="d2l-labs-media-player-thumbnails-preview-chapter" style="bottom: ${thumbHeight}px">${chapterTitleLabel}</span>`}
+					html`<span class="d2l-label-text" id="thumbnails-preview-chapter" style="bottom: ${thumbHeight}px">${chapterTitleLabel}</span>`}
 			</div>
 		`;
 	}
@@ -1491,7 +1491,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		return this._tracks.length > 0 && !this.hideCaptionsSelection ? html`
 			<d2l-menu-item text="${this.transcriptViewerOn ? this.localize('components:mediaPlayer:language') : this.localize('components:mediaPlayer:captions')}">
 				<div slot="supporting">${this._selectedTrackLabel}</div>
-				<d2l-menu id="d2l-labs-media-player-captions-menu"
+				<d2l-menu id="captions-menu"
 					@d2l-menu-item-change=${this._onTracksMenuItemChange} theme="${ifDefined(this._getTheme())}">
 					${this.transcriptViewerOn ? '' : html`
 					<d2l-menu-item-radio text="${this.localize('components:mediaPlayer:off')}" ?selected="${!this._selectedTrackIdentifier}"></d2l-menu-item-radio>`}
@@ -2113,7 +2113,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		if (!this._media) {
 			return;
 		}
-		const captionsMenu = this.shadowRoot.getElementById('d2l-labs-media-player-captions-menu');
+		const captionsMenu = this.shadowRoot.getElementById('captions-menu');
 		if (captionsMenu) {
 			this._captionsMenuReturnItem = captionsMenu.shadowRoot.querySelector('d2l-menu-item-return');
 			this._captionsMenuReturnItem?.setAttribute('text', this.localize('components:mediaPlayer:language'));

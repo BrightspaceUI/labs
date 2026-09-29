@@ -46,7 +46,7 @@ describe('d2l-labs-media-player', () => {
 				<track kind="captions" src="./demo/components/media-player/static/sample-vtt-en.vtt" srclang="en" label="English" default>
 			</d2l-labs-media-player>`
 		);
-		const settingsMenu = elem.shadowRoot.querySelector('#d2l-labs-media-player-settings-menu');
+		const settingsMenu = elem.shadowRoot.querySelector('#settings-menu');
 		settingsMenu.setAttribute('opened', true);
 		await oneEvent(settingsMenu, 'd2l-dropdown-open');
 		await expect(elem).to.be.golden();
