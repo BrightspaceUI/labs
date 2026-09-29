@@ -59,6 +59,12 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		}
 	`;
 
+	#audioDescriptionResizeObserver = new ResizeObserver(entries => {
+		for (const entry of entries) {
+			this._audioDescriptionControlsInMenu = entry.contentRect.width < AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX;
+		}
+	});
+
 	constructor() {
 		super();
 
@@ -73,16 +79,11 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 
 	connectedCallback() {
 		super.connectedCallback();
-		this._audioDescriptionResizeObserver ??= new ResizeObserver(entries => {
-			for (const entry of entries) {
-				this._audioDescriptionControlsInMenu = entry.contentRect.width < AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX;
-			}
-		});
-		this._audioDescriptionResizeObserver.observe(this);
+		this.#audioDescriptionResizeObserver.observe(this);
 	}
 
 	disconnectedCallback() {
-		this._audioDescriptionResizeObserver?.disconnect();
+		this.#audioDescriptionResizeObserver.disconnect();
 		this._cancelAudioDescription();
 		super.disconnectedCallback();
 	}
