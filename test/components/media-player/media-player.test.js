@@ -51,10 +51,25 @@ describe('d2l-labs-media-player', () => {
 	});
 
 	describe('audio descriptions', () => {
-		let el;
+		let el, originalSpeechSynthesisDescriptor, originalSpeechSynthesisUtterance;
+
+		const stubSpeechSynthesis = stub => {
+			Object.defineProperty(window, 'speechSynthesis', { configurable: true, get: () => stub });
+		};
 
 		beforeEach(async() => {
+			originalSpeechSynthesisDescriptor = Object.getOwnPropertyDescriptor(window, 'speechSynthesis');
+			originalSpeechSynthesisUtterance = window.SpeechSynthesisUtterance;
 			el = await fixture(html`<d2l-labs-media-player></d2l-labs-media-player>`);
+		});
+
+		afterEach(() => {
+			if (originalSpeechSynthesisDescriptor) {
+				Object.defineProperty(window, 'speechSynthesis', originalSpeechSynthesisDescriptor);
+			} else {
+				delete window.speechSynthesis;
+			}
+			window.SpeechSynthesisUtterance = originalSpeechSynthesisUtterance;
 		});
 
 		it('should speak a description once when its timestamp is crossed', () => {
@@ -79,7 +94,7 @@ describe('d2l-labs-media-player', () => {
 				cancel: () => {},
 				getVoices: () => [{ lang: 'en-US', name: 'English (United States)' }]
 			};
-			window.speechSynthesis = speechSynthesis;
+			stubSpeechSynthesis(speechSynthesis);
 			window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) {
 				this.text = text;
 				this.lang = 'en-US';
@@ -94,7 +109,7 @@ describe('d2l-labs-media-player', () => {
 				},
 				play: () => Promise.resolve()
 			};
-			el._media = media;
+			Object.defineProperty(el, '_media', { configurable: true, get: () => media });
 			el._selectedAudioDescriptionLanguage = 'en-US';
 			el._audioDescriptionTracks = [{
 				srclang: 'en-US',
@@ -118,7 +133,7 @@ describe('d2l-labs-media-player', () => {
 					{ lang: 'en-US', name: 'English (United States)' }
 				]
 			};
-			window.speechSynthesis = speechSynthesis;
+			stubSpeechSynthesis(speechSynthesis);
 			window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) {
 				this.text = text;
 				this.lang = 'en-US';
