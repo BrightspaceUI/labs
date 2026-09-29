@@ -114,7 +114,9 @@ describe('d2l-labs-media-player', () => {
 					</d2l-labs-media-player>`,
 					{ viewport }
 				);
-				await waitUntil(() => elem.shadowRoot.querySelector('#audio-description-button'));
+				// Wait for all tracks so the preference restore after loading doesn't override test state
+				await waitUntil(() => elem._audioDescriptionTracks.length === 2 && elem.shadowRoot.querySelector('#audio-description-button'));
+				await elem.updateComplete;
 				return elem;
 			};
 
