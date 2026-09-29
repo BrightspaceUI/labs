@@ -27,20 +27,20 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	};
 
 	static styles = css`
-		#d2l-labs-media-player-audio-description-skip-button {
+		#audio-description-skip-button {
 			margin-right: 12px;
 		}
-		#d2l-labs-media-player-audio-description-button {
+		#audio-description-button {
 			margin-right: 15px;
 		}
-		#d2l-labs-media-player-audio-description-button[data-enabled] {
+		#audio-description-button[data-enabled] {
 			position: relative;
 		}
-		#d2l-labs-media-player-audio-description-button d2l-icon-custom {
+		#audio-description-button d2l-icon-custom {
 			height: calc(1rem - 7px);
 			width: calc(2rem - 9px);
 		}
-		.d2l-labs-media-player-audio-description-header {
+		.audio-description-header {
 			background-color: var(--d2l-color-tungsten);
 			border-bottom: 1px solid var(--d2l-color-mica);
 			border-start-end-radius: var(--d2l-popover-border-radius, var(--d2l-popover-default-border-radius));
@@ -48,7 +48,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			color: white;
 			padding: 1rem;
 		}
-		#d2l-labs-media-player-audio-description-button[data-enabled]::after {
+		#audio-description-button[data-enabled]::after {
 			border: 2px solid var(--d2l-color-sylvite);
 			border-radius: var(--d2l-button-icon-border-radius, 0.3rem);
 			box-sizing: border-box;
@@ -108,7 +108,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			${showControls && !this._audioDescriptionControlsInMenu ? html`
 				<d2l-button-icon
 					icon="tier1:undo"
-					id="d2l-labs-media-player-audio-description-replay-button"
+					id="audio-description-replay-button"
 					theme="${ifDefined(this._getTheme())}"
 					disabled-tooltip="${replayTooltip}"
 					?disabled="${!this._audioDescriptionPlaying}"
@@ -116,7 +116,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 				></d2l-button-icon>
 				<d2l-button-icon
 					icon="tier1:redo"
-					id="d2l-labs-media-player-audio-description-skip-button"
+					id="audio-description-skip-button"
 					theme="${ifDefined(this._getTheme())}"
 					disabled-tooltip="${skipTooltip}"	
 					?disabled="${!this._audioDescriptionPlaying}"
@@ -127,15 +127,15 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 				<d2l-button-icon
 					aria-label="${tooltip}"
 					class="d2l-dropdown-opener"
-					id="d2l-labs-media-player-audio-description-button"
+					id="audio-description-button"
 					title="${tooltip}"
 					theme="${ifDefined(this._getTheme())}"
 					?data-enabled="${!!this._selectedAudioDescriptionLanguage}"
 				><d2l-icon-custom slot="icon"><svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M8.89199 8.55L7.21999 3.9805C7.13766 3.77783 7.05216 3.53717 6.96349 3.2585C6.87483 2.97983 6.78616 2.679 6.69749 2.356C6.61516 2.679 6.52966 2.983 6.44099 3.268C6.35233 3.54667 6.26683 3.7905 6.18449 3.9995L4.52199 8.55H8.89199ZM13.4045 13.737H11.4285C11.2068 13.737 11.0263 13.6832 10.887 13.5755C10.7477 13.4615 10.6432 13.3222 10.5735 13.1575L9.54749 10.355H3.85699L2.83099 13.1575C2.78033 13.3032 2.68216 13.4362 2.53649 13.5565C2.39083 13.6768 2.21033 13.737 1.99499 13.737H-7.82078e-06L5.40549 -1.43051e-06H8.00849L13.4045 13.737ZM27.2244 6.8685C27.2244 7.8755 27.0565 8.80017 26.7209 9.6425C26.3852 10.4848 25.9134 11.21 25.3054 11.818C24.6974 12.426 23.9659 12.8978 23.1109 13.2335C22.2559 13.5692 21.3059 13.737 20.2609 13.737H15.0264V-1.43051e-06H20.2609C21.3059 -1.43051e-06 22.2559 0.170999 23.1109 0.512999C23.9659 0.848665 24.6974 1.3205 25.3054 1.9285C25.9134 2.53017 26.3852 3.25217 26.7209 4.0945C27.0565 4.93683 27.2244 5.8615 27.2244 6.8685ZM24.6024 6.8685C24.6024 6.11483 24.501 5.44033 24.2984 4.845C24.102 4.24333 23.8139 3.73667 23.4339 3.325C23.0602 2.907 22.6042 2.58717 22.0659 2.3655C21.5339 2.14383 20.9322 2.033 20.2609 2.033H17.5914V11.704H20.2609C20.9322 11.704 21.5339 11.5932 22.0659 11.3715C22.6042 11.1498 23.0602 10.8332 23.4339 10.4215C23.8139 10.0035 24.102 9.49683 24.2984 8.9015C24.501 8.29983 24.6024 7.62217 24.6024 6.8685Z" fill="white"/>
 </svg></d2l-icon-custom></d2l-button-icon>
-				<d2l-dropdown-content id="d2l-labs-media-player-audio-description-dropdown-content" class="vdiff-target" no-padding no-padding-header no-pointer theme="${ifDefined(this._getTheme())}">
-					${showControls ? html`<div class="d2l-labs-media-player-audio-description-header" slot="header">${this.localize('components:mediaPlayer:extendedAudioDescription')}</div>` : null}
+				<d2l-dropdown-content id="audio-description-dropdown-content" class="vdiff-target" no-padding no-padding-header no-pointer theme="${ifDefined(this._getTheme())}">
+					${showControls ? html`<div class="audio-description-header" slot="header">${this.localize('components:mediaPlayer:extendedAudioDescription')}</div>` : null}
                     <d2l-menu label="${tooltip}" @d2l-menu-item-change=${this._onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
 						${showControls && this._audioDescriptionControlsInMenu ? html`
 							<d2l-menu-item
@@ -243,7 +243,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			this._clearPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
 		}
 
-		this.shadowRoot?.querySelector('#d2l-labs-media-player-audio-description-dropdown-content')?.close();
+		this.shadowRoot?.querySelector('#audio-description-dropdown-content')?.close();
 	}
 
 	_onAudioDescriptionTimeUpdate(currentTime) {
