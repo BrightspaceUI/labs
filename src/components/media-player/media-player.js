@@ -813,7 +813,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		const mediaControlsClass = { 'd2l-labs-media-player-hidden': this._hidingCustomControls() };
 		const theme = this.mediaType === SOURCE_TYPES.video ? 'dark' : undefined;
 		const volumeLevelContainerClass = { 'd2l-labs-media-player-hidden': !this._usingVolumeContainer || this._hidingCustomControls() };
-		const searchContainerClass = { 'd2l-labs-media-player-search-container-hidden' : !this._searchInstances[this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier)] };
+		const hideSearchForAudioDescriptions = this._audioDescriptionTracks.length > 0 && this._audioDescriptionControlsInMenu;
+		const searchContainerClass = { 'd2l-labs-media-player-search-container-hidden' : !this._searchInstances[this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier)] || hideSearchForAudioDescriptions };
 		this._captionsMenuReturnItem?.setAttribute('text', (this.transcriptViewerOn ? this.localize('components:mediaPlayer:language') : this.localize('components:mediaPlayer:captions')));
 
 		const fullscreenButton = this.mediaType === SOURCE_TYPES.video ? html`<d2l-button-icon
