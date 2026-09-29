@@ -38,7 +38,9 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			position: relative;
 		}
 		#audio-description-button d2l-icon-custom {
+			display: block;
 			height: calc(1rem - 7px);
+			margin: 0 auto;
 			width: calc(2rem - 9px);
 		}
 		.audio-description-header {
