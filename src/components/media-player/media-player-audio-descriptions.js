@@ -169,19 +169,11 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	}
 
 	async _loadAudioDescriptionTrack(node) {
-		if (!node.label) {
-			console.warn("d2l-labs-media-player component requires 'label' text on track");
-			return;
-		}
-
-		if (!node.src) {
-			console.warn("d2l-labs-media-player component requires 'src' text on track");
-			return;
-		}
-
-		if (!node.srclang) {
-			console.warn("d2l-labs-media-player component requires 'srclang' text on track");
-			return;
+		for (const attr of ['label', 'src', 'srclang']) {
+			if (!node[attr]) {
+				console.warn(`d2l-labs-media-player component requires '${attr}' text on track`);
+				return;
+			}
 		}
 
 		const res = await fetch(node.src);
