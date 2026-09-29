@@ -111,7 +111,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	_getAudioDescriptionsButtonView() {
 		if (!this._audioDescriptionTracks?.length) return null;
 
-		const tooltip = this.localize('components:mediaPlayer:audioDescriptions');
+		const tooltip = this.localize('components:mediaPlayer:audioDescription');
 		const replayTooltip = this.localize('components:mediaPlayer:replayAudioDescription');
 		const skipTooltip = this.localize('components:mediaPlayer:skipAudioDescription');
 		const showControls = !!this._getSelectedAudioDescriptionTrack()?.pauseVideo;
@@ -121,21 +121,19 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 				<d2l-button-icon
 					icon="tier1:undo"
 					id="d2l-labs-media-player-audio-description-replay-button"
-					text="${replayTooltip}"
 					theme="${ifDefined(this._getTheme())}"
+					disabled-tooltip="${replayTooltip}"
 					?disabled="${!this._audioDescriptionPlaying}"
 					@click="${this._replayAudioDescription}"
 				></d2l-button-icon>
-				<d2l-tooltip position="top" for="d2l-labs-media-player-audio-description-replay-button">${replayTooltip}</d2l-tooltip>
 				<d2l-button-icon
 					icon="tier1:redo"
 					id="d2l-labs-media-player-audio-description-skip-button"
-					text="${skipTooltip}"
 					theme="${ifDefined(this._getTheme())}"
+					disabled-tooltip="${skipTooltip}"	
 					?disabled="${!this._audioDescriptionPlaying}"
 					@click="${this._skipAudioDescription}"
 				></d2l-button-icon>
-				<d2l-tooltip position="top" for="d2l-labs-media-player-audio-description-skip-button">${skipTooltip}</d2l-tooltip>
 			` : null}
 			<d2l-dropdown>
 				<d2l-button-icon
