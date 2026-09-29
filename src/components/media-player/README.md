@@ -216,9 +216,33 @@ The media player supports captions and subtitles, provided as `.srt` or `.vtt` f
 | default | Boolean | false | The track to be selected by default. If D2L.MediaPlayer.Preferences.Track is defined in local storage, then it will take precedence over this attribute.
 | default-ignore-preferences | Boolean | false | Same as default, but if D2L.MediaPlayer.Preferences.Track is defined, it will be ignored and this track will be selected instead.
 
+## Audio Descriptions Using `<track>`
+
+The media player supports audio descriptions, provided as `.vtt` files, one per language. Audio descriptions are not displayed as burned-in text; instead, when the video's current time crosses a cue's start timestamp (the cue's end timestamp is ignored), the cue text is spoken using the browser's SpeechSynthesis API. If any valid audio description tracks are present, an "Audio descriptions" menu item will be presented in the settings menu with an item for each track.
+
+```html
+<script type="module">
+    import '@brightspace-ui/labs/components/media-player.js';
+</script>
+<d2l-labs-media-player src="/video.webm">
+	<track src="/english-descriptions.vtt" srclang="en" label="English" kind="descriptions">
+	<track src="/french-descriptions.vtt" srclang="fr" label="French" kind="descriptions" pause-video>
+</d2l-labs-media-player>
+```
+
+**Attributes**
+
+| Attribute | Type | Default | Description |
+|--|--|--|--|
+| kind | "descriptions", required | | Identifies the track as an audio description track. |
+| label | String, required | | The label for the track, displayed to the user for selection. |
+| src | String, required | | The URL of the `.vtt` source file. |
+| srclang | String, required | | The language's code. Used as the SpeechSynthesis voice/language and stored as the selection preference. |
+| pause-video | Boolean | false | If set, playback is paused for the duration of each spoken description and resumes automatically once the description finishes, and replay/skip controls are shown. If not set, descriptions play inline with the video and the replay/skip controls are hidden. |
+
 ## Local Storage
 
-The media player uses local storage to persist the user's playback speed, track selections, and volume.
+The media player uses local storage to persist the user's playback speed, track selections, audio description selection, and volume.
 
 **Items**
 
@@ -226,6 +250,7 @@ The media player uses local storage to persist the user's playback speed, track 
 | -- | -- |
 | D2L.MediaPlayer.Preferences.Speed | Playback speed that was last selected.
 | D2L.MediaPlayer.Preferences.Track | Identifier for the kind and language of the track that was last selected.
+| D2L.MediaPlayer.Preferences.AudioDescriptionLanguage | Language of the audio description track that was last selected.
 | D2L.MediaPlayer.Preferences.Volume | Volume that was last selected.
 
 ## Accessibility

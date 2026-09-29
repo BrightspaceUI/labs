@@ -64,7 +64,7 @@ class MediaPlayerAudioBars extends LitElement {
 
 	static properties = {
 		playing: { type: Boolean },
-		_visibleAudioBars: { type: Array, attribute: false },
+		_visibleAudioBars: { state: true },
 	};
 
 	static styles = css`
@@ -72,7 +72,7 @@ class MediaPlayerAudioBars extends LitElement {
 			width: 100%;
 		}
 
-		#d2l-labs-media-player-audio-bars-row {
+		#audio-bars-row {
 			align-items: center;
 			display: flex;
 			flex-direction: row;
@@ -80,13 +80,13 @@ class MediaPlayerAudioBars extends LitElement {
 			justify-content: center;
 		}
 
-		#d2l-labs-media-player-audio-bar-container {
+		#audio-bar-container {
 			display: flex;
 			flex-direction: column;
 			height: 100%;
 		}
 
-		.d2l-labs-media-player-audio-bar {
+		.audio-bar {
 			border-top-left-radius: 0.075rem;
 			border-top-right-radius: 0.075rem;
 			margin: 0 ${AUDIO_BAR_HORIZONTAL_MARGIN_REM}rem;
@@ -143,16 +143,16 @@ class MediaPlayerAudioBars extends LitElement {
 
 				this._startChangingAudioBars();
 			}
-		}).observe(this.shadowRoot.getElementById('d2l-labs-media-player-audio-bars-row'));
+		}).observe(this.shadowRoot.getElementById('audio-bars-row'));
 	}
 
 	render() {
 		return html`
-			<div id="d2l-labs-media-player-audio-bars-row">
+			<div id="audio-bars-row">
 				${this._visibleAudioBars.map(audioBar => html`
-					<div id="d2l-labs-media-player-audio-bar-container">
+					<div id="audio-bar-container">
 						<div style="flex: auto;"></div>
-						<div class="d2l-labs-media-player-audio-bar" style=${styleMap({ backgroundColor: `rgba(${audioBar.red}, ${audioBar.green}, ${audioBar.blue}, 1)`, height: `${audioBar.height}%` })}></div>
+						<div class="audio-bar" style=${styleMap({ backgroundColor: `rgba(${audioBar.red}, ${audioBar.green}, ${audioBar.blue}, 1)`, height: `${audioBar.height}%` })}></div>
 					</div>
 				`)}
 			</div>
