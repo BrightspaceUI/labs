@@ -48,6 +48,20 @@
 					<source src="static/sample-video-360p.mp4" label="HD" default>
 					<track src="static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
 					<track src="static/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
+				</d2l-labs-media-player>
+			</d2l-demo-snippet>
+
+			<h5>Audio Descriptions</h5>
+			<d2l-demo-snippet>
+				<d2l-labs-media-player
+					thumbnails="static/th90w160i1-samplevideo.png"
+					id="audio-descriptions"
+					media-type="video"
+					metadata='{"chapters":[{"time":0,"title":{"en":"Chapter One","fr":"Chapitre Un","fr-ca":"Chapitre : Un"}},{"time":3,"title":{"en":"Chapter Two","fr":"Chapitre Deux","fr-ca":"Chapitre : Deux"}}]}' poster="static/sample-poster.png">
+					<source src="static/sample-video-144p.mp4" label="SD">
+					<source src="static/sample-video-360p.mp4" label="HD" default>
+					<track src="static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English">
+					<track src="static/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
 					<track src="static/sample-vtt-en-descriptions.vtt" kind="descriptions" srclang="en" label="English" pause-video>
 					<track src="static/sample-vtt-fr-descriptions.vtt" kind="descriptions" srclang="fr" label="French">
 				</d2l-labs-media-player>

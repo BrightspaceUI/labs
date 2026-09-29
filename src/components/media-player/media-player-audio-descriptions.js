@@ -45,8 +45,8 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			padding: 1rem;
 		}
 		.d2l-labs-media-player-audio-description-menu-controls {
-			border-bottom: 1px solid var(--d2l-color-mica);
 			align-items: flex-start;
+			border-bottom: 1px solid var(--d2l-color-mica);
 			display: flex;
 			flex-direction: column;
 			gap: 0.3rem;
@@ -187,10 +187,6 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		`;
 	}
 
-	_getSelectedAudioDescriptionTrack() {
-		return this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
-	}
-
 	_getAudioDescriptionVoice(language) {
 		const normalizedLanguage = (language || '').toLowerCase();
 		if (!normalizedLanguage || !window.speechSynthesis?.getVoices) return null;
@@ -205,6 +201,10 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			|| voices.find(voice => (voice.lang || '').toLowerCase().includes(normalizedLanguage.split('-')[0]))
 			|| voices[0];
 		return bestMatch || null;
+	}
+
+	_getSelectedAudioDescriptionTrack() {
+		return this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
 	}
 
 	async _loadAudioDescriptionTrack(node) {
@@ -362,13 +362,13 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		}
 
 		// Speaking before voices have loaded is silently dropped in some browsers
-		let timeout;
+		const controller = new AbortController();
 		const onVoicesChanged = () => {
-			clearTimeout(timeout);
-			window.speechSynthesis.removeEventListener('voiceschanged', onVoicesChanged);
+			controller.abort();
 			speak();
 		};
-		timeout = setTimeout(onVoicesChanged, VOICES_LOAD_TIMEOUT_MS);
-		window.speechSynthesis.addEventListener('voiceschanged', onVoicesChanged);
+		window.speechSynthesis.addEventListener('voiceschanged', onVoicesChanged, { signal: controller.signal });
+		const timeout = setTimeout(onVoicesChanged, VOICES_LOAD_TIMEOUT_MS);
+		controller.signal.addEventListener('abort', () => clearTimeout(timeout));
 	}
 };
