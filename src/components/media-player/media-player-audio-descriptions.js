@@ -59,12 +59,6 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		}
 	`;
 
-	#audioDescriptionResizeObserver = new ResizeObserver(entries => {
-		for (const entry of entries) {
-			this._audioDescriptionControlsInMenu = entry.contentRect.width < AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX;
-		}
-	});
-
 	constructor() {
 		super();
 
@@ -88,6 +82,12 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		super.disconnectedCallback();
 	}
 
+	#audioDescriptionResizeObserver = new ResizeObserver(entries => {
+		for (const entry of entries) {
+			this._audioDescriptionControlsInMenu = entry.contentRect.width < AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX;
+		}
+	});
+
 	_cancelAudioDescription() {
 		if (this._audioDescriptionUtterance && window.speechSynthesis) {
 			window.speechSynthesis.cancel();
@@ -103,7 +103,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		const tooltip = this.localize('components:mediaPlayer:audioDescription');
 		const replayTooltip = this.localize('components:mediaPlayer:replayAudioDescription');
 		const skipTooltip = this.localize('components:mediaPlayer:skipAudioDescription');
-		const showControls = !!this._getSelectedAudioDescriptionTrack()?.pauseVideo;
+		const showControls = !!this.#getSelectedAudioDescriptionTrack()?.pauseVideo;
 
 		return html`
 			${showControls && !this._audioDescriptionControlsInMenu ? html`
@@ -137,7 +137,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 </svg></d2l-icon-custom></d2l-button-icon>
 				<d2l-dropdown-content id="audio-description-dropdown-content" class="vdiff-target" no-padding no-padding-header no-pointer theme="${ifDefined(this._getTheme())}">
 					${showControls ? html`<div class="audio-description-header" slot="header">${this.localize('components:mediaPlayer:extendedAudioDescription')}</div>` : null}
-                    <d2l-menu label="${tooltip}" @d2l-menu-item-change=${this._onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
+                    <d2l-menu label="${tooltip}" @d2l-menu-item-change=${this.#onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
 						${showControls && this._audioDescriptionControlsInMenu ? html`
 							<d2l-menu-item
 								text="${this.localize('components:mediaPlayer:replay')}"
@@ -166,26 +166,6 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 				</d2l-dropdown-content>
 			</d2l-dropdown>
 		`;
-	}
-
-	_getAudioDescriptionVoice(language) {
-		const normalizedLanguage = (language || '').toLowerCase();
-		if (!normalizedLanguage || !window.speechSynthesis?.getVoices) return null;
-
-		const voices = window.speechSynthesis.getVoices();
-		if (!voices.length) return null;
-
-		const bestMatch = voices.find(voice => (voice.lang || '').toLowerCase() === normalizedLanguage)
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}-`))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}_`))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(normalizedLanguage.split('-')[0]))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().includes(normalizedLanguage.split('-')[0]))
-			|| voices[0];
-		return bestMatch || null;
-	}
-
-	_getSelectedAudioDescriptionTrack() {
-		return this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
 	}
 
 	async _loadAudioDescriptionTrack(node) {
@@ -234,19 +214,6 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this.dispatchEvent(new CustomEvent('trackloaded'));
 	}
 
-	_onAudioDescriptionMenuItemChange(e) {
-		this._cancelAudioDescription();
-		this._selectedAudioDescriptionLanguage = e.target.value || null;
-		this._resetAudioDescriptionCursor(this.currentTime);
-		if (this._selectedAudioDescriptionLanguage) {
-			this._setPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY, this._selectedAudioDescriptionLanguage);
-		} else {
-			this._clearPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
-		}
-
-		this.shadowRoot?.querySelector('#audio-description-dropdown-content')?.close();
-	}
-
 	_onAudioDescriptionTimeUpdate(currentTime) {
 		const track = this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
 		if (!track) return;
@@ -260,21 +227,21 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		const next = track.descriptions[this._audioDescriptionIndex];
 		if (next && this._audioDescriptionPreviousTime < next.time && currentTime >= next.time) {
 			this._audioDescriptionIndex += 1;
-			this._speakAudioDescription(next, track);
+			this.#speakAudioDescription(next, track);
 		}
 		this._audioDescriptionPreviousTime = currentTime;
 	}
 
 	_replayAudioDescription() {
 		if (!this._audioDescriptionPlaying) return;
-		const track = this._getSelectedAudioDescriptionTrack();
+		const track = this.#getSelectedAudioDescriptionTrack();
 		if (!track?.pauseVideo) return;
 		const description = track?.descriptions.findLast(description => description.time <= this.currentTime);
 		if (!description) return;
 
 		// Preserve the pause from the original playback so the video still resumes after the replay
 		const pausedVideo = this._audioDescriptionPausedVideo;
-		this._speakAudioDescription(description, track);
+		this.#speakAudioDescription(description, track);
 		if (pausedVideo) this._audioDescriptionPausedVideo = true;
 	}
 
@@ -297,13 +264,46 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	}
 
 	_skipAudioDescription() {
-		if (!this._audioDescriptionPlaying || !this._getSelectedAudioDescriptionTrack()?.pauseVideo) return;
+		if (!this._audioDescriptionPlaying || !this.#getSelectedAudioDescriptionTrack()?.pauseVideo) return;
 		const pausedVideo = this._audioDescriptionPausedVideo;
 		this._cancelAudioDescription();
 		if (pausedVideo) this._play();
 	}
 
-	_speakAudioDescription(description, track) {
+	#getAudioDescriptionVoice(language) {
+		const normalizedLanguage = (language || '').toLowerCase();
+		if (!normalizedLanguage || !window.speechSynthesis?.getVoices) return null;
+
+		const voices = window.speechSynthesis.getVoices();
+		if (!voices.length) return null;
+
+		const bestMatch = voices.find(voice => (voice.lang || '').toLowerCase() === normalizedLanguage)
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}-`))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}_`))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(normalizedLanguage.split('-')[0]))
+			|| voices.find(voice => (voice.lang || '').toLowerCase().includes(normalizedLanguage.split('-')[0]))
+			|| voices[0];
+		return bestMatch || null;
+	}
+
+	#getSelectedAudioDescriptionTrack() {
+		return this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
+	}
+
+	#onAudioDescriptionMenuItemChange(e) {
+		this._cancelAudioDescription();
+		this._selectedAudioDescriptionLanguage = e.target.value || null;
+		this._resetAudioDescriptionCursor(this.currentTime);
+		if (this._selectedAudioDescriptionLanguage) {
+			this._setPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY, this._selectedAudioDescriptionLanguage);
+		} else {
+			this._clearPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
+		}
+
+		this.shadowRoot?.querySelector('#audio-description-dropdown-content')?.close();
+	}
+
+	#speakAudioDescription(description, track) {
 		if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
 
 		this._cancelAudioDescription();
@@ -331,7 +331,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 
 		const speak = () => {
 			if (this._audioDescriptionUtterance !== utterance) return;
-			const voice = this._getAudioDescriptionVoice(track.srclang);
+			const voice = this.#getAudioDescriptionVoice(track.srclang);
 			if (voice) utterance.voice = voice;
 			utterance.volume = this.volume;
 			window.speechSynthesis.speak(utterance);

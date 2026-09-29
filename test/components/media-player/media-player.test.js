@@ -73,18 +73,26 @@ describe('d2l-labs-media-player', () => {
 		});
 
 		it('should speak a description once when its timestamp is crossed', () => {
-			const description = { time: 10, text: 'A person enters.' };
+			const spoken = [];
+			stubSpeechSynthesis({
+				speak: utterance => spoken.push(utterance.text),
+				cancel: () => {},
+				getVoices: () => [{ lang: 'en-US', name: 'English (United States)' }]
+			});
+			window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) {
+				this.text = text;
+			};
 			el._selectedAudioDescriptionLanguage = 'en-US';
 			el._audioDescriptionTracks = [{
 				srclang: 'en-US',
-				descriptions: [description]
+				descriptions: [{ time: 10, text: 'A person enters.' }]
 			}];
 			el._audioDescriptionPreviousTime = 9;
-			el._speakAudioDescription = (spokenDescription) => expect(spokenDescription).to.equal(description);
 
 			el._onAudioDescriptionTimeUpdate(10);
 			el._onAudioDescriptionTimeUpdate(10.5);
 			expect(el._audioDescriptionIndex).to.equal(1);
+			expect(spoken).to.deep.equal(['A person enters.']);
 		});
 
 		it('should pause the video when an audio description requests it', () => {
@@ -124,28 +132,30 @@ describe('d2l-labs-media-player', () => {
 		});
 
 		it('should select the closest voice for the description language', () => {
-			const speechSynthesis = {
-				speak: () => {},
+			let spokenUtterance = null;
+			stubSpeechSynthesis({
+				speak: utterance => spokenUtterance = utterance,
 				cancel: () => {},
 				getVoices: () => [
 					{ lang: 'en-GB', name: 'English (United Kingdom)' },
 					{ lang: 'fr-FR', name: 'French (France)' },
 					{ lang: 'en-US', name: 'English (United States)' }
 				]
-			};
-			stubSpeechSynthesis(speechSynthesis);
+			});
 			window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) {
 				this.text = text;
-				this.lang = 'en-US';
 				this.voice = null;
-				this.onend = null;
-				this.onerror = null;
 			};
+			el._selectedAudioDescriptionLanguage = 'en-US';
+			el._audioDescriptionTracks = [{
+				srclang: 'en-US',
+				descriptions: [{ time: 10, text: 'hello' }]
+			}];
+			el._audioDescriptionPreviousTime = 9;
+			el._audioDescriptionIndex = 0;
 
-			const utterance = new window.SpeechSynthesisUtterance('hello');
-			const voice = el._getAudioDescriptionVoice('en-US');
-			utterance.voice = voice;
-			expect(utterance.voice.name).to.equal('English (United States)');
+			el._onAudioDescriptionTimeUpdate(10);
+			expect(spokenUtterance.voice.name).to.equal('English (United States)');
 		});
 	});
 });
