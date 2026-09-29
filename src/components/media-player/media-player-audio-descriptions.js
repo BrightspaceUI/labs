@@ -28,10 +28,10 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 
 	static styles = css`
 		#audio-description-skip-button {
-			margin-right: 12px;
+			margin-inline-end: 12px;
 		}
 		#audio-description-button {
-			margin-right: 15px;
+			margin-inline-end: 15px;
 		}
 		#audio-description-button[data-enabled] {
 			position: relative;
