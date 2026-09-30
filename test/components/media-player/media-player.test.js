@@ -157,5 +157,32 @@ describe('d2l-labs-media-player', () => {
 			el._onAudioDescriptionTimeUpdate(10);
 			expect(spokenUtterance.voice.name).to.equal('English (United States)');
 		});
+
+		it('should prefer natural voices over Eloquence and novelty voices', () => {
+			let spokenUtterance = null;
+			stubSpeechSynthesis({
+				speak: utterance => spokenUtterance = utterance,
+				cancel: () => {},
+				getVoices: () => [
+					{ lang: 'fr-FR', name: 'Eddy (French (France))', voiceURI: 'com.apple.eloquence.fr-FR.Eddy' },
+					{ lang: 'fr-FR', name: 'Grandma (French (France))', voiceURI: 'com.apple.eloquence.fr-FR.Grandma' },
+					{ lang: 'fr-FR', name: 'Thomas', voiceURI: 'com.apple.voice.compact.fr-FR.Thomas' }
+				]
+			});
+			window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) {
+				this.text = text;
+				this.voice = null;
+			};
+			el._selectedAudioDescriptionLanguage = 'fr-FR';
+			el._audioDescriptionTracks = [{
+				srclang: 'fr-FR',
+				descriptions: [{ time: 10, text: 'bonjour' }]
+			}];
+			el._audioDescriptionPreviousTime = 9;
+			el._audioDescriptionIndex = 0;
+
+			el._onAudioDescriptionTimeUpdate(10);
+			expect(spokenUtterance.voice.name).to.equal('Thomas');
+		});
 	});
 });
