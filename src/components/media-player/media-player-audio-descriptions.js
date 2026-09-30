@@ -45,7 +45,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		}
 		.audio-description-header {
 			background-color: var(--d2l-color-tungsten);
-			border-bottom: 1px solid var(--d2l-color-mica);
+			border-bottom: 1px solid var(--d2l-color-chromite);
 			border-start-end-radius: var(--d2l-popover-border-radius, var(--d2l-popover-default-border-radius));
 			border-start-start-radius: var(--d2l-popover-border-radius, var(--d2l-popover-default-border-radius));
 			color: white;
@@ -65,6 +65,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	constructor() {
 		super();
 
+		this._activeDescriptionCue = null;
 		this._audioDescriptionTracks = [];
 		this._audioDescriptionIndex = 0;
 		this._audioDescriptionPreviousTime = -0.001;
@@ -72,6 +73,10 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._audioDescriptionPlaying = false;
 		this._audioDescriptionControlsInMenu = false;
 		this._canReplayAudioDescription = false;
+	}
+
+	get activeDescriptionCue() {
+		return this._activeDescriptionCue;
 	}
 
 	connectedCallback() {
@@ -101,7 +106,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	}
 
 	_getAudioDescriptionsButtonView() {
-		if (!this._audioDescriptionTracks?.length) return null;
+		if (!this._audioDescriptionTracks?.length || this.hideAudioDescriptionSelection) return null;
 
 		const tooltip = this.localize('components:mediaPlayer:audioDescription');
 		const replayTooltip = this.localize('components:mediaPlayer:replayAudioDescription');
@@ -111,28 +116,57 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		return html`
 			${showControls && !this._audioDescriptionControlsInMenu ? html`
 				<d2l-button-icon
-					icon="tier1:undo"
 					id="audio-description-replay-button"
+					text="${this.localize('components:mediaPlayer:replay')}"
 					theme="${ifDefined(this._getTheme())}"
 					disabled-tooltip="${replayTooltip}"
 					?disabled="${!this._audioDescriptionPlaying}"
 					@click="${this._replayAudioDescription}"
-				></d2l-button-icon>
+				><d2l-icon-custom slot="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_777_1621)">
+<mask id="mask0_777_1621" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="2" width="18" height="14">
+<path d="M0 2H18V16H0V2Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_777_1621)">
+<path d="M14.846 2C16.036 2 17 2.73967 17 3.65278V14.3472C17 14.957 16.563 15.517 15.862 15.8048C15.162 16.0926 14.312 16.0607 13.651 15.7223L3.958 10.3751C3.66426 10.2256 3.42291 10.0217 3.25568 9.78167C3.08845 9.54163 3.00059 9.27302 3 9C3 8.44778 3.36 7.93133 3.96 7.62489L13.651 2.27767C14.0059 2.09624 14.4213 1.9997 14.846 2Z" fill="#F1F5FB"/>
+</g>
+<path d="M2 1V17" stroke="#F1F5FB" stroke-width="2" stroke-linecap="round"/>
+</g>
+<defs>
+<clipPath id="clip0_777_1621">
+<rect width="18" height="18" fill="white"/>
+</clipPath>
+</defs>
+</svg></d2l-icon-custom></d2l-button-icon>
 				<d2l-button-icon
-					icon="tier1:redo"
 					id="audio-description-skip-button"
+					text="${this.localize('components:mediaPlayer:skip')}"
 					theme="${ifDefined(this._getTheme())}"
-					disabled-tooltip="${skipTooltip}"	
+					disabled-tooltip="${skipTooltip}"
 					?disabled="${!this._audioDescriptionPlaying}"
 					@click="${this._skipAudioDescription}"
-				></d2l-button-icon>
+				><d2l-icon-custom slot="icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_777_1614)">
+<mask id="mask0_777_1614" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="2" width="18" height="14">
+<path d="M18 2H0V16H18V2Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_777_1614)">
+<path d="M3.154 2C1.964 2 1 2.73967 1 3.65278V14.3472C1 14.957 1.437 15.517 2.138 15.8048C2.838 16.0926 3.688 16.0607 4.349 15.7223L14.042 10.3751C14.3357 10.2256 14.5771 10.0217 14.7443 9.78167C14.9115 9.54163 14.9994 9.27302 15 9C15 8.44778 14.64 7.93133 14.04 7.62489L4.349 2.27767C3.9941 2.09624 3.5787 1.9997 3.154 2Z" fill="#F1F5FB"/>
+</g>
+<path d="M16 1V17" stroke="#F1F5FB" stroke-width="2" stroke-linecap="round"/>
+</g>
+<defs>
+<clipPath id="clip0_777_1614">
+<rect width="18" height="18" fill="white" transform="matrix(-1 0 0 1 18 0)"/>
+</clipPath>
+</defs>
+</svg></d2l-icon-custom></d2l-button-icon>
 			` : null}
 			<d2l-dropdown>
 				<d2l-button-icon
-					aria-label="${tooltip}"
 					class="d2l-dropdown-opener"
 					id="audio-description-button"
-					title="${tooltip}"
+					text="${tooltip}"
 					theme="${ifDefined(this._getTheme())}"
 					?data-enabled="${!!this._selectedAudioDescriptionLanguage}"
 				><d2l-icon-custom slot="icon"><svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,11 +251,14 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			this._audioDescriptionIndex = track.descriptions.findIndex(description => description.time >= currentTime);
 			if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = track.descriptions.length;
 			this._cancelAudioDescription();
+			this._activeDescriptionCue = null;
 		}
 
 		const next = track.descriptions[this._audioDescriptionIndex];
 		if (next && this._audioDescriptionPreviousTime < next.time && currentTime >= next.time) {
 			this._audioDescriptionIndex += 1;
+			this._activeDescriptionCue = next;
+			this.dispatchEvent(new CustomEvent('descriptioncuechange'));
 			this.#speakAudioDescription(next, track);
 		}
 		this._audioDescriptionPreviousTime = currentTime;
@@ -242,6 +279,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 
 	_resetAudioDescriptionCursor(time) {
 		this._cancelAudioDescription();
+		this._activeDescriptionCue = null;
 		const track = this._audioDescriptionTracks?.find(track => track.srclang === this._selectedAudioDescriptionLanguage);
 		this._audioDescriptionIndex = track
 			? track.descriptions.findIndex(description => description.time >= time)
@@ -329,6 +367,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			const voice = this.#getAudioDescriptionVoice(track.srclang);
 			if (voice) utterance.voice = voice;
 			utterance.volume = this.volume;
+			utterance.rate = this._media?.playbackRate || 1;
 			window.speechSynthesis.speak(utterance);
 		};
 

@@ -42,6 +42,7 @@ A Lit element based media player component, designed for similarity across brows
 | crossorigin | String | null | If set, will set the `crossorigin` attribute on the underlying media element to the set value.
 | download-filename | String | null | If set along with `allow-download`, will use the provided value as the base of the filename (the extension will be automatically appended)
 | duration-hint | Number | 1 | Measured in seconds. If set and the duration cannot be determined automatically, this value will be used instead.
+| hide-audio-description-selection | Boolean | false | If set, the button to configure audio descriptions is hidden. |
 | hide-captions-selection | Boolean | false | If set, the menu item to configure captions is hidden. |
 | hide-seek-bar | Boolean | false | If set, the seek bar will not be shown. |
 | loop | Boolean | false | If set, once the media has finished playing it will replay from the beginning. |
@@ -64,6 +65,7 @@ A Lit element based media player component, designed for similarity across brows
 |--|--|--|--|
 | currentTime | Number | Get & Set | Current time playback time of the media in seconds. |
 | activeCue | Object | Get | VTTCue instance for the currently-displayed captions cue. If no cue is currently displayed, the value is null. |
+| activeDescriptionCue | Object | Get | The most recently reached audio description cue (`{ text, time }`). Reset to null on seek or when the audio description language changes. |
 | duration | Number | Get | Total duration of the media in seconds. |
 | ended | Boolean | Get | Whether or not the video has ended. |
 | paused | Boolean | Get | Whether or not the video is currently paused. |
@@ -96,6 +98,7 @@ this.document.querySelector('d2l-labs-media-player').pause();
 | Event | Description |
 |--|--|
 | cuechange | Dispatched when the currently-displayed captions cue changes. |
+| descriptioncuechange | Dispatched when a new audio description cue is reached. Read the cue from `activeDescriptionCue`. |
 | durationchange | Dispatched when the video or media displayed has changed its duration |
 | ended | Dispatched when the media has reached the end of its duration. |
 | error | Dispatched when the media failed to load. |
