@@ -84,6 +84,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		crossorigin: { type: String },
 		downloadFilename: { type: String, attribute: 'download-filename' },
 		durationHint: { type: Number, attribute: 'duration-hint' },
+		hideAudioDescriptionSelection: { type: Boolean, attribute: 'hide-audio-description-selection' },
 		hideCaptionsSelection: { type: Boolean, attribute: 'hide-captions-selection' },
 		hideSeekBar: { type: Boolean, attribute: 'hide-seek-bar' },
 		loop: { type: Boolean },
@@ -809,7 +810,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		const mediaControlsClass = { 'hidden': this._hidingCustomControls() };
 		const theme = this.mediaType === SOURCE_TYPES.video ? 'dark' : undefined;
 		const volumeLevelContainerClass = { 'hidden': !this._usingVolumeContainer || this._hidingCustomControls() };
-		const hideSearchForAudioDescriptions = this._audioDescriptionTracks.length > 0 && this._audioDescriptionControlsInMenu;
+		const hideSearchForAudioDescriptions = !this.hideAudioDescriptionSelection && this._audioDescriptionTracks.length > 0 && this._audioDescriptionControlsInMenu;
 		const searchContainerClass = { 'search-container-hidden' : !this._searchInstances[this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier)] || hideSearchForAudioDescriptions };
 		this._captionsMenuReturnItem?.setAttribute('text', (this.transcriptViewerOn ? this.localize('components:mediaPlayer:language') : this.localize('components:mediaPlayer:captions')));
 
