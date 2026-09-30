@@ -16,6 +16,11 @@ export const AUDIO_DESCRIPTION_TRACK_KIND = 'descriptions';
 const PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY = 'D2L.MediaPlayer.Preferences.AudioDescriptionLanguage';
 const VOICES_LOAD_TIMEOUT_MS = 1000;
 const AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX = 768;
+// macOS Eloquence and novelty voices, which Safari lists alphabetically ahead of the natural-sounding ones
+const LOW_QUALITY_VOICE_NAMES = new Set([
+	'albert', 'bad news', 'bahh', 'bells', 'boing', 'bubbles', 'cellos', 'eddy', 'flo', 'fred', 'good news', 'grandma', 'grandpa',
+	'jester', 'junior', 'kathy', 'organ', 'ralph', 'reed', 'rocko', 'sandy', 'shelley', 'superstar', 'trinoids', 'whisper', 'wobble', 'zarvox'
+]);
 
 export const MediaPlayerAudioDescriptionsMixin = superclass => class extends superclass {
 
@@ -272,13 +277,34 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		const voices = window.speechSynthesis.getVoices();
 		if (!voices.length) return null;
 
-		const bestMatch = voices.find(voice => (voice.lang || '').toLowerCase() === normalizedLanguage)
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}-`))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(`${normalizedLanguage.split('-')[0]}_`))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().startsWith(normalizedLanguage.split('-')[0]))
-			|| voices.find(voice => (voice.lang || '').toLowerCase().includes(normalizedLanguage.split('-')[0]))
-			|| voices[0];
-		return bestMatch || null;
+		const baseLanguage = normalizedLanguage.split('-')[0];
+		const getLanguageScore = voice => {
+			const voiceLanguage = (voice.lang || '').toLowerCase();
+			if (voiceLanguage === normalizedLanguage) return 4;
+			if (voiceLanguage.startsWith(`${baseLanguage}-`) || voiceLanguage.startsWith(`${baseLanguage}_`)) return 3;
+			if (voiceLanguage.startsWith(baseLanguage)) return 2;
+			if (voiceLanguage.includes(baseLanguage)) return 1;
+			return 0;
+		};
+		const getQualityScore = voice => {
+			const uri = (voice.voiceURI || '').toLowerCase();
+			const name = (voice.name || '').toLowerCase().split(' (')[0];
+			if (uri.includes('eloquence') || uri.includes('speech.synthesis.voice') || LOW_QUALITY_VOICE_NAMES.has(name)) return 0;
+			if (uri.includes('premium') || name.includes('premium')) return 3;
+			if (uri.includes('enhanced') || name.includes('enhanced')) return 2;
+			return 1;
+		};
+
+		let bestMatch = voices[0];
+		let bestScore = -1;
+		for (const voice of voices) {
+			const score = getLanguageScore(voice) * 10 + getQualityScore(voice);
+			if (score > bestScore) {
+				bestMatch = voice;
+				bestScore = score;
+			}
+		}
+		return bestMatch;
 	}
 
 	#getSelectedAudioDescriptionTrack() {
