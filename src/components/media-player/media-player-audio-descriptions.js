@@ -253,10 +253,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		if (!track) return;
 
 		if (currentTime < this._audioDescriptionPreviousTime) {
-			this._audioDescriptionIndex = track.descriptions.findIndex(description => description.time >= currentTime);
-			if (this._audioDescriptionIndex < 0) this._audioDescriptionIndex = track.descriptions.length;
-			this._cancelAudioDescription();
-			this._activeDescriptionCue = null;
+			this._resetAudioDescriptionCursor(currentTime);
 		}
 
 		const next = track.descriptions[this._audioDescriptionIndex];

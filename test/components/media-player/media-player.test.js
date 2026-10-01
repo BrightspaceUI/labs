@@ -95,6 +95,29 @@ describe('d2l-labs-media-player', () => {
 			expect(spoken).to.deep.equal(['A person enters.']);
 		});
 
+		it('should speak a description at the start of the video after seeking back to the beginning', () => {
+			const spoken = [];
+			stubSpeechSynthesis({
+				speak: utterance => spoken.push(utterance.text),
+				cancel: () => {},
+				getVoices: () => [{ lang: 'en-US', name: 'English (United States)' }]
+			});
+			window.SpeechSynthesisUtterance = function SpeechSynthesisUtterance(text) {
+				this.text = text;
+			};
+			el._selectedAudioDescriptionLanguage = 'en-US';
+			el._audioDescriptionTracks = [{
+				srclang: 'en-US',
+				descriptions: [{ time: 0, text: 'Opening scene.' }]
+			}];
+			el._audioDescriptionIndex = 1;
+			el._audioDescriptionPreviousTime = 30;
+
+			el._onAudioDescriptionTimeUpdate(0);
+			expect(el._audioDescriptionIndex).to.equal(1);
+			expect(spoken).to.deep.equal(['Opening scene.']);
+		});
+
 		it('should pause the video when an audio description requests it', () => {
 			let paused = false;
 			const speechSynthesis = {
