@@ -732,6 +732,17 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		return this._media ? this._media.textTracks : null;
 	}
 
+	connectedCallback() {
+		super.connectedCallback();
+		fullscreenApi.onchange(this.#onFullscreenChange);
+	}
+
+	disconnectedCallback() {
+		fullscreenApi.off('change', this.#onFullscreenChange);
+		this.#releaseFullscreenEscape();
+		super.disconnectedCallback();
+	}
+
 	firstUpdated(changedProperties) {
 		super.firstUpdated(changedProperties);
 
@@ -1039,7 +1050,37 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 		return this.localize('components:mediaPlayer:off');
 	}
 
+	#isFullscreen = false;
+	#keyboardLocked = false;
 	#searchTimeout = null;
+
+	#onFullscreenChange = () => {
+		const root = this.shadowRoot;
+		const isFullscreen = !!this._mediaContainer && (root?.fullscreenElement ?? root?.webkitFullscreenElement) === this._mediaContainer;
+		if (isFullscreen === this.#isFullscreen) return;
+		this.#isFullscreen = isFullscreen;
+
+		if (isFullscreen) {
+			document.addEventListener('keydown', this.#onFullscreenKeyDown, true);
+			// Lets Escape reach the page so open menus can close before fullscreen exits (Chromium only)
+			navigator.keyboard?.lock?.(['Escape'])
+				.then(() => {
+					if (this.#isFullscreen) this.#keyboardLocked = true;
+					else navigator.keyboard.unlock();
+				})
+				.catch(() => {});
+		} else {
+			this.#releaseFullscreenEscape();
+			// Browsers without keyboard lock exit fullscreen on Escape without dispatching it to the page
+			this.#getOpenDropdowns().forEach(dropdown => dropdown.close());
+		}
+	};
+
+	// Capture phase runs before the dropdowns' own Escape handler closes them
+	#onFullscreenKeyDown = e => {
+		if (e.key !== 'Escape' || this.#getOpenDropdowns().length > 0) return;
+		fullscreenApi.exit();
+	};
 
 	_beginIOSVideoFullscreen() {
 		this._iosVideoFullscreen = true;
@@ -2353,6 +2394,18 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			} else if (currCue !== this.transcriptActiveCue) {
 				this.afterCaptions.push(currCue);
 			}
+		}
+	}
+
+	#getOpenDropdowns() {
+		return [...(this.shadowRoot?.querySelectorAll('d2l-dropdown-menu[opened], d2l-dropdown-content[opened]') ?? [])];
+	}
+
+	#releaseFullscreenEscape() {
+		document.removeEventListener('keydown', this.#onFullscreenKeyDown, true);
+		if (this.#keyboardLocked) {
+			navigator.keyboard?.unlock?.();
+			this.#keyboardLocked = false;
 		}
 	}
 }
