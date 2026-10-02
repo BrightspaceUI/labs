@@ -151,7 +151,7 @@ describe('d2l-labs-media-player', () => {
 				elem._selectedAudioDescriptionLanguage = 'en';
 				await elem.updateComplete;
 				const dialog = elem.shadowRoot.querySelector('#audio-description-about-dialog');
-				dialog.opened = true;
+				elem._audioDescriptionDialogOpened = true;
 				await oneEvent(dialog, 'd2l-dialog-open');
 				await expect(document).to.be.golden();
 			});
