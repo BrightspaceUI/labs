@@ -13,7 +13,7 @@ import './slider-bar.js';
 import 'webvtt-parser';
 import './media-player-audio-bars.js';
 import { AUDIO_DESCRIPTION_REPLAY_KEY, AUDIO_DESCRIPTION_SKIP_KEY, AUDIO_DESCRIPTION_TRACK_KIND, MediaPlayerAudioDescriptionsMixin } from './media-player-audio-descriptions.js';
-import { css, html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import fullscreenApi from './fullscreen-api.js';
 import Fuse from 'fuse.js';
@@ -830,7 +830,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			icon="${fullscreenIcon}"
 			text="${fullscreenTooltip}"
 			theme="${ifDefined(theme)}"
-			@click="${this._toggleFullscreen}"></d2l-button-icon>` : null;
+			@click="${this._toggleFullscreen}"></d2l-button-icon>` : nothing;
 
 		return html`
 		<slot @slotchange=${this._onSlotChange}></slot>
@@ -841,7 +841,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			${this.transcriptViewerOn ? this._renderTranscriptViewer() : ''}
 			${this._getMediaAreaView()}
 
-			${!this._trackText || this.transcriptViewerOn ? null : html`
+			${!this._trackText || this.transcriptViewerOn ? nothing : html`
 				<div id="track-container" style=${styleMap(trackContainerStyle)} @click=${this._onTrackContainerClick}>
 					<div>
 						<span style=${styleMap(trackSpanStyle)} role="status">${this._trackText}</span>
@@ -1180,7 +1180,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 					theme="${ifDefined(this._getTheme())}"
 					style=${styleMap({ left: `${this._getPercentageTime(chapter.time)}%` })}
 				></div>
-			` : null;
+			` : nothing;
 		});
 	}
 
@@ -1239,7 +1239,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 			<div class="full-area-centered">
 				<d2l-loading-spinner size="100"></d2l-loading-spinner>
 			</div>
-		` : null;
+		` : nothing;
 	}
 
 	_getMediaAreaView() {
@@ -1299,7 +1299,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 					>
 						<source @error=${this._onError}></source>
 					</audio>
-					${this.transcriptViewerOn ? null : html`
+					${this.transcriptViewerOn ? nothing : html`
 					<div id="audio-bars-container">
 						<div id="audio-play-button-container">
 							<button id="audio-play-button" title="${playTooltip}" aria-label="${playTooltip}" @click=${this._togglePlay}>
@@ -1311,7 +1311,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 					</div>`}
 				`;
 			default:
-				return null;
+				return nothing;
 		}
 	}
 
@@ -1382,7 +1382,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 				@click=${this._onVideoClick}>
 				<d2l-icon icon="tier1:play" theme="${ifDefined(this._getTheme())}"></d2l-icon>
 			</button>
-		` : null;
+		` : nothing;
 
 		return html`
 			${playIcon}
@@ -1416,7 +1416,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 					`)}
 				</d2l-menu>
 			</d2l-menu-item>
-		` : null;
+		` : nothing;
 	}
 
 	_getSearchResultsView() {
@@ -1546,7 +1546,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerAudioDescriptionsMixin(
 					`)}
 				</d2l-menu>
 			</d2l-menu-item>
-		` : null;
+		` : nothing;
 	}
 
 	_hidingCustomControls() {

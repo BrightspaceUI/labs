@@ -145,6 +145,16 @@ describe('d2l-labs-media-player', () => {
 				await openAudioDescriptions(elem);
 				await expect(elem).to.be.golden();
 			});
+
+			it('video with about extended audio descriptions dialog open', async() => {
+				const elem = await audioDescriptionsFixture();
+				elem._selectedAudioDescriptionLanguage = 'en';
+				await elem.updateComplete;
+				const dialog = elem.shadowRoot.querySelector('#audio-description-about-dialog');
+				elem._audioDescriptionDialogOpened = true;
+				await oneEvent(dialog, 'd2l-dialog-open');
+				await expect(document).to.be.golden();
+			});
 		});
 	});
 });
