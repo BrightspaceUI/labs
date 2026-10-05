@@ -3,12 +3,13 @@ import '@brightspace-ui/core/components/dropdown/dropdown-menu.js';
 import '@brightspace-ui/core/components/icons/icon.js';
 import '@brightspace-ui/core/components/menu/menu.js';
 import '@brightspace-ui/core/components/menu/menu-item.js';
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 
-// Expects the host to provide _media, mediaType, currentTime, _selectedTrackIdentifier, _getSrclangFromTrackIdentifier(), _onCueChange() and localize()
+// Expects the host to provide _media, _tracks, mediaType, currentTime, _selectedTrackIdentifier, _getSrclangFromTrackIdentifier(), _onCueChange() and localize()
 export const MediaPlayerTranscriptMixin = superclass => class extends superclass {
 
 	static properties = {
+		transcriptViewer: { type: Boolean, attribute: 'transcript-viewer' },
 		transcriptViewerOn: { type: Boolean, attribute: 'transcript-viewer-on', reflect: true },
 	};
 
@@ -94,9 +95,18 @@ export const MediaPlayerTranscriptMixin = superclass => class extends superclass
 		super();
 		this.afterCaptions = [];
 		this.beforeCaptions = [];
+		this.transcriptViewer = false;
+		this.transcriptViewerOn = false;
+	}
+
+	willUpdate(changedProperties) {
+		super.willUpdate(changedProperties);
+		// The viewer element is re-created each time it is shown
+		if (changedProperties.has('transcriptViewerOn')) this._transcriptViewer = null;
 	}
 
 	_closeTranscript() {
+		this._setTranscriptViewerOn(false);
 		this.dispatchEvent(new CustomEvent('close-transcript', { bubbles: true, composed: true }));
 	}
 
@@ -177,6 +187,17 @@ export const MediaPlayerTranscriptMixin = superclass => class extends superclass
 		`;
 	}
 
+	_renderTranscriptViewerMenuItem() {
+		if (!this.transcriptViewer || this._tracks.length === 0) return nothing;
+		return html`
+			<d2l-menu-item
+				id="transcript-viewer-menu-item"
+				text="${this.transcriptViewerOn ? this.localize('components:mediaPlayer:hideTranscript') : this.localize('components:mediaPlayer:viewTranscript')}"
+				@d2l-menu-item-select=${this._toggleTranscriptViewer}
+			></d2l-menu-item>
+		`;
+	}
+
 	_scrollTranscriptViewer() {
 		const cue = this.shadowRoot.getElementById('transcript-viewer-active-cue');
 		const cueRect = cue?.getBoundingClientRect();
@@ -188,6 +209,16 @@ export const MediaPlayerTranscriptMixin = superclass => class extends superclass
 				this._transcriptViewer.scrollBy({ top: cueRect.top - transcriptRect.top, left: 0, behavior: 'smooth' });
 			}
 		}
+	}
+
+	_setTranscriptViewerOn(on) {
+		if (this.transcriptViewerOn === on) return;
+		this.transcriptViewerOn = on;
+		this.dispatchEvent(new CustomEvent('transcriptviewertoggle', { bubbles: true, composed: true, detail: { on } }));
+	}
+
+	_toggleTranscriptViewer() {
+		this._setTranscriptViewerOn(!this.transcriptViewerOn);
 	}
 
 	_updateTranscriptViewerCues() {

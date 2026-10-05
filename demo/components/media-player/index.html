@@ -69,10 +69,9 @@
 
 			<h5>Transcript Viewer</h5>
 			<d2l-demo-snippet>
-				<d2l-labs-media-player src="static/sample-video-360p.mp4" media-type="video">
+				<d2l-labs-media-player src="static/sample-video-360p.mp4" media-type="video" transcript-viewer>
 					<track src="static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English" default>
 					<track src="static/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
-					<d2l-menu-item slot="settings-menu-item" class="transcript-viewer-menu-item" text="View Transcript"></d2l-menu-item>
 				</d2l-labs-media-player>
 			</d2l-demo-snippet>
 
@@ -86,25 +85,11 @@
 
 			<h5>Transcript Viewer</h5>
 			<d2l-demo-snippet>
-				<d2l-labs-media-player src="static/sample-audio.mp3" media-type="audio">
+				<d2l-labs-media-player src="static/sample-audio.mp3" media-type="audio" transcript-viewer>
 					<track src="static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English" default>
 					<track src="static/sample-srt-fr.srt" kind="captions" srclang="fr" label="French">
-					<d2l-menu-item slot="settings-menu-item" class="transcript-viewer-menu-item" text="View Transcript"></d2l-menu-item>
 				</d2l-labs-media-player>
 			</d2l-demo-snippet>
 		</d2l-demo-page>
-		<script>
-			const setTranscriptViewer = (player, on) => {
-				player.transcriptViewerOn = on;
-				const menuItem = player.querySelector('.transcript-viewer-menu-item');
-				if (menuItem) menuItem.text = on ? 'Hide Transcript' : 'View Transcript';
-			};
-			document.addEventListener('d2l-menu-item-select', e => {
-				if (!e.target.classList?.contains('transcript-viewer-menu-item')) return;
-				const player = e.target.closest('d2l-labs-media-player');
-				setTranscriptViewer(player, !player.transcriptViewerOn);
-			});
-			document.addEventListener('close-transcript', e => setTranscriptViewer(e.target, false));
-		</script>
 	</body>
 </html>

@@ -822,6 +822,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 								</d2l-menu-item>
 								${this._getTracksMenuView()}
 								${this._getQualityMenuView()}
+								${this._renderTranscriptViewerMenuItem()}
 								${(this.allowDownload && this._getCurrentSource()) ? this._getDownloadButtonView() : ''}
 								<slot name="settings-menu-item"></slot>
 							</d2l-menu>
