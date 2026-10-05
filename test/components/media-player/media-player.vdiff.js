@@ -100,6 +100,60 @@ describe('d2l-labs-media-player', () => {
 		await expect(elem).to.be.golden();
 	});
 
+	describe('thumbnails', () => {
+		const chaptersMetadata = '{"chapters":[{"time":0,"title":{"en":"Chapter One"}}]}';
+
+		const showTimelinePreview = async elem => {
+			await waitUntil(() => elem._media && elem._media.readyState >= 1);
+			if (elem._thumbnailsImage) await elem._thumbnailsImage.decode();
+			// Set hover state directly since the seek bar hover position depends on the mouse
+			elem._hovering = true;
+			elem._hoverTime = elem.duration / 2;
+			elem._timelinePreviewOffset = 50;
+			await elem.updateComplete;
+		};
+
+		it('video-with-thumbnails-preview', async() => {
+			const elem = await fixture(
+				html`
+				<d2l-labs-media-player
+					src="./test/components/media-player/videos/1_lego.webm"
+					thumbnails="./demo/components/media-player/static/th90w160i1-samplevideo.png"
+					media-type="video">
+				</d2l-labs-media-player>`
+			);
+			await showTimelinePreview(elem);
+			await expect(elem).to.be.golden();
+		});
+
+		it('video-with-thumbnails-preview-and-chapter', async() => {
+			const elem = await fixture(
+				html`
+				<d2l-labs-media-player
+					src="./test/components/media-player/videos/1_lego.webm"
+					thumbnails="./demo/components/media-player/static/th90w160i1-samplevideo.png"
+					metadata=${chaptersMetadata}
+					media-type="video">
+				</d2l-labs-media-player>`
+			);
+			await showTimelinePreview(elem);
+			await expect(elem).to.be.golden();
+		});
+
+		it('video-without-thumbnails-preview', async() => {
+			const elem = await fixture(
+				html`
+				<d2l-labs-media-player
+					src="./test/components/media-player/videos/1_lego.webm"
+					metadata=${chaptersMetadata}
+					media-type="video">
+				</d2l-labs-media-player>`
+			);
+			await showTimelinePreview(elem);
+			await expect(elem).to.be.golden();
+		});
+	});
+
 	[
 		{ name: 'desktop', viewport: { width: 1000 } },
 		{ name: 'mobile', viewport: { width: 600 } }
