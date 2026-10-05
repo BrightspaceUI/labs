@@ -115,7 +115,7 @@ describe('d2l-labs-media-player', () => {
 			it(`${mediaType}-with-transcript-viewer`, async() => {
 				const elem = await fixture(
 					html`
-					<d2l-labs-media-player src=${src} media-type=${mediaType} transcript-viewer-on>
+					<d2l-labs-media-player src=${src} media-type=${mediaType} transcript-viewer transcript-viewer-on>
 						<track src="./demo/components/media-player/static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English" default>
 					</d2l-labs-media-player>`
 				);
