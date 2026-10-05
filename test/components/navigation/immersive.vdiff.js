@@ -1,6 +1,6 @@
 import '../../../src/components/navigation/navigation-immersive.js';
 import '@brightspace-ui/core/templates/primary-secondary/primary-secondary.js';
-import { expect, fixture, focusElem, html, nextFrame } from '@brightspace-ui/testing';
+import { expect, fixture, focusElem, html, nextFrame, waitUntil } from '@brightspace-ui/testing';
 
 const pageContent = html`<div style="background-color: pink;">Main Page Content</div>`;
 const normalFixture = html`<d2l-labs-navigation-immersive width-type="normal" back-link-href="https://www.d2l.com"></d2l-labs-navigation-immersive>${pageContent}`;
@@ -43,6 +43,15 @@ const contextBarFixture = html`
 	</d2l-template-primary-secondary>
 `;
 
+// primary-secondary sizes its secondary panel asynchronously via a ResizeObserver
+async function waitForTemplate() {
+	const template = document.querySelector('d2l-template-primary-secondary');
+	if (!template) return;
+	await waitUntil(() => template._size !== undefined, 'Template panel size was not initialized');
+	await template.updateComplete;
+	await nextFrame();
+}
+
 describe('d2l-labs-navigation-immersive', () => {
 
 	[1500, 929, 767].forEach((width) => {
@@ -58,6 +67,7 @@ describe('d2l-labs-navigation-immersive', () => {
 			describe(name, () => {
 				it(`${width}`, async() => {
 					await fixture(template, { viewport: { height: 200, width } });
+					await waitForTemplate();
 					await expect(document).to.be.golden();
 				});
 			});
@@ -111,7 +121,7 @@ describe('d2l-labs-navigation-immersive', () => {
 
 		it('with-text-spacing-change', async() => {
 			await fixture(contextBarFixture, { viewport: { height: 400, width: 1500 } });
-			await nextFrame();
+			await waitForTemplate();
 
 			// Apply accessibility styles directly to the page
 			const style = document.createElement('style');
