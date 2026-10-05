@@ -87,11 +87,6 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		return this._activeDescriptionCue;
 	}
 
-	// True while a pause-video description is speaking, so the player should present itself as playing
-	get _audioDescriptionHoldingPlayback() {
-		return this._audioDescriptionPausedVideo && !this._audioDescriptionPaused;
-	}
-
 	connectedCallback() {
 		super.connectedCallback();
 		this.#audioDescriptionResizeObserver.observe(this);
@@ -101,6 +96,11 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this.#audioDescriptionResizeObserver.disconnect();
 		this._cancelAudioDescription();
 		super.disconnectedCallback();
+	}
+
+	// True while a pause-video description is speaking, so the player should present itself as playing
+	get _audioDescriptionHoldingPlayback() {
+		return this._audioDescriptionPausedVideo && !this._audioDescriptionPaused;
 	}
 
 	#audioDescriptionResizeObserver = new ResizeObserver(entries => {
