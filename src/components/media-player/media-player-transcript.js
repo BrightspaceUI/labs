@@ -9,10 +9,19 @@ import { css, html } from 'lit';
 export const MediaPlayerTranscriptMixin = superclass => class extends superclass {
 
 	static properties = {
-		transcriptViewerOn: { type: Boolean, attribute: 'transcript-viewer-on' },
+		transcriptViewerOn: { type: Boolean, attribute: 'transcript-viewer-on', reflect: true },
 	};
 
 	static styles = [super.styles, css`
+		:host([transcript-viewer-on]) #video,
+		:host([transcript-viewer-on]) #video-poster {
+			height: 30%;
+			left: 0;
+			min-height: 30%;
+			position: absolute;
+			top: 0;
+			width: 30%;
+		}
 		.transcript-cue-container {
 			padding-left: 10px;
 		}
