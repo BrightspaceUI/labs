@@ -100,6 +100,31 @@ describe('d2l-labs-media-player', () => {
 		await expect(elem).to.be.golden();
 	});
 
+	describe('transcript viewer', () => {
+		const showTranscriptCue = async elem => {
+			await waitUntil(() => elem._media && elem._media.readyState >= 1 && elem._media.textTracks[0]?.cues?.length > 0);
+			elem._media.currentTime = 5;
+			await waitUntil(() => elem.transcriptActiveCue);
+			await elem.updateComplete;
+		};
+
+		[
+			{ mediaType: 'video', src: './test/components/media-player/videos/1_lego.webm' },
+			{ mediaType: 'audio', src: './test/components/media-player/audio/applause.mp3' }
+		].forEach(({ mediaType, src }) => {
+			it(`${mediaType}-with-transcript-viewer`, async() => {
+				const elem = await fixture(
+					html`
+					<d2l-labs-media-player src=${src} media-type=${mediaType} transcript-viewer-on>
+						<track src="./demo/components/media-player/static/sample-vtt-en.vtt" kind="captions" srclang="en" label="English" default>
+					</d2l-labs-media-player>`
+				);
+				await showTranscriptCue(elem);
+				await expect(elem).to.be.golden();
+			});
+		});
+	});
+
 	describe('thumbnails', () => {
 		const chaptersMetadata = '{"chapters":[{"time":0,"title":{"en":"Chapter One"}}]}';
 

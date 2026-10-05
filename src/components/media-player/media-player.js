@@ -2,7 +2,6 @@ import '@brightspace-ui/core/components/button/button-icon.js';
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@brightspace-ui/core/components/dropdown/dropdown.js';
 import '@brightspace-ui/core/components/dropdown/dropdown-menu.js';
-import '@brightspace-ui/core/components/dropdown/dropdown-button-subtle.js';
 import '@brightspace-ui/core/components/icons/icon.js';
 import '@brightspace-ui/core/components/loading-spinner/loading-spinner.js';
 import '@brightspace-ui/core/components/menu/menu.js';
@@ -21,7 +20,9 @@ import { getFocusPseudoClass } from '@brightspace-ui/core/helpers/focus.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { labelStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
+import { MediaPlayerChaptersMixin } from './media-player-chapters.js';
 import { MediaPlayerThumbnailsMixin } from './media-player-thumbnails.js';
+import { MediaPlayerTranscriptMixin } from './media-player-transcript.js';
 import parseSRT from 'parse-srt/src/parse-srt.js';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -75,7 +76,7 @@ const tryParseUrlExpiry = url => {
 	}
 };
 
-class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPlayerAudioDescriptionsMixin(RtlMixin(LitElement)))) {
+class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPlayerThumbnailsMixin(MediaPlayerChaptersMixin(MediaPlayerAudioDescriptionsMixin(RtlMixin(LitElement)))))) {
 
 	static properties = {
 		allowDownload: { type: Boolean, attribute: 'allow-download', reflect: true },
@@ -88,13 +89,10 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 		hideSeekBar: { type: Boolean, attribute: 'hide-seek-bar' },
 		loop: { type: Boolean },
 		mediaType: { type: String, attribute: 'media-type' },
-		metadata: { type: Object },
 		poster: { type: String },
 		src: { type: String },
 		disableSetPreferences: { type: Boolean, attribute: 'disable-set-preferences' },
-		transcriptViewerOn: { type: Boolean, attribute: 'transcript-viewer-on' },
 		playInView: { type: Boolean, attribute: 'play-in-view' },
-		_chapters: { state: true },
 		_currentTime: { state: true },
 		_duration: { state: true },
 		_heightPixels: { state: true },
@@ -399,28 +397,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 			width: 2.75rem;
 		}
 
-		.chapter-marker, .chapter-marker-highlight {
-			cursor: pointer;
-			height: 6px;
-			pointer-events: none;
-			position: absolute;
-			top: 4px;
-			width: 3px;
-			z-index: 2;
-		}
-
-		.chapter-marker {
-			background-color: var(--d2l-color-ferrite);
-		}
-
-		.chapter-marker-highlight {
-			background-color: var(--d2l-color-celestine-minus-1);
-		}
-
-		.chapter-marker[theme="dark"] {
-			background-color: white;
-		}
-
 		#search-container {
 			align-items: center;
 			display: flex;
@@ -512,73 +488,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 			font-size: 1rem;
 			line-height: 2.1rem;
 		}
-
-		.transcript-cue-container {
-			padding-left: 10px;
-		}
-		.video-transcript-cue {
-			padding-left: 5px;
-		}
-		.audio-transcript-cue {
-			padding-left: 5px;
-		}
-		.video-transcript-cue[active] {
-			background-color: gray;
-			box-shadow: -5px 0 0 white;
-		}
-		.audio-transcript-cue[active] {
-			background-color: lightgray;
-			box-shadow: -5px 0 0 black;
-		}
-		#video-transcript-viewer {
-			bottom: 55px;
-			color: white;
-			overflow-anchor: none;
-			overflow-y: auto;
-			position: absolute;
-			right: 0;
-			top: 50px;
-			width: 65%;
-			z-index: 1;
-		}
-		#audio-transcript-viewer {
-			bottom: 60px;
-			color: black;
-			overflow-anchor: none;
-			overflow-y: auto;
-			position: absolute;
-			right: 0;
-			top: 45px;
-			width: 100%;
-			z-index: 1;
-		}
-		#close-transcript {
-			position: absolute;
-			right: 7px;
-			top: 0;
-			z-index: 1;
-		}
-		#video-transcript-download-button {
-			left: 35%;
-			position: absolute;
-			top: 5px;
-			z-index: 2;
-		}
-		#audio-transcript-download-button {
-			left: 10px;
-			position: absolute;
-			top: 0;
-			z-index: 2;
-		}
-		#audio-transcript-download-menu {
-			left: 35px;
-		}
-		#video-close-transcript-icon {
-			color: white;
-		}
-		#audio-close-transcript-icon {
-			color: black;
-		}
 	`];
 
 	constructor() {
@@ -589,7 +498,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 		this.loop = false;
 		this.playInView = false;
 
-		this._chapters = [];
 		this._currentTime = 0;
 		this._determiningSourceType = true;
 		this._duration = this.durationHint || 1;
@@ -623,8 +531,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 		this._playRequested = false;
 		this._mediaContainerAspectRatio = {
 		};
-		this.afterCaptions = [];
-		this.beforeCaptions = [];
 		this._iosVideoFullscreen = false;
 	}
 
@@ -721,8 +627,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 		this._volumeSlider = this.shadowRoot.getElementById('volume-slider');
 		this._searchInput = this.shadowRoot.getElementById('search-input');
 		this._searchContainer = this.shadowRoot.getElementById('search-container');
-
-		this._getMetadata();
 
 		this._startUpdatingCurrentTime();
 		new ResizeObserver((entries) => {
@@ -938,10 +842,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 		if (changedProperties.has('src') || changedProperties.has('mediaType')) {
 			this._reloadSource();
 		}
-
-		if (changedProperties.has('metadata')) {
-			this._getMetadata();
-		}
 	}
 
 	exitFullscreen() {
@@ -1048,10 +948,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 		localStorage.removeItem(preferenceKey);
 	}
 
-	_closeTranscript() {
-		this.dispatchEvent(new CustomEvent('close-transcript', { bubbles: true, composed: true }));
-	}
-
 	_disableNativeCaptions() {
 		if (!this._media) return;
 		for (let i = 0; i < this._media.textTracks.length; i++) {
@@ -1063,14 +959,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 				textTrack.mode = 'disabled';
 			}
 		}
-	}
-
-	_downloadCaptions() {
-		this.dispatchEvent(new CustomEvent('download-captions', { bubbles: true, composed: true }));
-	}
-
-	_downloadTranscript() {
-		this.dispatchEvent(new CustomEvent('download-transcript', { bubbles: true, composed: true }));
 	}
 
 	_endIOSVideoFullscreen() {
@@ -1110,57 +998,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 		a.setAttribute('href', url);
 
 		return a.href;
-	}
-
-	_getChapterMarkersView() {
-		if (this._chapters.length === 0) return;
-
-		let start, end;
-		if (this._chapters[this._chapters.length - 1].time === Math.floor(this._duration)) this._chapters.pop();
-
-		for (let i = 0; i < this._chapters.length; i++) {
-			if (i === this._chapters.length - 1) {
-				start = this._chapters[i].time;
-				break;
-			}
-			else if (this._hoverTime >= this._chapters[i].time && this._hoverTime < this._chapters[i + 1].time) {
-				start = this._chapters[i].time;
-				end = this._chapters[i + 1].time;
-				break;
-			}
-		}
-
-		return this._chapters.map(chapter => {
-			const highlight = this._hovering && this._hoverTime >= this._chapters[0].time && (chapter.time === start || chapter.time === end);
-			return chapter.time > 0 ? html`
-				<div
-					class=${highlight ? 'chapter-marker-highlight' : 'chapter-marker'}
-					theme="${ifDefined(this._getTheme())}"
-					style=${styleMap({ left: `${this._getPercentageTime(chapter.time)}%` })}
-				></div>
-			` : nothing;
-		});
-	}
-
-	_getChapterTitle() {
-		if (!(this._chapters.length > 0 && this._hoverTime >= this._chapters[0].time)) return;
-
-		const chapter = this._chapters.find((_chapter, index, chapters) => (
-			index === chapters.length - 1 || (this._hoverTime >= chapters[0].time && this._hoverTime < chapters[index + 1].time)
-		));
-		const chapterTitle = chapter && chapter.title;
-
-		if (!chapterTitle) return;
-
-		if (typeof chapterTitle === 'string') {
-			return chapterTitle;
-		}
-
-		for (const locale in chapterTitle) {
-			if (locale.split('-')[0] === 'en') {
-				return chapterTitle[locale];
-			}
-		}
 	}
 
 	_getCurrentSource() {
@@ -1271,61 +1108,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 			default:
 				return nothing;
 		}
-	}
-
-	_getMetadata() {
-		if (!this.metadata) return;
-
-		const data = (typeof this.metadata === 'string' || this.metadata instanceof String) ? JSON.parse(this.metadata) : this.metadata;
-		if (!(data && data.chapters && data.chapters.length > 0)) return;
-		let chapters = data.chapters.map(({ time, title }) => {
-			return {
-				time: parseInt(time),
-				title
-			};
-		}).sort((a, b) => a.time - b.time);
-
-		if (!data.cuts) {
-			data.cuts = [];
-		}
-
-		// updating the chapter times based on the cuts, loops over all chapters per cut because it can change multiple chapters
-		let cutDiff = 0;
-		for (const cut of data.cuts) {
-			const cutIn = cut.in - cutDiff;
-
-			const newChapters = new Map(); // using map to preserve sort ordering
-
-			if (!cut.out) { // if cut is until the end of the video
-				for (const chapter of chapters) {
-					if (chapter.time < cutIn) {
-						newChapters.set(chapter.time, chapter.title);
-					}
-				}
-			} else {
-				const cutOut = cut.out - cutDiff;
-				const cutLength = cutOut - cutIn;
-
-				for (const chapter of chapters) {
-					let newTime = chapter.time;
-					if (chapter.time > cutIn && chapter.time <= cutOut) {
-						newTime = cutIn;
-					} else if (chapter.time > cutOut) {
-						newTime = chapter.time - cutLength;
-					}
-
-					newChapters.set(newTime, chapter.title);
-				}
-
-				cutDiff += cutLength;
-			}
-
-			chapters = [...newChapters].map(([chapterTime, chapterTitle]) => ({
-				time: chapterTime,
-				title: chapterTitle
-			}));
-		}
-		this._chapters = chapters;
 	}
 
 	_getPercentageTime(time) {
@@ -1502,13 +1284,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 
 	async _onCueChange() {
 		if (this.transcriptViewerOn) {
-			if (!this._transcriptViewer) {
-				this._transcriptViewer = this.shadowRoot.getElementById('video-transcript-viewer')
-					|| this.shadowRoot.getElementById('audio-transcript-viewer');
-			}
-			this._updateTranscriptViewerCues();
-			await this.requestUpdate();
-			this._scrollTranscriptViewer();
+			await this._onTranscriptCueChange();
 		}
 		for (let i = 0; i < this._media.textTracks.length; i++) {
 			if (this._media.textTracks[i].mode === 'hidden') {
@@ -2052,80 +1828,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 		}
 	}
 
-	_renderTranscriptViewer() {
-		if (!this._media) {
-			return;
-		}
-		const captionsMenu = this.shadowRoot.getElementById('captions-menu');
-		if (captionsMenu) {
-			this._captionsMenuReturnItem = captionsMenu.shadowRoot.querySelector('d2l-menu-item-return');
-			this._captionsMenuReturnItem?.setAttribute('text', this.localize('components:mediaPlayer:language'));
-		}
-
-		if (!this._transcriptViewer) {
-			this._onCueChange();
-		}
-
-		const isVideo = this.mediaType === SOURCE_TYPES.video;
-		const captionsToHtml = (item) => {
-			const updateTime = async() => {
-				this.currentTime = item.startTime;
-				this._media.currentTime = item.startTime;
-			};
-			return html`
-			<div class=${isVideo ? 'video-transcript-cue' : 'audio-transcript-cue'}
-				@click=${updateTime}>
-				${item.text}<br>
-			</div>`;
-		};
-
-		return html`
-			<span id="close-transcript"
-			@click=${this._closeTranscript}>
-			<d2l-icon class="d2l-button-icon"
-				id=${isVideo ? 'video-close-transcript-icon' : 'audio-close-transcript-icon'}
-				icon="tier1:close-small"></d2l-icon>
-			</span>
-			<div
-			id=${isVideo ? 'video-transcript-viewer' : 'audio-transcript-viewer'}
-			>
-			<div class="transcript-cue-container">
-				${this.beforeCaptions.map(captionsToHtml)}
-				<div class=${isVideo ? 'video-transcript-cue' : 'audio-transcript-cue'} active
-				id="transcript-viewer-active-cue">
-					${this.transcriptActiveCue?.text}
-				</div>
-				${this.afterCaptions.map(captionsToHtml)}
-			</div>
-			</div>
-			<d2l-dropdown-button-subtle
-				id=${isVideo ? 'video-transcript-download-button' : 'audio-transcript-download-button'}
-				text="${this.localize('components:mediaPlayer:download')}">
-				<d2l-dropdown-menu id=${isVideo ? 'video-transcript-download-menu' : 'audio-transcript-download-menu'}>
-					<d2l-menu>
-							<d2l-menu-item @click=${this._downloadTranscript} text="${this.localize('components:mediaPlayer:transcriptTxt')}"></d2l-menu-item>
-							<d2l-menu-item @click=${this._downloadCaptions} text="${this.localize('components:mediaPlayer:captionsVtt')}"></d2l-menu-item>
-					</d2l-menu>
-				</d2l-dropdown-menu>
-			</d2l-dropdown-button-subtle>
-		`;
-	}
-
 	_sanitizeText(text) {
 		return text.replace(/<br \/>/g, '\n');
-	}
-
-	_scrollTranscriptViewer() {
-		const cue = this.shadowRoot.getElementById('transcript-viewer-active-cue');
-		const cueRect = cue?.getBoundingClientRect();
-		const transcriptRect = this._transcriptViewer?.getBoundingClientRect();
-		if (cue && cueRect && transcriptRect) {
-			if (cueRect.bottom > transcriptRect.bottom && cueRect.height <= transcriptRect.height) {
-				this._transcriptViewer.scrollBy({ top: cueRect.bottom - transcriptRect.bottom + transcriptRect.height - cueRect.height, left: 0, behavior: 'smooth' });
-			} else if (cueRect.top < transcriptRect.top) {
-				this._transcriptViewer.scrollBy({ top: cueRect.top - transcriptRect.top, left: 0, behavior: 'smooth' });
-			}
-		}
 	}
 
 	_setPreference(preferenceKey, value) {
@@ -2253,49 +1957,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerThumbnailsMixin(MediaPl
 				}
 			}
 		});
-	}
-
-	_updateTranscriptViewerCues() {
-		let cues = null;
-		const lang = this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier);
-		for (let i = 0; i < this._media.textTracks.length; i += 1) {
-			const currTrack = this._media.textTracks[i];
-			if (currTrack?.cues) {
-				const activeCues = currTrack.activeCues;
-				if (lang === currTrack.language) {
-					this.transcriptActiveCue = activeCues?.[activeCues?.length - 1];
-					cues = currTrack.cues;
-					break;
-				}
-			}
-		}
-		if (!cues) {
-			let defaultTrack;
-			for (let i = 0; i < this._media.textTracks.length; i++) {
-				if (this._media.textTracks[i].default) {
-					defaultTrack = this._media.textTracks[i];
-					break;
-				}
-			}
-			defaultTrack = defaultTrack || this._media.textTracks[0];
-			if (defaultTrack) defaultTrack.mode = 'hidden';
-			this._selectedTrackIdentifier = { kind: defaultTrack?.kind, srclang: defaultTrack?.language };
-			this.requestUpdate();
-			return;
-		}
-
-		this.beforeCaptions = [];
-		this.afterCaptions = [];
-		for (let i = 0; i < cues.length; i += 1) {
-			const currCue = cues[i];
-			const currTime = this._media?.currentTime;
-			const before = currCue !== this.transcriptActiveCue && (currCue.endTime < currTime || currCue.endTime <= this.transcriptActiveCue?.endTime);
-			if (before) {
-				this.beforeCaptions.push(currCue);
-			} else if (currCue !== this.transcriptActiveCue) {
-				this.afterCaptions.push(currCue);
-			}
-		}
 	}
 
 	#getOpenDropdowns() {
