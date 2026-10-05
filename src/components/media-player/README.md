@@ -51,6 +51,8 @@ A Lit element based media player component, designed for similarity across brows
 | poster | String | null | URL of the image to display in place of the media before it has loaded. |
 | src | String |  | URL of the media to play. If multiple sources are desired, use `<source>` tags instead (see below). |
 | thumbnails | String |  | If set, will show thumbnails on preview. See below for required format. |
+| transcript-viewer | Boolean | false | If set and captions tracks are available, adds a "View transcript" item to the settings menu that toggles the transcript viewer. |
+| transcript-viewer-on | Boolean | false | Whether the transcript viewer is shown. Reflected to the attribute. |
 | play-in-view | Boolean | false | If set, will stop the media playback if not in view
 
 ```
@@ -98,7 +100,10 @@ this.document.querySelector('d2l-labs-media-player').pause();
 | Event | Description |
 |--|--|
 | cuechange | Dispatched when the currently-displayed captions cue changes. |
+| close-transcript | Dispatched when the transcript viewer's close button is clicked. |
 | descriptioncuechange | Dispatched when a new audio description cue is reached. Read the cue from `activeDescriptionCue`. |
+| download-captions | Dispatched when "Captions (.vtt)" is selected in the transcript viewer's download menu. |
+| download-transcript | Dispatched when "Transcript (.txt)" is selected in the transcript viewer's download menu. |
 | durationchange | Dispatched when the video or media displayed has changed its duration |
 | ended | Dispatched when the media has reached the end of its duration. |
 | error | Dispatched when the media failed to load. |
@@ -112,6 +117,7 @@ this.document.querySelector('d2l-labs-media-player').pause();
 | trackloaded | Dispatched when a track element has loaded. |
 | trackloadfailed | Dispatched when a track element could not be loaded from the provided src attribute. |
 | tracksmenuitemchanged | Dispatched when the tracks menu item has changed. |
+| transcriptviewertoggle | Dispatched when the transcript viewer is opened or closed from within the player. |
 ```
 // Listen for the loadeddata event
 
