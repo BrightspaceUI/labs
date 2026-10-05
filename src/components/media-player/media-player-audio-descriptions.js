@@ -28,6 +28,8 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	static properties = {
 		_audioDescriptionControlsInMenu: { state: true },
 		_audioDescriptionDialogOpened: { state: true },
+		_audioDescriptionPaused: { state: true },
+		_audioDescriptionPausedVideo: { state: true },
 		_audioDescriptionPlaying: { state: true },
 		_audioDescriptionTracks: { state: true },
 		_canReplayAudioDescription: { state: true },
@@ -73,6 +75,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._audioDescriptionTracks = [];
 		this._audioDescriptionIndex = 0;
 		this._audioDescriptionPreviousTime = -0.001;
+		this._audioDescriptionPaused = false;
 		this._audioDescriptionPausedVideo = false;
 		this._audioDescriptionPlaying = false;
 		this._audioDescriptionControlsInMenu = false;
@@ -82,6 +85,11 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 
 	get activeDescriptionCue() {
 		return this._activeDescriptionCue;
+	}
+
+	// True while a pause-video description is speaking, so the player should present itself as playing
+	get _audioDescriptionHoldingPlayback() {
+		return this._audioDescriptionPausedVideo && !this._audioDescriptionPaused;
 	}
 
 	connectedCallback() {
@@ -104,8 +112,11 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	_cancelAudioDescription() {
 		if (this._audioDescriptionUtterance && window.speechSynthesis) {
 			window.speechSynthesis.cancel();
+			// Some browsers stay paused after cancel(), which would hold back the next utterance
+			if (this._audioDescriptionPaused) window.speechSynthesis.resume();
 		}
 		this._audioDescriptionUtterance = null;
+		this._audioDescriptionPaused = false;
 		this._audioDescriptionPausedVideo = false;
 		this._audioDescriptionPlaying = false;
 	}
@@ -285,6 +296,12 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._audioDescriptionPreviousTime = currentTime;
 	}
 
+	_pauseAudioDescription() {
+		if (!this._audioDescriptionPlaying || this._audioDescriptionPaused) return;
+		this._audioDescriptionPaused = true;
+		window.speechSynthesis?.pause();
+	}
+
 	_replayAudioDescription() {
 		if (!this._audioDescriptionPlaying) return;
 		const track = this.#getSelectedAudioDescriptionTrack();
@@ -317,11 +334,22 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._resetAudioDescriptionCursor(this.currentTime);
 	}
 
+	_resumeAudioDescription() {
+		if (!this._audioDescriptionPaused) return;
+		this._audioDescriptionPaused = false;
+		window.speechSynthesis?.resume();
+	}
+
 	_skipAudioDescription() {
 		if (!this._audioDescriptionPlaying || !this.#getSelectedAudioDescriptionTrack()?.pauseVideo) return;
-		const pausedVideo = this._audioDescriptionPausedVideo;
+		const resumeVideo = this._audioDescriptionHoldingPlayback;
 		this._cancelAudioDescription();
-		if (pausedVideo) this._play();
+		if (resumeVideo) this._play();
+	}
+
+	_toggleAudioDescriptionPause() {
+		if (this._audioDescriptionPaused) this._resumeAudioDescription();
+		else this._pauseAudioDescription();
 	}
 
 	#getAudioDescriptionVoice(language) {
