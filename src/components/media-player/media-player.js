@@ -659,11 +659,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	render() {
 		const fullscreenIcon = fullscreenApi.isFullscreen ? 'tier1:smallscreen' : 'tier1:fullscreen';
-		const playIcon = this._playing ? 'tier1:pause' : 'tier1:play';
+		const playing = this._playing || this._audioDescriptionHoldingPlayback;
+		const playIcon = playing ? 'tier1:pause' : 'tier1:play';
 		const volumeIcon = this._muted ? 'tier1:volume-muted' : 'tier1:volume';
 
 		const fullscreenTooltip = `${fullscreenApi.isFullscreen ? this.localize('components:mediaPlayer:exitFullscreen') : this.localize('components:mediaPlayer:fullscreen')} (${KEY_BINDINGS.fullscreen})`;
-		const playTooltip = `${this._playing ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
+		const playTooltip = `${playing ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
 		const volumeTooltip = `${this._muted ? this.localize('components:mediaPlayer:unmute') : this.localize('components:mediaPlayer:mute')} (${KEY_BINDINGS.mute})`;
 
 		const height = this._maintainHeight ? `${this._maintainHeight}px` : (this._heightPixels ? `${this._heightPixels}px` : '100%');
@@ -864,13 +865,13 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	}
 
 	pause() {
-		if (this._media && !this._media.paused) {
+		if (this._media && (!this._media.paused || this._audioDescriptionHoldingPlayback)) {
 			this._togglePlay();
 		}
 	}
 
 	play() {
-		if (this._media && this._media.paused) {
+		if (this._media && this._media.paused && !this._audioDescriptionHoldingPlayback) {
 			this._togglePlay();
 		}
 	}
@@ -1039,8 +1040,9 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	}
 
 	_getMediaAreaView() {
-		const playIcon = `tier3:${this._playing ? 'pause' : 'play'}`;
-		const playTooltip = `${this._playing ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
+		const playing = this._playing || this._audioDescriptionHoldingPlayback;
+		const playIcon = `tier3:${playing ? 'pause' : 'play'}`;
+		const playTooltip = `${playing ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
 
 		switch (this.mediaType) {
 			case SOURCE_TYPES.video:
@@ -1417,12 +1419,13 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	}
 
 	_onPause() {
-		if (!this._audioDescriptionPausedVideo) this._cancelAudioDescription();
+		if (!this._audioDescriptionPausedVideo) this._pauseAudioDescription();
 		this._playing = false;
 		this.dispatchEvent(new CustomEvent('pause'));
 	}
 
 	_onPlay() {
+		this._resumeAudioDescription();
 		this.dispatchEvent(new CustomEvent('play'));
 	}
 
@@ -1932,6 +1935,10 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	_togglePlay() {
 		this._posterVisible = false;
+		if (this._audioDescriptionPausedVideo) {
+			this._toggleAudioDescriptionPause();
+			return;
+		}
 		if (this._media.paused) {
 			if (this.playInView) {
 				this._loadVisibilityObserver({ target: this._mediaContainer });
