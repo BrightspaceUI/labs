@@ -1935,6 +1935,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	_togglePlay() {
 		this._posterVisible = false;
+		this._unlockAudioDescriptionSpeech();
 		if (this._audioDescriptionPausedVideo) {
 			this._toggleAudioDescriptionPause();
 			return;
