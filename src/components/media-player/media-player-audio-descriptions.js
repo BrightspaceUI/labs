@@ -17,12 +17,15 @@ export const AUDIO_DESCRIPTION_TRACK_KIND = 'descriptions';
 const PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY = 'D2L.MediaPlayer.Preferences.AudioDescriptionLanguage';
 const VOICES_LOAD_TIMEOUT_MS = 1000;
 const AUDIO_DESCRIPTION_START_TIMEOUT_MS = 1500;
+const AUDIO_DESCRIPTION_END_POLL_MS = 500;
 const AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX = 768;
 // macOS Eloquence and novelty voices, which Safari lists alphabetically ahead of the natural-sounding ones
 const LOW_QUALITY_VOICE_NAMES = new Set([
 	'albert', 'bad news', 'bahh', 'bells', 'boing', 'bubbles', 'cellos', 'eddy', 'flo', 'fred', 'good news', 'grandma', 'grandpa',
 	'jester', 'junior', 'kathy', 'organ', 'ralph', 'reed', 'rocko', 'sandy', 'shelley', 'superstar', 'trinoids', 'whisper', 'wobble', 'zarvox'
 ]);
+
+let speechUnlocked = false;
 
 export const MediaPlayerAudioDescriptionsMixin = superclass => class extends superclass {
 
@@ -353,6 +356,16 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		else this._pauseAudioDescription();
 	}
 
+	// iOS Safari only speaks after speak() has been called once from a user gesture
+	_unlockAudioDescriptionSpeech() {
+		if (speechUnlocked || !this._selectedAudioDescriptionLanguage || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+		if (navigator.userActivation && !navigator.userActivation.isActive) return;
+		speechUnlocked = true;
+		const utterance = new window.SpeechSynthesisUtterance('');
+		utterance.volume = 0;
+		window.speechSynthesis.speak(utterance);
+	}
+
 	#getAudioDescriptionVoice(language) {
 		const normalizedLanguage = (language || '').toLowerCase();
 		if (!normalizedLanguage || !window.speechSynthesis?.getVoices) return null;
@@ -406,6 +419,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	#onAudioDescriptionMenuItemChange(e) {
 		this._cancelAudioDescription();
 		this._selectedAudioDescriptionLanguage = e.target.value || null;
+		this._unlockAudioDescriptionSpeech();
 		this._resetAudioDescriptionCursor(this.currentTime);
 		if (this._selectedAudioDescriptionLanguage) {
 			this._setPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY, this._selectedAudioDescriptionLanguage);
@@ -442,7 +456,17 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		utterance.onend = finish;
 		utterance.onerror = finish;
 		let started = false;
-		utterance.onstart = () => started = true;
+		utterance.onstart = () => {
+			started = true;
+			// Safari can drop onend (e.g. when iOS backgrounds the page), which would leave the video paused
+			const poll = setInterval(() => {
+				if (this._audioDescriptionUtterance !== utterance) clearInterval(poll);
+				else if (!this._audioDescriptionPaused && !window.speechSynthesis.speaking) {
+					clearInterval(poll);
+					finish();
+				}
+			}, AUDIO_DESCRIPTION_END_POLL_MS);
+		};
 
 		const speak = () => {
 			if (this._audioDescriptionUtterance !== utterance) return;
