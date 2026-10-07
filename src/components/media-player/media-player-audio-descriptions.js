@@ -16,6 +16,7 @@ export const AUDIO_DESCRIPTION_SKIP_KEY = 's';
 export const AUDIO_DESCRIPTION_TRACK_KIND = 'descriptions';
 const PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY = 'D2L.MediaPlayer.Preferences.AudioDescriptionLanguage';
 const VOICES_LOAD_TIMEOUT_MS = 1000;
+const AUDIO_DESCRIPTION_START_TIMEOUT_MS = 1500;
 const AUDIO_DESCRIPTION_CONTROLS_IN_MENU_MAX_WIDTH_PX = 768;
 // macOS Eloquence and novelty voices, which Safari lists alphabetically ahead of the natural-sounding ones
 const LOW_QUALITY_VOICE_NAMES = new Set([
@@ -415,7 +416,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this.shadowRoot?.querySelector('#audio-description-dropdown-content')?.close();
 	}
 
-	#speakAudioDescription(description, track) {
+	#speakAudioDescription(description, track, isRetry = false) {
 		if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
 
 		this._cancelAudioDescription();
@@ -440,6 +441,8 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		};
 		utterance.onend = finish;
 		utterance.onerror = finish;
+		let started = false;
+		utterance.onstart = () => started = true;
 
 		const speak = () => {
 			if (this._audioDescriptionUtterance !== utterance) return;
@@ -448,6 +451,19 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			utterance.volume = this.volume;
 			utterance.rate = this._media?.playbackRate || 1;
 			window.speechSynthesis.speak(utterance);
+			// Chrome's paused state is browser-wide and survives reloads, and resume() is ignored until something is queued
+			if (!this._audioDescriptionPaused) window.speechSynthesis.resume?.();
+			if (isRetry) return;
+
+			setTimeout(() => {
+				if (started || this._audioDescriptionUtterance !== utterance || this._audioDescriptionPaused) return;
+				const pausedVideo = this._audioDescriptionPausedVideo;
+				// Detach first so the cancelled utterance's error event doesn't resume the video
+				this._audioDescriptionUtterance = null;
+				window.speechSynthesis.cancel();
+				this.#speakAudioDescription(description, track, true);
+				if (pausedVideo) this._audioDescriptionPausedVideo = true;
+			}, AUDIO_DESCRIPTION_START_TIMEOUT_MS);
 		};
 
 		if (window.speechSynthesis.getVoices().length) {
