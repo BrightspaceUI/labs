@@ -33,6 +33,7 @@ export default {
 	"components:mediaPlayer:aboutExtendedAudioDescriptions": "About Extended Audio Descriptions",
 	"components:mediaPlayer:aboutExtendedAudioDescriptionsText": "The video will pause when descriptions play. Options to Replay (r) and Skip (s) the description will be available during that time. Keyboard shortcuts work while focus is in the player.",
 	"components:mediaPlayer:audioDescription": "Audio Description",
+	"components:mediaPlayer:audioDescriptionButtonDescription": "Choose a language for spoken descriptions of the video, or turn them off",
 	"components:mediaPlayer:audioDescriptions": "Audio Descriptions",
 	"components:mediaPlayer:captions": "Subtítulos",
 	"components:mediaPlayer:captionsVtt": "Subtítulos (.vtt)",

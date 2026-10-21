@@ -187,6 +187,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 					class="d2l-dropdown-opener"
 					id="audio-description-button"
 					text="${tooltip}"
+					description="${this.localize('components:mediaPlayer:audioDescriptionButtonDescription')}"
 					theme="${ifDefined(this._getTheme())}"
 					?data-enabled="${!!this._selectedAudioDescriptionLanguage}"
 				><d2l-icon-custom slot="icon"><svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
