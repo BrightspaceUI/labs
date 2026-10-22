@@ -740,7 +740,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 					></d2l-labs-slider-bar>
 				`}
 				<div id="buttons">
-					<d2l-button-icon icon="${playIcon}" text="${playTooltip}"  @click="${this._togglePlay}" theme="${ifDefined(theme)}"></d2l-button-icon>
+					<d2l-button-icon id="play-button" icon="${playIcon}" text="${playTooltip}"  @click="${this._togglePlay}" theme="${ifDefined(theme)}"></d2l-button-icon>
 
 					<div id="volume-container" @mouseenter="${this._startUsingVolumeContainer}" @mouseleave="${this._stopUsingVolumeContainer}" ?hidden="${IS_IOS}">
 						<d2l-button-icon
@@ -1050,6 +1050,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 					${this._getPosterView()}
 					<video
 						id="video"
+						aria-hidden="true"
 						playsinline
 						webkit-playsinline
 						?autoplay="${this.autoplay}"
@@ -1066,7 +1067,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 						@playing=${this._onPlaying}
 						@pause=${this._onPause}
 						@loadedmetadata=${this._onLoadedMetadata}
-						tabindex="-1"
 						@timeupdate=${this._onTimeUpdate}
 						@volumechange=${this._onVolumeChange}
 						@webkitbeginfullscreen=${this._beginIOSVideoFullscreen}
@@ -1131,6 +1131,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			${playIcon}
 			<img
 				id="video-poster"
+				alt="${this.localize('components:mediaPlayer:videoPoster')}"
 				src="${ifDefined(this.poster)}"
 				@click=${this._onVideoClick}
 			/>
@@ -1745,6 +1746,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 		this._togglePlay();
 		this._showControls(true);
+		// keeps focus inside the player so keyboard shortcuts still work
+		this._playButton?.focus();
 
 		if (this._videoClicked) {
 			this._toggleFullscreen();

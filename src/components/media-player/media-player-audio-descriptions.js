@@ -8,6 +8,7 @@ import '@brightspace-ui/core/components/menu/menu-item-radio.js';
 import '@brightspace-ui/core/components/menu/menu-item.js';
 import '@brightspace-ui/core/components/menu/menu-item-separator.js';
 import { css, html, nothing } from 'lit';
+import { announce } from '@brightspace-ui/core/helpers/announce.js';
 import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -422,10 +423,13 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._selectedAudioDescriptionLanguage = e.target.value || null;
 		this._unlockAudioDescriptionSpeech();
 		this._resetAudioDescriptionCursor(this.currentTime);
-		if (this._selectedAudioDescriptionLanguage) {
+		const track = this.#getSelectedAudioDescriptionTrack();
+		if (track) {
 			this._setPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY, this._selectedAudioDescriptionLanguage);
+			announce(this.localize('components:mediaPlayer:audioDescriptionsOn', { language: track.label }));
 		} else {
 			this._clearPreference(PREFERENCES_AUDIO_DESCRIPTION_LANGUAGE_KEY);
+			announce(this.localize('components:mediaPlayer:audioDescriptionsOff'));
 		}
 
 		this.shadowRoot?.querySelector('#audio-description-dropdown-content')?.close();
