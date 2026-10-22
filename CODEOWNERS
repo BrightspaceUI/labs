@@ -1,6 +1,7 @@
 *       @BrightspaceUI/gaudi-dev
 **/media-player	@BrightspaceUI/Media @BrightspaceUI/gaudi-dev
 
+src/lang/
 golden/
 .vdiff.json
 package-lock.json
