@@ -60,6 +60,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		}
 		.audio-description-about-text {
 			margin-block-start: 0;
+			margin-block-end: 0;
 		}
 		.audio-description-header {
 			border-bottom: 1px solid var(--d2l-color-chromite);
