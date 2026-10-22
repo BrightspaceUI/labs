@@ -187,8 +187,8 @@ describe('d2l-labs-media-player', () => {
 			const audioDescriptionsFixture = async() => {
 				const elem = await fixture(
 					html`
-					<d2l-labs-media-player src="./test/components/media-player/videos/1_lego.webm" media-type="video">
-						<track src="./demo/components/media-player/static/sample-vtt-en-descriptions.vtt" kind="descriptions" srclang="en" label="English" pause-video>
+					<d2l-labs-media-player src="./test/components/media-player/videos/1_lego.webm" media-type="video" audio-description-pause-video>
+						<track src="./demo/components/media-player/static/sample-vtt-en-descriptions.vtt" kind="descriptions" srclang="en" label="English">
 						<track src="./demo/components/media-player/static/sample-vtt-fr-descriptions.vtt" kind="descriptions" srclang="fr" label="French">
 					</d2l-labs-media-player>`,
 					{ viewport }

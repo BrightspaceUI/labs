@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "캡션",
 	"components:mediaPlayer:captionsVtt": "캡션(.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "참조",
 	"components:mediaPlayer:default": "기본값",
 	"components:mediaPlayer:download": "다운로드",

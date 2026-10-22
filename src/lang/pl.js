@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Napisy",
 	"components:mediaPlayer:captionsVtt": "Napisy (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "DW",
 	"components:mediaPlayer:default": "Domyślny",
 	"components:mediaPlayer:download": "Pobierz",

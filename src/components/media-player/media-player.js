@@ -80,6 +80,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	static properties = {
 		allowDownload: { type: Boolean, attribute: 'allow-download', reflect: true },
+		audioDescriptionPauseVideo: { type: Boolean, attribute: 'audio-description-pause-video' },
 		autoplay: { type: Boolean },
 		crossorigin: { type: String },
 		downloadFilename: { type: String, attribute: 'download-filename' },

@@ -141,10 +141,10 @@ describe('d2l-labs-media-player', () => {
 				play: () => Promise.resolve()
 			};
 			Object.defineProperty(el, '_media', { configurable: true, get: () => media });
+			el.audioDescriptionPauseVideo = true;
 			el._selectedAudioDescriptionLanguage = 'en-US';
 			el._audioDescriptionTracks = [{
 				srclang: 'en-US',
-				pauseVideo: true,
 				descriptions: [{ time: 10, text: 'A person enters.' }]
 			}];
 			el._audioDescriptionPreviousTime = 9;

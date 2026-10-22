@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Legendas",
 	"components:mediaPlayer:captionsVtt": "Legendas (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",
 	"components:mediaPlayer:default": "Padrão",
 	"components:mediaPlayer:download": "Baixar",

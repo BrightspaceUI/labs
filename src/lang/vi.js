@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Phụ đề",
 	"components:mediaPlayer:captionsVtt": "Phụ đề (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",
 	"components:mediaPlayer:default": "Mặc định",
 	"components:mediaPlayer:download": "Tải xuống",
