@@ -559,20 +559,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	get activeCue() {
 		if (!this._media) return null;
-		for (let i = 0; i < this._media.textTracks.length; i++) {
-			if (this._media.textTracks[i].mode === 'hidden') {
-				if (this._media &&
-					this._media.textTracks &&
-					this._media.textTracks[0] &&
-					this._media.textTracks[0].activeCues &&
-					this._media.textTracks[0].activeCues[0]) {
-					return this._media.textTracks[0].activeCues[0];
-				} else {
-					return null;
-				}
-			}
-		}
-		return null;
+		const hiddenTrack = Array.from(this._media.textTracks).find(track => track.mode === 'hidden');
+		return hiddenTrack?.activeCues?.[0] ?? null;
 	}
 
 	get duration() {
@@ -1194,9 +1182,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	_getSelectedTextTrack() {
 		if (!this._media) return null;
 		const selectedTrackSrcLang = this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier);
+		const selectedTrackKind = this._getKindFromTrackIdentifier(this._selectedTrackIdentifier);
 		for (let i = 0; i < this._media.textTracks.length; i++) {
-			if (this._media.textTracks[i].language === selectedTrackSrcLang) {
-				return this._media.textTracks[i];
+			const textTrack = this._media.textTracks[i];
+			if (textTrack.language === selectedTrackSrcLang && textTrack.kind === selectedTrackKind) {
+				return textTrack;
 			}
 		}
 		return null;
