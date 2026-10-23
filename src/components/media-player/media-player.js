@@ -884,6 +884,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	#currentTimeFrame = null;
 	#isFullscreen = false;
 	#keyboardLocked = false;
+	#safariExpiryTimeout = null;
 	#searchTimeout = null;
 	#sourceObserver = null;
 
@@ -1804,13 +1805,14 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 				// "Expires" query parameter (e.g. CloudFront signed URLs). It's also not a
 				// good long-term solution since it depends on a somewhat accurate client
 				// system time.
+				clearTimeout(this.#safariExpiryTimeout);
 				if (isSafari() && updatedSource !== undefined) {
 					const expires = tryParseUrlExpiry(updatedSource);
 					if (expires) {
 						const timeToExpiryMs = (expires * 1000) - Date.now() - (SAFARI_EXPIRY_EARLY_SWAP_SECONDS * 1000);
 						const timeoutPeriodMs = Math.max(timeToExpiryMs, SAFARI_EXPIRY_MIN_ERROR_EMIT_SECONDS * 1000);
 						// Longer delays overflow setTimeout and fire immediately
-						if (timeoutPeriodMs <= MAX_TIMEOUT_MS) setTimeout(() => this._onError(), timeoutPeriodMs);
+						if (timeoutPeriodMs <= MAX_TIMEOUT_MS) this.#safariExpiryTimeout = setTimeout(() => this._onError(), timeoutPeriodMs);
 					}
 				}
 
