@@ -46,7 +46,6 @@ const PREFERENCES_KEY_PREFIX = 'D2L.MediaPlayer.Preferences';
 const PREFERENCES_SPEED_KEY = `${PREFERENCES_KEY_PREFIX}.Speed`;
 const PREFERENCES_TRACK_IDENTIFIER_KEY = `${PREFERENCES_KEY_PREFIX}.Track`;
 const PREFERENCES_VOLUME_KEY = `${PREFERENCES_KEY_PREFIX}.Volume`;
-const SEEK_BAR_UPDATE_PERIOD_MS = 0;
 const SOURCE_TYPES = {
 	audio: 'audio',
 	video: 'video'
@@ -591,11 +590,17 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	connectedCallback() {
 		super.connectedCallback();
 		fullscreenApi.onchange(this.#onFullscreenChange);
+		// Moving the element within the DOM doesn't pause the media
+		if (this._playing) this.#startCurrentTimeLoop();
+		// firstUpdated() does not run again when the element is re-attached
+		if (this._mediaContainer) this.#mediaContainerResizeObserver.observe(this._mediaContainer);
 	}
 
 	disconnectedCallback() {
 		fullscreenApi.off('change', this.#onFullscreenChange);
 		this.#releaseFullscreenEscape();
+		this.#stopCurrentTimeLoop();
+		this.#mediaContainerResizeObserver.disconnect();
 		super.disconnectedCallback();
 	}
 
@@ -616,33 +621,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		this._searchInput = this.shadowRoot.getElementById('search-input');
 		this._searchContainer = this.shadowRoot.getElementById('search-container');
 
-		this._startUpdatingCurrentTime();
-		new ResizeObserver((entries) => {
-			for (const entry of entries) {
-				const { height, width } = entry.contentRect;
-				// Handles potential flickering of video dimensions - given two heights (A, B), if we see that
-				// the heights alternate A -> B -> A (height === two heights ago), we set the height to the larger of A/B
-				// Furthermore, check that the height difference was within the threshold of a flicker (i.e., not a full screen toggle)
-				const flickerThreshold = 20;
-				if ((height === this._twoHeightsAgo && width === this._twoWidthsAgo)
-					&& Math.abs(this._lastHeight - height) < flickerThreshold
-				) {
-					this._heightPixels = Math.floor(Math.max(height, this._lastHeight));
-				} else {
-					this._heightPixels = null;
-				}
-
-				this._twoHeightsAgo = this._lastHeight;
-				this._lastHeight = height;
-
-				this._twoWidthsAgo = this._lastWidth;
-				this._lastWidth = width;
-
-				const multiplier = Math.sqrt(Math.min(height, width) / MIN_TRACK_WIDTH_PX);
-				this._trackFontSizeRem = multiplier;
-				this._timeFontSizeRem = Math.min(multiplier * 0.9 * 0.95, 0.95);
-			}
-		}).observe(this._mediaContainer);
+		this.#mediaContainerResizeObserver.observe(this._mediaContainer);
 	}
 
 	render() {
@@ -907,10 +886,45 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		return this._playing || this._audioDescriptionHoldingPlayback;
 	}
 
+	#currentTimeFrame = null;
 	#isFullscreen = false;
 	#keyboardLocked = false;
 	#mediaReadyResolvers = [];
+	#safariExpiryTimeout = null;
 	#searchTimeout = null;
+	#sourceObserver = null;
+
+	#mediaContainerResizeObserver = new ResizeObserver(entries => {
+		for (const entry of entries) {
+			const { height, width } = entry.contentRect;
+			// Handles potential flickering of video dimensions - given two heights (A, B), if we see that
+			// the heights alternate A -> B -> A (height === two heights ago), we set the height to the larger of A/B
+			// Furthermore, check that the height difference was within the threshold of a flicker (i.e., not a full screen toggle)
+			const flickerThreshold = 20;
+			if ((height === this._twoHeightsAgo && width === this._twoWidthsAgo)
+				&& Math.abs(this._lastHeight - height) < flickerThreshold
+			) {
+				this._heightPixels = Math.floor(Math.max(height, this._lastHeight));
+			} else {
+				this._heightPixels = null;
+			}
+
+			this._twoHeightsAgo = this._lastHeight;
+			this._lastHeight = height;
+
+			this._twoWidthsAgo = this._lastWidth;
+			this._lastWidth = width;
+
+			const multiplier = Math.sqrt(Math.min(height, width) / MIN_TRACK_WIDTH_PX);
+			this._trackFontSizeRem = multiplier;
+			this._timeFontSizeRem = Math.min(multiplier * 0.9 * 0.95, 0.95);
+		}
+	});
+
+	#onCurrentTimeFrame = () => {
+		this.#syncCurrentTime();
+		this.#currentTimeFrame = requestAnimationFrame(this.#onCurrentTimeFrame);
+	};
 
 	#onFullscreenChange = () => {
 		const root = this.shadowRoot;
@@ -1456,6 +1470,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	_onPause() {
 		if (!this._audioDescriptionPausedVideo) this._pauseAudioDescription();
 		this._playing = false;
+		this.#stopCurrentTimeLoop();
+		this.#syncCurrentTime();
 		this.dispatchEvent(new CustomEvent('pause'));
 	}
 
@@ -1488,6 +1504,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	_onPlaying() {
 		this._playing = true;
 		this._pausedForSeekDrag = false;
+		this.#startCurrentTimeLoop();
 	}
 
 	_onPositionChangeSeek() {
@@ -1550,20 +1567,23 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		const nodes = e.target.assignedNodes();
 		let defaultTrack;
 
+		this.#sourceObserver?.disconnect();
+		this.#sourceObserver = null;
+
 		// this.src case is handled in updated() event
 		if (!this.src) {
 			// The onSlotChange event does not monitor changes to slot children, so we need
 			// to detect the change to the <source> element via a MutationObserver
 			const sourceNodes = nodes.filter(node => node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SOURCE');
-			const observer = new MutationObserver(mutationList => {
+			this.#sourceObserver = new MutationObserver(mutationList => {
 				mutationList.forEach(mutation => {
 					this._parseSourceNode(mutation.target);
 				});
 
 				this._reloadSource();
 			});
-			sourceNodes.map(node => {
-				observer.observe(node, { attributes: true });
+			sourceNodes.forEach(node => {
+				this.#sourceObserver.observe(node, { attributes: true });
 			});
 			this._updateSources(sourceNodes);
 			this._reloadSource();
@@ -1669,6 +1689,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	}
 
 	_onTimeUpdate(e) {
+		// Covers seeks while paused and background tabs, where animation frames don't run
+		this.#syncCurrentTime();
 		this._onAudioDescriptionTimeUpdate(e.target.currentTime);
 		this.dispatchEvent(new CustomEvent('timeupdate'));
 	}
@@ -1783,13 +1805,14 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 				// "Expires" query parameter (e.g. CloudFront signed URLs). It's also not a
 				// good long-term solution since it depends on a somewhat accurate client
 				// system time.
+				clearTimeout(this.#safariExpiryTimeout);
 				if (isSafari() && updatedSource !== undefined) {
 					const expires = tryParseUrlExpiry(updatedSource);
 					if (expires) {
 						const timeToExpiryMs = (expires * 1000) - Date.now() - (SAFARI_EXPIRY_EARLY_SWAP_SECONDS * 1000);
 						const timeoutPeriodMs = Math.max(timeToExpiryMs, SAFARI_EXPIRY_MIN_ERROR_EMIT_SECONDS * 1000);
 						// Longer delays overflow setTimeout and fire immediately
-						if (timeoutPeriodMs <= MAX_TIMEOUT_MS) setTimeout(() => this._onError(), timeoutPeriodMs);
+						if (timeoutPeriodMs <= MAX_TIMEOUT_MS) this.#safariExpiryTimeout = setTimeout(() => this._onError(), timeoutPeriodMs);
 					}
 				}
 
@@ -1835,14 +1858,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	_startHoveringControls() {
 		this._hoveringMediaControls = true;
 		this._showControls(false);
-	}
-
-	_startUpdatingCurrentTime() {
-		setInterval(() => {
-			if (this._media && !this._dragging) {
-				this._currentTime = this._media.currentTime;
-			}
-		}, SEEK_BAR_UPDATE_PERIOD_MS);
 	}
 
 	_startUsingVolumeContainer() {
@@ -1964,6 +1979,22 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		await this.updateComplete;
 		if (this._media) return;
 		await new Promise(resolve => this.#mediaReadyResolvers.push(resolve));
+	}
+
+	#startCurrentTimeLoop() {
+		if (this.#currentTimeFrame !== null) return;
+		this.#currentTimeFrame = requestAnimationFrame(this.#onCurrentTimeFrame);
+	}
+
+	#stopCurrentTimeLoop() {
+		cancelAnimationFrame(this.#currentTimeFrame);
+		this.#currentTimeFrame = null;
+	}
+
+	#syncCurrentTime() {
+		if (this._media && !this._dragging) {
+			this._currentTime = this._media.currentTime;
+		}
 	}
 }
 
