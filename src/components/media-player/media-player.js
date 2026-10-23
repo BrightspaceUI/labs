@@ -1989,7 +1989,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			this._currentTime = this._media.currentTime;
 		}
 	}
-	
+
 	// The media element isn't rendered until media-type is set, which may happen later
 	async #waitForMedia() {
 		await this.updateComplete;
