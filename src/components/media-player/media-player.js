@@ -1974,13 +1974,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		}
 	}
 
-	// The media element isn't rendered until media-type is set, which may happen later
-	async #waitForMedia() {
-		await this.updateComplete;
-		if (this._media) return;
-		await new Promise(resolve => this.#mediaReadyResolvers.push(resolve));
-	}
-
 	#startCurrentTimeLoop() {
 		if (this.#currentTimeFrame !== null) return;
 		this.#currentTimeFrame = requestAnimationFrame(this.#onCurrentTimeFrame);
@@ -1995,6 +1988,13 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		if (this._media && !this._dragging) {
 			this._currentTime = this._media.currentTime;
 		}
+	}
+	
+	// The media element isn't rendered until media-type is set, which may happen later
+	async #waitForMedia() {
+		await this.updateComplete;
+		if (this._media) return;
+		await new Promise(resolve => this.#mediaReadyResolvers.push(resolve));
 	}
 }
 
