@@ -5,7 +5,7 @@ import '@brightspace-ui/core/components/menu/menu.js';
 import '@brightspace-ui/core/components/menu/menu-item.js';
 import { css, html, nothing } from 'lit';
 
-// Expects the host to provide _media, _tracks, mediaType, currentTime, _selectedTrackIdentifier, _getSrclangFromTrackIdentifier(), _onCueChange() and localize()
+// Expects the host to provide _media, _tracks, mediaType, currentTime, _selectedTrackIdentifier, _getSelectedTextTrack(), _onCueChange() and localize()
 export const MediaPlayerTranscriptMixin = superclass => class extends superclass {
 
 	static properties = {
@@ -223,17 +223,11 @@ export const MediaPlayerTranscriptMixin = superclass => class extends superclass
 
 	_updateTranscriptViewerCues() {
 		let cues = null;
-		const lang = this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier);
-		for (let i = 0; i < this._media.textTracks.length; i += 1) {
-			const currTrack = this._media.textTracks[i];
-			if (currTrack?.cues) {
-				const activeCues = currTrack.activeCues;
-				if (lang === currTrack.language) {
-					this.transcriptActiveCue = activeCues?.[activeCues?.length - 1];
-					cues = currTrack.cues;
-					break;
-				}
-			}
+		const selectedTrack = this._getSelectedTextTrack();
+		if (selectedTrack?.cues) {
+			const activeCues = selectedTrack.activeCues;
+			this.transcriptActiveCue = activeCues?.[activeCues?.length - 1];
+			cues = selectedTrack.cues;
 		}
 		if (!cues) {
 			let defaultTrack;
