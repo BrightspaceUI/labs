@@ -259,7 +259,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		for (const attr of ['label', 'src', 'srclang']) {
 			if (!node[attr]) {
 				console.warn(`d2l-labs-media-player component requires '${attr}' text on track`);
-				return;
+				return null;
 			}
 		}
 
@@ -267,7 +267,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		if (res.status !== 200) {
 			console.warn(`d2l-labs-media-player component could not load track from '${node.src}'`);
 			this.dispatchEvent(new CustomEvent('trackloadfailed'));
-			return;
+			return null;
 		}
 
 		const text = await res.text();
@@ -279,17 +279,16 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			.filter(description => Number.isFinite(description.time) && description.text)
 			.sort((a, b) => a.time - b.time);
 
-		if (descriptions.length === 0) return;
+		if (descriptions.length === 0) return null;
 
 		// Some browsers (e.g. Chrome) load voices asynchronously on the first getVoices() call
 		window.speechSynthesis?.getVoices?.();
 
-		this._audioDescriptionTracks.push({
+		return {
 			descriptions,
 			label: node.label,
 			srclang: node.srclang,
-		});
-		this.dispatchEvent(new CustomEvent('trackloaded'));
+		};
 	}
 
 	_onAudioDescriptionTimeUpdate(currentTime) {
