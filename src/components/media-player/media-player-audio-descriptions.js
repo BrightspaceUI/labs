@@ -32,6 +32,8 @@ let speechUnlocked = false;
 export const MediaPlayerAudioDescriptionsMixin = superclass => class extends superclass {
 
 	static properties = {
+		audioDescriptionPauseVideo: { type: Boolean, attribute: 'audio-description-pause-video' },
+		hideAudioDescriptionSelection: { type: Boolean, attribute: 'hide-audio-description-selection' },
 		_audioDescriptionControlsInMenu: { state: true },
 		_audioDescriptionDialogOpened: { state: true },
 		_audioDescriptionPaused: { state: true },
