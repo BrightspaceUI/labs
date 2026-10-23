@@ -831,6 +831,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		if (changedProperties.has('src') || changedProperties.has('mediaType')) {
 			this._reloadSource();
 		}
+
+		if (this._media && this.#mediaReadyResolvers.length > 0) {
+			this.#mediaReadyResolvers.forEach(resolve => resolve());
+			this.#mediaReadyResolvers = [];
+		}
 	}
 
 	exitFullscreen() {
@@ -840,9 +845,9 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	}
 
 	async getLoadingComplete() {
-		do {
-			await new Promise((resolve) => setTimeout(() => resolve(), 1000));
-		} while (this._loading);
+		await this.updateComplete;
+		if (!this._loading) return;
+		await new Promise(resolve => this.addEventListener('loadedmetadata', resolve, { once: true }));
 	}
 
 	load() {
@@ -904,6 +909,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	#isFullscreen = false;
 	#keyboardLocked = false;
+	#mediaReadyResolvers = [];
 	#searchTimeout = null;
 
 	#onFullscreenChange = () => {
@@ -1262,6 +1268,47 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		}
 	}
 
+	async _loadTextTrack(node) {
+		if (!(node.kind in TRACK_KINDS)) {
+			console.warn(`d2l-labs-media-player component requires 'kind' text on track to be one of ${Object.keys(TRACK_KINDS)}`);
+			return null;
+		}
+
+		for (const attr of ['label', 'src', 'srclang']) {
+			if (!node[attr]) {
+				console.warn(`d2l-labs-media-player component requires '${attr}' text on track`);
+				return null;
+			}
+		}
+
+		const res = await fetch(node.src);
+		if (res.status !== 200) {
+			console.warn(`d2l-labs-media-player component could not load track from '${node.src}'`);
+			this.dispatchEvent(new CustomEvent('trackloadfailed'));
+			return null;
+		}
+
+		const text = await res.text();
+
+		try {
+			node.cues = parseSRT(text);
+			node.srt = true;
+		} catch {
+			node.srt = false;
+		}
+
+		return {
+			cues: node.cues,
+			kind: node.kind,
+			label: node.label,
+			src: node.src,
+			srclang: node.srclang,
+			srt: node.srt,
+			default: node.default || node['default-ignore-preferences'],
+			text
+		};
+	}
+
 	_loadVisibilityObserver({ target }) {
 		if (this._observer) return;
 		this._observer = new IntersectionObserver(([ioEvent]) => {
@@ -1522,62 +1569,23 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			this._reloadSource();
 		}
 
-		for (let i = 0; i < nodes.length; i++) {
-			const node = nodes[i];
+		const trackNodes = nodes.filter(node => node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'TRACK');
+		const isAudioDescription = node => node.getAttribute('kind') === AUDIO_DESCRIPTION_TRACK_KIND;
+		const loadedTracks = await Promise.all(trackNodes.map(node => (
+			isAudioDescription(node) ? this._loadAudioDescriptionTrack(node) : this._loadTextTrack(node)
+		)));
 
-			if (node.nodeType !== Node.ELEMENT_NODE || node.nodeName !== 'TRACK') continue;
+		trackNodes.forEach((node, i) => {
+			const track = loadedTracks[i];
+			if (!track) return;
 
-			if (node.getAttribute('kind') === AUDIO_DESCRIPTION_TRACK_KIND) {
-				await this._loadAudioDescriptionTrack(node);
-				continue;
+			if (isAudioDescription(node)) {
+				this._audioDescriptionTracks.push(track);
+				this.dispatchEvent(new CustomEvent('trackloaded'));
+				return;
 			}
 
-			if (!(node.kind in TRACK_KINDS)) {
-				console.warn(`d2l-labs-media-player component requires 'kind' text on track to be one of ${Object.keys(TRACK_KINDS)}`);
-				continue;
-			}
-
-			if (!node.label) {
-				console.warn("d2l-labs-media-player component requires 'label' text on track");
-				continue;
-			}
-
-			if (!node.src) {
-				console.warn("d2l-labs-media-player component requires 'src' text on track");
-				continue;
-			}
-
-			if (!node.srclang) {
-				console.warn("d2l-labs-media-player component requires 'srclang' text on track");
-				continue;
-			}
-
-			const res = await fetch(node.src);
-			if (res.status !== 200) {
-				console.warn(`d2l-labs-media-player component could not load track from '${node.src}'`);
-				this.dispatchEvent(new CustomEvent('trackloadfailed'));
-				continue;
-			}
-
-			const text = await res.text();
-
-			try {
-				node.cues = parseSRT(text);
-				node.srt = true;
-			} catch {
-				node.srt = false;
-			}
-
-			this._tracks.push({
-				cues: node.cues,
-				kind: node.kind,
-				label: node.label,
-				src: node.src,
-				srclang: node.srclang,
-				srt: node.srt,
-				default: node.default || node['default-ignore-preferences'],
-				text
-			});
+			this._tracks.push(track);
 
 			const defaultIgnorePreferences = node.attributes['default-ignore-preferences'];
 			if (node.default || defaultIgnorePreferences) {
@@ -1588,19 +1596,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 					ignorePreferences: !!defaultIgnorePreferences,
 				};
 			}
-		}
+		});
 
 		this._restoreAudioDescriptionPreference();
 
-		await new Promise(resolve => {
-			const interval = setInterval(() => {
-				if (!this._media) return;
-
-				clearInterval(interval);
-
-				resolve();
-			});
-		});
+		await this.#waitForMedia();
 
 		const oldTracks = this._media.querySelectorAll('track');
 		oldTracks.forEach(track => this._media.removeChild(track));
@@ -1957,6 +1957,13 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			navigator.keyboard?.unlock?.();
 			this.#keyboardLocked = false;
 		}
+	}
+
+	// The media element isn't rendered until media-type is set, which may happen later
+	async #waitForMedia() {
+		await this.updateComplete;
+		if (this._media) return;
+		await new Promise(resolve => this.#mediaReadyResolvers.push(resolve));
 	}
 }
 
