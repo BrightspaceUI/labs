@@ -81,12 +81,10 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	static properties = {
 		allowDownload: { type: Boolean, attribute: 'allow-download', reflect: true },
-		audioDescriptionPauseVideo: { type: Boolean, attribute: 'audio-description-pause-video' },
 		autoplay: { type: Boolean },
 		crossorigin: { type: String },
 		downloadFilename: { type: String, attribute: 'download-filename' },
 		durationHint: { type: Number, attribute: 'duration-hint' },
-		hideAudioDescriptionSelection: { type: Boolean, attribute: 'hide-audio-description-selection' },
 		hideCaptionsSelection: { type: Boolean, attribute: 'hide-captions-selection' },
 		hideSeekBar: { type: Boolean, attribute: 'hide-seek-bar' },
 		loop: { type: Boolean },
@@ -661,12 +659,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	render() {
 		const fullscreenIcon = fullscreenApi.isFullscreen ? 'tier1:smallscreen' : 'tier1:fullscreen';
-		const playing = this._playing || this._audioDescriptionHoldingPlayback;
-		const playIcon = playing ? 'tier1:pause' : 'tier1:play';
+		const playIcon = this._showingPlaying ? 'tier1:pause' : 'tier1:play';
 		const volumeIcon = this._muted ? 'tier1:volume-muted' : 'tier1:volume';
 
 		const fullscreenTooltip = `${fullscreenApi.isFullscreen ? this.localize('components:mediaPlayer:exitFullscreen') : this.localize('components:mediaPlayer:fullscreen')} (${KEY_BINDINGS.fullscreen})`;
-		const playTooltip = `${playing ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
+		const playTooltip = this._getPlayTooltip();
 		const volumeTooltip = `${this._muted ? this.localize('components:mediaPlayer:unmute') : this.localize('components:mediaPlayer:mute')} (${KEY_BINDINGS.mute})`;
 
 		const height = this._maintainHeight ? `${this._maintainHeight}px` : (this._heightPixels ? `${this._heightPixels}px` : '100%');
@@ -688,7 +685,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 		const mediaContainerClass = { 'type-is-audio': this.mediaType === SOURCE_TYPES.audio, 'type-is-video': this.mediaType === SOURCE_TYPES.video };
 		const mediaControlsClass = { 'hidden': this._hidingCustomControls() };
-		const theme = this.mediaType === SOURCE_TYPES.video ? 'dark' : undefined;
+		const theme = this._getTheme();
 		const volumeLevelContainerClass = { 'hidden': !this._usingVolumeContainer || this._hidingCustomControls() };
 		const hideSearchForAudioDescriptions = !this.hideAudioDescriptionSelection && this._audioDescriptionTracks.length > 0 && this._audioDescriptionControlsInMenu;
 		const searchContainerClass = { 'search-container-hidden' : !this._searchInstances[this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier)] || hideSearchForAudioDescriptions };
@@ -912,6 +909,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		return this.localize('components:mediaPlayer:off');
 	}
 
+	// A pause-video audio description holding playback should still present as playing
+	get _showingPlaying() {
+		return this._playing || this._audioDescriptionHoldingPlayback;
+	}
+
 	#isFullscreen = false;
 	#keyboardLocked = false;
 	#searchTimeout = null;
@@ -1042,9 +1044,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	}
 
 	_getMediaAreaView() {
-		const playing = this._playing || this._audioDescriptionHoldingPlayback;
-		const playIcon = `tier3:${playing ? 'pause' : 'play'}`;
-		const playTooltip = `${playing ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
+		const playIcon = `tier3:${this._showingPlaying ? 'pause' : 'play'}`;
+		const playTooltip = this._getPlayTooltip();
 
 		switch (this.mediaType) {
 			case SOURCE_TYPES.video:
@@ -1117,6 +1118,10 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	_getPercentageTime(time) {
 		if (this._media) return (time / this.duration) * 100;
+	}
+
+	_getPlayTooltip() {
+		return `${this._showingPlaying ? this.localize('components:mediaPlayer:pause') : this.localize('components:mediaPlayer:play')} (${KEY_BINDINGS.play})`;
 	}
 
 	_getPosterView() {
@@ -1303,16 +1308,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		}
 	}
 
-	_onDownloadButtonPress() {
-		const linkHref = this._getDownloadLink();
-
-		const anchor = document.createElement('a');
-		anchor.href = linkHref;
-		anchor.download = '';
-		anchor.click();
-		anchor.remove();
-	}
-
 	_onDragEndSeek() {
 		// _onDragEndSeek() is called once before firstUpdated()
 		if (this._seekBar) {
@@ -1477,18 +1472,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 		this._selectedQuality = e.target.value;
 		this._reloadSource();
-	}
-
-	_onRetryButtonPress() {
-		this._loading = true;
-	}
-
-	_onSearchButtonPress() {
-		if (this._searchContainer.classList.includes((SEARCH_CONTAINER_HOVER_CLASS))) {
-			this._searchContainer.classList.remove(SEARCH_CONTAINER_HOVER_CLASS);
-		} else {
-			this._onSearchContainerHover(true);
-		}
 	}
 
 	_onSearchContainerHover() {
