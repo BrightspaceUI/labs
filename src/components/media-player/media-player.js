@@ -560,20 +560,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 	get activeCue() {
 		if (!this._media) return null;
-		for (let i = 0; i < this._media.textTracks.length; i++) {
-			if (this._media.textTracks[i].mode === 'hidden') {
-				if (this._media &&
-					this._media.textTracks &&
-					this._media.textTracks[0] &&
-					this._media.textTracks[0].activeCues &&
-					this._media.textTracks[0].activeCues[0]) {
-					return this._media.textTracks[0].activeCues[0];
-				} else {
-					return null;
-				}
-			}
-		}
-		return null;
+		const hiddenTrack = Array.from(this._media.textTracks).find(track => track.mode === 'hidden');
+		return hiddenTrack?.activeCues?.[0] ?? null;
 	}
 
 	get duration() {
@@ -603,11 +591,14 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	connectedCallback() {
 		super.connectedCallback();
 		fullscreenApi.onchange(this.#onFullscreenChange);
+		// firstUpdated() does not run again when the element is re-attached
+		if (this._mediaContainer) this.#mediaContainerResizeObserver.observe(this._mediaContainer);
 	}
 
 	disconnectedCallback() {
 		fullscreenApi.off('change', this.#onFullscreenChange);
 		this.#releaseFullscreenEscape();
+		this.#mediaContainerResizeObserver.disconnect();
 		super.disconnectedCallback();
 	}
 
@@ -629,32 +620,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		this._searchContainer = this.shadowRoot.getElementById('search-container');
 
 		this._startUpdatingCurrentTime();
-		new ResizeObserver((entries) => {
-			for (const entry of entries) {
-				const { height, width } = entry.contentRect;
-				// Handles potential flickering of video dimensions - given two heights (A, B), if we see that
-				// the heights alternate A -> B -> A (height === two heights ago), we set the height to the larger of A/B
-				// Furthermore, check that the height difference was within the threshold of a flicker (i.e., not a full screen toggle)
-				const flickerThreshold = 20;
-				if ((height === this._twoHeightsAgo && width === this._twoWidthsAgo)
-					&& Math.abs(this._lastHeight - height) < flickerThreshold
-				) {
-					this._heightPixels = Math.floor(Math.max(height, this._lastHeight));
-				} else {
-					this._heightPixels = null;
-				}
-
-				this._twoHeightsAgo = this._lastHeight;
-				this._lastHeight = height;
-
-				this._twoWidthsAgo = this._lastWidth;
-				this._lastWidth = width;
-
-				const multiplier = Math.sqrt(Math.min(height, width) / MIN_TRACK_WIDTH_PX);
-				this._trackFontSizeRem = multiplier;
-				this._timeFontSizeRem = Math.min(multiplier * 0.9 * 0.95, 0.95);
-			}
-		}).observe(this._mediaContainer);
+		this.#mediaContainerResizeObserver.observe(this._mediaContainer);
 	}
 
 	render() {
@@ -918,6 +884,34 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	#keyboardLocked = false;
 	#safariExpiryTimeout = null;
 	#searchTimeout = null;
+	#sourceObserver = null;
+
+	#mediaContainerResizeObserver = new ResizeObserver(entries => {
+		for (const entry of entries) {
+			const { height, width } = entry.contentRect;
+			// Handles potential flickering of video dimensions - given two heights (A, B), if we see that
+			// the heights alternate A -> B -> A (height === two heights ago), we set the height to the larger of A/B
+			// Furthermore, check that the height difference was within the threshold of a flicker (i.e., not a full screen toggle)
+			const flickerThreshold = 20;
+			if ((height === this._twoHeightsAgo && width === this._twoWidthsAgo)
+				&& Math.abs(this._lastHeight - height) < flickerThreshold
+			) {
+				this._heightPixels = Math.floor(Math.max(height, this._lastHeight));
+			} else {
+				this._heightPixels = null;
+			}
+
+			this._twoHeightsAgo = this._lastHeight;
+			this._lastHeight = height;
+
+			this._twoWidthsAgo = this._lastWidth;
+			this._lastWidth = width;
+
+			const multiplier = Math.sqrt(Math.min(height, width) / MIN_TRACK_WIDTH_PX);
+			this._trackFontSizeRem = multiplier;
+			this._timeFontSizeRem = Math.min(multiplier * 0.9 * 0.95, 0.95);
+		}
+	});
 
 	#onFullscreenChange = () => {
 		const root = this.shadowRoot;
@@ -1196,9 +1190,11 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	_getSelectedTextTrack() {
 		if (!this._media) return null;
 		const selectedTrackSrcLang = this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier);
+		const selectedTrackKind = this._getKindFromTrackIdentifier(this._selectedTrackIdentifier);
 		for (let i = 0; i < this._media.textTracks.length; i++) {
-			if (this._media.textTracks[i].language === selectedTrackSrcLang) {
-				return this._media.textTracks[i];
+			const textTrack = this._media.textTracks[i];
+			if (textTrack.language === selectedTrackSrcLang && textTrack.kind === selectedTrackKind) {
+				return textTrack;
 			}
 		}
 		return null;
@@ -1514,20 +1510,23 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		const nodes = e.target.assignedNodes();
 		let defaultTrack;
 
+		this.#sourceObserver?.disconnect();
+		this.#sourceObserver = null;
+
 		// this.src case is handled in updated() event
 		if (!this.src) {
 			// The onSlotChange event does not monitor changes to slot children, so we need
 			// to detect the change to the <source> element via a MutationObserver
 			const sourceNodes = nodes.filter(node => node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SOURCE');
-			const observer = new MutationObserver(mutationList => {
+			this.#sourceObserver = new MutationObserver(mutationList => {
 				mutationList.forEach(mutation => {
 					this._parseSourceNode(mutation.target);
 				});
 
 				this._reloadSource();
 			});
-			sourceNodes.map(node => {
-				observer.observe(node, { attributes: true });
+			sourceNodes.forEach(node => {
+				this.#sourceObserver.observe(node, { attributes: true });
 			});
 			this._updateSources(sourceNodes);
 			this._reloadSource();
