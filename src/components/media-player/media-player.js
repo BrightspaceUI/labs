@@ -46,7 +46,6 @@ const PREFERENCES_KEY_PREFIX = 'D2L.MediaPlayer.Preferences';
 const PREFERENCES_SPEED_KEY = `${PREFERENCES_KEY_PREFIX}.Speed`;
 const PREFERENCES_TRACK_IDENTIFIER_KEY = `${PREFERENCES_KEY_PREFIX}.Track`;
 const PREFERENCES_VOLUME_KEY = `${PREFERENCES_KEY_PREFIX}.Volume`;
-const SEEK_BAR_UPDATE_PERIOD_MS = 0;
 const SOURCE_TYPES = {
 	audio: 'audio',
 	video: 'video'
@@ -603,11 +602,14 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	connectedCallback() {
 		super.connectedCallback();
 		fullscreenApi.onchange(this.#onFullscreenChange);
+		// Moving the element within the DOM doesn't pause the media
+		if (this._playing) this.#startCurrentTimeLoop();
 	}
 
 	disconnectedCallback() {
 		fullscreenApi.off('change', this.#onFullscreenChange);
 		this.#releaseFullscreenEscape();
+		this.#stopCurrentTimeLoop();
 		super.disconnectedCallback();
 	}
 
@@ -628,7 +630,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		this._searchInput = this.shadowRoot.getElementById('search-input');
 		this._searchContainer = this.shadowRoot.getElementById('search-container');
 
-		this._startUpdatingCurrentTime();
 		new ResizeObserver((entries) => {
 			for (const entry of entries) {
 				const { height, width } = entry.contentRect;
@@ -914,9 +915,15 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		return this._playing || this._audioDescriptionHoldingPlayback;
 	}
 
+	#currentTimeFrame = null;
 	#isFullscreen = false;
 	#keyboardLocked = false;
 	#searchTimeout = null;
+
+	#onCurrentTimeFrame = () => {
+		this.#syncCurrentTime();
+		this.#currentTimeFrame = requestAnimationFrame(this.#onCurrentTimeFrame);
+	};
 
 	#onFullscreenChange = () => {
 		const root = this.shadowRoot;
@@ -1419,6 +1426,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	_onPause() {
 		if (!this._audioDescriptionPausedVideo) this._pauseAudioDescription();
 		this._playing = false;
+		this.#stopCurrentTimeLoop();
+		this.#syncCurrentTime();
 		this.dispatchEvent(new CustomEvent('pause'));
 	}
 
@@ -1451,6 +1460,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	_onPlaying() {
 		this._playing = true;
 		this._pausedForSeekDrag = false;
+		this.#startCurrentTimeLoop();
 	}
 
 	_onPositionChangeSeek() {
@@ -1679,6 +1689,8 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 	}
 
 	_onTimeUpdate(e) {
+		// Covers seeks while paused and background tabs, where animation frames don't run
+		this.#syncCurrentTime();
 		this._onAudioDescriptionTimeUpdate(e.target.currentTime);
 		this.dispatchEvent(new CustomEvent('timeupdate'));
 	}
@@ -1847,14 +1859,6 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		this._showControls(false);
 	}
 
-	_startUpdatingCurrentTime() {
-		setInterval(() => {
-			if (this._media && !this._dragging) {
-				this._currentTime = this._media.currentTime;
-			}
-		}, SEEK_BAR_UPDATE_PERIOD_MS);
-	}
-
 	_startUsingVolumeContainer() {
 		setTimeout(() => {
 			this._usingVolumeContainer = true;
@@ -1966,6 +1970,22 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		if (this.#keyboardLocked) {
 			navigator.keyboard?.unlock?.();
 			this.#keyboardLocked = false;
+		}
+	}
+
+	#startCurrentTimeLoop() {
+		if (this.#currentTimeFrame !== null) return;
+		this.#currentTimeFrame = requestAnimationFrame(this.#onCurrentTimeFrame);
+	}
+
+	#stopCurrentTimeLoop() {
+		cancelAnimationFrame(this.#currentTimeFrame);
+		this.#currentTimeFrame = null;
+	}
+
+	#syncCurrentTime() {
+		if (this._media && !this._dragging) {
+			this._currentTime = this._media.currentTime;
 		}
 	}
 }
