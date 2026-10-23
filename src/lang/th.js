@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "คำบรรยายภาพ",
 	"components:mediaPlayer:captionsVtt": "คำบรรยายภาพ (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "สำเนาถึง",
 	"components:mediaPlayer:default": "ค่าเริ่มต้น",
 	"components:mediaPlayer:download": "ดาวน์โหลด",

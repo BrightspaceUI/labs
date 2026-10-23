@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Bildtexter",
 	"components:mediaPlayer:captionsVtt": "Bildtexter (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "Kopia",
 	"components:mediaPlayer:default": "Standard",
 	"components:mediaPlayer:download": "Hämta",

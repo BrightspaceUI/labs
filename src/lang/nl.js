@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Bijschriften",
 	"components:mediaPlayer:captionsVtt": "Ondertitels (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",
 	"components:mediaPlayer:default": "Standaard",
 	"components:mediaPlayer:download": "Downloaden",

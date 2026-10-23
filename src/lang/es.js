@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Leyendas",
 	"components:mediaPlayer:captionsVtt": "Subtítulos (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",
 	"components:mediaPlayer:default": "Predeterminado",
 	"components:mediaPlayer:download": "Descargar",
