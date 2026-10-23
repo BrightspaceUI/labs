@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "キャプション",
 	"components:mediaPlayer:captionsVtt": "キャプション（.vtt）",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",
 	"components:mediaPlayer:default": "デフォルト",
 	"components:mediaPlayer:download": "ダウンロード",

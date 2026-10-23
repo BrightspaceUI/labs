@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "字幕",
 	"components:mediaPlayer:captionsVtt": "字幕 (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "字幕",
 	"components:mediaPlayer:default": "默认值",
 	"components:mediaPlayer:download": "下载",

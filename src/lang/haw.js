@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Nā huaʻōlelo",
 	"components:mediaPlayer:captionsVtt": "Nā huaʻōlelo (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "CC",
 	"components:mediaPlayer:default": "Default",
 	"components:mediaPlayer:download": "Hoʻoiho",

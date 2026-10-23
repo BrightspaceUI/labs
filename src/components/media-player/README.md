@@ -38,6 +38,7 @@ A Lit element based media player component, designed for similarity across brows
 | Attribute | Type | Default | Description |
 |--|--|--|--|
 | allow-download| Boolean | false | If set, will allow the media to be downloaded.
+| audio-description-pause-video | Boolean | false | If set, playback is paused for the duration of each spoken audio description and resumes automatically once the description finishes, and replay/skip controls are shown. If not set, descriptions play inline with the media and the replay/skip controls are hidden. |
 | autoplay | Boolean | false | If set, will play the media as soon as it has been loaded. |
 | crossorigin | String | null | If set, will set the `crossorigin` attribute on the underlying media element to the set value.
 | download-filename | String | null | If set along with `allow-download`, will use the provided value as the base of the filename (the extension will be automatically appended)
@@ -233,9 +234,9 @@ The media player supports audio descriptions, provided as `.vtt` files, one per 
 <script type="module">
     import '@brightspace-ui/labs/components/media-player.js';
 </script>
-<d2l-labs-media-player src="/video.webm">
+<d2l-labs-media-player src="/video.webm" audio-description-pause-video>
 	<track src="/english-descriptions.vtt" srclang="en" label="English" kind="descriptions">
-	<track src="/french-descriptions.vtt" srclang="fr" label="French" kind="descriptions" pause-video>
+	<track src="/french-descriptions.vtt" srclang="fr" label="French" kind="descriptions">
 </d2l-labs-media-player>
 ```
 
@@ -247,7 +248,8 @@ The media player supports audio descriptions, provided as `.vtt` files, one per 
 | label | String, required | | The label for the track, displayed to the user for selection. |
 | src | String, required | | The URL of the `.vtt` source file. |
 | srclang | String, required | | The language's code. Used as the SpeechSynthesis voice/language and stored as the selection preference. |
-| pause-video | Boolean | false | If set, playback is paused for the duration of each spoken description and resumes automatically once the description finishes, and replay/skip controls are shown. If not set, descriptions play inline with the video and the replay/skip controls are hidden. |
+
+Set `audio-description-pause-video` on `d2l-labs-media-player` to pause playback while each description is spoken (extended audio descriptions).
 
 ## Local Storage
 

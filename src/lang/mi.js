@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Ngā Whakaāhua",
 	"components:mediaPlayer:captionsVtt": "Ngā Whakamaumaharatanga (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "PC",
 	"components:mediaPlayer:default": "Taunoa",
 	"components:mediaPlayer:download": "Tikiake",

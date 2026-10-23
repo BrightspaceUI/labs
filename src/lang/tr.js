@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Alt yazı",
 	"components:mediaPlayer:captionsVtt": "Alt yazılar (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "Bilgi",
 	"components:mediaPlayer:default": "Varsayılan",
 	"components:mediaPlayer:download": "İndir",

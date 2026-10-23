@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "कैप्शन",
 	"components:mediaPlayer:captionsVtt": "कैप्शन (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "प्रतिलिपि",
 	"components:mediaPlayer:default": "डिफ़ॉल्ट",
 	"components:mediaPlayer:download": "डाउनलोड करें",

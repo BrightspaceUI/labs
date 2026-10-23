@@ -1,3 +1,4 @@
+import '@brightspace-ui/core/components/button/button.js';
 import '@brightspace-ui/core/components/button/button-icon.js';
 import '@brightspace-ui/core/components/dialog/dialog.js';
 import '@brightspace-ui/core/components/dropdown/dropdown.js';
@@ -7,9 +8,9 @@ import '@brightspace-ui/core/components/menu/menu.js';
 import '@brightspace-ui/core/components/menu/menu-item-radio.js';
 import '@brightspace-ui/core/components/menu/menu-item.js';
 import '@brightspace-ui/core/components/menu/menu-item-separator.js';
+import { bodyCompactStyles, bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { css, html, nothing } from 'lit';
 import { announce } from '@brightspace-ui/core/helpers/announce.js';
-import { bodyCompactStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 export const AUDIO_DESCRIPTION_REPLAY_KEY = 'r';
@@ -41,7 +42,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		_selectedAudioDescriptionLanguage: { state: true },
 	};
 
-	static styles = [bodyCompactStyles, css`
+	static styles = [bodyCompactStyles, bodyStandardStyles, css`
 		#audio-description-skip-button {
 			margin-inline-end: 12px;
 		}
@@ -56,6 +57,10 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 			height: calc(1rem - 7px);
 			margin: 0 auto;
 			width: calc(2rem - 9px);
+		}
+		.audio-description-about-text {
+			margin-block-end: 0;
+			margin-block-start: 0;
 		}
 		.audio-description-header {
 			border-bottom: 1px solid var(--d2l-color-chromite);
@@ -132,7 +137,8 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		const tooltip = this.localize('components:mediaPlayer:audioDescription');
 		const replayTooltip = this.localize('components:mediaPlayer:replayAudioDescription');
 		const skipTooltip = this.localize('components:mediaPlayer:skipAudioDescription');
-		const showControls = !!this.#getSelectedAudioDescriptionTrack()?.pauseVideo;
+		const showControls = this.audioDescriptionPauseVideo && !!this.#getSelectedAudioDescriptionTrack();
+		const showAbout = this.audioDescriptionPauseVideo;
 
 		return html`
 			${showControls && !this._audioDescriptionControlsInMenu ? html`
@@ -195,9 +201,9 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 <path d="M8.89199 8.55L7.21999 3.9805C7.13766 3.77783 7.05216 3.53717 6.96349 3.2585C6.87483 2.97983 6.78616 2.679 6.69749 2.356C6.61516 2.679 6.52966 2.983 6.44099 3.268C6.35233 3.54667 6.26683 3.7905 6.18449 3.9995L4.52199 8.55H8.89199ZM13.4045 13.737H11.4285C11.2068 13.737 11.0263 13.6832 10.887 13.5755C10.7477 13.4615 10.6432 13.3222 10.5735 13.1575L9.54749 10.355H3.85699L2.83099 13.1575C2.78033 13.3032 2.68216 13.4362 2.53649 13.5565C2.39083 13.6768 2.21033 13.737 1.99499 13.737H-7.82078e-06L5.40549 -1.43051e-06H8.00849L13.4045 13.737ZM27.2244 6.8685C27.2244 7.8755 27.0565 8.80017 26.7209 9.6425C26.3852 10.4848 25.9134 11.21 25.3054 11.818C24.6974 12.426 23.9659 12.8978 23.1109 13.2335C22.2559 13.5692 21.3059 13.737 20.2609 13.737H15.0264V-1.43051e-06H20.2609C21.3059 -1.43051e-06 22.2559 0.170999 23.1109 0.512999C23.9659 0.848665 24.6974 1.3205 25.3054 1.9285C25.9134 2.53017 26.3852 3.25217 26.7209 4.0945C27.0565 4.93683 27.2244 5.8615 27.2244 6.8685ZM24.6024 6.8685C24.6024 6.11483 24.501 5.44033 24.2984 4.845C24.102 4.24333 23.8139 3.73667 23.4339 3.325C23.0602 2.907 22.6042 2.58717 22.0659 2.3655C21.5339 2.14383 20.9322 2.033 20.2609 2.033H17.5914V11.704H20.2609C20.9322 11.704 21.5339 11.5932 22.0659 11.3715C22.6042 11.1498 23.0602 10.8332 23.4339 10.4215C23.8139 10.0035 24.102 9.49683 24.2984 8.9015C24.501 8.29983 24.6024 7.62217 24.6024 6.8685Z" fill="white"/>
 </svg></d2l-icon-custom></d2l-button-icon>
 				<d2l-dropdown-content id="audio-description-dropdown-content" class="vdiff-target" no-padding no-padding-header no-pointer theme="${ifDefined(this._getTheme())}">
-					${showControls ? nothing : html`<div class="d2l-body-compact audio-description-header" slot="header">${this.localize('components:mediaPlayer:audioDescriptions')}</div>`}
+					${showAbout ? nothing : html`<div class="d2l-body-compact audio-description-header" slot="header">${this.localize('components:mediaPlayer:audioDescriptions')}</div>`}
                     <d2l-menu label="${tooltip}" @d2l-menu-item-change=${this.#onAudioDescriptionMenuItemChange} theme="${ifDefined(this._getTheme())}">
-						${showControls ? html`
+						${showAbout ? html`
 							<d2l-menu-item
 								id="audio-description-about-menu-item"
 								text="${this.localize('components:mediaPlayer:aboutExtendedAudioDescriptions')}"
@@ -232,7 +238,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
                     </d2l-menu>
 				</d2l-dropdown-content>
 			</d2l-dropdown>
-			${showControls ? html`
+			${showAbout ? html`
 				<d2l-dialog
 					id="audio-description-about-dialog"
 					width="500"
@@ -240,7 +246,8 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 					?opened="${this._audioDescriptionDialogOpened}"
 					@d2l-dialog-close="${this.#onAboutExtendedAudioDescriptionsDialogClose}"
 				>
-					<p class="d2l-body-compact">${this.localize('components:mediaPlayer:aboutExtendedAudioDescriptionsText')}</p>
+					<p class="d2l-body-standard audio-description-about-text">${this.localize('components:mediaPlayer:aboutExtendedAudioDescriptionsText')}</p>
+					<d2l-button slot="footer" data-dialog-action>${this.localize('components:mediaPlayer:close')}</d2l-button>
 				</d2l-dialog>
 			` : nothing}
 		`;
@@ -278,7 +285,6 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._audioDescriptionTracks.push({
 			descriptions,
 			label: node.label,
-			pauseVideo: node.hasAttribute('pause-video'),
 			srclang: node.srclang,
 		});
 		this.dispatchEvent(new CustomEvent('trackloaded'));
@@ -309,10 +315,10 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	}
 
 	_replayAudioDescription() {
-		if (!this._audioDescriptionPlaying) return;
+		if (!this._audioDescriptionPlaying || !this.audioDescriptionPauseVideo) return;
 		const track = this.#getSelectedAudioDescriptionTrack();
-		if (!track?.pauseVideo) return;
-		const description = track?.descriptions.findLast(description => description.time <= this.currentTime);
+		if (!track) return;
+		const description = track.descriptions.findLast(description => description.time <= this.currentTime);
 		if (!description) return;
 
 		// Preserve the pause from the original playback so the video still resumes after the replay
@@ -347,7 +353,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 	}
 
 	_skipAudioDescription() {
-		if (!this._audioDescriptionPlaying || !this.#getSelectedAudioDescriptionTrack()?.pauseVideo) return;
+		if (!this._audioDescriptionPlaying || !this.audioDescriptionPauseVideo) return;
 		const resumeVideo = this._audioDescriptionHoldingPlayback;
 		this._cancelAudioDescription();
 		if (resumeVideo) this._play();
@@ -444,7 +450,7 @@ export const MediaPlayerAudioDescriptionsMixin = superclass => class extends sup
 		this._audioDescriptionUtterance = utterance;
 		this._audioDescriptionPlaying = true;
 
-		if (track.pauseVideo && this._media && !this._media.paused) {
+		if (this.audioDescriptionPauseVideo && this._media && !this._media.paused) {
 			this._audioDescriptionPausedVideo = true;
 			this._media.pause();
 		}

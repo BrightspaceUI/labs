@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "التسميات التوضيحية",
 	"components:mediaPlayer:captionsVtt": "التسميات التوضيحية (‎.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "التسميات التوضيحية المغلقة",
 	"components:mediaPlayer:default": "افتراضي",
 	"components:mediaPlayer:download": "تنزيل",

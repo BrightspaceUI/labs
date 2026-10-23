@@ -184,11 +184,11 @@ describe('d2l-labs-media-player', () => {
 		{ name: 'mobile', viewport: { width: 600 } }
 	].forEach(({ name, viewport }) => {
 		describe(name, () => {
-			const audioDescriptionsFixture = async() => {
+			const audioDescriptionsFixture = async({ pauseVideo = false } = {}) => {
 				const elem = await fixture(
 					html`
-					<d2l-labs-media-player src="./test/components/media-player/videos/1_lego.webm" media-type="video">
-						<track src="./demo/components/media-player/static/sample-vtt-en-descriptions.vtt" kind="descriptions" srclang="en" label="English" pause-video>
+					<d2l-labs-media-player src="./test/components/media-player/videos/1_lego.webm" media-type="video" ?audio-description-pause-video=${pauseVideo}>
+						<track src="./demo/components/media-player/static/sample-vtt-en-descriptions.vtt" kind="descriptions" srclang="en" label="English">
 						<track src="./demo/components/media-player/static/sample-vtt-fr-descriptions.vtt" kind="descriptions" srclang="fr" label="French">
 					</d2l-labs-media-player>`,
 					{ viewport }
@@ -216,8 +216,8 @@ describe('d2l-labs-media-player', () => {
 				await expect(elem).to.be.golden();
 			});
 
-			it('video with audio descriptions pause-video open', async() => {
-				const elem = await audioDescriptionsFixture();
+			it('video with extended audio descriptions open', async() => {
+				const elem = await audioDescriptionsFixture({ pauseVideo: true });
 				// Set directly to avoid persisting the selection to localStorage
 				elem._selectedAudioDescriptionLanguage = 'en';
 				await elem.updateComplete;
@@ -226,7 +226,7 @@ describe('d2l-labs-media-player', () => {
 			});
 
 			it('video with about extended audio descriptions dialog open', async() => {
-				const elem = await audioDescriptionsFixture();
+				const elem = await audioDescriptionsFixture({ pauseVideo: true });
 				elem._selectedAudioDescriptionLanguage = 'en';
 				await elem.updateComplete;
 				const dialog = elem.shadowRoot.querySelector('#audio-description-about-dialog');

@@ -39,6 +39,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionsOn": "Audio descriptions on: {language}",
 	"components:mediaPlayer:captions": "Подписи",
 	"components:mediaPlayer:captionsVtt": "Подписи (.vtt)",
+	"components:mediaPlayer:close": "Close",
 	"components:mediaPlayer:closedCaptionsAcronym": "Копия",
 	"components:mediaPlayer:default": "По умолчанию",
 	"components:mediaPlayer:download": "Скачать",
