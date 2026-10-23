@@ -31,6 +31,7 @@ const DEFAULT_SPEED = '1.0';
 const DEFAULT_VOLUME = '1.0';
 const FULLSCREEN_ENABLED = fullscreenApi.isEnabled;
 const HIDE_DELAY_MS = 3000;
+const MAX_TIMEOUT_MS = 2 ** 31 - 1;
 const KEY_BINDINGS = {
 	play: 'k',
 	mute: 'm',
@@ -1785,9 +1786,10 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 				if (isSafari() && updatedSource !== undefined) {
 					const expires = tryParseUrlExpiry(updatedSource);
 					if (expires) {
-						const timeToExpiry = (expires * 1000) - Date.now() - SAFARI_EXPIRY_EARLY_SWAP_SECONDS;
-						const timeoutPeriod = Math.max(timeToExpiry, SAFARI_EXPIRY_MIN_ERROR_EMIT_SECONDS);
-						setTimeout(() => this._onError(), timeoutPeriod);
+						const timeToExpiryMs = (expires * 1000) - Date.now() - (SAFARI_EXPIRY_EARLY_SWAP_SECONDS * 1000);
+						const timeoutPeriodMs = Math.max(timeToExpiryMs, SAFARI_EXPIRY_MIN_ERROR_EMIT_SECONDS * 1000);
+						// Longer delays overflow setTimeout and fire immediately
+						if (timeoutPeriodMs <= MAX_TIMEOUT_MS) setTimeout(() => this._onError(), timeoutPeriodMs);
 					}
 				}
 
