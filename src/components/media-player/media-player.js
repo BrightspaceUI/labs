@@ -140,6 +140,10 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			width: 100%;
 		}
 
+		#media-container:focus {
+			outline: none;
+		}
+
 		.type-is-audio {
 			background-color: #ffffff;
 		}
@@ -670,7 +674,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 
 		${this._getLoadingSpinnerView()}
 
-		<div id="media-container" class=${classMap(mediaContainerClass)} style=${styleMap(mediaContainerStyle)} @mousemove=${this._onVideoContainerMouseMove} @keydown=${this._listenForKeyboard}>
+		<div id="media-container" tabindex="-1" class=${classMap(mediaContainerClass)} style=${styleMap(mediaContainerStyle)} @mousemove=${this._onVideoContainerMouseMove} @pointerdown=${this._onMediaContainerPointerDown} @keydown=${this._listenForKeyboard}>
 			${this.transcriptViewerOn ? this._renderTranscriptViewer() : ''}
 			${this._getMediaAreaView()}
 
@@ -1264,6 +1268,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		}
 		this._showControls(true);
 		switch (e.key) {
+			case ' ':
+				// Focused controls handle Space themselves
+				if (e.target !== e.currentTarget) break;
+				e.preventDefault();
+				this._togglePlay();
+				break;
 			case KEY_BINDINGS.play:
 				this._togglePlay();
 				break;
@@ -1465,6 +1475,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		this.volume = volume;
 
 		this.dispatchEvent(new CustomEvent('loadedmetadata'));
+	}
+
+	// Safari doesn't focus buttons on click, so keydown would never reach the container without this
+	_onMediaContainerPointerDown() {
+		if (this.shadowRoot.activeElement) return;
+		this._mediaContainer.focus({ preventScroll: true });
 	}
 
 	_onPause() {
