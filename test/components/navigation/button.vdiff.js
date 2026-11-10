@@ -53,13 +53,13 @@ describe('d2l-labs-navigation-button', () => {
 		{ name: 'icon-text-disabled', template: create({ disabled: true }) },
 		{ name: 'icon-text-no-highlight-border', template: create({ noHighlightBorder: true }) },
 		{ name: 'icon-text-flip', template: create({ iconPosition: 'end' }) },
-		{ name: 'icon-text-hidden', template: create({ textHidden: true }), tooltip: true },
+		{ name: 'icon-text-hidden', template: create({ textHidden: true }), tooltip: [true, true] },
 		{ name: 'icon-text-hidden-disabled', template: create({ disabled: true, textHidden: true }) },
-		{ name: 'dropdown-icon-off', template: createDropdown(), tooltip: true },
-		{ name: 'dropdown-icon-on', template: createDropdown({ hasNotification: true, notificationText: 'You have new notifications', text: 'Notification on' }), tooltip: true },
-		{ name: 'dropdown-icon-disabled', template: createDropdown({ disabled: true, text: 'Disabled' }) },
+		{ name: 'dropdown-icon-off', template: createDropdown(), tooltip: [true, true] },
+		{ name: 'dropdown-icon-on', template: createDropdown({ hasNotification: true, notificationText: 'You have new notifications', text: 'Notification on' }), tooltip: [true, true] },
+		{ name: 'dropdown-icon-disabled', template: createDropdown({ disabled: true, text: 'Disabled' }), tooltip: [true, false] },
 		{ name: 'dropdown-custom', template: html`<d2l-labs-navigation-dropdown-button-custom><span slot="opener">custom</span><d2l-dropdown-content>content</d2l-dropdown-content></d2l-labs-navigation-dropdown-button-custom>` }
-	].forEach(({ name, template, tooltip }) => {
+	].forEach(({ name, template, tooltip = [false, false] }) => {
 		describe(name, () => {
 
 			let elem;
@@ -72,7 +72,7 @@ describe('d2l-labs-navigation-button', () => {
 			});
 
 			it('hover', async() => {
-				if (tooltip) {
+				if (tooltip[0]) {
 					hoverElem(elem);
 					await oneEvent(elem, 'd2l-tooltip-show');
 				} else {
@@ -82,7 +82,7 @@ describe('d2l-labs-navigation-button', () => {
 			});
 
 			it('focus', async() => {
-				if (tooltip) {
+				if (tooltip[1]) {
 					focusElem(elem);
 					await oneEvent(elem, 'd2l-tooltip-show');
 				} else {
