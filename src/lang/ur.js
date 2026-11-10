@@ -21,7 +21,7 @@ export default {
 	"components:fileUploader:browse_files": "فائلیں براؤز",
 	"components:fileUploader:choose_one_file_to_upload": "اپلوڈ کرنے کے لیے ایک فائل منتخب کریں۔",
 	"components:fileUploader:file_upload_text": "ڈریگ اینڈ ڈراپ یا",
-	"components:gradeResult:cannotBeNegative": "(۰ سے کم نہیں ہو سکتا)",
+	"components:gradeResult:cannotBeNegative": "(0 سے کم نہیں ہو سکتا)",
 	"components:gradeResult:clearManualOverride": "دستی طور پر اوور رائڈ کو صاف کریں",
 	"components:gradeResult:gradeScoreLabel": "گریڈ اسکور",
 	"components:gradeResult:manuallyOverrideGrade": "گریڈ کو دستی طور پر اوور رائڈ کریں",
