@@ -47,9 +47,8 @@ class NavigationImmersive extends LitElement {
 		}
 		.d2l-navigiation-immersive-fixed {
 			background-color: white;
-			left: 0;
+			inset-inline: 0;
 			position: fixed;
-			right: 0;
 			top: 0;
 			z-index: 2; /* higher than skeletons which could scroll behind immersive nav */
 		}
@@ -89,11 +88,11 @@ class NavigationImmersive extends LitElement {
 		.d2l-labs-navigation-immersive-left {
 			color: var(--d2l-color-tungsten);
 			letter-spacing: 0.2px;
-			padding-left: 7px;
+			padding-left: 7px; /* stylelint-disable-line property-layout-mappings */
 		}
 
 		.d2l-labs-navigation-immersive-right {
-			padding-right: 7px;
+			padding-right: 7px; /* stylelint-disable-line property-layout-mappings */
 		}
 
 		.d2l-labs-navigation-immersive-left,

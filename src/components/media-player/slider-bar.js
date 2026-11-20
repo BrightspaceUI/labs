@@ -48,13 +48,11 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 
 		:host(:focus-within) .slider-knob::after {
 			border-radius: 50%;
-			bottom: 0;
 			box-shadow: 0 0 0 var(--d2l-calculated-knob-focus-size) var(--d2l-calculated-knob-focus-color);
 			content: "";
-			left: 0;
+			inset-block: 0;
+			inset-inline: 0;
 			position: absolute;
-			right: 0;
-			top: 0;
 		}
 
 		:host([solid]) .slider-knob-inner {
@@ -63,28 +61,23 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 
 		#sliderContainer {
 			height: var(--d2l-calculated-knob-size);
-			margin-left: var(--d2l-half-knob-size);
-			margin-right: var(--d2l-half-knob-size);
+			margin-inline: var(--d2l-half-knob-size);
 			position: relative;
 		}
 
 		#knobContainer {
-			bottom: 0;
-			left: 0;
+			inset-block: 0;
+			inset-inline: 0;
 			pointer-events: none;
 			position: absolute;
-			right: 0;
-			top: 0;
 		}
 
 		:host([fullWidth]) #sliderContainer {
-			margin-left: 0;
-			margin-right: 0;
+			margin-inline: 0;
 		}
 
 		:host([fullWidth]) #knobContainer {
-			left: var(--d2l-half-knob-size);
-			right: var(--d2l-half-knob-size);
+			inset-inline: var(--d2l-half-knob-size);
 		}
 
 		.bar-container {
@@ -120,8 +113,8 @@ class SliderBar extends PropertyRequiredMixin(LocalizeLabsElement(RtlMixin(LitEl
 			box-shadow: var(--d2l-calculated-knob-box-shadow);
 			cursor: pointer;
 			height: calc((((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) * 2) + var(--d2l-calculated-seek-bar-height) - 2px);
-			left: 0;
-			margin-left: calc(-1 * ((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) - var(--d2l-calculated-seek-bar-height) / 2);
+			left: 0; /* stylelint-disable-line property-layout-mappings */
+			margin-left: calc(-1 * ((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) - var(--d2l-calculated-seek-bar-height) / 2); /* stylelint-disable-line property-layout-mappings */
 			position: absolute;
 			top: 0;
 			width: calc((((var(--d2l-calculated-knob-size) / 2) - var(--d2l-calculated-seek-bar-height) / 2) * 2) + var(--d2l-calculated-seek-bar-height) - 2px);

@@ -34,13 +34,12 @@ class PagerNumeric extends LocalizeLabsElement(LitElement) {
 		}
 
 		d2l-input-number {
-			margin-left: 0.25rem;
-			margin-right: 0.25rem;
+			margin-inline: 0.25rem;
 			width: 3.8rem;
 		}
 
 		.d2l-page-max-text {
-			margin-right: 0.25rem;
+			margin-right: 0.25rem; /* stylelint-disable-line property-layout-mappings */
 		}
 
 		@media (max-width: 544px) {

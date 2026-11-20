@@ -121,24 +121,22 @@ class FlyoutImplementation extends composeMixins(
 		}
 
 		.flyout-buttons {
-			margin-left: auto;
-			margin-right: auto;
+			margin-inline: auto;
 		}
 
 		.flyout-buttons d2l-button {
-			margin-left: 0.5rem;
-			margin-right: 0.5rem;
+			margin-inline: 0.5rem;
 		}
 
 		.flyout-tab-container {
 			height: 1.2rem;
-			left: 50%;
+			inset-inline-start: 50%;
 			max-width: 1230px;
 			overflow: hidden;
 			pointer-events: none;
 			position: absolute;
 			top: 100%;
-			transform: translateX(-50%);
+			transform: translateX(calc(-50% * var(--d2l-length-factor, 1)));
 			width: 100%;
 		}
 
@@ -165,9 +163,10 @@ class FlyoutImplementation extends composeMixins(
 		}
 
 		.flyout-tab:focus {
+			border-block-width: 0 1px;
 			border-color: rgba(0, 111, 191, 0.4);
+			border-inline-width: 1px;
 			border-style: solid;
-			border-width: 0 1px 1px 1px;
 			box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.3);
 		}
 

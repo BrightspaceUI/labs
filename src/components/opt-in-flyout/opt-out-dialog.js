@@ -43,12 +43,12 @@ class OptOutDialog extends LocalizeLabsElement(LitElement) {
 			border-radius: 0.3rem;
 			box-shadow: 0 2px 12px rgba(86, 90, 92, 0.25);
 			box-sizing: border-box;
-			left: 50%;
+			inset-inline-start: 50%;
 			max-width: 680px;
 			padding: 1rem;
 			position: absolute;
 			top: 7.5%;
-			transform: translateX(-50%);
+			transform: translateX(calc(-50% * var(--d2l-length-factor, 1)));
 			width: 90%;
 			z-index: 2;
 		}
@@ -68,7 +68,7 @@ class OptOutDialog extends LocalizeLabsElement(LitElement) {
 		}
 
 		d2l-button {
-			margin-right: 1rem;
+			margin-inline-end: 18px;
 		}
 
 		.close-button {

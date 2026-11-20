@@ -11,22 +11,19 @@ export const navigationSharedStyle = css`
 	}
 
 	.d2l-labs-navigation-gutters {
-		padding-left: 2.439%;
-		padding-right: 2.439%;
+		padding-inline: 2.439%;
 		position: relative;
 	}
 
 	@media (max-width: 615px) {
 		.d2l-labs-navigation-gutters {
-			padding-left: 15px;
-			padding-right: 15px;
+			padding-inline: 15px;
 		}
 	}
 
 	@media (min-width: 1230px) {
 		.d2l-labs-navigation-gutters {
-			padding-left: 30px;
-			padding-right: 30px;
+			padding-inline: 30px;
 		}
 	}
 `;

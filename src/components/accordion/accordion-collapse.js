@@ -100,20 +100,10 @@ class LabsAccordionCollapse extends LitElement {
 			overflow: hidden;
 		}
 		:host([icon-has-padding]) d2l-icon {
-			padding-left: 1.25rem;
-			padding-right: 0;
-		}
-		:host([icon-has-padding][dir="rtl"]) d2l-icon {
-			padding-left: 0;
-			padding-right: 1.25rem;
+			padding-inline-start: 1.25rem;
 		}
 		:host([flex][icon-has-padding]) d2l-icon {
-			padding-left: 0;
-			padding-right: 1.25rem;
-		}
-		:host([flex][icon-has-padding][dir="rtl"]) d2l-icon {
-			padding-left: 1.25rem;
-			padding-right: 0;
+			padding-inline-end: 1.25rem;
 		}
 		.content {
 			height: auto;

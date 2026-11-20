@@ -120,13 +120,14 @@ class AttributePicker extends ArrowKeysMixin(LocalizeLabsElement(LitElement)) {
 			border-radius: 0.3rem;
 			max-height: 7.8rem;
 			overflow-y: auto;
-			padding-left: 0;
+			padding-inline-start: 0;
 			text-overflow: ellipsis;
 		}
 		.d2l-attribute-picker-li {
 			cursor: pointer;
 			margin: 0;
-			padding: 0.4rem 6rem 0.4rem 0.6rem;
+			padding-block: 0.4rem;
+			padding-inline: 0.6rem 6rem;
 		}
 		.d2l-attribute-picker-li[aria-selected="true"] {
 			background-color: var(--d2l-color-celestine-plus-2);

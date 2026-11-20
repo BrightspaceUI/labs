@@ -10,20 +10,17 @@ export const centererStyles = css`
 
 export const guttersStyles = css`
 	.d2l-labs-navigation-gutters {
-		padding-left: 2.439%;
-		padding-right: 2.439%;
+		padding-inline: 2.439%;
 		position: relative;
 	}
 	@media (max-width: 615px) {
 		.d2l-labs-navigation-gutters {
-			padding-left: 15px;
-			padding-right: 15px;
+			padding-inline: 15px;
 		}
 	}
 	@media (min-width: 1230px) {
 		.d2l-labs-navigation-gutters {
-			padding-left: 30px;
-			padding-right: 30px;
+			padding-inline: 30px;
 		}
 	}
 `;
@@ -35,7 +32,7 @@ export const highlightBorderStyles = css`
 		border-bottom-right-radius: 4px;
 		display: block;
 		height: 4px;
-		left: -7px;
+		inset-inline-start: -7px;
 		position: absolute;
 		top: 0;
 		width: calc(100% + 14px);

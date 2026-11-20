@@ -55,12 +55,12 @@ class NavigationBand extends LitElement {
 			z-index: 2;
 		}
 		.d2l-labs-navigation-scroll-before {
-			background: linear-gradient(to right, var(--d2l-branding-primary-color, var(--d2l-color-celestine)), transparent);
-			left: 0;
+			background: linear-gradient(to var(--d2l-inline-end, right), var(--d2l-branding-primary-color, var(--d2l-color-celestine)), transparent);
+			inset-inline-start: 0;
 		}
 		.d2l-labs-navigation-scroll-after {
-			background: linear-gradient(to left, var(--d2l-branding-primary-color, var(--d2l-color-celestine)), transparent);
-			right: 0;
+			background: linear-gradient(to var(--d2l-inline-start, left), var(--d2l-branding-primary-color, var(--d2l-color-celestine)), transparent);
+			inset-inline-end: 0;
 		}
 		/* Styles to ensure the right padding is respected when scrolling */
 		.d2l-labs-navigation-centerer {

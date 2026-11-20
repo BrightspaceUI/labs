@@ -103,7 +103,7 @@ class D2LStep extends LocalizeLabsElement(LitElement) {
 		}
 
 		.d2l-labs-wizard-step-button-next {
-			float: right;
+			float: inline-end;
 		}
 	`];
 

@@ -41,7 +41,7 @@ class CheckboxDrawer extends LocalizeLabsElement(SkeletonMixin(LitElement)) {
 
 		.d2l-input-read-only-label {
 			display: inline-block;
-			margin-left: 0.5rem;
+			margin-inline-start: 0.5rem;
 		}
 		.d2l-input-read-only-spacer {
 			padding-inline-start: 1.7rem;
