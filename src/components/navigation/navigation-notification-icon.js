@@ -11,8 +11,8 @@ class NavigationNotificationIcon extends LitElement {
 		:host {
 			display: inline-block;
 			height: 100%;
-			position: absolute;
 			inset-inline-end: calc(-100% + 11px);
+			position: absolute;
 			top: calc(-50% + 11px);
 			width: 100%;
 		}
