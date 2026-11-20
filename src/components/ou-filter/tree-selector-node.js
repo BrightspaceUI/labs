@@ -3,7 +3,6 @@ import '@brightspace-ui/core/components/inputs/input-checkbox';
 
 import { css, html, LitElement, nothing } from 'lit';
 import { LocalizeLabsElement } from '../localize-labs-element.js';
-import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 
 /**
  * @property {string} name
@@ -14,7 +13,7 @@ import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
  * @fires d2l-labs-tree-selector-node-open - user has requested that this node be expanded or collapsed
  *
  */
-class TreeSelectorNode extends LocalizeLabsElement(RtlMixin(LitElement)) {
+class TreeSelectorNode extends LocalizeLabsElement(LitElement) {
 	static properties = {
 		name: { type: String },
 		dataId: { type: Number, attribute: 'data-id' },
@@ -63,12 +62,7 @@ class TreeSelectorNode extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		}
 
 		.d2l-labs-tree-selector-node-subtree {
-			margin-left: 34px;
-			margin-right: 0;
-		}
-		:host([dir="rtl"]) .d2l-labs-tree-selector-node-subtree {
-			margin-left: 0;
-			margin-right: 34px;
+			margin-inline-start: 34px;
 		}
 		.d2l-labs-tree-selector-node-subtree[hidden] {
 			display: none;
@@ -77,8 +71,7 @@ class TreeSelectorNode extends LocalizeLabsElement(RtlMixin(LitElement)) {
 		.d2l-labs-tree-selector-node-text {
 			cursor: default;
 			display: inline-block;
-			margin-left: 0.5rem;
-			margin-right: 0.5rem;
+			margin-inline: 0.5rem;
 			width: 100%;
 		}
 	`;

@@ -13,7 +13,7 @@ class NavigationNotificationIcon extends RtlMixin(LitElement) {
 			display: inline-block;
 			height: 100%;
 			position: absolute;
-			right: calc(-100% + 11px);
+			right: calc(-100% + 11px); /* stylelint-disable-line property-layout-mappings */
 			top: calc(-50% + 11px);
 			width: 100%;
 		}
@@ -21,8 +21,8 @@ class NavigationNotificationIcon extends RtlMixin(LitElement) {
 			display: none;
 		}
 		:host([dir="rtl"]) {
-			left: calc(-50% - 4px);
-			right: auto;
+			left: calc(-50% - 4px); /* stylelint-disable-line property-layout-mappings */
+			right: auto; /* stylelint-disable-line property-layout-mappings */
 		}
 		.d2l-labs-navigation-notification-icon-indicator {
 			background: var(--d2l-color-primary-accent-indicator);

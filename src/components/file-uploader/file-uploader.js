@@ -72,7 +72,7 @@ class FileUploader extends FocusMixin(LocalizeLabsElement(LitElement)) {
 		.d2l-file-uploader-input {
 			display: inline-block;
 			height: 100%;
-			left: 0;
+			inset-inline-start: 0;
 			opacity: 0;
 			position: absolute;
 			top: 0;
@@ -84,7 +84,7 @@ class FileUploader extends FocusMixin(LocalizeLabsElement(LitElement)) {
 			border: none;
 			color: var(--d2l-color-celestine);
 			overflow: hidden;
-			padding-right: 0;
+			padding-inline-end: 0;
 			position: relative;
 		}
 		.d2l-file-uploader-browse-label:hover,
@@ -103,19 +103,14 @@ class FileUploader extends FocusMixin(LocalizeLabsElement(LitElement)) {
 			-webkit-animation-name: feedbackIn;
 			animation-name: feedbackIn;
 			border: 1px solid var(--d2l-color-mica);
-			border-left-color: var(--d2l-file-uploader-feedback-color);
-			border-left-width: 0.5rem;
+			border-inline-start-color: var(--d2l-file-uploader-feedback-color);
+			border-inline-start-width: 0.5rem;
 			border-radius: 0.3rem;
 			display: none;
 			margin-bottom: 1.5rem;
 			padding: 0.7rem 1rem 0.7rem;
 		}
-		:host(:dir(rtl)) > .d2l-file-uploader-feedback {
-			border-left-color: var(--d2l-color-mica);
-			border-left-width: 1px;
-			border-right-color: var(--d2l-file-uploader-feedback-color);
-			border-right-width: 0.5rem;
-		}
+
 		:host([feedback]) > .d2l-file-uploader-feedback {
 			display: block;
 		}

@@ -17,20 +17,20 @@ export const MediaPlayerTranscriptMixin = superclass => class extends superclass
 		:host([transcript-viewer-on]) #video,
 		:host([transcript-viewer-on]) #video-poster {
 			height: 30%;
-			left: 0;
+			left: 0; /* stylelint-disable-line property-layout-mappings */
 			min-height: 30%;
 			position: absolute;
 			top: 0;
 			width: 30%;
 		}
 		.transcript-cue-container {
-			padding-left: 10px;
+			padding-left: 10px; /* stylelint-disable-line property-layout-mappings */
 		}
 		.video-transcript-cue {
-			padding-left: 5px;
+			padding-left: 5px; /* stylelint-disable-line property-layout-mappings */
 		}
 		.audio-transcript-cue {
-			padding-left: 5px;
+			padding-left: 5px; /* stylelint-disable-line property-layout-mappings */
 		}
 		.video-transcript-cue[active] {
 			background-color: gray;
@@ -46,7 +46,7 @@ export const MediaPlayerTranscriptMixin = superclass => class extends superclass
 			overflow-anchor: none;
 			overflow-y: auto;
 			position: absolute;
-			right: 0;
+			right: 0; /* stylelint-disable-line property-layout-mappings */
 			top: 50px;
 			width: 65%;
 			z-index: 1;
@@ -57,31 +57,31 @@ export const MediaPlayerTranscriptMixin = superclass => class extends superclass
 			overflow-anchor: none;
 			overflow-y: auto;
 			position: absolute;
-			right: 0;
+			right: 0; /* stylelint-disable-line property-layout-mappings */
 			top: 45px;
 			width: 100%;
 			z-index: 1;
 		}
 		#close-transcript {
 			position: absolute;
-			right: 7px;
+			right: 7px; /* stylelint-disable-line property-layout-mappings */
 			top: 0;
 			z-index: 1;
 		}
 		#video-transcript-download-button {
-			left: 35%;
+			left: 35%; /* stylelint-disable-line property-layout-mappings */
 			position: absolute;
 			top: 5px;
 			z-index: 2;
 		}
 		#audio-transcript-download-button {
-			left: 10px;
+			left: 10px; /* stylelint-disable-line property-layout-mappings */
 			position: absolute;
 			top: 0;
 			z-index: 2;
 		}
 		#audio-transcript-download-menu {
-			left: 35px;
+			left: 35px; /* stylelint-disable-line property-layout-mappings */
 		}
 		#video-close-transcript-icon {
 			color: white;

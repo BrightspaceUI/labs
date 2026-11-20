@@ -23,8 +23,8 @@ import { LocalizeLabsElement } from '../localize-labs-element.js';
 import { MediaPlayerChaptersMixin } from './media-player-chapters.js';
 import { MediaPlayerThumbnailsMixin } from './media-player-thumbnails.js';
 import { MediaPlayerTranscriptMixin } from './media-player-transcript.js';
+import { offscreenStyles } from '@brightspace-ui/core/components/offscreen/offscreen-styles.js';
 import parseSRT from 'parse-srt/src/parse-srt.js';
-import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
 const DEFAULT_SPEED = '1.0';
@@ -76,7 +76,7 @@ const tryParseUrlExpiry = url => {
 	}
 };
 
-class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPlayerThumbnailsMixin(MediaPlayerChaptersMixin(MediaPlayerAudioDescriptionsMixin(RtlMixin(LitElement)))))) {
+class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPlayerThumbnailsMixin(MediaPlayerChaptersMixin(MediaPlayerAudioDescriptionsMixin(LitElement))))) {
 
 	static properties = {
 		allowDownload: { type: Boolean, attribute: 'allow-download', reflect: true },
@@ -119,7 +119,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		_volume: { state: true },
 	};
 
-	static styles = [super.styles, labelStyles, css`
+	static styles = [super.styles, labelStyles, offscreenStyles, css`
 		:host {
 			display: block;
 			min-height: 140px;
@@ -188,7 +188,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			border: none;
 			border-radius: 50%;
 			cursor: pointer;
-			left: 10%;
+			left: 10%; /* stylelint-disable-line property-layout-mappings */
 			padding: 2em;
 			position: absolute;
 			top: 10%;
@@ -242,12 +242,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
-			margin-left: 6px;
-		}
-
-		[dir="rtl"] #buttons {
-			margin-left: 0;
-			margin-right: 6px;
+			margin-inline-start: 6px;
 		}
 
 		.flex-filler {
@@ -271,14 +266,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		#volume-level-container {
 			bottom: calc(1.8rem + 6px);
 			height: 11px;
-			left: 0;
 			position: absolute;
 			width: 1.8rem;
 			z-index: 2;
 		}
-
-		#volume-level-container.hidden {
-			left: -10000px;
+		#volume-level-container:not(.d2l-offscreen) {
+			inset-inline-start: 0;
 		}
 
 		#volume-level-background {
@@ -289,7 +282,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			display: flex;
 			height: 1.8rem;
 			justify-content: center;
-			left: -2.7rem;
+			left: -2.7rem; /* stylelint-disable-line property-layout-mappings */
 			padding: 0 0.625rem;
 			position: relative;
 			width: 6rem;
@@ -319,7 +312,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			flex-wrap: nowrap;
 			height: 8.5rem;
 			justify-content: center;
-			left: calc(2.1rem + 6px);
+			left: calc(2.1rem + 6px); /* stylelint-disable-line property-layout-mappings */
 			position: absolute;
 			top: calc(50% - 5.125rem);
 			width: calc(100% - 4.2rem - 12px);
@@ -468,28 +461,12 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 			align-items: center;
 			display: flex;
 			height: 100%;
+			inset-inline-start: 0;
 			justify-content: center;
-			left: 0;
 			position: absolute;
 			top: 0;
 			width: 100%;
 			z-index: 2;
-		}
-
-		#alert-inner {
-			display: flex;
-			flex-direction: row;
-			justify-content: flex-start;
-		}
-
-		#alert-inner > svg {
-			flex-shrink: 0;
-			margin-right: 0.5rem;
-		}
-
-		#alert-inner > span {
-			font-size: 1rem;
-			line-height: 2.1rem;
 		}
 	`];
 
@@ -657,7 +634,7 @@ class MediaPlayer extends LocalizeLabsElement(MediaPlayerTranscriptMixin(MediaPl
 		const mediaContainerClass = { 'type-is-audio': this.mediaType === SOURCE_TYPES.audio, 'type-is-video': this.mediaType === SOURCE_TYPES.video };
 		const mediaControlsClass = { 'hidden': this._hidingCustomControls() };
 		const theme = this._getTheme();
-		const volumeLevelContainerClass = { 'hidden': !this._usingVolumeContainer || this._hidingCustomControls() };
+		const volumeLevelContainerClass = { 'd2l-offscreen': !this._usingVolumeContainer || this._hidingCustomControls() };
 		const hideSearchForAudioDescriptions = !this.hideAudioDescriptionSelection && this._audioDescriptionTracks.length > 0 && this._audioDescriptionControlsInMenu;
 		const searchContainerClass = { 'search-container-hidden' : !this._searchInstances[this._getSrclangFromTrackIdentifier(this._selectedTrackIdentifier)] || hideSearchForAudioDescriptions };
 		this._captionsMenuReturnItem?.setAttribute('text', (this.transcriptViewerOn ? this.localize('components:mediaPlayer:language') : this.localize('components:mediaPlayer:captions')));

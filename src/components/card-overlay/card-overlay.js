@@ -7,7 +7,7 @@ class CardOverlay extends SkeletonMixin(LitElement) {
 	static styles = [super.styles, bodyStandardStyles, css`
 		:host {
 			display: block;
-			left: 0;
+			inset-inline-start: 0;
 			position: absolute;
 			top: 0;
 		}
@@ -25,13 +25,12 @@ class CardOverlay extends SkeletonMixin(LitElement) {
 			flex-direction: column;
 			height: calc(100% - 20px);
 			justify-content: center;
-			padding-left: 7px;
+			padding-inline-start: 7px;
 			padding-top: 20px;
 			width: calc(100% - 28px);
 		}
 		.d2l-insights-card-overlay-title {
-			margin-left: 15px;
-			margin-right: 15px;
+			margin-inline: 15px;
 			margin-top: 10px;
 			width: 100%;
 		}
@@ -51,9 +50,8 @@ class CardOverlay extends SkeletonMixin(LitElement) {
 			display: inline-block;
 			font-size: 14px;
 			line-height: 1rem;
-			margin: 10px;
-			margin-left: 5px;
-			margin-right: 0;
+			margin-block: 10px;
+			margin-inline: 5px 0;
 			vertical-align: middle;
 		}
 	`];

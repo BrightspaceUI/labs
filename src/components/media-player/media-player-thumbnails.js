@@ -32,7 +32,7 @@ export const MediaPlayerThumbnailsMixin = superclass => class extends superclass
 			background: #00000042;
 			bottom: 3px;
 			font-size: 14px;
-			left: 0;
+			left: 0; /* stylelint-disable-line property-layout-mappings */
 			position: absolute;
 			text-align: center;
 			text-shadow: 0 0 4px rgb(0 0 0 / 75%);
