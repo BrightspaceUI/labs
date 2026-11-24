@@ -36,7 +36,7 @@ export default {
 	"components:mediaPlayer:audioDescriptionButtonDescription": "동영상의 음성 설명에 사용할 언어를 선택하거나 끄세요",
 	"components:mediaPlayer:audioDescriptions": "오디오 설명",
 	"components:mediaPlayer:audioDescriptionsOff": "오디오 설명 끄기",
-	"components:mediaPlayer:audioDescriptionsOn": "오디오 설명 켜짐: ${ language }",
+	"components:mediaPlayer:audioDescriptionsOn": "오디오 설명 켜짐: ${language}",
 	"components:mediaPlayer:captions": "캡션",
 	"components:mediaPlayer:captionsVtt": "캡션(.vtt)",
 	"components:mediaPlayer:close": "닫기",
