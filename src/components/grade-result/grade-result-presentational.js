@@ -11,7 +11,7 @@ import { LocalizeLabsElement } from '../localize-labs-element.js';
 
 const numberConverter = {
 	fromAttribute: (attr) => { return !attr ? undefined : Number(attr); },
-	toAttribute:  (prop) => { return String(prop); }
+	toAttribute: (prop) => { return String(prop); }
 };
 
 /**
